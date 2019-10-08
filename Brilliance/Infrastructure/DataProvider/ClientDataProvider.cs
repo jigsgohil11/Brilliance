@@ -1,0 +1,145 @@
+﻿using Brilliance.Models.Entity;
+using Brilliance.Models.ViewModel;
+using Brilliance.Infrastructure;
+using Brilliance.Infrastructure.DataProvider;
+using Brilliance.Models;
+using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Data.SqlClient;
+using System.Linq;
+using System.Web;
+using System.Web.Mvc;
+
+namespace Brilliance.Infrastructure.DataProvider
+{
+    public class ClientDataProvider : BaseDataProvider,IClientDataProvider
+    {
+        public ServiceResponse GetClient(Guid ClientID)
+        {
+            ClientViewModel ClientViewModel = new ClientViewModel();
+            var response = new ServiceResponse();
+            try
+            {
+                var searchList = new List<SearchValueData>()
+                {
+                        new SearchValueData { Name = "ClientID" ,Value = Convert.ToString(ClientID)}
+                };
+
+                ClientViewModel = GetMultipleEntity<ClientViewModel>("GetClientdata", searchList);
+                response.Data = ClientViewModel;
+                response.IsSuccess = true;
+            }
+            catch (Exception ex)
+            {
+
+            }
+            return response;
+        }
+        public ClientListModel ClientList()
+        {
+            var clientListModel = new ClientListModel();
+            try
+            {
+                var searchList = new List<SearchValueData>();
+
+                List<Client> clients = GetEntityList<Client>("GetClientList", searchList);//Constants.GetUserGroupList
+                if (clients.Count > 0)
+                {
+                    clientListModel.Clientlist = clients;
+                    clientListModel.Response.IsSuccess = true;
+                }
+                else
+                {
+                    clientListModel.Response.IsSuccess = false;
+                }
+            }
+            catch (Exception ex)
+            {
+                //userGroupListModel.Response.Message = Resource.Resource.ServerError;
+            }
+            return clientListModel;
+        }
+        public ServiceResponse SaveClients(ClientViewModel Clients)
+        {
+            var response = new ServiceResponse();
+            try
+            {
+               
+
+                if (Clients.client.IsEdit == false)
+                {
+                   
+                    SqlCommand cmd = new SqlCommand();
+                    cmd.Parameters.AddWithValue("@ClientID", Guid.NewGuid()).SqlDbType = SqlDbType.UniqueIdentifier;
+                    cmd.Parameters.AddWithValue("@ClientCode", Clients.client.ClientCode).SqlDbType = SqlDbType.NVarChar;
+                    cmd.Parameters.AddWithValue("@OrganizationName", Clients.client.OrganizationName).SqlDbType = SqlDbType.NVarChar;
+                    cmd.Parameters.AddWithValue("@ContactPersonName", Clients.client.ContactPersonName).SqlDbType = SqlDbType.NVarChar;
+                    cmd.Parameters.AddWithValue("@ContactPersonEmail", Clients.client.ContactPersonEmail).SqlDbType = SqlDbType.NVarChar;
+                    cmd.Parameters.AddWithValue("@MobileNo", Clients.client.MobileNo).SqlDbType = SqlDbType.NVarChar;
+                    cmd.Parameters.AddWithValue("@Description", Clients.client.Description).SqlDbType = SqlDbType.NVarChar;
+                    cmd.Parameters.AddWithValue("@Address", Clients.client.Address).SqlDbType = SqlDbType.NVarChar;
+                    cmd.Parameters.AddWithValue("@City", Clients.client.City).SqlDbType = SqlDbType.NVarChar;
+                    cmd.Parameters.AddWithValue("@State", Clients.client.State).SqlDbType = SqlDbType.NVarChar;
+                    cmd.Parameters.AddWithValue("@Country", Clients.client.Country).SqlDbType = SqlDbType.NVarChar;
+                    cmd.Parameters.AddWithValue("@IsEdit", Clients.client.IsEdit).SqlDbType = SqlDbType.Bit;
+
+
+                    DataSet ds = null;
+                    ds = BulkInsert("Save_Client", cmd);
+
+                    response.IsSuccess = true;
+
+                    response.Message = "Record Saved Successfully.";
+                }
+                else
+                {
+                    SqlCommand cmd = new SqlCommand();
+                    cmd.Parameters.AddWithValue("@ClientID", Clients.client.ClientID).SqlDbType = SqlDbType.UniqueIdentifier;
+                    cmd.Parameters.AddWithValue("@ClientCode", Clients.client.ClientCode).SqlDbType = SqlDbType.NVarChar;
+                    cmd.Parameters.AddWithValue("@OrganizationName", Clients.client.OrganizationName).SqlDbType = SqlDbType.NVarChar;
+                    cmd.Parameters.AddWithValue("@ContactPersonName", Clients.client.ContactPersonName).SqlDbType = SqlDbType.NVarChar;
+                    cmd.Parameters.AddWithValue("@ContactPersonEmail", Clients.client.ContactPersonEmail).SqlDbType = SqlDbType.NVarChar;
+                    cmd.Parameters.AddWithValue("@MobileNo", Clients.client.MobileNo).SqlDbType = SqlDbType.NVarChar;
+                    cmd.Parameters.AddWithValue("@Description", Clients.client.Description).SqlDbType = SqlDbType.NVarChar;
+                    cmd.Parameters.AddWithValue("@Address", Clients.client.Address).SqlDbType = SqlDbType.NVarChar;
+                    cmd.Parameters.AddWithValue("@City", Clients.client.City).SqlDbType = SqlDbType.NVarChar;
+                    cmd.Parameters.AddWithValue("@State", Clients.client.State).SqlDbType = SqlDbType.NVarChar;
+                    cmd.Parameters.AddWithValue("@Country", Clients.client.Country).SqlDbType = SqlDbType.NVarChar;
+                    cmd.Parameters.AddWithValue("@IsEdit", Clients.client.IsEdit).SqlDbType = SqlDbType.Bit;
+
+                    DataSet ds = null;
+                    ds = BulkInsert("Save_Client", cmd);
+                    response.IsSuccess = true;
+                    response.Message = "Record Updated Successfully.";
+                }
+
+            }
+            catch (Exception ex)
+            {
+                response.Message = "Internal server error";
+            }
+
+            return response;
+        }
+        public ServiceResponse DeleteClient(Guid ClientID)
+        {
+            var response = new ServiceResponse();
+            var searchList = new List<SearchValueData>();
+            if (ClientID != Guid.Empty)
+            {
+                var searchValueData = new SearchValueData { Name = "ClientID", Value = Convert.ToString(ClientID) };
+                searchList.Add(searchValueData);
+                BaseDataProvider objnew = new BaseDataProvider();
+                objnew = new BaseDataProvider();
+                objnew.GetScalar("crm_DeleteAreaByAreaID", searchList);
+                response.IsSuccess = true;
+            }
+            else
+            {
+                response.IsSuccess = false;
+            }
+            return response;
+        }
+    }
+}

@@ -1,0 +1,161 @@
+﻿
+@{
+    ViewBag.Title = "Company";
+    Layout = "~/Views/Shared/_Layout_public.cshtml";
+}
+
+<link href="~/assets/global/plugins/bootstrap-datepicker/css/bootstrap-datepicker.min.css" rel="stylesheet" />
+
+<style>
+    .floatClass {
+        float: left;
+        margin-bottom: 10px;
+    }
+
+    .capright {
+        float: right;
+        display: inline-block;
+        font-size: 18px;
+        line-height: 18px;
+        padding: 5px 0;
+    }
+</style>
+
+<div class="page-content page-content-dashbrd-backgrnd">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="page-bar margin-bottom-10">
+                <div class="row">
+                    <div class="col-md-12 padding-out">
+                        <div class="portlet light padding-header margin-0 custom-padding-bar">
+                            <div class="portlet-title portlet-title-Project-custom">
+                                <div class="caption font-dark">
+                                    <i class="icon-settings font-dark"></i>
+                                    <span class="caption-subject bold uppercase">Company</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row"  style="margin-left:-25px;margin-right:-25px;margin-top:-5px;">
+                <div class="col-lg-12">
+                    <div class="portlet light">
+                        <div class="portlet-body form">
+                            <form id="frmTasks" action="/Crm/Areas/SaveArea" method="post" data-ajax="true" data-ajax-method="Post" data-ajax-success="SaveAreaResponse(data);" data-ajax-begin="ShowLoader();">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Organization</label>
+                                            <select id="Organization_id" name="Organization_id" class="form-control bs-select" data_live_search="true">
+                                                <option value=" ">Choose...</option>
+                                                <option value="Organization 1">Organization 1</option>
+                                                <option value="Organization 2">Organization 2</option>
+                                                <option value="Organization 3">Organization 3</option>
+                                                <option value="Organization 4">Organization 4</option>
+                                            </select>
+                                            @*<input type="text" id="AreaTitle" name="AreaTitle" class="form-control m-input" placeholder="Enter first name" required />*@
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Code</label>
+                                            <input type="text" id="code" name="code" class="form-control m-input" placeholder="Enter Code" required />
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Name</label>
+                                            <input type="text" id="name" name="name" class="form-control m-input" placeholder="Enter Name" required />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Description</label>
+                                            <textarea id="description" name="description" class="form-control m-input"></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Address</label>
+                                            <textarea id="address" name="address" class="form-control m-input"></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>City</label>
+                                            <input type="text" id="city" name="city" class="form-control m-input" placeholder="Enter city" required />
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>State</label>
+                                            <input type="text" id="state" name="state" class="form-control m-input" placeholder="Enter state" />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Country</label>
+                                            <input type="text" id="country" name="country" class="form-control m-input" placeholder="Enter country" />
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Primary Contact Name</label>
+                                            <input type="text" id="Primaryname" name="Primaryname" class="form-control m-input" placeholder="Enter Primary contact name" />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Primary Email ID</label>
+                                            <input type="text" id="Primaryemail" name="Primaryemail" class="form-control m-input" placeholder="Enter Primary emailid" />
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Secondary Contact Name</label>
+                                            <input type="text" id="secondaryname" name="secondaryname" class="form-control m-input" placeholder="Enter secondary contact name" />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Secondary Email ID</label>
+                                            <input type="text" id="secondaryemail" name="secondaryemail" class="form-control m-input" placeholder="Enter secondary emailid" />
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Web URL</label>
+                                            <input type="text" id="weburl" name="weburl" class="form-control m-input" placeholder="Enter web url" />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-actions">
+                                    <div class="col-lg-12  text-right">
+                                        <button type="button" onclick="location.href = '/Company/CompanyList'" class="btn default">Cancel</button>
+                                        <button type="button" onclick="" class="btn btn-primary btnSubmit">Save</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+

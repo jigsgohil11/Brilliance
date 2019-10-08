@@ -1,0 +1,114 @@
+﻿body.dragging, body.dragging * {
+    cursor: move !important;
+}
+
+.dragged {
+    position: absolute !important;
+    margin: 0px !important;
+    top: 0;
+    opacity: .5;
+    z-index: 9999999;
+}
+
+ol.vertical.nested_with_switch {
+    margin: 0 0 9px 0;
+    min-height: 10px;
+    padding: 0px;
+}
+
+    ol.vertical.nested_with_switch li {
+        display: block;
+        margin: 5px;
+        padding: 5px;
+        border: 1px solid #CCC;
+        color: #333;
+    }
+
+        ol.vertical.nested_with_switch li.placeholder {
+            position: relative;
+            margin: 0;
+            padding: 0;
+            border: none;
+        }
+
+ol.vertical li ol {
+    margin-left: 15px;
+}
+
+
+.customfieldfrom li ol {
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+ol.vertical.nested_with_switch.customfieldfrom li {
+    border: none;
+}
+
+    ol.vertical.nested_with_switch.customfieldfrom li.active {
+        border: 1px dashed #1976D2 !important;
+    }
+
+    ol.vertical.nested_with_switch.customfieldfrom li[data-type='Section'] {
+        border: 1px solid #CCC;
+    }
+
+ol.vertical.nested_with_switch.customfieldfrom .fa-remove {
+    float: none !important;
+}
+
+
+/*.customfieldfrom li ol {
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+ol.vertical.nested_with_switch.customfieldfrom li {
+    border: none !important;
+}*/
+
+/*.level1 {
+    background-color: #39426c !important;
+}
+
+.level2 {
+    background-color: #62608a !important;
+}
+
+.level3 {
+    background-color: #858eb8 !important;
+}
+
+.level4 {
+    background-color: #abb4de !important;
+}*/
+
+.fa-plus-square:hover, .fa-minus-square:hover {
+    cursor: pointer !important;
+}
+
+.fa-plus-square, .fa-minus-square {
+    float: left;
+    margin-right: 5px;
+    color: #000;
+}
+
+.fa-remove {
+    cursor: pointer !important;
+    float: right;
+    color: #333;
+}
+
+
+.un-active {
+    display: none;
+}
+
+.sortable li {
+    list-style: outside none none;
+}
+
+.sortable.horizontal li {
+    float: left;
+    list-style: outside none none;
+}

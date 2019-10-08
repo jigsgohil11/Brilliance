@@ -1,1 +1,141 @@
 D:\NEHA_Isoftnetech\Brilliance\Brilliance\obj\Debug\Brilliance.csprojResolveAssemblyReference.cache
+C:\Users\Akki\Documents\GitHub\Brilliance\Brilliance\bin\ApplicationInsights.config
+C:\Users\Akki\Documents\GitHub\Brilliance\Brilliance\bin\roslyn\csc.exe
+C:\Users\Akki\Documents\GitHub\Brilliance\Brilliance\bin\roslyn\csc.exe.config
+C:\Users\Akki\Documents\GitHub\Brilliance\Brilliance\bin\roslyn\csc.rsp
+C:\Users\Akki\Documents\GitHub\Brilliance\Brilliance\bin\roslyn\csi.exe
+C:\Users\Akki\Documents\GitHub\Brilliance\Brilliance\bin\roslyn\csi.rsp
+C:\Users\Akki\Documents\GitHub\Brilliance\Brilliance\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
+C:\Users\Akki\Documents\GitHub\Brilliance\Brilliance\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
+C:\Users\Akki\Documents\GitHub\Brilliance\Brilliance\bin\roslyn\Microsoft.CodeAnalysis.CSharp.Scripting.dll
+C:\Users\Akki\Documents\GitHub\Brilliance\Brilliance\bin\roslyn\Microsoft.CodeAnalysis.dll
+C:\Users\Akki\Documents\GitHub\Brilliance\Brilliance\bin\roslyn\Microsoft.CodeAnalysis.Scripting.dll
+C:\Users\Akki\Documents\GitHub\Brilliance\Brilliance\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
+C:\Users\Akki\Documents\GitHub\Brilliance\Brilliance\bin\roslyn\Microsoft.CSharp.Core.targets
+C:\Users\Akki\Documents\GitHub\Brilliance\Brilliance\bin\roslyn\Microsoft.DiaSymReader.Native.amd64.dll
+C:\Users\Akki\Documents\GitHub\Brilliance\Brilliance\bin\roslyn\Microsoft.DiaSymReader.Native.x86.dll
+C:\Users\Akki\Documents\GitHub\Brilliance\Brilliance\bin\roslyn\Microsoft.VisualBasic.Core.targets
+C:\Users\Akki\Documents\GitHub\Brilliance\Brilliance\bin\roslyn\System.AppContext.dll
+C:\Users\Akki\Documents\GitHub\Brilliance\Brilliance\bin\roslyn\System.Collections.Immutable.dll
+C:\Users\Akki\Documents\GitHub\Brilliance\Brilliance\bin\roslyn\System.Diagnostics.StackTrace.dll
+C:\Users\Akki\Documents\GitHub\Brilliance\Brilliance\bin\roslyn\System.IO.FileSystem.dll
+C:\Users\Akki\Documents\GitHub\Brilliance\Brilliance\bin\roslyn\System.IO.FileSystem.Primitives.dll
+C:\Users\Akki\Documents\GitHub\Brilliance\Brilliance\bin\roslyn\System.Reflection.Metadata.dll
+C:\Users\Akki\Documents\GitHub\Brilliance\Brilliance\bin\roslyn\vbc.exe
+C:\Users\Akki\Documents\GitHub\Brilliance\Brilliance\bin\roslyn\vbc.exe.config
+C:\Users\Akki\Documents\GitHub\Brilliance\Brilliance\bin\roslyn\vbc.rsp
+C:\Users\Akki\Documents\GitHub\Brilliance\Brilliance\bin\roslyn\VBCSCompiler.exe
+C:\Users\Akki\Documents\GitHub\Brilliance\Brilliance\bin\roslyn\VBCSCompiler.exe.config
+C:\Users\Akki\Documents\GitHub\Brilliance\Brilliance\bin\Brilliance.dll.config
+C:\Users\Akki\Documents\GitHub\Brilliance\Brilliance\bin\Brilliance.dll
+C:\Users\Akki\Documents\GitHub\Brilliance\Brilliance\bin\Brilliance.pdb
+C:\Users\Akki\Documents\GitHub\Brilliance\Brilliance\bin\Antlr3.Runtime.dll
+C:\Users\Akki\Documents\GitHub\Brilliance\Brilliance\bin\Elmah.dll
+C:\Users\Akki\Documents\GitHub\Brilliance\Brilliance\bin\Microsoft.AI.Agent.Intercept.dll
+C:\Users\Akki\Documents\GitHub\Brilliance\Brilliance\bin\Microsoft.AI.DependencyCollector.dll
+C:\Users\Akki\Documents\GitHub\Brilliance\Brilliance\bin\Microsoft.AI.PerfCounterCollector.dll
+C:\Users\Akki\Documents\GitHub\Brilliance\Brilliance\bin\Microsoft.AI.ServerTelemetryChannel.dll
+C:\Users\Akki\Documents\GitHub\Brilliance\Brilliance\bin\Microsoft.AI.Web.dll
+C:\Users\Akki\Documents\GitHub\Brilliance\Brilliance\bin\Microsoft.AI.WindowsServer.dll
+C:\Users\Akki\Documents\GitHub\Brilliance\Brilliance\bin\Microsoft.ApplicationInsights.dll
+C:\Users\Akki\Documents\GitHub\Brilliance\Brilliance\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
+C:\Users\Akki\Documents\GitHub\Brilliance\Brilliance\bin\Microsoft.Web.Infrastructure.dll
+C:\Users\Akki\Documents\GitHub\Brilliance\Brilliance\bin\Newtonsoft.Json.dll
+C:\Users\Akki\Documents\GitHub\Brilliance\Brilliance\bin\System.Web.Helpers.dll
+C:\Users\Akki\Documents\GitHub\Brilliance\Brilliance\bin\System.Web.Mvc.dll
+C:\Users\Akki\Documents\GitHub\Brilliance\Brilliance\bin\System.Web.Optimization.dll
+C:\Users\Akki\Documents\GitHub\Brilliance\Brilliance\bin\System.Web.Razor.dll
+C:\Users\Akki\Documents\GitHub\Brilliance\Brilliance\bin\System.Web.WebPages.Deployment.dll
+C:\Users\Akki\Documents\GitHub\Brilliance\Brilliance\bin\System.Web.WebPages.dll
+C:\Users\Akki\Documents\GitHub\Brilliance\Brilliance\bin\System.Web.WebPages.Razor.dll
+C:\Users\Akki\Documents\GitHub\Brilliance\Brilliance\bin\WebGrease.dll
+C:\Users\Akki\Documents\GitHub\Brilliance\Brilliance\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+C:\Users\Akki\Documents\GitHub\Brilliance\Brilliance\bin\System.Web.Helpers.xml
+C:\Users\Akki\Documents\GitHub\Brilliance\Brilliance\bin\System.Web.Mvc.xml
+C:\Users\Akki\Documents\GitHub\Brilliance\Brilliance\bin\System.Web.Optimization.xml
+C:\Users\Akki\Documents\GitHub\Brilliance\Brilliance\bin\System.Web.Razor.xml
+C:\Users\Akki\Documents\GitHub\Brilliance\Brilliance\bin\System.Web.WebPages.xml
+C:\Users\Akki\Documents\GitHub\Brilliance\Brilliance\bin\System.Web.WebPages.Deployment.xml
+C:\Users\Akki\Documents\GitHub\Brilliance\Brilliance\bin\System.Web.WebPages.Razor.xml
+C:\Users\Akki\Documents\GitHub\Brilliance\Brilliance\bin\Antlr3.Runtime.pdb
+C:\Users\Akki\Documents\GitHub\Brilliance\Brilliance\bin\Newtonsoft.Json.xml
+C:\Users\Akki\Documents\GitHub\Brilliance\Brilliance\bin\Microsoft.ApplicationInsights.xml
+C:\Users\Akki\Documents\GitHub\Brilliance\Brilliance\bin\Microsoft.AI.DependencyCollector.xml
+C:\Users\Akki\Documents\GitHub\Brilliance\Brilliance\bin\Microsoft.AI.ServerTelemetryChannel.xml
+C:\Users\Akki\Documents\GitHub\Brilliance\Brilliance\bin\Microsoft.AI.WindowsServer.xml
+C:\Users\Akki\Documents\GitHub\Brilliance\Brilliance\bin\Microsoft.AI.Web.xml
+C:\Users\Akki\Documents\GitHub\Brilliance\Brilliance\obj\Debug\Brilliance.csprojResolveAssemblyReference.cache
+C:\Users\Akki\Documents\GitHub\Brilliance\Brilliance\obj\Debug\Brilliance.Resource.Resource.resources
+C:\Users\Akki\Documents\GitHub\Brilliance\Brilliance\obj\Debug\Brilliance.csproj.GenerateResource.Cache
+C:\Users\Akki\Documents\GitHub\Brilliance\Brilliance\obj\Debug\Brilliance.dll
+C:\Users\Akki\Documents\GitHub\Brilliance\Brilliance\obj\Debug\Brilliance.pdb
+D:\NEHA_Isoftnetech\Projects\Brilliance\Latest Work\Brilliance\bin\ApplicationInsights.config
+D:\NEHA_Isoftnetech\Projects\Brilliance\Latest Work\Brilliance\bin\roslyn\csc.exe
+D:\NEHA_Isoftnetech\Projects\Brilliance\Latest Work\Brilliance\bin\roslyn\csc.exe.config
+D:\NEHA_Isoftnetech\Projects\Brilliance\Latest Work\Brilliance\bin\roslyn\csc.rsp
+D:\NEHA_Isoftnetech\Projects\Brilliance\Latest Work\Brilliance\bin\roslyn\csi.exe
+D:\NEHA_Isoftnetech\Projects\Brilliance\Latest Work\Brilliance\bin\roslyn\csi.rsp
+D:\NEHA_Isoftnetech\Projects\Brilliance\Latest Work\Brilliance\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
+D:\NEHA_Isoftnetech\Projects\Brilliance\Latest Work\Brilliance\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
+D:\NEHA_Isoftnetech\Projects\Brilliance\Latest Work\Brilliance\bin\roslyn\Microsoft.CodeAnalysis.CSharp.Scripting.dll
+D:\NEHA_Isoftnetech\Projects\Brilliance\Latest Work\Brilliance\bin\roslyn\Microsoft.CodeAnalysis.dll
+D:\NEHA_Isoftnetech\Projects\Brilliance\Latest Work\Brilliance\bin\roslyn\Microsoft.CodeAnalysis.Scripting.dll
+D:\NEHA_Isoftnetech\Projects\Brilliance\Latest Work\Brilliance\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
+D:\NEHA_Isoftnetech\Projects\Brilliance\Latest Work\Brilliance\bin\roslyn\Microsoft.CSharp.Core.targets
+D:\NEHA_Isoftnetech\Projects\Brilliance\Latest Work\Brilliance\bin\roslyn\Microsoft.DiaSymReader.Native.amd64.dll
+D:\NEHA_Isoftnetech\Projects\Brilliance\Latest Work\Brilliance\bin\roslyn\Microsoft.DiaSymReader.Native.x86.dll
+D:\NEHA_Isoftnetech\Projects\Brilliance\Latest Work\Brilliance\bin\roslyn\Microsoft.VisualBasic.Core.targets
+D:\NEHA_Isoftnetech\Projects\Brilliance\Latest Work\Brilliance\bin\roslyn\System.AppContext.dll
+D:\NEHA_Isoftnetech\Projects\Brilliance\Latest Work\Brilliance\bin\roslyn\System.Collections.Immutable.dll
+D:\NEHA_Isoftnetech\Projects\Brilliance\Latest Work\Brilliance\bin\roslyn\System.Diagnostics.StackTrace.dll
+D:\NEHA_Isoftnetech\Projects\Brilliance\Latest Work\Brilliance\bin\roslyn\System.IO.FileSystem.dll
+D:\NEHA_Isoftnetech\Projects\Brilliance\Latest Work\Brilliance\bin\roslyn\System.IO.FileSystem.Primitives.dll
+D:\NEHA_Isoftnetech\Projects\Brilliance\Latest Work\Brilliance\bin\roslyn\System.Reflection.Metadata.dll
+D:\NEHA_Isoftnetech\Projects\Brilliance\Latest Work\Brilliance\bin\roslyn\vbc.exe
+D:\NEHA_Isoftnetech\Projects\Brilliance\Latest Work\Brilliance\bin\roslyn\vbc.exe.config
+D:\NEHA_Isoftnetech\Projects\Brilliance\Latest Work\Brilliance\bin\roslyn\vbc.rsp
+D:\NEHA_Isoftnetech\Projects\Brilliance\Latest Work\Brilliance\bin\roslyn\VBCSCompiler.exe
+D:\NEHA_Isoftnetech\Projects\Brilliance\Latest Work\Brilliance\bin\roslyn\VBCSCompiler.exe.config
+D:\NEHA_Isoftnetech\Projects\Brilliance\Latest Work\Brilliance\bin\Brilliance.dll.config
+D:\NEHA_Isoftnetech\Projects\Brilliance\Latest Work\Brilliance\bin\Brilliance.dll
+D:\NEHA_Isoftnetech\Projects\Brilliance\Latest Work\Brilliance\bin\Brilliance.pdb
+D:\NEHA_Isoftnetech\Projects\Brilliance\Latest Work\Brilliance\bin\Antlr3.Runtime.dll
+D:\NEHA_Isoftnetech\Projects\Brilliance\Latest Work\Brilliance\bin\Elmah.dll
+D:\NEHA_Isoftnetech\Projects\Brilliance\Latest Work\Brilliance\bin\Microsoft.AI.Agent.Intercept.dll
+D:\NEHA_Isoftnetech\Projects\Brilliance\Latest Work\Brilliance\bin\Microsoft.AI.DependencyCollector.dll
+D:\NEHA_Isoftnetech\Projects\Brilliance\Latest Work\Brilliance\bin\Microsoft.AI.PerfCounterCollector.dll
+D:\NEHA_Isoftnetech\Projects\Brilliance\Latest Work\Brilliance\bin\Microsoft.AI.ServerTelemetryChannel.dll
+D:\NEHA_Isoftnetech\Projects\Brilliance\Latest Work\Brilliance\bin\Microsoft.AI.Web.dll
+D:\NEHA_Isoftnetech\Projects\Brilliance\Latest Work\Brilliance\bin\Microsoft.AI.WindowsServer.dll
+D:\NEHA_Isoftnetech\Projects\Brilliance\Latest Work\Brilliance\bin\Microsoft.ApplicationInsights.dll
+D:\NEHA_Isoftnetech\Projects\Brilliance\Latest Work\Brilliance\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
+D:\NEHA_Isoftnetech\Projects\Brilliance\Latest Work\Brilliance\bin\Microsoft.Web.Infrastructure.dll
+D:\NEHA_Isoftnetech\Projects\Brilliance\Latest Work\Brilliance\bin\Newtonsoft.Json.dll
+D:\NEHA_Isoftnetech\Projects\Brilliance\Latest Work\Brilliance\bin\System.Web.Helpers.dll
+D:\NEHA_Isoftnetech\Projects\Brilliance\Latest Work\Brilliance\bin\System.Web.Mvc.dll
+D:\NEHA_Isoftnetech\Projects\Brilliance\Latest Work\Brilliance\bin\System.Web.Optimization.dll
+D:\NEHA_Isoftnetech\Projects\Brilliance\Latest Work\Brilliance\bin\System.Web.Razor.dll
+D:\NEHA_Isoftnetech\Projects\Brilliance\Latest Work\Brilliance\bin\System.Web.WebPages.Deployment.dll
+D:\NEHA_Isoftnetech\Projects\Brilliance\Latest Work\Brilliance\bin\System.Web.WebPages.dll
+D:\NEHA_Isoftnetech\Projects\Brilliance\Latest Work\Brilliance\bin\System.Web.WebPages.Razor.dll
+D:\NEHA_Isoftnetech\Projects\Brilliance\Latest Work\Brilliance\bin\WebGrease.dll
+D:\NEHA_Isoftnetech\Projects\Brilliance\Latest Work\Brilliance\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+D:\NEHA_Isoftnetech\Projects\Brilliance\Latest Work\Brilliance\bin\System.Web.Helpers.xml
+D:\NEHA_Isoftnetech\Projects\Brilliance\Latest Work\Brilliance\bin\System.Web.Mvc.xml
+D:\NEHA_Isoftnetech\Projects\Brilliance\Latest Work\Brilliance\bin\System.Web.Optimization.xml
+D:\NEHA_Isoftnetech\Projects\Brilliance\Latest Work\Brilliance\bin\System.Web.Razor.xml
+D:\NEHA_Isoftnetech\Projects\Brilliance\Latest Work\Brilliance\bin\System.Web.WebPages.xml
+D:\NEHA_Isoftnetech\Projects\Brilliance\Latest Work\Brilliance\bin\System.Web.WebPages.Deployment.xml
+D:\NEHA_Isoftnetech\Projects\Brilliance\Latest Work\Brilliance\bin\System.Web.WebPages.Razor.xml
+D:\NEHA_Isoftnetech\Projects\Brilliance\Latest Work\Brilliance\bin\Antlr3.Runtime.pdb
+D:\NEHA_Isoftnetech\Projects\Brilliance\Latest Work\Brilliance\bin\Newtonsoft.Json.xml
+D:\NEHA_Isoftnetech\Projects\Brilliance\Latest Work\Brilliance\bin\Microsoft.ApplicationInsights.xml
+D:\NEHA_Isoftnetech\Projects\Brilliance\Latest Work\Brilliance\bin\Microsoft.AI.DependencyCollector.xml
+D:\NEHA_Isoftnetech\Projects\Brilliance\Latest Work\Brilliance\bin\Microsoft.AI.ServerTelemetryChannel.xml
+D:\NEHA_Isoftnetech\Projects\Brilliance\Latest Work\Brilliance\bin\Microsoft.AI.WindowsServer.xml
+D:\NEHA_Isoftnetech\Projects\Brilliance\Latest Work\Brilliance\bin\Microsoft.AI.Web.xml
+D:\NEHA_Isoftnetech\Projects\Brilliance\Latest Work\Brilliance\obj\Debug\Brilliance.csprojResolveAssemblyReference.cache
+D:\NEHA_Isoftnetech\Projects\Brilliance\Latest Work\Brilliance\obj\Debug\Brilliance.Resource.Resource.resources
+D:\NEHA_Isoftnetech\Projects\Brilliance\Latest Work\Brilliance\obj\Debug\Brilliance.csproj.GenerateResource.Cache
+D:\NEHA_Isoftnetech\Projects\Brilliance\Latest Work\Brilliance\obj\Debug\Brilliance.dll
+D:\NEHA_Isoftnetech\Projects\Brilliance\Latest Work\Brilliance\obj\Debug\Brilliance.pdb

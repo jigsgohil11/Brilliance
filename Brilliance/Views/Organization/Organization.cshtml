@@ -1,0 +1,182 @@
+﻿@using Brilliance.Infrastructure
+@model Brilliance.Models.ViewModel.ClientViewModel
+@{
+    ViewBag.Title = "Organization";
+    Layout = "~/Views/Shared/_Layout_public.cshtml";
+}
+
+<link href="~/assets/global/plugins/bootstrap-datepicker/css/bootstrap-datepicker.min.css" rel="stylesheet" />
+
+<style>
+
+    .floatClass {
+        float: left;
+        margin-bottom: 10px;
+    }
+
+    .capright {
+        float: right;
+        display: inline-block;
+        font-size: 18px;
+        line-height: 18px;
+        padding: 5px 0;
+    }
+</style>
+
+<div class="page-content page-content-dashbrd-backgrnd">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="page-bar margin-bottom-10">
+                <div class="row">
+                    <div class="col-md-12 padding-out">
+                        <div class="portlet light padding-header margin-0 custom-padding-bar">
+                            <div class="portlet-title portlet-title-Project-custom">
+                                <div class="caption font-dark">
+                                    <i class="icon-settings font-dark"></i>
+                                    <span class="caption-subject bold uppercase">Organization</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row" style="margin-left:-25px;margin-right:-25px;margin-top:-5px;">
+                <div class="col-lg-12">
+                    <div class="portlet light">
+                        <div class="portlet-body form">
+                            @*<form id="frmClient" action="/Organization/SaveClient" data-ajax="true" data-ajax-method="Post" data-ajax-success="SaveClientResponse(data);" data-ajax-begin="ShowLoader();">*@
+                                <form action="/Organization/SaveClient" id="frmClient" data-ajax-success="SaveClientResponse(data);" data-ajax="true" data-ajax-method="Post" method="post">
+                                    @Html.HiddenFor(m=>m.client.ClientID)
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>Code</label>
+                                                @*<input type="text" id="code" name="code" class="form-control m-input" placeholder="Enter Code" required />*@
+                                                @Html.TextBoxFor(m => m.client.ClientCode, new { @class = "form-control m-input", @placeholder = "Enter Client Code" })
+                                                @*@Html.ValidationMessageFor(m => m.client.ClientCode)*@
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>Name</label>
+                                                @*<input type="text" id="name" name="name" class="form-control m-input" placeholder="Enter Name" required />*@
+                                                @Html.TextBoxFor(m => m.client.OrganizationName, new { @class = "form-control m-input", @placeholder = "Enter Organization Name" })
+                                                @*@Html.ValidationMessageFor(m => m.client.OrganizationName)*@
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>Contact Person Name</label>
+                                                @*<input type="text" id="code" name="code" class="form-control m-input" placeholder="Enter Code" required />*@
+                                                @Html.TextBoxFor(m => m.client.ContactPersonName, new { @class = "form-control m-input", @placeholder = "Enter contact person name" })
+                                                @*@Html.ValidationMessageFor(m => m.client.ContactPersonName)*@
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>Contact Person Email</label>
+                                                @*<input type="text" id="name" name="name" class="form-control m-input" placeholder="Enter Name" required />*@
+                                                @Html.TextBoxFor(m => m.client.ContactPersonEmail, new { @class = "form-control m-input", @placeholder = "Enter contact person email" })
+                                                @*@Html.ValidationMessageFor(m => m.client.ContactPersonEmail)*@
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>Mobile Number</label>
+                                                @*<input type="text" id="code" name="code" class="form-control m-input" placeholder="Enter Code" required />*@
+                                                @Html.TextBoxFor(m => m.client.MobileNo, new { @class = "form-control m-input", @placeholder = "Enter mobile number" })
+                                                @*@Html.ValidationMessageFor(m => m.client.MobileNo)*@
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>Description</label>
+                                                @*<textarea id="description" name="description" class="form-control m-input"></textarea>*@
+                                                @Html.TextAreaFor(m => m.client.Description, new { @class = "form-control m-input", @placeholder = "Enter Description" })
+                                                @*@Html.ValidationMessageFor(m => m.client.Description)*@
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>Address</label>
+                                                @*<textarea id="address" name="address" class="form-control m-input"></textarea>*@
+                                                @Html.TextAreaFor(m => m.client.Address, new { @class = "form-control m-input", @placeholder = "Enter Address" })
+                                                @*@Html.ValidationMessageFor(m => m.client.Address)*@
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>City</label>
+                                                @*<input type="text" id="city" name="city" class="form-control m-input" placeholder="Enter city" required />*@
+                                                @Html.TextBoxFor(m => m.client.City, new { @class = "form-control m-input", @placeholder = "Enter City" })
+                                                @*@Html.ValidationMessageFor(m => m.client.City)*@
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>State</label>
+                                                @*<input type="text" id="state" name="state" class="form-control m-input" placeholder="Enter state"/>*@
+                                                @Html.TextBoxFor(m => m.client.State, new { @class = "form-control m-input", @placeholder = "Enter State" })
+                                                @*@Html.ValidationMessageFor(m => m.client.State)*@
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>Country</label>
+                                                @*<input type="text" id="country" name="country" class="form-control m-input" placeholder="Enter country"/>*@
+                                                @Html.TextBoxFor(m => m.client.Country, new { @class = "form-control m-input", @placeholder = "Enter Country" })
+                                                @*@Html.ValidationMessageFor(m => m.client.Country)*@
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-actions">
+                                        <div class="col-lg-12  text-right">
+                                            <button type="button" onclick="location.href = '/Organization/OrganizationList'" class="btn default">Cancel</button>
+                                            @*<button type="button" onclick="ClientFormSubmit();" class="btn btn-primary btnSubmit">Save</button>*@
+                                            <button type="submit" class="btn btn-primary btnSubmit">Save</button>
+                                        </div>
+                                    </div>
+                                </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section scripts{
+
+   <script>
+       
+       function SaveClientResponse(response) {
+           //if (response == "_Logon_") {
+           //    window.location.href = "/Login/Login";
+           //}
+           //else {
+           //    if (response.IsSuccess) {
+           //        SetMessageForPageLoad(response.Message, "Organizationsaved");
+           //        window.location.href = "/Organization/OrganizationList/";
+           //    } else {
+           //        ShowMessage(response.Message, "error");
+           //    }
+           //}
+           
+           if (response.IsSuccess) {
+               SetMessageForPageLoad(response.Message, "Organizationsaved");
+               window.location.href = "/Organization/OrganizationList/";
+           } else {
+               ShowMessage(response.Message, "error");
+           }
+       }
+    </script>
+}
+
+

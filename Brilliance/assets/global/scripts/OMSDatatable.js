@@ -1,0 +1,1 @@
+﻿$("table").find("input[type=text]").addClass("form-control input-sm input-small input-inline");

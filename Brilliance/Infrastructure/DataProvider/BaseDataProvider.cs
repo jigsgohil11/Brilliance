@@ -6,7 +6,8 @@ using Brilliance.Infrastructure.Attributes;
 using Brilliance.Models;
 using PetaPoco;
 using System.Data.SqlClient;
-
+using System;
+using System.Collections.Generic;
 
 namespace Brilliance.Infrastructure.DataProvider
 {
@@ -15,7 +16,7 @@ namespace Brilliance.Infrastructure.DataProvider
         private readonly Database _db;
         public BaseDataProvider()
         {
-            _db = new Database("");
+            _db = new Database("DefaultConnection");
             _db.CommandTimeout = ConfigSettings.DBCommandTimeOut;
         }
 

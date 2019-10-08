@@ -23,54 +23,134 @@ namespace Brilliance.Controllers
             return Json(baseDataProvider.GetAutoCompleteList(table, textField, valueField, text, pageSize, SearchCriteriaField1 != "" ? string.Format(" and {0} like '{1}'", SearchCriteriaField1, SearchCriteriaValue1) : "", SearchCriteriaField2 != "" ? string.Format(" and {0} like '{1}'", SearchCriteriaField2, SearchCriteriaValue2) : ""));
         }
 
+        //protected override void OnActionExecuting(ActionExecutingContext filterContext)
+        //{
+        //    bool countRequest = false;
+
+        //    if (SessionHelper.UserId == Guid.Empty && SessionHelper.ClientID == Guid.Empty)
+        //    {
+        //        filterContext.Result = new RedirectToRouteResult(new RouteValueDictionary(new
+        //        {
+        //            controller = "login",
+        //            action = "login"
+        //        }));
+        //        return;
+        //    }
+
+        //    //if (filterContext.HttpContext.Request.IsAjaxRequest() && SessionHelper.FirstTimeLogin)
+        //    //{
+        //    //    SessionHelper.FirstTimeLogin = false;
+        //    //    countRequest = true;
+        //    //}
+
+        //    //if (!SessionHelper.FirstTimeLogin)
+        //    //{
+        //    //    if (!countRequest)
+        //    //    {
+        //    //        if (SessionHelper.UserId != Guid.Empty && SessionHelper.ClientID != Guid.Empty)
+        //    //        {
+        //    //            BaseDataProvider bdp = new BaseDataProvider();
+        //    //            var searchList = new List<SearchValueData>();
+        //    //            var searchValueData = new SearchValueData { Name = "UserID1", Value = SessionHelper.UserId.ToString() };
+        //    //            searchList.Add(searchValueData);
+
+        //    //            searchValueData = new SearchValueData { Name = "ClientID1", Value = SessionHelper.ClientID.ToString() };
+        //    //            searchList.Add(searchValueData);
+
+        //    //            searchValueData = new SearchValueData { Name = "IsRequest", Value = Convert.ToString(1) };
+        //    //            searchList.Add(searchValueData);
+
+        //    //            //List<LoginUserRoleRightModel> updatedUserRoleRightList = bdp.GetEntityList<LoginUserRoleRightModel>("user_User_Get_RoleRightDataByUser", searchList);
+
+        //    //            UsersLoginDetails usersLoginDetails = bdp.GetMultipleEntity<UsersLoginDetails>("user_User_GetLoginDataNew", searchList);
+        //    //            UserManagementDataProvider userManagementDataProvider = new UserManagementDataProvider();
+
+        //    //            userManagementDataProvider.FillUserSession(usersLoginDetails);
+        //    //            SessionHelper.FirstTimeLogin = false;
+        //    //        }
+        //    //    }
+        //    //    countRequest = false;
+        //    //}
+        //    //base.OnActionExecuting(filterContext);
+        //    //var request = HttpContext.Request;
+        //    //var baseUrl = string.Format("{0}://{1}{2}", request.Url.Scheme, request.Url.Authority, HttpRuntime.AppDomainAppVirtualPath == "/" ? "" : HttpRuntime.AppDomainAppVirtualPath);
+        //    //ViewBag.BasePath = baseUrl;
+        //}
+
         protected override void OnActionExecuting(ActionExecutingContext filterContext)
         {
-            bool countRequest = false;
+            //if (SessionHelper.UserId == Guid.Empty)
+            //{
+            //    filterContext.Result = new RedirectToRouteResult(new RouteValueDictionary(new
+            //    {
+            //        controller = "login",
+            //        action = "login",
+            //        area = ""
+            //    }));
+            //    return;
+            //}
 
-            if (SessionHelper.UserId == Guid.Empty && SessionHelper.ClientID == Guid.Empty)
+            // If the browser session or authentication session has expired...
+            if (SessionHelper.UserId != Guid.Empty)
             {
-                filterContext.Result = new RedirectToRouteResult(new RouteValueDictionary(new
+                if (filterContext.HttpContext.Request.IsAjaxRequest())
                 {
-                    controller = "login",
-                    action = "login"
-                }));
-                return;
+                    // For AJAX requests, we're overriding the returned JSON result with a simple string,
+                    // indicating to the calling JavaScript code that a redirect should be performed.
+                    filterContext.Result = new JsonResult { Data = "_Logon_" };
+                }
+                else
+                {
+                    // For round-trip posts, we're forcing a redirect to Home/TimeoutRedirect/, which
+                    // simply displays a temporary 5 second notification that they have timed out, and
+                    // will, in turn, redirect to the logon page.
+                    filterContext.Result = new RedirectToRouteResult(new RouteValueDictionary(new
+                    {
+                        controller = "login",
+                        action = "login",
+                        area = ""
+                    }));
+                }
             }
+
+            base.OnActionExecuting(filterContext);
 
             //if (filterContext.HttpContext.Request.IsAjaxRequest() && SessionHelper.FirstTimeLogin)
             //{
             //    SessionHelper.FirstTimeLogin = false;
             //    countRequest = true;
             //}
-
-            //if (!SessionHelper.FirstTimeLogin)
+            //if (filterContext.HttpContext.Request.IsAjaxRequest())
             //{
-            //    if (!countRequest)
-            //    {
-            //        if (SessionHelper.UserId != Guid.Empty && SessionHelper.ClientID != Guid.Empty)
-            //        {
-            //            BaseDataProvider bdp = new BaseDataProvider();
-            //            var searchList = new List<SearchValueData>();
-            //            var searchValueData = new SearchValueData { Name = "UserID1", Value = SessionHelper.UserId.ToString() };
-            //            searchList.Add(searchValueData);
 
-            //            searchValueData = new SearchValueData { Name = "ClientID1", Value = SessionHelper.ClientID.ToString() };
-            //            searchList.Add(searchValueData);
-
-            //            searchValueData = new SearchValueData { Name = "IsRequest", Value = Convert.ToString(1) };
-            //            searchList.Add(searchValueData);
-
-            //            //List<LoginUserRoleRightModel> updatedUserRoleRightList = bdp.GetEntityList<LoginUserRoleRightModel>("user_User_Get_RoleRightDataByUser", searchList);
-
-            //            UsersLoginDetails usersLoginDetails = bdp.GetMultipleEntity<UsersLoginDetails>("user_User_GetLoginDataNew", searchList);
-            //            UserManagementDataProvider userManagementDataProvider = new UserManagementDataProvider();
-
-            //            userManagementDataProvider.FillUserSession(usersLoginDetails);
-            //            SessionHelper.FirstTimeLogin = false;
-            //        }
-            //    }
-            //    countRequest = false;
             //}
+            //if (!SessionHelper.FirstTimeLogin)  // Avoid this block on first time login
+            //{
+            //    if (SessionHelper.UserId > 0 && SessionHelper.ClientID > 0)
+            //    {
+            //        BaseDataProvider bdp = new BaseDataProvider();
+            //        var searchList = new List<SearchValueData>();
+            //        var searchValueData = new SearchValueData { Name = "UserID1", Value = SessionHelper.UserId.ToString() };
+            //        searchList.Add(searchValueData);
+
+            //        searchValueData = new SearchValueData { Name = "ClientID1", Value = SessionHelper.ClientID.ToString() };
+            //        searchList.Add(searchValueData);
+
+            //        searchValueData = new SearchValueData { Name = "IsRequest", Value = Convert.ToString(1) };
+            //        searchList.Add(searchValueData);
+
+            //        //List<LoginUserRoleRightModel> updatedUserRoleRightList = bdp.GetEntityList<LoginUserRoleRightModel>("user_User_Get_RoleRightDataByUser", searchList);
+
+            //        //UsersLoginDetails usersLoginDetails = bdp.GetMultipleEntity<UsersLoginDetails>("user_User_GetLoginDataNew", searchList);
+            //        //LoginDataProvider loginDataProvider = new LoginDataProvider();
+            //        //if (usersLoginDetails.LoginUserDataModel != null)
+            //        //{
+            //        //    loginDataProvider.FillUserSession(usersLoginDetails);
+            //        //}
+            //    }
+            //}
+            //else
+            //    SessionHelper.FirstTimeLogin = false;
             //base.OnActionExecuting(filterContext);
             //var request = HttpContext.Request;
             //var baseUrl = string.Format("{0}://{1}{2}", request.Url.Scheme, request.Url.Authority, HttpRuntime.AppDomainAppVirtualPath == "/" ? "" : HttpRuntime.AppDomainAppVirtualPath);

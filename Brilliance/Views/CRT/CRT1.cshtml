@@ -1,0 +1,390 @@
+﻿
+@{
+    ViewBag.Title = "CRT1";
+    Layout = "~/Views/Shared/_Layout_public.cshtml";
+}
+
+<link href="~/assets/global/plugins/bootstrap-datepicker/css/bootstrap-datepicker.min.css" rel="stylesheet" />
+
+<style>
+    /*.page-content-dashbrd-backgrnd {
+        background-color: #eef1f5;
+    }*/
+
+    /*.portlet.light.padding-header.margin-0.custom-padding-bar {
+        padding: 0 10px;
+    }
+
+    .portlet-title.portlet-title-Project-custom {
+        border-bottom: none !important;
+        min-height: 0px !important;
+        margin: 0;
+    }*/
+
+    .floatClass {
+        float: left;
+        margin-bottom: 10px;
+    }
+
+    .capright {
+        float: right;
+        display: inline-block;
+        font-size: 18px;
+        line-height: 18px;
+        padding: 5px 0;
+    }
+</style>
+@*<link href="~/assets/global/plugins/bootstrap-datepicker/css/bootstrap-datepicker.min.css" rel="stylesheet" />
+    <link href="~/assets/global/plugins/bootstrap-summernote/summernote.css" rel="stylesheet" />
+    <link href="~/assets/global/plugins/datatables/datatables.min.css" rel="stylesheet" type="text/css" />*@
+
+
+<div class="page-content page-content-dashbrd-backgrnd">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="page-bar margin-bottom-10">
+                <div class="row">
+                    <div class="col-md-12 padding-out">
+                        <div class="portlet light padding-header margin-0 custom-padding-bar">
+                            <div class="portlet-title portlet-title-Project-custom">
+                                <div class="caption font-dark">
+                                    <i class="icon-settings font-dark"></i>
+                                    <span class="caption-subject bold uppercase">Complaints Reporting Tool</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="portlet light">
+                        <div class="portlet-body form">
+                            <form id="frmTasks" action="/Crm/Areas/SaveArea" method="post" data-ajax="true" data-ajax-method="Post" data-ajax-success="SaveAreaResponse(data);" data-ajax-begin="ShowLoader();">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Company</label>
+                                            <select id="company_id" name="comapny_id" class="form-control bs-select" data_live_search="true">
+                                                <option value=" ">--Select Company--</option>
+                                                <option value="Company 1">Company 1</option>
+                                                <option value="Company 2">Company 2</option>
+                                                <option value="Company 3">Company 3</option>
+                                                <option value="Company 4">Company 4</option>
+                                            </select>
+                                            @*<input type="text" id="AreaTitle" name="AreaTitle" class="form-control m-input" placeholder="Enter first name" required />*@
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Division</label>
+                                            <select id="company_id" name="comapny_id" class="form-control bs-select" data_live_search="true">
+                                                <option value=" ">--Select Division--</option>
+                                                <option value="Division 1">Division 1</option>
+                                                <option value="Division 2">Division 2</option>
+                                                <option value="Division 3">Division 3</option>
+                                                <option value="Division 4">Division 4</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Policy Or Amount</label>
+                                            <input type="text" id="AreaTitle" name="AreaTitle" class="form-control m-input" placeholder="Enter Policy Or Amount" required />
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="row">
+                                            <div class="col-md-3" style="margin-top:25px;">
+                                                <div class="form-group">
+                                                    <label class="mt-checkbox mt-checkbox-outline">
+                                                        not a client
+                                                        <input type="checkbox" id="ResetPassword" name="ResetPassword" onclick="ChkClick(this);" value="true">
+                                                        <span></span>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-9">
+                                                <div class="form-group">
+                                                    <label>ID number</label>
+                                                    <input type="text" id="AreaTitle" name="AreaTitle" class="form-control m-input" placeholder="Enter ID number" required />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>First Name</label>
+                                            <input type="text" id="AreaTitle" name="AreaTitle" class="form-control m-input" placeholder="Enter first name" required />
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Last Name</label>
+                                            <input type="text" id="AreaTitle" name="AreaTitle" class="form-control m-input" placeholder="Enter last name" required />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Contact No</label>
+                                            <input type="text" id="AreaTitle" name="AreaTitle" class="form-control m-input" placeholder="Enter contact no" required />
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Email address</label>
+                                            <input type="text" id="AreaTitle" name="AreaTitle" class="form-control m-input" placeholder="Enter Email" required />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Level of</label>
+                                            <select id="company_id" name="comapny_id" class="form-control bs-select" data_live_search="true">
+                                                <option value="Not satisfied">Not satisfied</option>
+                                                <option value="satisfied">satisfied</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="row">
+                                            <div class="col-lg-6">
+                                                <label>Is this a complaint?</label>
+                                                <div class="mt-radio-inline">
+                                                    <label class="mt-radio mt-radio-outline margin-bottom0">
+                                                        <input name="optionsRadios" id="optionsRadios25" value="yes" type="radio"> Yes
+                                                        <span></span>
+                                                    </label>
+                                                    <label class="mt-radio mt-radio-outline margin-bottom0">
+                                                        <input name="optionsRadios" id="optionsRadios26" value="no" type="radio"> No
+                                                        <span></span>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6" style="margin-top:29px;">
+                                                <div class="form-group">
+                                                    <label>Complaint Number : <b style="color:lightgray">Complaint 1</b></label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                @*<div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>File note ID : <b style="color:lightgray">Complaint 1</b></label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<label>File note date : <b style="color:lightgray">Complaint 1</b></label>
+                                               <textarea  class="form-control m-input"></textarea>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="row">
+                                                <div class="col-lg-6">
+                                                    <label>Is this a complaint?</label>
+                                                    <div class="mt-radio-inline">
+                                                        <label class="mt-radio mt-radio-outline margin-bottom0">
+                                                            <input name="optionsRadios" id="optionsRadios25" value="yes" type="radio"> Yes
+                                                            <span></span>
+                                                        </label>
+                                                        <label class="mt-radio mt-radio-outline margin-bottom0">
+                                                            <input name="optionsRadios" id="optionsRadios26" value="no" type="radio"> No
+                                                            <span></span>
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6" style="margin-top:29px;">
+                                                    <div class="form-group">
+                                                        <label>Complaint Number : <b style="color:lightgray">Complaint 1</b></label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label>Author : <b style="color:lightgray">Web Submission</b></label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <button type="button" onclick="" class="btn btn-primary btnSubmit">Add note</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>*@
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Product Category</label>
+                                            <select id="company_id" name="comapny_id" class="form-control bs-select" data_live_search="true">
+                                                <option value=" ">Choose...</option>
+                                                <option value="product 1">product 1</option>
+                                                <option value="product 2">product 2</option>
+                                                <option value="product 3">product 3</option>
+                                                <option value="product 4">product 4</option>
+                                            </select>
+                                            @*<input type="text" id="AreaTitle" name="AreaTitle" class="form-control m-input" placeholder="Enter first name" required />*@
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Product Type</label>
+                                            <select id="company_id" name="comapny_id" class="form-control bs-select" data_live_search="true">
+                                                <option value=" ">Choose...</option>
+                                                <option value="Type 1">Type 1</option>
+                                                <option value="Type 2">Type 2</option>
+                                                <option value="Type 3">Type 3</option>
+                                                <option value="Type 4">Type 4</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Complaint category</label>
+                                            <select id="company_id" name="comapny_id" class="form-control bs-select" data_live_search="true">
+                                                <option value=" ">Choose...</option>
+                                                <option value="category 1">category 1</option>
+                                                <option value="category 2">category 2</option>
+                                                <option value="category 3">category 3</option>
+                                                <option value="category 4">category 4</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Nature of complaint</label>
+                                            <select id="company_id" name="comapny_id" class="form-control bs-select" data_live_search="true">
+                                                <option value=" ">Choose...</option>
+                                                <option value="civil">civil</option>
+                                                <option value="criminal">criminal</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Complaint received date</label>
+                                            <div class="input-group">
+                                                <span class="input-group-addon">
+                                                    <i class="fa fa-calendar font-green"></i>
+                                                </span>
+                                                @*@Html.TextBoxFor(m => m.leads.DateOfLead, Constants.DateFormatString, new { @class = "form-control form-control-inline  date-picker", @placeholder = "Select Date Of Lead" })*@
+                                                <input type="text" id="AreaTitle" name="AreaTitle" class="form-control form-control-inline  date-picker" placeholder="Select received date" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Complaint incident date&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<label style="font:5px;">(date when dissatisfactory experience occcured)</label></label>
+                                            <div class="input-group">
+                                                <span class="input-group-addon">
+                                                    <i class="fa fa-calendar font-green"></i>
+                                                </span>
+                                                @*@Html.TextBoxFor(m => m.leads.DateOfLead, Constants.DateFormatString, new { @class = "form-control form-control-inline  date-picker", @placeholder = "Select Date Of Lead" })*@
+                                                <input type="text" id="AreaTitle" name="AreaTitle" class="form-control form-control-inline  date-picker" placeholder="Select incident date" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Complaint received date</label>
+                                            <div class="input-group">
+                                                <span class="input-group-addon">
+                                                    <i class="fa fa-calendar font-green"></i>
+                                                </span>
+                                                @*@Html.TextBoxFor(m => m.leads.DateOfLead, Constants.DateFormatString, new { @class = "form-control form-control-inline  date-picker", @placeholder = "Select Date Of Lead" })*@
+                                                <input type="text" id="AreaTitle" name="AreaTitle" class="form-control form-control-inline  date-picker" placeholder="Select received date" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Complaint incident date&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<label style="font:5px;">(date when dissatisfactory experience occcured)</label></label>
+                                            <div class="input-group">
+                                                <span class="input-group-addon">
+                                                    <i class="fa fa-calendar font-green"></i>
+                                                </span>
+                                                @*@Html.TextBoxFor(m => m.leads.DateOfLead, Constants.DateFormatString, new { @class = "form-control form-control-inline  date-picker", @placeholder = "Select Date Of Lead" })*@
+                                                <input type="text" id="AreaTitle" name="AreaTitle" class="form-control form-control-inline  date-picker" placeholder="Select incident date" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="row">
+                                            <div class="col-md-6" style="margin-top:29px;">
+                                                <div class="form-group">
+                                                    <label>TCF Outcome : <b style="color:lightgray">Outcome</b></label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-actions">
+                                    <div class="col-lg-12  text-right">
+                                        <button type="button" onclick="location.href = ''" class="btn default">Cancel</button>
+                                        <button type="button" onclick="" class="btn btn-primary btnSubmit">Save</button>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <label>Complaint resolved?</label>
+                                        <div class="mt-radio-inline">
+                                            <label class="mt-radio mt-radio-outline margin-bottom0">
+                                                <input name="optionsRadios" id="optionsRadios25" value="yes" type="radio"> Yes
+                                                <span></span>
+                                            </label>
+                                            <label class="mt-radio mt-radio-outline margin-bottom0">
+                                                <input name="optionsRadios" id="optionsRadios26" value="no" type="radio"> Not yet
+                                                <span></span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label>Complaint resolution date</label>
+                                            <div class="input-group">
+                                                <span class="input-group-addon">
+                                                    <i class="fa fa-calendar font-green"></i>
+                                                </span>
+                                                <input type="text" id="AreaTitle" name="AreaTitle" class="form-control form-control-inline  date-picker" placeholder="Select resolution date" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4" style="margin-top:29px;">
+                                        <div class="form-group">
+                                            <label>
+                                                <label>Complaint Number : <b style="color:lightgray">XC-996847362</b></label>
+
+                                                @*Complaint Number : <b style="color: rgba(135, 117, 167, 1);">XC-996847362</b>*@
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+

@@ -4,7 +4,7 @@ using System.Data;
 using System.Linq;
 using PetaPoco.Internal;
 
-namespace Brilliance.Infrastructure
+namespace PetaPoco
 {
     public class GridReader : IDisposable
     {
