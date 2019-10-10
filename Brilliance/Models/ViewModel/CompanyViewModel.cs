@@ -4,30 +4,31 @@ using System.Web.Mvc;
 
 namespace Brilliance.Models.ViewModel
 {
-    public class ClientViewModel
+    public class CompanyViewModel
     {
-        public ClientViewModel()
+        public CompanyViewModel()
         {
-            client = new Client();
+            company = new Company();
+            ClientList = new List<SelectListItem>();
             Countrylist = new List<SelectListItem>();
             StateList = new List<SelectListItem>();
             CityList = new List<SelectListItem>();
         }
-        public Client client { get; set; }
+        public Company company { get; set; }
+        public List<SelectListItem> ClientList { get; set; }
         public List<SelectListItem> Countrylist { get; set; }
         public List<SelectListItem> StateList { get; set; }
         public List<SelectListItem> CityList { get; set; }
 
-
     }
-    public class ClientListModel
+    public class CompanyListModel
     {
-        public ClientListModel()
+        public CompanyListModel()
         {
-            Clientlist = new List<Client>();
+            Companylist = new List<Company>();
             Response = new ServiceResponse();
         }
-        public List<Client> Clientlist { get; set; }
+        public List<Company> Companylist { get; set; }
         public ServiceResponse Response { get; set; }
     }
 }

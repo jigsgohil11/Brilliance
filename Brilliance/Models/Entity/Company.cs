@@ -74,7 +74,11 @@ namespace Brilliance.Models.Entity
         public string Description { get; set; }
         public Guid? SectorID { get; set; }
         public Guid? IndustryID { get; set; }
+        [Ignore]
+        public string EncryptedCompanyID { get { return CompanyID != Guid.Empty ? Crypto.Encrypt(Convert.ToString(CompanyID)) : null; } }
 
+        [Ignore]
+        public bool IsEdit { get { return CompanyID != Guid.Empty ? true : false; } }
 
     }
 }

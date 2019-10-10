@@ -1,4 +1,5 @@
-﻿
+﻿@using Brilliance.Infrastructure
+@model Brilliance.Models.ViewModel.CompanyViewModel
 @{
     ViewBag.Title = "Company";
     Layout = "~/Views/Shared/_Layout_public.cshtml";
@@ -38,23 +39,24 @@
                     </div>
                 </div>
             </div>
-            <div class="row"  style="margin-left:-25px;margin-right:-25px;margin-top:-5px;">
+            <div class="row" style="margin-left:-25px;margin-right:-25px;margin-top:-5px;">
                 <div class="col-lg-12">
                     <div class="portlet light">
                         <div class="portlet-body form">
-                            <form id="frmTasks" action="/Crm/Areas/SaveArea" method="post" data-ajax="true" data-ajax-method="Post" data-ajax-success="SaveAreaResponse(data);" data-ajax-begin="ShowLoader();">
+                            <form id="frmcompany" action="/Company/SaveCompany" method="post" data-ajax="true" data-ajax-method="Post" data-ajax-success="SaveCompanyResponse(data);" data-ajax-begin="ShowLoader();">
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label>Organization</label>
-                                            <select id="Organization_id" name="Organization_id" class="form-control bs-select" data_live_search="true">
+                                            @*<select id="Organization_id" name="Organization_id" class="form-control bs-select" data_live_search="true">
                                                 <option value=" ">Choose...</option>
                                                 <option value="Organization 1">Organization 1</option>
                                                 <option value="Organization 2">Organization 2</option>
                                                 <option value="Organization 3">Organization 3</option>
                                                 <option value="Organization 4">Organization 4</option>
-                                            </select>
-                                            @*<input type="text" id="AreaTitle" name="AreaTitle" class="form-control m-input" placeholder="Enter first name" required />*@
+                                            </select>*@
+                                            @Html.DropDownListFor(m => m.company.ClientID, new SelectList(Model.ClientList, "Value", "Text", 0), "--Select Organization--", new { @data_live_search = "true", @class = "form-control bs-select"})
+                                            @Html.ValidationMessageFor(m => m.company.ClientID)
                                         </div>
                                     </div>
                                 </div>
@@ -62,13 +64,16 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label>Code</label>
-                                            <input type="text" id="code" name="code" class="form-control m-input" placeholder="Enter Code" required />
+                                            @Html.TextBoxFor(m => m.company.CompanyCode, new { @class = "form-control m-input", @placeholder = "Enter company code" })
+                                            @Html.ValidationMessageFor(m => m.company.CompanyCode)
+
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label>Name</label>
-                                            <input type="text" id="name" name="name" class="form-control m-input" placeholder="Enter Name" required />
+                                            <label>Company Name</label>
+                                            @Html.TextBoxFor(m => m.company.CompanyName, new { @class = "form-control m-input", @placeholder = "Enter company name" })
+                                            @Html.ValidationMessageFor(m => m.company.CompanyName)
                                         </div>
                                     </div>
                                 </div>
@@ -76,27 +81,13 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label>Description</label>
-                                            <textarea id="description" name="description" class="form-control m-input"></textarea>
+                                            @Html.TextAreaFor(m => m.company.Description, new { @class = "form-control m-input", @placeholder = "Enter Description"})
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label>Address</label>
-                                            <textarea id="address" name="address" class="form-control m-input"></textarea>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label>City</label>
-                                            <input type="text" id="city" name="city" class="form-control m-input" placeholder="Enter city" required />
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label>State</label>
-                                            <input type="text" id="state" name="state" class="form-control m-input" placeholder="Enter state" />
+                                            @Html.TextAreaFor(m => m.company.Address, new { @class = "form-control m-input", @placeholder = "Enter Address" })
                                         </div>
                                     </div>
                                 </div>
@@ -104,13 +95,32 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label>Country</label>
-                                            <input type="text" id="country" name="country" class="form-control m-input" placeholder="Enter country" />
+                                            @Html.DropDownListFor(m => m.company.Country, new SelectList(Model.Countrylist, "Value", "Text", 0), "--Select Country--", new { @data_live_search = "true", @class = "form-control bs-select", @onchange = "GetState(this);" })
+                                            @Html.ValidationMessageFor(m => m.company.Country)
+                                        </div>
+                                    </div>
+                                  
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>State</label>
+                                            @Html.DropDownListFor(m => m.company.State, new SelectList(Model.StateList, "Value", "Text", 0), new { @data_live_search = "true", @class = "form-control bs-select", @onchange = "GetCity(this);" })
+                                            @Html.ValidationMessageFor(m => m.company.State)
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>City</label>
+                                            @Html.DropDownListFor(m => m.company.City, new SelectList(Model.CityList, "Value", "Text", 0), new { @data_live_search = "true", @class = "form-control bs-select" })
+                                            @Html.ValidationMessageFor(m => m.company.City)
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label>Primary Contact Name</label>
-                                            <input type="text" id="Primaryname" name="Primaryname" class="form-control m-input" placeholder="Enter Primary contact name" />
+                                            @Html.TextBoxFor(m => m.company.MobileNo, new { @class = "form-control m-input", @placeholder = "Enter mobile number" })
+                                            @Html.ValidationMessageFor(m => m.company.MobileNo)
                                         </div>
                                     </div>
                                 </div>
@@ -118,13 +128,15 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label>Primary Email ID</label>
-                                            <input type="text" id="Primaryemail" name="Primaryemail" class="form-control m-input" placeholder="Enter Primary emailid" />
+                                            @Html.TextBoxFor(m => m.company.Email, new { @class = "form-control email m-input", @placeholder = "Enter Email" })
+                                            @Html.ValidationMessageFor(m => m.company.Email)
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label>Secondary Contact Name</label>
-                                            <input type="text" id="secondaryname" name="secondaryname" class="form-control m-input" placeholder="Enter secondary contact name" />
+                                           @Html.TextBoxFor(m => m.company.SecondaryContactName, new { @class = "form-control m-input", @placeholder = "Enter secondary contact name" })
+                                           @Html.ValidationMessageFor(m => m.company.SecondaryContactName)
                                         </div>
                                     </div>
                                 </div>
@@ -132,20 +144,22 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label>Secondary Email ID</label>
-                                            <input type="text" id="secondaryemail" name="secondaryemail" class="form-control m-input" placeholder="Enter secondary emailid" />
+                                            @Html.TextBoxFor(m => m.company.SecondaryEmail, new { @class = "form-control email m-input", @placeholder = "Enter secondary email" })
+                                            @Html.ValidationMessageFor(m => m.company.SecondaryEmail)
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label>Web URL</label>
-                                            <input type="text" id="weburl" name="weburl" class="form-control m-input" placeholder="Enter web url" />
+                                            @Html.TextBoxFor(m => m.company.WebURL, new { @class = "form-control m-input", @placeholder = "Enter Web URL" })
+                                            @Html.ValidationMessageFor(m => m.company.WebURL)
                                         </div>
                                     </div>
                                 </div>
                                 <div class="form-actions">
                                     <div class="col-lg-12  text-right">
                                         <button type="button" onclick="location.href = '/Company/CompanyList'" class="btn default">Cancel</button>
-                                        <button type="button" onclick="" class="btn btn-primary btnSubmit">Save</button>
+                                        <button type="submit" class="btn btn-primary btnSubmit">Save</button>
                                     </div>
                                 </div>
                             </form>
@@ -157,5 +171,83 @@
     </div>
 </div>
 
+@section scripts{
 
+    <script>
+
+        function SaveCompanyResponse(response) {
+            //if (response == "_Logon_") {
+            //    window.location.href = "/Login/Login";
+            //}
+            //else {
+            //    if (response.IsSuccess) {
+            //        SetMessageForPageLoad(response.Message, "Organizationsaved");
+            //        window.location.href = "/Organization/OrganizationList/";
+            //    } else {
+            //        ShowMessage(response.Message, "error");
+            //    }
+            //}
+
+            if (response.IsSuccess) {
+                SetMessageForPageLoad(response.Message, "Companysaved");
+                window.location.href = "/Company/CompanyList/";
+            } else {
+                ShowMessage(response.Message, "error");
+            }
+        }
+        function GetState(Obj) {
+            //var index = $(Obj).attr('index');
+            var countryVal = $('#' + Obj.id).val();
+            var postData = { cid: countryVal };
+            ShowLoader();
+            AjaxCall("/Organization/GetStateByCountry", JSON.stringify(postData), "post", "json", "application/json", false).done(function (data) {
+                HideLoader();
+                //if (data == "_Logon_") {
+                //    window.location.href = "/Login/Login";
+                //}
+                if (data != null && data.length > 0) {
+                    $("#company_State").html('');
+                    $("#company_State").append('<option value="">-- Select State --</option>');
+                    $("#company_State").selectpicker('refresh');
+                    for (key in data) {
+                        $("#company_State").append('<option value="' + data[key].Value + '">' + data[key].Text + '</option>')
+                    }
+                    $("#client_State").selectpicker('refresh');
+                }
+                else {
+                    $("#company_State").html('');
+                    $("#company_State").append('<option value="">-- Select State --</option>');
+                    $("#company_State").selectpicker('refresh');
+                }
+            });
+        }
+
+        function GetCity(Obj) {
+            //var index = $(Obj).attr('index');
+            var stateVal = $('#' + Obj.id).val();
+            var postData = { sid: stateVal };
+            ShowLoader();
+            AjaxCall("/Organization/GetCityByState", JSON.stringify(postData), "post", "json", "application/json", false).done(function (data) {
+                HideLoader();
+                //if (data == "_Logon_") {
+                //    window.location.href = "/Login/Login";
+                //}
+                if (data != null && data.length > 0) {
+                    $("#company_City").html('');
+                    $("#company_City").append('<option value="">-- Select City --</option>');
+                    $("#company_City").selectpicker('refresh');
+                    for (key in data) {
+                        $("#company_City").append('<option value="' + data[key].Value + '">' + data[key].Text + '</option>')
+                    }
+                    $("#company_City").selectpicker('refresh');
+                }
+                else {
+                    $("#company_City").html('');
+                    $("#company_City").append('<option value="">-- Select City --</option>');
+                    $("#company_City").selectpicker('refresh');
+                }
+            });
+        }
+    </script>
+}
 

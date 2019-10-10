@@ -124,6 +124,10 @@ namespace Brilliance.Infrastructure
         {
             return !string.IsNullOrEmpty(guid) ? !string.IsNullOrEmpty(Crypto.Decrypt(guid)) ? new Guid(Crypto.Decrypt(guid)) : Guid.Empty : Guid.Empty;
         }
+        public static Guid CheckIdNullOrEmptyNonEncrypt(string guid)
+        {
+            return !string.IsNullOrEmpty(guid) ? new Guid(guid) : Guid.Empty;
+        }
 
         public static string ConvertDateFormate(DateTime date)
         {

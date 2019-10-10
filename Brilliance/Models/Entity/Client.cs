@@ -12,32 +12,33 @@ namespace Brilliance.Models.Entity
     public class Client
     {
         [Key]
-       // [Required]
+        [Required]
         public Guid ClientID { get; set; }
         [MaxLength(7)]
-        //[Required(ErrorMessage ="Code is required.")]
+        [Required(ErrorMessage ="Code is required.")]
         public string ClientCode { get; set; }
         [MaxLength(167)]
-       // [Required(ErrorMessage = "Organization name is required.")]
+        [Required(ErrorMessage = "Organization name is required.")]
         public string OrganizationName { get; set; }
         [MaxLength(167)]
         public string TotalNumberofUser { get; set; }
         [MaxLength(67)]
-        //[Required(ErrorMessage = "Contact person name is required.")]
+        [Required(ErrorMessage = "Contact person name is required.")]
         public string ContactPersonName { get; set; }
         [MaxLength(31)]
-        //[Required(ErrorMessage = "Email is required.")]
+        [Required(ErrorMessage = "Email is required.")]
         public string ContactPersonEmail { get; set; }
-        [MaxLength(19)]
-        //[Required(ErrorMessage = "Mobile No. is required.")]
+        //[StringLength(15, ErrorMessage = Constants.StringLengthErrorMessage)]
+        [Required(ErrorMessage = "Mobile No. is required.")]
+        [RegularExpression(@"\d{10}", ErrorMessage = "Mobile No.should be 10 digit.")]
         public string MobileNo { get; set; }
         public Guid? AssociatePartnerID { get; set; }
-        [MaxLength(167)]
-        public string Country { get; set; }
-        [MaxLength(167)]
-        public string State { get; set; }
-        [MaxLength(167)]
-        public string City { get; set; }
+        [Required(ErrorMessage = "Country is required.")]
+        public Guid? Country { get; set; }
+        [Required(ErrorMessage = "State is required.")]
+        public Guid? State { get; set; }
+        [Required(ErrorMessage = "City is required.")]
+        public Guid? City { get; set; }
         public bool? IsAcceptedTermsServices { get; set; }
         public bool? IsActive { get; set; }
         public bool? IsBlock { get; set; }
@@ -54,7 +55,7 @@ namespace Brilliance.Models.Entity
         public Guid? UpdatedBy { get; set; }
         
         public string Description { get; set; }
-       
+        [Required(ErrorMessage = "Address is required.")]
         public string Address { get; set; }
        
         [Ignore]

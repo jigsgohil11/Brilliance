@@ -51,17 +51,15 @@
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label>Code</label>
-                                                @*<input type="text" id="code" name="code" class="form-control m-input" placeholder="Enter Code" required />*@
-                                                @Html.TextBoxFor(m => m.client.ClientCode, new { @class = "form-control m-input", @placeholder = "Enter Client Code" })
-                                                @*@Html.ValidationMessageFor(m => m.client.ClientCode)*@
+                                                @Html.TextBoxFor(m => m.client.ClientCode, new { @class = "form-control m-input", @placeholder = "Enter Organization Code" })
+                                                @Html.ValidationMessageFor(m => m.client.ClientCode)
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label>Name</label>
-                                                @*<input type="text" id="name" name="name" class="form-control m-input" placeholder="Enter Name" required />*@
                                                 @Html.TextBoxFor(m => m.client.OrganizationName, new { @class = "form-control m-input", @placeholder = "Enter Organization Name" })
-                                                @*@Html.ValidationMessageFor(m => m.client.OrganizationName)*@
+                                                @Html.ValidationMessageFor(m => m.client.OrganizationName)
                                             </div>
                                         </div>
                                     </div>
@@ -69,17 +67,15 @@
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label>Contact Person Name</label>
-                                                @*<input type="text" id="code" name="code" class="form-control m-input" placeholder="Enter Code" required />*@
                                                 @Html.TextBoxFor(m => m.client.ContactPersonName, new { @class = "form-control m-input", @placeholder = "Enter contact person name" })
-                                                @*@Html.ValidationMessageFor(m => m.client.ContactPersonName)*@
+                                                @Html.ValidationMessageFor(m => m.client.ContactPersonName)
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label>Contact Person Email</label>
-                                                @*<input type="text" id="name" name="name" class="form-control m-input" placeholder="Enter Name" required />*@
-                                                @Html.TextBoxFor(m => m.client.ContactPersonEmail, new { @class = "form-control m-input", @placeholder = "Enter contact person email" })
-                                                @*@Html.ValidationMessageFor(m => m.client.ContactPersonEmail)*@
+                                                @Html.TextBoxFor(m => m.client.ContactPersonEmail, new { @class = "form-control email m-input", @placeholder = "Enter contact person email" })
+                                                @Html.ValidationMessageFor(m => m.client.ContactPersonEmail)
                                             </div>
                                         </div>
                                     </div>
@@ -87,53 +83,50 @@
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label>Mobile Number</label>
-                                                @*<input type="text" id="code" name="code" class="form-control m-input" placeholder="Enter Code" required />*@
                                                 @Html.TextBoxFor(m => m.client.MobileNo, new { @class = "form-control m-input", @placeholder = "Enter mobile number" })
-                                                @*@Html.ValidationMessageFor(m => m.client.MobileNo)*@
+                                                @Html.ValidationMessageFor(m => m.client.MobileNo)
                                             </div>
                                         </div>
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label>Description</label>
-                                                @*<textarea id="description" name="description" class="form-control m-input"></textarea>*@
-                                                @Html.TextAreaFor(m => m.client.Description, new { @class = "form-control m-input", @placeholder = "Enter Description" })
-                                                @*@Html.ValidationMessageFor(m => m.client.Description)*@
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label>Address</label>
-                                                @*<textarea id="address" name="address" class="form-control m-input"></textarea>*@
                                                 @Html.TextAreaFor(m => m.client.Address, new { @class = "form-control m-input", @placeholder = "Enter Address" })
-                                                @*@Html.ValidationMessageFor(m => m.client.Address)*@
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label>City</label>
-                                                @*<input type="text" id="city" name="city" class="form-control m-input" placeholder="Enter city" required />*@
-                                                @Html.TextBoxFor(m => m.client.City, new { @class = "form-control m-input", @placeholder = "Enter City" })
-                                                @*@Html.ValidationMessageFor(m => m.client.City)*@
+                                                @Html.ValidationMessageFor(m => m.client.Address)
                                             </div>
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label>State</label>
-                                                @*<input type="text" id="state" name="state" class="form-control m-input" placeholder="Enter state"/>*@
-                                                @Html.TextBoxFor(m => m.client.State, new { @class = "form-control m-input", @placeholder = "Enter State" })
-                                                @*@Html.ValidationMessageFor(m => m.client.State)*@
+                                                <label>Country</label>
+                                                @Html.DropDownListFor(m => m.client.Country, new SelectList(Model.Countrylist, "Value", "Text",0),"--Select Country--", new { @data_live_search = "true", @class = "form-control bs-select", @onchange = "GetState(this);"})
+                                                @Html.ValidationMessageFor(m => m.client.Country)
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label>Country</label>
-                                                @*<input type="text" id="country" name="country" class="form-control m-input" placeholder="Enter country"/>*@
-                                                @Html.TextBoxFor(m => m.client.Country, new { @class = "form-control m-input", @placeholder = "Enter Country" })
-                                                @*@Html.ValidationMessageFor(m => m.client.Country)*@
+                                                <label>State</label>
+                                                @Html.DropDownListFor(m => m.client.State, new SelectList(Model.StateList, "Value", "Text", 0), new { @data_live_search = "true", @class = "form-control bs-select", @onchange = "GetCity(this);" })
+                                                @Html.ValidationMessageFor(m => m.client.State)
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>City</label>
+                                                @Html.DropDownListFor(m => m.client.City, new SelectList(Model.CityList, "Value", "Text", 0), new { @data_live_search = "true", @class = "form-control bs-select"})
+                                                @Html.ValidationMessageFor(m => m.client.City)
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label>Description</label>
+                                                @*<textarea class="form-control input-sm" data-bind="value: note" rows="4" style="resize:none;width:100%;"></textarea>*@
+                                                @Html.TextAreaFor(m => m.client.Description, new { @class = "form-control m-input", @placeholder = "Enter Description", @rows = "4" })
+                                                @*@Html.ValidationMessageFor(m => m.client.Description)*@
                                             </div>
                                         </div>
                                     </div>
@@ -155,7 +148,7 @@
 @section scripts{
 
    <script>
-       
+
        function SaveClientResponse(response) {
            //if (response == "_Logon_") {
            //    window.location.href = "/Login/Login";
@@ -168,13 +161,66 @@
            //        ShowMessage(response.Message, "error");
            //    }
            //}
-           
+
            if (response.IsSuccess) {
                SetMessageForPageLoad(response.Message, "Organizationsaved");
                window.location.href = "/Organization/OrganizationList/";
            } else {
                ShowMessage(response.Message, "error");
            }
+       }
+       function GetState(Obj) {
+           //var index = $(Obj).attr('index');
+           var countryVal = $('#' + Obj.id).val();
+           var postData = { cid: countryVal };
+           ShowLoader();
+           AjaxCall("/Organization/GetStateByCountry", JSON.stringify(postData), "post", "json", "application/json", false).done(function (data) {
+               HideLoader();
+               //if (data == "_Logon_") {
+               //    window.location.href = "/Login/Login";
+               //}
+               if (data != null && data.length > 0) {
+                   $("#client_State").html('');
+                   $("#client_State").append('<option value="">-- Select State --</option>');
+                   $("#client_State").selectpicker('refresh');
+                   for (key in data) {
+                       $("#client_State").append('<option value="' + data[key].Value + '">' + data[key].Text + '</option>')
+                   }
+                   $("#client_State").selectpicker('refresh');
+               }
+               else {
+                   $("#client_State").html('');
+                   $("#client_State").append('<option value="">-- Select State --</option>');
+                   $("#client_State").selectpicker('refresh');
+               }
+           });
+       }
+
+       function GetCity(Obj) {
+           //var index = $(Obj).attr('index');
+           var stateVal = $('#' + Obj.id).val();
+           var postData = { sid: stateVal };
+           ShowLoader();
+           AjaxCall("/Organization/GetCityByState", JSON.stringify(postData), "post", "json", "application/json", false).done(function (data) {
+               HideLoader();
+               //if (data == "_Logon_") {
+               //    window.location.href = "/Login/Login";
+               //}
+               if (data != null && data.length > 0) {
+                   $("#client_City").html('');
+                   $("#client_City").append('<option value="">-- Select City --</option>');
+                   $("#client_City").selectpicker('refresh');
+                   for (key in data) {
+                       $("#client_City").append('<option value="' + data[key].Value + '">' + data[key].Text + '</option>')
+                   }
+                   $("#client_City").selectpicker('refresh');
+               }
+               else {
+                   $("#client_City").html('');
+                   $("#client_City").append('<option value="">-- Select City --</option>');
+                   $("#client_City").selectpicker('refresh');
+               }
+           });
        }
     </script>
 }

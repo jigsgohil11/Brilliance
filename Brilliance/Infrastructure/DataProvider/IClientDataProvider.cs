@@ -10,6 +10,10 @@ namespace Brilliance.Infrastructure.DataProvider
         ServiceResponse GetClient(Guid ClientID);
         ServiceResponse SaveClients(ClientViewModel Clients);
         ServiceResponse DeleteClient(Guid ClientID);
+        ServiceResponse GetStateByCountry(Guid CountryID);
+        ServiceResponse GetCityByState(Guid StateID);
+
+
     }
 }
                                                                                                                                                                                                

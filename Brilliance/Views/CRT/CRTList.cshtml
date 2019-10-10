@@ -35,7 +35,7 @@
             <!-- BEGIN EXAMPLE TABLE PORTLET-->
             <div class="portlet light bordered portlet-custom-decrease-padding">
                 <div class="portlet-body">
-                    <table class="table table-striped table-bordered table-hover dt-responsive" width="100%" id="dt_client">
+                    <table class="table  table-bordered table-hover dt-responsive" width="100%" id="dt_client">
                         <thead>
                             <tr>
                                 <th class="all">Policy no.</th>
@@ -48,7 +48,7 @@
                         </thead>
                         <tbody>
                             <tr>
-                                <td>AA12-55 00</td>
+                                <td style="background-color:white !important;">AA12-55 00</td>
                                 <td>Loans - cellular Loan</td>
                                 <td>Admin Error</td>
                                 <td>2019.09.17</td>
@@ -59,11 +59,22 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td>AA17-87 06</td>
+                                <td style="background-color:white !important;">AA17-87 06</td>
                                 <td>Loans - cellular Loan</td>
                                 <td>Admin Error</td>
                                 <td>2019.09.16</td>
                                 <td>New</td>
+                                <td>
+                                    <a class="action btn btn-primary btn-xs" href="/Pms/Client/Client/" title="Edit"><i class="btn-xs fa fa-pencil padding0"></i></a>
+                                    <a class="action btn btn-danger btn-xs" href="javascript:void(0);" title="Delete" onclick="fnOpenDeleteModel('DeleteButton','DeleteModal');"><i class="btn-xs fa fa-trash-o padding0"></i></a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="background-color:white !important;">AA12-55 00</td>
+                                <td>Loans - cellular Loan</td>
+                                <td>Admin Error</td>
+                                <td>2019.09.17</td>
+                                <td>Not Yet</td>
                                 <td>
                                     <a class="action btn btn-primary btn-xs" href="/Pms/Client/Client/" title="Edit"><i class="btn-xs fa fa-pencil padding0"></i></a>
                                     <a class="action btn btn-danger btn-xs" href="javascript:void(0);" title="Delete" onclick="fnOpenDeleteModel('DeleteButton','DeleteModal');"><i class="btn-xs fa fa-trash-o padding0"></i></a>

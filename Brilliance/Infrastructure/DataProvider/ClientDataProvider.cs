@@ -79,9 +79,9 @@ namespace Brilliance.Infrastructure.DataProvider
                     cmd.Parameters.AddWithValue("@MobileNo", Clients.client.MobileNo).SqlDbType = SqlDbType.NVarChar;
                     cmd.Parameters.AddWithValue("@Description", Clients.client.Description).SqlDbType = SqlDbType.NVarChar;
                     cmd.Parameters.AddWithValue("@Address", Clients.client.Address).SqlDbType = SqlDbType.NVarChar;
-                    cmd.Parameters.AddWithValue("@City", Clients.client.City).SqlDbType = SqlDbType.NVarChar;
-                    cmd.Parameters.AddWithValue("@State", Clients.client.State).SqlDbType = SqlDbType.NVarChar;
-                    cmd.Parameters.AddWithValue("@Country", Clients.client.Country).SqlDbType = SqlDbType.NVarChar;
+                    cmd.Parameters.AddWithValue("@City", Clients.client.City).SqlDbType = SqlDbType.UniqueIdentifier;
+                    cmd.Parameters.AddWithValue("@State", Clients.client.State).SqlDbType = SqlDbType.UniqueIdentifier;
+                    cmd.Parameters.AddWithValue("@Country", Clients.client.Country).SqlDbType = SqlDbType.UniqueIdentifier;
                     cmd.Parameters.AddWithValue("@IsEdit", Clients.client.IsEdit).SqlDbType = SqlDbType.Bit;
 
 
@@ -103,9 +103,9 @@ namespace Brilliance.Infrastructure.DataProvider
                     cmd.Parameters.AddWithValue("@MobileNo", Clients.client.MobileNo).SqlDbType = SqlDbType.NVarChar;
                     cmd.Parameters.AddWithValue("@Description", Clients.client.Description).SqlDbType = SqlDbType.NVarChar;
                     cmd.Parameters.AddWithValue("@Address", Clients.client.Address).SqlDbType = SqlDbType.NVarChar;
-                    cmd.Parameters.AddWithValue("@City", Clients.client.City).SqlDbType = SqlDbType.NVarChar;
-                    cmd.Parameters.AddWithValue("@State", Clients.client.State).SqlDbType = SqlDbType.NVarChar;
-                    cmd.Parameters.AddWithValue("@Country", Clients.client.Country).SqlDbType = SqlDbType.NVarChar;
+                    cmd.Parameters.AddWithValue("@City", Clients.client.City).SqlDbType = SqlDbType.UniqueIdentifier;
+                    cmd.Parameters.AddWithValue("@State", Clients.client.State).SqlDbType = SqlDbType.UniqueIdentifier;
+                    cmd.Parameters.AddWithValue("@Country", Clients.client.Country).SqlDbType = SqlDbType.UniqueIdentifier;
                     cmd.Parameters.AddWithValue("@IsEdit", Clients.client.IsEdit).SqlDbType = SqlDbType.Bit;
 
                     DataSet ds = null;
@@ -132,12 +132,55 @@ namespace Brilliance.Infrastructure.DataProvider
                 searchList.Add(searchValueData);
                 BaseDataProvider objnew = new BaseDataProvider();
                 objnew = new BaseDataProvider();
-                objnew.GetScalar("crm_DeleteAreaByAreaID", searchList);
+                objnew.GetScalar("DeleteClient", searchList);
                 response.IsSuccess = true;
             }
             else
             {
                 response.IsSuccess = false;
+            }
+            return response;
+        }
+        public ServiceResponse GetStateByCountry(Guid CountryID)
+        {
+            var response = new ServiceResponse();
+            var searchvaluedata = new List<SearchValueData>();
+            try
+            {
+                searchvaluedata.Add(new SearchValueData { Name = "CountryID", Value = Convert.ToString(CountryID) });
+                List<SelectListItem> States = GetEntityList<SelectListItem>("GetStateListByCountry", searchvaluedata);
+                //if (HoldingCompanies != null && HoldingCompanies.Count > 0)
+                //{
+                //    response.Data = HoldingCompanies;
+                //}
+                response.Data = States;
+                response.IsSuccess = true;
+            }
+            catch (Exception ex)
+            {
+                response.Message = "Internal Server Error";
+            }
+            return response;
+        }
+
+        public ServiceResponse GetCityByState(Guid StateID)
+        {
+            var response = new ServiceResponse();
+            var searchvaluedata = new List<SearchValueData>();
+            try
+            {
+                searchvaluedata.Add(new SearchValueData { Name = "StateID", Value = Convert.ToString(StateID) });
+                List<SelectListItem> States = GetEntityList<SelectListItem>("GetCityListByState", searchvaluedata);
+                //if (HoldingCompanies != null && HoldingCompanies.Count > 0)
+                //{
+                //    response.Data = HoldingCompanies;
+                //}
+                response.Data = States;
+                response.IsSuccess = true;
+            }
+            catch (Exception ex)
+            {
+                response.Message = "Internal Server Error";
             }
             return response;
         }

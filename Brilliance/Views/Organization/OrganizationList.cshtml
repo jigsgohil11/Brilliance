@@ -32,7 +32,7 @@
             <!-- BEGIN EXAMPLE TABLE PORTLET-->
             <div class="portlet light bordered portlet-custom-decrease-padding">
                 <div class="portlet-body">
-                    <table class="table table-striped table-bordered table-hover dt-responsive" width="100%" id="dt_client">
+                    <table class="table table-bordered table-hover dt-responsive" width="100%" id="dt_client">
                         <thead>
                             <tr>
                                 <th class="all">Code</th>
@@ -47,12 +47,12 @@
                                 foreach (var item in Model.Clientlist)
                                 {
                                     <tr>
-                                        <td>@item.ClientCode</td>
+                                        <td style="background-color:white !important;">@item.ClientCode</td>
                                         <td>@item.OrganizationName</td>
                                         <td>@item.Description</td>
                                         <td>
                                             <a class="action btn  btn-primary btn-xs @Constants.Class_Cannot_Access_Update" href="/Organization/Organization/@item.EncryptedClientID" title="Edit"><i class="btn-xs fa fa-pencil padding0"></i></a>
-                                            @*<a class="action btn  btn-danger btn-xs @Constants.Class_Cannot_Access_Remove" href="javascript:void(0);" title="Delete" onclick="fnOpenDeleteModel('DeleteButton','DeleteModal','@item.EncryptedClientID.ToString()');"><i class="btn-xs fa fa-trash-o padding0"></i></a>*@
+                                            <a class="action btn  btn-danger btn-xs @Constants.Class_Cannot_Access_Remove" href="javascript:void(0);" title="Delete" onclick="fnOpenDeleteModel('DeleteButton','DeleteModal','@item.EncryptedClientID.ToString()');"><i class="btn-xs fa fa-trash-o padding0"></i></a>
                                         </td>
                                     </tr>
                                 }

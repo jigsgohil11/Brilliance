@@ -22,7 +22,6 @@ namespace Brilliance.Controllers
             _iclientDataProvider = new ClientDataProvider();
             ClientListModel clientlistModel = _iclientDataProvider.ClientList();
             return View(clientlistModel);
-          
         }
         public ActionResult Organization(string id)
         {
@@ -48,6 +47,20 @@ namespace Brilliance.Controllers
             Guid ClientId = Common.CheckIdNullOrEmpty(DeleteID);
             response = _iclientDataProvider.DeleteClient(ClientId);
             return Json(response);
+        }
+        public ActionResult GetStateByCountry(string cid)
+        {
+            _iclientDataProvider = new ClientDataProvider();
+            Guid CountryID = Common.CheckIdNullOrEmptyNonEncrypt(cid);
+            ServiceResponse response = _iclientDataProvider.GetStateByCountry(CountryID);
+            return Json(response.Data, JsonRequestBehavior.AllowGet);
+        }
+        public ActionResult GetCityByState(string sid)
+        {
+            _iclientDataProvider = new ClientDataProvider();
+            Guid StateID = Common.CheckIdNullOrEmptyNonEncrypt(sid);
+            ServiceResponse response = _iclientDataProvider.GetCityByState(StateID);
+            return Json(response.Data, JsonRequestBehavior.AllowGet);
         }
     }
 }

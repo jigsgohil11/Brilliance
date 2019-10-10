@@ -1008,8 +1008,17 @@ div .todo-tasklist-item.miles-task-box:hover {
 /*Table and Main Padding Decrease Style Start*/
 
 body {
-    font-size: 12px;
+    /*font-size: 12px;*/
+    /*font-size: 13px;
+    font-family: Verdana;
+    font-weight:normal;*/
+    color: #4c4c4c;
+    line-height: 160%;
+    font-size: 13px;
+    font-family: Verdana,Geneva,sans-serif;
 }
+
+ 
 
 .custom-decrease-padding {
     padding: 0px 5px !important;
@@ -1033,17 +1042,30 @@ table.dataTable tbody td > .btn.btn-circle {
     padding: 0;
 }
 
-.table td, .table th {
+
+.table th {
     font-size: 12px;
+    /*font-size: 13px;*/
+    color: rgba(26, 77, 122, 1);
+}
+.table > thead > tr {
+    background-color: rgba(242, 242, 242, 1);
+}
+.table td {
+    font-size: 12px;
+    /*font-size: 13px;*/
+    font-family: Verdana;
 }
 
-.btn-group-xs > .btn, .btn-xs {
+
+.btn-group-xs > .btn, .btn-xs { 
     padding: 0.5px 4px;
     font-size: 10px;
 }
 
 table.dataTable tbody td > .btn.btn-circle > i {
-    font-size: 12px;
+    /*font-size: 12px;*/
+    font-size: 13px;
 }
 
 table.dataTable.dtr-inline.collapsed > tbody > tr > td:first-child, table.dataTable.dtr-inline.collapsed > tbody > tr > th:first-child {
@@ -1069,7 +1091,8 @@ table.dataTable.dtr-inline.collapsed > tbody > tr > td:first-child::before, tabl
 
 .dataTables_wrapper .dataTables_info {
     padding-top: 0.355em !important;
-    font-size: 12px;
+    /*font-size: 12px;*/
+    font-size: 13px;
 }
 
 .pagination {
