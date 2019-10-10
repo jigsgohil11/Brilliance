@@ -10,20 +10,25 @@ namespace Brilliance.Models.Entity
     public class Company
     {
         [Key]
-        [Required]
         public Guid CompanyID { get; set; }
         [MaxLength(17)]
+        [Required(ErrorMessage = "Organization is required.")]
         public string CompanyCode { get; set; }
         [MaxLength(370)]
+        [Required(ErrorMessage = "Organization is required.")]
         public string CompanyName { get; set; }
         [MaxLength(373)]
+        [Required(ErrorMessage = "Organization is required.")]
         public string Address { get; set; }
         [MaxLength(67)]
-        public string City { get; set; }
+        [Required(ErrorMessage = "Organization is required.")]
+        public Guid? City { get; set; }
         [MaxLength(67)]
-        public string State { get; set; }
+        [Required(ErrorMessage = "Organization is required.")]
+        public Guid? State { get; set; }
         [MaxLength(67)]
-        public string Country { get; set; }
+        [Required(ErrorMessage = "Organization is required.")]
+        public Guid? Country { get; set; }
         [MaxLength(137)]
         public string GeoLocation { get; set; }
         [MaxLength(19)]
@@ -57,6 +62,7 @@ namespace Brilliance.Models.Entity
         public string SecondaryEmail { get; set; }
         [MaxLength(19)]
         public string SecondaryMobNo { get; set; }
+        [Required(ErrorMessage = "Organization is required.")]
         public Guid? ClientID { get; set; }
         public bool? IsActive { get; set; }
         public bool? IsBlock { get; set; }
