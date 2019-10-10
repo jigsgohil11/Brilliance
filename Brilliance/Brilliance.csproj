@@ -340,6 +340,7 @@
     <Content Include="assets\global\img\ajax-loading.gif" />
     <Content Include="assets\global\img\ajax-modal-loading.gif" />
     <Content Include="assets\global\img\bg1.jpg" />
+    <Content Include="assets\global\img\brilliance-logo-small.png" />
     <Content Include="assets\global\img\datatable-row-openclose.png" />
     <Content Include="assets\global\img\dmsicon\application-msword.png" />
     <Content Include="assets\global\img\dmsicon\application-pdf.png" />
@@ -6732,6 +6733,7 @@
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />

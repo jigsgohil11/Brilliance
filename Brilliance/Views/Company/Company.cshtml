@@ -43,18 +43,12 @@
                 <div class="col-lg-12">
                     <div class="portlet light">
                         <div class="portlet-body form">
-                            <form id="frmcompany" action="/Company/SaveCompany" method="post" data-ajax="true" data-ajax-method="Post" data-ajax-success="SaveCompanyResponse(data);" data-ajax-begin="ShowLoader();">
+                            <form id="frmcompany" action="/Company/SaveCompany" method="post" data-ajax="true" data-ajax-method="Post" data-ajax-success="SaveCompanyResponse(data);">
+                                @Html.HiddenFor(m=>m.company.CompanyID)
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label>Organization</label>
-                                            @*<select id="Organization_id" name="Organization_id" class="form-control bs-select" data_live_search="true">
-                                                <option value=" ">Choose...</option>
-                                                <option value="Organization 1">Organization 1</option>
-                                                <option value="Organization 2">Organization 2</option>
-                                                <option value="Organization 3">Organization 3</option>
-                                                <option value="Organization 4">Organization 4</option>
-                                            </select>*@
+                                            <label>Organization<span  style="font-weight: bold;color: red;">*</span></label>
                                             @Html.DropDownListFor(m => m.company.ClientID, new SelectList(Model.ClientList, "Value", "Text", 0), "--Select Organization--", new { @data_live_search = "true", @class = "form-control bs-select"})
                                             @Html.ValidationMessageFor(m => m.company.ClientID)
                                         </div>
@@ -80,46 +74,33 @@
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label>Description</label>
-                                            @Html.TextAreaFor(m => m.company.Description, new { @class = "form-control m-input", @placeholder = "Enter Description"})
+                                            <label>Industry<span style="font-weight: bold;color: red;">*</span></label>
+                                            @Html.DropDownListFor(m => m.company.IndustryID, new SelectList(Model.IndustryList, "Value", "Text", 0), "--Select Industry--", new { @data_live_search = "true", @class = "form-control bs-select" })
+                                            @Html.ValidationMessageFor(m => m.company.CompanyCode)
+
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label>Address</label>
-                                            @Html.TextAreaFor(m => m.company.Address, new { @class = "form-control m-input", @placeholder = "Enter Address" })
+                                            <label>Sector<span style="font-weight: bold;color: red;">*</span></label>
+                                            @Html.DropDownListFor(m => m.company.SectorID, new SelectList(Model.SectorList, "Value", "Text", 0), "--Select Sector--", new { @data_live_search = "true", @class = "form-control bs-select" })
+                                            @Html.ValidationMessageFor(m => m.company.CompanyName)
                                         </div>
                                     </div>
                                 </div>
+                               
                                 <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label>Country</label>
-                                            @Html.DropDownListFor(m => m.company.Country, new SelectList(Model.Countrylist, "Value", "Text", 0), "--Select Country--", new { @data_live_search = "true", @class = "form-control bs-select", @onchange = "GetState(this);" })
-                                            @Html.ValidationMessageFor(m => m.company.Country)
-                                        </div>
-                                    </div>
-                                  
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label>State</label>
-                                            @Html.DropDownListFor(m => m.company.State, new SelectList(Model.StateList, "Value", "Text", 0), new { @data_live_search = "true", @class = "form-control bs-select", @onchange = "GetCity(this);" })
-                                            @Html.ValidationMessageFor(m => m.company.State)
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label>City</label>
-                                            @Html.DropDownListFor(m => m.company.City, new SelectList(Model.CityList, "Value", "Text", 0), new { @data_live_search = "true", @class = "form-control bs-select" })
-                                            @Html.ValidationMessageFor(m => m.company.City)
-                                        </div>
-                                    </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label>Primary Contact Name</label>
-                                            @Html.TextBoxFor(m => m.company.MobileNo, new { @class = "form-control m-input", @placeholder = "Enter mobile number" })
+                                            @Html.TextBoxFor(m => m.company.ContactPersonName, new { @class = "form-control m-input", @placeholder = "Enter contact person name" })
+                                            @Html.ValidationMessageFor(m => m.company.ContactPersonName)
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Primary Mobile No</label>
+                                            @Html.TextBoxFor(m => m.company.MobileNo, new { @class = "form-control m-input", @placeholder = "Enter Mobile No" })
                                             @Html.ValidationMessageFor(m => m.company.MobileNo)
                                         </div>
                                     </div>
@@ -136,23 +117,68 @@
                                         <div class="form-group">
                                             <label>Secondary Contact Name</label>
                                            @Html.TextBoxFor(m => m.company.SecondaryContactName, new { @class = "form-control m-input", @placeholder = "Enter secondary contact name" })
-                                           @Html.ValidationMessageFor(m => m.company.SecondaryContactName)
                                         </div>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label>Secondary Email ID</label>
-                                            @Html.TextBoxFor(m => m.company.SecondaryEmail, new { @class = "form-control email m-input", @placeholder = "Enter secondary email" })
-                                            @Html.ValidationMessageFor(m => m.company.SecondaryEmail)
+                                            <label>Secondary Contact No</label>
+                                            @Html.TextBoxFor(m => m.company.SecondaryContactNo, new { @class = "form-control m-input", @placeholder = "Enter secondary contact no" })
+                                            @Html.ValidationMessageFor(m => m.company.SecondaryContactNo)
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
+                                            <label>Secondary Email ID</label>
+                                            @Html.TextBoxFor(m => m.company.SecondaryEmail, new { @class = "form-control m-input", @placeholder = "Enter secondary email" })
+                                            @Html.ValidationMessageFor(m => m.company.SecondaryEmail)
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
                                             <label>Web URL</label>
                                             @Html.TextBoxFor(m => m.company.WebURL, new { @class = "form-control m-input", @placeholder = "Enter Web URL" })
-                                            @Html.ValidationMessageFor(m => m.company.WebURL)
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Address<span style="font-weight: bold;color: red;">*</span></label>
+                                            @Html.TextAreaFor(m => m.company.Address, new { @class = "form-control m-input", @placeholder = "Enter Address" })
+                                            @Html.ValidationMessageFor(m => m.company.Address)
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label>Country<span style="font-weight: bold;color: red;">*</span></label>
+                                            @Html.DropDownListFor(m => m.company.Country, new SelectList(Model.Countrylist, "Value", "Text", 0), "--Select Country--", new { @data_live_search = "true", @class = "form-control bs-select", @onchange = "GetState(this);" })
+                                            @Html.ValidationMessageFor(m => m.company.Country)
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label>State<span style="font-weight: bold;color: red;">*</span></label>
+                                            @Html.DropDownListFor(m => m.company.State, new SelectList(Model.StateList, "Value", "Text", 0), new { @data_live_search = "true", @class = "form-control bs-select", @onchange = "GetCity(this);" })
+                                            @Html.ValidationMessageFor(m => m.company.State)
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label>City<span style="font-weight: bold;color: red;">*</span></label>
+                                            @Html.DropDownListFor(m => m.company.City, new SelectList(Model.CityList, "Value", "Text", 0), new { @data_live_search = "true", @class = "form-control bs-select" })
+                                            @Html.ValidationMessageFor(m => m.company.City)
+                                        </div>
+                                    </div>   
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label>Description</label>
+                                            @Html.TextAreaFor(m => m.company.Description, new { @class = "form-control m-input", @placeholder = "Enter Description",@rows="4" })
                                         </div>
                                     </div>
                                 </div>
@@ -212,7 +238,7 @@
                     for (key in data) {
                         $("#company_State").append('<option value="' + data[key].Value + '">' + data[key].Text + '</option>')
                     }
-                    $("#client_State").selectpicker('refresh');
+                    $("#company_State").selectpicker('refresh');
                 }
                 else {
                     $("#company_State").html('');

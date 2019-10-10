@@ -98,14 +98,14 @@
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label>Country</label>
+                                                <label>Country<span style="font-weight: bold;color: red;">*</span></label>
                                                 @Html.DropDownListFor(m => m.client.Country, new SelectList(Model.Countrylist, "Value", "Text",0),"--Select Country--", new { @data_live_search = "true", @class = "form-control bs-select", @onchange = "GetState(this);"})
                                                 @Html.ValidationMessageFor(m => m.client.Country)
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label>State</label>
+                                                <label>State<span style="font-weight: bold;color: red;">*</span></label>
                                                 @Html.DropDownListFor(m => m.client.State, new SelectList(Model.StateList, "Value", "Text", 0), new { @data_live_search = "true", @class = "form-control bs-select", @onchange = "GetCity(this);" })
                                                 @Html.ValidationMessageFor(m => m.client.State)
                                             </div>
@@ -114,7 +114,7 @@
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label>City</label>
+                                                <label>City<span style="font-weight: bold;color: red;">*</span></label>
                                                 @Html.DropDownListFor(m => m.client.City, new SelectList(Model.CityList, "Value", "Text", 0), new { @data_live_search = "true", @class = "form-control bs-select"})
                                                 @Html.ValidationMessageFor(m => m.client.City)
                                             </div>

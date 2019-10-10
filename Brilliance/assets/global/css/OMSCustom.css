@@ -1017,7 +1017,13 @@ body {
     font-size: 13px;
     font-family: Verdana,Geneva,sans-serif;
 }
-
+.form-control {
+    height: 32px;
+    font-size: 13px;
+}
+.btn {
+    font-size: 13px;
+}
  
 
 .custom-decrease-padding {

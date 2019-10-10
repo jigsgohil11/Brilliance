@@ -12,22 +12,22 @@ namespace Brilliance.Models.Entity
         [Key]
         public Guid CompanyID { get; set; }
         [MaxLength(17)]
-        [Required(ErrorMessage = "Organization is required.")]
+        [Required(ErrorMessage = "Company code is required.")]
         public string CompanyCode { get; set; }
         [MaxLength(370)]
-        [Required(ErrorMessage = "Organization is required.")]
+        [Required(ErrorMessage = "Company name is required.")]
         public string CompanyName { get; set; }
-        [MaxLength(373)]
-        [Required(ErrorMessage = "Organization is required.")]
+        
+        [Required(ErrorMessage = "Address is required.")]
         public string Address { get; set; }
-        [MaxLength(67)]
-        [Required(ErrorMessage = "Organization is required.")]
+        
+        [Required(ErrorMessage = "City is required.")]
         public Guid? City { get; set; }
-        [MaxLength(67)]
-        [Required(ErrorMessage = "Organization is required.")]
+        
+        [Required(ErrorMessage = "State is required.")]
         public Guid? State { get; set; }
-        [MaxLength(67)]
-        [Required(ErrorMessage = "Organization is required.")]
+        
+        [Required(ErrorMessage = "Country is required.")]
         public Guid? Country { get; set; }
         [MaxLength(137)]
         public string GeoLocation { get; set; }
@@ -36,16 +36,20 @@ namespace Brilliance.Models.Entity
         [MaxLength(167)]
         public string CompanyLogo { get; set; }
         [MaxLength(367)]
+        [Required(ErrorMessage = "Contact person name is required.")]
         public string ContactPersonName { get; set; }
         [MaxLength(19)]
         public string PhoneNo { get; set; }
         [MaxLength(19)]
         public string ExtensionNo { get; set; }
         [MaxLength(19)]
+        [Required(ErrorMessage = "MobileNo is required.")]
+        [RegularExpression(@"\d{11}", ErrorMessage = "Mobile No.should be 11 digit.")]
         public string MobileNo { get; set; }
         [MaxLength(167)]
+        [Required(ErrorMessage = "Email is required.")]
         public string Email { get; set; }
-        [MaxLength(167)]
+        
         public string WebURL { get; set; }
         [MaxLength]
         public string AboutCompany { get; set; }
@@ -54,11 +58,14 @@ namespace Brilliance.Models.Entity
         public long? TotalRooms { get; set; }
         [MaxLength(167)]
         public string SecondaryContactName { get; set; }
-        [MaxLength(19)]
+
+        [RegularExpression(@"\d{10}", ErrorMessage = "Mobile No.should be 11 digit.")]
         public string SecondaryContactNo { get; set; }
         [MaxLength(19)]
         public string SecondaryExtNo { get; set; }
-        [MaxLength(97)]
+
+        //[RegularExpression(@"\b[A-Z0-9._%-]+@[A-Z0-9.-]+\.[A-Z]{2,4}\b", ErrorMessage = "Please enter a valid e-mail adress")]
+        [EmailAddress(ErrorMessage = "Invalid Email Address.")]
         public string SecondaryEmail { get; set; }
         [MaxLength(19)]
         public string SecondaryMobNo { get; set; }
@@ -76,7 +83,7 @@ namespace Brilliance.Models.Entity
         public Guid? WhiteLabelTemplateID { get; set; }
         public bool? IsWhiteLabel { get; set; }
         public bool? IsSync { get; set; }
-        [MaxLength]
+       
         public string Description { get; set; }
         public Guid? SectorID { get; set; }
         public Guid? IndustryID { get; set; }
