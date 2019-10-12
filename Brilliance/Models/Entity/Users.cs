@@ -9,7 +9,7 @@ using PetaPoco;
 
 namespace Brilliance.Models.Entity
 {
-    [TableName("user_Users")]
+    [TableName("usr_User")]
     [PrimaryKey("UserID")]
     [Sort("UserID", "ASC")]
     public class Users
@@ -32,6 +32,7 @@ namespace Brilliance.Models.Entity
         [Required(ErrorMessageResourceName = "CodeRequired", ErrorMessageResourceType = typeof(Resource.Resource))]
         [Ignore]
         public Guid? RoleID { get; set; }
+        public bool IsVerified { get; set; }
 
         [ResultColumn]
         public string RegionsIDs { get; set; }

@@ -8,35 +8,31 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Brilliance.Models.Entity
 {
-    [TableName("user_LoginLog")]
+    [TableName("usr_LoginLog")]
     [PrimaryKey("LoginLogID")]
     [Sort("LoginLogID", "ASC")]
 
     public class LoginLog
     {
         public Guid LoginLogID { get; set; }
-
-        public DateTime? LoginDate { get; set; }
-
-        public Guid? ClientiD { get; set; }
-
-        public string SessionID { get; set; }
-
-        public string LoginSource { get; set; }
-
-        [ResultColumn]
-        public long SeqNo { get; set; }
-
-        public DateTime? LogoutDate { get; set; }
-
-        [ResultColumn]
-        public byte[] UpdateLog { get; set; }
+        public Guid? ClientID { get; set; }
+        public Guid? CompanyID { get; set; }
         public Guid? UserID { get; set; }
+        public DateTime? LoginDateTime { get; set; }
+        public string SessionID { get; set; }
+        public DateTime? LogoutDateTime { get; set; }
+        public string TokenID { get; set; }
+        public string SourceOfLogin_Term { get; set; }
+        public string IPLocation { get; set; }
+        public string WebSource_Term { get; set; }
+        public string DeviceSource_Term { get; set; }
+        public string CurrentStatus_Term { get; set; }
+        public Guid? DeviceID { get; set; }
+        public Guid? ModuleID { get; set; }
+        [ResultColumn]
+        public long Seqno { get; set; }
 
         [Ignore]
         public string EncryptedLoginLogID { get { return LoginLogID != Guid.Empty ? Crypto.Encrypt(Convert.ToString(LoginLogID)) : null; } }
-
-        [ResultColumn]
-        public string UserName { get; set; }
     }
 }

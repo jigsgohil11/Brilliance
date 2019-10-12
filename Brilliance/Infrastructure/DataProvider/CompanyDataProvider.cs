@@ -66,10 +66,8 @@ namespace Brilliance.Infrastructure.DataProvider
             try
             {
 
-
                 if (companymodel.company.IsEdit == false)
                 {
-
                     SqlCommand cmd = new SqlCommand();
                     cmd.Parameters.AddWithValue("@CompanyID", Guid.NewGuid()).SqlDbType = SqlDbType.UniqueIdentifier;
                     cmd.Parameters.AddWithValue("@CompanyCode", companymodel.company.CompanyCode).SqlDbType = SqlDbType.NVarChar;
@@ -91,12 +89,9 @@ namespace Brilliance.Infrastructure.DataProvider
                     cmd.Parameters.AddWithValue("@SectorID", companymodel.company.SectorID).SqlDbType = SqlDbType.UniqueIdentifier;
                     cmd.Parameters.AddWithValue("@IsEdit", companymodel.company.IsEdit).SqlDbType = SqlDbType.Bit;
 
-
                     DataSet ds = null;
                     ds = BulkInsert("Save_Company", cmd);
-
                     response.IsSuccess = true;
-
                     response.Message = "Record Saved Successfully.";
                 }
                 else
