@@ -79,39 +79,39 @@ namespace Brilliance.Controllers
 
         protected override void OnActionExecuting(ActionExecutingContext filterContext)
         {
-            //if (SessionHelper.UserId == Guid.Empty)
-            //{
-            //    filterContext.Result = new RedirectToRouteResult(new RouteValueDictionary(new
-            //    {
-            //        controller = "login",
-            //        action = "login",
-            //        area = ""
-            //    }));
-            //    return;
-            //}
+            if (SessionHelper.UserId == Guid.Empty)
+            {
+                filterContext.Result = new RedirectToRouteResult(new RouteValueDictionary(new
+                {
+                    controller = "login",
+                    action = "login",
+                    area = ""
+                }));
+                return;
+            }
 
             // If the browser session or authentication session has expired...
-            if (SessionHelper.UserId != Guid.Empty)
-            {
-                if (filterContext.HttpContext.Request.IsAjaxRequest())
-                {
-                    // For AJAX requests, we're overriding the returned JSON result with a simple string,
-                    // indicating to the calling JavaScript code that a redirect should be performed.
-                    filterContext.Result = new JsonResult { Data = "_Logon_" };
-                }
-                else
-                {
-                    // For round-trip posts, we're forcing a redirect to Home/TimeoutRedirect/, which
-                    // simply displays a temporary 5 second notification that they have timed out, and
-                    // will, in turn, redirect to the logon page.
-                    filterContext.Result = new RedirectToRouteResult(new RouteValueDictionary(new
-                    {
-                        controller = "login",
-                        action = "login",
-                        area = ""
-                    }));
-                }
-            }
+            //if (SessionHelper.UserId != Guid.Empty)
+            //{
+            //    if (filterContext.HttpContext.Request.IsAjaxRequest())
+            //    {
+            //        // For AJAX requests, we're overriding the returned JSON result with a simple string,
+            //        // indicating to the calling JavaScript code that a redirect should be performed.
+            //        filterContext.Result = new JsonResult { Data = "_Logon_" };
+            //    }
+            //    else
+            //    {
+            //        // For round-trip posts, we're forcing a redirect to Home/TimeoutRedirect/, which
+            //        // simply displays a temporary 5 second notification that they have timed out, and
+            //        // will, in turn, redirect to the logon page.
+            //        filterContext.Result = new RedirectToRouteResult(new RouteValueDictionary(new
+            //        {
+            //            controller = "login",
+            //            action = "login",
+            //            area = ""
+            //        }));
+            //    }
+            //}
 
             base.OnActionExecuting(filterContext);
 
