@@ -1,0 +1,147 @@
+﻿@using Brilliance.Infrastructure
+@model Brilliance.Models.ViewModel.DivisionViewModel
+@{
+    ViewBag.Title = "Division";
+    Layout = "~/Views/Shared/_Layout_public.cshtml";
+}
+
+
+<div class="page-content page-content-dashbrd-backgrnd">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="page-bar margin-bottom-10">
+                <div class="row">
+                    <div class="col-md-12 padding-out">
+                        <div class="portlet light padding-header margin-0 custom-padding-bar">
+                            <div class="portlet-title portlet-title-Project-custom">
+                                <div class="caption font-dark">
+                                    <i class="icon-settings font-dark"></i>
+                                    <span class="caption-subject bold uppercase">Division</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row" style="margin-left:-25px;margin-right:-25px;margin-top:-5px;">
+                <div class="col-lg-12">
+                    <div class="portlet light">
+                        <div class="portlet-body form">
+                            <form id="frmdivision" action="/Division/SaveDivision" method="post" data-ajax="true" data-ajax-method="Post" data-ajax-success="SaveDivisionResponse(data);">
+                                @Html.HiddenFor(m => m.division.DivisionID)
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Organization<span style="font-weight: bold;color: red;">*</span></label>
+                                            @Html.DropDownListFor(m => m.division.ClientID, new SelectList(Model.Clientlist, "Value", "Text", 0), "--Select Organization--", new { @data_live_search = "true", @class = "form-control bs-select",@onchange= "GetCompany(this);" })
+                                            @Html.ValidationMessageFor(m => m.division.ClientID)
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Company<span style="font-weight: bold;color: red;">*</span></label>
+                                            @Html.DropDownListFor(m => m.division.CompanyID, new SelectList(Model.CompanyList, "Value", "Text", 0), "--Select Company--", new { @data_live_search = "true", @class = "form-control bs-select" })
+                                            @Html.ValidationMessageFor(m => m.division.CompanyID)
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Code</label>
+                                            @Html.TextBoxFor(m => m.division.Code, new { @class = "form-control m-input", @placeholder = "Enter Code" })
+                                            @Html.ValidationMessageFor(m => m.division.Code)
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Division Name</label>
+                                            @Html.TextBoxFor(m => m.division.Name, new { @class = "form-control m-input", @placeholder = "Enter division name" })
+                                            @Html.ValidationMessageFor(m => m.division.Name)
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label>Description</label>
+                                            @Html.TextAreaFor(m => m.division.Description, new { @class = "form-control m-input", @placeholder = "Enter Description", @rows = "4" })
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-actions">
+                                    <div class="col-lg-12  text-right">
+                                        <button type="button" onclick="location.href = '/Company/CompanyList'" class="btn default">Cancel</button>
+                                        <button type="submit" class="btn btn-primary btnSubmit">Save</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts{
+
+    <script>
+
+        function SaveDivisionResponse(response) {
+            //if (response == "_Logon_") {
+            //    window.location.href = "/Login/Login";
+            //}
+            //else {
+            //    if (response.IsSuccess) {
+            //        SetMessageForPageLoad(response.Message, "Organizationsaved");
+            //        window.location.href = "/Organization/OrganizationList/";
+            //    } else {
+            //        ShowMessage(response.Message, "error");
+            //    }
+            //}
+
+            if (response.IsSuccess) {
+                SetMessageForPageLoad(response.Message, "Divisionsaved");
+                window.location.href = "/Division/DivisionList/";
+            } else {
+                ShowMessage(response.Message, "error");
+            }
+        }
+        function GetCompany(Obj) {
+            //var index = $(Obj).attr('index');
+            var clientVal = $('#' + Obj.id).val();
+            var postData = { cid: clientVal };
+            ShowLoader();
+            AjaxCall("/Division/GetCompanyByClient", JSON.stringify(postData), "post", "json", "application/json", false).done(function (data) {
+                HideLoader();
+                //if (data == "_Logon_") {
+                //    window.location.href = "/Login/Login";
+                //}
+                if (data != null && data.length > 0) {
+                    $("#division_CompanyID").html('');
+                    $("#division_CompanyID").append('<option value="">-- Select Company --</option>');
+                    $("#division_CompanyID").selectpicker('refresh');
+                    for (key in data) {
+                        $("#division_CompanyID").append('<option value="' + data[key].Value + '">' + data[key].Text + '</option>')
+                    }
+                    $("#division_CompanyID").selectpicker('refresh');
+                }
+                else {
+                    $("#division_CompanyID").html('');
+                    $("#division_CompanyID").append('<option value="">-- Select Company --</option>');
+                    $("#division_CompanyID").selectpicker('refresh');
+                }
+            });
+        }
+
+      
+    </script>
+}
+
+
+
+
+
+
+

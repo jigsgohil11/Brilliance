@@ -143,6 +143,7 @@ namespace Brilliance.Infrastructure.DataProvider
                 objnew = new BaseDataProvider();
                 objnew.GetScalar("DeleteCompany", searchList);
                 response.IsSuccess = true;
+                response.Message = "Record Deleted Successfully.";
             }
             else
             {
