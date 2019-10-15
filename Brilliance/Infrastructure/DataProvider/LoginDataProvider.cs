@@ -1,13 +1,9 @@
-﻿using Brilliance.Infrastructure.DataProvider;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Web;
 using Brilliance.Models;
 using Brilliance.Models.Entity;
 using Brilliance.Models.ViewModel;
-using Brilliance.Infrastructure;
-
 
 namespace Brilliance.Infrastructure.DataProvider
 {

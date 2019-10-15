@@ -1,15 +1,10 @@
 ﻿using Brilliance.Models.Entity;
 using Brilliance.Models.ViewModel;
-using Brilliance.Infrastructure;
-using Brilliance.Infrastructure.DataProvider;
 using Brilliance.Models;
 using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
 
 namespace Brilliance.Infrastructure.DataProvider
 {

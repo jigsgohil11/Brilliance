@@ -1,13 +1,8 @@
 ﻿using Brilliance.Infrastructure.DataProvider;
-using Brilliance.Models.Entity;
 using Brilliance.Models.ViewModel;
 using Brilliance.Infrastructure;
 using Brilliance.Models;
-using Brilliance.Controllers;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 namespace Brilliance.Controllers
 {

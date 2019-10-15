@@ -2,14 +2,10 @@
 
 namespace Brilliance.Controllers
 {
-    public class HomeController : Controller
+    public class UserController : Controller
     {
-        // GET: Home
+        // GET: User
         public ActionResult Index()
-        {
-            return View();
-        }
-        public ActionResult Index1()
         {
             return View();
         }

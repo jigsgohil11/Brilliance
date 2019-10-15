@@ -1,8 +1,6 @@
 ﻿using System.Data;
 using System.Linq;
 using System.Reflection;
-using Brilliance.Infrastructure;
-using Brilliance.Infrastructure.Attributes;
 using Brilliance.Models;
 using PetaPoco;
 using System.Data.SqlClient;

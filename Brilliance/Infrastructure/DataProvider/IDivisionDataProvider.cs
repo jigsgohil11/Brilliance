@@ -2,8 +2,6 @@
 using Brilliance.Models;
 using System;
 
-
-
 namespace Brilliance.Infrastructure.DataProvider
 {
     interface IDivisionDataProvider
