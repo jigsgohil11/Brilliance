@@ -1,11 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.ComponentModel.DataAnnotations;
-using Brilliance .Infrastructure;
+using Brilliance.Infrastructure;
 using PetaPoco;
-
 
 namespace Brilliance.Models.Entity
 {

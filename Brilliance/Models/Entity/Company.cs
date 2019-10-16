@@ -2,6 +2,7 @@
 using PetaPoco;
 using System;
 using System.ComponentModel.DataAnnotations;
+
 namespace Brilliance.Models.Entity
 {
     [TableName("mst_Company")]

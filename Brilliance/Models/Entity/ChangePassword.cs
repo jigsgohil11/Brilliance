@@ -1,5 +1,4 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using System.Web;
 using System.Web.Mvc;
 
 namespace Brilliance.Models.Entity

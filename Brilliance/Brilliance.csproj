@@ -152,6 +152,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\OrganizationController.cs" />
+    <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -178,8 +179,10 @@
     <Compile Include="Infrastructure\DataProvider\ICompanyDataProvider.cs" />
     <Compile Include="Infrastructure\DataProvider\IDivisionDataProvider.cs" />
     <Compile Include="Infrastructure\DataProvider\ILoginDataProvider.cs" />
+    <Compile Include="Infrastructure\DataProvider\IProductDataProvider.cs" />
     <Compile Include="Infrastructure\DataProvider\IUserDataProvider.cs" />
     <Compile Include="Infrastructure\DataProvider\LoginDataProvider.cs" />
+    <Compile Include="Infrastructure\DataProvider\ProductDataProvider.cs" />
     <Compile Include="Infrastructure\DataProvider\UserDataProvider.cs" />
     <Compile Include="Infrastructure\GridReader.cs" />
     <Compile Include="Infrastructure\JsonStringResult.cs" />
@@ -197,6 +200,7 @@
     <Compile Include="Models\Entity\Login.cs" />
     <Compile Include="Models\Entity\LoginLog.cs" />
     <Compile Include="Models\Entity\LoginUser.cs" />
+    <Compile Include="Models\Entity\Product.cs" />
     <Compile Include="Models\Entity\Users.cs" />
     <Compile Include="Models\LinkResponse.cs" />
     <Compile Include="Models\SearchValueData.cs" />
@@ -205,6 +209,7 @@
     <Compile Include="Models\ViewModel\ClientViewModel.cs" />
     <Compile Include="Models\ViewModel\CompanyViewModel.cs" />
     <Compile Include="Models\ViewModel\DivisionViewModel.cs" />
+    <Compile Include="Models\ViewModel\ProductViewModel.cs" />
     <Compile Include="Models\ViewModel\UserLoginDetails.cs" />
     <Compile Include="Models\ViewModel\UsersModel.cs" />
     <Compile Include="Models\ViewModel\UserViewModel.cs" />
@@ -6791,6 +6796,7 @@
     <Folder Include="App_Data\" />
     <Folder Include="assets\apps\img\" />
     <Folder Include="assets\global\plugins\angularjs\plugins\angular-file-upload\uploads\" />
+    <Folder Include="Views\Product\" />
     <Folder Include="Views\Test\" />
     <Folder Include="Views\User\" />
   </ItemGroup>

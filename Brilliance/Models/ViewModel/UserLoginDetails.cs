@@ -1,7 +1,5 @@
-﻿using Brilliance.Models;
-using Brilliance.Models.Entity;
+﻿using Brilliance.Models.Entity;
 using System.Collections.Generic;
-
 
 namespace Brilliance.Models.ViewModel
 {
