@@ -6791,12 +6791,12 @@
     <Content Include="Views\Dashboard\Dashboard.cshtml" />
     <Content Include="Views\Division\DivisionList.cshtml" />
     <Content Include="Views\Division\Division.cshtml" />
+    <Content Include="Views\Product\ProductList.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="assets\apps\img\" />
     <Folder Include="assets\global\plugins\angularjs\plugins\angular-file-upload\uploads\" />
-    <Folder Include="Views\Product\" />
     <Folder Include="Views\Test\" />
     <Folder Include="Views\User\" />
   </ItemGroup>

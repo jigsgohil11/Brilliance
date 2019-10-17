@@ -11,13 +11,13 @@ namespace Brilliance.Controllers
     {
         private IProductDataProvider _iproductDataProvider;
 
-        public ActionResult OrganizationList()
+        public ActionResult ProductList()
         {
             _iproductDataProvider = new ProductDataProvider();
             ProductListModel productlistModel = _iproductDataProvider.ProductList();
             return View(productlistModel);
         }
-        public ActionResult Organization(string id)
+        public ActionResult Product(string id)
         {
             _iproductDataProvider = new ProductDataProvider();
             var response = new ServiceResponse();

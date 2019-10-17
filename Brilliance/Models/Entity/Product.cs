@@ -33,7 +33,7 @@ namespace Brilliance.Models.Entity
         public Guid? UpdatedBy { get; set; }
 
         [Ignore]
-        public string EncryptedClientID { get { return ProductID != Guid.Empty ? Crypto.Encrypt(Convert.ToString(ProductID)) : null; } }
+        public string EncryptedProductID { get { return ProductID != Guid.Empty ? Crypto.Encrypt(Convert.ToString(ProductID)) : null; } }
 
         [Ignore]
         public bool IsEdit { get { return ProductID != Guid.Empty ? true : false; } }
