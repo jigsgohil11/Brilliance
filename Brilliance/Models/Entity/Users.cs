@@ -10,6 +10,7 @@ namespace Brilliance.Models.Entity
     [Sort("UserID", "ASC")]
     public class Users
     {
+        [Key]
         public Guid UserID { get; set; }
 
         [Required(ErrorMessageResourceName = "NameRequired", ErrorMessageResourceType = typeof(Resource.Resource))]

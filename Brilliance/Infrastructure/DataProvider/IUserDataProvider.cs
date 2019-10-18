@@ -12,5 +12,9 @@ namespace Brilliance.Infrastructure.DataProvider
         ServiceResponse DeleteUser(Guid UserID);
         //ServiceResponse GetStateByCountry(Guid CountryID);
         //ServiceResponse GetCityByState(Guid StateID);
+        RoleListModel RoleList();
+        ServiceResponse GetRole(Guid RoleID);
+        ServiceResponse SaveRole(RoleViewModel Rolemodel);
+        ServiceResponse DeleteRole(Guid RoleID);
     }
 }

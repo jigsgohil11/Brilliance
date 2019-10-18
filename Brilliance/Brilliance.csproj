@@ -201,6 +201,7 @@
     <Compile Include="Models\Entity\LoginLog.cs" />
     <Compile Include="Models\Entity\LoginUser.cs" />
     <Compile Include="Models\Entity\Product.cs" />
+    <Compile Include="Models\Entity\Role.cs" />
     <Compile Include="Models\Entity\Users.cs" />
     <Compile Include="Models\LinkResponse.cs" />
     <Compile Include="Models\SearchValueData.cs" />
@@ -210,6 +211,7 @@
     <Compile Include="Models\ViewModel\CompanyViewModel.cs" />
     <Compile Include="Models\ViewModel\DivisionViewModel.cs" />
     <Compile Include="Models\ViewModel\ProductViewModel.cs" />
+    <Compile Include="Models\ViewModel\RoleViewModel.cs" />
     <Compile Include="Models\ViewModel\UserLoginDetails.cs" />
     <Compile Include="Models\ViewModel\UsersModel.cs" />
     <Compile Include="Models\ViewModel\UserViewModel.cs" />
@@ -6792,13 +6794,14 @@
     <Content Include="Views\Division\DivisionList.cshtml" />
     <Content Include="Views\Division\Division.cshtml" />
     <Content Include="Views\Product\ProductList.cshtml" />
+    <Content Include="Views\User\RoleList.cshtml" />
+    <Content Include="Views\User\Role.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="assets\apps\img\" />
     <Folder Include="assets\global\plugins\angularjs\plugins\angular-file-upload\uploads\" />
     <Folder Include="Views\Test\" />
-    <Folder Include="Views\User\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
