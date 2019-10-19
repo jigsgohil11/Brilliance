@@ -439,9 +439,18 @@ namespace Brilliance.Infrastructure.DataProvider
                     searchList.Add(searchValueData);
                     BaseDataProvider objnew = new BaseDataProvider();
                     objnew = new BaseDataProvider();
-                    var _msg = objnew.GetScalar("_PrcDeleteoutcomeMaster", searchList);
-                    response.Message = _msg.ToString();
-                    response.IsSuccess = true;
+                    var _msg =Convert.ToInt32(objnew.GetScalar("_PrcDeleteoutcomeMaster", searchList));
+                    if(_msg==0)
+                    {
+                        response.Message ="Can't delete item in use";
+                        response.IsSuccess = false;
+                    }
+                    else if (_msg > 0)
+                    {
+                        response.Message = "Delete successfully";
+                        response.IsSuccess = true;
+                    }
+                      
                     
                 }
                 else

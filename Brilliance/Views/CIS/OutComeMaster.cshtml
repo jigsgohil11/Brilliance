@@ -356,8 +356,21 @@
                     method: 'post',
                     data: { Id: id },
                     success: function (data) {
+                        debugger;
                         HideLoader();
-                        ShowMessage(data.Message, "error");
+                        
+                        if (data.IsSuccess == true)
+                        {
+                            BindGrid();
+                            SetMessageForPageLoad(response.Message, "OutcomeSaved");
+                        }
+                        else if (data.IsSuccess == false)
+                        {
+                            BindGrid();
+                            ShowMessage(data.Message, "error");
+
+                        }
+                        
                         
                       
                     }
