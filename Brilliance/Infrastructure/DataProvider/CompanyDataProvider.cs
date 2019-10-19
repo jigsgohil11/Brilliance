@@ -1,15 +1,10 @@
 ﻿using Brilliance.Models.Entity;
 using Brilliance.Models.ViewModel;
-using Brilliance.Infrastructure;
-using Brilliance.Infrastructure.DataProvider;
 using Brilliance.Models;
 using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
 
 namespace Brilliance.Infrastructure.DataProvider
 {
@@ -66,10 +61,8 @@ namespace Brilliance.Infrastructure.DataProvider
             try
             {
 
-
                 if (companymodel.company.IsEdit == false)
                 {
-
                     SqlCommand cmd = new SqlCommand();
                     cmd.Parameters.AddWithValue("@CompanyID", Guid.NewGuid()).SqlDbType = SqlDbType.UniqueIdentifier;
                     cmd.Parameters.AddWithValue("@CompanyCode", companymodel.company.CompanyCode).SqlDbType = SqlDbType.NVarChar;
@@ -91,12 +84,9 @@ namespace Brilliance.Infrastructure.DataProvider
                     cmd.Parameters.AddWithValue("@SectorID", companymodel.company.SectorID).SqlDbType = SqlDbType.UniqueIdentifier;
                     cmd.Parameters.AddWithValue("@IsEdit", companymodel.company.IsEdit).SqlDbType = SqlDbType.Bit;
 
-
                     DataSet ds = null;
                     ds = BulkInsert("Save_Company", cmd);
-
                     response.IsSuccess = true;
-
                     response.Message = "Record Saved Successfully.";
                 }
                 else
@@ -148,6 +138,7 @@ namespace Brilliance.Infrastructure.DataProvider
                 objnew = new BaseDataProvider();
                 objnew.GetScalar("DeleteCompany", searchList);
                 response.IsSuccess = true;
+                response.Message = "Record Deleted Successfully.";
             }
             else
             {

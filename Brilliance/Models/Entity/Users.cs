@@ -1,19 +1,16 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.ComponentModel.DataAnnotations;
-using Brilliance .Infrastructure;
+using Brilliance.Infrastructure;
 using PetaPoco;
-
 
 namespace Brilliance.Models.Entity
 {
-    [TableName("user_Users")]
+    [TableName("usr_User")]
     [PrimaryKey("UserID")]
     [Sort("UserID", "ASC")]
     public class Users
     {
+        [Key]
         public Guid UserID { get; set; }
 
         [Required(ErrorMessageResourceName = "NameRequired", ErrorMessageResourceType = typeof(Resource.Resource))]
@@ -32,6 +29,7 @@ namespace Brilliance.Models.Entity
         [Required(ErrorMessageResourceName = "CodeRequired", ErrorMessageResourceType = typeof(Resource.Resource))]
         [Ignore]
         public Guid? RoleID { get; set; }
+        public bool IsVerified { get; set; }
 
         [ResultColumn]
         public string RegionsIDs { get; set; }
