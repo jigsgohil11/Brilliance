@@ -10,7 +10,8 @@ namespace Brilliance.Controllers
     public class UserController : Controller
     {
         private IUserDataProvider _iuserDataProvider;
-        // GET: User
+
+        #region User Management
         public ActionResult UserList()
         {
             _iuserDataProvider = new UserDataProvider();
@@ -41,5 +42,39 @@ namespace Brilliance.Controllers
             response = _iuserDataProvider.DeleteUser(UserID);
             return Json(response);
         }
+        #endregion
+
+        #region Role
+        public ActionResult RoleList()
+        {
+            _iuserDataProvider = new UserDataProvider();
+            RoleListModel RolelistModel = _iuserDataProvider.RoleList();
+            return View(RolelistModel);
+        }
+        public ActionResult Role(string id)
+        {
+            _iuserDataProvider = new UserDataProvider();
+            var response = new ServiceResponse();
+            Guid RoleID = Common.CheckIdNullOrEmpty(id);
+            response = _iuserDataProvider.GetRole(RoleID);
+            return View(response.Data);
+        }
+        [HttpPost]
+        public ActionResult SaveRole(RoleViewModel RoleViewModel)
+        {
+            _iuserDataProvider = new UserDataProvider();
+            var response = new ServiceResponse();
+            response = _iuserDataProvider.SaveRole(RoleViewModel);
+            return Json(response);
+        }
+        public ActionResult DeleteRole(string DeleteID)
+        {
+            _iuserDataProvider = new UserDataProvider();
+            var response = new ServiceResponse();
+            Guid RoleID = Common.CheckIdNullOrEmpty(DeleteID);
+            response = _iuserDataProvider.DeleteRole(RoleID);
+            return Json(response);
+        }
+        #endregion
     }
 }

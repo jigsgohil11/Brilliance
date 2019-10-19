@@ -146,6 +146,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\BaseController.cs" />
+    <Compile Include="Controllers\CISController.cs" />
     <Compile Include="Controllers\CompanyController.cs" />
     <Compile Include="Controllers\CRTController.cs" />
     <Compile Include="Controllers\DashboardController.cs" />
@@ -197,11 +198,13 @@
     <Compile Include="Models\Entity\ChangePassword.cs" />
     <Compile Include="Models\Entity\Client.cs" />
     <Compile Include="Models\Entity\Company.cs" />
+    <Compile Include="Models\Entity\ConductMaster.cs" />
     <Compile Include="Models\Entity\Division.cs" />
     <Compile Include="Models\Entity\Login.cs" />
     <Compile Include="Models\Entity\LoginLog.cs" />
     <Compile Include="Models\Entity\LoginUser.cs" />
     <Compile Include="Models\Entity\Product.cs" />
+    <Compile Include="Models\Entity\Role.cs" />
     <Compile Include="Models\Entity\Users.cs" />
     <Compile Include="Models\LinkResponse.cs" />
     <Compile Include="Models\SearchValueData.cs" />
@@ -209,8 +212,10 @@
     <Compile Include="Models\ViewModel\ActionLoginLogModel.cs" />
     <Compile Include="Models\ViewModel\ClientViewModel.cs" />
     <Compile Include="Models\ViewModel\CompanyViewModel.cs" />
+    <Compile Include="Models\ViewModel\ConductDataViewModel.cs" />
     <Compile Include="Models\ViewModel\DivisionViewModel.cs" />
     <Compile Include="Models\ViewModel\ProductViewModel.cs" />
+    <Compile Include="Models\ViewModel\RoleViewModel.cs" />
     <Compile Include="Models\ViewModel\UserLoginDetails.cs" />
     <Compile Include="Models\ViewModel\UsersModel.cs" />
     <Compile Include="Models\ViewModel\UserViewModel.cs" />
@@ -4574,7 +4579,6 @@
     <Content Include="assets\global\plugins\icheck\demo\css\montserrat-regular.svg" />
     <Content Include="assets\global\plugins\icheck\demo\css\normalize.css" />
     <Content Include="assets\global\plugins\icheck\demo\index.html" />
-    <Content Include="assets\global\plugins\icheck\demo\js\custom.js" />
     <Content Include="assets\global\plugins\icheck\demo\js\custom.min.js" />
     <Content Include="assets\global\plugins\icheck\demo\js\jquery.js" />
     <Content Include="assets\global\plugins\icheck\demo\js\zepto.js" />
@@ -6390,6 +6394,7 @@
     <Content Include="Content\bootstrap-reboot.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\kendoStyles.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -6559,7 +6564,6 @@
     <Content Include="assets\global\plugins\gmaps\README.md" />
     <Content Include="assets\global\plugins\icheck\bower.json" />
     <Content Include="assets\global\plugins\icheck\CHANGELOG.md" />
-    <Content Include="assets\global\plugins\icheck\demo\css\custom.styl" />
     <Content Include="assets\global\plugins\icheck\demo\css\montserrat-bold.eot" />
     <Content Include="assets\global\plugins\icheck\demo\css\montserrat-bold.ttf" />
     <Content Include="assets\global\plugins\icheck\demo\css\montserrat-bold.woff" />
@@ -6752,7 +6756,9 @@
     <Content Include="assets\global\plugins\wysihtml\minified\wysihtml.min.map" />
     <Content Include="assets\global\plugins\wysihtml\minified\wysihtml.table_editing.min.map" />
     <Content Include="assets\global\plugins\wysihtml\minified\wysihtml.toolbar.min.map" />
+    <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Scripts\bootstrapvalidator.min.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
@@ -6761,6 +6767,7 @@
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\kendoScripts.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
@@ -6794,13 +6801,17 @@
     <Content Include="Views\Division\Division.cshtml" />
     <Content Include="Views\Product\ProductList.cshtml" />
     <Content Include="Views\Product\Product.cshtml" />
+    <Content Include="Views\User\RoleList.cshtml" />
+    <Content Include="Views\User\Role.cshtml" />
+    <Content Include="Views\CIS\Index.cshtml" />
+    <Content Include="Views\CIS\OutComeMaster.cshtml" />
+    <Content Include="Views\CIS\SuboutComes.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="assets\apps\img\" />
     <Folder Include="assets\global\plugins\angularjs\plugins\angular-file-upload\uploads\" />
     <Folder Include="Views\Test\" />
-    <Folder Include="Views\User\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
