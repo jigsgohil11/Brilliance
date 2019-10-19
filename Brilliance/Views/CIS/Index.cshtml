@@ -1,0 +1,379 @@
+﻿@model Brilliance.Models.Entity.TCFForm
+@using Brilliance.Infrastructure.DataProvider;
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout_public.cshtml";
+    ConductDataprovider _icisDataProvider = new ConductDataprovider();
+}
+
+<link href="~/Content/kendoStyles.css" rel="stylesheet" />
+<link rel="stylesheet" href="https://app.brillianceib.com/bundles/knockout?v=mKy6cxTu1mioyNO6m4RTtIqEAZBgJ9YqLsg1ixYmtsM1" />
+<link rel="stylesheet" href="https://app.brillianceib.com/bundles/bootstrap?v=B9gEIvl-BkYgXVSg8Ql9co87zoQ4x1JR0IJEM-Rbbx01" />
+<style>
+    #grid {
+    margin: 0;
+    padding: 0;
+    border-width: 0;
+    height: 100%;
+    /* DO NOT USE !important for setting the Grid height! */
+  }
+</style>
+<div class="page-content page-content-dashbrd-backgrnd">
+    <div class="page-bar margin-bottom-10">
+        <div class="row">
+            <div class="col-md-12 padding-out">
+                <div class="portlet light padding-header margin-0 custom-padding-bar">
+                    <div class="portlet-title portlet-title-Project-custom">
+                        <div class="caption font-dark">
+                            <i class="icon-settings font-dark"></i>
+                            <span class="caption-subject bold uppercase">Conduct Improvement System</span>
+                        </div>
+                        @*<div class="caption font-dark pull-right">
+                            <a class="btn btn-circle btn-icon-only btn-default" title="Add Complaint" href="/CRT/CRT">
+                                <i class="fa fa-plus"></i>
+                            </a>
+                        </div>*@
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+   <br />
+    <!-- Button trigger modal -->
+    <!-- Button trigger modal -->
+    <button type="button" class="btn btn-brilliance btn-sm" data-toggle="modal" data-target="#exampleModalLong">
+        Add own TCF requirement
+        </button>
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">Capture...</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="form-group">
+                            <div class="col-md-12">
+                                <label>Select the outcome for this TCF requirement</label>
+                                @Html.DropDownListFor(x => x.TCFQuestionId, _icisDataProvider.BindOutcome(), "...", new { @class = "form-control", @style = "width:47%;" })
+                            </div>
+
+                        </div>
+                    </div>
+                    <br />
+                    <div class="row">
+                        <div class="form-group">
+                            <div class="col-md-12">
+                                <label>Provide the description</label>
+                                <br />
+                                @Html.TextAreaFor(x => x.ReasonFully, new { @class = "form-control", @style = "width:100%;" })
+
+
+                            </div>
+
+                        </div>
+                    </div>
+                    <br />
+                    <div class="row">
+                        <div class="form-group">
+                            <div class="col-md-12">
+                                <label>Rate the extent to which this is in place or in practice</label>
+                                @Html.DropDownListFor(x => x.TCFFormRatingId, _icisDataProvider.BindOutcomeRating(), "...", new { @class = "form-control", @style = "width:47%;" })
+                            </div>
+
+                        </div>
+                    </div>
+                    <br />
+                    <div class="row" id="notapply">
+                        <div class="form-group">
+                            <div class="col-md-12">
+                                <label>Why do you say this is not applicable?</label>
+                                <br />
+                                @Html.TextAreaFor(x => x.ReasonNotApplicable, new { @class = "form-control", @style = "width:100%;", @placeholder = "Please carefully consider whether this is something that should be in place, albeit not yet, before you declare it not applicable." })
+
+
+                            </div>
+
+                        </div>
+                    </div>
+                    <br />
+                    <div id="notyet">
+                        <div class="row">
+                            <div class="form-group">
+                                <div class="col-md-12">
+                                    <label>Notes</label>
+                                    <br />
+                                    @Html.TextAreaFor(x => x.ReasonPartially, new { @class = "form-control", @style = "width:100%;", @placeholder = "Type here what has been and/or needs to be done towards closing this gap. Note: This field is optional.  Whatever you insert here will be included in the email that automatically gets sent to the responsible person if that person is not yourself." })
+
+
+                                </div>
+
+                            </div>
+
+                        </div>
+                        <br />
+                        <div class="row">
+                            <div class="form-group">
+                                <div class="col-md-12">
+                                    <label>Due date by when this will be in place or in practice</label>
+                                    <br />
+                                    @Html.TextBoxFor(x => x.DueDate, new { @class = "form-control", @style = "width:47%;" })
+
+
+                                </div>
+
+                            </div>
+                        </div>
+                        <br />
+                        <div class="row">
+                            <div class="form-group">
+                                <div class="col-md-12">
+                                    <label>Who is responsible for getting and / or keeping this in place or in practice?</label>
+                                    <br />
+                                    @Html.DropDownListFor(x => x.UserId, _icisDataProvider.BindOutcomeRating(), "...", new { @class = "form-control", @style = "width:47%;" })
+
+
+
+
+                                </div>
+
+                            </div>
+                        </div> 
+                    </div>
+                    <br />
+                    <div id="divfully">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label>Why do you say this is fully in place or in practice?</label>
+                                    @Html.TextAreaFor(x => x.ReasonFully, new { @class = "form-control", @width = "100%" })
+                                </div>
+                            </div>
+                           
+                        </div>
+                        <br />
+                        <div class="row">
+                            <div class="form-group">
+                                <div class="col-md-12">
+                                    <label>Who is responsible for getting and / or keeping this in place or in practice?</label>
+                                    <br />
+                                    @Html.DropDownListFor(x => x.UserId, _icisDataProvider.BindOutcomeRating(), "...", new { @class = "form-control", @style = "width:47%;" })
+
+
+
+
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-brilliance">Save and Close</button>
+
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+  
+    <div class="row">
+        <div id="grid"></div>
+        </div>
+        
+    </div>
+
+
+
+
+    @section scripts{
+       
+        <script src="https://kendo.cdn.telerik.com/2018.2.620/js/jszip.min.js"></script>
+        <script src="https://kendo.cdn.telerik.com/2018.2.620/js/kendo.all.min.js"></script>
+        <script>
+            $(document).ready(function () {
+                
+                var url='@Url.Action("CisQuestion", "CIS")';
+
+                var element = $("#grid").kendoGrid({
+                    dataSource: {
+
+                        transport: {
+                            read: {
+                                url: url,
+                                type: "get",
+                                dataType: "json"
+                            }
+                        },
+                        group: [{ field: "Description" }],
+                        groupable: false,
+                        sortable: false,
+                        pageSize: 1000,
+                        serverPaging: false,
+                        serverSorting: false
+                    },
+                   
+                    sortable: false,
+                    pageable: false,
+                    scrollable: true,
+                   /// detailInit: detailInit,
+                    dataBound: function () {
+                        var grid = this;
+                        $(".k-grouping-row").each(function (e) {
+                            grid.collapseGroup(this);
+                        });
+                        ////this.expandRow(this.tbody.find("tr.k-master-row").last());
+                    },
+                    
+                    
+                    columns: [
+                        {
+                            title: "Ref",
+                            field: "Qgroup",
+                            
+                            width: "4%"
+                        },
+                        {
+                            field: "Qdesc",
+                            title: "Description",
+                            width: "60%"
+                        },
+                        {
+                            title: "Previous Rating",
+                            width: "110px"
+                        },
+                        {
+                            title: "Current Rating",
+                            width: "110px"
+                        },
+                        {
+                            title: "Current Due Dates"
+                        },
+                        {
+
+
+                            'title': 'Edit',
+                            'field': 'Edit',
+                            template: "<a href='\\\#' class='name-link btn btn-default' value='#= Id #'>#= 'Edit' #</a>"
+                        },
+                    ]
+                  
+                }).on("click", "a.name-link", function() {
+                    var tr = $(this).closest("tr");
+                    
+                    var dataItem = $("#grid").data("kendoGrid").dataItem(tr);
+         
+                    
+            });
+            });
+            @*function detailInit(e) {
+
+                var _url = '@Url.Action("BindSubmenuQuestion", "CIS")';
+                $("<div/>").appendTo(e.detailCell).kendoGrid({
+                    dataSource: {
+                        transport: {
+                            read: {
+                                url: _url,
+                                type: "get",
+                                dataType: "json",
+                                data: { Id: e.data.Id }
+                            }
+                        },
+                        serverPaging: true,
+                        serverSorting: true,
+                        serverFiltering: true,
+                        pageSize: 10,
+                        filter: { field: "Id", operator: "eq", value: e.data.Id }
+                    },
+                    scrollable: false,
+                    sortable: true,
+                    pageable: false,
+                    columns: [
+                         { field: "Code", width: "3%" },
+                        { field: "Description", width: "50%" }
+                       
+                    ]
+                });
+               
+            }*@
+            @*function detailSubmenuInit(e) {
+
+                var _url = '@Url.Action("BindSubmenuDetails", "CIS")';
+                $("<div/>").appendTo(e.detailCell).kendoGrid({
+                    dataSource: {
+                        transport: {
+                            read: {
+                                url: _url,
+                                type: "get",
+                                dataType: "json",
+                                data: { Id: e.data.Id }
+                            }
+                        },
+                        serverPaging: true,
+                        serverSorting: true,
+                        serverFiltering: true,
+                        pageSize: 10,
+                        filter: { field: "Id", operator: "eq", value: e.data.Id }
+                    },
+                    scrollable: false,
+                    sortable: true,
+                    pageable: false,
+                    columns: [
+                         { field: "Code", width: "3%" },
+                        { field: "Description", width: "50%" }
+
+                    ]
+                });
+                hideDetailGridHeaders();
+            }
+
+            function hideDetailGridHeaders() {
+                $(".k-grid tbody .k-grid .k-grid-header").hide();
+            }*@
+</script>
+        <script>
+            $(document).ready(function () {
+                $("#notapply").hide();
+                $("#notyet").hide();
+                $("#divfully").hide();
+                $("#DueDate").kendoDatePicker();
+            })
+        </script>
+  <script>
+    $("#TCFFormRatingId").on('change', function () {
+        var val = $(this).val();
+        if(val==0)
+        {
+            $("#notapply").show();
+            $("#notyet").hide();
+            $("#divfully").hide();
+        }
+        if (val == 1 || val == 2 || val == 3) {
+            $("#notyet").show();
+            $("#notapply").hide();
+            $("#divfully").hide();
+        }
+        if(val==4)
+        {
+            $("#notapply").hide();
+            $("#notyet").hide();
+            $("#divfully").show();
+        }
+    })
+</script>
+        <script>
+            $('#modal').on('show.bs.modal', function () {
+                $(this).find('.modal-body').css({
+                    width: 'auto', //probably not needed
+                    height: 'auto', //probably not needed 
+                    'max-height': '100%'
+                });
+            });
+        </script>
+    }

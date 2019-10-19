@@ -17,6 +17,7 @@ namespace Brilliance.Infrastructure.DataProvider
         public BaseDataProvider()
         {
             _db = new Database("DefaultConnection");
+            
             _db.CommandTimeout = ConfigSettings.DBCommandTimeOut;
         }
 
@@ -32,7 +33,18 @@ namespace Brilliance.Infrastructure.DataProvider
             }
             return item;
         }
-
+        public T Save<T>(T item) where T : class
+        {
+            if (item!=null)
+            {
+                _db.Insert(item);
+            }
+            else
+            {
+                _db.Update(item);
+            }
+            return item;
+        }
         public void DeleteEntity<T>(Guid id) where T : class
         {
             string primaryKeyName = GetPrimaryKeyName<T>();
