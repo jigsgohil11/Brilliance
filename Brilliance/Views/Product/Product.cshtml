@@ -1,0 +1,144 @@
+﻿@using Brilliance.Infrastructure
+@model Brilliance.Models.ViewModel.ProductViewModel
+@{
+    ViewBag.Title = "Product";
+    Layout = "~/Views/Shared/_Layout_public.cshtml";
+}
+
+
+<div class="page-content page-content-dashbrd-backgrnd">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="page-bar margin-bottom-10">
+                <div class="row">
+                    <div class="col-md-12 padding-out">
+                        <div class="portlet light padding-header margin-0 custom-padding-bar">
+                            <div class="portlet-title portlet-title-Project-custom">
+                                <div class="caption font-dark">
+                                    <i class="icon-settings font-dark"></i>
+                                    <span class="caption-subject bold uppercase">Product</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row" style="margin-left:-25px;margin-right:-25px;margin-top:-5px;">
+                <div class="col-lg-12">
+                    <div class="portlet light">
+                        <div class="portlet-body form">
+                            <form action="/Product/SaveProduct" id="frmProduct" data-ajax-success="SaveProductResponse(data);" data-ajax="true" data-ajax-method="Post" method="post">
+                                @Html.HiddenFor(m => m.product.ProductID)
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Organization<span style="font-weight: bold;color: red;">*</span></label>
+                                            @Html.DropDownListFor(m => m.product.ClientID, new SelectList(Model.Clientlist, "Value", "Text", 0), "--Select Organization--", new { @data_live_search = "true", @class = "form-control bs-select", @onchange = "GetCompany(this);" })
+                                            @Html.ValidationMessageFor(m => m.product.ClientID)
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Company</label>
+                                            @Html.DropDownListFor(m => m.product.CompanyID, new SelectList(Model.Companylist, "Value", "Text", 0), "--Select Company--", new { @data_live_search = "true", @class = "form-control bs-select" })
+                                            @Html.ValidationMessageFor(m => m.product.CompanyID)
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Code</label>
+                                            @Html.TextBoxFor(m => m.product.Code, new { @class = "form-control m-input", @placeholder = "Enter product code" })
+                                            @Html.ValidationMessageFor(m => m.product.Code)
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Name</label>
+                                            @Html.TextBoxFor(m => m.product.Name, new { @class = "form-control m-input", @placeholder = "Enter product name" })
+                                            @Html.ValidationMessageFor(m => m.product.Name)
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label>Description</label>
+                                            @*<textarea class="form-control input-sm" data-bind="value: note" rows="4" style="resize:none;width:100%;"></textarea>*@
+                                            @Html.TextAreaFor(m => m.product.Description, new { @class = "form-control m-input", @placeholder = "Enter Description", @rows = "4" })
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-actions">
+                                    <div class="col-lg-12  text-right">
+                                        <button type="button" onclick="location.href = '/Product/ProductList'" class="btn default">Cancel</button>
+                                        @*<button type="button" onclick="ClientFormSubmit();" class="btn btn-primary btnSubmit">Save</button>*@
+                                        <button type="submit" class="btn btn-primary btnSubmit">Save</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section scripts{
+
+    <script>
+
+        function SaveProductResponse(response) {
+            //if (response == "_Logon_") {
+            //    window.location.href = "/Login/Login";
+            //}
+            //else {
+            //    if (response.IsSuccess) {
+            //        SetMessageForPageLoad(response.Message, "Organizationsaved");
+            //        window.location.href = "/Organization/OrganizationList/";
+            //    } else {
+            //        ShowMessage(response.Message, "error");
+            //    }
+            //}
+
+            if (response.IsSuccess) {
+                SetMessageForPageLoad(response.Message, "Productsaved");
+                window.location.href = "/Product/ProductList/";
+            } else {
+                ShowMessage(response.Message, "error");
+            }
+        }
+
+        function GetCompany(Obj) {
+            //var index = $(Obj).attr('index');
+            var clientVal = $('#' + Obj.id).val();
+            var postData = { cid: clientVal };
+            ShowLoader();
+            AjaxCall("/Division/GetCompanyByClient", JSON.stringify(postData), "post", "json", "application/json", false).done(function (data) {
+                HideLoader();
+                //if (data == "_Logon_") {
+                //    window.location.href = "/Login/Login";
+                //}
+                if (data != null && data.length > 0) {
+                    $("#product_CompanyID").html('');
+                    $("#product_CompanyID").append('<option value="">-- Select Company --</option>');
+                    $("#product_CompanyID").selectpicker('refresh');
+                    for (key in data) {
+                        $("#product_CompanyID").append('<option value="' + data[key].Value + '">' + data[key].Text + '</option>')
+                    }
+                    $("#product_CompanyID").selectpicker('refresh');
+                }
+                else {
+                    $("#product_CompanyID").html('');
+                    $("#product_CompanyID").append('<option value="">-- Select Company --</option>');
+                    $("#product_CompanyID").selectpicker('refresh');
+                }
+            });
+        }
+
+    </script>
+}
+

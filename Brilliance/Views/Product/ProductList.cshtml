@@ -37,7 +37,8 @@
                             <tr>
                                 <th class="all">Code</th>
                                 <th class="min-tablet">Name</th>
-                                @*<th class="desktop">Company</th>*@
+                                <th class="desktop">Organization</th>
+                                <th class="desktop">Company</th>
                                 <th class="desktop">Description</th>
                                 <th class="all">Action</th>
                             </tr>
@@ -47,16 +48,17 @@
                             {
                                 foreach (var item in Model.Productlist)
                                 {
-                                    <tr>
-                                        <td style="background-color:white !important;">@item.Code</td>
-                                        <td>@item.Name</td>
-                                        @*<td>@item.Company</td>*@
-                                        <td>@item.Description</td>
-                                        <td>
-                                            <a class="action btn  btn-primary btn-xs @Constants.Class_Cannot_Access_Update" href="/Product/Product/@item.EncryptedProductID" title="Edit"><i class="btn-xs fa fa-pencil padding0"></i></a>
-                                            <a class="action btn  btn-danger btn-xs @Constants.Class_Cannot_Access_Remove" href="javascript:void(0);" title="Delete" onclick="fnOpenDeleteModel('DeleteButton','DeleteModal','@item.EncryptedProductID.ToString()');"><i class="btn-xs fa fa-trash-o padding0"></i></a>
-                                        </td>
-                                    </tr>
+                            <tr>
+                                <td style="background-color:white !important;">@item.Code</td>
+                                <td>@item.Name</td>
+                                <td>@item.Organization</td>
+                                <td>@item.Company</td>
+                                <td>@item.Description</td>
+                                <td>
+                                    <a class="action btn  btn-primary btn-xs @Constants.Class_Cannot_Access_Update" href="/Product/Product/@item.EncryptedProductID" title="Edit"><i class="btn-xs fa fa-pencil padding0"></i></a>
+                                    <a class="action btn  btn-danger btn-xs @Constants.Class_Cannot_Access_Remove" href="javascript:void(0);" title="Delete" onclick="fnOpenDeleteModel('DeleteButton','DeleteModal','@item.EncryptedProductID.ToString()');"><i class="btn-xs fa fa-trash-o padding0"></i></a>
+                                </td>
+                            </tr>
                                 }
                             }
 
