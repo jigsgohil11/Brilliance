@@ -3,3 +3,7 @@
 ################################################################################
 
 /.vs
+/Brilliance/obj/Release/Package/PackageTmp
+/Brilliance/obj/Release/TempPE
+/Brilliance/obj/Release/TransformWebConfig
+/Brilliance/Properties/PublishProfiles
