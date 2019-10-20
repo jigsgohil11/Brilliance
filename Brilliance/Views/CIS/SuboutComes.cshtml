@@ -246,7 +246,7 @@
                         BindGrid();
                         HideLoader();
                         $('#exampleModalLong').modal('hide');
-                        $(this).find('form').trigger('reset');
+                        window.location.reload();
                     },
                     failure: function (ex) {
                         BindGrid();
@@ -384,7 +384,7 @@
                 columns: [
                     {
                         title: "Code",
-                        field: "ClientCode",
+                        field: "Code",
                         
                         width: "10%"
                     },

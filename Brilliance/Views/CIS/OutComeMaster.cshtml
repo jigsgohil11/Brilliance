@@ -413,6 +413,7 @@
                         debugger;
                         $('#exampleModalLong').modal('hide');
                         SetMessageForPageLoad(data.IsSuccess, "OutcomeSaved");
+                        window.location.reload()
                     },
                     failure: function (ex) {
                         BindGrid();

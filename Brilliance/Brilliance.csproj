@@ -148,8 +148,13 @@
     <Compile Include="Controllers\CISController.cs" />
     <Compile Include="Controllers\CompanyController.cs" />
     <Compile Include="Controllers\CRTController.cs" />
+    <Compile Include="Controllers\DashboardController.cs" />
+    <Compile Include="Controllers\DivisionController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\OrganizationController.cs" />
+    <Compile Include="Controllers\ProductController.cs" />
+    <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -171,9 +176,17 @@
     <Compile Include="Infrastructure\DataProvider\ClientDataProvider.cs" />
     <Compile Include="Infrastructure\DataProvider\CompanyDataProvider.cs" />
     <Compile Include="Infrastructure\DataProvider\ConductDataprovider.cs" />
+    <Compile Include="Infrastructure\DataProvider\DivisionDataProvider.cs" />
     <Compile Include="Infrastructure\DataProvider\IClientDataProvider.cs" />
     <Compile Include="Infrastructure\DataProvider\ICompanyDataProvider.cs" />
     <Compile Include="Infrastructure\DataProvider\IConductIS.cs" />
+    <Compile Include="Infrastructure\DataProvider\IDivisionDataProvider.cs" />
+    <Compile Include="Infrastructure\DataProvider\ILoginDataProvider.cs" />
+    <Compile Include="Infrastructure\DataProvider\IProductDataProvider.cs" />
+    <Compile Include="Infrastructure\DataProvider\IUserDataProvider.cs" />
+    <Compile Include="Infrastructure\DataProvider\LoginDataProvider.cs" />
+    <Compile Include="Infrastructure\DataProvider\ProductDataProvider.cs" />
+    <Compile Include="Infrastructure\DataProvider\UserDataProvider.cs" />
     <Compile Include="Infrastructure\GridReader.cs" />
     <Compile Include="Infrastructure\JsonStringResult.cs" />
     <Compile Include="Infrastructure\PetaPoco.cs" />
@@ -184,11 +197,17 @@
     <Compile Include="Models\CommonLogic.cs" />
     <Compile Include="Models\DropDownItem.cs" />
     <Compile Include="Models\Entity\ActionLog.cs" />
+    <Compile Include="Models\Entity\ChangePassword.cs" />
     <Compile Include="Models\Entity\Client.cs" />
     <Compile Include="Models\Entity\Company.cs" />
     <Compile Include="Models\Entity\ConductMaster.cs" />
     <Compile Include="Models\Entity\ConductStatus.cs" />
+    <Compile Include="Models\Entity\Division.cs" />
+    <Compile Include="Models\Entity\Login.cs" />
     <Compile Include="Models\Entity\LoginLog.cs" />
+    <Compile Include="Models\Entity\LoginUser.cs" />
+    <Compile Include="Models\Entity\Product.cs" />
+    <Compile Include="Models\Entity\Role.cs" />
     <Compile Include="Models\Entity\Users.cs" />
     <Compile Include="Models\LinkResponse.cs" />
     <Compile Include="Models\SearchValueData.cs" />
@@ -197,7 +216,12 @@
     <Compile Include="Models\ViewModel\ClientViewModel.cs" />
     <Compile Include="Models\ViewModel\CompanyViewModel.cs" />
     <Compile Include="Models\ViewModel\ConductDataViewModel.cs" />
+    <Compile Include="Models\ViewModel\DivisionViewModel.cs" />
+    <Compile Include="Models\ViewModel\ProductViewModel.cs" />
+    <Compile Include="Models\ViewModel\RoleViewModel.cs" />
+    <Compile Include="Models\ViewModel\UserLoginDetails.cs" />
     <Compile Include="Models\ViewModel\UsersModel.cs" />
+    <Compile Include="Models\ViewModel\UserViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Resource\Resource.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -9835,6 +9859,13 @@
     <Content Include="Views\CIS\Index.cshtml" />
     <Content Include="Views\CIS\OutComeMaster.cshtml" />
     <Content Include="Views\CIS\SuboutComes.cshtml" />
+    <Content Include="Views\Dashboard\Dashboard.cshtml" />
+    <Content Include="Views\Division\Division.cshtml" />
+    <Content Include="Views\Division\DivisionList.cshtml" />
+    <Content Include="Views\Login\Login.cshtml" />
+    <Content Include="Views\Product\ProductList.cshtml" />
+    <Content Include="Views\User\Role.cshtml" />
+    <Content Include="Views\User\RoleList.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
