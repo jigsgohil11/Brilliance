@@ -162,7 +162,7 @@ namespace Brilliance.Models.Entity
     public class TCFQuestionViewmodel
     {
         public Guid Id { get; set; }
-        public string ClientCode { get; set; }
+        public string Code { get; set; }
         public string GroupName { get; set; }
         public string Description { get; set; }
     }
