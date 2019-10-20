@@ -176,9 +176,11 @@
     <Compile Include="Infrastructure\DataProvider\BaseDataProvider.cs" />
     <Compile Include="Infrastructure\DataProvider\ClientDataProvider.cs" />
     <Compile Include="Infrastructure\DataProvider\CompanyDataProvider.cs" />
+    <Compile Include="Infrastructure\DataProvider\ConductDataprovider.cs" />
     <Compile Include="Infrastructure\DataProvider\DivisionDataProvider.cs" />
     <Compile Include="Infrastructure\DataProvider\IClientDataProvider.cs" />
     <Compile Include="Infrastructure\DataProvider\ICompanyDataProvider.cs" />
+    <Compile Include="Infrastructure\DataProvider\IConductIS.cs" />
     <Compile Include="Infrastructure\DataProvider\IDivisionDataProvider.cs" />
     <Compile Include="Infrastructure\DataProvider\ILoginDataProvider.cs" />
     <Compile Include="Infrastructure\DataProvider\IProductDataProvider.cs" />
