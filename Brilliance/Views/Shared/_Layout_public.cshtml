@@ -42,7 +42,7 @@ License: You must have a valid license purchased only from themeforest(the above
     <!-- END THEME GLOBAL STYLES -->
     <!-- BEGIN PAGE LEVEL STYLES -->
     <link href="~/assets/pages/css/login-5.min.css" rel="stylesheet" type="text/css" />
-    
+
     @*<link href="~/assets/global/css/OMSCustom.css" rel="stylesheet" />*@
     <!-- END PAGE LEVEL STYLES -->
     <!-- BEGIN THEME LAYOUT STYLES -->
@@ -66,7 +66,7 @@ License: You must have a valid license purchased only from themeforest(the above
                 <div class="page-logo">
                     <a href="index.html">
                         @*<img src="../assets/layouts/layout/img/logo.png" alt="logo" class="logo-default" />*@
-                        <img src="~/assets/global/img/brilliance-logo-small.png" alt="logo" class="logo-default" />
+                        <img src="~/assets/global/img/brilliance-logo-small.png" alt="logo" class="logo-default" style="height:50px !important" />
                     </a>
                     <div class="menu-toggler sidebar-toggler">
                         <span></span>
@@ -194,7 +194,6 @@ License: You must have a valid license purchased only from themeforest(the above
                             </ul>
                         </li>
                         <!-- END NOTIFICATION DROPDOWN -->
-                        
                         <!-- BEGIN USER LOGIN DROPDOWN -->
                         <!-- DOC: Apply "dropdown-dark" class after below "dropdown-extended" to change the dropdown styte -->
                         <li class="dropdown dropdown-user">
@@ -209,12 +208,22 @@ License: You must have a valid license purchased only from themeforest(the above
                                         <i class="icon-user"></i> My Profile
                                     </a>
                                 </li>
-                              
+                                @*<li>
+                                        <a href="/Setup/User/ChangeProfilePassword">
+                                            <i class="icon-user"></i> Change Password
+                                        </a>
+                                    </li>*@
                                 <li>
-                                    <a href="page_user_login_1.html">
+                                    <a href="/Login/Logout">
                                         <i class="icon-key"></i> Log Out
                                     </a>
                                 </li>
+
+                                @*<li>
+                                        <a href="page_user_login_1.html">
+                                            <i class="icon-key"></i> Log Out
+                                        </a>
+                                    </li>*@
                             </ul>
                         </li>
                         <!-- END USER LOGIN DROPDOWN -->
@@ -239,31 +248,30 @@ License: You must have a valid license purchased only from themeforest(the above
                                 <span></span>
                             </div>
                         </li>
-                       
+
                         <li class="nav-item start">
-                            <a href="javascript:;">
+                            <a href="/Dashboard/Dashboard">
                                 <i class="icon-home"></i>
                                 <span class="title">Dashboard</span>
                                 <span class="selected"></span>
                             </a>
                             @*<ul class="sub-menu">
-                                <li class="nav-item start ">
-                                    <a href="index.html" class="nav-link ">
-                                        <i class="icon-bar-chart"></i>
-                                        <span class="title">Dashboard 1</span>
-                                    </a>
-                                </li>
-                            </ul>*@
+                                    <li class="nav-item start ">
+                                        <a href="index.html" class="nav-link ">
+                                            <i class="icon-bar-chart"></i>
+                                            <span class="title">Dashboard 1</span>
+                                        </a>
+                                    </li>
+                                </ul>*@
                         </li>
-                       
+
                         @*<li class="heading">
-                            <h3 class="uppercase">Features</h3>
-                        </li>*@
+                                <h3 class="uppercase">Features</h3>
+                            </li>*@
                         <li class="nav-item start">
-                            <a href="avascript:;" class="nav-link nav-toggle">
+                            <a href="javascript:;" class="nav-link nav-toggle">
                                 <i class="icon-settings"></i>
                                 <span class="title">Complaints</span>
-                                @*<span class="selected"></span>*@
                                 <span class="arrow"></span>
                             </a>
                             <ul class="sub-menu">
@@ -272,8 +280,8 @@ License: You must have a valid license purchased only from themeforest(the above
                                         <span class="title">
                                             Complaints Reporting Tool
                                         </span>
-                                        
-                                    </a>@*<span class="selected"></span>*@
+
+                                    </a>
                                 </li>
                             </ul>
                         </li>
@@ -296,7 +304,7 @@ License: You must have a valid license purchased only from themeforest(the above
                                 <li class="nav-item start">
                                     <a href="/CIS/SuboutComes" class="nav-link ">
                                         <span class="title">
-                                           Sub Outcome Master
+                                            Outcome Master
                                         </span>
 
                                     </a>@*<span class="selected"></span>*@
@@ -310,7 +318,7 @@ License: You must have a valid license purchased only from themeforest(the above
                                     </a>@*<span class="selected"></span>*@
                                 </li>
                             </ul>
-                           
+
                         </li>
                         <li class="nav-item start">
                             <a href="javascript:;" class="nav-link nav-toggle">
@@ -321,9 +329,16 @@ License: You must have a valid license purchased only from themeforest(the above
                             </a>
                             <ul class="sub-menu">
                                 <li class="nav-item start">
-                                    <a href="/CRT/CRTList" class="nav-link ">
+                                    <a href="/User/RoleList" class="nav-link ">
                                         <span class="title">
-                                            User Management
+                                            Role
+                                        </span>
+                                    </a>
+                                </li>
+                                <li class="nav-item start">
+                                    <a href="/User/UserList" class="nav-link ">
+                                        <span class="title">
+                                            USer Management
                                         </span>
                                     </a>
                                 </li>
@@ -341,6 +356,20 @@ License: You must have a valid license purchased only from themeforest(the above
                                         </span>
                                     </a>
                                 </li>
+                                <li class="nav-item start">
+                                    <a href="/Division/DivisionList" class="nav-link ">
+                                        <span class="title">
+                                            Division
+                                        </span>
+                                    </a>
+                                </li>
+                                <li class="nav-item start">
+                                    <a href="/Product/ProductList" class="nav-link ">
+                                        <span class="title">
+                                            Product
+                                        </span>
+                                    </a>
+                                </li>
                             </ul>
                         </li>
 
@@ -353,26 +382,20 @@ License: You must have a valid license purchased only from themeforest(the above
             </div>
             <!-- END SIDEBAR -->
             <!-- BEGIN CONTENT -->
-            <div id="message" style="width: 12%;left: 450.5px;top: 14px;z-index: 10003;">
-                <div id="dialog">
-                </div>
-                <span id="undo" style="display:none" class="k-button hide-on-narrow"></span>
-            </div>
             <div class="page-content-wrapper">
-               
                 <!-- BEGIN CONTENT BODY -->
                 @*<div class="page-content">*@
 
-                    @RenderBody()
+                @RenderBody()
 
-                    <!-- END CONTENT BODY -->
+                <!-- END CONTENT BODY -->
                 @*</div>*@
-                </div>
+            </div>
             <!-- END CONTENT -->
         </div>
-      
+
         <!-- END CONTAINER -->
-     
+
     </div>
     <div class="page-footer">
         <div class="page-footer-inner">
@@ -415,7 +438,7 @@ License: You must have a valid license purchased only from themeforest(the above
 
     @System.Web.Optimization.Scripts.Render("~/bundles/jqueryval")
 
-    <script src="~/assets/global/scripts/OMSCommon.js"></script>  
+    <script src="~/assets/global/scripts/OMSCommon.js"></script>
     <script>
         $(document).ready(function () {
             $('#clickmewow').click(function () {
@@ -424,19 +447,19 @@ License: You must have a valid license purchased only from themeforest(the above
         })
     </script>
 
-  
+
     <script>
-         var url = window.location.href;
-         var LastChar = url[url.length - 1];
-         if (LastChar == "/") {
-             url = url.slice(0, -1);
-         }
-         $(".page-sidebar-menu a").each(function () {
-             if (url == (this.href)) {
-                 $(this).closest("li").addClass("active");
-                 $(this).closest("li").parent().parent().addClass("active");
-             }
-         });
+        var url = window.location.href;
+        var LastChar = url[url.length - 1];
+        if (LastChar == "/") {
+            url = url.slice(0, -1);
+        }
+        $(".page-sidebar-menu a").each(function () {
+            if (url == (this.href)) {
+                $(this).closest("li").addClass("active");
+                $(this).closest("li").parent().parent().addClass("active");
+            }
+        });
     </script>
     @RenderSection("scripts", required: false)
 </body>

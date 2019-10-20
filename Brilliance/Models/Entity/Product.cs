@@ -17,20 +17,25 @@ namespace Brilliance.Models.Entity
         [Required(ErrorMessage = "Code is required.")]
         public string Code { get; set; }
         [MaxLength(167)]
-        [Required(ErrorMessage = "Organization name is required.")]
+        [Required(ErrorMessage = "Product name is required.")]
         public string Name { get; set; }
         public string Description { get; set; }
         public string Image { get; set; }
+        [Required(ErrorMessage = "Company is required.")]
         public Guid? CompanyID { get; set; }
+        [Required(ErrorMessage = "Organization is required.")]
         public Guid? ClientID { get; set; }
         public bool? IsActive { get; set; }
         public bool? IsBlock { get; set; }
-        public byte[] UpdateLog { get; set; }
-        public long SeqNo { get; set; }
+       
         public DateTime? CreatedOn { get; set; }
         public DateTime? UpdatedOn { get; set; }
         public Guid? CreatedBy { get; set; }
         public Guid? UpdatedBy { get; set; }
+        [ResultColumn]
+        public string Company { get; set; }
+        [ResultColumn]
+        public string Organization { get; set; }
 
         [Ignore]
         public string EncryptedProductID { get { return ProductID != Guid.Empty ? Crypto.Encrypt(Convert.ToString(ProductID)) : null; } }
