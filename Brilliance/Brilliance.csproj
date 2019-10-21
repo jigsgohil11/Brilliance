@@ -6808,6 +6808,8 @@
     <Content Include="Views\CIS\Index.cshtml" />
     <Content Include="Views\CIS\OutComeMaster.cshtml" />
     <Content Include="Views\CIS\SuboutComes.cshtml" />
+    <Content Include="Views\User\UserList.cshtml" />
+    <Content Include="Views\User\User.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
