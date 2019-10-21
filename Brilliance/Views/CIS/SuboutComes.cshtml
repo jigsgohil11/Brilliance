@@ -108,7 +108,7 @@
                                     </div>
                                     <div class="col-md-6">
                                         <label> Code</label>
-                                        @Html.TextBoxFor(x => x.Code, new { @class = "form-control", @style = "width:70%;" })
+                                        @Html.TextBoxFor(x => x.Code, new { @class = "form-control", @style = "width:70%;", @readonly = "readonly" })
                                         @Html.ValidationMessageFor(x => x.Code)
                                         @Html.HiddenFor(x => x.Id)
                                         @Html.HiddenFor(x => x.IsEdit)
@@ -245,8 +245,9 @@
                     success: function (data) {
                         BindGrid();
                         HideLoader();
+                      
                         $('#exampleModalLong').modal('hide');
-                        window.location.reload();
+                        $("#frmsuboutcome").trigger("reset");
                     },
                     failure: function (ex) {
                         BindGrid();
@@ -361,25 +362,17 @@
                         }
                     },
 
-                    groupable: false,
-                    sortable: false,
+                   
                     pageSize: 10,
                     serverPaging: false,
-                    serverSorting: false
+                    
                 },
 
-                sortable: false,
+                
                 pageable: true,
                 scrollable: true,
                 /// detailInit: detailInit,
-                dataBound: function () {
-                    var grid = this;
-                    $(".k-grouping-row").each(function (e) {
-                        grid.collapseGroup(this);
-                    });
-                    ////this.expandRow(this.tbody.find("tr.k-master-row").last());
-                },
-
+                
 
                 columns: [
                     {
@@ -481,5 +474,27 @@
             }
         })
     }
+
     </script>
+    <script>
+        $("#TCFQuestionGroupId").on('change', function () {
+            var currentval = $("#TCFQuestionGroupId").val();
+          
+            var url = '@Url.Action("GetSuboutcomeCode", "CIS")';
+            $.ajax({
+                url: url,
+                method: 'post',
+                data: { Id: currentval },
+                success: function (data) {
+                    $("#Code").val(data);
+                }
+            })
+
+        });
+</script>
+
+
+
+
+    
 }

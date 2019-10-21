@@ -124,13 +124,18 @@ namespace Brilliance.Models.Entity
     }
     public class TCFForm
     {
-        public int Id { get; set; }
-        public int ClusterId { get; set; }
-        public int TCFPeriodId { get; set; }
-        public int TCFQuestionId { get; set; }
+        public TCFForm()
+        {
+            TCFNotes = new List<TCFNotes>();
+            TCFTask= new List<TCFTask>();
+        }
+        public Guid Id { get; set; }
+        public Guid ClusterId { get; set; }
+        public Guid TCFPeriodId { get; set; }
+        public Guid TCFQuestionId { get; set; }
 
-        public int TCFFormRatingId { get; set; }
-        public int UserId { get; set; }
+        public Guid TCFFormRatingId { get; set; }
+        public Guid UserId { get; set; }
         public DateTime DueDate { get; set; }
 
         public string ReasonNotApplicable { get; set; }
@@ -157,14 +162,35 @@ namespace Brilliance.Models.Entity
         public int IsDeleted { get; set; }
 
         public int? TempId { get; set; }
-    }
 
-    public class TCFQuestionViewmodel
+        public virtual IList<TCFNotes> TCFNotes { get; set; }
+        public virtual IList<TCFTask> TCFTask { get; set; }
+
+    }
+    public class TCFNotes
     {
         public Guid Id { get; set; }
+        public Guid TcfId { get; set; }
+        public Guid AddedById { get; set; }
+        public DateTime AddedAt { get; set; }
+        public string Note { get; set; }
+    }
+    public class TCFTask
+    {
+        public Guid Id { get; set; }
+        public Guid TcfId { get; set; }
+        public Guid AddedById { get; set; }
+
+        public Guid AssignUserId { get; set; }
+        public DateTime AddedAt { get; set; }
+        public string Task { get; set; }
+    }
+    public class TCFQuestionViewmodel
+    {
         public string Code { get; set; }
-        public string GroupName { get; set; }
         public string Description { get; set; }
+        public string GroupName { get; set; }
+        public Guid Id { get; set; }
     }
 
 }

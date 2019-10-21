@@ -465,5 +465,52 @@ namespace Brilliance.Infrastructure.DataProvider
             }
             return response;
         }
+
+
+        public int MasterCont()
+        {
+            int count = 0;
+
+            try
+            {
+                var _count = GetScalar("_PrcMasterCont");
+                if (_count != null)
+                {
+                    count = Convert.ToInt32(_count);
+                }
+
+            }
+            catch (Exception ex)
+            {
+                count = 0;
+            }
+            return count;
+        }
+
+
+        public string GetSuboutcomeCode(Guid Id)
+        {
+            string code = string.Empty;
+
+            try
+            {
+                var searchList = new List<SearchValueData>()
+                {
+                        new SearchValueData { Name = "Code" ,Value = Convert.ToString(Id)}
+                };
+                var _count = GetScalar("GetSuboutcomeCode", searchList);
+                if (_count != null)
+                {
+                    code = _count.ToString();
+                }
+
+            }
+            catch (Exception ex)
+            {
+                code = ex.Message;
+            }
+            return code;
+        }
+
     }
 }
