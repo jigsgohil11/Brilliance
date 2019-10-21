@@ -1,0 +1,83 @@
+﻿@model Brilliance.Models.Entity.TCFForm
+@using Brilliance.Infrastructure.DataProvider;
+@{
+   
+    ConductDataprovider _icisDataProvider = new ConductDataprovider();
+}
+
+
+
+
+<table class="table table-bordered table-condensed main-multi-field-wrapper">
+    <tr>
+        <th colspan="4">  Who is responsible for getting and / or keeping this in place or in practice?</th>
+        
+    </tr>
+<tbody class="sub-multi-fields">
+
+        @if (Model.TCFTask.Count > 0)
+            {
+                foreach (var item in Model.TCFTask)
+                {
+                    var index = Model.TCFTask.IndexOf(item);
+                <tr class="multi-field" id="@index">
+                    <td width="1%">@(index + 1)</td>
+                    
+                    <td width="40%">
+                        @Html.DropDownListFor(x => x.TCFTask[index].AssignUserId, _icisDataProvider.BindOutcomeRating(), "...", new { @class = "form-control", @style = "width:100%;" })
+
+
+
+                    </td>
+                    <td width="58%">
+                        @Html.TextBoxFor(x => x.TCFTask[index].Task, new { @class = "form-control" , @placeholder= "Assign Task to user..." })
+
+                    </td>
+                    <td width="1%">
+                        <button type="button" class="remove-field btn btn-xs btn-danger"><i class="fa fa-remove"></i></button>
+                    </td>
+                </tr>
+                
+            }
+
+        }
+
+
+        else
+        {
+            <tr class="multi-field" id="1">
+                <td width="1%">1</td>
+                
+                <td width="40%">
+                    @Html.DropDownListFor(x => x.TCFTask[0].AssignUserId, _icisDataProvider.BindOutcomeRating(), "...", new { @class = "form-control", @style = "width:100%;" , @required= "required"})
+
+
+                </td>
+                <td width="58%">
+
+
+                    <input type="text" name="TCFTask[0].Task" id="TCFTask[0].Task" class="form-control" required placeholder= "Assign Task to user...">
+
+                </td>
+
+                <td width="1%">
+                    <button type="button" class="remove-field btn btn-xs btn-danger"><i class="fa fa-remove"></i></button>
+                </td>
+            </tr>
+        }
+
+
+    </tbody>
+    <tbody>
+
+        <tr>
+            <th colspan="14">
+                <button type="button" class="add-field btn btn-xs btn-primary"><i class="fa fa-plus"></i>&nbsp;Add Row</button>
+            </th>
+        </tr>
+    </tbody>
+</table>
+
+
+
+
