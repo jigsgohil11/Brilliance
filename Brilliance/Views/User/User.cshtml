@@ -1,0 +1,98 @@
+﻿@model Brilliance.Models.ViewModel.UserViewModel
+@{
+    ViewBag.Title = "User";
+    Layout = "~/Views/Shared/_Layout_public.cshtml";
+}
+
+<link href="~/assets/global/plugins/bootstrap-datepicker/css/bootstrap-datepicker.min.css" rel="stylesheet" />
+
+<style>
+    .floatClass {
+        float: left;
+        margin-bottom: 10px;
+    }
+
+    .capright {
+        float: right;
+        display: inline-block;
+        font-size: 18px;
+        line-height: 18px;
+        padding: 5px 0;
+    }
+</style>
+
+<div class="page-content page-content-dashbrd-backgrnd">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="page-bar margin-bottom-10">
+                <div class="row">
+                    <div class="col-md-12 padding-out">
+                        <div class="portlet light padding-header margin-0 custom-padding-bar">
+                            <div class="portlet-title portlet-title-Project-custom">
+                                <div class="caption font-dark">
+                                    <i class="icon-settings font-dark"></i>
+                                    <span class="caption-subject bold uppercase">User</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row" style="margin-left:-25px;margin-right:-25px;margin-top:-5px;">
+                <div class="col-lg-12">
+                    <div class="portlet light">
+                        <div class="portlet-body form">
+                            <form action="/User/SaveUser" id="frmUser" data-ajax-success="SaveUserResponse(data);" data-ajax="true" data-ajax-method="Post" method="post">
+                                @Html.HiddenFor(m => m.User.UserID)
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Code</label>
+                                            @Html.TextBoxFor(m => m.User.FirstName, new { @class = "form-control m-input", @placeholder = "Enter User Code" })
+                                            @Html.ValidationMessageFor(m => m.User.FirstName)
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Name</label>
+                                            @Html.TextBoxFor(m => m.User.UserName, new { @class = "form-control m-input", @placeholder = "Enter User Name" })
+                                            @Html.ValidationMessageFor(m => m.User.UserName)
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label>Email Address</label>
+                                            @Html.TextAreaFor(m => m.User.EmailID, new { @class = "form-control m-input", @placeholder = "Enter Email Address", @rows = "4" })
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-actions">
+                                    <div class="col-lg-12  text-right">
+                                        <button type="button" onclick="location.href = '/User/UserList'" class="btn default">Cancel</button>
+                                        <button type="submit" class="btn btn-primary btnSubmit">Save</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section scripts{
+
+    <script>
+
+        function SaveUserResponse(response) {
+            if (response.IsSuccess) {
+                SetMessageForPageLoad(response.Message, "Usersaved");
+                window.location.href = "/User/UserList/";
+            } else {
+                ShowMessage(response.Message, "error");
+            }
+        }
+    </script>
+}
