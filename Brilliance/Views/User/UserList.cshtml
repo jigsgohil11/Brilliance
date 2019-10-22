@@ -1,4 +1,4 @@
-﻿@model Brilliance.Models.ViewModel.UsersListModel
+﻿@model Brilliance.Models.ViewModel.UserListModel
 @using Brilliance.Infrastructure
 @{
     ViewBag.Title = "UserList";
@@ -35,19 +35,19 @@
                     <table class="table table-bordered table-hover dt-responsive" width="100%" id="dt_user">
                         <thead>
                             <tr>
-                                <th class="all">UserName</th>
-                                <th class="min-tablet">Name</th>
+                                <th class="all">Name</th>
+                                <th class="min-tablet">Username</th>
                                 <th class="desktop">Email</th>
                                 <th class="all">Action</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @if (Model != null && Model.Users.Count > 0)
+                            @if (Model != null && Model.Userlist.Count > 0)
                             {
-                                foreach (var item in Model.Users)
+                                foreach (var item in Model.Userlist)
                                 {
                                     <tr>
-                                        <td style="background-color:white !important;">@item.UserName</td>
+                                        <td style="background-color:white !important;">@string.Format("{0} {1}", item.FirstName, item.LastName)</td>
                                         <td>@item.UserName</td>
                                         <td>@item.EmailID</td>
                                         <td>
@@ -77,7 +77,7 @@
                 <button type="button" class="btn dark btn-outline" data-dismiss="modal">Close</button>
                 <button type="button" class="btn green" id="DeleteButton" onclick="DeleteAnyEntity('/User/DeleteUser', 'DeleteButton', 'DeleteModal', 'Usersaved','dt_user','/User/UserList');">Yes</button>
             </div>
-        </div> 
+        </div>
         <!-- /.modal-content -->
     </div>
     <!-- /.modal-dialog -->
