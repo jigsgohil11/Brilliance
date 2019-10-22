@@ -207,6 +207,7 @@
     <Compile Include="Models\Entity\LoginUser.cs" />
     <Compile Include="Models\Entity\Product.cs" />
     <Compile Include="Models\Entity\Role.cs" />
+    <Compile Include="Models\Entity\User.cs" />
     <Compile Include="Models\Entity\Users.cs" />
     <Compile Include="Models\LinkResponse.cs" />
     <Compile Include="Models\SearchValueData.cs" />

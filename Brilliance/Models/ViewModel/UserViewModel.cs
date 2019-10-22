@@ -1,4 +1,5 @@
 ﻿using Brilliance.Models.Entity;
+using System.Collections.Generic;
 
 namespace Brilliance.Models.ViewModel
 {
@@ -6,8 +7,18 @@ namespace Brilliance.Models.ViewModel
     {
         public UserViewModel()
         {
-            Users = new Users();           
+            User = new User();           
         }
-        public Users Users { get; set; }
-    }    
+        public User User { get; set; }
+    }
+    public class UserListModel
+    {
+        public UserListModel()
+        {
+            Userlist = new List<User>();
+            Response = new ServiceResponse();
+        }
+        public List<User> Userlist { get; set; }
+        public ServiceResponse Response { get; set; }
+    }
 }

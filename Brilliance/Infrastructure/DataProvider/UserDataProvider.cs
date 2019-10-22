@@ -31,17 +31,17 @@ namespace Brilliance.Infrastructure.DataProvider
             }
             return response;
         }
-        public UsersListModel UserList()
+        public UserListModel UserList()
         {
-            var userListModel = new UsersListModel();
+            var userListModel = new UserListModel();
             try
             {
                 var searchList = new List<SearchValueData>();
 
-                List<Users> users = GetEntityList<Users>("GetUserList", searchList);//Constants.GetUserGroupList
-                if (users.Count > 0)
+                List<User> userlist = GetEntityList<User>("GetUserList", searchList);//Constants.GetUserGroupList
+                if (userlist.Count > 0)
                 {
-                    userListModel.Users = users;
+                    userListModel.Userlist = userlist;
                     userListModel.Response.IsSuccess = true;
                 }
                 else
