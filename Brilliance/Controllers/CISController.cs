@@ -28,6 +28,16 @@ namespace Brilliance.Controllers
 
             return View();
         }
+        public JsonResult GrupcntByEntity(int Id, string EntityId)
+        {
+            _icisDataProvider = new ConductDataprovider();
+           
+            Guid entityId = new Guid(EntityId);
+           
+            int response = _icisDataProvider.GrupcntByEntity(Id, entityId);
+            string cde = _icisDataProvider.GetGroupSubCode(response);
+            return Json(cde, JsonRequestBehavior.AllowGet);
+        }
         public JsonResult SaveOutcome(TCFQuestionGroup _TCFQuestionGroup)
         {
             _icisDataProvider = new ConductDataprovider();

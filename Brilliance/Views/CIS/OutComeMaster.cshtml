@@ -215,7 +215,7 @@
                             $(".drpmaster").hide();
                         }
                         else {
-                            $(".titleqgroup").hide();
+                           
                            
 
                             $("#msgcs").hide();
@@ -332,7 +332,7 @@
                         if(data.IsVisible==false)
                         {
                             $('input[name=IsVisible]').attr('checked', true);
-                            $(".titleqgroup").hide();
+                           
                            
                             $(".drpmaster").show();
                             $("#coderef").val(data.Code.toUpperCase());
@@ -482,10 +482,22 @@
 <script>
     $("#coderef").on('change', function () {
         var currentval = $("#coderef").val();
+        var EntityId = $("#HoldingEntityId").val();
         if(currentval>0)
         {
             $("#Code").val(currentval)
-
+            var url = '@Url.Action("GrupcntByEntity", "CIS")';
+            $.ajax({
+                url: url,
+                method: 'post',
+                data: { Id: currentval, EntityId: EntityId },
+                success: function (data) {
+                    $("#Code").val(currentval);
+                    
+                    var cde = currentval + data;
+                    $("#Title").val(cde);
+                }
+            })
         }
         else if(currentval==0)
         {
@@ -495,5 +507,6 @@
 
     })
 </script>
+
     }
 

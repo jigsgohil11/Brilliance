@@ -89,17 +89,7 @@
                            
                         </div>
                     </div>
-                    <br />
-                    
-                            
-                    <div class="row">
-                        <div class="form-group">
-                            <div class="col-md-2">
-                                <input type="button" value="Add Task" class="btn btn-default addtask" />
-                            </div>
-                           
-                        </div>
-                    </div>
+                   
                    
                     <br />
                             <div class="row" id="notapply">
@@ -119,6 +109,7 @@
                                         <div class="col-md-12">
                                             <label>Notes</label>
                                             <br />
+                                          
                                             @Html.TextAreaFor(x => x.ReasonPartially, new { @class = "form-control", @style = "width:100%;", @placeholder = "Type here what has been and/or needs to be done towards closing this gap. Note: This field is optional.  Whatever you insert here will be included in the email that automatically gets sent to the responsible person if that person is not yourself." })
 
                                         </div>
@@ -127,20 +118,7 @@
                                     
                                     
                                 </div>
-                                <br />
-                              
-                                <div class="row">
-                                    <div class="form-group">
-                                        <div class="col-md-2">
-                                            <input type="button" value="Add Note" class="btn btn-default addnote" />
-                                        </div>
-                                        <div class="col-md-10">
-                                            <div id="divadd" style="display:block;width: 100%;">
-                                                @Html.Partial("TCFNote")
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                                
                                     <div class="row">
                                         <div class="form-group">
                                             <div class="col-md-12">
@@ -153,15 +131,15 @@
                                     </div>
                                     <br />
                                 
-                                <div class="row">
+                                @*<div class="row">
                                     <div class="form-group">
                                         <div class="col-md-12" id="divtask">
                                             @Html.Partial("TCFTask")
                                         </div>
 
                                     </div>
-                                </div>
-                                    @*<div class="row">
+                                </div>*@
+                                    <div class="row">
                                         <div class="form-group">
                                             <div class="col-md-12">
                                                 <label>Who is responsible for getting and / or keeping this in place or in practice?</label>
@@ -171,7 +149,7 @@
 
                                             </div>
                                         </div>
-                                    </div>*@
+                                    </div>
                                 </div>
                             <br />
                             <div id="divfully">
@@ -196,6 +174,27 @@
                                         </div>
                                     </div>
                                 </div>
+                                <br />
+                                <div class="row">
+                                    <div class="form-group">
+                                        <span style="padding-left: 2%;font-weight:bold;">Notes:</span>&nbsp;<span>Optional add note</span> 
+                                        &nbsp;&nbsp;&nbsp;
+                                        <button type="button" class="btnaddnote"><i class="fa fa-plus"></i>&nbsp;Add Row</button>
+                                        <button type="button" class="btn-default addn" ><i class="fa fa-plus"></i>&nbsp;Add Row</button>
+                                    </div>
+                                </div>
+                                <br />
+
+                                <div class="row">
+                                    <div class="form-group">
+
+                                        <div class="col-md-12">
+                                            <div id="divadd" style="display:block;width: 100%;">
+                                                @Html.Partial("TCFNote")
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         <div class="modal-footer">
@@ -206,6 +205,146 @@
         </div>
     </div>
     
+
+    <div class="modal fade" id="submodal" tabindex="-1" role="dialog" aria-labelledby="submodal" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">Capture...</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="form-group">
+                            <div class="col-md-12">
+                                <label id="txtdesnum"></label>
+                                <br />
+                                <label id="txtdes" style="color: #BA1800;font-weight:bold;"></label>
+                            </div>
+
+                        </div>
+                    </div>
+                    
+                    <br />
+                    <div class="row">
+                        <div class="form-group">
+                            <div class="col-md-12">
+                                <label>Rate the extent to which this is in place or in practice</label>
+                                @Html.DropDownListFor(x => x.TCFFormRatingId, _icisDataProvider.BindOutcomeRating(), "...", new { @class = "form-control", @style = "width:47%;" })
+                            </div>
+
+                        </div>
+                    </div>
+
+
+                    <br />
+                    <div class="row" id="notapply">
+                        <div class="form-group">
+                            <div class="col-md-12">
+                                <label>Why do you say this is not applicable?</label>
+                                <br />
+                                @Html.TextAreaFor(x => x.ReasonNotApplicable, new { @class = "form-control", @style = "width:100%;", @placeholder = "Please carefully consider whether this is something that should be in place, albeit not yet, before you declare it not applicable." })
+
+                            </div>
+                        </div>
+                    </div>
+                    <br />
+                    <div id="notyet">
+                        <div class="row">
+                            <div class="form-group">
+                                <div class="col-md-12">
+                                    <label>Notes</label>
+                                    <br />
+
+                                    @Html.TextAreaFor(x => x.ReasonPartially, new { @class = "form-control", @style = "width:100%;", @placeholder = "Type here what has been and/or needs to be done towards closing this gap. Note: This field is optional.  Whatever you insert here will be included in the email that automatically gets sent to the responsible person if that person is not yourself." })
+
+                                </div>
+                            </div>
+                            <br />
+
+
+                        </div>
+
+                        <div class="row">
+                            <div class="form-group">
+                                <div class="col-md-12">
+                                    <label>Due date by when this will be in place or in practice</label>
+                                    <br />
+                                    @Html.TextBoxFor(x => x.DueDate, new { @class = "form-control", @style = "width:47%;" })
+
+                                </div>
+                            </div>
+                        </div>
+                        <br />
+
+                        
+                        <div class="row">
+                            <div class="form-group">
+                                <div class="col-md-12">
+                                    <label>Who is responsible for getting and / or keeping this in place or in practice?</label>
+                                    <br />
+                                    @Html.DropDownListFor(x => x.UserId, _icisDataProvider.BindOutcomeRating(), "...", new { @class = "form-control", @style = "width:47%;" })
+
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <br />
+                    <div id="divfully">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label>Why do you say this is fully in place or in practice?</label>
+                                    @Html.TextAreaFor(x => x.ReasonFully, new { @class = "form-control", @width = "100%" })
+                                </div>
+                            </div>
+
+                        </div>
+                        <br />
+                        <div class="row">
+                            <div class="form-group">
+                                <div class="col-md-12">
+                                    <label>Who is responsible for getting and / or keeping this in place or in practice?</label>
+                                    <br />
+                                    @Html.DropDownListFor(x => x.UserId, _icisDataProvider.BindOutcomeRating(), "...", new { @class = "form-control", @style = "width:47%;" })
+
+
+                                </div>
+                            </div>
+                        </div>
+                        <br />
+                        <div class="row">
+                            <div class="form-group">
+                                <span style="padding-left: 2%;font-weight:bold;">Notes:</span>&nbsp;<span>Optional add note</span>
+                                &nbsp;&nbsp;&nbsp;
+                                <button type="button" class="btnaddnote"><i class="fa fa-plus"></i>&nbsp;Add Row</button>
+                                <button type="button" class="btn-default addn"><i class="fa fa-plus"></i>&nbsp;Add Row</button>
+                            </div>
+                        </div>
+                        <br />
+
+                        <div class="row">
+                            <div class="form-group">
+
+                                <div class="col-md-12">
+                                    <div id="divadd" style="display:block;width: 100%;">
+                                        @Html.Partial("TCFNote")
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-brilliance">Save and Close</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
   
     <div class="row">
         <div id="grid"></div>
@@ -286,16 +425,18 @@
 
                             'title': 'Edit',
                             'field': 'Edit',
-                            template: "<a href='\\\#' class='name-link btn btn-default' value='#= Id #'>#= 'Edit' #</a>"
+                            template: "<a href='\\\#' class='sub-link btn btn-default' value='#= Id #'>#= 'Edit' #</a>"
                         },
                     ]
                   
-                }).on("click", "a.name-link", function() {
+                }).on("click", "a.sub-link", function () {
                     var tr = $(this).closest("tr");
                     
                     var dataItem = $("#grid").data("kendoGrid").dataItem(tr);
-         
+                    $('#submodal').modal('show');
                     
+                    $('#txtdesnum').html(dataItem.Qgroup)
+                    $('#txtdes').html(dataItem.Qdesc)
             });
             });
             @*function detailInit(e) {
@@ -368,10 +509,10 @@
                 $("#notapply").hide();
                 $("#notyet").hide();
                 $("#divfully").hide();
-                $("#DueDate").kendoDatePicker();
+                //$("#DueDate").kendoDatePicker();
                 $("#divadd").hide();
                 $("#divtask").hide();
-                
+               
                 InitCloning();
             })
         </script>
@@ -408,12 +549,16 @@
         </script>
 
         <script>
-            $(".addnote").on('click', function () {
+            $(".btnaddnote").on('click', function () {
                 $("#divadd").show();
 
             })
             $(".addtask").on('click', function () {
                 $("#divtask").show();
+
+            })
+            $(".addn").on('click', function () {
+                $(".add-field").click();
 
             })
             

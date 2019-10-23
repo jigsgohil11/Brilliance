@@ -13,7 +13,7 @@ function InitCloning() {
             $(".add-field", $this).click(function (e) {
                 
                
-
+                debugger;
                 var $len = $('.multi-field', $wrapper).length;
                 var $clone = $('.multi-field:first-child', $wrapper);
                
@@ -24,6 +24,7 @@ function InitCloning() {
                 }
                 $clone.clone().appendTo($wrapper).find('input,select').each(function () {
                     /// $len = $len + 1;
+                    debugger;
                     if ($(this).hasClass("clr")) {
 
                         $(this).attr('id', $(this).attr('id'), $len);
@@ -33,17 +34,12 @@ function InitCloning() {
                         var ctrl = tt.attr("id", newctrlid);
                         debugger;
                         $(this).attr('name', $(this).attr('name').replace(/\d+/g, $len));
-                        if ($(this).hasClass("qty")) {
+                        if ($(this).hasClass("txtnote")) {
                             debugger;
-                            $(ctrl).val('');
+                            $(ctrl).val('Note ID:0' + $len + 1);
                         }
-                        if ($(this).hasClass("Rate")) {
-                            debugger;
-                            $(ctrl).val('');
-                        }
-                        if($(this).hasClass("deliverquantity")){
-                              $(ctrl).val('');
-                          }
+                       
+                        
                     }
                     else {
                         $(this).attr('id', $(this).attr('id'), $len);
@@ -52,17 +48,12 @@ function InitCloning() {
                         var newctrlid = ctrl + '_' + $len;
                         var ctrl = tt.attr("id", newctrlid);
                         $(this).attr('name', $(this).attr('name').replace(/\d+/g, $len));
-                        if ($(this).hasClass("qty")) {
+                        if ($(this).hasClass("txtnote")) {
                             debugger;
-                            $(ctrl).val('');
+                            var sr=parseInt($len)+1
+                            $(ctrl).val('Note ID:0' +sr);
                         }
-                        if ($(this).hasClass("Rate")) {
-                            debugger;
-                            $(ctrl).val('');
-                        }
-                         if($(this).hasClass("deliverquantity")){
-                              $(ctrl).val('');
-                          }
+                       
 
                     }
 

@@ -114,7 +114,7 @@ namespace Brilliance.Models.Entity
 
     public class TCFQuestionGroupViewmodel
     {
-        public int Id { get; set; }
+        public Guid Id { get; set; }
         public string Code { get; set; }
         public string Title { get; set; }
         public string Qgroup { get; set; }
@@ -174,6 +174,8 @@ namespace Brilliance.Models.Entity
         public Guid AddedById { get; set; }
         public DateTime AddedAt { get; set; }
         public string Note { get; set; }
+        public string NoteId { get; set; }
+        public string Author { get; set; }
     }
     public class TCFTask
     {
