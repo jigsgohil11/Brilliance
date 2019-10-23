@@ -4,6 +4,8 @@
     ViewBag.Title = "OutComeMaster";
     Layout = "~/Views/Shared/_Layout_public.cshtml";
     ConductDataprovider _icisDataProvider = new ConductDataprovider();
+    string _code = _icisDataProvider.MasterCont().ToString();
+    ViewBag.cd = _code;
 }
 <link href="~/Content/kendoStyles.css" rel="stylesheet" />
 <link rel="stylesheet" href="https://app.brillianceib.com/bundles/knockout?v=mKy6cxTu1mioyNO6m4RTtIqEAZBgJ9YqLsg1ixYmtsM1" />
@@ -83,7 +85,7 @@
                             <div class="form-group">
                                 <div class="col-md-12">
                                     <label>Code</label>
-                                    @Html.TextBoxFor(x => x.Code, new { @class = "form-control", @style = "width:47%;" })
+                                    @Html.TextBoxFor(x => x.Code, new { @class = "form-control", @style = "width:47%;", @readonly = "readonly", @Value = _icisDataProvider.MasterCont().ToString() })
                                     @Html.HiddenFor(x => x.GroupId)
                                     @Html.HiddenFor(x => x.IsEdit)
                                 </div>
@@ -213,7 +215,7 @@
                             $(".drpmaster").hide();
                         }
                         else {
-                            $(".titleqgroup").hide();
+                           
                            
 
                             $("#msgcs").hide();
@@ -319,6 +321,7 @@
                     success:function(data)
                     {
                         HideLoader();
+                        $("#frmoutcome").trigger("reset");
                         $('#exampleModalLong').modal('show');
                         $("#Code").val(data.Code);
                         $("#IsEdit").val(true);
@@ -329,7 +332,7 @@
                         if(data.IsVisible==false)
                         {
                             $('input[name=IsVisible]').attr('checked', true);
-                            $(".titleqgroup").hide();
+                           
                            
                             $(".drpmaster").show();
                             $("#coderef").val(data.Code.toUpperCase());
@@ -411,9 +414,19 @@
                         BindGrid();
                         HideLoader();
                         debugger;
+                       
                         $('#exampleModalLong').modal('hide');
+                        $("#frmoutcome").trigger("reset");
                         SetMessageForPageLoad(data.IsSuccess, "OutcomeSaved");
-                        window.location.reload()
+                        
+                        //$("#GroupId").val(''),
+                        //$("#HoldingEntityId").val(''),
+                        //$("#Code").val(''),
+                        //$("#IsVisible").prop('unchecked'),
+                        //$("#Title").val(''),
+                        //$("#Description").val(''),
+                        //$("#coderef").val(''),
+                        //$("#IsEdit").val('')
                     },
                     failure: function (ex) {
                         BindGrid();
@@ -442,9 +455,18 @@
                                 message: "Please select Entity..."
                             }
                         }
-                    }
-                },
-                fields: {
+                    },
+                
+                    Code: {
+                        message: "Please Enter Code...",
+                        validators: {
+                            notEmpty: {
+                                message: "Please Enter Code..."
+                            }
+                        }
+                    },
+               
+                
                     Description: {
                         message: "Please provide outcome description..",
                         validators: {
@@ -452,11 +474,39 @@
                                 message: "Please prvide outcome description.."
                             }
                         }
-                    },
+                    }
                 }
             });
         }
     </script>
+<script>
+    $("#coderef").on('change', function () {
+        var currentval = $("#coderef").val();
+        var EntityId = $("#HoldingEntityId").val();
+        if(currentval>0)
+        {
+            $("#Code").val(currentval)
+            var url = '@Url.Action("GrupcntByEntity", "CIS")';
+            $.ajax({
+                url: url,
+                method: 'post',
+                data: { Id: currentval, EntityId: EntityId },
+                success: function (data) {
+                    $("#Code").val(currentval);
+                    
+                    var cde = currentval + data;
+                    $("#Title").val(cde);
+                }
+            })
+        }
+        else if(currentval==0)
+        {
+            $("#Code").val(@Html.Raw(Json.Encode(ViewBag.cd)))
+        }
+
+
+    })
+</script>
 
     }
 

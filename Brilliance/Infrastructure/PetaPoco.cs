@@ -1096,7 +1096,7 @@ namespace PetaPoco
         }
 
         /// <summary>
-        /// Performs an SQL Insert
+        /// Performs an SQL 11
         /// </summary>
         /// <param name="tableName">The name of the table to insert into</param>
         /// <param name="primaryKeyName">The name of the primary key column of the table</param>

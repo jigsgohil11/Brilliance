@@ -20,6 +20,10 @@ namespace Brilliance.Infrastructure.DataProvider
         List<SelectListItem> GetGroupcode();
         ServiceResponse SaveOutcome(TCFQuestionGroup outcome);
         int GroupCount();
+        int MasterCont();
+        string GetSuboutcomeCode(Guid Id);
+        string GetGroupSubCode(int count);
+        int GrupcntByEntity(int Id, Guid entityId);
         ConductDataViewModel TCFOutcomeList();
         TCFQuestionGroup GetoutcomeById(Guid GroupId);
         List<SelectListItem> GetQuiztype();

@@ -203,6 +203,7 @@
     <Compile Include="Infrastructure\SortAttribute.cs" />
     <Compile Include="Infrastructure\StoreProcedureAttribute.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\CommonLogic.cs" />
     <Compile Include="Models\DropDownItem.cs" />
     <Compile Include="Models\Entity\ActionLog.cs" />
     <Compile Include="Models\Entity\ChangePassword.cs" />
@@ -210,6 +211,7 @@
     <Compile Include="Models\Entity\Company.cs" />
     <Compile Include="Models\Entity\Complaint.cs" />
     <Compile Include="Models\Entity\ConductMaster.cs" />
+    <Compile Include="Models\Entity\ConductStatus.cs" />
     <Compile Include="Models\Entity\CRTNotes.cs" />
     <Compile Include="Models\Entity\Division.cs" />
     <Compile Include="Models\Entity\Login.cs" />
@@ -217,6 +219,7 @@
     <Compile Include="Models\Entity\LoginUser.cs" />
     <Compile Include="Models\Entity\Product.cs" />
     <Compile Include="Models\Entity\Role.cs" />
+    <Compile Include="Models\Entity\User.cs" />
     <Compile Include="Models\Entity\Users.cs" />
     <Compile Include="Models\LinkResponse.cs" />
     <Compile Include="Models\SearchValueData.cs" />
@@ -6782,6 +6785,7 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\kendoScripts.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
+    <Content Include="Scripts\multifieldwrapper.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <None Include="Scripts\_references.js" />
@@ -6818,7 +6822,6 @@
     <Content Include="Views\CIS\Index.cshtml" />
     <Content Include="Views\CIS\OutComeMaster.cshtml" />
     <Content Include="Views\CIS\SuboutComes.cshtml" />
-    <Content Include="Views\CRT\_AddNotes.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -6863,9 +6866,9 @@
         <WebProjectProperties>
           <UseIIS>True</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>59819</DevelopmentServerPort>
+          <DevelopmentServerPort>0</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:59819/</IISUrl>
+          <IISUrl>http://localhost:60819/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

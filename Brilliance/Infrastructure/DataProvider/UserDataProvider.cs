@@ -31,17 +31,17 @@ namespace Brilliance.Infrastructure.DataProvider
             }
             return response;
         }
-        public UsersListModel UserList()
+        public UserListModel UserList()
         {
-            var userListModel = new UsersListModel();
+            var userListModel = new UserListModel();
             try
             {
                 var searchList = new List<SearchValueData>();
 
-                List<Users> users = GetEntityList<Users>("GetUserList", searchList);//Constants.GetUserGroupList
-                if (users.Count > 0)
+                List<User> userlist = GetEntityList<User>("GetUserList", searchList);//Constants.GetUserGroupList
+                if (userlist.Count > 0)
                 {
-                    userListModel.Users = users;
+                    userListModel.Userlist = userlist;
                     userListModel.Response.IsSuccess = true;
                 }
                 else
@@ -57,54 +57,45 @@ namespace Brilliance.Infrastructure.DataProvider
         }
         public ServiceResponse SaveUser(UserViewModel Usermodel)
         {
+            DataSet ds = null;
             var response = new ServiceResponse();
             try
             {
-
-
-                //if (Usermodel.Users.IsEdit == false)
-                //{
-
-                //    SqlCommand cmd = new SqlCommand();
-                //    //cmd.Parameters.AddWithValue("@UserID", Guid.NewGuid()).SqlDbType = SqlDbType.UniqueIdentifier;
-                //    //cmd.Parameters.AddWithValue("@Code", Usermodel.User.Code).SqlDbType = SqlDbType.NVarChar;
-                //    //cmd.Parameters.AddWithValue("@Name", Usermodel.User.Name).SqlDbType = SqlDbType.NVarChar;
-                //    //cmd.Parameters.AddWithValue("@Description", Usermodel.User.Description).SqlDbType = SqlDbType.NVarChar;
-                //    //cmd.Parameters.AddWithValue("@CompanyID", Usermodel.User.CompanyID).SqlDbType = SqlDbType.UniqueIdentifier;
-                //    //cmd.Parameters.AddWithValue("@ClientID", Usermodel.User.ClientID).SqlDbType = SqlDbType.UniqueIdentifier;
-                //    //cmd.Parameters.AddWithValue("@CreatedOn", DateTime.Now).SqlDbType = SqlDbType.DateTime;
-                //    //cmd.Parameters.AddWithValue("@UpdatedOn", null).SqlDbType = SqlDbType.DateTime;
-                //    //cmd.Parameters.AddWithValue("@CreatedBy", SessionHelper.UserId).SqlDbType = SqlDbType.UniqueIdentifier;
-                //    //cmd.Parameters.AddWithValue("@UpdatedBy", null).SqlDbType = SqlDbType.UniqueIdentifier;
-                //    //cmd.Parameters.AddWithValue("@IsEdit", Usermodel.User.IsEdit).SqlDbType = SqlDbType.Bit;
-
-
-                //    DataSet ds = null;
-                //    ds = BulkInsert("Save_User", cmd);
-
-                //    response.IsSuccess = true;
-
-                //    response.Message = "Record Saved Successfully.";
-                //}
-                //else
-                //{
                 SqlCommand cmd = new SqlCommand();
-                //cmd.Parameters.AddWithValue("@UserID", Usermodel.Users.UserID).SqlDbType = SqlDbType.UniqueIdentifier;
-                //cmd.Parameters.AddWithValue("@Code", Usermodel.Users.Code).SqlDbType = SqlDbType.NVarChar;
-                //cmd.Parameters.AddWithValue("@Name", Usermodel.Users.Name).SqlDbType = SqlDbType.NVarChar;
-                //cmd.Parameters.AddWithValue("@Description", Usermodel.Users.Description).SqlDbType = SqlDbType.NVarChar;
-                //cmd.Parameters.AddWithValue("@CompanyID", Usermodel.Users.CompanyID).SqlDbType = SqlDbType.UniqueIdentifier;
-                //cmd.Parameters.AddWithValue("@ClientID", Usermodel.Users.ClientID).SqlDbType = SqlDbType.UniqueIdentifier;
-                //cmd.Parameters.AddWithValue("@UpdatedOn", DateTime.Now).SqlDbType = SqlDbType.DateTime;
-                //cmd.Parameters.AddWithValue("@UpdatedBy", SessionHelper.UserId).SqlDbType = SqlDbType.UniqueIdentifier;
-                //cmd.Parameters.AddWithValue("@IsEdit", Usermodel.User.IsEdit).SqlDbType = SqlDbType.Bit;
+                if (Usermodel.User.IsEdit == false)
+                {
+                    cmd.Parameters.AddWithValue("@UserID", Guid.NewGuid()).SqlDbType = SqlDbType.UniqueIdentifier;
+                    cmd.Parameters.AddWithValue("@FirstName", Usermodel.User.FirstName).SqlDbType = SqlDbType.NVarChar;
+                    cmd.Parameters.AddWithValue("@LastName", Usermodel.User.LastName).SqlDbType = SqlDbType.NVarChar;
+                    cmd.Parameters.AddWithValue("@EmailID", Usermodel.User.EmailID).SqlDbType = SqlDbType.NVarChar;
+                    cmd.Parameters.AddWithValue("@Password", Usermodel.User.Password).SqlDbType = SqlDbType.NVarChar;
+                    cmd.Parameters.AddWithValue("@ClientID", Usermodel.User.ClientID).SqlDbType = SqlDbType.UniqueIdentifier;
+                    cmd.Parameters.AddWithValue("@CreatedOn", DateTime.Now).SqlDbType = SqlDbType.DateTime;
+                    cmd.Parameters.AddWithValue("@UpdatedOn", null).SqlDbType = SqlDbType.DateTime;
+                    cmd.Parameters.AddWithValue("@CreatedBy", SessionHelper.UserId).SqlDbType = SqlDbType.UniqueIdentifier;
+                    cmd.Parameters.AddWithValue("@UpdatedBy", null).SqlDbType = SqlDbType.UniqueIdentifier;
+                    cmd.Parameters.AddWithValue("@IsEdit", Usermodel.User.IsEdit).SqlDbType = SqlDbType.Bit;
 
-                DataSet ds = null;
-                ds = BulkInsert("Save_User", cmd);
-                response.IsSuccess = true;
-                response.Message = "Record Updated Successfully.";
-                //}
+                    ds = BulkInsert("Save_User", cmd);
+                    response.IsSuccess = true;
+                    response.Message = "Record Saved Successfully.";
+                }
+                else
+                {
+                    cmd.Parameters.AddWithValue("@UserID", Guid.NewGuid()).SqlDbType = SqlDbType.UniqueIdentifier;
+                    cmd.Parameters.AddWithValue("@FirstName", Usermodel.User.FirstName).SqlDbType = SqlDbType.NVarChar;
+                    cmd.Parameters.AddWithValue("@LastName", Usermodel.User.LastName).SqlDbType = SqlDbType.NVarChar;
+                    cmd.Parameters.AddWithValue("@EmailID", Usermodel.User.EmailID).SqlDbType = SqlDbType.NVarChar;
+                    cmd.Parameters.AddWithValue("@Password", Usermodel.User.Password).SqlDbType = SqlDbType.NVarChar;
+                    cmd.Parameters.AddWithValue("@ClientID", Usermodel.User.ClientID).SqlDbType = SqlDbType.UniqueIdentifier;
+                    cmd.Parameters.AddWithValue("@UpdatedOn", DateTime.Now).SqlDbType = SqlDbType.DateTime;
+                    cmd.Parameters.AddWithValue("@UpdatedBy", SessionHelper.UserId).SqlDbType = SqlDbType.UniqueIdentifier;
+                    cmd.Parameters.AddWithValue("@IsEdit", Usermodel.User.IsEdit).SqlDbType = SqlDbType.Bit;
 
+                    ds = BulkInsert("Save_User", cmd);
+                    response.IsSuccess = true;
+                    response.Message = "Record Updated Successfully.";
+                }
             }
             catch (Exception ex)
             {
@@ -184,51 +175,42 @@ namespace Brilliance.Infrastructure.DataProvider
             var response = new ServiceResponse();
             try
             {
-
-
-                //if (Usermodel.Users.IsEdit == false)
-                //{
-
-                //    SqlCommand cmd = new SqlCommand();
-                //    //cmd.Parameters.AddWithValue("@UserID", Guid.NewGuid()).SqlDbType = SqlDbType.UniqueIdentifier;
-                //    //cmd.Parameters.AddWithValue("@Code", Usermodel.User.Code).SqlDbType = SqlDbType.NVarChar;
-                //    //cmd.Parameters.AddWithValue("@Name", Usermodel.User.Name).SqlDbType = SqlDbType.NVarChar;
-                //    //cmd.Parameters.AddWithValue("@Description", Usermodel.User.Description).SqlDbType = SqlDbType.NVarChar;
-                //    //cmd.Parameters.AddWithValue("@CompanyID", Usermodel.User.CompanyID).SqlDbType = SqlDbType.UniqueIdentifier;
-                //    //cmd.Parameters.AddWithValue("@ClientID", Usermodel.User.ClientID).SqlDbType = SqlDbType.UniqueIdentifier;
-                //    //cmd.Parameters.AddWithValue("@CreatedOn", DateTime.Now).SqlDbType = SqlDbType.DateTime;
-                //    //cmd.Parameters.AddWithValue("@UpdatedOn", null).SqlDbType = SqlDbType.DateTime;
-                //    //cmd.Parameters.AddWithValue("@CreatedBy", SessionHelper.UserId).SqlDbType = SqlDbType.UniqueIdentifier;
-                //    //cmd.Parameters.AddWithValue("@UpdatedBy", null).SqlDbType = SqlDbType.UniqueIdentifier;
-                //    //cmd.Parameters.AddWithValue("@IsEdit", Usermodel.User.IsEdit).SqlDbType = SqlDbType.Bit;
-
-
-                //    DataSet ds = null;
-                //    ds = BulkInsert("Save_User", cmd);
-
-                //    response.IsSuccess = true;
-
-                //    response.Message = "Record Saved Successfully.";
-                //}
-                //else
-                //{
-                SqlCommand cmd = new SqlCommand();
-                //cmd.Parameters.AddWithValue("@UserID", Usermodel.Users.UserID).SqlDbType = SqlDbType.UniqueIdentifier;
-                //cmd.Parameters.AddWithValue("@Code", Usermodel.Users.Code).SqlDbType = SqlDbType.NVarChar;
-                //cmd.Parameters.AddWithValue("@Name", Usermodel.Users.Name).SqlDbType = SqlDbType.NVarChar;
-                //cmd.Parameters.AddWithValue("@Description", Usermodel.Users.Description).SqlDbType = SqlDbType.NVarChar;
-                //cmd.Parameters.AddWithValue("@CompanyID", Usermodel.Users.CompanyID).SqlDbType = SqlDbType.UniqueIdentifier;
-                //cmd.Parameters.AddWithValue("@ClientID", Usermodel.Users.ClientID).SqlDbType = SqlDbType.UniqueIdentifier;
-                //cmd.Parameters.AddWithValue("@UpdatedOn", DateTime.Now).SqlDbType = SqlDbType.DateTime;
-                //cmd.Parameters.AddWithValue("@UpdatedBy", SessionHelper.UserId).SqlDbType = SqlDbType.UniqueIdentifier;
-                //cmd.Parameters.AddWithValue("@IsEdit", Usermodel.User.IsEdit).SqlDbType = SqlDbType.Bit;
-
                 DataSet ds = null;
-                ds = BulkInsert("Save_Role", cmd);
-                response.IsSuccess = true;
-                response.Message = "Record Updated Successfully.";
-                //}
-
+                SqlCommand cmd = new SqlCommand();
+                if (Rolemodel.role.IsEdit == false)
+                {
+                    cmd.Parameters.AddWithValue("@RoleID", Guid.NewGuid()).SqlDbType = SqlDbType.UniqueIdentifier;
+                    cmd.Parameters.AddWithValue("@Code", Rolemodel.role.RoleCode).SqlDbType = SqlDbType.NVarChar;
+                    cmd.Parameters.AddWithValue("@Name", Rolemodel.role.RoleName).SqlDbType = SqlDbType.NVarChar;
+                    cmd.Parameters.AddWithValue("@Description", Rolemodel.role.AboutRole).SqlDbType = SqlDbType.NVarChar;
+                    //cmd.Parameters.AddWithValue("@CompanyID", Usermodel.User.CompanyID).SqlDbType = SqlDbType.UniqueIdentifier;
+                    //cmd.Parameters.AddWithValue("@ClientID", Usermodel.User.ClientID).SqlDbType = SqlDbType.UniqueIdentifier;
+                    cmd.Parameters.AddWithValue("@CreatedOn", DateTime.Now).SqlDbType = SqlDbType.DateTime;
+                    cmd.Parameters.AddWithValue("@UpdatedOn", null).SqlDbType = SqlDbType.DateTime;
+                    cmd.Parameters.AddWithValue("@CreatedBy", SessionHelper.UserId).SqlDbType = SqlDbType.UniqueIdentifier;
+                    cmd.Parameters.AddWithValue("@UpdatedBy", null).SqlDbType = SqlDbType.UniqueIdentifier;
+                    cmd.Parameters.AddWithValue("@IsEdit", Rolemodel.role.IsEdit).SqlDbType = SqlDbType.Bit;
+                    
+                    ds = BulkInsert("Save_User", cmd);
+                    response.IsSuccess = true;
+                    response.Message = "Record Saved Successfully.";
+                }
+                else
+                {
+                    cmd.Parameters.AddWithValue("@UserID", Rolemodel.role.RoleID).SqlDbType = SqlDbType.UniqueIdentifier;
+                    cmd.Parameters.AddWithValue("@Code", Rolemodel.role.RoleCode).SqlDbType = SqlDbType.NVarChar;
+                    cmd.Parameters.AddWithValue("@Name", Rolemodel.role.RoleName).SqlDbType = SqlDbType.NVarChar;
+                    cmd.Parameters.AddWithValue("@Description", Rolemodel.role.AboutRole).SqlDbType = SqlDbType.NVarChar;
+                    //cmd.Parameters.AddWithValue("@CompanyID", Usermodel.User.CompanyID).SqlDbType = SqlDbType.UniqueIdentifier;
+                    //cmd.Parameters.AddWithValue("@ClientID", Usermodel.User.ClientID).SqlDbType = SqlDbType.UniqueIdentifier;
+                    cmd.Parameters.AddWithValue("@UpdatedOn", DateTime.Now).SqlDbType = SqlDbType.DateTime;
+                    cmd.Parameters.AddWithValue("@UpdatedBy", SessionHelper.UserId).SqlDbType = SqlDbType.UniqueIdentifier;
+                    cmd.Parameters.AddWithValue("@IsEdit", Rolemodel.role.IsEdit).SqlDbType = SqlDbType.Bit;
+                    
+                    ds = BulkInsert("Save_Role", cmd);
+                    response.IsSuccess = true;
+                    response.Message = "Record Updated Successfully.";
+                }
             }
             catch (Exception ex)
             {

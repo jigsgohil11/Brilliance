@@ -15,7 +15,7 @@ namespace Brilliance.Controllers
         public ActionResult UserList()
         {
             _iuserDataProvider = new UserDataProvider();
-            UsersListModel UserlistModel = _iuserDataProvider.UserList();
+            UserListModel UserlistModel = _iuserDataProvider.UserList();
             return View(UserlistModel);
         }
         public ActionResult User(string id)

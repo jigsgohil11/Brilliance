@@ -6,12 +6,10 @@ namespace Brilliance.Infrastructure.DataProvider
 {
     interface IUserDataProvider
     {
-        UsersListModel UserList();
+        UserListModel UserList();
         ServiceResponse GetUser(Guid UserID);
         ServiceResponse SaveUser(UserViewModel Usermodel);
         ServiceResponse DeleteUser(Guid UserID);
-        //ServiceResponse GetStateByCountry(Guid CountryID);
-        //ServiceResponse GetCityByState(Guid StateID);
         RoleListModel RoleList();
         ServiceResponse GetRole(Guid RoleID);
         ServiceResponse SaveRole(RoleViewModel Rolemodel);

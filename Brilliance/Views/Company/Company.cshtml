@@ -48,9 +48,9 @@
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label>Organization<span  style="font-weight: bold;color: red;">*</span></label>
+                                            @*<label>Organization<span  style="font-weight: bold;color: red;">*</span></label>
                                             @Html.DropDownListFor(m => m.company.ClientID, new SelectList(Model.ClientList, "Value", "Text", 0), "--Select Organization--", new { @data_live_search = "true", @class = "form-control bs-select"})
-                                            @Html.ValidationMessageFor(m => m.company.ClientID)
+                                            @Html.ValidationMessageFor(m => m.company.ClientID)*@
                                         </div>
                                     </div>
                                 </div>
@@ -202,18 +202,7 @@
     <script>
 
         function SaveCompanyResponse(response) {
-            //if (response == "_Logon_") {
-            //    window.location.href = "/Login/Login";
-            //}
-            //else {
-            //    if (response.IsSuccess) {
-            //        SetMessageForPageLoad(response.Message, "Organizationsaved");
-            //        window.location.href = "/Organization/OrganizationList/";
-            //    } else {
-            //        ShowMessage(response.Message, "error");
-            //    }
-            //}
-
+           
             if (response.IsSuccess) {
                 SetMessageForPageLoad(response.Message, "Companysaved");
                 window.location.href = "/Company/CompanyList/";

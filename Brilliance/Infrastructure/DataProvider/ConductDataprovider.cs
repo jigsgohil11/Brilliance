@@ -465,5 +465,97 @@ namespace Brilliance.Infrastructure.DataProvider
             }
             return response;
         }
+
+
+        public int MasterCont()
+        {
+            int count = 0;
+
+            try
+            {
+                var _count = GetScalar("_PrcMasterCont");
+                if (_count != null)
+                {
+                    count = Convert.ToInt32(_count);
+                }
+
+            }
+            catch (Exception ex)
+            {
+                count = 0;
+            }
+            return count;
+        }
+
+
+        public string GetSuboutcomeCode(Guid Id)
+        {
+            string code = string.Empty;
+
+            try
+            {
+                var searchList = new List<SearchValueData>()
+                {
+                        new SearchValueData { Name = "Code" ,Value = Convert.ToString(Id)}
+                };
+                var _count = GetScalar("GetSuboutcomeCode", searchList);
+                if (_count != null)
+                {
+                    code = _count.ToString();
+                }
+
+            }
+            catch (Exception ex)
+            {
+                code = ex.Message;
+            }
+            return code;
+        }
+
+        public string GetGroupSubCode(int count)
+        {
+            string cde = string.Empty;
+            List<Groupcode> st = new List<Groupcode>();
+            st.Add(new Groupcode { index=0, gpno="a." });
+            st.Add(new Groupcode { index = 1, gpno = "b." });
+            st.Add(new Groupcode { index = 2, gpno = "c." });
+            st.Add(new Groupcode { index = 3, gpno = "d." });
+            st.Add(new Groupcode { index = 4, gpno = "e." });
+            st.Add(new Groupcode { index = 5, gpno = "f." });
+            st.Add(new Groupcode { index = 6, gpno = "g." });
+            st.Add(new Groupcode { index = 7, gpno = "h." });
+            st.Add(new Groupcode { index = 8, gpno = "i." });
+            st.Add(new Groupcode { index = 9, gpno = "j." });
+            st.Add(new Groupcode { index = 10, gpno = "k." });
+            st.Add(new Groupcode { index = 11, gpno = "l." });
+            cde = st.Where(x => x.index == count).Select(x => x.gpno).FirstOrDefault();
+            return cde;
+        }
+
+
+        public int GrupcntByEntity(int Id, Guid entityId)
+        {
+            int count = 0;
+            try
+            {
+                var searchList = new List<SearchValueData>()
+                {
+                        new SearchValueData { Name = "gId" ,Value = Convert.ToString(Id )},
+                         new SearchValueData { Name = "EntityId" ,Value = Convert.ToString(entityId)}
+                };
+
+               var _count = GetScalar("GrupcntByEntity", searchList);
+                if (_count != null)
+                {
+                    count = Convert.ToInt32(_count);
+                }
+            }
+            catch (Exception ex)
+            {
+
+            }
+            return count;
+        }
+
     }
 }

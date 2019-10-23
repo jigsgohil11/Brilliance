@@ -1,0 +1,55 @@
+﻿@model Brilliance.Models.Entity.TCFForm
+
+    <table class="table table-bordered table-condensed main-multi-field-wrapper">
+
+        <tbody class="sub-multi-fields">
+
+            @if (Model.TCFNotes.Count > 0)
+            {
+                foreach (var item in Model.TCFNotes)
+                {
+                    var index = Model.TCFNotes.IndexOf(item);
+            <tr class="multi-field" id="1">
+                <td width="1%">@(index+1)</td>
+                <td>
+                    @Html.TextAreaFor(x => x.TCFNotes[index].Note, new { @class = "form-control" })
+                    @Html.TextAreaFor(x => x.TCFNotes[index].NoteId, new { @class = "txtnote" })
+                </td>
+               
+               </tr>
+                }
+
+            }
+
+
+            else
+            {
+            <tr class="multi-field" id="1">
+                <td width="1%">1</td>
+
+                <td width="98%">
+
+
+                    <textarea class="form-control" cols="20" id="TCFNotes[0].Note" name="TCFNotes[0].Note" rows="2" style="width:100%;"></textarea>
+                    <input type="text" id="TCFNotes[index].NoteId" name="TCFNotes[index].NoteId" class="txtnote" value="Note ID:01" readonly />
+                </td>
+               
+                <td width="1%">
+                    <button type="button" class="remove-field btn btn-xs btn-danger"><i class="fa fa-remove"></i></button>
+                </td>
+            </tr>
+            }
+
+
+        </tbody>
+        <tbody>
+
+            <tr>
+                <th colspan="14">
+                    <button type="button" style="display:none;" class="add-field btn btn-xs btn-primary"><i class="fa fa-plus"></i>&nbsp;Add Row</button>
+                </th>
+            </tr>
+        </tbody>
+    </table>
+
+

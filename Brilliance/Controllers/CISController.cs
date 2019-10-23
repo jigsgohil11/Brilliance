@@ -17,13 +17,26 @@ namespace Brilliance.Controllers
         // GET: CIS
         public ActionResult Index()
         {
-            return View();
+            TCFForm _TCFForm = new TCFForm();
+            _TCFForm.TCFNotes=new List<TCFNotes>();
+            _TCFForm.TCFTask = new List<TCFTask>();
+            return View(_TCFForm);
         }
         public ActionResult OutComeMaster()
         {
 
 
             return View();
+        }
+        public JsonResult GrupcntByEntity(int Id, string EntityId)
+        {
+            _icisDataProvider = new ConductDataprovider();
+           
+            Guid entityId = new Guid(EntityId);
+           
+            int response = _icisDataProvider.GrupcntByEntity(Id, entityId);
+            string cde = _icisDataProvider.GetGroupSubCode(response);
+            return Json(cde, JsonRequestBehavior.AllowGet);
         }
         public JsonResult SaveOutcome(TCFQuestionGroup _TCFQuestionGroup)
         {
@@ -51,14 +64,15 @@ namespace Brilliance.Controllers
                     }
                     if (_TCFQuestionGroup.IsEdit==false)
                     {
+                       
                         _TCFQuestionGroup.Createddate = DateTime.Now;
-                        _TCFQuestionGroup.CreatedBy = new Guid("25F5F426-9194-4476-8B06-925E7831EB18");
+                        _TCFQuestionGroup.CreatedBy = SessionHelper.UserId;
 
                     }
                     else if (_TCFQuestionGroup.IsEdit == true)
                     {
                         _TCFQuestionGroup.Modifieddate = DateTime.Now;
-                        _TCFQuestionGroup.ModifiedBy = new Guid("25F5F426-9194-4476-8B06-925E7831EB18");
+                        _TCFQuestionGroup.ModifiedBy = SessionHelper.UserId;
 
                     }
                     response = _icisDataProvider.SaveOutcome(_TCFQuestionGroup);
@@ -123,13 +137,13 @@ namespace Brilliance.Controllers
             {
                
                 _TCFQuestion.CreatedAt = DateTime.Now;
-                _TCFQuestion.CreatedBy = new Guid("25F5F426-9194-4476-8B06-925E7831EB18");
+                _TCFQuestion.CreatedBy = SessionHelper.UserId;
 
             }
             else if (_TCFQuestion.IsEdit == true)
             {
                 _TCFQuestion.Modifieddate = DateTime.Now;
-                _TCFQuestion.ModifiedBy = new Guid("25F5F426-9194-4476-8B06-925E7831EB18");
+                _TCFQuestion.ModifiedBy = SessionHelper.UserId;
 
             }
             response = _icisDataProvider.SaveSuboutcomes(_TCFQuestion);
@@ -150,7 +164,18 @@ namespace Brilliance.Controllers
             response = _icisDataProvider.GetTCFQuestionById(outcomId);
             return Json(response, JsonRequestBehavior.AllowGet);
         }
-        #endregion
+
+
+        public JsonResult GetSuboutcomeCode(string Id)
+        {
+            _icisDataProvider = new ConductDataprovider();
+            string res = string.Empty;
+            Guid outcomId = new Guid(Id);
+            res = _icisDataProvider.GetSuboutcomeCode(outcomId);
+            return Json(res, JsonRequestBehavior.AllowGet);
+
+        }
+        #endregion SuboutCome
         public JsonResult CisQuestion()
         {
             _icisDataProvider = new ConductDataprovider();
