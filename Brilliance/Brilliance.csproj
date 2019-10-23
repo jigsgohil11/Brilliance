@@ -49,6 +49,12 @@
     <Reference Include="Elmah, Version=1.2.14706.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\elmah.corelibrary.1.2.2\lib\Elmah.dll</HintPath>
     </Reference>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.3\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
     </Reference>
@@ -176,10 +182,12 @@
     <Compile Include="Infrastructure\DataProvider\BaseDataProvider.cs" />
     <Compile Include="Infrastructure\DataProvider\ClientDataProvider.cs" />
     <Compile Include="Infrastructure\DataProvider\CompanyDataProvider.cs" />
+    <Compile Include="Infrastructure\DataProvider\ComplaintDataProvider.cs" />
     <Compile Include="Infrastructure\DataProvider\ConductDataprovider.cs" />
     <Compile Include="Infrastructure\DataProvider\DivisionDataProvider.cs" />
     <Compile Include="Infrastructure\DataProvider\IClientDataProvider.cs" />
     <Compile Include="Infrastructure\DataProvider\ICompanyDataProvider.cs" />
+    <Compile Include="Infrastructure\DataProvider\IComplaintDataProvider.cs" />
     <Compile Include="Infrastructure\DataProvider\IConductIS.cs" />
     <Compile Include="Infrastructure\DataProvider\IDivisionDataProvider.cs" />
     <Compile Include="Infrastructure\DataProvider\ILoginDataProvider.cs" />
@@ -200,7 +208,9 @@
     <Compile Include="Models\Entity\ChangePassword.cs" />
     <Compile Include="Models\Entity\Client.cs" />
     <Compile Include="Models\Entity\Company.cs" />
+    <Compile Include="Models\Entity\Complaint.cs" />
     <Compile Include="Models\Entity\ConductMaster.cs" />
+    <Compile Include="Models\Entity\CRTNotes.cs" />
     <Compile Include="Models\Entity\Division.cs" />
     <Compile Include="Models\Entity\Login.cs" />
     <Compile Include="Models\Entity\LoginLog.cs" />
@@ -214,6 +224,7 @@
     <Compile Include="Models\ViewModel\ActionLoginLogModel.cs" />
     <Compile Include="Models\ViewModel\ClientViewModel.cs" />
     <Compile Include="Models\ViewModel\CompanyViewModel.cs" />
+    <Compile Include="Models\ViewModel\ComplaintViewModel.cs" />
     <Compile Include="Models\ViewModel\ConductDataViewModel.cs" />
     <Compile Include="Models\ViewModel\DivisionViewModel.cs" />
     <Compile Include="Models\ViewModel\ProductViewModel.cs" />
@@ -6792,7 +6803,6 @@
     <Content Include="Views\Home\Index1.cshtml" />
     <Content Include="Views\CRT\CRT.cshtml" />
     <Content Include="Views\CRT\CRTList.cshtml" />
-    <Content Include="Views\CRT\CRT1.cshtml" />
     <Content Include="Views\Organization\OrganizationList.cshtml" />
     <Content Include="Views\Organization\Organization.cshtml" />
     <Content Include="Views\Company\Company.cshtml" />
@@ -6808,6 +6818,7 @@
     <Content Include="Views\CIS\Index.cshtml" />
     <Content Include="Views\CIS\OutComeMaster.cshtml" />
     <Content Include="Views\CIS\SuboutComes.cshtml" />
+    <Content Include="Views\CRT\_AddNotes.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

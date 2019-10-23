@@ -25,6 +25,7 @@ namespace Brilliance.Infrastructure
         public const string IndDateFormat2 = "MM/dd/yyyy";
         //public const string DbDateTimeFormat = "yyyy/MM/dd HH:mm";
         public const string DbDateTimeFormat = "yyyy-MM-dd hh:mm:ss";
+        public const string DateFormatString = "{0:dd/MM/yyyy}";   // Indian Date format for us
 
         public const string RegxEmail = @"[A-Za-z0-9\._%+-]+\@[A-Za-z0-9\.-]+\.[A-Za-z]{2,4}";
         //public const string RegxWebSiteURL = @"^(?:(ftp|http|https)?:\/\/)?(?:[\w-]+\.)+([a-z]|[A-Z]|[0-9]){2,6}$";

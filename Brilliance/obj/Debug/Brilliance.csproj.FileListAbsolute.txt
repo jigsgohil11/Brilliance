@@ -211,3 +211,7 @@ D:\iSoftNet Work\Brilliance\Latest Work\Brilliance\Brilliance\obj\Debug\Brillian
 D:\NEHA_Isoftnetech\Projects\Brilliance\Latest Work\Brilliance\obj\Debug\Brilliance.csprojAssemblyReference.cache
 D:\NEHA_Isoftnetech\Projects\Brilliance\Latest Work\Brilliance\obj\Debug\Brilliance.csproj.CoreCompileInputs.cache
 D:\NEHA_Isoftnetech\Projects\Brilliance\Latest Work\Brilliance\obj\Debug\Brilliance.csproj.CopyComplete
+D:\NEHA_Isoftnetech\Projects\Brilliance\Latest Work\Brilliance\bin\EntityFramework.dll
+D:\NEHA_Isoftnetech\Projects\Brilliance\Latest Work\Brilliance\bin\EntityFramework.SqlServer.dll
+D:\NEHA_Isoftnetech\Projects\Brilliance\Latest Work\Brilliance\bin\EntityFramework.xml
+D:\NEHA_Isoftnetech\Projects\Brilliance\Latest Work\Brilliance\bin\EntityFramework.SqlServer.xml
