@@ -360,7 +360,67 @@
         <script src="https://kendo.cdn.telerik.com/2018.2.620/js/jszip.min.js"></script>
         <script src="https://kendo.cdn.telerik.com/2018.2.620/js/kendo.all.min.js"></script>
       <script src="~/Scripts/multifieldwrapper.js"></script>
-  
+  @*<script>
+      var url = '@Url.Action("CisQuestion", "CIS")';
+
+      $("#grid").kendoGrid({
+  columns: [
+    {
+        title: "Ref",
+        field: "Qgroup",
+
+        width: "4%"
+    },
+    {
+        field: "Qdesc",
+        title: "Description",
+        width: "60%"
+    },
+        {
+            title: "Previous Rating",
+            width: "110px"
+        },
+                        {
+                            title: "Current Rating",
+                            width: "110px"
+                        },
+                        {
+                            title: "Current Due Dates"
+                        },
+                        {
+
+
+                            'title': 'Edit',
+                            'field': 'Edit',
+                            template: "<a href='\\\#' class='sub-link btn btn-default' value='#= Id #'>#= 'Edit' #</a>"
+                        },
+    {
+        field: "Description",
+        hidden:true,
+      groupHeaderTemplate: "#= customFunction(value)# - Count: #=count#"
+    }
+  ],
+
+  dataSource: {
+
+      transport: {
+              read: {
+                  url: url,
+                  type: "get",
+                  dataType: "json"
+              }
+      },
+
+      group: { field: "Description", aggregates: [{ field: "Description", aggregate: "count" }] }
+  }
+});
+  function customFunction(value){
+
+    var result = value.replace(" ", ", ");
+    return result
+  }
+
+</script>*@
         <script>
             $(document).ready(function () {
                 
@@ -376,7 +436,7 @@
                                 dataType: "json"
                             }
                         },
-                        group: [{ field: "Description" }],
+                        group: { field: "Description", aggregates: [{ field: "Description", aggregate: "count" }, { field: "Status", aggregate: "sum" }] },
                         groupable: false,
                         sortable: false,
                         pageSize: 1000,
@@ -407,7 +467,7 @@
                         {
                             field: "Qdesc",
                             title: "Description",
-                            width: "60%"
+                            width: "55%"
                         },
                         {
                             title: "Previous Rating",
@@ -418,7 +478,8 @@
                             width: "110px"
                         },
                         {
-                            title: "Current Due Dates"
+                            title: "Current Due Dates",
+                            width: "140px"
                         },
                         {
 
@@ -427,6 +488,11 @@
                             'field': 'Edit',
                             template: "<a href='\\\#' class='sub-link btn btn-default' value='#= Id #'>#= 'Edit' #</a>"
                         },
+                         {
+                             field: "Description",
+                             hidden: true,
+                             groupHeaderTemplate:"#= customFunction(value,aggregates.Status)#"
+                         }
                     ]
                   
                 }).on("click", "a.sub-link", function () {
@@ -439,6 +505,22 @@
                     $('#txtdes').html(dataItem.Qdesc)
             });
             });
+            function customFunction(value, s) {
+
+                debugger;
+                var result = value;
+           
+                if (s.sum == 0)
+                {
+                    result = result + '<span style="position:absolute;right:10px;color:#BA1800;"> Incomplete</span>'
+                }
+                else
+                {
+                    result = result + '<span style="position:absolute;right:10px;color:green;"> Complete</span>'
+                }
+                return result;
+            }
+        
             @*function detailInit(e) {
 
                 var _url = '@Url.Action("BindSubmenuQuestion", "CIS")';

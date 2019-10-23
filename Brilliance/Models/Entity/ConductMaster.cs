@@ -120,12 +120,14 @@ namespace Brilliance.Models.Entity
         public string Qgroup { get; set; }
         public string Description { get; set; }
         public string Qdesc { get; set; }
+        public int Status { get; set; }
         public Guid GroupId { get; set; }
     }
     public class TCFForm
     {
         public TCFForm()
         {
+           _TCFSubOutCome = new List<TCFSubOutCome>();
             TCFNotes = new List<TCFNotes>();
             TCFTask= new List<TCFTask>();
         }
@@ -163,9 +165,22 @@ namespace Brilliance.Models.Entity
 
         public int? TempId { get; set; }
 
+
         public virtual IList<TCFNotes> TCFNotes { get; set; }
         public virtual IList<TCFTask> TCFTask { get; set; }
+        public virtual IList<TCFSubOutCome> _TCFSubOutCome { get; set; }
 
+    }
+    public  class TCFSubOutCome
+    {
+        public Guid TCFFormId { set; get; }
+        public Guid TCFoutcomeId { set; get; }
+        public Guid RateId { set; get; }
+        public string Note { set; get; }
+        public Guid ? AssignUserId { get; set; }
+        [ForeignKey("AssignUserId")]
+        public virtual User  _User { get; set; }
+        public DateTime DueDate { set; get; }
     }
     public class TCFNotes
     {

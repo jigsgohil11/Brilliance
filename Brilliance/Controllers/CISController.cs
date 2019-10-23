@@ -28,6 +28,15 @@ namespace Brilliance.Controllers
 
             return View();
         }
+
+        public JsonResult MasterCont()
+        {
+            _icisDataProvider = new ConductDataprovider();
+
+
+            int response = _icisDataProvider.MasterCont();
+            return Json(response, JsonRequestBehavior.AllowGet);
+        }
         public JsonResult GrupcntByEntity(int Id, string EntityId)
         {
             _icisDataProvider = new ConductDataprovider();
