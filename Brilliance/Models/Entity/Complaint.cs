@@ -1,0 +1,90 @@
+﻿using Brilliance.Infrastructure;
+using PetaPoco;
+using System;
+using System.ComponentModel.DataAnnotations;
+
+namespace Brilliance.Models.Entity
+{
+    [TableName("mst_Complaint")]
+    [PrimaryKey("ComplaintID")]
+    [Sort("SeqNo", "ASC")]
+    public class Complaint
+    {
+
+        public Guid ComplaintID { get; set; }
+        public Guid? CompanyId { get; set; }
+        public Guid? DivisionId { get; set; }
+        [MaxLength(50)]
+        public string PolicyNumber { get; set; }
+        public bool IsClient { get; set; }
+        [MaxLength(50)]
+        public string ClientIdentificationNumber { get; set; }
+        [MaxLength(50)]
+        public string FirstName { get; set; }
+        [MaxLength(50)]
+        public string LastName { get; set; }
+        [MaxLength(19)]
+        public string PhoneNo { get; set; }
+        [MaxLength(50)]
+        public string Email { get; set; }
+        public Guid? ComplaintProductId { get; set; }
+        public Guid? ComplaintProductTypeId { get; set; }
+        public Guid? ComplaintCategoryId { get; set; }
+        public Guid? ComplaintNatureOfId { get; set; }
+        public DateTime? DateReceived { get; set; }
+        public DateTime? DateIncident { get; set; }
+        [MaxLength]
+        public string Notes { get; set; }
+        public string IsResolved { get; set; }
+        public DateTime? DateResolved { get; set; }
+        public Guid? ComplaintPolicyStatusId { get; set; }
+        public Guid? ComplaintRootCauseId { get; set; }
+        public Guid? ComplaintReceivedId { get; set; }
+        public Guid? ComplaintReceivedRegulatoryId { get; set; }
+        public Guid? ComplaintReceivedRegulatoryFeedbackId { get; set; }
+        [MaxLength(50)]
+        public string ComplaintReceivedRegulatoryReference { get; set; }
+        public Guid? ComplaintOverallOutcomeId { get; set; }
+        public Guid? ComplaintCompensationId { get; set; }
+        public Guid? ComplaintRegulatedCostId { get; set; }
+        public Guid? SatisfactionLevel { get; set; }
+        public Guid? Satisfactionlevel_resolution { get; set; }
+        public string IsComplaint { get; set; }
+        public long? CompensationValue { get; set; }
+        public string Isclaimpaid { get; set; }
+        public string IsVATregistered { get; set; }
+        public string IsPayee { get; set; }
+        public DateTime? claimpaymentdate { get; set; }
+        public decimal claimpaidamount_exclVAT { get; set; }
+        public decimal claimpaidamount_inclVAT { get; set; }
+        public string VAT_number { get; set; }
+        public string Panel_Attorneys { get; set; }
+        public Guid? CaseFileStage { get; set; }
+        public bool? IsActive { get; set; }
+      
+        public DateTime? CreatedOn { get; set; }
+        public Guid? CreatedBy { get; set; }
+        public DateTime? UpdatedOn { get; set; }
+        public Guid? UpdatedBy { get; set; }
+
+        [ResultColumn]
+        public string company { get; set; }
+        [ResultColumn]
+        public string division { get; set; }
+        [ResultColumn]
+        public string productcategory { get; set; }
+        [ResultColumn]
+        public string natureofcomplaint { get; set; }
+        [ResultColumn]
+        public string ReceivedDate { get; set; }
+        [ResultColumn]
+        public string ResolvedDate { get; set; }
+
+        [Ignore]
+        public string EncryptedComplaintID { get { return ComplaintID != Guid.Empty ? Crypto.Encrypt(Convert.ToString(ComplaintID)) : null; } }
+
+        [Ignore]
+        public bool IsEdit { get { return ComplaintID != Guid.Empty ? true : false; } }
+
+    }
+}

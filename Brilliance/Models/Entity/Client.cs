@@ -29,7 +29,7 @@ namespace Brilliance.Models.Entity
         [Required(ErrorMessage = "Email is required.")]
         public string ContactPersonEmail { get; set; }
         //[StringLength(15, ErrorMessage = Constants.StringLengthErrorMessage)]
-        [Required(ErrorMessage = "Mobile No. is required.")]
+        [Required(ErrorMessage = "Contact No. is required.")]
         [RegularExpression(@"\d{10}", ErrorMessage = "Mobile No.should be 10 digit.")]
         public string MobileNo { get; set; }
         public Guid? AssociatePartnerID { get; set; }

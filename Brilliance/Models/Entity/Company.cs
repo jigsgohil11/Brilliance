@@ -44,8 +44,8 @@ namespace Brilliance.Models.Entity
         [MaxLength(19)]
         public string ExtensionNo { get; set; }
         [MaxLength(19)]
-        [Required(ErrorMessage = "MobileNo is required.")]
-        [RegularExpression(@"\d{11}", ErrorMessage = "Mobile No.should be 11 digit.")]
+        [Required(ErrorMessage = "Contact No is required.")]
+        [RegularExpression(@"\d{11}", ErrorMessage = "Contact No.should be 11 digit.")]
         public string MobileNo { get; set; }
         [MaxLength(167)]
         [Required(ErrorMessage = "Email is required.")]

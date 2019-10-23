@@ -35,8 +35,7 @@
                     <table class="table table-bordered table-hover dt-responsive" width="100%" id="dt_client">
                         <thead>
                             <tr>
-                                <th class="all">Code</th>
-                                <th class="min-tablet">Name</th>
+                                <th class="all">Name</th>
                                 <th class="desktop">Description</th>
                                 <th class="all">Action</th>
                             </tr>
@@ -47,8 +46,7 @@
                                 foreach (var item in Model.Clientlist)
                                 {
                                     <tr>
-                                        <td style="background-color:white !important;">@item.ClientCode</td>
-                                        <td>@item.OrganizationName</td>
+                                        <td style="background-color:white !important;">@item.OrganizationName</td>
                                         <td>@item.Description</td>
                                         <td>
                                             <a class="action btn  btn-primary btn-xs @Constants.Class_Cannot_Access_Update" href="/Organization/Organization/@item.EncryptedClientID" title="Edit"><i class="btn-xs fa fa-pencil padding0"></i></a>
