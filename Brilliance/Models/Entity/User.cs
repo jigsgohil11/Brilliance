@@ -43,5 +43,7 @@ namespace Brilliance.Models.Entity
         public DateTime? UpdatedOn { get; set; }
         [Ignore]
         public string EncryptedUserID => UserID != Guid.Empty ? Crypto.Encrypt(Convert.ToString(UserID)) : null;
+        [Ignore]
+        public bool IsEdit { get { return UserID != Guid.Empty ? true : false; } }
     }
 }
