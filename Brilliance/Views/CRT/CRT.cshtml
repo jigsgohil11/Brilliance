@@ -91,14 +91,14 @@
                                                 <div class="row">
                                                     <div class="col-md-6">
                                                         <div class="form-group">
-                                                            <label>Company</label>
+                                                            <label>Company<span style="font-weight: bold;color: red;">*</span></label>
                                                             @Html.DropDownListFor(m => m.complaint.CompanyId, new SelectList(Model.CompanyList, "Value", "Text", 0), "--Select Company--", new { @data_live_search = "true", @class = "form-control bs-select", @onchange = "Getdata(this);" })
-                                                            @Html.ValidationMessageFor(m => m.complaint.ComplaintID)
+                                                            @Html.ValidationMessageFor(m => m.complaint.CompanyId)
                                                         </div>
                                                     </div>
                                                     <div class="col-md-6">
                                                         <div class="form-group">
-                                                            <label>Division</label>
+                                                            <label>Division<span style="font-weight: bold;color: red;">*</span></label>
                                                             @Html.DropDownListFor(m => m.complaint.DivisionId, new SelectList(Model.DivisionList, "Value", "Text", 0), "--Select Division--", new { @data_live_search = "true", @class = "form-control bs-select" })
                                                             @Html.ValidationMessageFor(m => m.complaint.DivisionId)
                                                         </div>
@@ -160,7 +160,7 @@
                                                     <div class="col-md-6">
                                                         <div class="form-group">
                                                             <label>Email address</label>
-                                                            @Html.TextBoxFor(m => m.complaint.Email, new { @class = "form-control m-input", @placeholder = "Enter email" })
+                                                            @Html.TextBoxFor(m => m.complaint.Email, new { @class = "form-control email m-input", @placeholder = "Enter email" })
                                                             @Html.ValidationMessageFor(m => m.complaint.Email)
                                                         </div>
                                                     </div>
@@ -383,14 +383,14 @@
                                                 <div class="row">
                                                     <div class="col-md-6">
                                                         <div class="form-group">
-                                                            <label>Complaint category</label>
+                                                            <label>Complaint category<span style="font-weight: bold;color: red;">*</span></label>
                                                             @Html.DropDownListFor(m => m.complaint.ComplaintCategoryId, new SelectList(Model.ComplaintCategoryList, "Value", "Text", 0), "--Select Complaint Category--", new { @data_live_search = "true", @class = "form-control bs-select" })
                                                             @Html.ValidationMessageFor(m => m.complaint.ComplaintCategoryId)
                                                         </div>
                                                     </div>
                                                     <div class="col-md-6">
                                                         <div class="form-group">
-                                                            <label>Nature of complaint</label>
+                                                            <label>Nature of complaint<span style="font-weight: bold;color: red;">*</span></label>
                                                             @Html.DropDownListFor(m => m.complaint.ComplaintNatureOfId, new SelectList(Model.ComplaintNatureList, "Value", "Text", 0), "--Select Complaint Nature--", new { @data_live_search = "true", @class = "form-control bs-select" })
                                                             @Html.ValidationMessageFor(m => m.complaint.ComplaintNatureOfId)
                                                         </div>
@@ -560,7 +560,7 @@
                                                             <div class="col-md-6">
                                                                 <div class="form-group">
                                                                     <label>Complaint from regulatory body?</label>
-                                                                    @Html.DropDownListFor(m => m.complaint.ComplaintReceivedRegulatoryId, new SelectList(Model.ComplaintReceivedRegulatoryList, "Value", "Text", 0), "Choose..", new { @data_live_search = "true", @class = "form-control bs-select" })
+                                                                    @Html.DropDownListFor(m => m.complaint.ComplaintReceivedRegulatoryId, new SelectList(Model.ComplaintReceivedRegulatoryList, "Value", "Text", 0), "Choose..", new { @data_live_search = "true", @class = "form-control bs-select",@onchange= "chkdropdown(this);" })
                                                                     @Html.ValidationMessageFor(m => m.complaint.ComplaintReceivedRegulatoryId)
                                                                     @*<select id="complaint_regulatory" name="complaint_regulatory" class="form-control bs-select" onchange="chkdropdown(this)" data_live_search="true">
                                                                             <option value="No">No</option>
@@ -688,57 +688,58 @@
             $(".btnPrevious, .btnSubmit").hide();
 
             $("#m_tabs_5_1").click(function () {
-                //$("#frmAssignment").valid();
-                //if ($("#frmAssignment .tab-content .active .field-validation-error").length > 0 || $("#frmAssignment .tab-content .active .field-validation-error").length > 0) { }
-                //else {
-                //    $("#tab1").fadeIn();
-                //    $("#tab1").addClass("active");
-                //    $("#tab2").removeClass("active");
-                //    $(this).closest("ul").children("li").removeClass("active");
-                //    $(this).closest("li").addClass("active");
-                //    $("#tab2").hide();
-                //    $(".btnPrevious").hide();
-                //    $(".btnSubmit").hide();
-                //    $(".btnNext").show();
-                //    $(".bs-select").selectpicker('refresh');
-                //}
-                $("#tab1").fadeIn();
-                $("#tab1").addClass("active");
-                $("#tab2").removeClass("active");
-                $(this).closest("ul").children("li").removeClass("active");
-                $(this).closest("li").addClass("active");
-                $("#tab2").hide();
-                $(".btnPrevious").hide();
-                $(".btnSubmit").hide();
-                $(".btnNext").show();
-                $(".bs-select").selectpicker('refresh');
+                $("#frmComplaint").valid();
+                if ($("#frmComplaint .tab-content .active .field-validation-error").length > 0 || $("#frmComplaint .tab-content .active .field-validation-error").length > 0) { }
+                else {
+                    $("#tab1").fadeIn();
+                    $("#tab1").addClass("active");
+                    $("#tab2").removeClass("active");
+                    $(this).closest("ul").children("li").removeClass("active");
+                    $(this).closest("li").addClass("active");
+                    $("#tab2").hide();
+                    $(".btnPrevious").hide();
+                    $(".btnSubmit").hide();
+                    $(".btnNext").show();
+                    $(".bs-select").selectpicker('refresh');
+                }
+
+                //$("#tab1").fadeIn();
+                //$("#tab1").addClass("active");
+                //$("#tab2").removeClass("active");
+                //$(this).closest("ul").children("li").removeClass("active");
+                //$(this).closest("li").addClass("active");
+                //$("#tab2").hide();
+                //$(".btnPrevious").hide();
+                //$(".btnSubmit").hide();
+                //$(".btnNext").show();
+                //$(".bs-select").selectpicker('refresh');
             });
 
             $("#m_tabs_5_2").click(function () {
-                //$("#frmAssignment").valid();
-                //if ($("#frmAssignment .tab-content .active .field-validation-error").length > 0 || $("#frmAssignment .tab-content .active .field-validation-error").length > 0) { }
-                //else {
-                //    $("#tab2").fadeIn();
-                //    $("#tab2").addClass("active");
-                //    $("#tab1,#tab3,#tab4,#tab5,#tab6").removeClass("active");
-                //    $(this).closest("ul").children("li").removeClass("active");
-                //    $(this).closest("li").addClass("active");
-                //    $("#tab1,#tab3,#tab4,#tab5,#tab6").hide();
-                //    $(".btnPrevious").show();
-                //    $(".btnSubmit").show();
-                //    $(".btnNext").hide();
-                //    $(".bs-select").selectpicker('refresh');
-                //}
-                $("#tab2").fadeIn();
-                $("#tab2").addClass("active");
-                $("#tab1,#tab3,#tab4,#tab5,#tab6").removeClass("active");
-                $(this).closest("ul").children("li").removeClass("active");
-                $(this).closest("li").addClass("active");
-                $("#tab1,#tab3,#tab4,#tab5,#tab6").hide();
-                $(".btnPrevious").show();
-                $(".btnSubmit").show();
-                $(".btnNext").hide();
-                $(".bs-select").selectpicker('refresh');
+                $("#frmComplaint").valid();
+                if ($("#frmComplaint .tab-content .active .field-validation-error").length > 0 || $("#frmComplaint .tab-content .active .field-validation-error").length > 0) { }
+                else {
+                    $("#tab2").fadeIn();
+                    $("#tab2").addClass("active");
+                    $("#tab1,#tab3,#tab4,#tab5,#tab6").removeClass("active");
+                    $(this).closest("ul").children("li").removeClass("active");
+                    $(this).closest("li").addClass("active");
+                    $("#tab1,#tab3,#tab4,#tab5,#tab6").hide();
+                    $(".btnPrevious").show();
+                    $(".btnSubmit").show();
+                    $(".btnNext").hide();
+                    $(".bs-select").selectpicker('refresh');
+                }
+                //$("#tab2").fadeIn();
+                //$("#tab2").addClass("active");
+                //$("#tab1,#tab3,#tab4,#tab5,#tab6").removeClass("active");
+                //$(this).closest("ul").children("li").removeClass("active");
+                //$(this).closest("li").addClass("active");
+                //$("#tab1,#tab3,#tab4,#tab5,#tab6").hide();
+                //$(".btnPrevious").show();
+                //$(".btnSubmit").show();
+                //$(".btnNext").hide();
+                //$(".bs-select").selectpicker('refresh');
             });
 
             if ($("#complaint_regulatory").val() == "No") {
@@ -753,18 +754,19 @@
         });
 
         $(".btnNext").click(function () {
-            //$("#frmAssignment").valid();
-            //if ($("#frmAssignment .tab-content .active .field-validation-error").length > 0) { }
-            //else {
-            //    var selA = $(".employee").find("li.active").children("a").attr("id");
-            //    if (selA == "m_tabs_5_1") {
-            //        $("#m_tabs_5_2").trigger("click");
-            //    }
-            //}
-            var selA = $(".employee").find("li.active").children("a").attr("id");
-            if (selA == "m_tabs_5_1") {
-                $("#m_tabs_5_2").trigger("click");
+            $("#frmComplaint").valid();
+            if ($("#frmComplaint .tab-content .active .field-validation-error").length > 0) { }
+            else {
+                var selA = $(".employee").find("li.active").children("a").attr("id");
+                if (selA == "m_tabs_5_1") {
+                    $("#m_tabs_5_2").trigger("click");
+                }
             }
+
+            //var selA = $(".employee").find("li.active").children("a").attr("id");
+            //if (selA == "m_tabs_5_1") {
+            //    $("#m_tabs_5_2").trigger("click");
+            //}
         });
 
         $(".btnPrevious").click(function () {
@@ -784,14 +786,20 @@
             }
         }
         function chkdropdown(obj) {
-
+            debugger;
             if($("#complaint_ComplaintReceivedRegulatoryId :selected").text() == "NO") {
-                $("#ComplaintReceivedRegulatoryFeedbackId option[text='Not Applicable']").attr('selected', 'selected');
-                //$("#ComplaintReceivedRegulatoryFeedbackId").attr('disabled', 'disabled');
+                var x = document.getElementById("complaint_ComplaintReceivedRegulatoryFeedbackId");
+                for (i = 0; i < x.options.length; i++) {
+                    if (document.getElementById("complaint_ComplaintReceivedRegulatoryFeedbackId").getElementsByTagName("option")[i].text.toString().toUpperCase() == "NOT APPLICABLE") {
+                        document.getElementById("complaint_ComplaintReceivedRegulatoryFeedbackId").getElementsByTagName("option")[i].selected = true;
+                    }
+                    $('#complaint_ComplaintReceivedRegulatoryFeedbackId').selectpicker('render');
+                    $("#complaint_ComplaintReceivedRegulatoryFeedbackId").attr('disabled', 'disabled');
+                }
             }
             else {
-                $("#ComplaintReceivedRegulatoryFeedbackId").removeAttr('disabled');
-                $('#ComplaintReceivedRegulatoryFeedbackId').val("Pending");
+                $("#complaint_ComplaintReceivedRegulatoryFeedbackId").removeAttr('disabled');
+                $('#complaint_ComplaintReceivedRegulatoryFeedbackId').val("");
             }
             $(".bs-select").selectpicker('refresh');
         }

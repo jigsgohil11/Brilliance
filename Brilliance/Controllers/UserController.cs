@@ -59,6 +59,14 @@ namespace Brilliance.Controllers
             response = _iuserDataProvider.GetRole(RoleID);
             return View(response.Data);
         }
+        public ActionResult Role1()
+        {
+            ////_iuserDataProvider = new UserDataProvider();
+            ////var response = new ServiceResponse();
+            ////Guid RoleID = Common.CheckIdNullOrEmpty(id);
+            //response = _iuserDataProvider.GetRole(RoleID);
+            return View();
+        }
         [HttpPost]
         public ActionResult SaveRole(RoleViewModel RoleViewModel)
         {

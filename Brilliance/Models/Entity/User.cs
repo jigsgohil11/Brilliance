@@ -1,6 +1,7 @@
 ﻿using Brilliance.Infrastructure;
 using PetaPoco;
 using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace Brilliance.Models.Entity
 {
@@ -11,13 +12,18 @@ namespace Brilliance.Models.Entity
     {
         public Guid UserID { get; set; }
         public string UserName { get; set; }
+        [Required(ErrorMessage = "Password is required.")]
         public string Password { get; set; }
         public string EncryptionKey { get; set; }
+        [Required(ErrorMessage = "First name is required.")]
         public string FirstName { get; set; }
+        [Required(ErrorMessage = "Last name is required.")]
         public string LastName { get; set; }
         public string UserImage { get; set; }
         public string DisplayName { get; set; }
+        [Required(ErrorMessage = "EmailID is required.")]
         public string EmailID { get; set; }
+        [Required(ErrorMessage = "Contact no. is required.")]
         public string PhoneNumber { get; set; }
         public Guid? TimeZone { get; set; }
         public string UserType_Term { get; set; }

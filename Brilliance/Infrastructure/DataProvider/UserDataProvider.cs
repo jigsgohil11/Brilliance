@@ -68,8 +68,9 @@ namespace Brilliance.Infrastructure.DataProvider
                     cmd.Parameters.AddWithValue("@FirstName", Usermodel.User.FirstName).SqlDbType = SqlDbType.NVarChar;
                     cmd.Parameters.AddWithValue("@LastName", Usermodel.User.LastName).SqlDbType = SqlDbType.NVarChar;
                     cmd.Parameters.AddWithValue("@EmailID", Usermodel.User.EmailID).SqlDbType = SqlDbType.NVarChar;
-                    cmd.Parameters.AddWithValue("@Password", Usermodel.User.Password).SqlDbType = SqlDbType.NVarChar;
-                    cmd.Parameters.AddWithValue("@ClientID", Usermodel.User.ClientID).SqlDbType = SqlDbType.UniqueIdentifier;
+                    cmd.Parameters.AddWithValue("@Password", Crypto.Encrypt(Usermodel.User.Password.Trim())).SqlDbType = SqlDbType.NVarChar;
+                    //cmd.Parameters.AddWithValue("@ClientID", Usermodel.User.ClientID).SqlDbType = SqlDbType.UniqueIdentifier;
+                    cmd.Parameters.AddWithValue("@PhoneNumber", Usermodel.User.PhoneNumber).SqlDbType = SqlDbType.NVarChar;
                     cmd.Parameters.AddWithValue("@CreatedOn", DateTime.Now).SqlDbType = SqlDbType.DateTime;
                     cmd.Parameters.AddWithValue("@UpdatedOn", null).SqlDbType = SqlDbType.DateTime;
                     cmd.Parameters.AddWithValue("@CreatedBy", SessionHelper.UserId).SqlDbType = SqlDbType.UniqueIdentifier;
@@ -82,12 +83,13 @@ namespace Brilliance.Infrastructure.DataProvider
                 }
                 else
                 {
-                    cmd.Parameters.AddWithValue("@UserID", Guid.NewGuid()).SqlDbType = SqlDbType.UniqueIdentifier;
+                    cmd.Parameters.AddWithValue("@UserID", Usermodel.User.UserID).SqlDbType = SqlDbType.UniqueIdentifier;
                     cmd.Parameters.AddWithValue("@FirstName", Usermodel.User.FirstName).SqlDbType = SqlDbType.NVarChar;
                     cmd.Parameters.AddWithValue("@LastName", Usermodel.User.LastName).SqlDbType = SqlDbType.NVarChar;
                     cmd.Parameters.AddWithValue("@EmailID", Usermodel.User.EmailID).SqlDbType = SqlDbType.NVarChar;
-                    cmd.Parameters.AddWithValue("@Password", Usermodel.User.Password).SqlDbType = SqlDbType.NVarChar;
-                    cmd.Parameters.AddWithValue("@ClientID", Usermodel.User.ClientID).SqlDbType = SqlDbType.UniqueIdentifier;
+                    cmd.Parameters.AddWithValue("@Password", Crypto.Encrypt(Usermodel.User.Password.Trim())).SqlDbType = SqlDbType.NVarChar;
+                    //cmd.Parameters.AddWithValue("@ClientID", Usermodel.User.ClientID).SqlDbType = SqlDbType.UniqueIdentifier;
+                    cmd.Parameters.AddWithValue("@PhoneNumber", Usermodel.User.PhoneNumber).SqlDbType = SqlDbType.NVarChar;
                     cmd.Parameters.AddWithValue("@UpdatedOn", DateTime.Now).SqlDbType = SqlDbType.DateTime;
                     cmd.Parameters.AddWithValue("@UpdatedBy", SessionHelper.UserId).SqlDbType = SqlDbType.UniqueIdentifier;
                     cmd.Parameters.AddWithValue("@IsEdit", Usermodel.User.IsEdit).SqlDbType = SqlDbType.Bit;
