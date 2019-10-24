@@ -245,13 +245,15 @@
                     success: function (data) {
                         BindGrid();
                         HideLoader();
-                      
+                        ShowMessage(data.Message);
+
                         $('#exampleModalLong').modal('hide');
                         $("#frmsuboutcome").trigger("reset");
                     },
                     failure: function (ex) {
                         BindGrid();
-                        alert(data.Message)
+                        ShowMessage(data.Message, "error");
+
                     }
                 });
             }

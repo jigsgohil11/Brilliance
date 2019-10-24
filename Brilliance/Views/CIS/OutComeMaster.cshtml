@@ -85,7 +85,7 @@
                             <div class="form-group">
                                 <div class="col-md-12">
                                     <label>Code</label>
-                                    @Html.TextBoxFor(x => x.Code, new { @class = "form-control", @style = "width:47%;", @readonly = "readonly", @Value = _icisDataProvider.MasterCont().ToString() })
+                                    @Html.TextBoxFor(x => x.Code, new { @class = "form-control", @style = "width:47%;", @readonly = "readonly" })
                                     @Html.HiddenFor(x => x.GroupId)
                                     @Html.HiddenFor(x => x.IsEdit)
                                 </div>
@@ -173,6 +173,7 @@
 
             $(".drpmaster").hide();
             BindGrid();
+            BindCode();
         });
     </script>
     <script>
@@ -364,8 +365,9 @@
                         
                         if (data.IsSuccess == true)
                         {
+                            ShowMessage(data.Message);
                             BindGrid();
-                            SetMessageForPageLoad(response.Message, "OutcomeSaved");
+                            
                         }
                         else if (data.IsSuccess == false)
                         {
@@ -414,14 +416,15 @@
                         BindGrid();
                         HideLoader();
                         debugger;
-                       
-                        $('#exampleModalLong').modal('hide');
                         $("#frmoutcome").trigger("reset");
-                        SetMessageForPageLoad(data.IsSuccess, "OutcomeSaved");
+                        $('#exampleModalLong').modal('hide');
+                        BindCode();
+                        ShowMessage(data.Message);
+                       
                         
                         //$("#GroupId").val(''),
                         //$("#HoldingEntityId").val(''),
-                        //$("#Code").val(''),
+                     
                         //$("#IsVisible").prop('unchecked'),
                         //$("#Title").val(''),
                         //$("#Description").val(''),
@@ -430,7 +433,7 @@
                     },
                     failure: function (ex) {
                         BindGrid();
-                        alert(data.Message)
+                        ShowMessage(data.Message, "error");
                     }
                 });
             }
@@ -479,7 +482,7 @@
             });
         }
     </script>
-<script>
+     <script>
     $("#coderef").on('change', function () {
         var currentval = $("#coderef").val();
         var EntityId = $("#HoldingEntityId").val();
@@ -507,6 +510,24 @@
 
     })
 </script>
+     <script>
+      function BindCode()
+      {
+          var url = '@Url.Action("MasterCont", "CIS")';
+          $.ajax({
+              url: url,
+              method: 'get',
+              data: {},
+              success: function (data) {
+                  $("#Code").val(data);
 
+                  
+              }
+          })
+
+
+      }
+
+  </script>
     }
 

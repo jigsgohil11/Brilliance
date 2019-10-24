@@ -89,7 +89,7 @@
         function SaveRoleResponse(response) {
             if (response.IsSuccess) {
                 SetMessageForPageLoad(response.Message, "Rolesaved");
-                window.location.href = "/Role/RoleList/";
+                window.location.href = "/User/RoleList/";
             } else {
                 ShowMessage(response.Message, "error");
             }
