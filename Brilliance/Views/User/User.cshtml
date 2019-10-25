@@ -71,7 +71,9 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label>Contact Number</label>
-                                            @Html.TextBoxFor(m => m.User.PhoneNumber, new { @class = "form-control m-input", @placeholder = "Enter Contact Number" })                                            
+                                            @Html.TextBoxFor(m => m.User.PhoneNumber, new { @class = "form-control m-input", @placeholder = "Enter Contact Number" })
+                                            @Html.ValidationMessageFor(m => m.User.PhoneNumber)
+
                                         </div>
                                     </div>
                                 </div>
@@ -80,15 +82,18 @@
                                         <div class="form-group">
                                             <label>Password</label>
                                             @Html.TextBoxFor(m => m.User.Password, new { @class = "form-control m-input", @placeholder = "Enter Password" })
+                                            @Html.ValidationMessageFor(m => m.User.Password)
+
+
                                         </div>
                                     </div>
-                                    <div class="col-md-6">
+                                    @*<div class="col-md-6">
                                         <div class="form-group">
                                             <label>Role</label>
                                             @Html.DropDownListFor(m => m.User.SelectedRoleID, new SelectList(Model.RoleList, "Value", "Text", 0), "--Select Role--", new { @data_live_search = "true", @class = "form-control bs-select" })
                                             @Html.ValidationMessageFor(m => m.User.SelectedRoleID)
                                         </div>
-                                    </div>
+                                    </div>*@
                                 </div>
                                 <div class="form-actions">
                                     <div class="col-lg-12  text-right">

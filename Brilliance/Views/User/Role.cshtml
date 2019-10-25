@@ -45,13 +45,13 @@
                             <form action="/User/SaveRole" id="frmRole" data-ajax-success="SaveRoleResponse(data);" data-ajax="true" data-ajax-method="Post" method="post">
                                 @Html.HiddenFor(m => m.role.RoleID)
                                 <div class="row">
-                                    <div class="col-md-6">
+                                    @*<div class="col-md-6">
                                         <div class="form-group">
                                             <label>Code</label>
                                             @Html.TextBoxFor(m => m.role.RoleCode, new { @class = "form-control m-input", @placeholder = "Enter Role Code" })
                                             @Html.ValidationMessageFor(m => m.role.RoleCode)
                                         </div>
-                                    </div>
+                                    </div>*@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label>Name</label>

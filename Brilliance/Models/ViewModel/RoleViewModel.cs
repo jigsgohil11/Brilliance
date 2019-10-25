@@ -8,10 +8,10 @@ namespace Brilliance.Models.ViewModel
         public RoleViewModel()
         {
             role = new Role();
-            loginUserRoleRightModel = new List<LoginUserRoleRightModel>();
+            //loginUserRoleRightModel = new List<LoginUserRoleRightModel>();
         }
         public Role role { get; set; }
-        public List<LoginUserRoleRightModel> loginUserRoleRightModel { get; set; }
+        //public List<LoginUserRoleRightModel> loginUserRoleRightModel { get; set; }
 
     }
     public class RoleListModel
