@@ -14,7 +14,6 @@ namespace Brilliance.Models.Entity
         public Guid RoleID { get; set; }
         public string RoleCode { get; set; }
         public string RoleName { get; set; }
-        public string DisplayName { get; set; }
         public string AboutRole { get; set; }
         public Guid? ClientID { get; set; }
         public bool? IsDefault { get; set; }

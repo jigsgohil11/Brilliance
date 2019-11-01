@@ -6822,18 +6822,17 @@
     <Content Include="Views\CIS\Index.cshtml" />
     <Content Include="Views\CIS\OutComeMaster.cshtml" />
     <Content Include="Views\CIS\SuboutComes.cshtml" />
-    <Content Include="Views\User\UserList.cshtml" />
-    <Content Include="Views\User\Role1.cshtml" />
+    <Content Include="Views\User\User.cshtml" />
     <Content Include="Views\User\UserList.cshtml" />
     <Content Include="Views\CRT\_AddNotes.cshtml" />
     <Content Include="Views\CIS\TCFNote.cshtml" />
     <Content Include="Views\CIS\TCFTask.cshtml" />
-    <Content Include="Views\User\User.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="assets\apps\img\" />
     <Folder Include="assets\global\plugins\angularjs\plugins\angular-file-upload\uploads\" />
+    <Folder Include="Views\Test\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
