@@ -4,8 +4,7 @@
     ViewBag.Title = "OutComeMaster";
     Layout = "~/Views/Shared/_Layout_public.cshtml";
     ConductDataprovider _icisDataProvider = new ConductDataprovider();
-    string _code = _icisDataProvider.MasterCont().ToString();
-    ViewBag.cd = _code;
+   
 }
 <link href="~/Content/kendoStyles.css" rel="stylesheet" />
 <link rel="stylesheet" href="https://app.brillianceib.com/bundles/knockout?v=mKy6cxTu1mioyNO6m4RTtIqEAZBgJ9YqLsg1ixYmtsM1" />
@@ -98,7 +97,7 @@
                                 <ul class="fieldlist">
                                     <li>
                                         <input type="checkbox" id="IsVisible" class="k-checkbox" name="IsVisible">
-                                        <label class="k-checkbox-label" for="IsVisible">Is Group</label>
+                                        <label class="k-checkbox-label" for="IsVisible">Sub Outcome group</label>
                                     </li>
                                 </ul>
                             </div>
@@ -108,7 +107,7 @@
                             <div class="form-group titleqgroup">
                                 <div class="col-md-12">
                                     <label>Title</label>
-                                    @Html.TextBoxFor(x => x.Title, new { @class = "form-control", @style = "width:47%;" })
+                                    @Html.TextBoxFor(x => x.Title, new { @class = "form-control", @style = "width:47%;", @readonly = "readonly" })
                                 </div>
 
                             </div>
@@ -173,7 +172,7 @@
 
             $(".drpmaster").hide();
             BindGrid();
-            BindCode();
+            //BindCode();
         });
     </script>
     <script>
@@ -418,18 +417,9 @@
                         debugger;
                         $("#frmoutcome").trigger("reset");
                         $('#exampleModalLong').modal('hide');
-                        BindCode();
+                        ///BindCode();
                         ShowMessage(data.Message);
-                       
-                        
-                        //$("#GroupId").val(''),
-                        //$("#HoldingEntityId").val(''),
-                     
-                        //$("#IsVisible").prop('unchecked'),
-                        //$("#Title").val(''),
-                        //$("#Description").val(''),
-                        //$("#coderef").val(''),
-                        //$("#IsEdit").val('')
+                      
                     },
                     failure: function (ex) {
                         BindGrid();
@@ -497,7 +487,7 @@
                 success: function (data) {
                     $("#Code").val(currentval);
                     
-                    var cde = currentval + data;
+                    var cde ='Outcome '+currentval + data +':';
                     $("#Title").val(cde);
                 }
             })
@@ -511,22 +501,21 @@
     })
 </script>
      <script>
-      function BindCode()
-      {
-          var url = '@Url.Action("MasterCont", "CIS")';
-          $.ajax({
-              url: url,
-              method: 'get',
-              data: {},
-              success: function (data) {
-                  $("#Code").val(data);
+         $("#HoldingEntityId").on('change', function () {
+             var url = '@Url.Action("MasterCont", "CIS")';
+             $.ajax({
+                 url: url,
+                 method: 'get',
+                 data: { EntityId: $("#HoldingEntityId").val()},
+                 success: function (data) {
+                     debugger;
+                     $("#Code").val(data.response);
+                     $("#Title").val(data._response);
 
-                  
-              }
-          })
-
-
-      }
+                 }
+             })
+         })
+    
 
   </script>
     }

@@ -1,21 +1,23 @@
 ﻿@model Brilliance.Models.Entity.TCFForm
 
-    <table class="table table-bordered table-condensed main-multi-field-wrapper">
+    <table class="table table-bordered table-condensed main-multi-field-wrapper" id="tbltask">
 
         <tbody class="sub-multi-fields">
 
-            @if (Model.TCFNotes.Count > 0)
+            @if (Model.TCFOutCome!= null)
             {
-                foreach (var item in Model.TCFNotes)
+                foreach (var item in Model.TCFOutCome.TCFSubOutCome.TCFNotes)
                 {
-                    var index = Model.TCFNotes.IndexOf(item);
+                    var index = Model.TCFOutCome.TCFSubOutCome.TCFNotes.IndexOf(item);
             <tr class="multi-field" id="1">
                 <td width="1%">@(index+1)</td>
                 <td>
-                    @Html.TextAreaFor(x => x.TCFNotes[index].Note, new { @class = "form-control" })
-                    @Html.TextAreaFor(x => x.TCFNotes[index].NoteId, new { @class = "txtnote" })
+                    @Html.TextAreaFor(x => x.TCFOutCome.TCFSubOutCome.TCFNotes[index].Note, new { @class = "form-control" })
+                    @Html.TextAreaFor(x => x.TCFOutCome.TCFSubOutCome.TCFNotes[index].NoteId, new { @class = "txtnote" })
                 </td>
-               
+                <td width="1%">
+                    <button type="button" class="remove-note btn btn-xs btn-danger"><i class="fa fa-remove"></i></button>
+                </td>
                </tr>
                 }
 
@@ -30,12 +32,12 @@
                 <td width="98%">
 
 
-                    <textarea class="form-control" cols="20" id="TCFNotes[0].Note" name="TCFNotes[0].Note" rows="2" style="width:100%;"></textarea>
-                    <input type="text" id="TCFNotes[index].NoteId" name="TCFNotes[index].NoteId" class="txtnote" value="Note ID:01" readonly />
+                    <textarea class="form-control" cols="20" id="TCFOutCome.TCFSubOutCome.TCFNotes[0].Note" name="TCFOutCome.TCFSubOutCome.TCFNotes[0].Note" rows="2" style="width:100%;"></textarea>
+                    <input type="text" id="TCFOutCome.TCFSubOutCome.TCFNotes[0].NoteId" name="TCFOutCome.TCFSubOutCome.TCFNotes[0].NoteId" class="txtnote" value="Note ID:01" readonly />
                 </td>
                
                 <td width="1%">
-                    <button type="button" class="remove-field btn btn-xs btn-danger"><i class="fa fa-remove"></i></button>
+                    <button type="button" class="remove-note btn btn-xs btn-danger"><i class="fa fa-remove"></i></button>
                 </td>
             </tr>
             }
@@ -46,7 +48,7 @@
 
             <tr>
                 <th colspan="14">
-                    <button type="button" style="display:none;" class="add-field btn btn-xs btn-primary"><i class="fa fa-plus"></i>&nbsp;Add Row</button>
+                    <button type="button" style="display:none;" class="add-note btn btn-xs btn-primary"><i class="fa fa-plus"></i>&nbsp;Add Row</button>
                 </th>
             </tr>
         </tbody>

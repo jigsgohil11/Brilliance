@@ -286,6 +286,5 @@ C:\Users\Zaidi\source\repos\jigsgohil11\Brilliance\Brilliance\bin\Microsoft.AI.D
 C:\Users\Zaidi\source\repos\jigsgohil11\Brilliance\Brilliance\bin\Microsoft.AI.ServerTelemetryChannel.xml
 C:\Users\Zaidi\source\repos\jigsgohil11\Brilliance\Brilliance\bin\Microsoft.AI.WindowsServer.xml
 C:\Users\Zaidi\source\repos\jigsgohil11\Brilliance\Brilliance\bin\Microsoft.AI.Web.xml
-C:\Users\Zaidi\source\repos\jigsgohil11\Brilliance\Brilliance\obj\Debug\Brilliance.csprojResolveAssemblyReference.cache
 C:\Users\Zaidi\source\repos\jigsgohil11\Brilliance\Brilliance\obj\Debug\Brilliance.Resource.Resource.resources
 C:\Users\Zaidi\source\repos\jigsgohil11\Brilliance\Brilliance\obj\Debug\Brilliance.csproj.GenerateResource.Cache

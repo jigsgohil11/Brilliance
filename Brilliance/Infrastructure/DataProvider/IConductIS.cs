@@ -12,7 +12,7 @@ namespace Brilliance.Infrastructure.DataProvider
 {
     interface IConductIS
     {
-        ConductDataViewModel TCFQuestionGroupList();
+        ConductDataViewModel TCFQuestionGroupList(Guid userid);
 
         List<SelectListItem> BindOutcome();
         List<SelectListItem> BindOutcomeRating();
@@ -20,7 +20,8 @@ namespace Brilliance.Infrastructure.DataProvider
         List<SelectListItem> GetGroupcode();
         ServiceResponse SaveOutcome(TCFQuestionGroup outcome);
         int GroupCount();
-        int MasterCont();
+        int MasterCont(Guid EntityId);
+        string Prcoutcometitle(Guid EntityId);
         string GetSuboutcomeCode(Guid Id);
         string GetGroupSubCode(int count);
         int GrupcntByEntity(int Id, Guid entityId);
@@ -34,5 +35,20 @@ namespace Brilliance.Infrastructure.DataProvider
 
         TCFQuestion GetTCFQuestionById(Guid Id);
         ServiceResponse DeleteoutcomeMaster(Guid Id);
+        List<SelectListItem> BindUsers();
+        ServiceResponse SaveTCFForm(TCFForm form);
+
+
+        TCFSubOutCome _GetSuboutcomeById(Guid Id);
+        int RemoveTcfImages(TCFFormEvidence ev);
+        ServiceResponse SaveTcfImage(TCFFormEvidence _TCFFormEvidence);
+        ServiceResponse UpdateUserSuboutcome(TCFSubOutCome _model);
+        List<TCFFormEvidence> _TCFFormEvidence(Guid Id,Guid TCFQuestionId);
+        List<TCFNotes> _GetNotes(Guid Id, Guid TCFQuestionId);
+        List<TCFTask> _GetTask(Guid Id, Guid TCFQuestionId);
+        int RemoveTcfTask(TCFTask ev);
+        int RemoveTcfNotes(TCFNotes ev);
+        ServiceResponse SaveTCFTask(TCFTask _model);
+        ServiceResponse SaveTCFNotes(TCFNotes _model);
     }
 }

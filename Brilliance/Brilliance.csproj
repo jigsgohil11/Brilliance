@@ -6411,10 +6411,12 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\kendoStyles.css" />
+    <Content Include="Content\sprite.png" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Images\iconfinder_add_green_619545.png" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="ApplicationInsights.config">
@@ -6774,6 +6776,7 @@
     <Content Include="assets\global\plugins\wysihtml\minified\wysihtml.toolbar.min.map" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Scripts\bootstrapKendo.js" />
     <Content Include="Scripts\bootstrapvalidator.min.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -6783,9 +6786,15 @@
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\jszip.min.js" />
+    <Content Include="Scripts\kendo.all.min.js" />
     <Content Include="Scripts\kendoScripts.js" />
+    <Content Include="Scripts\knockout.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\multifieldwrapper.js" />
+    <Content Include="Scripts\multifieldwrapperFileUpload.js" />
+    <Content Include="Scripts\multifieldwrapperNote.js" />
+    <Content Include="Scripts\multifieldwrapperTask.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <None Include="Scripts\_references.js" />
@@ -6827,6 +6836,8 @@
     <Content Include="Views\CRT\_AddNotes.cshtml" />
     <Content Include="Views\CIS\TCFNote.cshtml" />
     <Content Include="Views\CIS\TCFTask.cshtml" />
+    <Content Include="Views\CIS\_UploadFile.cshtml" />
+    <Content Include="Views\CIS\_TCFRegisterUser.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -6873,7 +6884,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>0</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:60819/</IISUrl>
+          <IISUrl>http://localhost:41128/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

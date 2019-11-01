@@ -1,0 +1,61 @@
+﻿@model Brilliance.Models.Entity.TCFForm
+@using (Html.BeginForm("Index", "CIS", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+<table class="table table-bordered table-condensed main-multi-field-wrapper">
+   
+    <tbody class="sub-multi-fields">
+        @if (Model.TCFOutCome!= null)
+        {
+            if (Model.TCFOutCome.TCFSubOutCome.TCFFormEvidence.Count > 0)
+            {
+                foreach (var item in Model.TCFOutCome.TCFSubOutCome.TCFFormEvidence)
+                {
+                    var index = Model.TCFOutCome.TCFSubOutCome.TCFFormEvidence.IndexOf(item);
+                    <tr class="multi-field" id="1">
+                        <td width="1%">@(index + 1)</td>
+                        <td>
+                            @Html.TextBoxFor(model => model.TCFOutCome.TCFSubOutCome.TCFFormEvidence[index].files, "", new { @type = "file" })
+
+
+                        </td>
+
+                    </tr>
+                }
+
+            }
+        }
+
+
+
+        else
+        {
+            <tr class="multi-field" id="1">
+                <td width="1%">1</td>
+
+                <td width="98%">
+                    <input type="file" name="files" id="TCFOutCome.TCFSubOutCome.TCFFormEvidence[0].files" />
+                  
+
+                </td>
+
+                <td width="1%">
+                    <button type="button" class="remove-note btn btn-xs btn-danger"><i class="fa fa-remove"></i></button>
+                </td>
+            </tr>
+        }
+
+
+    </tbody>
+    <tbody>
+
+        <tr>
+            <th colspan="14">
+                <button type="button"  class="add-file btn btn-xs btn-primary"><i class="fa fa-plus"></i>&nbsp;Add Row</button>
+            </th>
+        </tr>
+    </tbody>
+</table>
+
+
+}
+

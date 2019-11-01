@@ -1,28 +1,27 @@
 ﻿// For Add Add Functionality
 
-function InitCloning() {
-   
+function InitTaskCloning() {
+
     try {
-       
+
         $('.main-multi-field-wrapper').each(function () {
             //$('.select2').each(function(){$(this).select2("destroy")});
-           
+
             var $wrapper = $('.sub-multi-fields', this);
             var $this = $(this);
-          
-            $(".add-field", $this).click(function (e) {
-                
-               
+
+            $(".add-task", $this).click(function (e) {
+
+
                 debugger;
                 var $len = $('.multi-field', $wrapper).length;
                 var $clone = $('.multi-field:first-child', $wrapper);
-               
-                if ($len == 20)
-                {
+
+                if ($len == 20) {
                     alert('Cannt added')
                     return false;
                 }
-                $clone.clone().appendTo($wrapper).find('input,select,file').each(function () {
+                $clone.clone().appendTo($wrapper).find('input,textarea,radio,select').each(function () {
                     /// $len = $len + 1;
                     debugger;
                     if ($(this).hasClass("clr")) {
@@ -38,8 +37,8 @@ function InitCloning() {
                             debugger;
                             $(ctrl).val('Note ID:0' + $len + 1);
                         }
-                       
-                        
+
+
                     }
                     else {
                         $(this).attr('id', $(this).attr('id'), $len);
@@ -50,10 +49,10 @@ function InitCloning() {
                         $(this).attr('name', $(this).attr('name').replace(/\d+/g, $len));
                         if ($(this).hasClass("txtnote")) {
                             debugger;
-                            var sr=parseInt($len)+1
-                            $(ctrl).val('Note ID:0' +sr);
+                            var sr = parseInt($len) + 1
+                            $(ctrl).val('Note ID:0' + sr);
                         }
-                       
+
 
                     }
 
@@ -74,9 +73,9 @@ function InitCloning() {
 
                     $(this).find('td:first-child').html(idx + 1);
                 });
-               ///// select2 = $('.select2').select2();
+                ///// select2 = $('.select2').select2();
             });
-            $($wrapper).on("click", ".multi-field .remove-field", function (e) {
+            $($wrapper).on("click", ".multi-field .remove-task", function (e) {
 
                 var dltid = $(this).attr('data-dlt-id');
                 var $cthis = $(this);
@@ -103,19 +102,22 @@ function InitCloning() {
         function RemoveColumn($wrapper, $this, $cthis) {
             if ($('.multi-field', $wrapper).length > 1) {
                 ////select2.select2('destroy');
-              
+
                 $cthis.closest('tr').remove();
                 $('.multi-field', $wrapper).each(function (indx) {
                     $(this).find('input,select').each(function () {
                         var $ths = $(this);
-                        
+
                         $ths.attr('name', $ths.attr('name').replace(/\d+/g, indx));
                     });
                 });
-               //// select2 = $('.select2').select2();
+                //// select2 = $('.select2').select2();
             }
-            else {
-                $("#divadd").hide();
+            else if ($('.multi-field', $wrapper).length==1) {
+              
+                $("#divtsk").hide();
+                $(".addtask").show();
+                $(".addt").hide();
             }
             //TotlaAmt($wrapper, $this);
             $('.multi-field', $wrapper).each(function (idx) {

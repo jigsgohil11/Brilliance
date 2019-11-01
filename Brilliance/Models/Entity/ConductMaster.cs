@@ -58,18 +58,23 @@ namespace Brilliance.Models.Entity
     public class TCFFormEvidence
     {
         [Key]
-        public int Id { get; set; }
-        public int ClusterId { get; set; }
-        public int TCFPeriodId { get; set; }
-        public int TCFQuestionId { get; set; }
+        public Guid Id { get; set; }
+        public Guid TcformId { get; set; }
+        public Guid ClusterId { get; set; }
+        public Guid TCFPeriodId { get; set; }
+        public Guid TCFQuestionId { get; set; }
         public string FileName { get; set; }
         public string FileExtension { get; set; }
         public byte FileAttachment { get; set; }
 
         public DateTime CreatedAt { get; set; }
-        public int CreatedBy { get; set; }
+        public Guid CreatedBy { get; set; }
         public DateTime ExpiresAt { get; set; }
         public bool IsDeleted { get; set; }
+        [Ignore]
+        public IEnumerable<HttpPostedFileBase> files { get; set; }
+        [Ignore]
+        public bool IsEdit { get { return Id != Guid.Empty ? true : false; } }
     }
 
     public class TCFQuestion
@@ -115,92 +120,153 @@ namespace Brilliance.Models.Entity
     public class TCFQuestionGroupViewmodel
     {
         public Guid Id { get; set; }
+        public Guid OutcomeId { get; set; }
+        public Guid TCFSubOutComeId { get; set; }
+
         public string Code { get; set; }
+        public string Description { get; set; }
+
         public string Title { get; set; }
         public string Qgroup { get; set; }
-        public string Description { get; set; }
         public string Qdesc { get; set; }
         public int Status { get; set; }
+        public int ? PreviousRating { get; set; }
+        public int? CurrentRating { get; set; }
+
+        public string DueDate { get; set; }
         public Guid GroupId { get; set; }
     }
+    [PrimaryKey("Id", autoIncrement = true)]
     public class TCFForm
     {
-        public TCFForm()
-        {
-           _TCFSubOutCome = new List<TCFSubOutCome>();
-            TCFNotes = new List<TCFNotes>();
-            TCFTask= new List<TCFTask>();
-        }
+
         public Guid Id { get; set; }
         public Guid ClusterId { get; set; }
         public Guid TCFPeriodId { get; set; }
-        public Guid TCFQuestionId { get; set; }
+        public Guid BinderHolderTypeId { get; set; }
+        public string Description { get; set; }
+        
+        public DateTime CreatedAt { get; set; }
 
-        public Guid TCFFormRatingId { get; set; }
-        public Guid UserId { get; set; }
-        public DateTime DueDate { get; set; }
+        public Guid CreatedBy { get; set; }
 
+        public DateTime ? UpdatedAt { get; set; }
+
+        public Guid  ? UpdatedBy { get; set; }
+        public int  IsDeleted { get; set; }
+
+
+     
+        public virtual TCFOutCome  TCFOutCome { get; set; }
+        [Ignore]
+        public bool IsEdit { get { return Id != Guid.Empty ? true : false; } }
+        [Ignore]
+        public string images { get; set; }
+        /// public virtual User  _User { get; set; }
+
+    }
+    [PrimaryKey("Id")]
+    public class TCFOutCome
+    {
+        public Guid Id { get; set; }
+        [ForeignKey("TCFForm")]
+        public Guid TCFoutcomeId { set; get; }
+        public  virtual TCFForm TCFForm { get; set; }
+
+        [ForeignKey("TCFForm")]
+        public Guid TCFQuestionGroupId { set; get; }
+        public virtual TCFQuestionGroup TCFQuestionGroup { get; set; }
+
+        public Guid AddedBy { set; get; }
+        public DateTime AddedDate { set; get; }
+        public virtual TCFSubOutCome TCFSubOutCome { get; set; }
+        [Ignore]
+        public bool IsEdit { get { return Id != Guid.Empty ? true : false; } }
+    }
+    [PrimaryKey("Id")]
+    public  class TCFSubOutCome
+    {
+        public TCFSubOutCome()
+        {
+            TCFNotes = new List<TCFNotes>();
+            TCFTask = new List<TCFTask>();
+            TCFFormEvidence = new List<TCFFormEvidence>();
+        }
+        public Guid Id { set; get; }
+        [ForeignKey("TCFSubOutComeId")]
+        public Guid TCFSubOutComeId { set; get; }
+        public virtual TCFOutCome _TCFOutCome { get; set; }
+      
+        public Guid TCFQuestionId { set; get; }
+        [ForeignKey("TCFQuestionId")]
+        public TCFQuestion TCFQuestion { get; set; }
+        public Guid RateId { set; get; }
+        public Guid TCFFormId { set; get; }
+
+        
+        public Guid ? TCFSubOutComeUserId { get; set; }
+        [ForeignKey("TCFSubOutComeUserId")]
+        public virtual User  _User { get; set; }
+       
+
+        public string ReasonNotYet { get; set; }
+
+        public string Reasonmostly { get; set; }
         public string ReasonNotApplicable { get; set; }
 
         public string ReasonPartially { get; set; }
         public string ReasonFully { get; set; }
-        public DateTime ? Reminder1 { get; set; }
-        public DateTime? Reminder2 { get; set; }
-        public DateTime? Reminder3 { get; set; }
+        public Guid AddedBy { set; get; }
+        public DateTime AddedDate { set; get; }
 
-        public int ? Reminder1IsSent { get; set; }
-        public int? Reminder2IsSent { get; set; }
-        public int? Reminder3IsSent { get; set; }
-        public int? Reminder4IsSent { get; set; }
+        public Guid ? ModifiedBy { set; get; }
 
-        public int ? NotificationNRPIsSent { get; set; }
-        public DateTime CreatedAt { get; set; }
-
-        public int CreatedBy { get; set; }
-
-        public DateTime ? UpdatedAt { get; set; }
-
-        public int ? UpdatedBy { get; set; }
-        public int IsDeleted { get; set; }
-
-        public int? TempId { get; set; }
-
+        public DateTime ? ModifiedDate { set; get; }
+        public DateTime ? DueDate { set; get; }
 
         public virtual IList<TCFNotes> TCFNotes { get; set; }
         public virtual IList<TCFTask> TCFTask { get; set; }
-        public virtual IList<TCFSubOutCome> _TCFSubOutCome { get; set; }
-
-    }
-    public  class TCFSubOutCome
-    {
-        public Guid TCFFormId { set; get; }
-        public Guid TCFoutcomeId { set; get; }
-        public Guid RateId { set; get; }
-        public string Note { set; get; }
-        public Guid ? AssignUserId { get; set; }
-        [ForeignKey("AssignUserId")]
-        public virtual User  _User { get; set; }
-        public DateTime DueDate { set; get; }
+        public virtual IList<TCFFormEvidence> TCFFormEvidence { get; set; }
+        [Ignore]
+        public bool IsEdit { get { return TCFSubOutComeUserId != Guid.Empty ? true : false; } }
+      
     }
     public class TCFNotes
     {
         public Guid Id { get; set; }
-        public Guid TcfId { get; set; }
+        [ForeignKey("TCFSubOutComeId")]
+        public Guid TCFSubOutComeId { get; set; }
+        public virtual TCFSubOutCome _TCFSubOutCome { get; set; }
+        public Guid TcformId { get; set; }
+        public Guid TCFQuestionId { get; set; }
         public Guid AddedById { get; set; }
         public DateTime AddedAt { get; set; }
         public string Note { get; set; }
+        [Ignore]
         public string NoteId { get; set; }
         public string Author { get; set; }
+        public Guid ? ModifiedById { get; set; }
+        public DateTime ? ModifiedDate { get; set; }
+        public bool IsDeleted { get; set; }
     }
     public class TCFTask
     {
         public Guid Id { get; set; }
-        public Guid TcfId { get; set; }
+        [ForeignKey("TCFSubOutComeId")]
+        public Guid TCFSubOutComeId { get; set; }
+        public virtual TCFSubOutCome _TCFSubOutCome { get; set; }
+        public Guid TCFQuestionId { get; set; }
+        public Guid TcformId { get; set; }
+
         public Guid AddedById { get; set; }
 
         public Guid AssignUserId { get; set; }
         public DateTime AddedAt { get; set; }
         public string Task { get; set; }
+        public string Status { get; set; }
+        public Guid ? ModifiedById { get; set; }
+        public DateTime ModifiedDate { get; set; }
+        public bool IsDeleted { get; set; }
     }
     public class TCFQuestionViewmodel
     {
