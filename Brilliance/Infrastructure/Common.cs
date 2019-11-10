@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Linq;
 using System.IO;
 using System.Reflection;
 using System.Web;
@@ -15,6 +16,9 @@ using Brilliance.Models.Entity;
 //using Oracle.ManagedDataAccess.Client;
 //using HiQPdf;
 using System.Threading;
+using Brilliance.Models.ViewModel;
+using System.Web.Helpers;
+
 namespace Brilliance.Infrastructure
 {
     public class Common
@@ -497,6 +501,11 @@ namespace Brilliance.Infrastructure
         //    return response;
         //}
 
+        public static LoginUserRoleRightModel IsPermissionAllowed(string permissionName)
+        {
+            List<LoginUserRoleRightModel> LoginUserRoleRightList = Json.Decode<List<LoginUserRoleRightModel>>(SessionHelper.LoginUserRoleRightList).ToList();
+            return (LoginUserRoleRightModel)LoginUserRoleRightList.Where(x => x.DisplayName.Trim().ToLower() == permissionName.Trim().ToLower()).FirstOrDefault();
+        }
         public static ServiceResponse DeletepdffileFromFolder(Guid applicationId, string pdfFilePath)
         {
             var response = new ServiceResponse();

@@ -1,0 +1,78 @@
+﻿@model Brilliance.Models.ViewModel.ProjectTermListByCategory
+@using Brilliance.Infrastructure
+
+<link href="~/assets/global/plugins/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css" rel="stylesheet" type="text/css" />
+<div class="modal-dialog modal-lg">
+    <div class="modal-content">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+            <h4 class="modal-title">@Model.projecttermcategory.CategoryName</h4>
+        </div>
+        <form action="/GeneralSetup/SaveGeneralSetup" id="form_Setup" method="post" data-ajax-success="SaveRoleResponse(data);" data-ajax="true" data-ajax-method="Post" data-ajax-begin="ShowLoader();">
+            <div class="modal-body">
+                @Html.HiddenFor(m => m.projecttermcategory.ProjectTermcategoryID)
+                @Html.HiddenFor(m => m.projecttermcategory.TermID)
+                @Html.HiddenFor(m => m.projecttermcategory.CategoryName)
+
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="form-group ">
+                            <label>@(Model.projecttermcategory.CategoryName + " " + "Code")</label>
+                            @Html.TextBoxFor(m => m.projecttermcategory.TermCode, new { @class = "form-control m-input", @placeholder = "Enter Code" })
+                            @*@Html.ValidationMessageFor(m => m.projecttermcategory.TermCode)*@
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="form-group ">
+                            <label>@(Model.projecttermcategory.CategoryName + " " + "Name")</label>
+                            @Html.TextBoxFor(m => m.projecttermcategory.Term, new { @class = "form-control m-input", @placeholder = "Enter Name" })
+                            @Html.ValidationMessageFor(m => m.projecttermcategory.Term)
+                        </div>
+                    </div>
+                </div>
+
+                @if (!string.IsNullOrEmpty(Model.projecttermcategory.CategoryName) && Model.projecttermcategory.CategoryName.ToUpper() == "NATUREOFCOMPLAINT")
+                {
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="form-group ">
+                                <label>Sector Type</label>
+                                @Html.DropDownListFor(m => m.projecttermcategory.RefTermID, new SelectList(Model.SectorList, "Value", "Text"), "--Select Complaint Category--", new { @data_live_search = "true", @class = "form-control bs-select" })
+                                @Html.ValidationMessageFor(m => m.projecttermcategory.RefTermID)
+                            </div>
+                        </div>
+                    </div>
+                }
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn default" data-dismiss="modal">Cancel</button>
+                <button type="button" onclick="Submitform();" class="btn green">Submit</button>
+            </div>
+        </form>
+    </div>
+</div>
+<!-- /.modal-content -->
+
+<script src="~/assets/global/scripts/OMSCommon.js"></script>
+<script>
+
+    function SaveRoleResponse(response) {
+        if (response == "_Logon_") {
+            window.location.href = "/Login/Login";
+        }
+        else {
+            if (response.IsSuccess) {
+                SetMessageForPageLoad(response.Message, "Generalsetupsaved");
+                window.location.href = "/GeneralSetup/ProjectTermListbyCategory?categoryid=@Brilliance.Infrastructure.Crypto.Encrypt(Model.projecttermcategory.ProjectTermcategoryID.ToString())";
+                ShowPageLoadMessage("Generalsetupsaved", "Setup");
+            } else {
+                ShowMessage(response.Message, "error");
+            }
+        }
+    }
+
+</script>

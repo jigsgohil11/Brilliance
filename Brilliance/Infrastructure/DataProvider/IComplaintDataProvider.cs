@@ -10,6 +10,7 @@ namespace Brilliance.Infrastructure.DataProvider
         ServiceResponse GetComplaint(Guid ComplaintID);
         ServiceResponse SaveComplaints(ComplaintViewModel Complaintmodel);
         ServiceResponse DeleteComplaint(Guid ComplaintID);
+        ServiceResponse GetCompanyCustomRules(Guid CompanyID);
         ServiceResponse GetDivisionByCompany(Guid CompanyID);
         ServiceResponse GetProductByCompany(Guid CompanyID);
     }

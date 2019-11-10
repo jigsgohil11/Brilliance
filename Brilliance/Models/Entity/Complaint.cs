@@ -12,25 +12,35 @@ namespace Brilliance.Models.Entity
     {
 
         public Guid ComplaintID { get; set; }
+        [Required(ErrorMessage ="Company is required.")]
         public Guid? CompanyId { get; set; }
+        [Required(ErrorMessage = "Division is required.")]
         public Guid? DivisionId { get; set; }
+        [Required(ErrorMessage = "Policy number is required.")]
         [MaxLength(50)]
         public string PolicyNumber { get; set; }
         public bool IsClient { get; set; }
         [MaxLength(50)]
         public string ClientIdentificationNumber { get; set; }
         [MaxLength(50)]
+        [Required(ErrorMessage = "First name is required.")]
         public string FirstName { get; set; }
         [MaxLength(50)]
+        [Required(ErrorMessage = "Last name is required.")]
         public string LastName { get; set; }
         [MaxLength(19)]
+        [Required(ErrorMessage = "Contact no. is required.")]
         public string PhoneNo { get; set; }
         [MaxLength(50)]
+        [Required(ErrorMessage = "Email is required.")]
         public string Email { get; set; }
         public Guid? ComplaintProductId { get; set; }
         public Guid? ComplaintProductTypeId { get; set; }
+        [Required(ErrorMessage = "Complaint category is required.")]
         public Guid? ComplaintCategoryId { get; set; }
+        [Required(ErrorMessage = "Nature of complaint is required.")]
         public Guid? ComplaintNatureOfId { get; set; }
+        [Required(ErrorMessage = "received date is required.")]
         public DateTime? DateReceived { get; set; }
         public DateTime? DateIncident { get; set; }
         [MaxLength]

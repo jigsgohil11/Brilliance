@@ -9,7 +9,7 @@ namespace Brilliance.Models.ViewModel
         public ComplaintViewModel()
         {
             complaint = new Complaint();
-            //NoteList = new List<CRTNotes>();
+            NoteList = new List<CRTNotes>();
             CompanyList = new List<SelectListItem>();
             DivisionList = new List<SelectListItem>();
             DisatisfactionLevelList = new List<SelectListItem>();
@@ -29,7 +29,7 @@ namespace Brilliance.Models.ViewModel
             CaseFileStageList = new List<SelectListItem>();
         }
         public Complaint complaint { get; set; }
-        //public List<CRTNotes> NoteList { get; set; }
+        public List<CRTNotes> NoteList { get; set; }
         public List<SelectListItem> CompanyList { get; set; }
         public List<SelectListItem> DivisionList { get; set; }
         public List<SelectListItem> DisatisfactionLevelList { get; set; }

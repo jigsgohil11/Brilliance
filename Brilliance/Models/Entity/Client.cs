@@ -57,7 +57,11 @@ namespace Brilliance.Models.Entity
         public string Description { get; set; }
         [Required(ErrorMessage = "Address is required.")]
         public string Address { get; set; }
-       
+        public string UnitNo { get; set; }
+        public string Complex { get; set; }
+        public string StreetNo { get; set; }
+        public string Street { get; set; }
+
         [Ignore]
         public string EncryptedClientID { get { return ClientID != Guid.Empty ? Crypto.Encrypt(Convert.ToString(ClientID)) : null; } }
 

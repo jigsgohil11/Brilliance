@@ -1,74 +1,147 @@
-﻿@model Brilliance.Models.Entity.TCFForm
+﻿@model Brilliance.Models.Entity.TCFQuestion
 @using Brilliance.Infrastructure.DataProvider;
 @{
-   
+
     ConductDataprovider _icisDataProvider = new ConductDataprovider();
+    Guid taskid = new Guid();
 }
 
 
 
-
 <table class="table table-bordered table-condensed main-multi-field-wrapper">
-   
+
     <tbody class="sub-multi-fields">
-
-        @if (Model.TCFOutCome != null)
-        {
-            foreach (var item in Model.TCFOutCome.TCFSubOutCome.TCFTask)
+        
+        @if (Model.TCFTask.Count > 0)
             {
-                var index = Model.TCFOutCome.TCFSubOutCome.TCFTask.IndexOf(item);
-                <tr class="multi-field" id="@index">
-                    <td width="1%">@(index + 1)</td>
-
-                    <td width="40%">
-                        @Html.DropDownListFor(x => x.TCFOutCome.TCFSubOutCome.TCFTask[index].AssignUserId, _icisDataProvider.BindOutcomeRating(), "...", new { @class = "form-control", @style = "width:100%;" })
-
-
-
-                    </td>
-                    <td width="58%">
-                        @Html.TextBoxFor(x => x.TCFOutCome.TCFSubOutCome.TCFTask[index].Task, new { @class = "form-control", @placeholder = "Assign Task to user..." })
-                        <br />
-
-                        @Html.DropDownListFor(x => x.TCFOutCome.TCFSubOutCome.TCFTask[index].AssignUserId, _icisDataProvider.BindUsers(), "...", new { @class = "form-control", @style = "width:100%;", @required = "required" })
+                foreach (var item in Model.TCFTask)
+                {
+                    var index = Model.TCFTask.IndexOf(item);
+                     taskid = item.AssignUserId;
+                    <tr class="multi-field" id="1">
+                        <td width="1%">@(index + 1)</td>
 
 
-                    </td>
-                    <td width="1%">
-                        <button type="button" class="remove-task btn btn-xs btn-danger"><i class="fa fa-remove"></i></button>
-                    </td>
-                </tr>
 
-            }
+                        <td width="78%">
+                            @Html.TextAreaFor(x => x.TCFTask[index].Task, new { @class = "form-control" })
+                            <br />
+                            <span style="font-family:'Times New Roman'; font-weight:bold;">Task </span> <span> Owner who will do the task</span>
+                            @Html.DropDownListFor(x => x.TCFTask[index].AssignUserId, _icisDataProvider.BindUsers(taskid), "...", new { @class = "form-control", @style = "width:100%;", @required = "required",@Value=Model.TCFTask[index].AssignUserId })
+                            <br />
+                            @Html.TextBoxFor(x => x.TCFTask[index].DueDate, new { @class = "form-control tskduedate", @style = "width:47%;" })
 
-        }
+                        </td>
+                        <td width="18%">
+                           
+                                @foreach (var r in item._TaskStatus)
+                                {
+                                    @Html.RadioButtonFor(m =>m.TCFTask[index].Status, r.Value,new { @style="display:block;"})
+                                    <span>@r.Value</span>
+                                }
+
+                            
+                            @*<label style="display: block;font-family:'Times New Roman', Times, serif;font-weight:bold;"><input name="@cl" type="radio" value="Assigned">Assigned</label>
+                            <label style="display: block;font-family:'Times New Roman', Times, serif;font-weight:bold;"><input name="@cl" type="radio" value="In progress">In progress</label>
+                            <label style="display: block;font-family:'Times New Roman', Times, serif;font-weight:bold;"><input name="@cl" type="radio" value="Completed">Completed</label>*@
+                        </td>
+        @*<td width="15%">
+                @{ 
+                    string check = item.Status;
+                   
+                    
+                    }
+                @if (check == "Assigned")
+                {
+                    var Id = "Model.TCFTask[" + index + "].Status_" + index + "0";
+                    var cl = "Model.TCFTask[" + index + "].Status";
+                    <label style="display: block;font-family:'Times New Roman', Times, serif;font-weight:bold;">
+
+                        <input name="@cl" type="radio" value="Assigned" checked>Assigned
+                    </label>
+                }
+                else
+                {
+                    var cl = "Model.TCFTask[" + index + "].Status";
+                    var Id = "Model.TCFTask[" + index + "].Status_" + index + "0";
+                    <label style="display: block;font-family:'Times New Roman', Times, serif;font-weight:bold;">
+                        <input name="@cl"  type="radio" value="Assigned">Assigned
+                    </label>
+                }
+                @if (check == "In progress")
+                {
+                    var cl = "Model.TCFTask[" + index + "].Status";
+                    var Id = "Model.TCFTask[" + index + "].Status_" + index + "1";
+                    <label style="display: block;font-family:'Times New Roman', Times, serif;font-weight:bold;">
+                        <input name="@cl"  type="radio" value="In progress" checked>In progress
+                    </label>
+                }
+                else
+                {
+                    var Id = "Model.TCFTask[" + index + "].Status_" + index + "1";
+                    var cl = "Model.TCFTask[" + index + "].Status";
+                    <label style="display: block;font-family:'Times New Roman', Times, serif;font-weight:bold;">
+                        <input name="@cl"  type="radio" value="In progress">In progress
+                    </label>
+                }
+                @if (check == "Completed")
+                {
+                    var Id = "Model.TCFTask[" + index + "].Status_" + index + "2";
+                    var cl = "Model.TCFTask[" + index + "].Status";
+                    <label style="display: block;font-family:'Times New Roman', Times, serif;font-weight:bold;">
+                        <input name="@cl"  type="radio" value="Completed" checked>Completed
+                    </label>
+                }
+                else
+                {
+                    var Id = "Model.TCFTask[" + index + "].Status_" + index + "2";
+                    var cl = "Model.TCFTask[" + index + "].Status";
+                    <label style="display: block;font-family:'Times New Roman', Times, serif;font-weight:bold;">
+                        <input name="@cl"   type="radio" value="Completed">Completed
+                    </label>
+                }
 
 
-        else
-        {
-            <tr class="multi-field" id="1">
-                <td width="1%">1</td>
-                <td width="78%">
-
-                    <textarea name="TCFOutCome.TCFSubOutCome.TCFTask[0].Task" id="TCFOutCome.TCFSubOutCome.TCFTask[0].Task" class="form-control" required placeholder="Assign Task to user..."></textarea>
-                    <br />
-           <span style="font-family:'Times New Roman'; font-weight:bold;">Task </span> <span> Owner who will do the task</span>
-            @Html.DropDownListFor(x => x.TCFOutCome.TCFSubOutCome.TCFTask[0].AssignUserId, _icisDataProvider.BindUsers(), "...", new { @class = "form-control", @style = "width:100%;", @required = "required" })
-
-
-            </td>
-<td width="15%">
-                    <label style="display: block;font-family:'Times New Roman', Times, serif;font-weight:bold;"><input name="TCFOutCome.TCFSubOutCome.TCFTask[0].Status" type="radio"  value="A">Assigned</label>
-                    <label style="display: block;font-family:'Times New Roman', Times, serif;font-weight:bold;"><input name="TCFOutCome.TCFSubOutCome.TCFTask[0].Status" type="radio"  value="B">In progress</label>
-                    <label style="display: block;font-family:'Times New Roman', Times, serif;font-weight:bold;"><input name="TCFOutCome.TCFSubOutCome.TCFTask[0].Status" type="radio"  value="C">Completed</label>
-                </td>
-                <td width="1%">
+            </td>*@
+        <td width="1%">
                     <button type="button" class="remove-task btn btn-xs btn-danger"><i class="fa fa-remove"></i></button>
                 </td>
 
-                
+
             </tr>
-           
+
+
+
+                                }
+
+                            }
+
+
+                            else
+                            {
+        <tr class="multi-field" id="1">
+            <td width="1%">1</td>
+            <td width="78%">
+
+                <textarea name="TCFTask[0].Task" id="TCFTask[0].Task" class="form-control"  placeholder="Assign Task to user..." required></textarea>
+                <br />
+                <span style="font-family:'Times New Roman'; font-weight:bold;">Task </span> <span> Owner who will do the task</span>
+                @Html.DropDownListFor(x => x.TCFTask[0].AssignUserId, _icisDataProvider.BindUsers(taskid), "...", new { @class = "form-control", @style = "width:100%;", @required = "required" })
+                <input type="text" name="TCFTask[0].DueDate" id="TCFTask[0].DueDate" class="form-control tskduedate" required />
+
+            </td>
+            <td width="15%">
+                <label style="display: block;font-family:'Times New Roman', Times, serif;font-weight:bold;"><input name="TCFTask[0].Status" type="radio" value="Assigned">Assigned</label>
+                <label style="display: block;font-family:'Times New Roman', Times, serif;font-weight:bold;"><input name="TCFTask[0].Status" type="radio" value="In progress">In progress</label>
+                <label style="display: block;font-family:'Times New Roman', Times, serif;font-weight:bold;"><input name="TCFTask[0].Status" type="radio" value="Completed">Completed</label>
+            </td>
+            <td width="1%">
+                <button type="button" class="remove-task btn btn-xs btn-danger"><i class="fa fa-remove"></i></button>
+            </td>
+
+
+        </tr>
+
         }
 
 
@@ -77,12 +150,17 @@
 
         <tr>
             <th colspan="14">
-                <button type="button" style="display:none;" class="add-task btn btn-xs btn-primary"><i class="fa fa-plus"></i>&nbsp;Add Row</button>
+                <button type="button" style="display:none;" class="add-task"><i class="fa fa-plus"></i>&nbsp;Add Row</button>
             </th>
         </tr>
     </tbody>
 </table>
+<script src="~/Scripts/kendo.all.min.js"></script>
 
+<script src="~/Scripts/multifieldwrapperTask.js"></script>
+<script>
+    InitTaskCloning();
+    $(".tskduedate").kendoDatePicker();
 
-
+</script>
 

@@ -35,20 +35,29 @@ namespace Brilliance.Infrastructure.DataProvider
 
         TCFQuestion GetTCFQuestionById(Guid Id);
         ServiceResponse DeleteoutcomeMaster(Guid Id);
-        List<SelectListItem> BindUsers();
+        List<SelectListItem> BindUsers(Guid Id);
         ServiceResponse SaveTCFForm(TCFForm form);
 
 
-        TCFSubOutCome _GetSuboutcomeById(Guid Id);
+        TCFQuestion _GetSuboutcomeById(Guid Id);
         int RemoveTcfImages(TCFFormEvidence ev);
         ServiceResponse SaveTcfImage(TCFFormEvidence _TCFFormEvidence);
         ServiceResponse UpdateUserSuboutcome(TCFSubOutCome _model);
-        List<TCFFormEvidence> _TCFFormEvidence(Guid Id,Guid TCFQuestionId);
-        List<TCFNotes> _GetNotes(Guid Id, Guid TCFQuestionId);
-        List<TCFTask> _GetTask(Guid Id, Guid TCFQuestionId);
+        List<TCFFormEvidence> _TCFFormEvidence(Guid TCFQuestionId);
+        List<TCFNotes> _GetNotes(Guid TCFQuestionId);
+        List<TCFTask> _GetTask(Guid TCFQuestionId);
         int RemoveTcfTask(TCFTask ev);
         int RemoveTcfNotes(TCFNotes ev);
         ServiceResponse SaveTCFTask(TCFTask _model);
         ServiceResponse SaveTCFNotes(TCFNotes _model);
+        string _GetEntityByUser(Guid UserId);
+        ConductDataViewModel TCFQuestionEntityUserWise(Guid EntityId, Guid UserId,int IsAdmin,Guid Division);
+
+        ServiceResponse _UpdateTcfFormEntryByUser(TCFQuestion model);
+        string _GetUserName(Guid Id);
+        ServiceResponse _NewTcfEntry(TCFQuestion quiz);
+        List<TCFQuestionViewmodel> _TCFQuestionForUser(Guid CreatedBy);
+        List<SelectListItem> BindDivionByCompany(Guid CompanyID);
+        string _GetUserDivision(Guid UserID);
     }
 }

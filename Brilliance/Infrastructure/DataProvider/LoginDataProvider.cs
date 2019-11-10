@@ -4,6 +4,7 @@ using System.Web;
 using Brilliance.Models;
 using Brilliance.Models.Entity;
 using Brilliance.Models.ViewModel;
+using System.Linq;
 
 namespace Brilliance.Infrastructure.DataProvider
 {
@@ -35,12 +36,12 @@ namespace Brilliance.Infrastructure.DataProvider
                             SessionHelper.UserName = logindetails.LoginUserData.UserName;
                             SessionHelper.Password = logindetails.LoginUserData.Password;
                             //SessionHelper.EmployeeID = logindetails.LoginUserData.EmployeeID;
-                            //SessionHelper.IsSuperUser = logindetails.LoginUserData.IsSuperAdmin;
+                            //SessionHelper.Issu = logindetails.LoginUserData.IsSuperAdmin;
                             //SessionHelper.UserName = logindetails.LoginUserData.DisplayName;
                             //SessionHelper.EmailID = logindetails.LoginUserData.SecondaryEmailID;
                             //SessionHelper.RoleName = logindetails.LoginUserData.RoleName.ToString().Trim();
-                            //SessionHelper.Permissions = string.Join(",", logindetails.loginUserRoleRightModel.Select(m => m.RightName.Trim().ToLower()).ToList());
-                            //SessionHelper.LoginUserRoleRightList = System.Web.Helpers.Json.Encode(logindetails.loginUserRoleRightModel);
+                            SessionHelper.Permissions = string.Join(",", logindetails.loginUserRoleRightModel.Select(m => m.DisplayName.Trim().ToLower()).ToList());
+                            SessionHelper.LoginUserRoleRightList = System.Web.Helpers.Json.Encode(logindetails.loginUserRoleRightModel);
                             //if (!string.IsNullOrEmpty(logindetails.LoginUserData.ProfileImage))
                             //    if (System.IO.File.Exists(System.Web.HttpContext.Current.Server.MapPath(Constants.ProfileImagesPath.Replace("~", "") + logindetails.LoginUserData.ProfileImage)))
                             //        SessionHelper.Photo = Constants.ProfileImagesPath.Replace("~", "") + logindetails.LoginUserData.ProfileImage;
@@ -70,7 +71,7 @@ namespace Brilliance.Infrastructure.DataProvider
                     }
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 response.Message = "Internal server error";
             }

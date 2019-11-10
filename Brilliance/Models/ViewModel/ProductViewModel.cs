@@ -11,10 +11,12 @@ namespace Brilliance.Models.ViewModel
             product = new Product();
             Clientlist = new List<SelectListItem>();
             Companylist = new List<SelectListItem>();
+            ProductTypelist = new List<SelectListItem>();
         }
         public Product product { get; set; }
         public List<SelectListItem> Clientlist { get; set; }
         public List<SelectListItem> Companylist { get; set; }
+        public List<SelectListItem> ProductTypelist { get; set; }
     }
     public class ProductListModel
     {

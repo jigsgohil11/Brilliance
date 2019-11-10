@@ -69,13 +69,13 @@ namespace Brilliance.Models.ViewModel
         public string ProgrammeID { get; set; }
     }
 
-    public class LoginUserRoleRightModel
-    {
-        public Guid RightID { get; set; }
-        public string RightName { get; set; }
-        public bool IsView { get; set; }
-        public bool IsUpdate { get; set; }
-        public bool IsDelete { get; set; }
-        public bool IsCreate { get; set; }
-    }
+    //public class LoginUserRoleRightModel
+    //{
+    //    public Guid RightID { get; set; }
+    //    public string RightName { get; set; }
+    //    public bool IsView { get; set; }
+    //    public bool IsUpdate { get; set; }
+    //    public bool IsDelete { get; set; }
+    //    public bool IsCreate { get; set; }
+    //}
 }

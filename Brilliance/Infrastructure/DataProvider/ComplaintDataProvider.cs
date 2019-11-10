@@ -107,9 +107,9 @@ namespace Brilliance.Infrastructure.DataProvider
                     cmd.Parameters.AddWithValue("@ComplaintRegulatedCostId", Complaintmodel.complaint.ComplaintRegulatedCostId).SqlDbType = SqlDbType.UniqueIdentifier;
                     cmd.Parameters.AddWithValue("@CompensationValue", Complaintmodel.complaint.CompensationValue).SqlDbType = SqlDbType.NVarChar;
                     cmd.Parameters.AddWithValue("@CreatedBy", SessionHelper.UserId).SqlDbType = SqlDbType.UniqueIdentifier;
-                    cmd.Parameters.AddWithValue("@CreatedOn",DateTime.Now).SqlDbType = SqlDbType.DateTime;
-                    cmd.Parameters.AddWithValue("@UpdatedOn",null).SqlDbType = SqlDbType.DateTime;
-                    cmd.Parameters.AddWithValue("@UpdatedBy",null).SqlDbType = SqlDbType.UniqueIdentifier;
+                    cmd.Parameters.AddWithValue("@CreatedOn", DateTime.Now).SqlDbType = SqlDbType.DateTime;
+                    cmd.Parameters.AddWithValue("@UpdatedOn", null).SqlDbType = SqlDbType.DateTime;
+                    cmd.Parameters.AddWithValue("@UpdatedBy", null).SqlDbType = SqlDbType.UniqueIdentifier;
                     cmd.Parameters.AddWithValue("@IsEdit", Complaintmodel.complaint.IsEdit).SqlDbType = SqlDbType.Bit;
 
                     DataSet ds = null;
@@ -199,6 +199,24 @@ namespace Brilliance.Infrastructure.DataProvider
             return response;
         }
 
+        public ServiceResponse GetCompanyCustomRules(Guid CompanyID)
+        {
+            var response = new ServiceResponse();
+            var searchvaluedata = new List<SearchValueData>();
+            try
+            {
+                Company company = GetEntity<Company>(CompanyID);
+
+                response.Data = company;
+                response.IsSuccess = true;
+            }
+            catch (Exception ex)
+            {
+                response.Message = "Internal Server Error";
+            }
+            return response;
+        }
+
         public ServiceResponse GetDivisionByCompany(Guid CompanyID)
         {
             var response = new ServiceResponse();
@@ -207,7 +225,7 @@ namespace Brilliance.Infrastructure.DataProvider
             {
                 searchvaluedata.Add(new SearchValueData { Name = "CompanyID", Value = Convert.ToString(CompanyID) });
                 List<SelectListItem> Divisions = GetEntityList<SelectListItem>("GetDivisionListByCompany", searchvaluedata);
-               
+
                 response.Data = Divisions;
                 response.IsSuccess = true;
             }

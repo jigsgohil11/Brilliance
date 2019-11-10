@@ -41,6 +41,15 @@ namespace Brilliance.Controllers
             response = _icomplaintDataProvider.DeleteComplaint(ComplaintID);
             return Json(response);
         }
+
+        public ActionResult GetCompanyCustomRules(string cid)
+        {
+            _icomplaintDataProvider = new ComplaintDataProvider();
+            Guid CompanyID = Common.CheckIdNullOrEmptyNonEncrypt(cid);
+            ServiceResponse response = _icomplaintDataProvider.GetCompanyCustomRules(CompanyID);
+            return Json(response.Data, JsonRequestBehavior.AllowGet);
+        }
+
         public ActionResult GetDivisionByCompany(string cid)
         {
             _icomplaintDataProvider = new ComplaintDataProvider();

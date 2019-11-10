@@ -64,11 +64,11 @@ namespace Brilliance.Infrastructure.DataProvider
 
                 if (Products.product.IsEdit == false)
                 {
-
                     SqlCommand cmd = new SqlCommand();
                     cmd.Parameters.AddWithValue("@ProductID", Guid.NewGuid()).SqlDbType = SqlDbType.UniqueIdentifier;
                     cmd.Parameters.AddWithValue("@ClientID", Products.product.ClientID).SqlDbType = SqlDbType.UniqueIdentifier;
                     cmd.Parameters.AddWithValue("@CompanyID", Products.product.CompanyID).SqlDbType = SqlDbType.UniqueIdentifier;
+                    cmd.Parameters.AddWithValue("@ProductTypeID", Products.product.ProductTypeID).SqlDbType = SqlDbType.UniqueIdentifier;
                     cmd.Parameters.AddWithValue("@ProductCode", Products.product.Code).SqlDbType = SqlDbType.NVarChar;
                     cmd.Parameters.AddWithValue("@ProductName", Products.product.Name).SqlDbType = SqlDbType.NVarChar;
                     cmd.Parameters.AddWithValue("@Description", Products.product.Description).SqlDbType = SqlDbType.NVarChar;
@@ -78,12 +78,10 @@ namespace Brilliance.Infrastructure.DataProvider
                     cmd.Parameters.AddWithValue("@UpdatedBy", null).SqlDbType = SqlDbType.UniqueIdentifier;
                     cmd.Parameters.AddWithValue("@IsEdit", Products.product.IsEdit).SqlDbType = SqlDbType.Bit;
 
-
                     DataSet ds = null;
                     ds = BulkInsert("Save_Product", cmd);
 
                     response.IsSuccess = true;
-
                     response.Message = "Record Saved Successfully.";
                 }
                 else
@@ -92,13 +90,12 @@ namespace Brilliance.Infrastructure.DataProvider
                     cmd.Parameters.AddWithValue("@ProductID", Products.product.CompanyID).SqlDbType = SqlDbType.UniqueIdentifier;
                     cmd.Parameters.AddWithValue("@ClientID", Products.product.ClientID).SqlDbType = SqlDbType.UniqueIdentifier;
                     cmd.Parameters.AddWithValue("@CompanyID", Products.product.CompanyID).SqlDbType = SqlDbType.UniqueIdentifier;
+                    cmd.Parameters.AddWithValue("@ProductTypeID", Products.product.ProductTypeID).SqlDbType = SqlDbType.UniqueIdentifier;
                     cmd.Parameters.AddWithValue("@ProductCode", Products.product.Code).SqlDbType = SqlDbType.NVarChar;
                     cmd.Parameters.AddWithValue("@ProductName", Products.product.Name).SqlDbType = SqlDbType.NVarChar;
                     cmd.Parameters.AddWithValue("@Description", Products.product.Description).SqlDbType = SqlDbType.NVarChar;
-                    cmd.Parameters.AddWithValue("@CreatedOn", DateTime.Now).SqlDbType = SqlDbType.DateTime;
-                    cmd.Parameters.AddWithValue("@CreatedBy", SessionHelper.UserId).SqlDbType = SqlDbType.UniqueIdentifier;
-                    cmd.Parameters.AddWithValue("@UpdatedOn", null).SqlDbType = SqlDbType.DateTime;
-                    cmd.Parameters.AddWithValue("@UpdatedBy", null).SqlDbType = SqlDbType.UniqueIdentifier;
+                    cmd.Parameters.AddWithValue("@UpdatedOn", DateTime.Now).SqlDbType = SqlDbType.DateTime;
+                    cmd.Parameters.AddWithValue("@UpdatedBy", SessionHelper.UserId).SqlDbType = SqlDbType.UniqueIdentifier;
                     cmd.Parameters.AddWithValue("@IsEdit", Products.product.IsEdit).SqlDbType = SqlDbType.Bit;
 
                     DataSet ds = null;

@@ -4,9 +4,7 @@
     ViewBag.Title = "Company";
     Layout = "~/Views/Shared/_Layout_public.cshtml";
 }
-
 <link href="~/assets/global/plugins/bootstrap-datepicker/css/bootstrap-datepicker.min.css" rel="stylesheet" />
-
 <style>
     .floatClass {
         float: left;
@@ -21,7 +19,6 @@
         padding: 5px 0;
     }
 </style>
-
 <div class="page-content page-content-dashbrd-backgrnd">
     <div class="row">
         <div class="col-md-12">
@@ -44,25 +41,26 @@
                     <div class="portlet light">
                         <div class="portlet-body form">
                             <form id="frmcompany" action="/Company/SaveCompany" method="post" data-ajax="true" data-ajax-method="Post" data-ajax-success="SaveCompanyResponse(data);">
-                                @Html.HiddenFor(m=>m.company.CompanyID)
+                                @Html.HiddenFor(m => m.company.CompanyID)
+                                @*<div class="row">
+                                                                    <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>Code</label>
+                                                    @Html.TextBoxFor(m => m.company.CompanyCode, new { @class = "form-control m-input", @placeholder = "Enter company code" })
+                                                    @Html.ValidationMessageFor(m => m.company.CompanyCode)
+
+                                                </div>
+                                            </div>
+                                    </div>*@
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            @*<label>Organization<span  style="font-weight: bold;color: red;">*</span></label>
-                                            @Html.DropDownListFor(m => m.company.ClientID, new SelectList(Model.ClientList, "Value", "Text", 0), "--Select Organization--", new { @data_live_search = "true", @class = "form-control bs-select"})
-                                            @Html.ValidationMessageFor(m => m.company.ClientID)*@
+                                            <label>Organization<span style="font-weight: bold;color: red;">*</span></label>
+                                            @Html.DropDownListFor(m => m.company.ClientID, new SelectList(Model.ClientList, "Value", "Text", 0), "--Select Organization--", new { @data_live_search = "true", @class = "form-control bs-select" })
+                                            @Html.ValidationMessageFor(m => m.company.ClientID)
                                         </div>
                                     </div>
-                                </div>
-                                <div class="row">
-                                    @*<div class="col-md-6">
-                                        <div class="form-group">
-                                            <label>Code</label>
-                                            @Html.TextBoxFor(m => m.company.CompanyCode, new { @class = "form-control m-input", @placeholder = "Enter company code" })
-                                            @Html.ValidationMessageFor(m => m.company.CompanyCode)
 
-                                        </div>
-                                    </div>*@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label>Company Name</label>
@@ -77,7 +75,6 @@
                                             <label>Industry<span style="font-weight: bold;color: red;">*</span></label>
                                             @Html.DropDownListFor(m => m.company.IndustryID, new SelectList(Model.IndustryList, "Value", "Text", 0), "--Select Industry--", new { @data_live_search = "true", @class = "form-control bs-select" })
                                             @Html.ValidationMessageFor(m => m.company.CompanyCode)
-
                                         </div>
                                     </div>
                                     <div class="col-md-6">
@@ -88,7 +85,7 @@
                                         </div>
                                     </div>
                                 </div>
-                               
+
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group">
@@ -116,7 +113,7 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label>Secondary Contact Name</label>
-                                           @Html.TextBoxFor(m => m.company.SecondaryContactName, new { @class = "form-control m-input", @placeholder = "Enter secondary contact name" })
+                                            @Html.TextBoxFor(m => m.company.SecondaryContactName, new { @class = "form-control m-input", @placeholder = "Enter secondary contact name" })
                                         </div>
                                     </div>
                                 </div>
@@ -133,6 +130,34 @@
                                             <label>Secondary Email ID</label>
                                             @Html.TextBoxFor(m => m.company.SecondaryEmail, new { @class = "form-control m-input", @placeholder = "Enter secondary email" })
                                             @Html.ValidationMessageFor(m => m.company.SecondaryEmail)
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label>Unit No</label>
+                                            @Html.TextBoxFor(m => m.company.UnitNo, new { @class = "form-control m-input", @placeholder = "Enter Unit No" })
+                                        </div>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <div class="form-group">
+                                            <label>Complex</label>
+                                            @Html.TextBoxFor(m => m.company.Complex, new { @class = "form-control m-input", @placeholder = "Enter Complex details" })
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label>Street/Farm No</label>
+                                            @Html.TextBoxFor(m => m.company.StreetNo, new { @class = "form-control m-input", @placeholder = "Enter Street/Farm No" })
+                                        </div>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <div class="form-group">
+                                            <label>Street/Farm</label>
+                                            @Html.TextBoxFor(m => m.company.Street, new { @class = "form-control m-input", @placeholder = "Enter Street/Farm details" })
                                         </div>
                                     </div>
                                 </div>
@@ -172,13 +197,39 @@
                                             @Html.DropDownListFor(m => m.company.City, new SelectList(Model.CityList, "Value", "Text", 0), new { @data_live_search = "true", @class = "form-control bs-select" })
                                             @Html.ValidationMessageFor(m => m.company.City)
                                         </div>
-                                    </div>   
+                                    </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label>Description</label>
-                                            @Html.TextAreaFor(m => m.company.Description, new { @class = "form-control m-input", @placeholder = "Enter Description",@rows="4" })
+                                            @Html.TextAreaFor(m => m.company.Description, new { @class = "form-control m-input", @placeholder = "Enter Description", @rows = "4" })
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label>View Level of Dissatisfaction</label>
+                                            @Html.CheckBoxFor(m => m.company.IsViewDissatisfationLevel, new { @class = "form-control m-input" })
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label>Require Level of Dissatisfaction</label>
+                                            @Html.CheckBoxFor(m => m.company.IsRequireDissatisfationLevel, new { @class = "form-control m-input" })
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label>View Level of Satisfaction</label>
+                                            @Html.CheckBoxFor(m => m.company.IsViewSatisfationLevel, new { @class = "form-control m-input" })
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label>Require Level of Satisfaction</label>
+                                            @Html.CheckBoxFor(m => m.company.IsRequireSatisfationLevel, new { @class = "form-control m-input" })
                                         </div>
                                     </div>
                                 </div>
@@ -196,13 +247,11 @@
         </div>
     </div>
 </div>
-
 @section scripts{
-
     <script>
 
         function SaveCompanyResponse(response) {
-           
+
             if (response.IsSuccess) {
                 SetMessageForPageLoad(response.Message, "Companysaved");
                 window.location.href = "/Company/CompanyList/";
@@ -265,4 +314,3 @@
         }
     </script>
 }
-

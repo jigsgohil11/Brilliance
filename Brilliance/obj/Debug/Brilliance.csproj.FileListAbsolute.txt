@@ -288,3 +288,7 @@ C:\Users\Zaidi\source\repos\jigsgohil11\Brilliance\Brilliance\bin\Microsoft.AI.W
 C:\Users\Zaidi\source\repos\jigsgohil11\Brilliance\Brilliance\bin\Microsoft.AI.Web.xml
 C:\Users\Zaidi\source\repos\jigsgohil11\Brilliance\Brilliance\obj\Debug\Brilliance.Resource.Resource.resources
 C:\Users\Zaidi\source\repos\jigsgohil11\Brilliance\Brilliance\obj\Debug\Brilliance.csproj.GenerateResource.Cache
+D:\iSoftNet Work\Brilliance\Latest Work\Brilliance\Brilliance\bin\EntityFramework.dll
+D:\iSoftNet Work\Brilliance\Latest Work\Brilliance\Brilliance\bin\EntityFramework.SqlServer.dll
+D:\iSoftNet Work\Brilliance\Latest Work\Brilliance\Brilliance\bin\EntityFramework.xml
+D:\iSoftNet Work\Brilliance\Latest Work\Brilliance\Brilliance\bin\EntityFramework.SqlServer.xml

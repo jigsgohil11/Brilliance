@@ -18,16 +18,20 @@ namespace Brilliance.Models.Entity
         [MaxLength(370)]
         [Required(ErrorMessage = "Company name is required.")]
         public string CompanyName { get; set; }
-        
+
         [Required(ErrorMessage = "Address is required.")]
         public string Address { get; set; }
-        
+        public string UnitNo { get; set; }
+        public string Complex { get; set; }
+        public string StreetNo { get; set; }
+        public string Street { get; set; }
+
         [Required(ErrorMessage = "City is required.")]
         public Guid? City { get; set; }
-        
+
         [Required(ErrorMessage = "State is required.")]
         public Guid? State { get; set; }
-        
+
         [Required(ErrorMessage = "Country is required.")]
         public Guid? Country { get; set; }
         [MaxLength(137)]
@@ -50,7 +54,7 @@ namespace Brilliance.Models.Entity
         [MaxLength(167)]
         [Required(ErrorMessage = "Email is required.")]
         public string Email { get; set; }
-        
+
         public string WebURL { get; set; }
         [MaxLength]
         public string AboutCompany { get; set; }
@@ -74,17 +78,21 @@ namespace Brilliance.Models.Entity
         public Guid? ClientID { get; set; }
         public bool? IsActive { get; set; }
         public bool? IsBlock { get; set; }
-       
+
         public Guid? CreatedBy { get; set; }
         public DateTime? CreatedOn { get; set; }
         public DateTime? UpdatedOn { get; set; }
         public Guid? UpdatedBy { get; set; }
         public Guid? Supervisor { get; set; }
-    
+
         public Guid? WhiteLabelTemplateID { get; set; }
         public bool? IsWhiteLabel { get; set; }
         public bool? IsSync { get; set; }
-       
+        public bool IsViewDissatisfationLevel { get; set; }
+        public bool IsRequireDissatisfationLevel { get; set; }
+        public bool IsViewSatisfationLevel { get; set; }
+        public bool IsRequireSatisfationLevel { get; set; }
+
         public string Description { get; set; }
         public Guid? SectorID { get; set; }
         public Guid? IndustryID { get; set; }

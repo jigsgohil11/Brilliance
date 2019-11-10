@@ -157,6 +157,7 @@
     <Compile Include="Controllers\CRTController.cs" />
     <Compile Include="Controllers\DashboardController.cs" />
     <Compile Include="Controllers\DivisionController.cs" />
+    <Compile Include="Controllers\GeneralSetupController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\OrganizationController.cs" />
@@ -185,11 +186,13 @@
     <Compile Include="Infrastructure\DataProvider\ComplaintDataProvider.cs" />
     <Compile Include="Infrastructure\DataProvider\ConductDataprovider.cs" />
     <Compile Include="Infrastructure\DataProvider\DivisionDataProvider.cs" />
+    <Compile Include="Infrastructure\DataProvider\GeneralSetupDataProvider.cs" />
     <Compile Include="Infrastructure\DataProvider\IClientDataProvider.cs" />
     <Compile Include="Infrastructure\DataProvider\ICompanyDataProvider.cs" />
     <Compile Include="Infrastructure\DataProvider\IComplaintDataProvider.cs" />
     <Compile Include="Infrastructure\DataProvider\IConductIS.cs" />
     <Compile Include="Infrastructure\DataProvider\IDivisionDataProvider.cs" />
+    <Compile Include="Infrastructure\DataProvider\IGeneralSetupDataProvider.cs" />
     <Compile Include="Infrastructure\DataProvider\ILoginDataProvider.cs" />
     <Compile Include="Infrastructure\DataProvider\IProductDataProvider.cs" />
     <Compile Include="Infrastructure\DataProvider\IUserDataProvider.cs" />
@@ -214,10 +217,12 @@
     <Compile Include="Models\Entity\ConductStatus.cs" />
     <Compile Include="Models\Entity\CRTNotes.cs" />
     <Compile Include="Models\Entity\Division.cs" />
+    <Compile Include="Models\Entity\DuplicateDataCheck.cs" />
     <Compile Include="Models\Entity\Login.cs" />
     <Compile Include="Models\Entity\LoginLog.cs" />
     <Compile Include="Models\Entity\LoginUser.cs" />
     <Compile Include="Models\Entity\Product.cs" />
+    <Compile Include="Models\Entity\ProjectTermCategory.cs" />
     <Compile Include="Models\Entity\Role.cs" />
     <Compile Include="Models\Entity\User.cs" />
     <Compile Include="Models\Entity\Users.cs" />
@@ -230,6 +235,8 @@
     <Compile Include="Models\ViewModel\ComplaintViewModel.cs" />
     <Compile Include="Models\ViewModel\ConductDataViewModel.cs" />
     <Compile Include="Models\ViewModel\DivisionViewModel.cs" />
+    <Compile Include="Models\ViewModel\GeneralSetupViewModel.cs" />
+    <Compile Include="Models\ViewModel\LoginUserRoleRightModel.cs" />
     <Compile Include="Models\ViewModel\ProductViewModel.cs" />
     <Compile Include="Models\ViewModel\RoleViewModel.cs" />
     <Compile Include="Models\ViewModel\UserLoginDetails.cs" />
@@ -6411,12 +6418,15 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\kendoStyles.css" />
+    <Content Include="Scripts\moment-with-locales.js" />
+    <Content Include="Scripts\moment-with-locales.min.js" />
+    <Content Include="Scripts\moment.js" />
+    <Content Include="Scripts\moment.min.js" />
     <Content Include="Content\sprite.png" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
-    <Content Include="Images\iconfinder_add_green_619545.png" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="ApplicationInsights.config">
@@ -6774,9 +6784,9 @@
     <Content Include="assets\global\plugins\wysihtml\minified\wysihtml.min.map" />
     <Content Include="assets\global\plugins\wysihtml\minified\wysihtml.table_editing.min.map" />
     <Content Include="assets\global\plugins\wysihtml\minified\wysihtml.toolbar.min.map" />
+    <None Include="Properties\PublishProfiles\Brilliance.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
-    <Content Include="Scripts\bootstrapKendo.js" />
     <Content Include="Scripts\bootstrapvalidator.min.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -6789,7 +6799,6 @@
     <Content Include="Scripts\jszip.min.js" />
     <Content Include="Scripts\kendo.all.min.js" />
     <Content Include="Scripts\kendoScripts.js" />
-    <Content Include="Scripts\knockout.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\multifieldwrapper.js" />
     <Content Include="Scripts\multifieldwrapperFileUpload.js" />
@@ -6831,19 +6840,24 @@
     <Content Include="Views\CIS\Index.cshtml" />
     <Content Include="Views\CIS\OutComeMaster.cshtml" />
     <Content Include="Views\CIS\SuboutComes.cshtml" />
-    <Content Include="Views\User\User.cshtml" />
+    <Content Include="Views\User\UserList.cshtml" />
+    <Content Include="Views\User\Role1.cshtml" />
     <Content Include="Views\User\UserList.cshtml" />
     <Content Include="Views\CRT\_AddNotes.cshtml" />
     <Content Include="Views\CIS\TCFNote.cshtml" />
     <Content Include="Views\CIS\TCFTask.cshtml" />
-    <Content Include="Views\CIS\_UploadFile.cshtml" />
+    <Content Include="Views\User\User.cshtml" />
     <Content Include="Views\CIS\_TCFRegisterUser.cshtml" />
+    <Content Include="Views\CIS\_UploadFile.cshtml" />
+    <Content Include="Views\GeneralSetup\ProjectTermListbyCategory.cshtml" />
+    <Content Include="Views\GeneralSetup\_CategoryList.cshtml" />
+    <Content Include="Views\GeneralSetup\_GeneralSetup.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="assets\apps\img\" />
     <Folder Include="assets\global\plugins\angularjs\plugins\angular-file-upload\uploads\" />
-    <Folder Include="Views\Test\" />
+    <Folder Include="Images\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -6884,7 +6898,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>0</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:41128/</IISUrl>
+          <IISUrl>http://localhost:60819/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

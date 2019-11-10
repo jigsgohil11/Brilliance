@@ -75,6 +75,10 @@ namespace Brilliance.Infrastructure.DataProvider
                     cmd.Parameters.AddWithValue("@MobileNo", Clients.client.MobileNo).SqlDbType = SqlDbType.NVarChar;
                     cmd.Parameters.AddWithValue("@Description", Clients.client.Description).SqlDbType = SqlDbType.NVarChar;
                     cmd.Parameters.AddWithValue("@Address", Clients.client.Address).SqlDbType = SqlDbType.NVarChar;
+                    cmd.Parameters.AddWithValue("@UnitNo", Clients.client.UnitNo).SqlDbType = SqlDbType.NVarChar;
+                    cmd.Parameters.AddWithValue("@Complex", Clients.client.Complex).SqlDbType = SqlDbType.NVarChar;
+                    cmd.Parameters.AddWithValue("@Street", Clients.client.Street).SqlDbType = SqlDbType.NVarChar;
+                    cmd.Parameters.AddWithValue("@StreetNo", Clients.client.StreetNo).SqlDbType = SqlDbType.NVarChar;
                     cmd.Parameters.AddWithValue("@City", Clients.client.City).SqlDbType = SqlDbType.UniqueIdentifier;
                     cmd.Parameters.AddWithValue("@State", Clients.client.State).SqlDbType = SqlDbType.UniqueIdentifier;
                     cmd.Parameters.AddWithValue("@Country", Clients.client.Country).SqlDbType = SqlDbType.UniqueIdentifier;
@@ -99,6 +103,10 @@ namespace Brilliance.Infrastructure.DataProvider
                     cmd.Parameters.AddWithValue("@MobileNo", Clients.client.MobileNo).SqlDbType = SqlDbType.NVarChar;
                     cmd.Parameters.AddWithValue("@Description", Clients.client.Description).SqlDbType = SqlDbType.NVarChar;
                     cmd.Parameters.AddWithValue("@Address", Clients.client.Address).SqlDbType = SqlDbType.NVarChar;
+                    cmd.Parameters.AddWithValue("@UnitNo", Clients.client.UnitNo).SqlDbType = SqlDbType.NVarChar;
+                    cmd.Parameters.AddWithValue("@Complex", Clients.client.Complex).SqlDbType = SqlDbType.NVarChar;
+                    cmd.Parameters.AddWithValue("@Street", Clients.client.Street).SqlDbType = SqlDbType.NVarChar;
+                    cmd.Parameters.AddWithValue("@StreetNo", Clients.client.StreetNo).SqlDbType = SqlDbType.NVarChar;
                     cmd.Parameters.AddWithValue("@City", Clients.client.City).SqlDbType = SqlDbType.UniqueIdentifier;
                     cmd.Parameters.AddWithValue("@State", Clients.client.State).SqlDbType = SqlDbType.UniqueIdentifier;
                     cmd.Parameters.AddWithValue("@Country", Clients.client.Country).SqlDbType = SqlDbType.UniqueIdentifier;

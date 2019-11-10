@@ -20,7 +20,12 @@ namespace Brilliance.Models.Entity
         [Required(ErrorMessage ="Please select Entity")]
         public Guid HoldingEntityId { get; set; }
         [ForeignKey("HoldingEntityId")]
-        public Client _Client { get; set; }
+        public Company _Company { get; set; }
+
+        [Required(ErrorMessage = "Please select Division")]
+        public Guid DivisionId { get; set; }
+        [ForeignKey("DivisionId")]
+        public Division _Division { get; set; }
         public string Code { get; set; }
         public string Title { get; set; }
         [Required(ErrorMessage = "Please provide Description")]
@@ -40,9 +45,12 @@ namespace Brilliance.Models.Entity
         [ForeignKey("ModifiedBy")]
         public Users _fkUsersmodify { get; set; }
         public DateTime? CurrentDueDate { get; set; }
-
+        public string AdditionalDescription { get; set; }
+        public string Filename { get; set; }
         [Ignore]
         public bool IsEdit { get { return GroupId != Guid.Empty ? true : false; } }
+
+        public HttpPostedFileBase file { get; set; }
 
         [Ignore]
         public string coderef { get; set; }
@@ -59,7 +67,7 @@ namespace Brilliance.Models.Entity
     {
         [Key]
         public Guid Id { get; set; }
-        public Guid TcformId { get; set; }
+     
         public Guid ClusterId { get; set; }
         public Guid TCFPeriodId { get; set; }
         public Guid TCFQuestionId { get; set; }
@@ -82,8 +90,11 @@ namespace Brilliance.Models.Entity
         public TCFQuestion()
         {
             CreatedAt = DateTime.Now;
-
+            TCFNotes = new List<TCFNotes>();
+            TCFTask = new List<TCFTask>();
+            TCFFormEvidence = new List<TCFFormEvidence>();
         }
+        
         public Guid Id { get; set; }
         [Required(ErrorMessage = "Please select Group")]
         public Guid TCFQuestionGroupId { get; set; }
@@ -109,8 +120,24 @@ namespace Brilliance.Models.Entity
 
         public DateTime ? UpdatedAt { get; set; }
 
+        public DateTime? DueDate { get; set; }
+        public Guid RateId { set; get; }
+
+        public string ReasonNotYet { get; set; }
+
+        public string Reasonmostly { get; set; }
+        public string ReasonNotApplicable { get; set; }
+
+        public string ReasonPartially { get; set; }
+        public string ReasonFully { get; set; }
+
         public Guid? UpdatedBy { get; set; }
-        public bool ? IsDeleted { get; set; }
+        public Guid? TCFSubOutComeUserId { get; set; }
+
+        public virtual IList<TCFNotes> TCFNotes { get; set; }
+        public virtual IList<TCFTask> TCFTask { get; set; }
+        public virtual IList<TCFFormEvidence> TCFFormEvidence { get; set; }
+        public bool  IsDeleted { get; set; }
         [Ignore]
         public bool IsEdit { get { return Id != Guid.Empty ? true : false; } }
 
@@ -133,7 +160,7 @@ namespace Brilliance.Models.Entity
         public int ? PreviousRating { get; set; }
         public int? CurrentRating { get; set; }
 
-        public string DueDate { get; set; }
+        public string DueDateDes { get; set; }
         public Guid GroupId { get; set; }
     }
     [PrimaryKey("Id", autoIncrement = true)]
@@ -234,39 +261,43 @@ namespace Brilliance.Models.Entity
     public class TCFNotes
     {
         public Guid Id { get; set; }
-        [ForeignKey("TCFSubOutComeId")]
-        public Guid TCFSubOutComeId { get; set; }
-        public virtual TCFSubOutCome _TCFSubOutCome { get; set; }
-        public Guid TcformId { get; set; }
+       
         public Guid TCFQuestionId { get; set; }
         public Guid AddedById { get; set; }
         public DateTime AddedAt { get; set; }
         public string Note { get; set; }
-        [Ignore]
+        
         public string NoteId { get; set; }
         public string Author { get; set; }
         public Guid ? ModifiedById { get; set; }
         public DateTime ? ModifiedDate { get; set; }
         public bool IsDeleted { get; set; }
+       
     }
     public class TCFTask
     {
+        public TCFTask()
+        {
+            _TaskStatus = new List<TaskStatus>();
+        }
         public Guid Id { get; set; }
-        [ForeignKey("TCFSubOutComeId")]
-        public Guid TCFSubOutComeId { get; set; }
-        public virtual TCFSubOutCome _TCFSubOutCome { get; set; }
+      
         public Guid TCFQuestionId { get; set; }
-        public Guid TcformId { get; set; }
+    
 
         public Guid AddedById { get; set; }
 
         public Guid AssignUserId { get; set; }
+
+        public DateTime? DueDate { get; set; }
+
         public DateTime AddedAt { get; set; }
         public string Task { get; set; }
         public string Status { get; set; }
         public Guid ? ModifiedById { get; set; }
         public DateTime ModifiedDate { get; set; }
         public bool IsDeleted { get; set; }
+        public List<TaskStatus> _TaskStatus { get; set; }
     }
     public class TCFQuestionViewmodel
     {
@@ -275,5 +306,10 @@ namespace Brilliance.Models.Entity
         public string GroupName { get; set; }
         public Guid Id { get; set; }
     }
+    public class TaskStatus
+    {
+        public string Id { get; set; }
+        public string Value { get; set; }
 
+    }
 }

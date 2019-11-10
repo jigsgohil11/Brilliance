@@ -1,19 +1,25 @@
-﻿@model Brilliance.Models.Entity.TCFForm
+﻿@model Brilliance.Models.Entity.TCFQuestion
+<script src="~/Scripts/multifieldwrapperNote.js"></script>
+<script>
+    InitNoteCloning();
 
-    <table class="table table-bordered table-condensed main-multi-field-wrapper" id="tbltask">
+</script>
+    <table class="table table-bordered table-condensed main-multi-field-wrapper">
 
         <tbody class="sub-multi-fields">
 
-            @if (Model.TCFOutCome!= null)
+            @if (Model.TCFNotes.Count>0)
             {
-                foreach (var item in Model.TCFOutCome.TCFSubOutCome.TCFNotes)
+                foreach (var item in Model.TCFNotes)
                 {
-                    var index = Model.TCFOutCome.TCFSubOutCome.TCFNotes.IndexOf(item);
+                    var index = Model.TCFNotes.IndexOf(item);
             <tr class="multi-field" id="1">
                 <td width="1%">@(index+1)</td>
                 <td>
-                    @Html.TextAreaFor(x => x.TCFOutCome.TCFSubOutCome.TCFNotes[index].Note, new { @class = "form-control" })
-                    @Html.TextAreaFor(x => x.TCFOutCome.TCFSubOutCome.TCFNotes[index].NoteId, new { @class = "txtnote" })
+                    @Html.TextAreaFor(x => x.TCFNotes[index].Note, new { @class = "form-control", @readonly = true })
+                    @Html.TextBoxFor(x => x.TCFNotes[index].NoteId, new { @class = "txtnote", @readonly = true })
+                    @Html.TextBoxFor(x => x.TCFNotes[index].Author, new { @class = "",@readonly=true })
+                    @Html.TextBoxFor(x => x.TCFNotes[index].AddedAt, new { @class = "", @readonly = true })
                 </td>
                 <td width="1%">
                     <button type="button" class="remove-note btn btn-xs btn-danger"><i class="fa fa-remove"></i></button>
@@ -32,8 +38,8 @@
                 <td width="98%">
 
 
-                    <textarea class="form-control" cols="20" id="TCFOutCome.TCFSubOutCome.TCFNotes[0].Note" name="TCFOutCome.TCFSubOutCome.TCFNotes[0].Note" rows="2" style="width:100%;"></textarea>
-                    <input type="text" id="TCFOutCome.TCFSubOutCome.TCFNotes[0].NoteId" name="TCFOutCome.TCFSubOutCome.TCFNotes[0].NoteId" class="txtnote" value="Note ID:01" readonly />
+                    <textarea class="form-control" cols="20" id="TCFNotes[0].Note" name="TCFNotes[0].Note" rows="2" style="width:100%;"></textarea>
+                    <input type="text" id="TCFNotes[0].NoteId" name="TCFNotes[0].NoteId" class="txtnote" value="Note ID:01" readonly />
                 </td>
                
                 <td width="1%">

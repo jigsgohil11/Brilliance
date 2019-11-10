@@ -1,0 +1,303 @@
+﻿@using Brilliance.Models.ViewModel;
+@model ProjectTermListByCategory
+@{
+    ViewBag.Title = "ProjectTermListbyCategory";
+    Layout = "~/Views/Shared/_Layout_public.cshtml";
+
+}
+
+<title>General Setup</title>
+<style>
+    .field-validation-valid {
+        color: red;
+    }
+
+    .scrollable-menu {
+        height: auto;
+        max-height: 200px;
+        overflow-x: hidden;
+    }
+
+    .dropdown-menu {
+        box-shadow: none !important;
+    }
+</style>
+
+<div class="page-content page-content-dashbrd-backgrnd">
+    <div class="page-bar margin-bottom-10">
+        <div class="row">
+            <div class="col-md-12 padding-out">
+                <div class="portlet light padding-header margin-0 custom-padding-bar">
+                    <div class="portlet-title portlet-title-Project-custom">
+                        <div class="caption font-dark">
+                            <i class="icon-settings font-dark"></i>
+                            <span class="caption-subject bold uppercase">General Setup</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="portlet light bordered">
+                <div class="portlet-body">
+                    <div class="tabbable tabbable-tabdrop">
+                        @if (Model != null && Model.CategoryList != null && Model.CategoryList.Count > 0)
+                        {
+                            <ul class="nav nav-pills">
+                                @for (int i = 0; i < Model.CategoryList.Count; i++)
+                                {
+                                    if (i < 4)
+                                    {
+                                        if (Model.CategoryList[i].IsSelectedCategory == true)
+                                        {
+                                            <li class="active">
+                                                <a href="#tab_@i" data-toggle="tab" id="@Model.CategoryList[i].EncryptedProjectTermCategoryID" onclick="FilterCategory(this);">@Model.CategoryList[i].DisplayName</a>
+                                            </li>
+                                        }
+                                        else
+                                        {
+                                            <li>
+                                                <a href="#tab_@i" data-toggle="tab" id="@Model.CategoryList[i].EncryptedProjectTermCategoryID" onclick="FilterCategory(this);">@Model.CategoryList[i].DisplayName</a>
+                                            </li>
+                                        }
+                                    }
+                                }
+                                <li class="dropdown">
+                                    <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown">
+                                        <i class="fa fa-angle-down"></i><i class="fa fa-ellipsis-v"></i>
+                                    </a>
+                                    <ul class="dropdown-menu scrollable-menu" id="categoryUL">
+                                        <li class="bs-searchbox">
+                                            <input type="text" id="searchinput" onkeyup="Filterdropdown();" class="form-control" title="Type in a name" placeholder="Search Category..">
+                                        </li>
+                                        @if (Model.CategoryList.Count > 6)
+                                        {
+                                            for (int i = 0; i < Model.CategoryList.Count; i++)
+                                            {
+                                                if (i > 5)
+                                                {
+                                                    if (Model.CategoryList[i].IsSelectedCategory == true)
+                                                    {
+                                                        <li class="active custom">
+                                                            <a href="#tab_@i" data-toggle="tab" id="@Model.CategoryList[i].EncryptedProjectTermCategoryID" onclick="FilterCategory(this);">@Model.CategoryList[i].DisplayName</a>
+                                                        </li>
+                                                    }
+                                                    else
+                                                    {
+                                                        <li class="custom">
+                                                            <a href="#tab_@i" data-toggle="tab" id="@Model.CategoryList[i].EncryptedProjectTermCategoryID" onclick="FilterCategory(this);">@Model.CategoryList[i].DisplayName</a>
+                                                        </li>
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    </ul>
+                                    @*</div>*@
+
+                                    @*<ul class="dropdown-menu scrollable-menu bs-select" data-live-search="true">
+                                            @if (Model.CategoryList.Count > 6)
+                                        {
+                                            for (int i = 0; i < Model.CategoryList.Count; i++)
+                                            {
+                                                if (i > 5)
+                                                {
+                                                    if (Model.CategoryList[i].IsSelectedCategory == true)
+                                                    {
+                                        <li class="active">
+                                            <a href="#tab_@i" data-toggle="tab" id="@Model.CategoryList[i].EncryptedProjectTermCategoryID" onclick="FilterCategory(this);">@Model.CategoryList[i].DisplayName</a>
+                                        </li>
+                                                    }
+                                                    else
+                                                    {
+                                        <li>
+                                            <a href="#tab_@i" data-toggle="tab" id="@Model.CategoryList[i].EncryptedProjectTermCategoryID" onclick="FilterCategory(this);">@Model.CategoryList[i].DisplayName</a>
+                                        </li>
+                                                    }
+                                                }
+                                            }
+                                        }
+                                        </ul>*@
+                                </li>
+                            </ul>
+                        }
+                        @if (Model != null && Model.CategoryList != null && Model.CategoryList.Count > 0)
+                        {
+                            <div class="tab-content">
+                                <div class="row" id="Partialviewbind">
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var CategoryID = $(".portlet-body li.active").find("a").attr('id');
+            var postData = JSON.stringify({ Categoryid: CategoryID });
+            ShowLoader();
+            $.ajax({
+                type: "POST",
+                url: "/GeneralSetup/CategoryList",
+                traditional: true,
+                async: true,
+                data: {
+                    Categoryid: CategoryID
+                },
+                success: function (data) {
+                    HideLoader();
+                    if (data == "_Logon_") {
+                        window.location.href = "/Login/Login";
+                    }
+                    else {
+                        $("#Partialviewbind").html('');
+                        $("#Partialviewbind").html(data);
+                    }
+                }
+            });
+        });
+
+        function ClearPopup(form) {
+            $(".field-validation-valid").find('span').html('');
+            $(".field-validation-error").find('span').html('');
+            $('#' + form + ' input[type=text]').val("");
+            $('#' + form + ' .bs-select').val("");
+            $('#' + form + ' .bs-select').selectpicker('refresh');
+        }
+
+        function FilterCategory(obj) {
+            var CategoryID = $(obj).attr('id');
+            var postData = JSON.stringify({ Categoryid: CategoryID });
+            ShowLoader();
+            $.ajax({
+                type: "POST",
+                url: "/GeneralSetup/CategoryList",
+                traditional: true,
+                async: true,
+                data: {
+                    Categoryid: CategoryID
+                },
+                success: function (data) {
+                    HideLoader();
+                    if (data == "_Logon_") {
+                        window.location.href = "/Login/Login";
+                    }
+                    else {
+                        $("#Partialviewbind").html(data);
+                    }
+                }
+            });
+        }
+        function OpenPopup(id, form, categoryname) {
+            //var categoryid = id;
+            //var categoryname = categoryname;
+            ShowLoader();
+            $.ajax({
+                type: "POST",
+                url: "/GeneralSetup/GeneralsetupPopup",
+                traditional: true,
+                async: true,
+                data: {
+                    Categoryid: id,
+                    CategoryName: categoryname
+                },
+                success: function (data) {
+                    HideLoader();
+                    if (data == "_Logon_") {
+                        window.location.href = "/Login/Login";
+                    }
+                    else {
+                        $("#SetupPopup").html(data);
+                        $("#Setup_Popup").modal('show');
+                        $(".bs-select").selectpicker('refresh');
+                        $("#" + form).data('validator', null);
+                        $.validator.unobtrusive.parse($("#" + form));
+                        //$("#projecttermcategory_ProjectTermID").val('');
+                    }
+                }
+            });
+            //$("#Setup_Popup").modal('show');
+            //$("#" + form).data('validator', null);
+            //$.validator.unobtrusive.parse($("#" + form));
+            //$("#projecttermcategory_ProjectTermID").val('');
+            ClearPopup(form);
+        }
+
+        function EditPopup(id, form) {
+            ShowLoader();
+            $.ajax({
+                type: "POST",
+                url: "/GeneralSetup/GeneralsetupEditPopup",
+                traditional: true,
+                async: true,
+                data: {
+                    projecttermid: id
+                },
+                success: function (data) {
+                    HideLoader();
+                    if (data == "_Logon_") {
+                        window.location.href = "/Login/Login";
+                    }
+                    else {
+                        $("#Setup_Popup").modal('show');
+                        $("#SetupPopup").html(data);
+                        $(".bs-select").selectpicker('refresh');
+                        $("#" + form).data('validator', null);
+                        $.validator.unobtrusive.parse($("#" + form));
+                    }
+                }
+            });
+        }
+    </script>
+    <script>
+        function GetFiscalYear() {
+
+            if ($("#projecttermcategory_StartDate").val() != null && $("#projecttermcategory_EndDate").val() != null && $("#projecttermcategory_StartDate").val() != "" && $("#projecttermcategory_EndDate").val() != "" && $("#projecttermcategory_StartDate").val() != undefined && $("#projecttermcategory_EndDate").val() != undefined) {
+                var Startdate = $("#projecttermcategory_StartDate").val().split('/')[2];
+                var Enddate = $("#projecttermcategory_EndDate").val().split('/')[2];
+                if (Startdate == Enddate) {
+                    $("#projecttermcategory_Term").val(Startdate);
+                    $("#fiscalyear").html(Startdate);
+                }
+                else {
+                    $("#projecttermcategory_Term").val(Startdate + '-' + Enddate);
+                    $("#fiscalyear").html(Startdate + '-' + Enddate);
+                }
+            }
+            else {
+                $("#projecttermcategory_Term").val("");
+                $("#fiscalyear").html("");
+            }
+        }
+
+        function Filterdropdown() {
+            var input, filter, ul, li, a, i;
+            input = document.getElementById("searchinput");
+            filter = input.value.toUpperCase();
+            ul = document.getElementById("categoryUL");
+            li = ul.getElementsByClassName("custom");
+            for (i = 0; i < li.length; i++) {
+                a = li[i].getElementsByTagName("a")[0];
+                if (a.innerHTML.toUpperCase().indexOf(filter) > -1) {
+                    li[i].style.display = "";
+                } else {
+                    li[i].style.display = "none";
+                }
+            }
+        }
+        function Submitform() {
+            if ($("#form_Setup").valid()) {
+                $('#form_Setup *').prop('disabled', false);
+                ShowLoader();
+                $("#form_Setup").submit();
+            }
+        }
+    </script>
+}
+

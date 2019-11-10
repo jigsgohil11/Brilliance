@@ -5,7 +5,6 @@
     Layout = "~/Views/Shared/_Layout_public.cshtml";
 }
 
-
 <div class="page-content page-content-dashbrd-backgrnd">
     <div class="row">
         <div class="col-md-12">
@@ -45,30 +44,35 @@
                                         </div>
                                     </div>
                                 </div>
-
                                 <div class="row">
                                     @*<div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>Code</label>
+                                                @Html.TextBoxFor(m => m.product.Code, new { @class = "form-control m-input", @placeholder = "Enter product code" })
+                                                @Html.ValidationMessageFor(m => m.product.Code)
+                                            </div>
+                                        </div>*@
+                                    <div class="col-md-6">
                                         <div class="form-group">
-                                            <label>Code</label>
-                                            @Html.TextBoxFor(m => m.product.Code, new { @class = "form-control m-input", @placeholder = "Enter product code" })
-                                            @Html.ValidationMessageFor(m => m.product.Code)
+                                            <label>Product Type</label>
+                                            @Html.DropDownListFor(m => m.product.ProductTypeID, new SelectList(Model.ProductTypelist, "Value", "Text", 0), "--Select Product Type--", new { @data_live_search = "true", @class = "form-control bs-select" })
+                                            @Html.ValidationMessageFor(m => m.product.ProductTypeID)
                                         </div>
-                                    </div>*@
+                                    </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label>Name</label>
                                             @Html.TextBoxFor(m => m.product.Name, new { @class = "form-control m-input", @placeholder = "Enter product name" })
                                             @Html.ValidationMessageFor(m => m.product.Name)
                                         </div>
-                                    </div>
+                                    </div>                                    
                                 </div>
-
                                 <div class="row">
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label>Description</label>
                                             @*<textarea class="form-control input-sm" data-bind="value: note" rows="4" style="resize:none;width:100%;"></textarea>*@
-                                            @Html.TextAreaFor(m => m.product.Description, new { @class = "form-control m-input", @placeholder = "Enter Description", @rows = "4" })
+                                            @Html.TextAreaFor(m => m.product.Description, new { @class = "form-control m-input", @placeholder = "Enter Description", @rows = "1" })
                                         </div>
                                     </div>
                                 </div>
@@ -88,7 +92,6 @@
     </div>
 </div>
 @section scripts{
-
     <script>
 
         function SaveProductResponse(response) {
@@ -141,4 +144,3 @@
 
     </script>
 }
-

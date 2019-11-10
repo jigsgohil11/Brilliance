@@ -36,6 +36,9 @@ namespace Brilliance.Infrastructure.DataProvider
                     cmd.Parameters.AddWithValue("@Modifieddate", _model.Modifieddate).SqlDbType = SqlDbType.DateTime;
                     cmd.Parameters.AddWithValue("@ModifiedBy", _model.ModifiedBy).SqlDbType = SqlDbType.UniqueIdentifier;
                     cmd.Parameters.AddWithValue("@IsEdit", _model.IsEdit).SqlDbType = SqlDbType.Bit;
+                    cmd.Parameters.AddWithValue("@AdditionalDescription", _model.AdditionalDescription).SqlDbType = SqlDbType.NVarChar;
+                    cmd.Parameters.AddWithValue("@Filename", _model.Filename).SqlDbType = SqlDbType.NVarChar;
+                    cmd.Parameters.AddWithValue("@DivisionId", _model.DivisionId).SqlDbType = SqlDbType.UniqueIdentifier;
 
 
 
@@ -62,6 +65,10 @@ namespace Brilliance.Infrastructure.DataProvider
                     cmd.Parameters.AddWithValue("@Modifieddate", _model.Modifieddate).SqlDbType = SqlDbType.DateTime;
                     cmd.Parameters.AddWithValue("@ModifiedBy", _model.ModifiedBy).SqlDbType = SqlDbType.UniqueIdentifier;
                     cmd.Parameters.AddWithValue("@IsEdit", _model.IsEdit).SqlDbType = SqlDbType.Bit;
+                    cmd.Parameters.AddWithValue("@AdditionalDescription", _model.AdditionalDescription).SqlDbType = SqlDbType.NVarChar;
+                    cmd.Parameters.AddWithValue("@Filename", _model.Filename).SqlDbType = SqlDbType.NVarChar;
+                    cmd.Parameters.AddWithValue("@DivisionId", _model.DivisionId).SqlDbType = SqlDbType.UniqueIdentifier;
+
 
                     DataSet ds = null;
                     ds = BulkInsert("Save_Outcome", cmd);
@@ -82,12 +89,13 @@ namespace Brilliance.Infrastructure.DataProvider
             var TCFQuestionGroup = new ConductDataViewModel();
             try
             {
+                var client = SessionHelper.ClientID;
                 var searchList = new List<SearchValueData>()
                 {
-                        new SearchValueData { Name = "UserId " ,Value = Convert.ToString(userid)}
+                        new SearchValueData { Name = "EntityId " ,Value = Convert.ToString(client)}
                 };
 
-                List<TCFQuestionGroupViewmodel> _TCFQuestionGroup = GetEntityList<TCFQuestionGroupViewmodel>("_GetTCFBYUser", searchList);//Constants.GetUserGroupList
+                List<TCFQuestionGroupViewmodel> _TCFQuestionGroup = GetEntityList<TCFQuestionGroupViewmodel>("prc_GetQuestion", searchList);//Constants.GetUserGroupList
                 if (_TCFQuestionGroup.Count > 0)
                 {
                     TCFQuestionGroup.TCFQuestionGrouplist = _TCFQuestionGroup;
@@ -340,6 +348,8 @@ namespace Brilliance.Infrastructure.DataProvider
 
                     cmd.Parameters.AddWithValue("@Modifieddate", _model.Modifieddate).SqlDbType = SqlDbType.DateTime;
                     cmd.Parameters.AddWithValue("@ModifiedBy", _model.ModifiedBy).SqlDbType = SqlDbType.UniqueIdentifier;
+                    cmd.Parameters.AddWithValue("@RateId", _model.RateId).SqlDbType = SqlDbType.UniqueIdentifier;
+
                     cmd.Parameters.AddWithValue("@IsEdit", _model.IsEdit).SqlDbType = SqlDbType.Bit;
 
 
@@ -369,7 +379,7 @@ namespace Brilliance.Infrastructure.DataProvider
                     cmd.Parameters.AddWithValue("@CreatedBy", _model.CreatedBy).SqlDbType = SqlDbType.UniqueIdentifier;
 
                     cmd.Parameters.AddWithValue("@Modifieddate", _model.Modifieddate).SqlDbType = SqlDbType.DateTime;
-                    cmd.Parameters.AddWithValue("@ModifiedBy", _model.ModifiedBy).SqlDbType = SqlDbType.UniqueIdentifier;
+                    cmd.Parameters.AddWithValue("@RateId", _model.RateId).SqlDbType = SqlDbType.UniqueIdentifier;
                     cmd.Parameters.AddWithValue("@IsEdit", _model.IsEdit).SqlDbType = SqlDbType.Bit;
 
                     DataSet ds = null;
@@ -393,7 +403,14 @@ namespace Brilliance.Infrastructure.DataProvider
             List<TCFQuestionViewmodel> TCFQuestion = new List<TCFQuestionViewmodel>();
             try
             {
-                var searchList = new List<SearchValueData>();
+                var client = SessionHelper.ClientID;
+                Guid userid = new Guid();
+                userid = SessionHelper.UserId;
+                var searchList = new List<SearchValueData>()
+                {
+                        new SearchValueData { Name = "EntityId " ,Value = Convert.ToString(client)},
+                        new SearchValueData { Name = "UserId " ,Value = Convert.ToString(userid)}
+                };
 
                 TCFQuestion = GetEntityList<TCFQuestionViewmodel>("prc_GetQuestion", searchList);//Constants.GetUserGroupList
 
@@ -589,7 +606,7 @@ namespace Brilliance.Infrastructure.DataProvider
             return count;
         }
 
-        public List<SelectListItem> BindUsers()
+        public List<SelectListItem> BindUsers(Guid Id)
         {
             var _Bindclient = new List<SelectListItem>();
             try
@@ -600,11 +617,20 @@ namespace Brilliance.Infrastructure.DataProvider
                 List<SelectListItem> client = GetEntityList<SelectListItem>("Proc_BindUsers", searchList);//Constants.GetUserGroupList
                 if (client != null)
                 {
-                    _Bindclient = client;
+                    foreach(var item in client)
+                    {
+                        if(item.Value==Id.ToString().ToUpper())
+                        {
+                            _Bindclient.Add(new SelectListItem { Text = item.Text, Value = item.Value, Selected = true });
+                        }
+                        else
+                        {
+                            _Bindclient.Add(new SelectListItem { Text = item.Text, Value = item.Value});
+                        }
+                    }
+                    /////_Bindclient = client;
                 }
-                else
-                {
-                }
+               
             }
             catch (Exception ex)
             {
@@ -789,18 +815,22 @@ namespace Brilliance.Infrastructure.DataProvider
         }
 
 
-        public TCFSubOutCome _GetSuboutcomeById(Guid Id)
+        public TCFQuestion _GetSuboutcomeById(Guid Id)
         {
-            TCFSubOutCome vm = new TCFSubOutCome();
+            TCFQuestion vm = new TCFQuestion();
+            Guid userid = new Guid();
+            userid = SessionHelper.UserId;
             var response = new ServiceResponse();
             try
             {
                 var searchList = new List<SearchValueData>()
                 {
-                        new SearchValueData { Name = "Id " ,Value = Convert.ToString(Id)}
+                        new SearchValueData { Name = "Id" ,Value = Convert.ToString(Id)},
+
+                        new SearchValueData { Name = "UserId" ,Value = Convert.ToString(userid)}
                 };
 
-                vm = GetEntity<TCFSubOutCome>("_GetSuboutcomeById", searchList);
+                vm = GetEntity<TCFQuestion>("_GetSuboutcomeById", searchList);
                 response.Data = vm;
                 response.IsSuccess = true;
             }
@@ -812,7 +842,7 @@ namespace Brilliance.Infrastructure.DataProvider
 
         }
 
-        public List<TCFFormEvidence> _TCFFormEvidence(Guid Id,Guid TCFQuestionId)
+        public List<TCFFormEvidence> _TCFFormEvidence(Guid TCFQuestionId)
         {
             List<TCFFormEvidence> vm = new List<TCFFormEvidence>();
             var response = new ServiceResponse();
@@ -820,7 +850,6 @@ namespace Brilliance.Infrastructure.DataProvider
             {
                 var searchList = new List<SearchValueData>()
                 {
-                        new SearchValueData { Name = "Id" ,Value = Convert.ToString(Id)},
                         new SearchValueData { Name = "TCFQuestionId" ,Value = Convert.ToString(TCFQuestionId)}
                 };
 
@@ -835,7 +864,7 @@ namespace Brilliance.Infrastructure.DataProvider
             return vm;
 
         }
-        public List<TCFNotes> _GetNotes(Guid Id, Guid TCFQuestionId)
+        public List<TCFNotes> _GetNotes(Guid TCFQuestionId)
         {
             List<TCFNotes> vm = new List<TCFNotes>();
             var response = new ServiceResponse();
@@ -843,7 +872,6 @@ namespace Brilliance.Infrastructure.DataProvider
             {
                 var searchList = new List<SearchValueData>()
                 {
-                        new SearchValueData { Name = "Id " ,Value = Convert.ToString(Id)},
                          new SearchValueData { Name = "TCFQuestionId " ,Value = Convert.ToString(TCFQuestionId)}
                 };
 
@@ -858,7 +886,7 @@ namespace Brilliance.Infrastructure.DataProvider
             return vm;
 
         }
-        public List<TCFTask> _GetTask(Guid Id, Guid TCFQuestionId)
+        public List<TCFTask> _GetTask(Guid TCFQuestionId)
         {
             List<TCFTask> vm = new List<TCFTask>();
             var response = new ServiceResponse();
@@ -866,7 +894,6 @@ namespace Brilliance.Infrastructure.DataProvider
             {
                 var searchList = new List<SearchValueData>()
                 {
-                        new SearchValueData { Name = "Id" ,Value = Convert.ToString(Id)},
                         new SearchValueData { Name = "TCFQuestionId" ,Value = Convert.ToString(TCFQuestionId)}
                 };
 
@@ -890,7 +917,7 @@ namespace Brilliance.Infrastructure.DataProvider
             {
                 SqlCommand cmd = new SqlCommand();
                 DataSet ds = null;
-                cmd.Parameters.AddWithValue("@TcformId", ev.TcformId).SqlDbType = SqlDbType.UniqueIdentifier;
+                cmd.Parameters.AddWithValue("@AddedById", ev.CreatedBy).SqlDbType = SqlDbType.UniqueIdentifier;
                 cmd.Parameters.AddWithValue("@TCFQuestionId", ev.TCFQuestionId).SqlDbType = SqlDbType.UniqueIdentifier;
                 ds = BulkInsert("RemoveTcfImages", cmd);
             }
@@ -908,7 +935,7 @@ namespace Brilliance.Infrastructure.DataProvider
             {
                 SqlCommand cmd = new SqlCommand();
                 DataSet ds = null;
-                cmd.Parameters.AddWithValue("@TcformId", ev.TcformId).SqlDbType = SqlDbType.UniqueIdentifier;
+                cmd.Parameters.AddWithValue("@AddedBy", ev.AddedById).SqlDbType = SqlDbType.UniqueIdentifier;
                 cmd.Parameters.AddWithValue("@TCFQuestionId", ev.TCFQuestionId).SqlDbType = SqlDbType.UniqueIdentifier;
                 ds = BulkInsert("_procDeleteTaks", cmd);
             }
@@ -926,7 +953,7 @@ namespace Brilliance.Infrastructure.DataProvider
             {
                 SqlCommand cmd = new SqlCommand();
                 DataSet ds = null;
-                cmd.Parameters.AddWithValue("@TcformId", ev.TcformId).SqlDbType = SqlDbType.UniqueIdentifier;
+                cmd.Parameters.AddWithValue("@AddedBy", ev.AddedById).SqlDbType = SqlDbType.UniqueIdentifier;
                 cmd.Parameters.AddWithValue("@TCFQuestionId", ev.TCFQuestionId).SqlDbType = SqlDbType.UniqueIdentifier;
                 ds = BulkInsert("_procDeleteNote", cmd);
             }
@@ -947,7 +974,6 @@ namespace Brilliance.Infrastructure.DataProvider
                 if (_model.IsEdit == false)
                 {
                     SqlCommand cmd = new SqlCommand();
-                    cmd.Parameters.AddWithValue("@TcformId", _model.TcformId).SqlDbType = SqlDbType.UniqueIdentifier;
 
                     cmd.Parameters.AddWithValue("@ClusterId", _model.ClusterId).SqlDbType = SqlDbType.UniqueIdentifier;
                     cmd.Parameters.AddWithValue("@TCFPeriodId", _model.TCFPeriodId).SqlDbType = SqlDbType.UniqueIdentifier;
@@ -970,7 +996,6 @@ namespace Brilliance.Infrastructure.DataProvider
                 else
                 {
                     SqlCommand cmd = new SqlCommand();
-                    cmd.Parameters.AddWithValue("@TcformId", _model.ClusterId).SqlDbType = SqlDbType.UniqueIdentifier;
 
                     cmd.Parameters.AddWithValue("@ClusterId", _model.ClusterId).SqlDbType = SqlDbType.UniqueIdentifier;
                     cmd.Parameters.AddWithValue("@TCFPeriodId", _model.TCFPeriodId).SqlDbType = SqlDbType.UniqueIdentifier;
@@ -1017,10 +1042,11 @@ namespace Brilliance.Infrastructure.DataProvider
                     cmd.Parameters.AddWithValue("@ReasonPartially", _model.ReasonPartially).SqlDbType = SqlDbType.NVarChar;
                     cmd.Parameters.AddWithValue("@ReasonFully", _model.ReasonFully).SqlDbType = SqlDbType.NVarChar;
                     cmd.Parameters.AddWithValue("@ModifiedBy", _model.ModifiedBy).SqlDbType = SqlDbType.UniqueIdentifier;
+                    cmd.Parameters.AddWithValue("@DueDate", _model.DueDate).SqlDbType = SqlDbType.DateTime;
 
 
 
-                    DataSet ds = null;
+                DataSet ds = null;
                     ds = BulkInsert("Proc_UpdateSuboutcome", cmd);
 
                     response.IsSuccess = true;
@@ -1047,19 +1073,17 @@ namespace Brilliance.Infrastructure.DataProvider
 
 
                 SqlCommand cmd = new SqlCommand();
-                    cmd.Parameters.AddWithValue("@TcformId", _model.TcformId).SqlDbType = SqlDbType.UniqueIdentifier;
 
-                    cmd.Parameters.AddWithValue("@TCFSubOutComeId", _model.TCFSubOutComeId).SqlDbType = SqlDbType.UniqueIdentifier;
                     cmd.Parameters.AddWithValue("@TCFQuestionId", _model.TCFQuestionId).SqlDbType = SqlDbType.UniqueIdentifier;
                     cmd.Parameters.AddWithValue("@AddedById", _model.AddedById).SqlDbType = SqlDbType.UniqueIdentifier;
                     cmd.Parameters.AddWithValue("@AssignUserId", _model.AssignUserId).SqlDbType = SqlDbType.UniqueIdentifier;
                     cmd.Parameters.AddWithValue("@Task", _model.Task).SqlDbType = SqlDbType.NVarChar;
                     cmd.Parameters.AddWithValue("@Status", _model.Status).SqlDbType = SqlDbType.NVarChar;
+                    cmd.Parameters.AddWithValue("@DueDate", _model.DueDate).SqlDbType = SqlDbType.NVarChar;
 
 
 
-
-                    DataSet ds = null;
+                DataSet ds = null;
                     ds = BulkInsert("_ProcessTcfTask", cmd);
 
                     response.IsSuccess = true;
@@ -1084,19 +1108,15 @@ namespace Brilliance.Infrastructure.DataProvider
             {
 
                     SqlCommand cmd = new SqlCommand();
-                    cmd.Parameters.AddWithValue("@TcformId", _model.TcformId).SqlDbType = SqlDbType.UniqueIdentifier;
 
-                    cmd.Parameters.AddWithValue("@TCFSubOutComeId", _model.TCFSubOutComeId).SqlDbType = SqlDbType.UniqueIdentifier;
                     cmd.Parameters.AddWithValue("@TCFQuestionId", _model.TCFQuestionId).SqlDbType = SqlDbType.UniqueIdentifier;
                     cmd.Parameters.AddWithValue("@AddedById", _model.AddedById).SqlDbType = SqlDbType.UniqueIdentifier;
                     cmd.Parameters.AddWithValue("@Author", _model.Author).SqlDbType = SqlDbType.NVarChar;
                     cmd.Parameters.AddWithValue("@Note", _model.Note).SqlDbType = SqlDbType.NVarChar;
+                    cmd.Parameters.AddWithValue("@NoteId", _model.NoteId).SqlDbType = SqlDbType.NVarChar;
 
-
-
-
-                    DataSet ds = null;
-                    ds = BulkInsert("_ProcessTcfNote", cmd);
+                     DataSet ds = null;
+                     ds = BulkInsert("_ProcessTcfNote", cmd);
 
                     response.IsSuccess = true;
 
@@ -1112,6 +1132,260 @@ namespace Brilliance.Infrastructure.DataProvider
 
             return response;
         }
+
+        public string _GetEntityByUser(Guid Id)
+        {
+            string code = string.Empty;
+
+            try
+            {
+                SqlCommand cmd = new SqlCommand();
+                DataSet _ds = null;
+                cmd.Parameters.AddWithValue("@UserId", Id).SqlDbType = SqlDbType.UniqueIdentifier;
+                _ds = BulkInsert("_GetEntityByUser", cmd);
+                if (_ds.Tables[0].Rows.Count > 0)
+                {
+                    code = _ds.Tables[0].Rows[0]["code"].ToString();
+                }
+
+            }
+            catch (Exception ex)
+            {
+             
+            }
+            return code;
+        }
+
+        public string _GetUserName(Guid Id)
+        {
+            string TCFNoteuser = string.Empty;
+
+            try
+            {
+                SqlCommand cmd = new SqlCommand();
+                DataSet _ds = null;
+                cmd.Parameters.AddWithValue("@UserId", Id).SqlDbType = SqlDbType.UniqueIdentifier;
+                _ds = BulkInsert("_GetUserName", cmd);
+                if (_ds.Tables[0].Rows.Count > 0)
+                {
+                    TCFNoteuser = _ds.Tables[0].Rows[0]["TCFNoteuser"].ToString();
+                }
+
+            }
+            catch (Exception ex)
+            {
+
+            }
+            return TCFNoteuser;
+        }
+
+
+
+
+        public ConductDataViewModel TCFQuestionEntityUserWise(Guid EntityId,Guid UserId, int IsAdmin, Guid Division)
+        {
+            var TCFQuestionGroup = new ConductDataViewModel();
+            try
+            {
+                var client = SessionHelper.ClientID;
+                var searchList = new List<SearchValueData>()
+                {
+                        new SearchValueData { Name = "EntityId" ,Value = Convert.ToString(EntityId)},
+                        new SearchValueData { Name = "UserId" ,Value = Convert.ToString(UserId)},
+                         new SearchValueData { Name = "IsAdmin" ,Value = Convert.ToString(IsAdmin)},
+                          new SearchValueData { Name = "DivisionId" ,Value = Convert.ToString(Division)}
+                };
+
+                List<TCFQuestionGroupViewmodel> _TCFQuestionGroup = GetEntityList<TCFQuestionGroupViewmodel>("TCFQuestionEntityUserWise", searchList);//Constants.GetUserGroupList
+                if (_TCFQuestionGroup.Count > 0)
+                {
+                    TCFQuestionGroup.TCFQuestionGrouplist = _TCFQuestionGroup;
+                    TCFQuestionGroup.Response.IsSuccess = true;
+                }
+                else
+                {
+                    TCFQuestionGroup.Response.IsSuccess = false;
+                }
+            }
+            catch (Exception ex)
+            {
+                //userGroupListModel.Response.Message = Resource.Resource.ServerError;
+            }
+            return TCFQuestionGroup;
+        }
+
+        public ServiceResponse _UpdateTcfFormEntryByUser(TCFQuestion quiz)
+        {
+            var response = new ServiceResponse();
+            try
+            {
+                
+                SqlCommand _cmd = new SqlCommand();
+                DataSet _ds = null;
+                _cmd.Parameters.AddWithValue("@CreatedBy", quiz.CreatedBy).SqlDbType = SqlDbType.UniqueIdentifier;
+                _cmd.Parameters.AddWithValue("@TCFQuestionGroupId", quiz.TCFQuestionGroupId).SqlDbType = SqlDbType.UniqueIdentifier;
+                _cmd.Parameters.AddWithValue("@Id", quiz.Id).SqlDbType = SqlDbType.UniqueIdentifier;
+                _cmd.Parameters.AddWithValue("@RateId", quiz.RateId).SqlDbType = SqlDbType.UniqueIdentifier;
+                _cmd.Parameters.AddWithValue("@TCFQuestionTypeId", quiz.TCFQuestionTypeId).SqlDbType = SqlDbType.UniqueIdentifier;
+                _cmd.Parameters.AddWithValue("@BinderHolderTypeId", quiz.BinderHolderTypeId).SqlDbType = SqlDbType.UniqueIdentifier;
+                _cmd.Parameters.AddWithValue("@Code", quiz.Code).SqlDbType = SqlDbType.NVarChar;
+                _cmd.Parameters.AddWithValue("@Description", quiz.Description).SqlDbType = SqlDbType.NVarChar;
+                _cmd.Parameters.AddWithValue("@GuidanceTitle", quiz.GuidanceTitle).SqlDbType = SqlDbType.NVarChar;
+                _cmd.Parameters.AddWithValue("@GuidanceDescription", quiz.GuidanceDescription).SqlDbType = SqlDbType.NVarChar;
+                _cmd.Parameters.AddWithValue("@IsStandard", true).SqlDbType = SqlDbType.Bit;
+                _cmd.Parameters.AddWithValue("@ReasonNotYet", quiz.ReasonNotYet).SqlDbType = SqlDbType.NVarChar;
+                _cmd.Parameters.AddWithValue("@Reasonmostly", quiz.Reasonmostly).SqlDbType = SqlDbType.NVarChar;
+                _cmd.Parameters.AddWithValue("@ReasonNotApplicable", quiz.ReasonNotApplicable).SqlDbType = SqlDbType.NVarChar;
+                _cmd.Parameters.AddWithValue("@ReasonPartially", quiz.ReasonPartially).SqlDbType = SqlDbType.NVarChar;
+                _cmd.Parameters.AddWithValue("@ReasonFully", quiz.ReasonFully).SqlDbType = SqlDbType.NVarChar;
+                _cmd.Parameters.AddWithValue("@TCFSubOutComeUserId", quiz.TCFSubOutComeUserId).SqlDbType = SqlDbType.UniqueIdentifier;
+                _cmd.Parameters.AddWithValue("@UpdatedBy", SessionHelper.UserId).SqlDbType = SqlDbType.UniqueIdentifier;
+                _cmd.Parameters.AddWithValue("@DueDate", quiz.DueDate).SqlDbType = SqlDbType.DateTime;
+                _ds = BulkInsert("_TcfFormEntryByUser", _cmd);
+
+                string message = string.Empty;
+                if (_ds.Tables[0].Rows.Count > 0)
+                {
+                    message = _ds.Tables[0].Rows[0]["Msg"].ToString();
+                    if (message.ToString() == "1")
+                    {
+                        response.Message = "Saved Sucessfully..";
+                    }
+                    else
+                    {
+                        response.Message = "Update Sucessfully..";
+                    }
+                }
+            }
+            catch(Exception ex)
+            {
+
+
+            }
+            return response;
+        }
+
+        public ServiceResponse _NewTcfEntry(TCFQuestion quiz)
+        {
+            var response = new ServiceResponse();
+            try
+            {
+
+                SqlCommand _cmd = new SqlCommand();
+                DataSet _ds = null;
+                _cmd.Parameters.AddWithValue("@Id", quiz.Id).SqlDbType = SqlDbType.UniqueIdentifier;
+                _cmd.Parameters.AddWithValue("@RateId", quiz.RateId).SqlDbType = SqlDbType.UniqueIdentifier;
+                _cmd.Parameters.AddWithValue("@TCFQuestionGroupId", quiz.TCFQuestionGroupId).SqlDbType = SqlDbType.UniqueIdentifier;
+                _cmd.Parameters.AddWithValue("@BinderHolderTypeId", quiz.BinderHolderTypeId).SqlDbType = SqlDbType.UniqueIdentifier;
+                _cmd.Parameters.AddWithValue("@Code", quiz.Code).SqlDbType = SqlDbType.NVarChar;
+                _cmd.Parameters.AddWithValue("@Description", quiz.Description).SqlDbType = SqlDbType.NVarChar;
+                _cmd.Parameters.AddWithValue("@GuidanceDescription", quiz.GuidanceDescription).SqlDbType = SqlDbType.NVarChar;
+                _cmd.Parameters.AddWithValue("@IsStandard", true).SqlDbType = SqlDbType.Bit;
+                _cmd.Parameters.AddWithValue("@CreatedAt", quiz.CreatedAt).SqlDbType = SqlDbType.DateTime;
+                _cmd.Parameters.AddWithValue("@CreatedBy", quiz.CreatedBy).SqlDbType = SqlDbType.UniqueIdentifier;
+                _cmd.Parameters.AddWithValue("@Isdelete", quiz.IsDeleted).SqlDbType = SqlDbType.Bit;
+
+                _cmd.Parameters.AddWithValue("@ReasonNotYet", quiz.ReasonNotYet).SqlDbType = SqlDbType.NVarChar;
+                _cmd.Parameters.AddWithValue("@Reasonmostly", quiz.Reasonmostly).SqlDbType = SqlDbType.NVarChar;
+
+                _cmd.Parameters.AddWithValue("@ReasonNotApplicable", quiz.ReasonNotApplicable).SqlDbType = SqlDbType.NVarChar;
+                _cmd.Parameters.AddWithValue("@ReasonPartially", quiz.ReasonPartially).SqlDbType = SqlDbType.NVarChar;
+                _cmd.Parameters.AddWithValue("@ReasonFully", quiz.ReasonFully).SqlDbType = SqlDbType.NVarChar;
+                _cmd.Parameters.AddWithValue("@TCFSubOutComeUserId", quiz.TCFSubOutComeUserId).SqlDbType = SqlDbType.UniqueIdentifier;
+                _cmd.Parameters.AddWithValue("@DueDate", quiz.DueDate).SqlDbType = SqlDbType.DateTime;
+                _ds = BulkInsert("_NewTcfEntry", _cmd);
+
+                string message = string.Empty;
+                if (_ds.Tables[0].Rows.Count > 0)
+                {
+                    message = _ds.Tables[0].Rows[0]["Msg"].ToString();
+                    if (message.ToString() == "1")
+                    {
+                        response.Message = "Saved Sucessfully..";
+                    }
+                    else
+                    {
+                        response.Message = "Update Sucessfully..";
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+
+
+            }
+            return response;
+        }
+
+        public List<TCFQuestionViewmodel> _TCFQuestionForUser(Guid CreatedBy)
+        {
+            List<TCFQuestionViewmodel> vm = new List<TCFQuestionViewmodel>();
+
+            var searchList = new List<SearchValueData>()
+                {
+                        new SearchValueData { Name = "CreatedBy " ,Value = Convert.ToString(CreatedBy)}
+                       
+                };
+            vm = GetEntityList<TCFQuestionViewmodel>("_TCFQuestionForUser", searchList);//Constants.GetUserGroupList
+            return vm;
+        }
+
+
+        public List<SelectListItem> BindDivionByCompany(Guid CompanyID)
+        {
+            var _division = new List<SelectListItem>();
+            try
+            {
+
+                var searchList = new List<SearchValueData>()
+                {
+                        new SearchValueData { Name = "CompanyID" ,Value = Convert.ToString(CompanyID)}
+
+                };
+
+                List<SelectListItem> division = GetEntityList<SelectListItem>("BindDivionByCompany", searchList);//Constants.GetUserGroupList
+                if (division != null)
+                {
+                    _division = division;
+                }
+                else
+                {
+                }
+            }
+            catch (Exception ex)
+            {
+                //userGroupListModel.Response.Message = Resource.Resource.ServerError;
+            }
+            return _division;
+        }
+
+        public string _GetUserDivision(Guid Id)
+        {
+            string TCFNoteuser = string.Empty;
+
+            try
+            {
+                SqlCommand cmd = new SqlCommand();
+                DataSet _ds = null;
+                cmd.Parameters.AddWithValue("@UserId", Id).SqlDbType = SqlDbType.UniqueIdentifier;
+                _ds = BulkInsert("_GetUserDivision", cmd);
+                if (_ds.Tables[0].Rows.Count > 0)
+                {
+                    TCFNoteuser = _ds.Tables[0].Rows[0]["Position"].ToString();
+                }
+                else
+                {
+                    TCFNoteuser = null;
+                }
+
+            }
+            catch (Exception ex)
+            {
+
+            }
+            return TCFNoteuser;
+        }
+
 
     }
 }

@@ -1,10 +1,8 @@
-﻿@using Brilliance.Infrastructure
-@model Brilliance.Models.ViewModel.DivisionViewModel
+﻿@model Brilliance.Models.ViewModel.DivisionViewModel
 @{
     ViewBag.Title = "Division";
     Layout = "~/Views/Shared/_Layout_public.cshtml";
 }
-
 
 <div class="page-content page-content-dashbrd-backgrnd">
     <div class="row">
@@ -33,7 +31,7 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label>Organization<span style="font-weight: bold;color: red;">*</span></label>
-                                            @Html.DropDownListFor(m => m.division.ClientID, new SelectList(Model.Clientlist, "Value", "Text", 0), "--Select Organization--", new { @data_live_search = "true", @class = "form-control bs-select",@onchange= "GetCompany(this);" })
+                                            @Html.DropDownListFor(m => m.division.ClientID, new SelectList(Model.Clientlist, "Value", "Text", 0), "--Select Organization--", new { @data_live_search = "true", @class = "form-control bs-select", @onchange = "GetCompany(this);" })
                                             @Html.ValidationMessageFor(m => m.division.ClientID)
                                         </div>
                                     </div>
@@ -47,12 +45,12 @@
                                 </div>
                                 <div class="row">
                                     @*<div class="col-md-6">
-                                        <div class="form-group">
-                                            <label>Code</label>
-                                            @Html.TextBoxFor(m => m.division.Code, new { @class = "form-control m-input", @placeholder = "Enter Code" })
-                                            @Html.ValidationMessageFor(m => m.division.Code)
-                                        </div>
-                                    </div>*@
+                                            <div class="form-group">
+                                                <label>Code</label>
+                                                @Html.TextBoxFor(m => m.division.Code, new { @class = "form-control m-input", @placeholder = "Enter Code" })
+                                                @Html.ValidationMessageFor(m => m.division.Code)
+                                            </div>
+                                        </div>*@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label>Division Name</label>
@@ -60,12 +58,10 @@
                                             @Html.ValidationMessageFor(m => m.division.Name)
                                         </div>
                                     </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-12">
+                                    <div class="col-md-6">
                                         <div class="form-group">
                                             <label>Description</label>
-                                            @Html.TextAreaFor(m => m.division.Description, new { @class = "form-control m-input", @placeholder = "Enter Description", @rows = "4" })
+                                            @Html.TextAreaFor(m => m.division.Description, new { @class = "form-control m-input", @placeholder = "Enter Description", @rows = "1" })
                                         </div>
                                     </div>
                                 </div>
@@ -83,9 +79,7 @@
         </div>
     </div>
 </div>
-
 @section scripts{
-
     <script>
 
         function SaveDivisionResponse(response) {
@@ -135,13 +129,9 @@
             });
         }
 
-      
+
     </script>
 }
-
-
-
-
 
 
 

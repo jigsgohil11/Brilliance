@@ -59,11 +59,11 @@
                                 <td>@item.natureofcomplaint</td>
                                 <td>@item.ReceivedDate</td>
                                 <td>
-                                    @if (item.IsResolved.ToUpper() == "NOT YET")
+                                    @if (item.IsResolved!=null && item.IsResolved.ToUpper() == "NOT YET")
                                     {
                                         <label style="font-weight:bold;color:red">Not Yet</label>
                                     }
-                                    else if (item.IsResolved.ToUpper() == "YES")
+                                    else if (item.IsResolved != null && item.IsResolved.ToUpper() == "YES")
                                     {
                                         <label>@item.ResolvedDate</label>
                                     }

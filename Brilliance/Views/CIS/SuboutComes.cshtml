@@ -7,9 +7,7 @@
 
 }
 <link href="~/Content/kendoStyles.css" rel="stylesheet" />
-<link rel="stylesheet" href="https://app.brillianceib.com/bundles/knockout?v=mKy6cxTu1mioyNO6m4RTtIqEAZBgJ9YqLsg1ixYmtsM1" />
-<link rel="stylesheet" href="https://app.brillianceib.com/bundles/bootstrap?v=B9gEIvl-BkYgXVSg8Ql9co87zoQ4x1JR0IJEM-Rbbx01" />
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
 
 <style>
     #grid {
@@ -147,6 +145,21 @@
 
 
                             </div>
+                            <div class="row" style="padding-left:3%;">
+
+                                <div class="col-md-12">
+
+                                    <label>Rate the extent to which this is in place or in practice</label>
+
+
+                                    @Html.DropDownListFor(x => x.RateId, _icisDataProvider.BindOutcomeRating(), "...", new { @class = "form-control", @style = "width:47%;" })
+                                    @Html.ValidationMessageFor(x => x.RateId)
+                                </div>
+
+
+
+                            </div>
+                          
                             <br />
                             <div class="row" style="padding-left:3%;">
                                 <div class="form-group">
@@ -180,8 +193,8 @@
 
 @section scripts{
 
-    <script src="https://kendo.cdn.telerik.com/2018.2.620/js/jszip.min.js"></script>
-    <script src="https://kendo.cdn.telerik.com/2018.2.620/js/kendo.all.min.js"></script>
+  <script src="~/Scripts/jszip.min.js"></script>
+<script src="~/Scripts/kendo.all.min.js"></script>
 
     <script src="~/Scripts/bootstrapvalidator.min.js"></script>
 
@@ -327,6 +340,14 @@
                                    message: "Please provide Guidance for Description.."
                                }
                            }
+                       },
+                       RateId: {
+                           message: "Please Rate the following..",
+                           validators: {
+                               notEmpty: {
+                                   message: "Please Rate the following."
+                               }
+                           }
                        }
                    
                }
@@ -352,7 +373,7 @@
 <script>
         function BindGrid() {
 
-            var url = '@Url.Action("QuestionList", "CIS")';
+            var url = '@Url.Action("TCFQuestionList", "CIS")';
             var element = $("#grid").kendoGrid({
                 dataSource: {
 

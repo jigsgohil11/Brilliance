@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Brilliance.Models.Entity
 {
-    [TableName("brillianc.dbo.CRT_Notes")]
+    [TableName("mst_CRTNotes")]
     [PrimaryKey("NoteID")]
     [Sort("SeqNo", "ASC")]
     public class CRTNotes

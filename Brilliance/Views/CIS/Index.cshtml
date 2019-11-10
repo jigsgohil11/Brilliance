@@ -1,9 +1,10 @@
-﻿@model Brilliance.Models.Entity.TCFForm
+﻿@model Brilliance.Models.Entity.TCFQuestion
 @using Brilliance.Infrastructure.DataProvider;
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout_public.cshtml";
     ConductDataprovider _icisDataProvider = new ConductDataprovider();
+    Guid taskid = new Guid();
 }
 
 <link href="~/Content/kendoStyles.css" rel="stylesheet" />
@@ -50,7 +51,11 @@
             Add own TCF requirement
         </button>
         <form id="frmtcf" action="/CIS/Index" method="post" data-ajax="true" data-ajax-method="Post" enctype="multipart/form-data" data-ajax-success="SaveTCFResponse(data);">
-            @Html.HiddenFor(x=>x.Id)
+            @Html.HiddenFor(x => x.IsEdit)
+            @Html.HiddenFor(x => x.Id)
+            @Html.HiddenFor(x => x.CreatedBy)
+            @Html.HiddenFor(x => x.Code)
+            @Html.HiddenFor(x => x.TCFQuestionTypeId)
             <!-- Modal -->
 
             <div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
@@ -63,18 +68,20 @@
                             </button>
                         </div>
                         <div class="modal-body">
-                            <div class="row">
+                            <div class="row" id="dereq">
                                 <div class="form-group">
                                     <div class="col-md-12">
+                                        
                                        
                                         <label>Select the outcome for this TCF requirement</label>
-                                        @Html.DropDownListFor(x => x.TCFOutCome.TCFQuestionGroupId, _icisDataProvider.BindOutcome(), "...", new { @class = "form-control", @style = "width:47%;" })
+
+                                        @Html.DropDownListFor(x => x.TCFQuestionGroupId,_icisDataProvider.BindOutcome(), "...", new { @class = "form-control GroupId", @style = "width:47%;" })
                                     </div>
 
                                 </div>
                             </div>
-                            <br />
-                            <div class="row">
+                          
+                            <div class="row" id="reqdes">
                                 <div class="form-group">
                                     <div class="col-md-12">
                                         <label>Provide the description</label>
@@ -86,13 +93,175 @@
 
                                 </div>
                             </div>
-                            <br />
+                          
+                                <div class="row" id="divdescription">
+                                    <div class="form-group">
+                                        <div class="col-md-12">
+                                            <label id="txtdesnum"></label>
+                                            <br />
+                                            <label id="txtdes" style="color: #BA1800;font-weight:bold;"></label>
+                                          
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                              
+                                <div class="row">
+                                    <div class="form-group">
+                                        <div class="col-md-12">
+                                            <label>Rate the extent to which this is in place or in practice</label>
+                                            @Html.DropDownListFor(x => x.RateId, _icisDataProvider.BindOutcomeRating(), "...", new { @class = "form-control", @style = "width:47%;" })
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                                <div class="row" id="notapply">
+                                    <div class="form-group">
+                                        <div class="col-md-12">
+                                            <label>Why do you say this is not applicable?</label>
+                                            <br />
+                                            @Html.TextAreaFor(x => x.ReasonNotApplicable, new { @class = "form-control", @style = "width:100%;", @placeholder = "Please carefully consider whether this is something that should be in place, albeit not yet, before you declare it not applicable." })
+
+                                        </div>
+                                    </div>
+                                </div>
+                              
+                                <div id="notyet">
+                                    <div class="row">
+                                        <div class="form-group">
+                                            <div class="col-md-12">
+                                                <label>Notes</label>
+                                                <br />
+
+                                                @Html.TextAreaFor(x => x.ReasonPartially, new { @class = "form-control", @style = "width:100%;", @placeholder = "Type here what has been and/or needs to be done towards closing this gap. Note: This field is optional.  Whatever you insert here will be included in the email that automatically gets sent to the responsible person if that person is not yourself." })
+
+                                            </div>
+                                        </div>
+                                        <br />
 
 
-                            <div class="modal-footer">
+                                    </div>
+
+                                    <div class="row" id="divdate">
+                                        <div class="form-group">
+                                            <div class="col-md-12">
+                                                <label>Due date by when this will be in place or in practice</label>
+                                                <br />
+                                                @Html.TextBoxFor(x => x.DueDate, new { @class = "form-control", @style = "width:47%;" })
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                               
+                                <div id="divfully">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label>Why do you say this is fully in place or in practice?</label>
+                                                @Html.TextAreaFor(x => x.ReasonFully, new { @class = "form-control", @width = "100%" })
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <br />
+                                    <div class="row">
+                                        <div class="col-md-12">
+
+                                            <div class="form-group">
+                                                <label>Provide evidence proving this is fully in place or in practice </label>
+                                                <div id="selectedFiles"></div>
+                                                <input type="file" name="images[]" id="files" multiple />
+                                                <div id="selectedFiles"></div>
+                                                @*@Html.Partial("_UploadFile")*@
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <br />
+                                </div>
+                                <br />
+                                <div class="row" id="dvres">
+
+                                    <div class="form-group">
+                                        <div class="col-md-12">
+                                            <label>Who is responsible for getting and / or keeping this in place or in practice?</label>
+                                            <br />
+                                            @Html.DropDownListFor(x => x.TCFSubOutComeUserId, _icisDataProvider.BindUsers(taskid), "...", new { @class = "form-control", @style = "width:100%;" })
+
+
+                                        </div>
+                                    </div>
+                                    <div class="form-group" id="reguser">
+                                        <div class="col-md-12">
+                                            @*@Html.Partial("_TCFRegisterUser")*@
+
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <br />
+                                <div class="row" >
+                                    <div class="form-group" id="btnaddnotediv">
+                                        <span style="padding-left: 2%;font-weight:bold;">Notes:</span>&nbsp;<span>Optional add note</span>
+                                        &nbsp;&nbsp;&nbsp;
+                                        <button type="button" class="btnaddnote"><img src="~/Images/iconfinder_add_green_619545.png" width="20"></button>
+                                        <button type="button" class="btn-default addn"><img src="~/Images/iconfinder_add_green_619545.png" width="20"></button>
+                                    </div>
+                                    <div class="row" id="divadd" style="display:none;width: 100%;">
+                                        <div class="form-group">
+
+                                            <div class="col-md-12">
+                                                <div>
+                                                    @Html.Partial("TCFNote")
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="form-group">
+
+                                            <div class="col-md-12">
+                                                <div id="displaynote">
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <br />
+                                <div class="row" >
+                                    <div class="form-group" id="btntaskaddnew">
+                                        <span style="padding-left: 2%;font-weight:bold;">Task:</span>&nbsp;<span>Optional add task</span>
+                                        &nbsp;&nbsp;&nbsp;
+                                        <button type="button" class="addtask"> <img src="~/Images/iconfinder_add_green_619545.png" width="20"></button>
+                                        <button type="button" class="addt"> <img src="~/Images/iconfinder_add_green_619545.png" width="20"></button>
+
+                                    </div>
+                                    <div class="form-group" id="divtsk">
+
+                                        <div class="col-md-12">
+                                            <div style="display:block;width: 100%;">
+                                                @Html.Partial("TCFTask")
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <br />
+                               
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-brilliance btnupdate">Save and Close</button>
+                                    <button type="button" class="btn btn-default btclose" data-dismiss="modal">Close</button>
+                                </div>
+                            
+
+                            @*<div class="modal-footer">
                                 <button type="submit" class="btn btn-brilliance">Save and Close</button>
                                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                            </div>
+                            </div>*@
                         </div>
                     </div>
                 </div>
@@ -104,7 +273,7 @@
         
         
 
-            <div class="modal fade" id="EditModal" tabindex="-1" role="dialog" aria-labelledby="EditModal" aria-hidden="true">
+            @*<div class="modal fade" id="EditModal" tabindex="-1" role="dialog" aria-labelledby="EditModal" aria-hidden="true">
 
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
@@ -121,10 +290,12 @@
                                         <label id="txtdesnum"></label>
                                         <br />
                                         <label id="txtdes" style="color: #BA1800;font-weight:bold;"></label>
-                                       
-                                        @Html.HiddenFor(x => x.TCFOutCome.TCFSubOutCome.IsEdit)
-                                        @Html.HiddenFor(x => x.TCFOutCome.TCFSubOutCome.Id)
-                                        @Html.HiddenFor(x => x.TCFOutCome.TCFSubOutCome.TCFQuestionId)
+                                        @Html.HiddenFor(x => x.TCFQuestionGroupId)
+                                        @Html.HiddenFor(x => x.IsEdit)
+                                        @Html.HiddenFor(x => x.Id)
+                                        @Html.HiddenFor(x => x.CreatedBy)
+                                        @Html.HiddenFor(x => x.Code)
+                                        @Html.HiddenFor(x => x.TCFQuestionTypeId)
                                     </div>
 
                                 </div>
@@ -136,7 +307,7 @@
                                 <div class="form-group">
                                     <div class="col-md-12">
                                         <label>Rate the extent to which this is in place or in practice</label>
-                                        @Html.DropDownListFor(x => x.TCFOutCome.TCFSubOutCome.RateId, _icisDataProvider.BindOutcomeRating(), "...", new { @class = "form-control", @style = "width:47%;" })
+                                        @Html.DropDownListFor(x => x.RateId, _icisDataProvider.BindOutcomeRating(), "...", new { @class = "form-control", @style = "width:47%;" })
                                     </div>
 
                                 </div>
@@ -148,7 +319,7 @@
                                     <div class="col-md-12">
                                         <label>Why do you say this is not applicable?</label>
                                         <br />
-                                        @Html.TextAreaFor(x => x.TCFOutCome.TCFSubOutCome.ReasonNotApplicable, new { @class = "form-control", @style = "width:100%;", @placeholder = "Please carefully consider whether this is something that should be in place, albeit not yet, before you declare it not applicable." })
+                                        @Html.TextAreaFor(x => x.ReasonNotApplicable, new { @class = "form-control", @style = "width:100%;", @placeholder = "Please carefully consider whether this is something that should be in place, albeit not yet, before you declare it not applicable." })
 
                                     </div>
                                 </div>
@@ -161,7 +332,7 @@
                                             <label>Notes</label>
                                             <br />
 
-                                            @Html.TextAreaFor(x => x.TCFOutCome.TCFSubOutCome.ReasonPartially, new { @class = "form-control", @style = "width:100%;", @placeholder = "Type here what has been and/or needs to be done towards closing this gap. Note: This field is optional.  Whatever you insert here will be included in the email that automatically gets sent to the responsible person if that person is not yourself." })
+                                            @Html.TextAreaFor(x => x.ReasonPartially, new { @class = "form-control", @style = "width:100%;", @placeholder = "Type here what has been and/or needs to be done towards closing this gap. Note: This field is optional.  Whatever you insert here will be included in the email that automatically gets sent to the responsible person if that person is not yourself." })
 
                                         </div>
                                     </div>
@@ -175,7 +346,7 @@
                                         <div class="col-md-12">
                                             <label>Due date by when this will be in place or in practice</label>
                                             <br />
-                                            @Html.TextBoxFor(x => x.TCFOutCome.TCFSubOutCome.DueDate, new { @class = "form-control", @style = "width:47%;" })
+                                            @Html.TextBoxFor(x => x.DueDate, new { @class = "form-control", @style = "width:47%;" })
 
                                         </div>
                                     </div>
@@ -187,7 +358,7 @@
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label>Why do you say this is fully in place or in practice?</label>
-                                            @Html.TextAreaFor(x => x.TCFOutCome.TCFSubOutCome.ReasonFully, new { @class = "form-control", @width = "100%" })
+                                            @Html.TextAreaFor(x => x.ReasonFully, new { @class = "form-control", @width = "100%" })
                                         </div>
                                     </div>
 
@@ -201,8 +372,8 @@
                                             <div id="selectedFiles"></div>
                                             <input type="file" name="images[]"  id="files" multiple/>
                                             <div id="selectedFiles"></div>
-                                            @*@Html.Partial("_UploadFile")*@
-                                        </div>
+                                            @Html.Partial("_UploadFile")*
+                                        @*</div>
                                     </div>
 
                                 </div>
@@ -215,21 +386,22 @@
                                     <div class="col-md-12">
                                         <label>Who is responsible for getting and / or keeping this in place or in practice?</label>
                                         <br />
-                                        @Html.DropDownListFor(x => x.TCFOutCome.TCFSubOutCome.TCFSubOutComeUserId, _icisDataProvider.BindUsers(), "...", new { @class = "form-control", @style = "width:100%;" })
+                                        @Html.DropDownListFor(x => x.TCFSubOutComeUserId, _icisDataProvider.BindUsers(taskid), "...", new { @class = "form-control", @style = "width:100%;" })
 
 
                                     </div>
                                 </div>
                                 <div class="form-group" id="reguser">
                                     <div class="col-md-12">
-                                        @*@Html.Partial("_TCFRegisterUser")*@
+                                        @Html.Partial("_TCFRegisterUser")
 
 
                                     </div>
                                 </div>
                             </div>
-                            <div class="row">
-                                <div class="form-group">
+                            <br />*@
+                            @*<div class="row">
+                                <div class="form-group"  id="btnaddnotediv">
                                     <span style="padding-left: 2%;font-weight:bold;">Notes:</span>&nbsp;<span>Optional add note</span>
                                     &nbsp;&nbsp;&nbsp;
                                     <button type="button" class="btnaddnote"><img src="~/Images/iconfinder_add_green_619545.png" width="20"></button>
@@ -245,11 +417,21 @@
                                         </div>
                                     </div>
                                 </div>
+                                <div class="row">
+                                    <div class="form-group">
+
+                                        <div class="col-md-12">
+                                            <div  id="displaynote">
+                                                
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                             <br />
                             <div class="row">
                                 <div class="form-group">
-                                    <span style="padding-left: 2%;font-weight:bold;">Notes:</span>&nbsp;<span>Optional add task</span>
+                                    <span style="padding-left: 2%;font-weight:bold;">Task:</span>&nbsp;<span>Optional add task</span>
                                     &nbsp;&nbsp;&nbsp;
                                     <button type="button" class="addtask"> <img src="~/Images/iconfinder_add_green_619545.png" width="20"></button>
                                     <button type="button" class="addt"> <img src="~/Images/iconfinder_add_green_619545.png" width="20"></button>
@@ -257,8 +439,8 @@
                                 </div>
                             </div>
 
-                            <br />
-                            <div class="row" id="divtsk">
+                            <br />*@
+                            @*<div class="row" id="divtsk">
                                 <div class="form-group">
 
                                     <div class="col-md-12">
@@ -267,19 +449,19 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </div>*@
 
 
-                            <div class="modal-footer">
+                            @*<div class="modal-footer">
                                 <button type="button" class="btn btn-brilliance btnupdate">Save and Close</button>
                                 <button type="button" class="btn btn-default btclose" data-dismiss="modal">Close</button>
-                            </div>
-                        </div>
+                            </div>*@
+                        @*</div>
 
                     </div>
-                </div>
+                </div>*@
 
-            </div>
+            @*</div>*@
         </form>
             <div class="row">
                 <div id="grid"></div>
@@ -291,22 +473,22 @@
 
 
 @section scripts{
-    @*<script src="~/Scripts/knockout.js"></script>*@
     <script src="~/Scripts/jszip.min.js"></script>
     <script src="~/Scripts/kendo.all.min.js"></script>
 <script src="~/Scripts/multifieldwrapperFileUpload.js"></script>
-
-    @*<script src="~/Scripts/multifieldwrapper.js"></script>*@
 <script src="~/Scripts/multifieldwrapperNote.js"></script>
 <script src="~/Scripts/multifieldwrapperTask.js"></script>
+<script src="~/Scripts/moment.js"></script>
     <script>
         var selDiv = "";
         var storedFiles = [];
         var data = new FormData();
         var table = $("<table class='table table-responsive table-condensed' id='tblimage'></table>")
+        var tblnotes = $("<table class='table table-responsive table-condensed' id='tblnotes'></table>")
+
         $(document).ready(function () {
 
-            var url = '@Url.Action("CisQuestion", "CIS")';
+            var url = '@Url.Action("TCFQuestionEntityUserWise", "CIS")';
 
             var element = $("#grid").kendoGrid({
                 dataSource: {
@@ -361,6 +543,7 @@
                         width: "110px"
                     },
                     {
+                        field: "DueDateDes",
                         title: "Current Due Dates",
                         width: "140px"
                     },
@@ -369,7 +552,7 @@
 
                         'title': 'Edit',
                         'field': 'Edit',
-                        template: "<a href='\\\#' class='sub-link btn btn-default' value='#= TCFSubOutComeId #'>#= 'Edit' #</a>"
+                        template: "<a href='\\\#' class='sub-link btn btn-default' value='#=Id #'>#= 'Edit' #</a>"
                     },
                      {
                          field: "Description",
@@ -382,40 +565,51 @@
                 var tr = $(this).closest("tr");
 
                 var dataItem = $("#grid").data("kendoGrid").dataItem(tr);
-                var id = dataItem.TCFSubOutComeId;
-                
-                $('#EditModal').modal('show');
+                var id = dataItem.Id;
 
+                $('#exampleModalLong').modal('show');
+                $("#divdescription").show();
                 var url = '@Url.Action("_GetSuboutcomeById", "CIS")';
                 ShowLoader();
                 $.ajax({
-                    url:url,
+                    url: url,
                     method: 'post',
                     data: { Id: id },
                     success: function (data) {
                         HideLoader();
-                   
+                        $("#dereq").hide();
+                        $("#reqdes").hide();
                         $('#txtdesnum').html(dataItem.Qgroup)
                         $('#txtdes').html(dataItem.Qdesc)
+                        $('#CreatedBy').val(data.vm.CreatedBy)
+                        $('#Id').val(data.vm.Id);
+                        $('#TCFQuestionGroupId').val(data.vm.TCFQuestionGroupId)
+                        $('#TCFQuestionTypeId').val(data.vm.TCFQuestionTypeId)
+                        $('#Code').val(data.vm.Code);
                         $('#IsEdit').val(true)
-                        $('#Id').val(data.vm.TCFFormId);
-                        $('#TCFOutCome_IsEdit').val(true)
-                        $('#TCFOutCome_TCFSubOutCome_IsEdit').val(true)
-                        $('#TCFOutCome_TCFSubOutCome_Id').val(data.vm.Id)
-                        $('#TCFOutCome_TCFSubOutCome_TCFQuestionId').val(data.vm.TCFQuestionId)
+
+                        debugger;
                         if (data.vm.RateId != null) {
-                            $('#TCFOutCome_TCFSubOutCome_RateId').val(data.vm.RateId.toUpperCase())
+                            $('#RateId').val(data.vm.RateId.toUpperCase())
 
                         }
-                        if (data.vm.TCFSubOutComeUserId != null)
+                        if (data.vm.TCFSubOutComeUserId != null) {
+                        
+                            $("#dvres").show();
+
+                            $('#TCFSubOutComeUserId').val(data.vm.TCFSubOutComeUserId.toUpperCase())
+
+                        }
+                        $('#ReasonFully').val(data.vm.ReasonFully)
+                        $('#ReasonPartially').val(data.vm.ReasonPartially)
+                        $('#TReasonNotApplicable').val(data.vm.ReasonNotApplicable)
+                        if (data.vm.DueDate != null)
                         {
-                            $('#TCFOutCome_TCFSubOutCome_TCFSubOutComeUserId').val(data.vm.TCFSubOutComeUserId.toUpperCase())
-
+                            ////var date = new Date(parseInt(data.vm.DueDate.substr(6)));
+                            var date = moment(data.vm.DueDate).format('MM/DD/YYYY');
+                            $('#DueDate').val(date)
                         }
-                        $('#TCFOutCome_TCFSubOutCome_ReasonFully').val(data.vm.ReasonFully)
-                        $('#TCFOutCome_TCFSubOutCome_ReasonPartially').val(data.vm.ReasonPartially)
-                        $('#TCFOutCome_TCFSubOutCome_ReasonNotApplicable').val(data.vm.ReasonNotApplicable)
-                        $('#TCFOutCome_TCFSubOutCome_DueDate').val(data.vm.DueDate)
+
                         var val = data.vm.RateId.toUpperCase();
                         if (val == 'EE825CC9-466D-44C9-86CF-BBD0C018043C') {
                             $("#notapply").show();
@@ -446,29 +640,76 @@
 
 
                         }
+
                         selDiv.empty();
                         table.empty();
-                        storedFiles=[];
+                        tblnotes.empty();
+                        tblnotes.append('<tr><th>Note</th><th>Note User</th><th>Note Date</th></tr>');
+                      
+                        $("#displaynote").empty();
+                      
+                        if (data._Notes.length>0)
+                        {
+                            $("#btnaddnotediv").hide();
+                            //$.each(data._Notes, function (j, k) {
+
+                            //    var date = moment(k.AddedAt).format('MM/DD/YYYY');
+                                
+                            //    var notes = "<tbody><tr><td>" + k.Note + "</td><td>" + k.Author + "</td><td>" + date + "</td></tr></tbody>";
+                            //$(tblnotes).append(notes);
+                            //})
+                            var Id = data.vm.Id;
+                            $("#displaynote").load("/CIS/GetNoteView", { Id: Id, viewName: "TCFNote" });
+                            $("#displaynote").show();
+                            $("#btnaddnotediv").show();
+                        }
+                        if (data._Notes.length == 0)
+                        {
+                           
+                            $("#displaynote").hide();
+
+                        }
+                        if (data.vm.TCFTask.length > 0)
+                        {
+                            var Id = data.vm.Id;
+                            $("#btntaskaddnew").show();
+                          
+                            $("#divtsk").show();
+                            $(".addt").show();
+                            $(".addtask").hide();
+                            $("#divtsk").load("/CIS/getview", { Id: Id, viewName: "TCFTask" });
+                            $("#btntaskaddnew").show();
+                        }
+                        if (data.vm.TCFTask.length == 0)
+                        {
+                            $("#divtsk").hide();
+                            $(".addt").hide();
+                            $(".addtask").show();
+                          
+                            
+                           
+
+                        }
+                        storedFiles = [];
                         //storedFiles.push(dada._Ev);
                         $.each(data._Ev, function (i, l) {
                             ///var file = new File(l.FileName);
-                            
+
                             var file = new File(["foo"], l.FileName, {
                                 type: "text/plain",
                             });
                             storedFiles.push(file)
                         })
                         for (var i = 0, len = storedFiles.length; i < len; i++) {
-                            debugger;
-
-                            var image = "<tr><td>" + storedFiles[i].name + "</td><td><input type='button' class='del' data-file='" + storedFiles[i].name + "' id='delete'  value='remove'/></td></tr>";
+                           
+                            var image = "<tr><td>" + storedFiles[i].name + "</td><td><input type='button'  style='padding: 2px;float: right;'class='btn btn-default del' data-file='" + storedFiles[i].name + "' id='delete'  value='remove'/></td></tr>";
                             $(table).append(image);
                         }
-                       
+
                         selDiv.append(table);
                     }
                 });
-              
+
             });
         });
         function customFunction(value, s) {
@@ -477,10 +718,11 @@
             var result = value;
 
             if (s.sum == 0) {
-                result = result + '<span style="position:absolute;right:10px;color:#BA1800;"> Incomplete</span>'
+                result = result + '<span style="position:absolute;right:10px;color:green;"> Complete</span>'
             }
             else {
-                result = result + '<span style="position:absolute;right:10px;color:green;"> Complete</span>'
+                result = result + '<span style="position:absolute;right:10px;color:#BA1800;"> Incomplete</span>'
+
             }
             return result;
         }
@@ -493,19 +735,26 @@
             $("#notyet").hide();
             $("#divfully").hide();
             $("#DueDate").kendoDatePicker();
-            $("#divadd").hide();
-            $("#divtask").hide();
+           $("#divadd").hide();
+           $("#divtask").hide();
             $("#reguser").hide();
             $("#responsible").hide();
-            $("#TCFOutCome_TCFSubOutCome_DueDate").kendoDatePicker();
+            $("#divdescription").hide();
+            $("#DueDate").kendoDatePicker();
+            
+           //// $(".tskduedate").kendoDatePicker();
+
             InitFileCloning();
             InitNoteCloning();
             InitTaskCloning();
-            $("#divtsk").hide();
-
+           $("#divtsk").hide();
+           $("#dvres").hide();
+           $("#btntaskaddnew").hide();
+           $("#btnaddnotediv").hide();
             $(".addn").hide();
             $(".addt").hide();
-            
+            $(".tskduedate").kendoDatePicker();
+
         })
     </script>
     <script>
@@ -518,7 +767,7 @@
                 ShowMessage(response.Message, "error");
             }
         }
-        $("#TCFOutCome_TCFSubOutCome_RateId").on('change', function () {
+        $("#RateId").on('change', function () {
           
             var val = $(this).val();
             if (val == 'EE825CC9-466D-44C9-86CF-BBD0C018043C') {
@@ -527,6 +776,8 @@
                 $("#divfully").hide();
                 $("#reguser").hide();
                 $("#dvres").hide();
+                $("#btntaskaddnew").hide();
+                $("#btnaddnotediv").hide();
             }
             if (val == '9784C8F8-6BF6-4CA9-BE23-30A11CEC0C76' || val == '329244B5-AF09-4626-B52A-8FFE744BDFF3' || val == '786F9604-13BA-44D9-A878-2CE110FB9E28') {
                 $("#notyet").show();
@@ -535,12 +786,16 @@
                 $("#reguser").hide();
                 $("#divdate").show();
                 $("#dvres").show();
+                $("#btntaskaddnew").show();
+                $("#btnaddnotediv").show();
             }
             if (val == '10178C9E-1C8E-47B1-8AC9-4F046160FE2A') {
                 $("#notapply").hide();
                 $("#notyet").hide();
                 $("#divfully").show();
                 $("#responsible").show();
+                $("#btntaskaddnew").show();
+                $("#btnaddnotediv").show();
             }
             if (val=="")
             {
@@ -548,7 +803,8 @@
                 $("#divdate").hide();
                 $("#dvres").hide();
                 $("#notapply").hide();
-                
+                $("#btntaskaddnew").hide();
+                $("#btnaddnotediv").hide();
                
             }
         })
@@ -578,10 +834,11 @@
             $(".add-note").click();
             
         })
-        $(".addt").on('click', function () {
-            
+        $(document).on('click', '.addt', function () {
+          
             $(".add-task").click();
-        });
+        })
+       
         $("#UserId").on('change', function () {
             var value = $("#UserId").val();
             if (value == 0) {
@@ -614,16 +871,16 @@
 		var filesArr = Array.prototype.slice.call(files);
 		filesArr.forEach(function(f) {
 
-			if(!f.type.match("image.*")) {
-				return;
-			}
+			//if(!f.type.match("image.*")) {
+			//	return;
+			//}
 			storedFiles.push(f);
 
 			var reader = new FileReader();
 
 
 			reader.onload = function (e) {
-			    var image = "<tr><td>" + f.name + "</td><td><input type='button' class='del' data-file='" + f.name + "' id='delete'  value='remove'/></td></tr>";
+			    var image = "<tr><td>" + f.name + "</td><td><input type='button' style='padding: 2px;float: right;'class='btn btn-default del' data-file='" + f.name + "' id='delete'  value='remove'/></td></tr>";
 			    $(table).append(image);
 				//var html = "<div><img src=\"" + e.target.result + "\" data-file='"+f.name+"' class='selFile' title='Click to remove'>" + f.name + "<br clear=\"left\"/></div>";
 
@@ -677,7 +934,7 @@
             formdata.append("file", storedFiles[i]);
         }
         
-        ShowLoader();
+       ShowLoader();
         $.ajax({
             type: 'post',
             url: '/CIS/UpdateTCF',
@@ -700,8 +957,29 @@
     });
     $(document).on('click', '.btclose', function () {
     
-        $("#frmtcf").trigger("reset");
-        $('#EditModal').modal('hide');
+        
+
+        $('#exampleModalLong').modal('hide');
+        location.reload();
     })
+   
+
+   
+</script>
+<script>
+    $(document).on('change', "#TCFQuestionGroupId", function () {
+
+        var currentval = $("#TCFQuestionGroupId").val();
+        var url = '@Url.Action("GetSuboutcomeCode", "CIS")';
+        $.ajax({
+            url: url,
+            method: 'post',
+            data: { Id: currentval },
+            success: function (data) {
+                $("#Code").val(data);
+            }
+        })
+    })
+   
 </script>
 }

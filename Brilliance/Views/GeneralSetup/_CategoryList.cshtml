@@ -1,0 +1,175 @@
+﻿@model Brilliance.Models.ViewModel.ProjectTermListByCategory
+@using Brilliance.Infrastructure
+<link href="~/assets/global/plugins/datatables/datatables.min.css" rel="stylesheet" type="text/css" />
+@*<link href="~/assets/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap.css" rel="stylesheet" type="text/css" />*@
+@*@if (Model != null && Model.Projecttermcategorylist != null && Model.Projecttermcategorylist.Count > 0)
+    {*@
+<div class="row">
+    <div class="col-md-12">
+        <div class="portlet light bordered">
+            <div class="portlet-title">
+                <div class="caption font-dark">
+                    <span class="caption-subject bold">@(Model.projecttermcategory != null ? Model.projecttermcategory.TermCategory + " " + "List" : "List")</span>
+                </div>
+                @*@if (Common.IsPermissionAllowed(Constants.Can_Access_GeneralSetup).IsCreate)
+                    {*@
+                <div class="caption font-dark pull-right">
+                    <a class="btn btn-circle btn-icon-only btn-default" style="margin-top: -6px;" onclick="OpenPopup('@Model.projecttermcategory.ProjectTermcategoryID','form_Setup','@Model.projecttermcategory.TermCategory');">
+                        <i class="fa fa-plus"></i>
+                    </a>
+                </div>
+                @*}*@
+            </div>
+            @Html.HiddenFor(m => m.projecttermcategory.TermCategory)
+            <div class="portlet-body">
+                <table class="table table-striped table-bordered table-hover dt-responsive" width="100%" id="dt_setup">
+                    <thead>
+                        <tr>
+                            <th class="all">Action</th>
+                            <th class="desktop">@(Model.projecttermcategory != null ? Model.projecttermcategory.TermCategory + " " + "Code" : "Code")</th>
+                            <th class="all">@(Model.projecttermcategory != null ? Model.projecttermcategory.TermCategory + " " + "Name" : "Name")</th>
+                            @*@if (Model.projecttermcategory.CategoryName.ToUpper() == "ASSIGNMENT ROLE")
+                                {
+                                    <th class="min-tablet">Domestic Rate</th>
+                                    <th class="min-tablet">International Rate</th>
+                                }
+                                @if (Model.projecttermcategory.CategoryName.ToUpper() == "FISCAL YEAR")
+                                {
+                                    <th class="min-tablet">Start Date</th>
+                                    <th class="min-tablet">End Date</th>
+                                }
+                                @if (Model.projecttermcategory.CategoryName.ToUpper() == "DESIGNATION")
+                                {
+                                    <th class="min-tablet">Training Hours(Trainee)</th>
+                                    <th class="min-tablet">Training Hours(Trainer)</th>
+                                }
+                                @if (Model.projecttermcategory.CategoryName.ToUpper() == "CURRENCY CONVERSION")
+                                {
+                                    <th class="min-tablet">Currency Rate</th>
+                                }
+                                @if (Model.projecttermcategory.CategoryName.ToUpper() == "SUBSECTORTYPE TERM")
+                                {
+                                    <th class="min-tablet">Sector Type</th>
+                                }
+                                @if (Model.projecttermcategory.CategoryName.ToUpper() == "MAXIMUM ASSET APPROVAL LIMIT")
+                                {
+                                    <th class="desktop">Asset Limit</th>
+                                }
+                                @if (Model.projecttermcategory.CategoryName.ToUpper() == "SALARY EARNING TYPE")
+                                {
+                                    <th class="min-tablet">Earning Value</th>
+                                }
+                                @if (Model.projecttermcategory.CategoryName.ToUpper() == "SALARY DEDUCTION TYPE")
+                                {
+                                    <th class="min-tablet">Deduct Value</th>
+                                }*@
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (Model != null && Model.Projecttermcategorylist.Count > 0)
+                        {
+                            foreach (var item in Model.Projecttermcategorylist)
+                            {
+                                if (item.ProjectTermID != null && item.ProjectTermID != Guid.Empty)
+                                {
+                                    <tr>
+                                        <td>
+                                            @*@if (item.Term.ToUpper() != "OTHER")
+                                                {
+                                            if (Common.IsPermissionAllowed(Constants.Can_Access_GeneralSetup).IsUpdate)
+                                            {*@
+                                            <a class="action btn  btn-primary btn-xs @Constants.Class_Cannot_Access_Update" onclick="EditPopup('@item.EncryptedProjectTermID','form_Setup');" title="Edit"><i class="btn-xs fa fa-pencil padding0"></i></a>
+                                            @*}
+                                                if (Common.IsPermissionAllowed(Constants.Can_Access_GeneralSetup).IsDelete)
+                                                {*@
+                                            <a class="action btn  btn-danger btn-xs @Constants.Class_Cannot_Access_Remove" href="javascript:void(0);" title="Delete" onclick="fnOpenDeleteModel('DeleteButton','DeleteModal','@Convert.ToString(item.EncryptedProjectTermID)');"><i class="btn-xs fa fa-trash-o padding0"></i></a>
+                                            @*}
+                                            }*@
+                                        </td>
+                                        <td>@item.TermCode</td>
+                                        <td>@item.Term</td>
+                                        @*@if (Model.projecttermcategory.CategoryName.ToUpper() == "ASSIGNMENT ROLE")
+                                            {
+                                                <td>@item.DefaultValue</td>
+                                                <td>@item.DefaultValue1</td>
+                                            }
+                                            @if (Model.projecttermcategory.CategoryName.ToUpper() == "FISCAL YEAR")
+                                            {
+                                                <td>@item.StartDate</td>
+                                                <td>@item.EndDate</td>
+                                            }
+                                            @if (Model.projecttermcategory.CategoryName.ToUpper() == "DESIGNATION")
+                                            {
+                                                <td>@item.DefaultValue2</td>
+                                                <td>@item.DefaultValue</td>
+                                            }
+                                            @if (Model.projecttermcategory.CategoryName.ToUpper() == "CURRENCY CONVERSION")
+                                            {
+                                                <td>@item.DefaultValue</td>
+                                            }
+                                            @if (Model.projecttermcategory.CategoryName.ToUpper() == "SUBSECTORTYPE TERM")
+                                            {
+                                                <td>@item.SectorType</td>
+                                            }
+                                            @if (Model.projecttermcategory.CategoryName.ToUpper() == "MAXIMUM ASSET APPROVAL LIMIT")
+                                            {
+                                                <td>@item.DefaultValue</td>
+                                            }
+                                            @if (Model.projecttermcategory.CategoryName.ToUpper() == "ATTENDENCE BACKDATED DAYS ALLOW")
+                                            {
+                                                <td>@item.DefaultValue</td>
+                                            }
+                                            @if (Model.projecttermcategory.CategoryName.ToUpper() == "SALARY EARNING TYPE")
+                                            {
+                                                <td>@item.DefaultValue</td>
+                                            }
+                                            @if (Model.projecttermcategory.CategoryName.ToUpper() == "SALARY DEDUCTION TYPE")
+                                            {
+                                                <td>@item.DefaultValue</td>
+                                            }*@
+                                    </tr>
+                                }
+                            }
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade modal-scroll" id="DeleteModal" tabindex="-1" role="basic" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                <h4 class="modal-title">Delete</h4>
+            </div>
+            <div class="modal-body"> Are you sure want delete ? </div>
+            <div class="modal-footer">
+                <button type="button" class="btn dark btn-outline" data-dismiss="modal">Close</button>
+                <button type="button" class="btn green" id="DeleteButton" onclick="DeleteAnyEntity('/GeneralSetup/DeleteSetup', 'DeleteButton', 'DeleteModal', 'Term', 'dt_setup','/GeneralSetup/ProjectTermListbyCategory?categoryid=@Brilliance.Infrastructure.Crypto.Encrypt(Model.projecttermcategory.ProjectTermcategoryID.ToString())');">Yes</button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<div class="modal fade modal-scroll bs-modal-lg" id="Setup_Popup" tabindex="-1" role="dialog" aria-hidden="true">
+    <div id="SetupPopup">
+        @if (Model != null)
+        {
+            @Html.Partial("~/Views/GeneralSetup/_GeneralSetup.cshtml", Model)
+        }
+    </div>
+</div>
+
+<script src="~/assets/global/scripts/datatable.js" type="text/javascript"></script>
+<script src="~/assets/global/plugins/datatables/datatables.min.js" type="text/javascript"></script>
+<script src="~/assets/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap.js" type="text/javascript"></script>
+
+<script>
+    var table = $('#dt_setup').DataTable({});
+</script>
+<script src="~/assets/global/scripts/OMSDatatable.js"></script>
+

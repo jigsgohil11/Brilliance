@@ -21,13 +21,15 @@ namespace Brilliance.Models.Entity
         public string Name { get; set; }
         public string Description { get; set; }
         public string Image { get; set; }
+        [Required(ErrorMessage = "Product Type is required.")]
+        public Guid? ProductTypeID { get; set; }
         [Required(ErrorMessage = "Company is required.")]
         public Guid? CompanyID { get; set; }
         [Required(ErrorMessage = "Organization is required.")]
         public Guid? ClientID { get; set; }
         public bool? IsActive { get; set; }
         public bool? IsBlock { get; set; }
-       
+
         public DateTime? CreatedOn { get; set; }
         public DateTime? UpdatedOn { get; set; }
         public Guid? CreatedBy { get; set; }
