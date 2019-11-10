@@ -9,7 +9,7 @@ namespace Brilliance.Controllers
 {
     public class CRTController : BaseController
     {
-        private IComplaintDataProvider  _icomplaintDataProvider;
+        private IComplaintDataProvider _icomplaintDataProvider;
         // GET: CRT
         public ActionResult CRTList()
         {
@@ -62,6 +62,22 @@ namespace Brilliance.Controllers
             _icomplaintDataProvider = new ComplaintDataProvider();
             Guid CompanyID = Common.CheckIdNullOrEmptyNonEncrypt(cid);
             ServiceResponse response = _icomplaintDataProvider.GetProductByCompany(CompanyID);
+            return Json(response.Data, JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult GetProductByProductCategory(string id)
+        {
+            _icomplaintDataProvider = new ComplaintDataProvider();
+            Guid ProductCategoryID = Common.CheckIdNullOrEmptyNonEncrypt(id);
+            ServiceResponse response = _icomplaintDataProvider.GetProductByProductCategory(ProductCategoryID);
+            return Json(response.Data, JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult GetNatureOfComplaintList(string id)
+        {
+            _icomplaintDataProvider = new ComplaintDataProvider();
+            Guid ComplaintCategoryID = Common.CheckIdNullOrEmptyNonEncrypt(id);
+            ServiceResponse response = _icomplaintDataProvider.GetNatureOfComplaintList(ComplaintCategoryID);
             return Json(response.Data, JsonRequestBehavior.AllowGet);
         }
     }

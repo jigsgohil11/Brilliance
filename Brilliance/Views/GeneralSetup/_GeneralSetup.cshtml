@@ -14,6 +14,32 @@
                 @Html.HiddenFor(m => m.projecttermcategory.TermID)
                 @Html.HiddenFor(m => m.projecttermcategory.CategoryName)
 
+                @if (!string.IsNullOrEmpty(Model.projecttermcategory.CategoryName) && Model.projecttermcategory.CategoryName.ToUpper() == "NATURE OF COMPLAINT")
+                {
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="form-group ">
+                                <label>Complaint Category</label>
+                                @Html.DropDownListFor(m => m.projecttermcategory.RefTermID, new SelectList(Model.ComplaintCategoryList, "Value", "Text"), "--Select Complaint Category--", new { @data_live_search = "true", @class = "form-control bs-select" })
+                                @Html.ValidationMessageFor(m => m.projecttermcategory.RefTermID)
+                            </div>
+                        </div>
+                    </div>
+                }
+                else if (!string.IsNullOrEmpty(Model.projecttermcategory.CategoryName) && Model.projecttermcategory.CategoryName.ToUpper() == "SECTOR")
+                {
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="form-group ">
+                                <label>Industry</label>
+                                @Html.DropDownListFor(m => m.projecttermcategory.RefTermID, new SelectList(Model.IndustryList, "Value", "Text"), "--Select Industry--", new { @data_live_search = "true", @class = "form-control bs-select" })
+                                @Html.ValidationMessageFor(m => m.projecttermcategory.RefTermID)
+                            </div>
+                        </div>
+                    </div>
+                }
+
+
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="form-group ">
@@ -34,18 +60,7 @@
                     </div>
                 </div>
 
-                @if (!string.IsNullOrEmpty(Model.projecttermcategory.CategoryName) && Model.projecttermcategory.CategoryName.ToUpper() == "NATUREOFCOMPLAINT")
-                {
-                    <div class="row">
-                        <div class="col-lg-12">
-                            <div class="form-group ">
-                                <label>Sector Type</label>
-                                @Html.DropDownListFor(m => m.projecttermcategory.RefTermID, new SelectList(Model.SectorList, "Value", "Text"), "--Select Complaint Category--", new { @data_live_search = "true", @class = "form-control bs-select" })
-                                @Html.ValidationMessageFor(m => m.projecttermcategory.RefTermID)
-                            </div>
-                        </div>
-                    </div>
-                }
+
 
             </div>
             <div class="modal-footer">

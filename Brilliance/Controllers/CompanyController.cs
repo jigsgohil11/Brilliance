@@ -41,5 +41,12 @@ namespace Brilliance.Controllers
             response = _icompanyDataProvider.DeleteCompany(CompanyID);
             return Json(response);
         }
+        public ActionResult GetSectorByIndustry(string id)
+        {
+            _icompanyDataProvider = new CompanyDataProvider();
+            Guid IndustryID = Common.CheckIdNullOrEmptyNonEncrypt(id);
+            ServiceResponse response = _icompanyDataProvider.GetSectorByIndustry(IndustryID);
+            return Json(response.Data, JsonRequestBehavior.AllowGet);
+        }
     }
 }

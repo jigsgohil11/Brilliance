@@ -60,7 +60,6 @@
                                             @Html.ValidationMessageFor(m => m.company.ClientID)
                                         </div>
                                     </div>
-
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label>Company Name</label>
@@ -70,10 +69,24 @@
                                     </div>
                                 </div>
                                 <div class="row">
+                                    @*<div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>Web URL</label>
+                                                @Html.TextBoxFor(m => m.company.WebURL, new { @class = "form-control m-input", @placeholder = "Enter Web URL" })
+                                            </div>
+                                        </div>*@
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label>Description</label>
+                                            @Html.TextAreaFor(m => m.company.Description, new { @class = "form-control m-input", @placeholder = "Enter Description", @rows = "1" })
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label>Industry<span style="font-weight: bold;color: red;">*</span></label>
-                                            @Html.DropDownListFor(m => m.company.IndustryID, new SelectList(Model.IndustryList, "Value", "Text", 0), "--Select Industry--", new { @data_live_search = "true", @class = "form-control bs-select" })
+                                            @Html.DropDownListFor(m => m.company.IndustryID, new SelectList(Model.IndustryList, "Value", "Text", 0), "--Select Industry--", new { @data_live_search = "true", @class = "form-control bs-select", @onchange = "GetSector(this);" })
                                             @Html.ValidationMessageFor(m => m.company.CompanyCode)
                                         </div>
                                     </div>
@@ -85,52 +98,80 @@
                                         </div>
                                     </div>
                                 </div>
-
                                 <div class="row">
-                                    <div class="col-md-6">
+                                    <div class="col-md-4">
                                         <div class="form-group">
                                             <label>Primary Contact Name</label>
                                             @Html.TextBoxFor(m => m.company.ContactPersonName, new { @class = "form-control m-input", @placeholder = "Enter contact person name" })
                                             @Html.ValidationMessageFor(m => m.company.ContactPersonName)
                                         </div>
                                     </div>
-                                    <div class="col-md-6">
+                                    <div class="col-md-4">
                                         <div class="form-group">
                                             <label>Primary Contact No</label>
                                             @Html.TextBoxFor(m => m.company.MobileNo, new { @class = "form-control m-input", @placeholder = "Enter Mobile No" })
                                             @Html.ValidationMessageFor(m => m.company.MobileNo)
                                         </div>
                                     </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-6">
+                                    <div class="col-md-4">
                                         <div class="form-group">
                                             <label>Primary Email ID</label>
                                             @Html.TextBoxFor(m => m.company.Email, new { @class = "form-control email m-input", @placeholder = "Enter Email" })
                                             @Html.ValidationMessageFor(m => m.company.Email)
                                         </div>
                                     </div>
-                                    <div class="col-md-6">
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-4">
                                         <div class="form-group">
                                             <label>Secondary Contact Name</label>
                                             @Html.TextBoxFor(m => m.company.SecondaryContactName, new { @class = "form-control m-input", @placeholder = "Enter secondary contact name" })
                                         </div>
                                     </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-6">
+                                    <div class="col-md-4">
                                         <div class="form-group">
                                             <label>Secondary Contact No</label>
                                             @Html.TextBoxFor(m => m.company.SecondaryContactNo, new { @class = "form-control m-input", @placeholder = "Enter secondary contact no" })
                                             @Html.ValidationMessageFor(m => m.company.SecondaryContactNo)
                                         </div>
                                     </div>
-                                    <div class="col-md-6">
+                                    <div class="col-md-4">
                                         <div class="form-group">
                                             <label>Secondary Email ID</label>
                                             @Html.TextBoxFor(m => m.company.SecondaryEmail, new { @class = "form-control m-input", @placeholder = "Enter secondary email" })
                                             @Html.ValidationMessageFor(m => m.company.SecondaryEmail)
                                         </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label>View Level of Dissatisfaction</label>
+                                            @Html.CheckBoxFor(m => m.company.IsViewDissatisfationLevel, new { @class = "form-control m-input" })
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label>Require Level of Dissatisfaction</label>
+                                            @Html.CheckBoxFor(m => m.company.IsRequireDissatisfationLevel, new { @class = "form-control m-input" })
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label>View Level of Satisfaction</label>
+                                            @Html.CheckBoxFor(m => m.company.IsViewSatisfationLevel, new { @class = "form-control m-input" })
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label>Require Level of Satisfaction</label>
+                                            @Html.CheckBoxFor(m => m.company.IsRequireSatisfationLevel, new { @class = "form-control m-input" })
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <h4>Address</h4>
                                     </div>
                                 </div>
                                 <div class="row">
@@ -162,16 +203,10 @@
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <div class="col-md-6">
+                                    <div class="col-md-12">
                                         <div class="form-group">
-                                            <label>Web URL</label>
-                                            @Html.TextBoxFor(m => m.company.WebURL, new { @class = "form-control m-input", @placeholder = "Enter Web URL" })
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label>Address<span style="font-weight: bold;color: red;">*</span></label>
-                                            @Html.TextAreaFor(m => m.company.Address, new { @class = "form-control m-input", @placeholder = "Enter Address" })
+                                            <label>Suburb<span style="font-weight: bold;color: red;">*</span></label>
+                                            @Html.TextAreaFor(m => m.company.Address, new { @class = "form-control m-input", @placeholder = "Enter Suburb", @row = "1" })
                                             @Html.ValidationMessageFor(m => m.company.Address)
                                         </div>
                                     </div>
@@ -196,40 +231,6 @@
                                             <label>City<span style="font-weight: bold;color: red;">*</span></label>
                                             @Html.DropDownListFor(m => m.company.City, new SelectList(Model.CityList, "Value", "Text", 0), new { @data_live_search = "true", @class = "form-control bs-select" })
                                             @Html.ValidationMessageFor(m => m.company.City)
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <div class="form-group">
-                                            <label>Description</label>
-                                            @Html.TextAreaFor(m => m.company.Description, new { @class = "form-control m-input", @placeholder = "Enter Description", @rows = "4" })
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-3">
-                                        <div class="form-group">
-                                            <label>View Level of Dissatisfaction</label>
-                                            @Html.CheckBoxFor(m => m.company.IsViewDissatisfationLevel, new { @class = "form-control m-input" })
-                                        </div>
-                                    </div>
-                                    <div class="col-md-3">
-                                        <div class="form-group">
-                                            <label>Require Level of Dissatisfaction</label>
-                                            @Html.CheckBoxFor(m => m.company.IsRequireDissatisfationLevel, new { @class = "form-control m-input" })
-                                        </div>
-                                    </div>
-                                    <div class="col-md-3">
-                                        <div class="form-group">
-                                            <label>View Level of Satisfaction</label>
-                                            @Html.CheckBoxFor(m => m.company.IsViewSatisfationLevel, new { @class = "form-control m-input" })
-                                        </div>
-                                    </div>
-                                    <div class="col-md-3">
-                                        <div class="form-group">
-                                            <label>Require Level of Satisfaction</label>
-                                            @Html.CheckBoxFor(m => m.company.IsRequireSatisfationLevel, new { @class = "form-control m-input" })
                                         </div>
                                     </div>
                                 </div>
@@ -259,6 +260,33 @@
                 ShowMessage(response.Message, "error");
             }
         }
+
+        function GetSector(Obj) {
+            var industryVal = $('#' + Obj.id).val();
+            var postData = { id: industryVal };
+            ShowLoader();
+            AjaxCall("/Company/GetSectorByIndustry", JSON.stringify(postData), "post", "json", "application/json", false).done(function (data) {
+                HideLoader();
+                //if (data == "_Logon_") {
+                //    window.location.href = "/Login/Login";
+                //}
+                if (data != null && data.length > 0) {
+                    $("#company_SectorID").html('');
+                    $("#company_SectorID").append('<option value="">-- Select Sector --</option>');
+                    $("#company_SectorID").selectpicker('refresh');
+                    for (key in data) {
+                        $("#company_SectorID").append('<option value="' + data[key].Value + '">' + data[key].Text + '</option>')
+                    }
+                    $("#company_SectorID").selectpicker('refresh');
+                }
+                else {
+                    $("#company_SectorID").html('');
+                    $("#company_SectorID").append('<option value="">-- Select Sector --</option>');
+                    $("#company_SectorID").selectpicker('refresh');
+                }
+            });
+        }
+
         function GetState(Obj) {
             //var index = $(Obj).attr('index');
             var countryVal = $('#' + Obj.id).val();

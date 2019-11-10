@@ -10,7 +10,6 @@ namespace Brilliance.Infrastructure.DataProvider
         ServiceResponse GetCompany(Guid CompanyID);
         ServiceResponse SaveCompanies(CompanyViewModel companymodel);
         ServiceResponse DeleteCompany(Guid CompanyID);
-        //ServiceResponse GetStateByCountry(Guid CountryID);
-        //ServiceResponse GetCityByState(Guid StateID);
+        ServiceResponse GetSectorByIndustry(Guid IndustryID);
     }
 }

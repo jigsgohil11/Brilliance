@@ -60,13 +60,15 @@ namespace Brilliance.Models.ViewModel
             projecttermcategory = new ProjectTermCategory();
             CategoryList = new List<ProjectTermList>();
             Projecttermcategorylist = new List<ProjectTermCategoryList>();
-            SectorList = new List<SelectListItem>();
+            ComplaintCategoryList = new List<SelectListItem>();
+            IndustryList = new List<SelectListItem>();
             Response = new ServiceResponse();
         }
         public ProjectTermCategory projecttermcategory { get; set; }
         public List<ProjectTermList> CategoryList { get; set; }
         public List<ProjectTermCategoryList> Projecttermcategorylist { get; set; }
-        public List<SelectListItem> SectorList { get; set; }
+        public List<SelectListItem> ComplaintCategoryList { get; set; }
+        public List<SelectListItem> IndustryList { get; set; }
         public ServiceResponse Response { get; set; }
     }
 }

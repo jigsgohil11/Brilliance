@@ -83,6 +83,19 @@
                                     </div>
                                 </div>
                                 <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label>Description</label>
+                                            @Html.TextAreaFor(m => m.client.Description, new { @class = "form-control m-input", @placeholder = "Enter Description", @rows = "1" })
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <h4>Address</h4>
+                                    </div>
+                                </div>
+                                <div class="row">
                                     <div class="col-md-4">
                                         <div class="form-group">
                                             <label>Unit No</label>
@@ -111,19 +124,11 @@
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <div class="col-md-6">
+                                    <div class="col-md-12">
                                         <div class="form-group">
                                             <label>Suburb</label>
-                                            @Html.TextAreaFor(m => m.client.Address, new { @class = "form-control m-input", @placeholder = "Enter Address" })
+                                            @Html.TextAreaFor(m => m.client.Address, new { @class = "form-control m-input", @placeholder = "Enter Suburb", @rows = "1" })
                                             @Html.ValidationMessageFor(m => m.client.Address)
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label>Description</label>
-                                            @*<textarea class="form-control input-sm" data-bind="value: note" rows="4" style="resize:none;width:100%;"></textarea>*@
-                                            @Html.TextAreaFor(m => m.client.Description, new { @class = "form-control m-input", @placeholder = "Enter Description", @rows = "2" })
-                                            @*@Html.ValidationMessageFor(m => m.client.Description)*@
                                         </div>
                                     </div>
                                 </div>

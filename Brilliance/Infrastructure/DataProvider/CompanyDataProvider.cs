@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
+using System.Web.Mvc;
 
 namespace Brilliance.Infrastructure.DataProvider
 {
@@ -163,6 +164,26 @@ namespace Brilliance.Infrastructure.DataProvider
             return response;
         }
 
-       
+        public ServiceResponse GetSectorByIndustry(Guid IndustryID)
+        {
+            var response = new ServiceResponse();
+            var searchvaluedata = new List<SearchValueData>();
+            try
+            {
+                searchvaluedata.Add(new SearchValueData { Name = "IndustryID", Value = Convert.ToString(IndustryID) });
+                List<SelectListItem> Sectors = GetEntityList<SelectListItem>("GetSectorListByIndustry", searchvaluedata);
+                //if (HoldingCompanies != null && HoldingCompanies.Count > 0)
+                //{
+                //    response.Data = HoldingCompanies;
+                //}
+                response.Data = Sectors;
+                response.IsSuccess = true;
+            }
+            catch (Exception ex)
+            {
+                response.Message = "Internal Server Error";
+            }
+            return response;
+        }
     }
 }

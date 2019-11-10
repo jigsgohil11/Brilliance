@@ -13,5 +13,7 @@ namespace Brilliance.Infrastructure.DataProvider
         ServiceResponse GetCompanyCustomRules(Guid CompanyID);
         ServiceResponse GetDivisionByCompany(Guid CompanyID);
         ServiceResponse GetProductByCompany(Guid CompanyID);
+        ServiceResponse GetProductByProductCategory(Guid ProductCategoryID);
+        ServiceResponse GetNatureOfComplaintList(Guid ComplaintCategoryID);
     }
 }

@@ -252,5 +252,39 @@ namespace Brilliance.Infrastructure.DataProvider
             }
             return response;
         }
+        public ServiceResponse GetProductByProductCategory(Guid ProductCategoryID)
+        {
+            var response = new ServiceResponse();
+            var searchvaluedata = new List<SearchValueData>();
+            try
+            {
+                searchvaluedata.Add(new SearchValueData { Name = "ProductCategoryID", Value = Convert.ToString(ProductCategoryID) });
+                List<SelectListItem> Products = GetEntityList<SelectListItem>("GetProductListByProductCategory", searchvaluedata);
+                response.Data = Products;
+                response.IsSuccess = true;
+            }
+            catch (Exception ex)
+            {
+                response.Message = "Internal Server Error";
+            }
+            return response;
+        }
+        public ServiceResponse GetNatureOfComplaintList(Guid ComplaintCategoryID)
+        {
+            var response = new ServiceResponse();
+            var searchvaluedata = new List<SearchValueData>();
+            try
+            {
+                searchvaluedata.Add(new SearchValueData { Name = "ComplaintCategoryID", Value = Convert.ToString(ComplaintCategoryID) });
+                List<SelectListItem> NatureOfComplaints = GetEntityList<SelectListItem>("GetNatureOfComplaintList", searchvaluedata);
+                response.Data = NatureOfComplaints;
+                response.IsSuccess = true;
+            }
+            catch (Exception ex)
+            {
+                response.Message = "Internal Server Error";
+            }
+            return response;
+        }
     }
 }

@@ -54,8 +54,8 @@
                                         </div>*@
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label>Product Type</label>
-                                            @Html.DropDownListFor(m => m.product.ProductTypeID, new SelectList(Model.ProductTypelist, "Value", "Text", 0), "--Select Product Type--", new { @data_live_search = "true", @class = "form-control bs-select" })
+                                            <label>Product Category</label>
+                                            @Html.DropDownListFor(m => m.product.ProductTypeID, new SelectList(Model.ProductTypelist, "Value", "Text", 0), "--Select Product Category--", new { @data_live_search = "true", @class = "form-control bs-select" })
                                             @Html.ValidationMessageFor(m => m.product.ProductTypeID)
                                         </div>
                                     </div>
