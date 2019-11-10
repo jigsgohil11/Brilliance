@@ -6784,8 +6784,6 @@
     <Content Include="assets\global\plugins\wysihtml\minified\wysihtml.min.map" />
     <Content Include="assets\global\plugins\wysihtml\minified\wysihtml.table_editing.min.map" />
     <Content Include="assets\global\plugins\wysihtml\minified\wysihtml.toolbar.min.map" />
-    <None Include="Properties\PublishProfiles\Brilliance.pubxml" />
-    <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\bootstrapvalidator.min.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
@@ -6858,6 +6856,7 @@
     <Folder Include="assets\apps\img\" />
     <Folder Include="assets\global\plugins\angularjs\plugins\angular-file-upload\uploads\" />
     <Folder Include="Images\" />
+    <Folder Include="Properties\PublishProfiles\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
