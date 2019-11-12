@@ -154,6 +154,7 @@
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\CISController.cs" />
     <Compile Include="Controllers\CompanyController.cs" />
+    <Compile Include="Controllers\ComplaintController.cs" />
     <Compile Include="Controllers\CRTController.cs" />
     <Compile Include="Controllers\DashboardController.cs" />
     <Compile Include="Controllers\DivisionController.cs" />
@@ -196,9 +197,11 @@
     <Compile Include="Infrastructure\DataProvider\ILoginDataProvider.cs" />
     <Compile Include="Infrastructure\DataProvider\IProductDataProvider.cs" />
     <Compile Include="Infrastructure\DataProvider\IUserDataProvider.cs" />
+    <Compile Include="Infrastructure\DataProvider\IWebsubmissionDataProvider.cs" />
     <Compile Include="Infrastructure\DataProvider\LoginDataProvider.cs" />
     <Compile Include="Infrastructure\DataProvider\ProductDataProvider.cs" />
     <Compile Include="Infrastructure\DataProvider\UserDataProvider.cs" />
+    <Compile Include="Infrastructure\DataProvider\WebsubmissionDataProvider.cs" />
     <Compile Include="Infrastructure\GridReader.cs" />
     <Compile Include="Infrastructure\JsonStringResult.cs" />
     <Compile Include="Infrastructure\PetaPoco.cs" />
@@ -6850,6 +6853,8 @@
     <Content Include="Views\GeneralSetup\ProjectTermListbyCategory.cshtml" />
     <Content Include="Views\GeneralSetup\_CategoryList.cshtml" />
     <Content Include="Views\GeneralSetup\_GeneralSetup.cshtml" />
+    <Content Include="Views\Complaint\Websubmission.cshtml" />
+    <Content Include="Views\Shared\_LayoutWebSubmission.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
