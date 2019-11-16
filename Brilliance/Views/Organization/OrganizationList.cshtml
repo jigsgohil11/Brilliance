@@ -4,9 +4,7 @@
     ViewBag.Title = "OrganizationList";
     Layout = "~/Views/Shared/_Layout_public.cshtml";
 }
-
 <link href="~/assets/global/plugins/datatables/datatables.min.css" rel="stylesheet" type="text/css" />
-
 <div class="page-content page-content-dashbrd-backgrnd">
     <div class="page-bar margin-bottom-10">
         <div class="row">
@@ -35,6 +33,7 @@
                     <table class="table table-bordered table-hover dt-responsive" width="100%" id="dt_client">
                         <thead>
                             <tr>
+                                <th class="all">#</th>
                                 <th class="all">Name</th>
                                 <th class="desktop">Description</th>
                                 <th class="all">Action</th>
@@ -43,12 +42,15 @@
                         <tbody>
                             @if (Model != null && Model.Clientlist.Count > 0)
                             {
+                                int index = 0;
                                 foreach (var item in Model.Clientlist)
                                 {
+                                    index++;
                                     <tr>
-                                        <td style="background-color:white !important;">@item.OrganizationName</td>
-                                        <td>@item.Description</td>
-                                        <td>
+                                        <td width="1%">@index</td>
+                                        <td width="20%" style="background-color:white !important;">@item.OrganizationName</td>
+                                        <td width="69%">@item.Description</td>
+                                        <td width="10%">
                                             <a class="action btn  btn-primary btn-xs @Constants.Class_Cannot_Access_Update" href="/Organization/Organization/@item.EncryptedClientID" title="Edit"><i class="btn-xs fa fa-pencil padding0"></i></a>
                                             <a class="action btn  btn-danger btn-xs @Constants.Class_Cannot_Access_Remove" href="javascript:void(0);" title="Delete" onclick="fnOpenDeleteModel('DeleteButton','DeleteModal','@item.EncryptedClientID.ToString()');"><i class="btn-xs fa fa-trash-o padding0"></i></a>
                                         </td>
@@ -62,7 +64,6 @@
         </div>
     </div>
 </div>
-
 <div class="modal fade modal-scroll" id="DeleteModal" tabindex="-1" role="basic" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -99,13 +100,3 @@
         </script>
         <script src="~/assets/global/scripts/OMSDatatable.js"></script>*@
 }
-
-
-
-
-
-
-
-
-
-

@@ -47,9 +47,9 @@ namespace Brilliance.Models.Entity
         public string PhoneNo { get; set; }
         [MaxLength(19)]
         public string ExtensionNo { get; set; }
-        [MaxLength(19)]
+        [MaxLength(15)]
         [Required(ErrorMessage = "Contact No is required.")]
-        [RegularExpression(@"\d{11}", ErrorMessage = "Contact No.should be 11 digit.")]
+        [RegularExpression(@"^(\+*)[0-9]*$", ErrorMessage = "Contact No.should be + and digit.")]
         public string MobileNo { get; set; }
         [MaxLength(167)]
         [Required(ErrorMessage = "Email is required.")]
@@ -64,7 +64,7 @@ namespace Brilliance.Models.Entity
         [MaxLength(167)]
         public string SecondaryContactName { get; set; }
 
-        [RegularExpression(@"\d{10}", ErrorMessage = "Mobile No.should be 11 digit.")]
+        [RegularExpression(@"^(\+*)[0-9]*$", ErrorMessage = "Contact No. should be + and digit.")]
         public string SecondaryContactNo { get; set; }
         [MaxLength(19)]
         public string SecondaryExtNo { get; set; }

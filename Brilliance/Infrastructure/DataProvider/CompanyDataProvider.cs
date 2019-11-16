@@ -151,11 +151,16 @@ namespace Brilliance.Infrastructure.DataProvider
             {
                 var searchValueData = new SearchValueData { Name = "CompanyID", Value = Convert.ToString(CompanyID) };
                 searchList.Add(searchValueData);
-                BaseDataProvider objnew = new BaseDataProvider();
-                objnew = new BaseDataProvider();
-                objnew.GetScalar("DeleteCompany", searchList);
-                response.IsSuccess = true;
-                response.Message = "Record Deleted Successfully.";
+                if (Convert.ToBoolean(GetScalar("DeleteCompany", searchList)))
+                {
+                    response.IsSuccess = true;
+                    response.Message = "Record Deleted Successfully.";
+                }
+                else
+                {
+                    response.IsSuccess = false;
+                    response.Message = "Company is assigned to Divisionm, Complaints or CIS!!";
+                }
             }
             else
             {

@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Brilliance.Models.Entity
 {
-  
+
     [TableName("mst_Client")]
     [PrimaryKey("ClientID")]
     [Sort("SeqNo", "ASC")]
@@ -15,7 +15,7 @@ namespace Brilliance.Models.Entity
         [Required]
         public Guid ClientID { get; set; }
         [MaxLength(7)]
-        [Required(ErrorMessage ="Code is required.")]
+        [Required(ErrorMessage = "Code is required.")]
         public string ClientCode { get; set; }
         [MaxLength(167)]
         [Required(ErrorMessage = "Organization name is required.")]
@@ -28,9 +28,8 @@ namespace Brilliance.Models.Entity
         [MaxLength(31)]
         [Required(ErrorMessage = "Email is required.")]
         public string ContactPersonEmail { get; set; }
-        //[StringLength(15, ErrorMessage = Constants.StringLengthErrorMessage)]
         [Required(ErrorMessage = "Contact No. is required.")]
-        [RegularExpression(@"\d{10}", ErrorMessage = "Mobile No.should be 10 digit.")]
+        [RegularExpression(@"^(\+*)[0-9]*$", ErrorMessage = "Mobile No.should be + and digit.")]
         public string MobileNo { get; set; }
         public Guid? AssociatePartnerID { get; set; }
         [Required(ErrorMessage = "Country is required.")]
@@ -53,7 +52,7 @@ namespace Brilliance.Models.Entity
         public DateTime? UpdatedOn { get; set; }
         public Guid? CreatedBy { get; set; }
         public Guid? UpdatedBy { get; set; }
-        
+
         public string Description { get; set; }
         [Required(ErrorMessage = "Address is required.")]
         public string Address { get; set; }

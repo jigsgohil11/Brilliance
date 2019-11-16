@@ -35,6 +35,7 @@
                     <table class="table table-bordered table-hover dt-responsive" width="100%" id="dt_user">
                         <thead>
                             <tr>
+                                <th class="all">#</th>
                                 <th class="all">Name</th>
                                 <th class="min-tablet">Username</th>
                                 <th class="desktop">Email</th>
@@ -44,13 +45,16 @@
                         <tbody>
                             @if (Model != null && Model.Userlist.Count > 0)
                             {
+                                int index = 0;
                                 foreach (var item in Model.Userlist)
                                 {
+                                    index++;
                                     <tr>
-                                        <td style="background-color:white !important;">@string.Format("{0} {1}", item.FirstName, item.LastName)</td>
-                                        <td>@item.UserName</td>
-                                        <td>@item.EmailID</td>
-                                        <td>
+                                        <td width="1%">@index</td>
+                                        <td width="30%" style="background-color:white !important;">@string.Format("{0} {1}", item.FirstName, item.LastName)</td>
+                                        <td width="30%">@item.UserName</td>
+                                        <td width="30%">@item.EmailID</td>
+                                        <td width="9%">
                                             <a class="action btn  btn-primary btn-xs @Constants.Class_Cannot_Access_Update" href="/User/User/@item.EncryptedUserID" title="Edit"><i class="btn-xs fa fa-pencil padding0"></i></a>
                                             <a class="action btn  btn-danger btn-xs @Constants.Class_Cannot_Access_Remove" href="javascript:void(0);" title="Delete" onclick="fnOpenDeleteModel('DeleteButton','DeleteModal','@item.EncryptedUserID.ToString()');"><i class="btn-xs fa fa-trash-o padding0"></i></a>
                                         </td>
