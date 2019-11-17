@@ -1,17 +1,13 @@
 ﻿@model Brilliance.Models.ViewModel.ComplaintListModel
 @using Brilliance.Infrastructure
-
 @{
     ViewBag.Title = "CRTList";
     Layout = "~/Views/Shared/_Layout_public.cshtml";
 }
-
 @*@model Pms.Models.ViewModel.ClientViewModel
     @using DataProviderMaster.Infrastructure*@
-
 <link href="~/assets/global/plugins/datatables/datatables.min.css" rel="stylesheet" type="text/css" />
 @*<link href="~/assets/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap.css" rel="stylesheet" type="text/css" />*@
-
 <div class="page-content page-content-dashbrd-backgrnd">
     <div class="page-bar margin-bottom-10">
         <div class="row">
@@ -40,8 +36,11 @@
                     <table class="table  table-bordered table-hover dt-responsive" width="100%" id="dt_complaint">
                         <thead>
                             <tr>
-                                <th class="all">Policy no.</th>
-                                <th class="min-tablet">Product category/ type</th>
+                                @*<th class="all">Policy no.</th>*@
+                                <th class="min-tablet">Product category</th>
+                                <th class="desktop">First Name</th>
+                                <th class="desktop">Last Name</th>
+                                <th class="desktop">Contact No.</th>
                                 <th class="desktop">Nature of complaint</th>
                                 <th class="desktop">Received Date</th>
                                 <th class="desktop">Resolved Date</th>
@@ -53,35 +52,35 @@
                             {
                                 foreach (var item in Model.Complaintlist)
                                 {
-                            <tr>
-                                <td style="background-color:white !important;">@item.PolicyNumber</td>
-                                <td>@item.productcategory</td>
-                                <td>@item.natureofcomplaint</td>
-                                <td>@item.ReceivedDate</td>
-                                <td>
-                                    @if (item.IsResolved!=null && item.IsResolved.ToUpper() == "NOT YET")
-                                    {
-                                        <label style="font-weight:bold;color:red">Not Yet</label>
-                                    }
-                                    else if (item.IsResolved != null && item.IsResolved.ToUpper() == "YES")
-                                    {
-                                        <label>@item.ResolvedDate</label>
-                                    }
-                                    else
-                                    {
-                                        <label style="font-weight:bold;">New</label>
-                                    }
-                                </td>
-
-
-                                <td>
-                                    <a class="action btn  btn-primary btn-xs @Constants.Class_Cannot_Access_Update" href="/CRT/CRT/@item.EncryptedComplaintID" title="Edit"><i class="btn-xs fa fa-pencil padding0"></i></a>
-                                    <a class="action btn  btn-danger btn-xs @Constants.Class_Cannot_Access_Remove" href="javascript:void(0);" title="Delete" onclick="fnOpenDeleteModel('DeleteButton','DeleteModal','@item.EncryptedComplaintID.ToString()');"><i class="btn-xs fa fa-trash-o padding0"></i></a>
-                                </td>
-                            </tr>
+                                    <tr>
+                                        @*<td style="background-color:white !important;">@item.PolicyNumber</td>*@
+                                        <td>@item.productcategory</td>
+                                        <td>@item.FirstName</td>
+                                        <td>@item.LastName</td>
+                                        <td>@item.PhoneNo</td>
+                                        <td>@item.natureofcomplaint</td>
+                                        <td>@item.ReceivedDate</td>
+                                        <td>
+                                            @if (item.IsResolved != null && item.IsResolved.ToUpper() == "NOT YET")
+                                            {
+                                                <label style="font-weight:bold;color:red">Not Yet</label>
+                                            }
+                                            else if (item.IsResolved != null && item.IsResolved.ToUpper() == "YES")
+                                            {
+                                                <label>@item.ResolvedDate</label>
+                                            }
+                                            else
+                                            {
+                                                <label style="font-weight:bold;">New</label>
+                                            }
+                                        </td>
+                                        <td>
+                                            <a class="action btn  btn-primary btn-xs @Constants.Class_Cannot_Access_Update" href="/CRT/CRT/@item.EncryptedComplaintID" title="Edit"><i class="btn-xs fa fa-pencil padding0"></i></a>
+                                            <a class="action btn  btn-danger btn-xs @Constants.Class_Cannot_Access_Remove" href="javascript:void(0);" title="Delete" onclick="fnOpenDeleteModel('DeleteButton','DeleteModal','@item.EncryptedComplaintID.ToString()');"><i class="btn-xs fa fa-trash-o padding0"></i></a>
+                                        </td>
+                                    </tr>
                                 }
                             }
-
                         </tbody>
                     </table>
                 </div>
@@ -89,7 +88,6 @@
         </div>
     </div>
 </div>
-
 <div class="modal fade modal-scroll" id="DeleteModal" tabindex="-1" role="basic" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -120,12 +118,6 @@
             });
             @*CanAccessEditOrDelete('@Common.IsPermissionAllowed(Constants.Can_Access_Client).IsCreate.ToString()', '@Common.IsPermissionAllowed(Constants.Can_Access_Client).IsUpdate.ToString()', '@Common.IsPermissionAllowed(Constants.Can_Access_Client).IsDelete.ToString()');*@
 
-        </script>
-        <script src="~/assets/global/scripts/OMSDatatable.js"></script>
+    </script>
+    <script src="~/assets/global/scripts/OMSDatatable.js"></script>
 }
-
-
-
-
-
-
