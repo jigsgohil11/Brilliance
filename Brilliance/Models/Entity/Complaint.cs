@@ -40,8 +40,9 @@ namespace Brilliance.Models.Entity
         public Guid? ComplaintCategoryId { get; set; }
         [Required(ErrorMessage = "Nature of complaint is required.")]
         public Guid? ComplaintNatureOfId { get; set; }
-        [Required(ErrorMessage = "received date is required.")]
+        [Required(ErrorMessage = "Received date is required.")]
         public DateTime? DateReceived { get; set; }
+        //[Required(ErrorMessage = "Incident date is required.")]
         public DateTime? DateIncident { get; set; }
         [MaxLength]
         public string Notes { get; set; }
@@ -57,6 +58,7 @@ namespace Brilliance.Models.Entity
         public Guid? ComplaintOverallOutcomeId { get; set; }
         public Guid? ComplaintCompensationId { get; set; }
         public Guid? ComplaintRegulatedCostId { get; set; }
+        [Required(ErrorMessage = "Satisfaction Level is required.")]
         public Guid? SatisfactionLevel { get; set; }
         public Guid? Satisfactionlevel_resolution { get; set; }
         public string IsComplaint { get; set; }

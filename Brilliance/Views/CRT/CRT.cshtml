@@ -21,6 +21,10 @@
         color: red;
     }
 </style>
+@*@if (Model != null && Model.complaint != null && Model.complaint.IsResolved.ToUpper() == "NEW")
+{
+    var status = Model.complaint.IsResolved.ToUpper();
+}*@
 <div class="page-content page-content-dashbrd-backgrnd">
     <div class="page-bar margin-bottom-10">
         <div class="row">
@@ -54,11 +58,32 @@
                                 Complaint Detail
                             </a>
                         </li>
-                        <li>
-                            <a href="#tab2" id="m_tabs_5_2">
-                                Complaint Resolution
-                            </a>
-                        </li>
+                        @if (Model != null && Model.complaint != null && Model.complaint.IsResolved.ToUpper() == "NEW")
+                        {
+                            <li>
+                                <a href="#tab2" id="m_tabs_5_2" class="hide">
+                                    Complaint Resolution
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#tab3" id="m_tabs_5_3"  class="hide">
+                                    Claims
+                                </a>
+                            </li>
+                        }
+                        else
+                        {
+                            <li>
+                                <a href="#tab2" id="m_tabs_5_2">
+                                    Complaint Resolution
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#tab3" id="m_tabs_5_3">
+                                    Claims
+                                </a>
+                            </li>
+                        }
                     </ul>
                 </div>
                 <div class="portlet-body form">
@@ -69,131 +94,224 @@
                                     @Html.HiddenFor(m => m.complaint.ComplaintID)
                                     <div class="tab-content">
                                         <div class="tab-pane active" id="tab1" role="tabpanel">
-                                            @*<input type="hidden" value="@Model.assignment.TaskAssignedEmployeeIDs" id="TaskAssignedEmployeeIDs" name="TaskAssignedEmployeeIDs" />*@
-                                            @*@if (Model.assignment.AssignmentStatus_Term != null)
+                                            <div class="form-body">
+                                                @if (Model != null && Model.complaint != null && Model.complaint.IsResolved.ToUpper() == "NEW")
                                                 {
                                                     <div class="row">
-                                                        <div class="col-lg-12">
-                                                            <div class="note note-info float-right margin-0" style="padding: 5px 10px 5px 10px;font-size:16px;">
-                                                                <label class="sbold margin-0 font-blue-steel">Status : </label>
-                                                                <span class="sbold caption-subject">@Model.assignment.AssignmentStatus_Term</span>
+                                                        <div class="col-md-6">
+                                                            <div class="form-group">
+                                                                <label>Company<span style="font-weight: bold;color: red;">*</span></label>
+                                                                @Html.DropDownListFor(m => m.complaint.CompanyId, new SelectList(Model.CompanyList, "Value", "Text", 0), "--Select Company--", new { @data_live_search = "true", @class = "form-control bs-select", @onchange = "Getdata(this);", @disabled = "disabled" })
+                                                                @Html.ValidationMessageFor(m => m.complaint.CompanyId)
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <div class="form-group">
+                                                                <label>Division<span style="font-weight: bold;color: red;">*</span></label>
+                                                                @Html.DropDownListFor(m => m.complaint.DivisionId, new SelectList(Model.DivisionList, "Value", "Text", 0), "--Select Division--", new { @data_live_search = "true", @class = "form-control bs-select", @disabled = "disabled" })
+                                                                @Html.ValidationMessageFor(m => m.complaint.DivisionId)
                                                             </div>
                                                         </div>
                                                     </div>
-                                                }*@
-                                            <div class="form-body">
-                                                @*<input type="hidden" name="assignment.ProposalID" id="assignment_ProposalID" value="@Model.assignment.ProposalID" />*@
-                                                <div class="row">
-                                                    <div class="col-md-6">
-                                                        <div class="form-group">
-                                                            <label>Company<span style="font-weight: bold;color: red;">*</span></label>
-                                                            @Html.DropDownListFor(m => m.complaint.CompanyId, new SelectList(Model.CompanyList, "Value", "Text", 0), "--Select Company--", new { @data_live_search = "true", @class = "form-control bs-select", @onchange = "Getdata(this);" })
-                                                            @Html.ValidationMessageFor(m => m.complaint.CompanyId)
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-6">
-                                                        <div class="form-group">
-                                                            <label>Division<span style="font-weight: bold;color: red;">*</span></label>
-                                                            @Html.DropDownListFor(m => m.complaint.DivisionId, new SelectList(Model.DivisionList, "Value", "Text", 0), "--Select Division--", new { @data_live_search = "true", @class = "form-control bs-select" })
-                                                            @Html.ValidationMessageFor(m => m.complaint.DivisionId)
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col-md-6">
-                                                        <div class="row">
-                                                            <div class="col-md-9">
-                                                                <div class="form-group">
-                                                                    <label>Policy/Account number</label>
-                                                                    @Html.TextBoxFor(m => m.complaint.PolicyNumber, new { @class = "form-control m-input", @placeholder = "Enter policy number" })
-                                                                    @Html.ValidationMessageFor(m => m.complaint.PolicyNumber)
+                                                    <div class="row">
+                                                        <div class="col-md-6">
+                                                            <div class="row">
+                                                                <div class="col-md-9">
+                                                                    <div class="form-group">
+                                                                        <label>Policy/Account number</label>
+                                                                        @Html.TextBoxFor(m => m.complaint.PolicyNumber, new { @class = "form-control m-input", @placeholder = "Enter policy number", @disabled = "disabled" })
+                                                                        @Html.ValidationMessageFor(m => m.complaint.PolicyNumber)
+                                                                    </div>
                                                                 </div>
-                                                            </div>
-                                                            <div class="col-md-3" style="margin-top:25px;">
-                                                                <div class="form-group">
-                                                                    <label class="mt-checkbox mt-checkbox-outline" style="font-size:13px;">
-                                                                        Not a client
-                                                                        @Html.CheckBoxFor(m => m.complaint.IsClient, new { @onclick = "Chkclient(this);" })
-                                                                        <span></span>
-                                                                    </label>
+                                                                <div class="col-md-3" style="margin-top:25px;">
+                                                                    <div class="form-group">
+                                                                        <label class="mt-checkbox mt-checkbox-outline" style="font-size:13px;">
+                                                                            Not a client
+                                                                            @Html.CheckBoxFor(m => m.complaint.IsClient, new { @onclick = "Chkclient(this);", @disabled = "disabled" })
+                                                                            <span></span>
+                                                                        </label>
+                                                                    </div>
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                    </div>
-                                                    <div class="col-md-6">
-                                                        <div class="form-group">
-                                                            <label>ID number</label>
-                                                            @Html.TextBoxFor(m => m.complaint.ClientIdentificationNumber, new { @class = "form-control m-input", @placeholder = "Enter ID number" })
-                                                            @*@Html.ValidationMessageFor(m => m.complaint.ClientIdentificationNumber)*@
+                                                        <div class="col-md-6">
+                                                            <div class="form-group">
+                                                                <label>ID number</label>
+                                                                @Html.TextBoxFor(m => m.complaint.ClientIdentificationNumber, new { @class = "form-control m-input", @placeholder = "Enter ID number", @disabled = "disabled" })
+                                                                @*@Html.ValidationMessageFor(m => m.complaint.ClientIdentificationNumber)*@
+                                                            </div>
                                                         </div>
                                                     </div>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col-md-6">
-                                                        <div class="form-group">
-                                                            <label>First Name</label>
-                                                            @Html.TextBoxFor(m => m.complaint.FirstName, new { @class = "form-control m-input", @placeholder = "Enter first name" })
-                                                            @Html.ValidationMessageFor(m => m.complaint.FirstName)
+                                                    <div class="row">
+                                                        <div class="col-md-6">
+                                                            <div class="form-group">
+                                                                <label>First Name</label>
+                                                                @Html.TextBoxFor(m => m.complaint.FirstName, new { @class = "form-control m-input", @placeholder = "Enter first name", @disabled = "disabled" })
+                                                                @Html.ValidationMessageFor(m => m.complaint.FirstName)
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <div class="form-group">
+                                                                <label>Last Name</label>
+                                                                @Html.TextBoxFor(m => m.complaint.LastName, new { @class = "form-control m-input", @placeholder = "Enter last name", @disabled = "disabled" })
+                                                                @Html.ValidationMessageFor(m => m.complaint.LastName)
+                                                            </div>
                                                         </div>
                                                     </div>
-                                                    <div class="col-md-6">
-                                                        <div class="form-group">
-                                                            <label>Last Name</label>
-                                                            @Html.TextBoxFor(m => m.complaint.LastName, new { @class = "form-control m-input", @placeholder = "Enter last name" })
-                                                            @Html.ValidationMessageFor(m => m.complaint.LastName)
+                                                    <div class="row">
+                                                        <div class="col-md-6">
+                                                            <div class="form-group">
+                                                                <label>Contact number</label>
+                                                                @Html.TextBoxFor(m => m.complaint.PhoneNo, new { @class = "form-control m-input", @placeholder = "Enter contat no.", @disabled = "disabled" })
+                                                                @Html.ValidationMessageFor(m => m.complaint.PhoneNo)
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <div class="form-group">
+                                                                <label>Email address</label>
+                                                                @Html.TextBoxFor(m => m.complaint.Email, new { @class = "form-control email m-input", @placeholder = "Enter email", @disabled = "disabled" })
+                                                                @Html.ValidationMessageFor(m => m.complaint.Email)
+                                                            </div>
                                                         </div>
                                                     </div>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col-md-6">
-                                                        <div class="form-group">
-                                                            <label>Contact number</label>
-                                                            @Html.TextBoxFor(m => m.complaint.PhoneNo, new { @class = "form-control m-input", @placeholder = "Enter contat no." })
-                                                            @Html.ValidationMessageFor(m => m.complaint.PhoneNo)
+                                                }
+                                                else
+                                                {
+                                                    <div class="row">
+                                                        <div class="col-md-6">
+                                                            <div class="form-group">
+                                                                <label>Company<span style="font-weight: bold;color: red;">*</span></label>
+                                                                @Html.DropDownListFor(m => m.complaint.CompanyId, new SelectList(Model.CompanyList, "Value", "Text", 0), "--Select Company--", new { @data_live_search = "true", @class = "form-control bs-select", @onchange = "Getdata(this);" })
+                                                                @Html.ValidationMessageFor(m => m.complaint.CompanyId)
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <div class="form-group">
+                                                                <label>Division<span style="font-weight: bold;color: red;">*</span></label>
+                                                                @Html.DropDownListFor(m => m.complaint.DivisionId, new SelectList(Model.DivisionList, "Value", "Text", 0), "--Select Division--", new { @data_live_search = "true", @class = "form-control bs-select" })
+                                                                @Html.ValidationMessageFor(m => m.complaint.DivisionId)
+                                                            </div>
                                                         </div>
                                                     </div>
-                                                    <div class="col-md-6">
-                                                        <div class="form-group">
-                                                            <label>Email address</label>
-                                                            @Html.TextBoxFor(m => m.complaint.Email, new { @class = "form-control email m-input", @placeholder = "Enter email" })
-                                                            @Html.ValidationMessageFor(m => m.complaint.Email)
+                                                    <div class="row">
+                                                        <div class="col-md-6">
+                                                            <div class="row">
+                                                                <div class="col-md-9">
+                                                                    <div class="form-group">
+                                                                        <label>Policy/Account number</label>
+                                                                        @Html.TextBoxFor(m => m.complaint.PolicyNumber, new { @class = "form-control m-input", @placeholder = "Enter policy number" })
+                                                                        @Html.ValidationMessageFor(m => m.complaint.PolicyNumber)
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-3" style="margin-top:25px;">
+                                                                    <div class="form-group">
+                                                                        <label class="mt-checkbox mt-checkbox-outline" style="font-size:13px;">
+                                                                            Not a client
+                                                                            @Html.CheckBoxFor(m => m.complaint.IsClient, new { @onclick = "Chkclient(this);" })
+                                                                            <span></span>
+                                                                        </label>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <div class="form-group">
+                                                                <label>ID number</label>
+                                                                @Html.TextBoxFor(m => m.complaint.ClientIdentificationNumber, new { @class = "form-control m-input", @placeholder = "Enter ID number" })
+                                                                @*@Html.ValidationMessageFor(m => m.complaint.ClientIdentificationNumber)*@
+                                                            </div>
                                                         </div>
                                                     </div>
-                                                </div>
+                                                    <div class="row">
+                                                        <div class="col-md-6">
+                                                            <div class="form-group">
+                                                                <label>First Name</label>
+                                                                @Html.TextBoxFor(m => m.complaint.FirstName, new { @class = "form-control m-input", @placeholder = "Enter first name" })
+                                                                @Html.ValidationMessageFor(m => m.complaint.FirstName)
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <div class="form-group">
+                                                                <label>Last Name</label>
+                                                                @Html.TextBoxFor(m => m.complaint.LastName, new { @class = "form-control m-input", @placeholder = "Enter last name" })
+                                                                @Html.ValidationMessageFor(m => m.complaint.LastName)
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-md-6">
+                                                            <div class="form-group">
+                                                                <label>Contact number</label>
+                                                                @Html.TextBoxFor(m => m.complaint.PhoneNo, new { @class = "form-control m-input", @placeholder = "Enter contat no." })
+                                                                @Html.ValidationMessageFor(m => m.complaint.PhoneNo)
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <div class="form-group">
+                                                                <label>Email address</label>
+                                                                @Html.TextBoxFor(m => m.complaint.Email, new { @class = "form-control email m-input", @placeholder = "Enter email" })
+                                                                @Html.ValidationMessageFor(m => m.complaint.Email)
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                }
+
                                                 <div class="row">
                                                     <div class="col-md-6" id="DisSatisfactionLevel">
                                                         <div class="form-group">
                                                             <label>Level of dissatisfaction</label>
-                                                            @Html.DropDownListFor(m => m.complaint.SatisfactionLevel, new SelectList(Model.DisatisfactionLevelList, "Value", "Text", 0), "--Select dissatisfaction level--", new { @data_live_search = "true", @class = "form-control bs-select", @onchange = "chkLevelOfDissatisfaction(this);" })
-                                                            @Html.ValidationMessageFor(m => m.complaint.SatisfactionLevel)
+                                                            @if (Model != null && Model.complaint != null && Model.complaint.IsResolved.ToUpper() == "NEW")
+                                                            {
+                                                                @Html.DropDownListFor(m => m.complaint.SatisfactionLevel, new SelectList(Model.DisatisfactionLevelList, "Value", "Text", 0), "--Select dissatisfaction level--", new { @data_live_search = "true", @class = "form-control bs-select", @onchange = "chkLevelOfDissatisfaction(this);", @disabled = "disabled" })
+                                                            }
+                                                            else
+                                                            {
+                                                                @Html.DropDownListFor(m => m.complaint.SatisfactionLevel, new SelectList(Model.DisatisfactionLevelList, "Value", "Text", 0), "--Select dissatisfaction level--", new { @data_live_search = "true", @class = "form-control bs-select", @onchange = "chkLevelOfDissatisfaction(this);" })
+                                                                @Html.ValidationMessageFor(m => m.complaint.SatisfactionLevel)
+                                                            }
+
                                                         </div>
                                                     </div>
-                                                    <div class="col-md-6">
-                                                        <div class="row">
-                                                            <div class="col-md-4">
-                                                                <label>Is this a complaint?</label>
-                                                                <div class="mt-radio-inline">
-                                                                    <label class="mt-radio mt-radio-outline margin-bottom0" style="font-size:13px;">
-                                                                        @Html.RadioButtonFor(m => m.complaint.IsComplaint, "Yes")
-                                                                        Yes
-                                                                        <span></span>
-                                                                    </label>
-                                                                    <label class="mt-radio mt-radio-outline margin-bottom0" style="font-size:13px;">
-                                                                        @Html.RadioButtonFor(m => m.complaint.IsComplaint, "No")
-                                                                        No
-                                                                        <span></span>
-                                                                    </label>
+                                                    @if (Model != null && Model.complaint != null && Model.complaint.IsResolved.ToUpper() == "NEW")
+                                                    {
+                                                        <div class="col-md-6">
+                                                            <div class="row">
+                                                                <div class="col-md-4">
+                                                                    <label>Is this a complaint?</label>
+                                                                    <div class="mt-radio-inline">
+                                                                        <label class="mt-radio mt-radio-outline margin-bottom0" style="font-size:13px;">
+                                                                            @Html.RadioButtonFor(m => m.complaint.IsComplaint, "Yes",new { @class="class1" })
+                                                                            Yes
+                                                                            <span></span>
+                                                                        </label>
+                                                                        <label class="mt-radio mt-radio-outline margin-bottom0" style="font-size:13px;">
+                                                                            @Html.RadioButtonFor(m => m.complaint.IsComplaint, "No", new { @class = "class2" })
+                                                                            No
+                                                                            <span></span>
+                                                                        </label>
+                                                                    </div>
+                                                                    @Html.ValidationMessageFor(m => m.complaint.IsComplaint)
                                                                 </div>
-                                                                @*@Html.ValidationMessageFor(m => m.complaint.IsComplaint)*@
+                                                                <div class="col-md-8">
+                                                                    <label></label>
+                                                                    <div class="input-group">
+                                                                        <label>Complaint number : <span style="color:rgba(40, 116, 143, 1);font-weight:bold">BR 00112233</span></label>
+                                                                    </div>
+                                                                </div>
                                                             </div>
-                                                            <div class="col-md-8">
+                                                        </div>
+                                                    }
+                                                    else
+                                                    {
+                                                        <div class="col-md-6">
+                                                            <div class="form-group">
                                                                 <label></label>
                                                                 <div class="input-group">
                                                                     <label>Complaint number : <span style="color:rgba(40, 116, 143, 1);font-weight:bold">BR 00112233</span></label>
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                    </div>
+                                                    }
                                                 </div>
                                                 <div class="row">
                                                     <div class="col-md-6">
@@ -235,190 +353,146 @@
                                                 </div>
                                                 <div class="row">
                                                     <div class="col-md-6">
-                                                        <div class="row">
-                                                            <div class="col-md-5">
-                                                                <label>Claim paid :</label>
-                                                                <div class="mt-radio-inline">
-                                                                    <label class="mt-radio mt-radio-outline margin-bottom0" style="font-size:13px;">
-                                                                        @Html.RadioButtonFor(m => m.complaint.Isclaimpaid, "No")
-                                                                        No
-                                                                        <span></span>
-                                                                    </label>
-                                                                    <label class="mt-radio mt-radio-outline margin-bottom0" style="font-size:13px;">
-                                                                        @Html.RadioButtonFor(m => m.complaint.Isclaimpaid, "Yes")
-                                                                        Yes
-                                                                        <span></span>
-                                                                    </label>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-md-7">
-                                                                <div class="form-group">
-                                                                    <label>Claim payment date</label>
-                                                                    <div class="input-group">
-                                                                        <span class="input-group-addon">
-                                                                            <i class="fa fa-calendar font-green"></i>
-                                                                        </span>
-                                                                        @Html.TextBoxFor(m => m.complaint.claimpaymentdate, Constants.DateFormatString, new { @class = "form-control form-control-inline  date-picker", @placeholder = "Select claim payment date" })
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-6">
-                                                        <div class="row">
-                                                            <div class="col-md-6">
-                                                                <label>Claim paid amount (excl VAT)</label>
-                                                                @Html.TextBoxFor(m => m.complaint.claimpaidamount_exclVAT, new { @class = "form-control m-input" })
-                                                            </div>
-                                                            <div class="col-md-6">
-                                                                <div class="form-group">
-                                                                    <label>Claim paid amount (incl VAT)</label>
-                                                                    @Html.TextBoxFor(m => m.complaint.claimpaidamount_inclVAT, new { @class = "form-control m-input" })
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col-md-6">
-                                                        <div class="row">
-                                                            <div class="col-md-5">
-                                                                <label>Claimant VAT registered :</label>
-                                                                <div class="mt-radio-inline">
-                                                                    <label class="mt-radio mt-radio-outline margin-bottom0" style="font-size:13px;">
-                                                                        @Html.RadioButtonFor(m => m.complaint.IsVATregistered, "No")
-                                                                        No
-                                                                        <span></span>
-                                                                    </label>
-                                                                    <label class="mt-radio mt-radio-outline margin-bottom0" style="font-size:13px;">
-                                                                        @Html.RadioButtonFor(m => m.complaint.IsVATregistered, "Yes")
-                                                                        Yes
-                                                                        <span></span>
-                                                                    </label>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-md-7">
-                                                                <div class="form-group">
-                                                                    <label>VAT number</label>
-                                                                    @Html.TextBoxFor(m => m.complaint.VAT_number, new { @class = "form-control m-input" })
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-6">
-                                                        <label></label>
-                                                        <div class="input-group">
-                                                            <label>Invoice number : <span style="color:rgba(40, 116, 143, 1);font-weight:bold">BR 00112233</span></label>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col-md-6">
-                                                        <div class="row">
-                                                            <div class="col-md-5">
-                                                                <label>Payee :</label>
-                                                                <div class="mt-radio-inline">
-                                                                    <label class="mt-radio mt-radio-outline margin-bottom0" style="font-size:13px;">
-                                                                        @Html.RadioButtonFor(m => m.complaint.IsPayee, "No")
-                                                                        No
-                                                                        <span></span>
-                                                                    </label>
-                                                                    <label class="mt-radio mt-radio-outline margin-bottom0" style="font-size:13px;">
-                                                                        @Html.RadioButtonFor(m => m.complaint.IsPayee, "No")
-                                                                        Yes
-                                                                        <span></span>
-                                                                    </label>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-md-7">
-                                                                <div class="form-group">
-                                                                    <label>Panel Attorneys</label>
-                                                                    @Html.TextBoxFor(m => m.complaint.Panel_Attorneys, new { @class = "form-control m-input" })
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col-md-6">
                                                         <div class="form-group">
-                                                            <label>Regulatory body reference number</label>
-                                                            <input type="text" id="AreaTitle" name="AreaTitle" class="form-control m-input" placeholder="Enter reference number" required />
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-6">
-                                                        <div class="form-group">
-                                                            <label>Case file stage</label>
-                                                            @Html.DropDownListFor(m => m.complaint.CaseFileStage, new SelectList(Model.CaseFileStageList, "Value", "Text", 0), "--Select File Stage--", new { @data_live_search = "true", @class = "form-control bs-select" })
-                                                            @Html.ValidationMessageFor(m => m.complaint.CaseFileStage)
+                                                            <label>Note</label>
+                                                            @if (Model != null && Model.complaint != null && Model.complaint.Notes != null && Model.complaint.IsResolved.ToUpper() == "NEW")
+                                                            {
+                                                                @Html.TextAreaFor(m => m.complaint.Notes, new { @class = "form-control m-input", @placeholder = "Enter Description", @rows = "4", @disabled = "disabled" })
+                                                            }
+                                                            else
+                                                            {
+                                                                @Html.TextAreaFor(m => m.complaint.Notes, new { @class = "form-control m-input", @placeholder = "Enter Description", @rows = "4" })
+                                                                @*@Html.ValidationMessageFor(m => m.complaint.Notes)*@
+                                                            }
 
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="row">
-                                                    <div class="col-md-6">
-                                                        <div class="form-group">
-                                                            <label>Product Category</label>
-                                                            @Html.DropDownListFor(m => m.complaint.ComplaintProductTypeId, new SelectList(Model.ProductTypeList, "Value", "Text", 0), "--Select Product Category--", new { @data_live_search = "true", @class = "form-control bs-select", @onchange = "GetProductType(this);" })
-                                                            @Html.ValidationMessageFor(m => m.complaint.ComplaintProductTypeId)
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-6">
-                                                        <div class="form-group">
-                                                            <label>Product Type</label>
-                                                            @Html.DropDownListFor(m => m.complaint.ComplaintProductId, new SelectList(Model.ProductCategorylist, "Value", "Text", 0), "--Select Product--", new { @data_live_search = "true", @class = "form-control bs-select" })
-                                                            @Html.ValidationMessageFor(m => m.complaint.ComplaintProductId)
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col-md-6">
-                                                        <div class="form-group">
-                                                            <label>Complaint category<span style="font-weight: bold;color: red;">*</span></label>
-                                                            @Html.DropDownListFor(m => m.complaint.ComplaintCategoryId, new SelectList(Model.ComplaintCategoryList, "Value", "Text", 0), "--Select Complaint Category--", new { @data_live_search = "true", @class = "form-control bs-select", @onchange = "GetNatureOfComplaint(this);" })
-                                                            @Html.ValidationMessageFor(m => m.complaint.ComplaintCategoryId)
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-6">
-                                                        <div class="form-group">
-                                                            <label>Nature of complaint<span style="font-weight: bold;color: red;">*</span></label>
-                                                            @Html.DropDownListFor(m => m.complaint.ComplaintNatureOfId, new SelectList(Model.ComplaintNatureList, "Value", "Text", 0), "--Select Complaint Nature--", new { @data_live_search = "true", @class = "form-control bs-select" })
-                                                            @Html.ValidationMessageFor(m => m.complaint.ComplaintNatureOfId)
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col-md-6">
-                                                        <div class="form-group">
-                                                            <label>Complaint received date</label>
-                                                            <div class="input-group">
-                                                                <span class="input-group-addon">
-                                                                    <i class="fa fa-calendar font-green"></i>
-                                                                </span>
-                                                                @Html.TextBoxFor(m => m.complaint.DateReceived, Constants.DateFormatString, new { @class = "form-control form-control-inline  date-picker", @placeholder = "Select recieved date" })
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-6">
-                                                        <div class="form-group">
-                                                            <label>Complaint incident date&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<label style="font:5px;"><span class="text-right">(date when dissatisfactory experience occcured)</span></label></label>
-                                                            <div class="input-group">
-                                                                <span class="input-group-addon">
-                                                                    <i class="fa fa-calendar font-green"></i>
-                                                                </span>
-                                                                @Html.TextBoxFor(m => m.complaint.DateIncident, Constants.DateFormatString, new { @class = "form-control form-control-inline  date-picker", @placeholder = "Select incident date" })
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                @*<div class="row">
-                                                        <div class="col-md-12">
+                                                @if (Model != null && Model.complaint != null && Model.complaint.IsResolved.ToUpper() == "NEW")
+                                                {
+                                                    <div class="row hide" id="DivProduct">
+                                                        <div class="col-md-6">
                                                             <div class="form-group">
-                                                                <label>Notes</label>
-                                                                <textarea id="AreaTitle" name="AreaTitle" class="form-control m-input"></textarea>
+                                                                <label>Product Category</label>
+                                                                @Html.DropDownListFor(m => m.complaint.ComplaintProductTypeId, new SelectList(Model.ProductTypeList, "Value", "Text", 0), "--Select Product Category--", new { @data_live_search = "true", @class = "form-control bs-select", @onchange = "GetProductType(this);" })
+                                                                @Html.ValidationMessageFor(m => m.complaint.ComplaintProductTypeId)
                                                             </div>
                                                         </div>
-                                                    </div>*@
+                                                        <div class="col-md-6">
+                                                            <div class="form-group">
+                                                                <label>Product Type</label>
+                                                                @Html.DropDownListFor(m => m.complaint.ComplaintProductId, new SelectList(Model.ProductCategorylist, "Value", "Text", 0), "--Select Product--", new { @data_live_search = "true", @class = "form-control bs-select" })
+                                                                @Html.ValidationMessageFor(m => m.complaint.ComplaintProductId)
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row hide" id="DivCategory">
+                                                        <div class="col-md-6">
+                                                            <div class="form-group">
+                                                                <label>Complaint category<span style="font-weight: bold;color: red;">*</span></label>
+                                                                @Html.DropDownListFor(m => m.complaint.ComplaintCategoryId, new SelectList(Model.ComplaintCategoryList, "Value", "Text", 0), "--Select Complaint Category--", new { @data_live_search = "true", @class = "form-control bs-select", @onchange = "GetNatureOfComplaint(this);" })
+                                                                @Html.ValidationMessageFor(m => m.complaint.ComplaintCategoryId)
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <div class="form-group">
+                                                                <label>Nature of complaint<span style="font-weight: bold;color: red;">*</span></label>
+                                                                @Html.DropDownListFor(m => m.complaint.ComplaintNatureOfId, new SelectList(Model.ComplaintNatureList, "Value", "Text", 0), "--Select Complaint Nature--", new { @data_live_search = "true", @class = "form-control bs-select" })
+                                                                @Html.ValidationMessageFor(m => m.complaint.ComplaintNatureOfId)
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                }
+                                                else
+                                                {
+                                                    <div class="row" id="DivProduct">
+                                                        <div class="col-md-6">
+                                                            <div class="form-group">
+                                                                <label>Product Category</label>
+                                                                @Html.DropDownListFor(m => m.complaint.ComplaintProductTypeId, new SelectList(Model.ProductTypeList, "Value", "Text", 0), "--Select Product Category--", new { @data_live_search = "true", @class = "form-control bs-select", @onchange = "GetProductType(this);" })
+                                                                @Html.ValidationMessageFor(m => m.complaint.ComplaintProductTypeId)
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <div class="form-group">
+                                                                <label>Product Type</label>
+                                                                @Html.DropDownListFor(m => m.complaint.ComplaintProductId, new SelectList(Model.ProductCategorylist, "Value", "Text", 0), "--Select Product--", new { @data_live_search = "true", @class = "form-control bs-select" })
+                                                                @Html.ValidationMessageFor(m => m.complaint.ComplaintProductId)
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row" id="DivCategory">
+                                                        <div class="col-md-6">
+                                                            <div class="form-group">
+                                                                <label>Complaint category<span style="font-weight: bold;color: red;">*</span></label>
+                                                                @Html.DropDownListFor(m => m.complaint.ComplaintCategoryId, new SelectList(Model.ComplaintCategoryList, "Value", "Text", 0), "--Select Complaint Category--", new { @data_live_search = "true", @class = "form-control bs-select", @onchange = "GetNatureOfComplaint(this);" })
+                                                                @Html.ValidationMessageFor(m => m.complaint.ComplaintCategoryId)
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <div class="form-group">
+                                                                <label>Nature of complaint<span style="font-weight: bold;color: red;">*</span></label>
+                                                                @Html.DropDownListFor(m => m.complaint.ComplaintNatureOfId, new SelectList(Model.ComplaintNatureList, "Value", "Text", 0), "--Select Complaint Nature--", new { @data_live_search = "true", @class = "form-control bs-select" })
+                                                                @Html.ValidationMessageFor(m => m.complaint.ComplaintNatureOfId)
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                }
+                                                @if (Model != null && Model.complaint != null && Model.complaint.IsResolved.ToUpper() == "NEW")
+                                                {
+                                                    <div class="row">
+                                                        <div class="col-md-6">
+                                                            <div class="form-group">
+                                                                <label>Complaint received date</label>
+                                                                <div class="input-group">
+                                                                    <span class="input-group-addon">
+                                                                        <i class="fa fa-calendar font-green"></i>
+                                                                    </span>
+                                                                    @Html.TextBoxFor(m => m.complaint.DateReceived, Constants.DateFormatString, new { @class = "form-control form-control-inline  date-picker", @placeholder = "Select recieved date", @disabled = "disabled" })
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <div class="form-group">
+                                                                <label>Complaint incident date&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<label style="font:5px;"><span class="text-right">(date when dissatisfactory experience occcured)</span></label></label>
+                                                                <div class="input-group">
+                                                                    <span class="input-group-addon">
+                                                                        <i class="fa fa-calendar font-green"></i>
+                                                                    </span>
+                                                                    @Html.TextBoxFor(m => m.complaint.DateIncident, Constants.DateFormatString, new { @class = "form-control form-control-inline  date-picker", @placeholder = "Select incident date", @disabled = "disabled" })
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                }
+                                                else
+                                                {
+                                                    <div class="row">
+                                                        <div class="col-md-6">
+                                                            <div class="form-group">
+                                                                <label>Complaint received date</label>
+                                                                <div class="input-group">
+                                                                    <span class="input-group-addon">
+                                                                        <i class="fa fa-calendar font-green"></i>
+                                                                    </span>
+                                                                    @Html.TextBoxFor(m => m.complaint.DateReceived, Constants.DateFormatString, new { @class = "form-control form-control-inline  date-picker", @placeholder = "Select recieved date" })
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <div class="form-group">
+                                                                <label>Complaint incident date&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<label style="font:5px;"><span class="text-right">(date when dissatisfactory experience occcured)</span></label></label>
+                                                                <div class="input-group">
+                                                                    <span class="input-group-addon">
+                                                                        <i class="fa fa-calendar font-green"></i>
+                                                                    </span>
+                                                                    @Html.TextBoxFor(m => m.complaint.DateIncident, Constants.DateFormatString, new { @class = "form-control form-control-inline  date-picker", @placeholder = "Select incident date" })
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                }
+
                                                 <div class="row">
                                                     <div class="col-md-12">
                                                         <div class="form-group">
@@ -427,16 +501,33 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="form-actions">
-                                                <div class="col-lg-6">
-                                                    <button type="button" class="btn btn-primary btnPrevious">Previous</button>
+                                            @if (Model != null && Model.complaint != null && Model.complaint.IsResolved.ToUpper() == "NEW")
+                                            {
+                                                <div class="form-actions" id="WebsubmitDiv">
+                                                    <div class="col-lg-6">
+                                                        <button type="button" class="btn btn-primary btnPrevious hide">Previous</button>
+                                                    </div>
+                                                    <div class="text-right">
+                                                        <button type="button" class="btn btn-primary btnNext hide">Next</button>
+                                                        <button type="button" class="btn btn-primary newSubmit" onclick="ComplaintFormSubmit();">Save</button>
+                                                        <button type="button" onclick="location.href = '/CRT/CRTList'" class="btn default" data-dismiss="modal">Cancel</button>
+                                                    </div>
                                                 </div>
-                                                <div class="col-lg-6 text-right">
-                                                    <button type="button" class="btn btn-primary btnNext">Next</button>
-                                                    <button type="button" class="btn btn-primary btnSubmit">Save</button>
-                                                    <button type="button" onclick="location.href = '/CRT/CRTList'" class="btn default" data-dismiss="modal">Cancel</button>
+                                            }
+                                            else
+                                            {
+                                                <div class="form-actions" id="CRTsubmitDiv">
+                                                    <div class="col-lg-6">
+                                                        <button type="button" class="btn btn-primary btnPrevious">Previous</button>
+                                                    </div>
+                                                    <div class="col-lg-6 text-right">
+                                                        <button type="button" class="btn btn-primary btnNext">Next</button>
+                                                        <button type="button" class="btn btn-primary btnSubmit">Save</button>
+                                                        <button type="button" onclick="location.href = '/CRT/CRTList'" class="btn default" data-dismiss="modal">Cancel</button>
+                                                    </div>
                                                 </div>
-                                            </div>
+                                            }
+
                                         </div>
                                         <div class="tab-pane" id="tab2" role="tabpanel">
                                             @*<div class="form-body"></div>*@
@@ -634,6 +725,154 @@
                                                 </div>
                                             </div>
                                         </div>
+
+                                        <div class="tab-pane" id="tab3" role="tabpanel">
+                                            <div class="row margin-top10">
+                                                <div class="col-lg-12">
+                                                    <div class="portlet-title">
+                                                        <div class="caption caption-md">
+                                                            <i class="icon-globe theme-font hide"></i>
+                                                            <span class="caption-subject font-blue-madison bold uppercase">Claims</span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="portlet-body">
+                                                        <div class="row">
+                                                            <div class="col-md-6">
+                                                                <div class="row">
+                                                                    <div class="col-md-5">
+                                                                        <label>Claim paid :</label>
+                                                                        <div class="mt-radio-inline">
+                                                                            <label class="mt-radio mt-radio-outline margin-bottom0" style="font-size:13px;">
+                                                                                @Html.RadioButtonFor(m => m.complaint.Isclaimpaid, "No")
+                                                                                No
+                                                                                <span></span>
+                                                                            </label>
+                                                                            <label class="mt-radio mt-radio-outline margin-bottom0" style="font-size:13px;">
+                                                                                @Html.RadioButtonFor(m => m.complaint.Isclaimpaid, "Yes")
+                                                                                Yes
+                                                                                <span></span>
+                                                                            </label>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-md-7">
+                                                                        <div class="form-group">
+                                                                            <label>Claim payment date</label>
+                                                                            <div class="input-group">
+                                                                                <span class="input-group-addon">
+                                                                                    <i class="fa fa-calendar font-green"></i>
+                                                                                </span>
+                                                                                @Html.TextBoxFor(m => m.complaint.claimpaymentdate, Constants.DateFormatString, new { @class = "form-control form-control-inline  date-picker", @placeholder = "Select claim payment date" })
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-6">
+                                                                <div class="row">
+                                                                    <div class="col-md-6">
+                                                                        <label>Claim paid amount (excl VAT)</label>
+                                                                        @Html.TextBoxFor(m => m.complaint.claimpaidamount_exclVAT, new { @class = "form-control m-input" })
+                                                                    </div>
+                                                                    <div class="col-md-6">
+                                                                        <div class="form-group">
+                                                                            <label>Claim paid amount (incl VAT)</label>
+                                                                            @Html.TextBoxFor(m => m.complaint.claimpaidamount_inclVAT, new { @class = "form-control m-input" })
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col-md-6">
+                                                                <div class="row">
+                                                                    <div class="col-md-5">
+                                                                        <label>Claimant VAT registered :</label>
+                                                                        <div class="mt-radio-inline">
+                                                                            <label class="mt-radio mt-radio-outline margin-bottom0" style="font-size:13px;">
+                                                                                @Html.RadioButtonFor(m => m.complaint.IsVATregistered, "No")
+                                                                                No
+                                                                                <span></span>
+                                                                            </label>
+                                                                            <label class="mt-radio mt-radio-outline margin-bottom0" style="font-size:13px;">
+                                                                                @Html.RadioButtonFor(m => m.complaint.IsVATregistered, "Yes")
+                                                                                Yes
+                                                                                <span></span>
+                                                                            </label>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-md-7">
+                                                                        <div class="form-group">
+                                                                            <label>VAT number</label>
+                                                                            @Html.TextBoxFor(m => m.complaint.VAT_number, new { @class = "form-control m-input" })
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-6">
+                                                                <label></label>
+                                                                <div class="input-group">
+                                                                    <label>Invoice number : <span style="color:rgba(40, 116, 143, 1);font-weight:bold">BR 00112233</span></label>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col-md-6">
+                                                                <div class="row">
+                                                                    <div class="col-md-5">
+                                                                        <label>Payee :</label>
+                                                                        <div class="mt-radio-inline">
+                                                                            <label class="mt-radio mt-radio-outline margin-bottom0" style="font-size:13px;">
+                                                                                @Html.RadioButtonFor(m => m.complaint.IsPayee, "No")
+                                                                                No
+                                                                                <span></span>
+                                                                            </label>
+                                                                            <label class="mt-radio mt-radio-outline margin-bottom0" style="font-size:13px;">
+                                                                                @Html.RadioButtonFor(m => m.complaint.IsPayee, "No")
+                                                                                Yes
+                                                                                <span></span>
+                                                                            </label>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-md-7">
+                                                                        <div class="form-group">
+                                                                            <label>Panel Attorneys</label>
+                                                                            @Html.TextBoxFor(m => m.complaint.Panel_Attorneys, new { @class = "form-control m-input" })
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="row">
+                                                            <div class="col-md-6">
+                                                                <div class="form-group">
+                                                                    <label>Regulatory body reference number</label>
+                                                                    <input type="text" id="AreaTitle" name="AreaTitle" class="form-control m-input" placeholder="Enter reference number"  />
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-6">
+                                                                <div class="form-group">
+                                                                    <label>Case file stage</label>
+                                                                    @Html.DropDownListFor(m => m.complaint.CaseFileStage, new SelectList(Model.CaseFileStageList, "Value", "Text", 0), "--Select File Stage--", new { @data_live_search = "true", @class = "form-control bs-select" })
+                                                                    @Html.ValidationMessageFor(m => m.complaint.CaseFileStage)
+
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-actions">
+                                                <div class="col-lg-6">
+                                                    <button type="button" class="btn btn-primary btnPrevious">Previous</button>
+                                                </div>
+                                                <div class="col-lg-6 text-right">
+                                                    <button type="button" class="btn btn-primary btnNext">Next</button>
+                                                    <button type="button" class="btn btn-primary btnSubmit" onclick="ComplaintFormSubmit();">Save</button>
+                                                    <button type="button" onclick="location.href = '/CRT/CRTList'" class="btn default" data-dismiss="modal">Cancel</button>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -665,34 +904,42 @@
         }
 
         $(document).ready(function () {
+            debugger;
+            if (status != null && status=="NEW")
+             {
+                $("#DivProduct, #DivCategory").hide();
+                //$("#m_tabs_5_2").hide();
+                //$("#m_tabs_5_3").hide();
+            }
+            @*@if (Model!=null && Model.complaint!=null && Model.complaint.IsResolved.ToUpper() == "NEW")
+            {
+                var status = Model.complaint.IsResolved.ToUpper();
+            }*@
+
+            //if (Model != null && Model.complaint != null && Model.complaint.IsResolved.ToUpper() == "NEW") {
+            //    $("#DivProduct, #DivCategory").hide();
+            //    $("#m_tabs_5_2").hide();
+            //    $("#m_tabs_5_3").hide();
+            //}
+
             $(".btnPrevious, .btnSubmit").hide();
 
             $("#m_tabs_5_1").click(function () {
                 $("#frmComplaint").valid();
-                if ($("#frmComplaint .tab-content .active .field-validation-error").length > 0 || $("#frmComplaint .tab-content .active .field-validation-error").length > 0) { }
+    if ($("#frmComplaint .tab-content .active .field-validation-error").length > 0 || $("#frmComplaint .tab-content .active .field-validation-error").length > 0) { }
                 else {
                     $("#tab1").fadeIn();
                     $("#tab1").addClass("active");
-                    $("#tab2").removeClass("active");
+                    $("#tab2,#tab3").removeClass("active");
                     $(this).closest("ul").children("li").removeClass("active");
                     $(this).closest("li").addClass("active");
-                    $("#tab2").hide();
+                    $("#tab2,#tab3").hide();
                     $(".btnPrevious").hide();
                     $(".btnSubmit").hide();
                     $(".btnNext").show();
                     $(".bs-select").selectpicker('refresh');
                 }
 
-                //$("#tab1").fadeIn();
-                //$("#tab1").addClass("active");
-                //$("#tab2").removeClass("active");
-                //$(this).closest("ul").children("li").removeClass("active");
-                //$(this).closest("li").addClass("active");
-                //$("#tab2").hide();
-                //$(".btnPrevious").hide();
-                //$(".btnSubmit").hide();
-                //$(".btnNext").show();
-                //$(".bs-select").selectpicker('refresh');
             });
 
             $("#m_tabs_5_2").click(function () {
@@ -701,25 +948,32 @@
                 else {
                     $("#tab2").fadeIn();
                     $("#tab2").addClass("active");
-                    $("#tab1,#tab3,#tab4,#tab5,#tab6").removeClass("active");
+                    $("#tab1,#tab3").removeClass("active");
                     $(this).closest("ul").children("li").removeClass("active");
                     $(this).closest("li").addClass("active");
-                    $("#tab1,#tab3,#tab4,#tab5,#tab6").hide();
+                    $("#tab1,#tab3").hide();
+                    $(".btnPrevious").show();
+                    $(".btnSubmit").hide();
+                    $(".btnNext").show();
+                    $(".bs-select").selectpicker('refresh');
+                }
+            });
+
+            $("#m_tabs_5_3").click(function () {
+                $("#frmComplaint").valid();
+                if ($("#frmComplaint .tab-content .active .field-validation-error").length > 0 || $("#frmComplaint .tab-content .active .field-validation-error").length > 0) { }
+                else {
+                    $("#tab3").fadeIn();
+                    $("#tab3").addClass("active");
+                    $("#tab1,#tab2").removeClass("active");
+                    $(this).closest("ul").children("li").removeClass("active");
+                    $(this).closest("li").addClass("active");
+                    $("#tab1,#tab2").hide();
                     $(".btnPrevious").show();
                     $(".btnSubmit").show();
                     $(".btnNext").hide();
                     $(".bs-select").selectpicker('refresh');
                 }
-                //$("#tab2").fadeIn();
-                //$("#tab2").addClass("active");
-                //$("#tab1,#tab3,#tab4,#tab5,#tab6").removeClass("active");
-                //$(this).closest("ul").children("li").removeClass("active");
-                //$(this).closest("li").addClass("active");
-                //$("#tab1,#tab3,#tab4,#tab5,#tab6").hide();
-                //$(".btnPrevious").show();
-                //$(".btnSubmit").show();
-                //$(".btnNext").hide();
-                //$(".bs-select").selectpicker('refresh');
             });
 
             if ($("#complaint_regulatory").val() == "No") {
@@ -741,18 +995,19 @@
                 if (selA == "m_tabs_5_1") {
                     $("#m_tabs_5_2").trigger("click");
                 }
+                else if (selA == "m_tabs_5_2") {
+                    $("#m_tabs_5_3").trigger("click");
+                }
             }
-
-            //var selA = $(".employee").find("li.active").children("a").attr("id");
-            //if (selA == "m_tabs_5_1") {
-            //    $("#m_tabs_5_2").trigger("click");
-            //}
         });
 
         $(".btnPrevious").click(function () {
             var selA = $(".employee").find("li.active").children("a").attr("id");
             if (selA == "m_tabs_5_2") {
                 $("#m_tabs_5_1").trigger("click");
+            }
+            else if (selA == "m_tabs_5_3") {
+                $("#m_tabs_5_2").trigger("click");
             }
         });
 
@@ -791,11 +1046,16 @@
                     }
                     $('#complaint_ComplaintReceivedRegulatoryFeedbackId').selectpicker('render');
                     $("#complaint_ComplaintReceivedRegulatoryFeedbackId").attr('disabled', 'disabled');
+                    $('#complaint_ComplaintOverallOutcomeId').val("");
+                    $("#complaint_ComplaintOverallOutcomeId").attr('disabled', 'disabled');
                 }
             }
             else {
                 $("#complaint_ComplaintReceivedRegulatoryFeedbackId").removeAttr('disabled');
+                $("#complaint_ComplaintOverallOutcomeId").removeAttr('disabled');
                 $('#complaint_ComplaintReceivedRegulatoryFeedbackId').val("");
+                $('#complaint_ComplaintOverallOutcomeId').val("");
+
             }
             $(".bs-select").selectpicker('refresh');
         }
@@ -959,6 +1219,36 @@
                     $("#complaint_ComplaintNatureOfId").selectpicker('refresh');
                 }
             });
+        }
+
+        $('input[type=radio][class=class1]').change(function () {
+           
+            $("#m_tabs_5_2").removeClass('hide');
+            $("#m_tabs_5_3").removeClass('hide');
+            $("#DivProduct,#DivCategory").removeClass('hide');
+            //$("#WebsubmitDiv").addClass('hide');
+            $(".btnPrevious").removeClass('hide');
+            $(".btnNext").removeClass('hide');
+            $(".newSubmit").addClass('hide');
+        });
+
+        $('input[type=radio][class=class2]').change(function () {
+            $("#m_tabs_5_2").addClass('hide');
+            $("#m_tabs_5_3").addClass('hide');
+            $("#DivProduct,#DivCategory").addClass('hide');
+            //$("#WebsubmitDiv").removeClass('hide');
+            $(".btnPrevious").addClass('hide');
+            $(".btnNext").addClass('hide');
+            $(".newSubmit").removeClass('hide');
+        });
+
+        function ComplaintFormSubmit() {
+            if ($("#frmComplaint").valid()) {
+                //$("#frmComplaint *").removeAttr("disabled");
+                //Chkclient();
+                ShowLoader();
+                $("#frmComplaint").submit();
+            }
         }
     </script>
 }

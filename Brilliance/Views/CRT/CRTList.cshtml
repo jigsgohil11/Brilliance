@@ -69,6 +69,16 @@
                                             {
                                                 <label>@item.ResolvedDate</label>
                                             }
+                                            @*else if (item.DateResolved != null && item.IsComplaint.ToUpper() == "NO")
+                                            {
+                                                <label>@item.ResolvedDate</label>
+                                                <label style="font-weight:bold;color:limegreen">Resolved</label>
+                                            }*@
+                                            else if (item.IsResolved != null && item.IsResolved.ToUpper() == "RESOLVED")
+                                            {
+                                                <label>@item.ResolvedDate</label>
+                                                @*<label style="font-weight:bold;color:limegreen">Resolved</label>*@
+                                            }
                                             else
                                             {
                                                 <label style="font-weight:bold;">New</label>
