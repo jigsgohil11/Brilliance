@@ -68,3 +68,7 @@ D:\iSoftNet Work\Brilliance\Latest Work\Brilliance\Brilliance\obj\Release\Brilli
 D:\iSoftNet Work\Brilliance\Latest Work\Brilliance\Brilliance\obj\Release\Brilliance.csproj.GenerateResource.Cache
 D:\iSoftNet Work\Brilliance\Latest Work\Brilliance\Brilliance\obj\Release\Brilliance.dll
 D:\iSoftNet Work\Brilliance\Latest Work\Brilliance\Brilliance\obj\Release\Brilliance.pdb
+D:\iSoftNet Work\Brilliance\Latest Work\Brilliance\Brilliance\bin\EntityFramework.dll
+D:\iSoftNet Work\Brilliance\Latest Work\Brilliance\Brilliance\bin\EntityFramework.SqlServer.dll
+D:\iSoftNet Work\Brilliance\Latest Work\Brilliance\Brilliance\bin\EntityFramework.xml
+D:\iSoftNet Work\Brilliance\Latest Work\Brilliance\Brilliance\bin\EntityFramework.SqlServer.xml

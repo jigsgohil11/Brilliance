@@ -25,7 +25,7 @@
                 <table class="table table-striped table-bordered table-hover dt-responsive" width="100%" id="dt_setup">
                     <thead>
                         <tr>
-                            <th class="all">Action</th>
+                            <th class="all">#</th>
                             <th class="desktop">@(Model.projecttermcategory != null ? Model.projecttermcategory.TermCategory + " " + "Code" : "Code")</th>
                             <th class="all">@(Model.projecttermcategory != null ? Model.projecttermcategory.TermCategory + " " + "Name" : "Name")</th>
                             @*@if (Model.projecttermcategory.CategoryName.ToUpper() == "ASSIGNMENT ROLE")
@@ -63,31 +63,22 @@
                                 {
                                     <th class="min-tablet">Deduct Value</th>
                                 }*@
+                            <th class="all">Action</th>
                         </tr>
                     </thead>
                     <tbody>
                         @if (Model != null && Model.Projecttermcategorylist.Count > 0)
                         {
+                            int index = 0;
                             foreach (var item in Model.Projecttermcategorylist)
                             {
                                 if (item.ProjectTermID != null && item.ProjectTermID != Guid.Empty)
                                 {
+                                    index++;
                                     <tr>
-                                        <td>
-                                            @*@if (item.Term.ToUpper() != "OTHER")
-                                                {
-                                            if (Common.IsPermissionAllowed(Constants.Can_Access_GeneralSetup).IsUpdate)
-                                            {*@
-                                            <a class="action btn  btn-primary btn-xs @Constants.Class_Cannot_Access_Update" onclick="EditPopup('@item.EncryptedProjectTermID','form_Setup');" title="Edit"><i class="btn-xs fa fa-pencil padding0"></i></a>
-                                            @*}
-                                                if (Common.IsPermissionAllowed(Constants.Can_Access_GeneralSetup).IsDelete)
-                                                {*@
-                                            <a class="action btn  btn-danger btn-xs @Constants.Class_Cannot_Access_Remove" href="javascript:void(0);" title="Delete" onclick="fnOpenDeleteModel('DeleteButton','DeleteModal','@Convert.ToString(item.EncryptedProjectTermID)');"><i class="btn-xs fa fa-trash-o padding0"></i></a>
-                                            @*}
-                                            }*@
-                                        </td>
-                                        <td>@item.TermCode</td>
-                                        <td>@item.Term</td>
+                                        <td width="1%">@index</td>
+                                        <td width="20%">@item.TermCode</td>
+                                        <td width="69%">@item.Term</td>
                                         @*@if (Model.projecttermcategory.CategoryName.ToUpper() == "ASSIGNMENT ROLE")
                                             {
                                                 <td>@item.DefaultValue</td>
@@ -127,6 +118,20 @@
                                             {
                                                 <td>@item.DefaultValue</td>
                                             }*@
+
+                                        <td width="10%">
+                                            @*@if (item.Term.ToUpper() != "OTHER")
+                                                    {
+                                                if (Common.IsPermissionAllowed(Constants.Can_Access_GeneralSetup).IsUpdate)
+                                                {*@
+                                            <a class="action btn  btn-primary btn-xs @Constants.Class_Cannot_Access_Update" onclick="EditPopup('@item.EncryptedProjectTermID','form_Setup');" title="Edit"><i class="btn-xs fa fa-pencil padding0"></i></a>
+                                            @*}
+                                                if (Common.IsPermissionAllowed(Constants.Can_Access_GeneralSetup).IsDelete)
+                                                {*@
+                                            <a class="action btn  btn-danger btn-xs @Constants.Class_Cannot_Access_Remove" href="javascript:void(0);" title="Delete" onclick="fnOpenDeleteModel('DeleteButton','DeleteModal','@Convert.ToString(item.EncryptedProjectTermID)');"><i class="btn-xs fa fa-trash-o padding0"></i></a>
+                                            @*}
+                                                }*@
+                                        </td>
                                     </tr>
                                 }
                             }

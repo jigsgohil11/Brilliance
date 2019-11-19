@@ -4,9 +4,7 @@
     ViewBag.Title = "ProductList";
     Layout = "~/Views/Shared/_Layout_public.cshtml";
 }
-
 <link href="~/assets/global/plugins/datatables/datatables.min.css" rel="stylesheet" type="text/css" />
-
 <div class="page-content page-content-dashbrd-backgrnd">
     <div class="page-bar margin-bottom-10">
         <div class="row">
@@ -35,7 +33,7 @@
                     <table class="table table-striped table-bordered table-hover dt-responsive" width="100%" id="dt_product">
                         <thead>
                             <tr>
-                               
+                                <th class="all">#</th>
                                 <th class="min-tablet">Name</th>
                                 <th class="desktop">Organization</th>
                                 <th class="desktop">Company</th>
@@ -46,21 +44,23 @@
                         <tbody>
                             @if (Model != null && Model.Productlist.Count > 0)
                             {
+                                int index = 0;
                                 foreach (var item in Model.Productlist)
                                 {
-                            <tr>
-                                <td style="background-color:white !important;">@item.Name</td>
-                                <td>@item.Organization</td>
-                                <td>@item.Company</td>
-                                <td>@item.Description</td>
-                                <td>
-                                    <a class="action btn  btn-primary btn-xs @Constants.Class_Cannot_Access_Update" href="/Product/Product/@item.EncryptedProductID" title="Edit"><i class="btn-xs fa fa-pencil padding0"></i></a>
-                                    <a class="action btn  btn-danger btn-xs @Constants.Class_Cannot_Access_Remove" href="javascript:void(0);" title="Delete" onclick="fnOpenDeleteModel('DeleteButton','DeleteModal','@item.EncryptedProductID.ToString()');"><i class="btn-xs fa fa-trash-o padding0"></i></a>
-                                </td>
-                            </tr>
+                                    index++;
+                                    <tr>
+                                        <td width="1%">@index</td>
+                                        <td width="15%" style="background-color:white !important;">@item.Name</td>
+                                        <td width="15%">@item.Organization</td>
+                                        <td width="15%">@item.Company</td>
+                                        <td width="45%">@item.Description</td>
+                                        <td width="9%">
+                                            <a class="action btn  btn-primary btn-xs @Constants.Class_Cannot_Access_Update" href="/Product/Product/@item.EncryptedProductID" title="Edit"><i class="btn-xs fa fa-pencil padding0"></i></a>
+                                            <a class="action btn  btn-danger btn-xs @Constants.Class_Cannot_Access_Remove" href="javascript:void(0);" title="Delete" onclick="fnOpenDeleteModel('DeleteButton','DeleteModal','@item.EncryptedProductID.ToString()');"><i class="btn-xs fa fa-trash-o padding0"></i></a>
+                                        </td>
+                                    </tr>
                                 }
                             }
-
                         </tbody>
                     </table>
                 </div>
@@ -68,7 +68,6 @@
         </div>
     </div>
 </div>
-
 <div class="modal fade modal-scroll" id="DeleteModal" tabindex="-1" role="basic" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">

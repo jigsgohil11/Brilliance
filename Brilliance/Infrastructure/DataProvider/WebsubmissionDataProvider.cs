@@ -62,7 +62,7 @@ namespace Brilliance.Infrastructure.DataProvider
                 cmd.Parameters.AddWithValue("@ComplaintProductTypeId", Complaintmodel.complaint.ComplaintProductTypeId).SqlDbType = SqlDbType.UniqueIdentifier;
                 cmd.Parameters.AddWithValue("@ComplaintCategoryId", Complaintmodel.complaint.ComplaintCategoryId).SqlDbType = SqlDbType.UniqueIdentifier;
                 cmd.Parameters.AddWithValue("@ComplaintNatureOfId", Complaintmodel.complaint.ComplaintNatureOfId).SqlDbType = SqlDbType.UniqueIdentifier;
-                cmd.Parameters.AddWithValue("@DateReceived", Complaintmodel.complaint.DateReceived).SqlDbType = SqlDbType.DateTime;
+                cmd.Parameters.AddWithValue("@DateReceived",DateTime.Now).SqlDbType = SqlDbType.DateTime;
                 cmd.Parameters.AddWithValue("@DateIncident", Complaintmodel.complaint.DateIncident).SqlDbType = SqlDbType.DateTime;
                 cmd.Parameters.AddWithValue("@IsResolved", "New").SqlDbType = SqlDbType.NVarChar;
                 cmd.Parameters.AddWithValue("@DateResolved", Complaintmodel.complaint.DateResolved).SqlDbType = SqlDbType.DateTime;
@@ -76,6 +76,7 @@ namespace Brilliance.Infrastructure.DataProvider
                 cmd.Parameters.AddWithValue("@ComplaintCompensationId", Complaintmodel.complaint.ComplaintCompensationId).SqlDbType = SqlDbType.UniqueIdentifier;
                 cmd.Parameters.AddWithValue("@ComplaintRegulatedCostId", Complaintmodel.complaint.ComplaintRegulatedCostId).SqlDbType = SqlDbType.UniqueIdentifier;
                 cmd.Parameters.AddWithValue("@CompensationValue", Complaintmodel.complaint.CompensationValue).SqlDbType = SqlDbType.NVarChar;
+                cmd.Parameters.AddWithValue("@Description", Complaintmodel.complaint.Notes).SqlDbType = SqlDbType.NVarChar;
                 cmd.Parameters.AddWithValue("@CreatedBy", SessionHelper.UserId).SqlDbType = SqlDbType.UniqueIdentifier;
                 cmd.Parameters.AddWithValue("@CreatedOn", DateTime.Now).SqlDbType = SqlDbType.DateTime;
                 cmd.Parameters.AddWithValue("@UpdatedOn", null).SqlDbType = SqlDbType.DateTime;

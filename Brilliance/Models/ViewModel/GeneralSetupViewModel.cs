@@ -62,6 +62,7 @@ namespace Brilliance.Models.ViewModel
             Projecttermcategorylist = new List<ProjectTermCategoryList>();
             ComplaintCategoryList = new List<SelectListItem>();
             IndustryList = new List<SelectListItem>();
+            OrganizationList = new List<SelectListItem>();
             Response = new ServiceResponse();
         }
         public ProjectTermCategory projecttermcategory { get; set; }
@@ -69,6 +70,7 @@ namespace Brilliance.Models.ViewModel
         public List<ProjectTermCategoryList> Projecttermcategorylist { get; set; }
         public List<SelectListItem> ComplaintCategoryList { get; set; }
         public List<SelectListItem> IndustryList { get; set; }
+        public List<SelectListItem> OrganizationList { get; set; }
         public ServiceResponse Response { get; set; }
     }
 }

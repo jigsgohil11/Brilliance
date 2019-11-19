@@ -32,7 +32,12 @@ namespace Brilliance.Controllers
             _iwebsubmissionDataProvider = new WebsubmissionDataProvider();
             var response = new ServiceResponse();
             response = _iwebsubmissionDataProvider.SaveComplaints(Complaintmodel);
-            return Json(response);
+            return RedirectToAction("SubmissionMessage","Complaint");
+            //return Json(response);
+        }
+        public ActionResult SubmissionMessage()
+        {
+            return View();
         }
     }
 }

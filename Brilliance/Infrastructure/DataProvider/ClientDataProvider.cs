@@ -9,7 +9,7 @@ using System.Web.Mvc;
 
 namespace Brilliance.Infrastructure.DataProvider
 {
-    public class ClientDataProvider : BaseDataProvider,IClientDataProvider
+    public class ClientDataProvider : BaseDataProvider, IClientDataProvider
     {
         public ServiceResponse GetClient(Guid ClientID)
         {
@@ -61,11 +61,11 @@ namespace Brilliance.Infrastructure.DataProvider
             var response = new ServiceResponse();
             try
             {
-               
+
 
                 if (Clients.client.IsEdit == false)
                 {
-                   
+
                     SqlCommand cmd = new SqlCommand();
                     cmd.Parameters.AddWithValue("@ClientID", Guid.NewGuid()).SqlDbType = SqlDbType.UniqueIdentifier;
                     cmd.Parameters.AddWithValue("@ClientCode", Clients.client.ClientCode).SqlDbType = SqlDbType.NVarChar;
@@ -134,11 +134,16 @@ namespace Brilliance.Infrastructure.DataProvider
             {
                 var searchValueData = new SearchValueData { Name = "ClientID", Value = Convert.ToString(ClientID) };
                 searchList.Add(searchValueData);
-                BaseDataProvider objnew = new BaseDataProvider();
-                objnew = new BaseDataProvider();
-                objnew.GetScalar("DeleteClient", searchList);
-                response.IsSuccess = true;
-                response.Message = "Record Deleted Successfully.";
+                if (Convert.ToBoolean(GetScalar("DeleteClient", searchList)))
+                {
+                    response.IsSuccess = true;
+                    response.Message = "Record Deleted Successfully.";
+                }
+                else
+                {
+                    response.IsSuccess = false;
+                    response.Message = "Organization is assigned to Company!!";
+                }
             }
             else
             {

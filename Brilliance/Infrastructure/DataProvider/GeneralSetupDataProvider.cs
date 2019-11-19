@@ -1,11 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
-using Brilliance.Infrastructure.DataProvider;
 using Brilliance.Models;
 using Brilliance.Models.Entity;
-using Brilliance.Infrastructure;
 using Brilliance.Models.ViewModel;
 using System.Data;
 using System.Data.SqlClient;
@@ -156,6 +153,7 @@ namespace Brilliance.Infrastructure.DataProvider
                     cmd.Parameters.AddWithValue("@IsEdit", ProjectCategoryModel.projecttermcategory.IsEdit).SqlDbType = SqlDbType.Bit;
                     cmd.Parameters.AddWithValue("@Category", ProjectCategoryModel.projecttermcategory.CategoryName).SqlDbType = SqlDbType.NVarChar;
                     cmd.Parameters.AddWithValue("@RefTermID", (ProjectCategoryModel.projecttermcategory.RefTermID)).SqlDbType = SqlDbType.UniqueIdentifier;
+                    cmd.Parameters.AddWithValue("@ClientID", ProjectCategoryModel.projecttermcategory.ClientID).SqlDbType = SqlDbType.UniqueIdentifier;
 
                     DataSet ds = null;
                     ds = BulkInsert("Crm_SaveGeneralSetup", cmd);
@@ -178,7 +176,7 @@ namespace Brilliance.Infrastructure.DataProvider
                     cmd.Parameters.AddWithValue("@IsEdit", ProjectCategoryModel.projecttermcategory.IsEdit).SqlDbType = SqlDbType.Bit;
                     cmd.Parameters.AddWithValue("@Category", ProjectCategoryModel.projecttermcategory.CategoryName).SqlDbType = SqlDbType.NVarChar;
                     cmd.Parameters.AddWithValue("@RefTermID", ProjectCategoryModel.projecttermcategory.RefTermID).SqlDbType = SqlDbType.UniqueIdentifier;
-
+                    cmd.Parameters.AddWithValue("@ClientID", ProjectCategoryModel.projecttermcategory.ClientID).SqlDbType = SqlDbType.UniqueIdentifier;
                     DataSet ds = null;
                     ds = BulkInsert("Crm_SaveGeneralSetup", cmd);
                     response.IsSuccess = true;
