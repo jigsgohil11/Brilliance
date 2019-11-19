@@ -1,0 +1,325 @@
+﻿@model Brilliance.Models.Entity.TemplateMaster
+
+@{
+    ViewBag.Title = "TemplateMaster";
+}
+
+<link href="~/Content/kendoStyles.css" rel="stylesheet" />
+<style>
+    #grid {
+        margin: 0;
+        padding: 0;
+        border-width: 0;
+        height: 100%;
+        /* DO NOT USE !important for setting the Grid height! */
+    }
+
+    .fieldlist {
+        margin: 0 0 -1em;
+        padding: 0;
+        padding-left: 3%;
+    }
+
+        .fieldlist li {
+            list-style: none;
+            padding-bottom: 1em;
+        }
+
+    .form-control-feedback glyphicon glyphicon-remove {
+        display: none;
+    }
+
+    .has-feedback label ~ .form-control-feedback {
+        display: none;
+    }
+</style>
+
+<form id="frmtemplate" method="post" data-ajax="true" data-ajax-method="Post" data-ajax-success="SaveResponse(data);">
+    <div class="page-content page-content-dashbrd-backgrnd">
+        <div class="page-bar margin-bottom-10">
+            <div class="row">
+                <div class="col-md-12 padding-out">
+                    <div class="portlet light padding-header margin-0 custom-padding-bar">
+                        <div class="portlet-title portlet-title-Project-custom">
+                            <div class="caption font-dark">
+                                <i class="icon-settings font-dark"></i>
+                                <span class="caption-subject bold uppercase"> Template Master</span>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br />
+        <button type="button" class="btn btn-brilliance btn-sm" data-toggle="modal" data-target="#exampleModalLong">
+            Add New
+        </button>
+
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLongTitle">Add Details...</h5>
+
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="form-group">
+                                <div class="col-md-12">
+                                    <label>Enter Template Name</label>
+
+
+                                    @Html.TextBoxFor(x => x.TemplateName, new { @class = "form-control", @style = "width:100%;" })
+                                    @Html.ValidationMessageFor(x => x.TemplateName)
+                                    @Html.HiddenFor(x=>x.IsEdit)
+                                    @Html.HiddenFor(x => x.TemplateId)
+                                </div>
+
+                            </div>
+                            
+                            
+                        </div>
+                        <br />
+                        
+                        
+
+                    </div>
+                    <div class="modal-footer">
+
+                        <button type="button" class="btn btn-brilliance btnsave">Save and Close</button>
+
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div id="grid"></div>
+        </div>
+
+    </div>
+
+</form>
+
+@section scripts{
+    <script src="~/Scripts/jszip.min.js"></script>
+    <script src="~/Scripts/kendo.all.min.js"></script>
+    <script src="~/Scripts/bootstrapvalidator.min.js"></script>
+
+<script>
+    $(document).ready(function () {
+        BindGrid();
+
+
+        //$("tblimage").on("click", ".selFile", removeFile);
+    });
+        function SaveResponse(response) {
+            alert(response)
+            if (response.IsSuccess) {
+                SetMessageForPageLoad(response.Message, "OutcomeSaved");
+                location.reload();
+
+            } else {
+                ShowMessage(response.Message, "error");
+                location.reload();
+            }
+        }
+
+
+
+</script>
+<script>
+        function BindGrid() {
+
+            var url = '@Url.Action("TemplateList", "CIS")';
+
+            var element = $("#grid").kendoGrid({
+                dataSource: {
+
+                    transport: {
+                        read: {
+                            url: url,
+                            type: "get",
+                            dataType: "json"
+                        }
+                    },
+
+                    groupable: false,
+                    sortable: false,
+                    pageSize: 10,
+                    serverPaging: false,
+                    serverSorting: false
+                },
+
+                sortable: false,
+                pageable: true,
+                scrollable: true,
+                /// detailInit: detailInit,
+                dataBound: function () {
+                    var grid = this;
+                    $(".k-grouping-row").each(function (e) {
+                        grid.collapseGroup(this);
+                    });
+                    ////this.expandRow(this.tbody.find("tr.k-master-row").last());
+                },
+
+
+                columns: [
+                    {
+                        title: "Id",
+                        field: "TemplateId",
+                        hidden:true,
+                        width: "10%"
+                    },
+                    {
+                        field: "TemplateName",
+                        title: "Template Name",
+                        width: "50%"
+                    },
+                   
+
+                    {
+
+
+                        'title': 'Action',
+                        template: "<a href='\\\#' class='name-link btn btn-default' value='#= TemplateId #'>#= 'Edit' #</a>",
+
+                    }
+                ]
+
+            }).on("click", "a.name-link", function () {
+                var tr = $(this).closest("tr");
+
+                var dataItem = $("#grid").data("kendoGrid").dataItem(tr);
+                var id = dataItem.TemplateId;
+                var url = '@Url.Action("GetTemplateById", "CIS")';
+                ShowLoader();
+                $.ajax({
+                    url: url,
+                    method: 'post',
+                    data: { Id: id },
+                    success:function(data)
+                    {
+                        HideLoader();
+                        $("#frmoutcome").trigger("reset");
+                        $('#exampleModalLong').modal('show');
+                        $("#TemplateId").val(data.TemplateId);
+                        $("#IsEdit").val(true);
+                        $("#TemplateName").val(data.TemplateName);
+                      
+                    }
+                });
+
+            }).on("click", "a.Id-link", function () {
+                var tr = $(this).closest("tr");
+                var dataItem = $("#grid").data("kendoGrid").dataItem(tr);
+                var id = dataItem.GroupId;
+                var url = '@Url.Action("DeleteoutcomeMaster", "CIS")';
+                ShowLoader();
+                $.ajax({
+                    url: url,
+                    method: 'post',
+                    data: { Id: id },
+                    success: function (data) {
+                        debugger;
+                        HideLoader();
+
+                        if (data.IsSuccess == true)
+                        {
+                            ShowMessage(data.Message);
+                            BindGrid();
+                            location.reload();
+                        }
+                        else if (data.IsSuccess == false)
+                        {
+                            BindGrid();
+                            ShowMessage(data.Message, "error");
+                            location.reload();
+                        }
+
+
+
+                    }
+                });
+            });
+
+        }
+
+</script>
+<script>
+       
+        $(".btnsave").click(function () {
+            debugger;
+            Validate();
+            var validator = $('#frmtemplate').data('bootstrapValidator');
+           
+            validator.validate();
+            if (validator.isValid()) {
+                var TemplateMaster = {
+                    TemplateId: $("#TemplateId").val(),
+                    TemplateName: $("#TemplateName").val(),
+                    IsEdit: $("#IsEdit").val(),
+                }
+                var formdata = new FormData($('#frmtemplate').get(0));
+
+
+                var url = '@Url.Action("SaveTemplateMaster", "CIS")';
+                ShowLoader();
+                $.ajax({
+                    url: url,
+                    method: 'post',
+                    data: formdata,
+                    contentType: false,
+                    cache: false,
+                    processData: false,
+                    success: function (data) {
+                        BindGrid();
+                        HideLoader();
+                        debugger;
+                        $("#frmtemplate").trigger("reset");
+                        $('#exampleModalLong').modal('hide');
+                        ///BindCode();
+                        ShowMessage(data.Message);
+                        location.reload();
+                    },
+                    failure: function (ex) {
+                        BindGrid();
+                        ShowMessage(data.Message, "error");
+                        location.reload();
+                    }
+                });
+            }
+            else
+            {
+                return false;
+            }
+        });
+
+        function Validate()
+        {
+            var validator = $("#frmtemplate").bootstrapValidator({
+                feedbackIcons: {
+                    valid: "glyphicon glyphicon-ok",
+                    validating: "glyphicon glyphicon-refresh"
+                },
+                fields: {
+                    TemplateName: {
+                        message: "Please Enter Template Name...",
+                        validators: {
+                            notEmpty: {
+                                message: "Please Enter Template Name..."
+                            }
+                        }
+                    }
+                }
+            });
+        }
+</script>
+}

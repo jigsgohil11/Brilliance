@@ -1,0 +1,415 @@
+﻿@model Brilliance.Models.Entity.TemplateOutcomemaster
+@using Brilliance.Infrastructure.DataProvider;
+
+
+@{
+    ViewBag.Title = "TemplateOutcomemaster";
+    TemplatemasterDataProvider _provider = new TemplatemasterDataProvider();
+}
+<link href="~/Content/kendoStyles.css" rel="stylesheet" />
+
+<style>
+    #grid {
+        margin: 0;
+        padding: 0;
+        border-width: 0;
+        height: 100%;
+        /* DO NOT USE !important for setting the Grid height! */
+    }
+
+    .fieldlist {
+        margin: 0 0 -1em;
+        padding: 0;
+        padding-left: 3%;
+    }
+
+        .fieldlist li {
+            list-style: none;
+            padding-bottom: 1em;
+        }
+
+    .form-control-feedback glyphicon glyphicon-remove {
+        display: none;
+    }
+
+    .has-feedback label ~ .form-control-feedback {
+        display: none;
+    }
+</style>
+
+<form id="frmouttemplatemaster" method="post" data-ajax="true" data-ajax-method="Post" data-ajax-success="SaveResponse(data);">
+    <div class="page-content page-content-dashbrd-backgrnd">
+        <div class="page-bar margin-bottom-10">
+            <div class="row">
+                <div class="col-md-12 padding-out">
+                    <div class="portlet light padding-header margin-0 custom-padding-bar">
+                        <div class="portlet-title portlet-title-Project-custom">
+                            <div class="caption font-dark">
+                                <i class="icon-settings font-dark"></i>
+                                <span class="caption-subject bold uppercase"> Template OutcomeMaster</span>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br />
+        <button type="button" class="btn btn-brilliance btn-sm" data-toggle="modal" data-target="#templateoutcomemaster">
+            Add New
+        </button>
+
+        <div class="modal fade" id="templateoutcomemaster" tabindex="-1" role="dialog" aria-labelledby="templateoutcomemaster" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLongTitle">Add Details...</h5>
+
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="form-group">
+                                <div class="col-md-12">
+                                    <label>Select Template</label>
+
+                                    @Html.DropDownListFor(x=> x.TemplateId,_provider.GetTemplatemaster(),"Select", new { @class = "form-control", @style = "width:100%;" })
+                                    @Html.ValidationMessageFor(x => x.TemplateId)
+                                    @Html.HiddenFor(x => x.IsEdit)
+                                    @Html.HiddenFor(x => x.TemplateOutcomemasterId)
+                                </div>
+
+                            </div>
+
+
+                        </div>
+                        <br />
+                        <div class="row">
+                            <div class="form-group">
+                                <div class="col-md-12">
+                                    <label>Code</label>
+
+
+                                    @Html.TextBoxFor(x => x.Code, new { @class = "form-control", @style = "width:100%;" })
+                                    @Html.ValidationMessageFor(x => x.Code)
+                                    <br/>
+                                </div>
+
+                            </div>
+
+                        </div>
+                        <br />
+                        <div class="row">
+                            <div class="form-group">
+                                <div class="col-md-12">
+                                    <label>Title</label>
+
+
+                                    @Html.TextBoxFor(x => x.Title, new { @class = "form-control", @style = "width:100%;" })
+                                    @Html.ValidationMessageFor(x => x.Title)
+                                    <br />
+                                </div>
+
+                            </div>
+
+                        </div>
+                        <br/>
+                        
+                        <div class="row">
+                            <div class="form-group">
+                                <ul class="fieldlist">
+                                    <li>
+                                        <input type="checkbox" id="IsVisible" class="k-checkbox" name="IsVisible">
+                                        <label class="k-checkbox-label" for="IsVisible">Sub Outcome group</label>
+                                    </li>
+                                </ul>
+                            </div>
+
+                        </div>
+                        <br />
+                        <div class="form-group drpmaster">
+                            <div class="col-md-12">
+                                <label>Group Name</label>
+                                @Html.DropDownListFor(x => x.coderef, _provider.GetTemplateGroupcode(), "...", new { @class = "form-control", @style = "width:47%;" })
+                            </div>
+
+                        </div>
+                        <br />
+                        <div class="row">
+                            <div class="form-group">
+                                <div class="col-md-12">
+                                    <label>Description</label>
+
+
+                                    @Html.TextAreaFor(x => x.Description, new { @class = "form-control", @style = "width:100%;" })
+                                    @Html.ValidationMessageFor(x => x.Description)
+                                    <br />
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+                    <div class="modal-footer">
+
+                        <button type="submit" class="btn btn-brilliance btnsave">Save and Close</button>
+
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div id="grid"></div>
+        </div>
+    </div>
+</form>
+
+@section scripts{
+    <script src="~/Scripts/jszip.min.js"></script>
+    <script src="~/Scripts/kendo.all.min.js"></script>
+    <script src="~/Scripts/bootstrapvalidator.min.js"></script>
+<script>
+        $(document).ready(function () {
+
+            BindGrid();
+            $(".drpmaster").hide();
+        });
+</script>
+<script>
+
+        function SaveResponse(response) {
+            
+            if (response.IsSuccess) {
+                debugger;
+                ShowMessage(response.Message, "OutcomeSaved");
+                BindGrid();
+                location.reload();
+           
+            } else {
+                ShowMessage(response.Message, "error");
+                location.reload();
+            }
+        }
+</script>
+<script>
+    $("#TemplateId").on('change', function () {
+             var url = '@Url.Action("MasterTemplate", "CIS")';
+             $.ajax({
+                 url: url,
+                 method: 'get',
+                 data: { TemplateId: $("#TemplateId").val() },
+                 success: function (data) {
+                     debugger;
+                     $("#Code").val(data.response);
+                     $("#Title").val(data._response);
+                     if (data.lst.length > 0)
+                     {
+                         $("#DivisionId").empty();
+                         $("#DivisionId").append($("<option></option>").val(null).html('Select Division'));
+
+                         $.each(data.lst, function (data, value) {
+
+                             $("#DivisionId").append($("<option></option>").val(value.Value).html(value.Text));
+                         })
+                     }
+
+                 }
+             })
+         })
+
+        
+</script>
+
+<script>
+        function BindGrid() {
+
+            var url = '@Url.Action("TemplatedOutcomeList", "CIS")';
+
+            var element = $("#grid").kendoGrid({
+                dataSource: {
+
+                    transport: {
+                        read: {
+                            url: url,
+                            type: "get",
+                            dataType: "json"
+                        }
+                    },
+
+                    groupable: false,
+                    sortable: false,
+                    pageSize: 10,
+                    serverPaging: false,
+                    serverSorting: false
+                },
+
+                sortable: false,
+                pageable: true,
+                scrollable: true,
+                /// detailInit: detailInit,
+                dataBound: function () {
+                    var grid = this;
+                    $(".k-grouping-row").each(function (e) {
+                        grid.collapseGroup(this);
+                    });
+                    ////this.expandRow(this.tbody.find("tr.k-master-row").last());
+                },
+
+
+                columns: [
+                    {
+                        title: "Id",
+                        field: "TemplateId",
+                        hidden:true,
+                        width: "4%"
+                    },
+                    {
+                        field: "Title",
+                        title: "Title",
+                        width: "10%"
+                    },
+                    {
+                        title: "Description",
+                        field: "Description",
+                        width: "70%"
+                    },
+
+
+                    {
+
+
+                        'title': 'Action',
+                        template: "<a href='\\\#' class='name-link btn btn-default' value='#= TemplateId #'>#= 'Edit' #</a>",
+
+                    }
+                    
+                ]
+
+            }).on("click", "a.name-link", function () {
+                var tr = $(this).closest("tr");
+
+                var dataItem = $("#grid").data("kendoGrid").dataItem(tr);
+                var id = dataItem.TemplateId;
+                var url = '@Url.Action("GetTemplateOutcomeById", "CIS")';
+                ShowLoader();
+                $.ajax({
+                    url: url,
+                    method: 'post',
+                    data: { Id: id },
+                    success:function(data)
+                    {
+                        HideLoader();
+                        $('#templateoutcomemaster').modal('show');
+                        $("#Code").val(data.Code);
+                        $("#IsEdit").val(true);
+                        $("#TemplateOutcomemasterId").val(data.TemplateOutcomemasterId);
+                        $("#TemplateId").val(data.TemplateId.toUpperCase());
+                        $("#Title").val(data.Title)
+                        $("#Description").val(data.Description)
+                        if(data.IsVisible==false)
+                        {
+                            $('input[name=IsVisible]').attr('checked', true);
+
+
+                            $(".drpmaster").show();
+                            $("#coderef").val(data.Code.toUpperCase());
+                        }
+                        else if(data.IsVisible==true)
+                        {
+                            $('input[name=IsVisible]').attr('checked', false);
+                            $(".titleqgroup").show();
+
+                            $(".drpmaster").hide();
+
+                        }
+                        $("#AdditionalDescription").val(data.AdditionalDescription)
+                        $("#Filename").val(data.Filename)
+                        
+                    }
+                });
+
+            }).on("click", "a.Id-link", function () {
+                var tr = $(this).closest("tr");
+                var dataItem = $("#grid").data("kendoGrid").dataItem(tr);
+                var id = dataItem.GroupId;
+                var url = '@Url.Action("DeleteoutcomeMaster", "CIS")';
+                ShowLoader();
+                $.ajax({
+                    url: url,
+                    method: 'post',
+                    data: { Id: id },
+                    success: function (data) {
+                        debugger;
+                        HideLoader();
+
+                        if (data.IsSuccess == true)
+                        {
+                            ShowMessage(data.Message);
+                            BindGrid();
+                            location.reload();
+                        }
+                        else if (data.IsSuccess == false)
+                        {
+                            BindGrid();
+                            ShowMessage(data.Message, "error");
+                            location.reload();
+                        }
+
+
+
+                    }
+                });
+            });
+
+        }
+
+</script>
+<script>
+        $('input[type="checkbox"]').click(function () {
+            if ($(this).prop("checked") == true) {
+
+                            $(".drpmaster").show();
+                            $('input[name=IsVisible]').attr('checked', true);
+                            $('input[name=IsVisible]').attr('value', 1);
+            }
+            else if ($(this).prop("checked") == false) {
+                $(".titleqgroup").show();
+                $(".drpmaster").hide();
+            }
+        })
+
+</script>
+<script>
+    $("#coderef").on('change', function () {
+        var currentval = $("#coderef").val();
+        var EntityId = $("#TemplateId").val();
+        if(currentval>0)
+        {
+            $("#Code").val(currentval)
+            var url = '@Url.Action("Grouptemplatecount", "CIS")';
+            $.ajax({
+                url: url,
+                method: 'post',
+                data: { Id: currentval, EntityId: EntityId },
+                success: function (data) {
+                    $("#Code").val(currentval);
+
+                    var cde ='Outcome '+currentval + data +':';
+                    $("#Title").val(cde);
+                }
+            })
+        }
+        else if(currentval==0)
+        {
+            $("#Code").val(@Html.Raw(Json.Encode(ViewBag.cd)))
+        }
+
+
+    })
+</script>
+    }
