@@ -18,17 +18,10 @@ namespace Brilliance.Models.ViewModel
         public List<TCFQuestion> TCFQuestion { get; set; }
         public ServiceResponse Response { get; set; }
     }
-    public class Groupcode
+    public class  Groupcode
     {
         public int index { get; set; }
         public string gpno { get; set; }
     }
-    public class TemplateViewModel: TemplateSuboutcomeMaster
-    {
-        public List<TemplateOutcomemaster> _TemplateOutcomemaster { get; set; }
-        public List<TemplateMaster> TemplateMaster { get; set; }
-        public List<TemplateSuboutcomeMaster> _TemplateSuboutcomeMaster { get; set; }
-
-        public ServiceResponse Response { get; set; }
-    }
+   
 }

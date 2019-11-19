@@ -15,7 +15,6 @@ namespace Brilliance.Controllers
     public class CISController : Controller
     {
         private IConductIS _icisDataProvider;
-        private ITemplateMaster _itemplateDataProvider;
         // GET: CIS
         [HttpGet]
         public ActionResult Index()
@@ -124,8 +123,8 @@ namespace Brilliance.Controllers
         {
             _icisDataProvider = new ConductDataprovider();
             var response = new ServiceResponse();
-            string _FileName = string.Empty;
-            if (_TCFQuestionGroup.coderef != null)
+             string _FileName = string.Empty;
+            if(_TCFQuestionGroup.coderef!=null)
             {
                 _TCFQuestionGroup.IsVisible = true;
             }
@@ -138,9 +137,9 @@ namespace Brilliance.Controllers
             {
                 try
                 {
-                    if (file != null && file.ContentLength > 0)
+                    if(file!=null && file.ContentLength>0)
                     {
-                        _FileName = Path.GetFileName(file.FileName);
+                         _FileName = Path.GetFileName(file.FileName);
                         string _path = Path.Combine(Server.MapPath("~/Images"), _FileName);
                         file.SaveAs(_path);
                     }
@@ -162,7 +161,7 @@ namespace Brilliance.Controllers
                     }
                     if (_TCFQuestionGroup.IsEdit == false)
                     {
-
+                      
                         _TCFQuestionGroup.Createddate = DateTime.Now;
                         _TCFQuestionGroup.CreatedBy = SessionHelper.UserId;
                         _TCFQuestionGroup.Filename = _FileName;
@@ -171,7 +170,7 @@ namespace Brilliance.Controllers
                     {
                         _TCFQuestionGroup.Modifieddate = DateTime.Now;
                         _TCFQuestionGroup.ModifiedBy = SessionHelper.UserId;
-                        if (file != null && file.ContentLength > 0)
+                        if(file!=null && file.ContentLength>0)
                         {
                             _TCFQuestionGroup.Filename = _FileName;
 
@@ -303,7 +302,7 @@ namespace Brilliance.Controllers
         }
         #endregion SuboutCome
 
-
+       
         public JsonResult CisQuestion()
         {
             _icisDataProvider = new ConductDataprovider();
@@ -314,7 +313,7 @@ namespace Brilliance.Controllers
         }
 
 
-
+       
         public JsonResult TCFQuestionEntityUserWise()
         {
             _icisDataProvider = new ConductDataprovider();
@@ -324,18 +323,18 @@ namespace Brilliance.Controllers
             Guid entity = new Guid();
             entity = SessionHelper.ClientID;
             string Position = _icisDataProvider._GetUserDivision(userid);
-            if (Position != "")
+            if(Position!="")
             {
-                Guid _Position = new Guid(Position);
+               Guid _Position = new Guid(Position);
 
-                _ConductDataViewModel = _icisDataProvider.TCFQuestionEntityUserWise(entity, userid, 0, _Position);
+                _ConductDataViewModel = _icisDataProvider.TCFQuestionEntityUserWise(entity, userid,0, _Position);
             }
             else
             {
                 Guid _Position = Guid.NewGuid();
-                _ConductDataViewModel = _icisDataProvider.TCFQuestionEntityUserWise(entity, userid, 1, _Position);
+                _ConductDataViewModel = _icisDataProvider.TCFQuestionEntityUserWise(entity, userid,1, _Position);
             }
-
+            
             return Json(_ConductDataViewModel.TCFQuestionGrouplist, JsonRequestBehavior.AllowGet);
         }
         public JsonResult _GetSuboutcomeById(string Id)
@@ -347,28 +346,28 @@ namespace Brilliance.Controllers
             _icisDataProvider = new ConductDataprovider();
             Guid outcomId = new Guid(Id);
             vm = _icisDataProvider._GetSuboutcomeById(outcomId);
-            if (vm != null)
+            if(vm!=null)
             {
                 _Ev = _icisDataProvider._TCFFormEvidence(vm.Id);
                 _Notes = _icisDataProvider._GetNotes(vm.Id);
                 _task = _icisDataProvider._GetTask(vm.Id);
                 vm.TCFTask = _task;
             }
-
+          
             return Json(new { vm, _Ev, _Notes }, JsonRequestBehavior.AllowGet);
 
         }
-        public ActionResult GetView(string Id, string viewName)
+        public ActionResult GetView(string Id,string viewName)
         {
             _icisDataProvider = new ConductDataprovider();
             TCFQuestion vm = new TCFQuestion();
             List<TCFTask> _task = new List<TCFTask>();
             Guid TaskId = new Guid(Id);
-            ///// vm.Id = TaskId;
+           ///// vm.Id = TaskId;
             _task = _icisDataProvider._GetTask(TaskId);
-            if (_task != null)
+            if(_task!=null)
             {
-                foreach (var item in _task.ToList())
+                foreach(var item in _task.ToList())
                 {
                     TCFTask _t = new TCFTask();
                     _t._TaskStatus = _Status();
@@ -382,8 +381,8 @@ namespace Brilliance.Controllers
                     vm.TCFTask.Add(_t);
                 }
             }
-            /// vm.TCFTask = _task;
-
+           /// vm.TCFTask = _task;
+            
             return PartialView(viewName, vm);
         }
         public ActionResult GetNoteView(string Id, string viewName)
@@ -439,7 +438,7 @@ namespace Brilliance.Controllers
                     TCFNotes _tcf = new TCFNotes();
                     _tcf.AddedById = SessionHelper.UserId;
                     _tcf.TCFQuestionId = _question.Id;
-                    string note = _question.TCFNotes.Where(x => x.Note != null).Select(x => x.NoteId).FirstOrDefault();
+                    string note = _question.TCFNotes.Where(x=>x.Note!=null).Select(x=>x.NoteId).FirstOrDefault();
                     if (note != null)
                     {
                         var res = _icisDataProvider.RemoveTcfNotes(_tcf);
@@ -447,7 +446,7 @@ namespace Brilliance.Controllers
                     }
 
                     string username = _icisDataProvider._GetUserName(SessionHelper.UserId);
-                    foreach (var item in _question.TCFNotes.Where(x => x.Note != null).ToList())
+                    foreach (var item in _question.TCFNotes.Where(x=>x.Note!=null).ToList())
                     {
                         TCFNotes _notes = new TCFNotes();
                         _notes.AddedById = SessionHelper.UserId;
@@ -480,7 +479,7 @@ namespace Brilliance.Controllers
                     }
                 }
             }
-            else if (_question.IsEdit == false)
+            else if(_question.IsEdit==false)
             {
                 _question.Id = Guid.NewGuid();
                 _question.RateId = _question.RateId;
@@ -493,17 +492,17 @@ namespace Brilliance.Controllers
                 _question.CreatedAt = DateTime.Now;
                 _question.CreatedBy = SessionHelper.UserId;
                 _question.IsDeleted = false;
-                _question.ReasonNotYet = _question.ReasonNotYet;
-                _question.Reasonmostly = _question.Reasonmostly;
-                _question.ReasonNotApplicable = _question.ReasonNotApplicable;
-                _question.ReasonPartially = _question.ReasonPartially;
+                _question.ReasonNotYet = _question.ReasonNotYet; 
+                _question.Reasonmostly = _question.Reasonmostly; 
+                _question.ReasonNotApplicable = _question.ReasonNotApplicable; 
+                _question.ReasonPartially = _question.ReasonPartially; 
                 _question.ReasonFully = _question.ReasonFully;
                 _question.TCFSubOutComeUserId = _question.TCFSubOutComeUserId;
                 _question.DueDate = _question.DueDate;
                 response = _icisDataProvider._NewTcfEntry(_question);
                 if (file != null)
                 {
-
+                    
                     foreach (var _file in file)
                     {
                         TCFFormEvidence _TCFFormEvidence = new TCFFormEvidence();
@@ -519,7 +518,7 @@ namespace Brilliance.Controllers
                     }
                 }
                 if (_question.TCFNotes.Count > 0)
-                {
+                { 
                     string username = _icisDataProvider._GetUserName(SessionHelper.UserId);
                     foreach (var item in _question.TCFNotes.ToList())
                     {
@@ -643,250 +642,14 @@ namespace Brilliance.Controllers
         public List<TaskStatus> _Status()
         {
             List<TaskStatus> lst = new List<TaskStatus>();
-            lst.Add(new TaskStatus { Id = "Assigned", Value = "Assigned" });
+            lst.Add(new TaskStatus {Id= "Assigned", Value= "Assigned"});
             lst.Add(new TaskStatus { Id = "In progress", Value = "In progress" });
             lst.Add(new TaskStatus { Id = "Completed", Value = "Completed" });
             return lst;
         }
 
-        public ActionResult TemplateMaster()
-        {
-
-
-            return View();
-        }
-        public JsonResult SaveTemplateMaster(TemplateMaster template)
-        {
-            _itemplateDataProvider = new TemplatemasterDataProvider();
-            var response = new ServiceResponse();
-            string _FileName = string.Empty;
-            try
-            {
-                if (template.IsEdit == false)
-                {
-
-                    template.CreatedByID = SessionHelper.UserId;
-                    template.Datecreated = DateTime.Now;
-                    response = _itemplateDataProvider.SaveTemplateMaster(template);
-
-                }
-                else if (template.IsEdit == true)
-                {
-                    template.ModifybyId = SessionHelper.UserId;
-                    template.DateModfied = DateTime.Now;
-                    response = _itemplateDataProvider.SaveTemplateMaster(template);
-
-                }
-            }
-            catch (Exception ex)
-            {
-                return Json(ex.ToString(), JsonRequestBehavior.AllowGet);
-            }
-
-
-
-            return Json(response, JsonRequestBehavior.AllowGet);
-
-        }
-
-        public JsonResult TemplateList()
-        {
-            _itemplateDataProvider = new TemplatemasterDataProvider();
-
-            Guid userid = new Guid();
-            userid = SessionHelper.UserId;
-            TemplateViewModel Viewmodel = _itemplateDataProvider.TemplateMasterList();
-            return Json(Viewmodel.TemplateMaster, JsonRequestBehavior.AllowGet);
-        }
-        public JsonResult GetTemplateById(string Id)
-        {
-            _itemplateDataProvider = new TemplatemasterDataProvider();
-
-            Guid tid = new Guid(Id);
-            TemplateMaster Viewmodel = _itemplateDataProvider.GetTemplateById(tid);
-            return Json(Viewmodel, JsonRequestBehavior.AllowGet);
-        }
-        [HttpGet]
-        public ActionResult TemplateOutcomemaster()
-        {
-
-
-            return View();
-        }
-
-        public JsonResult MasterTemplate(string TemplateId)
-        {
-            _itemplateDataProvider = new TemplatemasterDataProvider();
-            Guid entityId = new Guid(TemplateId);
-            if (TemplateId != null)
-            {
-                int response = _itemplateDataProvider.MasterCont(entityId);
-                string _response = _itemplateDataProvider.Prcoutcometitle(entityId);
-              
-                return Json(new { response, _response }, JsonRequestBehavior.AllowGet);
-            }
-            else
-            {
-                return Json("", JsonRequestBehavior.AllowGet);
-
-            }
-
-        }
-
-        [HttpPost]
-        public ActionResult TemplateOutcomemaster(TemplateOutcomemaster model)
-        {
-            var response = new ServiceResponse();
-            _itemplateDataProvider = new TemplatemasterDataProvider();
-            if(model.IsEdit==false)
-            {
-                model.Createddate = DateTime.Now;
-                model.Createdby = SessionHelper.UserId;
-                model.IsDeleted = false;
-                if (model.coderef != null)
-                {
-                   
-                    model.IsVisible = false;
-                }
-                else
-                {
-                    model.IsVisible = true;
-
-                }
-                response = _itemplateDataProvider.Addoutcomemastertemplate(model);
-            }
-            else
-            {
-                if (model.coderef != null)
-                {
-                    model.IsVisible = true;
-                }
-                else
-                {
-                    model.IsVisible = false;
-
-                }
-                model.Modifieddate = DateTime.Now;
-                model.ModifiedBy = SessionHelper.UserId;
-                model.Createddate = null;
-                model.Createdby = null;
-                model.IsDeleted = false;
-                response = _itemplateDataProvider.Addoutcomemastertemplate(model);
-            }
-
-            return Json(response);
-        }
-
-        public JsonResult TemplatedOutcomeList()
-        {
-            _itemplateDataProvider = new TemplatemasterDataProvider();
-            TemplateViewModel _vm= _itemplateDataProvider.TemplateOutcomeList();
-            return Json(_vm._TemplateOutcomemaster, JsonRequestBehavior.AllowGet);
-        }
-        public JsonResult GetTemplateOutcomeById(string Id)
-        {
-            _itemplateDataProvider = new TemplatemasterDataProvider();
-
-            Guid tid = new Guid(Id);
-            TemplateOutcomemaster vm = _itemplateDataProvider.GetTemplateOutcomeById(tid);
-            return Json(vm, JsonRequestBehavior.AllowGet);
-        }
-        public JsonResult Grouptemplatecount(int Id, string EntityId)
-        {
-            _itemplateDataProvider = new TemplatemasterDataProvider();
-
-            Guid entityId = new Guid(EntityId);
-
-            int response = _itemplateDataProvider.GrupcntByEntity(Id, entityId);
-            string cde = _itemplateDataProvider.GetGroupSubCode(response);
-            return Json(cde, JsonRequestBehavior.AllowGet);
-        }
-
-        [HttpGet]
-        public ActionResult TemplateSubOutcomemaster()
-        {
-
-
-            return View();
-        }
-        [HttpPost]
-        public ActionResult TemplateSubOutcomemaster(TemplateSuboutcomeMaster _TemplateSuboutcomeMaster)
-        {
-            _itemplateDataProvider = new TemplatemasterDataProvider();
-            var response = new ServiceResponse();
-            if (_TemplateSuboutcomeMaster.IsEdit==false)
-            {
-                _TemplateSuboutcomeMaster.CreatedAt = DateTime.Now;
-                _TemplateSuboutcomeMaster.CreatedBy = SessionHelper.UserId;
-                response = _itemplateDataProvider.SavetemplateSuboutcomemaster(_TemplateSuboutcomeMaster);
-            }
-            else
-            {
-                _TemplateSuboutcomeMaster.Modifieddate = DateTime.Now;
-                _TemplateSuboutcomeMaster.ModifiedBy = SessionHelper.UserId;
-                response = _itemplateDataProvider.SavetemplateSuboutcomemaster(_TemplateSuboutcomeMaster);
-
-            }
-
-            return Json(response);
-        }
-        public JsonResult BindOutcomemastergroup(string Id)
-        {
-            _itemplateDataProvider = new TemplatemasterDataProvider();
-
-            Guid outcomId = new Guid(Id);
-            var response = new List<SelectListItem>();
-            response = _itemplateDataProvider.Bindgroup(outcomId);
-            return Json(response, JsonRequestBehavior.AllowGet);
-        }
-        public JsonResult GetTemplateSuboutcomeCode(string Id)
-        {
-            _itemplateDataProvider = new TemplatemasterDataProvider();
-            string res = string.Empty;
-            Guid outcomId = new Guid(Id);
-            res = _itemplateDataProvider.GetSuboutcomeCode(outcomId);
-            return Json(res, JsonRequestBehavior.AllowGet);
-
-        }
-        public JsonResult GetTemplatesuboutcomelist()
-        {
-            _itemplateDataProvider = new TemplatemasterDataProvider();
-            TemplateViewModel _vm = _itemplateDataProvider.GetTemplatesuboutcomelist();
-            return Json(_vm._TemplateSuboutcomeMaster, JsonRequestBehavior.AllowGet);
-        }
-        public JsonResult GetTemplateSuboutcomeMasterById(string Id)
-        {
-            _itemplateDataProvider = new TemplatemasterDataProvider();
-
-            Guid tid = new Guid(Id);
-            TemplateSuboutcomeMaster vm = _itemplateDataProvider.GetTemplateSuboutcomeMasterById(tid);
-            return Json(vm, JsonRequestBehavior.AllowGet);
-        }
-
-        public ActionResult AttachStandardTocompany()
-        {
-
-
-            return View();
-        }
-
-        [HttpPost]
-        public ActionResult AttachStandardTocompany(StandardConduct _StandardConduct)
-        {
-
-            _itemplateDataProvider = new TemplatemasterDataProvider();
-            var response = new ServiceResponse();
-            _StandardConduct.CreatedBy = SessionHelper.UserId;
-            _StandardConduct.CreatedDate = DateTime.Now;
-            response = _itemplateDataProvider.AttachStandard(_StandardConduct);
-
-
-            return View(response);
-        }
     }
-
+  
 }
-
-
 
 

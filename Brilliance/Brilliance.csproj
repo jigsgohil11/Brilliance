@@ -196,12 +196,10 @@
     <Compile Include="Infrastructure\DataProvider\IGeneralSetupDataProvider.cs" />
     <Compile Include="Infrastructure\DataProvider\ILoginDataProvider.cs" />
     <Compile Include="Infrastructure\DataProvider\IProductDataProvider.cs" />
-    <Compile Include="Infrastructure\DataProvider\ITemplateMaster.cs" />
     <Compile Include="Infrastructure\DataProvider\IUserDataProvider.cs" />
     <Compile Include="Infrastructure\DataProvider\IWebsubmissionDataProvider.cs" />
     <Compile Include="Infrastructure\DataProvider\LoginDataProvider.cs" />
     <Compile Include="Infrastructure\DataProvider\ProductDataProvider.cs" />
-    <Compile Include="Infrastructure\DataProvider\TemplatemasterDataProvider.cs" />
     <Compile Include="Infrastructure\DataProvider\UserDataProvider.cs" />
     <Compile Include="Infrastructure\DataProvider\WebsubmissionDataProvider.cs" />
     <Compile Include="Infrastructure\GridReader.cs" />
@@ -6857,10 +6855,6 @@
     <Content Include="Views\GeneralSetup\_GeneralSetup.cshtml" />
     <Content Include="Views\Complaint\Websubmission.cshtml" />
     <Content Include="Views\Shared\_LayoutWebSubmission.cshtml" />
-    <Content Include="Views\CIS\TemplateMaster.cshtml" />
-    <Content Include="Views\CIS\TemplateOutcomemaster.cshtml" />
-    <Content Include="Views\CIS\TemplateSubOutcomemaster.cshtml" />
-    <Content Include="Views\CIS\AttachStandardTocompany.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

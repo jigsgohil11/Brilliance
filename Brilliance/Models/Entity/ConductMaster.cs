@@ -12,12 +12,12 @@ namespace Brilliance.Models.Entity
     {
         public TCFQuestionGroup()
         {
-
+           
             TCFQuestion = new List<TCFQuestion>();
         }
         [Key]
         public Guid GroupId { get; set; }
-        [Required(ErrorMessage = "Please select Entity")]
+        [Required(ErrorMessage ="Please select Entity")]
         public Guid HoldingEntityId { get; set; }
         [ForeignKey("HoldingEntityId")]
         public Company _Company { get; set; }
@@ -40,8 +40,8 @@ namespace Brilliance.Models.Entity
         public Users _FKUsercreate { get; set; }
         public DateTime Createddate { get; set; }
 
-        public DateTime? Modifieddate { get; set; }
-        public Guid? ModifiedBy { get; set; }
+        public DateTime ? Modifieddate { get; set; }
+        public Guid ? ModifiedBy { get; set; }
         [ForeignKey("ModifiedBy")]
         public Users _fkUsersmodify { get; set; }
         public DateTime? CurrentDueDate { get; set; }
@@ -55,12 +55,10 @@ namespace Brilliance.Models.Entity
         [Ignore]
         public string coderef { get; set; }
         public virtual ICollection<TCFQuestion> TCFQuestion { get; set; }
-        public Guid ? MasterReference { get; set; }
-
     }
     public class TCFQuestionType
     {
-
+      
         public Guid Id { get; set; }
         public string Description { get; set; }
         public bool IsDeleted { get; set; }
@@ -69,7 +67,7 @@ namespace Brilliance.Models.Entity
     {
         [Key]
         public Guid Id { get; set; }
-
+     
         public Guid ClusterId { get; set; }
         public Guid TCFPeriodId { get; set; }
         public Guid TCFQuestionId { get; set; }
@@ -96,7 +94,7 @@ namespace Brilliance.Models.Entity
             TCFTask = new List<TCFTask>();
             TCFFormEvidence = new List<TCFFormEvidence>();
         }
-
+        
         public Guid Id { get; set; }
         [Required(ErrorMessage = "Please select Group")]
         public Guid TCFQuestionGroupId { get; set; }
@@ -120,7 +118,7 @@ namespace Brilliance.Models.Entity
         public Guid? ModifiedBy { get; set; }
         public DateTime CreatedAt { get; set; }
 
-        public DateTime? UpdatedAt { get; set; }
+        public DateTime ? UpdatedAt { get; set; }
 
         public DateTime? DueDate { get; set; }
         public Guid RateId { set; get; }
@@ -139,10 +137,10 @@ namespace Brilliance.Models.Entity
         public virtual IList<TCFNotes> TCFNotes { get; set; }
         public virtual IList<TCFTask> TCFTask { get; set; }
         public virtual IList<TCFFormEvidence> TCFFormEvidence { get; set; }
-        public bool IsDeleted { get; set; }
+        public bool  IsDeleted { get; set; }
         [Ignore]
         public bool IsEdit { get { return Id != Guid.Empty ? true : false; } }
-        public Guid? MasterReference { get; set; }
+
     }
 
 
@@ -159,7 +157,7 @@ namespace Brilliance.Models.Entity
         public string Qgroup { get; set; }
         public string Qdesc { get; set; }
         public int Status { get; set; }
-        public int? PreviousRating { get; set; }
+        public int ? PreviousRating { get; set; }
         public int? CurrentRating { get; set; }
 
         public string DueDateDes { get; set; }
@@ -174,19 +172,19 @@ namespace Brilliance.Models.Entity
         public Guid TCFPeriodId { get; set; }
         public Guid BinderHolderTypeId { get; set; }
         public string Description { get; set; }
-
+        
         public DateTime CreatedAt { get; set; }
 
         public Guid CreatedBy { get; set; }
 
-        public DateTime? UpdatedAt { get; set; }
+        public DateTime ? UpdatedAt { get; set; }
 
-        public Guid? UpdatedBy { get; set; }
-        public int IsDeleted { get; set; }
+        public Guid  ? UpdatedBy { get; set; }
+        public int  IsDeleted { get; set; }
 
 
-
-        public virtual TCFOutCome TCFOutCome { get; set; }
+     
+        public virtual TCFOutCome  TCFOutCome { get; set; }
         [Ignore]
         public bool IsEdit { get { return Id != Guid.Empty ? true : false; } }
         [Ignore]
@@ -200,7 +198,7 @@ namespace Brilliance.Models.Entity
         public Guid Id { get; set; }
         [ForeignKey("TCFForm")]
         public Guid TCFoutcomeId { set; get; }
-        public virtual TCFForm TCFForm { get; set; }
+        public  virtual TCFForm TCFForm { get; set; }
 
         [ForeignKey("TCFForm")]
         public Guid TCFQuestionGroupId { set; get; }
@@ -213,7 +211,7 @@ namespace Brilliance.Models.Entity
         public bool IsEdit { get { return Id != Guid.Empty ? true : false; } }
     }
     [PrimaryKey("Id")]
-    public class TCFSubOutCome
+    public  class TCFSubOutCome
     {
         public TCFSubOutCome()
         {
@@ -225,18 +223,18 @@ namespace Brilliance.Models.Entity
         [ForeignKey("TCFSubOutComeId")]
         public Guid TCFSubOutComeId { set; get; }
         public virtual TCFOutCome _TCFOutCome { get; set; }
-
+      
         public Guid TCFQuestionId { set; get; }
         [ForeignKey("TCFQuestionId")]
         public TCFQuestion TCFQuestion { get; set; }
         public Guid RateId { set; get; }
         public Guid TCFFormId { set; get; }
 
-
-        public Guid? TCFSubOutComeUserId { get; set; }
+        
+        public Guid ? TCFSubOutComeUserId { get; set; }
         [ForeignKey("TCFSubOutComeUserId")]
-        public virtual User _User { get; set; }
-
+        public virtual User  _User { get; set; }
+       
 
         public string ReasonNotYet { get; set; }
 
@@ -248,33 +246,33 @@ namespace Brilliance.Models.Entity
         public Guid AddedBy { set; get; }
         public DateTime AddedDate { set; get; }
 
-        public Guid? ModifiedBy { set; get; }
+        public Guid ? ModifiedBy { set; get; }
 
-        public DateTime? ModifiedDate { set; get; }
-        public DateTime? DueDate { set; get; }
+        public DateTime ? ModifiedDate { set; get; }
+        public DateTime ? DueDate { set; get; }
 
         public virtual IList<TCFNotes> TCFNotes { get; set; }
         public virtual IList<TCFTask> TCFTask { get; set; }
         public virtual IList<TCFFormEvidence> TCFFormEvidence { get; set; }
         [Ignore]
         public bool IsEdit { get { return TCFSubOutComeUserId != Guid.Empty ? true : false; } }
-
+      
     }
     public class TCFNotes
     {
         public Guid Id { get; set; }
-
+       
         public Guid TCFQuestionId { get; set; }
         public Guid AddedById { get; set; }
         public DateTime AddedAt { get; set; }
         public string Note { get; set; }
-
+        
         public string NoteId { get; set; }
         public string Author { get; set; }
-        public Guid? ModifiedById { get; set; }
-        public DateTime? ModifiedDate { get; set; }
+        public Guid ? ModifiedById { get; set; }
+        public DateTime ? ModifiedDate { get; set; }
         public bool IsDeleted { get; set; }
-
+       
     }
     public class TCFTask
     {
@@ -283,9 +281,9 @@ namespace Brilliance.Models.Entity
             _TaskStatus = new List<TaskStatus>();
         }
         public Guid Id { get; set; }
-
+      
         public Guid TCFQuestionId { get; set; }
-
+    
 
         public Guid AddedById { get; set; }
 
@@ -296,7 +294,7 @@ namespace Brilliance.Models.Entity
         public DateTime AddedAt { get; set; }
         public string Task { get; set; }
         public string Status { get; set; }
-        public Guid? ModifiedById { get; set; }
+        public Guid ? ModifiedById { get; set; }
         public DateTime ModifiedDate { get; set; }
         public bool IsDeleted { get; set; }
         public List<TaskStatus> _TaskStatus { get; set; }
@@ -312,149 +310,6 @@ namespace Brilliance.Models.Entity
     {
         public string Id { get; set; }
         public string Value { get; set; }
-
-    }
-    [Table("TemplateMaster")]
-    public class TemplateMaster
-    {
-        [Key]
-        public Guid TemplateId { get; set; }
-        [Required(ErrorMessage = "Please select TemplateName")]
-        public string TemplateName { get; set; }
-
-
-        public DateTime? Datecreated { get; set; }
-        public Guid CreatedByID { get; set; }
-
-        public DateTime? DateModfied { get; set; }
-        public Guid? ModifybyId { get; set; }
-
-        public bool IsDeleted { get; set; }
-        [Ignore]
-        public bool IsEdit { get { return TemplateId != Guid.Empty ? true : false; } }
-    }
-    public class TemplateMasterOutCome
-    {
-        [Key]
-        public Guid OutComeGroupId { get; set; }
-
-        public string Code { get; set; }
-        public string Title { get; set; }
-        [Required(ErrorMessage = "Please provide Description")]
-        public string Description { get; set; }
-
-        public bool IsVisible { get; set; }
-        public int SortingWeight { get; set; }
-        public bool IsDeleted { get; set; }
-
-        public Guid CreatedBy { get; set; }
-        [ForeignKey("CreatedBy")]
-        public Users _FKUsercreate { get; set; }
-        public DateTime Createddate { get; set; }
-
-        public DateTime? Modifieddate { get; set; }
-        public Guid? ModifiedBy { get; set; }
-        [ForeignKey("ModifiedBy")]
-        public Users _fkUsersmodify { get; set; }
-        public DateTime? CurrentDueDate { get; set; }
-        public string AdditionalDescription { get; set; }
-        public string Filename { get; set; }
-        [Ignore]
-        public bool IsEdit { get { return OutComeGroupId != Guid.Empty ? true : false; } }
-
-        public HttpPostedFileBase file { get; set; }
-
-        [Ignore]
-        public string coderef { get; set; }
-    }
-
-
-    [Table("TemplateOutcomemaster")]
-    public class TemplateOutcomemaster
-    {
-        [Key]
-        public Guid TemplateOutcomemasterId { get; set; }
-
-        public Guid TemplateId { get; set; }
-
-
-        public string Code { get; set; }
-        public string Title { get; set; }
-        [Required(ErrorMessage = "Please provide Description")]
-        public string Description { get; set; }
-
-        public DateTime ? Createddate { get; set; }
-        public Guid ? Createdby { get; set; }
-        public DateTime? Modifieddate { get; set; }
-        public Guid? ModifiedBy { get; set; }
-        [ForeignKey("ModifiedBy")]
-        public Users _fkUsersmodify { get; set; }
-        public string AdditionalDescription { get; set; }
-        public string Filename { get; set; }
-        [Ignore]
-        public bool IsEdit { get { return TemplateOutcomemasterId != Guid.Empty ? true : false; } }
-
-        public HttpPostedFileBase file { get; set; }
-
-        [Ignore]
-        public string coderef { get; set; }
-
-        public bool IsDeleted { get; set; }
-        public bool IsVisible { get; set; }
-
-    }
-    public class TemplateSuboutcomeMaster
-    {
-        public TemplateSuboutcomeMaster()
-        {
-            CreatedAt = DateTime.Now;
-          
-        }
-
-        public Guid Id { get; set; }
-        [Required(ErrorMessage = "Please select Template")]
-        public Guid TemplateId { get; set; }
-        [Required(ErrorMessage = "Please select Types")]
-        public Guid TemplateOutcomemasterId { get; set; }
-
-        [Required(ErrorMessage = "Please select Types")]
-        public Guid TCFQuestionTypeId { get; set; }
-        public string Code { get; set; }
-        [Required(ErrorMessage = "Please provide Description")]
-        public string Description { get; set; }
-        public string GuidanceTitle { get; set; }
-        [Required(ErrorMessage = "Please provide Guidance Description")]
-
-        public string GuidanceDescription { get; set; }
-
-        public Guid ? CreatedBy { get; set; }
-        public DateTime? CreatedAt { get; set; }
-        public Guid? ModifiedBy { get; set; }
-
-        public DateTime? Modifieddate { get; set; }
-       
-     
-        public bool IsDeleted { get; set; }
-        [Ignore]
-        public bool IsEdit { get { return Id != Guid.Empty ? true : false; } }
-        public string TemplateOutcomemasterGroup { get; set; }
-    }
-
-    public class StandardConduct
-    {
-        public Guid Id { get; set; }
-
-        public Guid TemplateId { get; set; }
-
-        public Guid CompanyId { get; set; }
-
-        public Guid  DivisonId { get; set; }
-        public Guid? CreatedBy { get; set; }
-        public DateTime ? CreatedDate { get; set; }
-
-        public Guid? ModifiedBy { get; set; }
-
-        public DateTime? ModifiedDate { get; set; }
 
     }
 }
