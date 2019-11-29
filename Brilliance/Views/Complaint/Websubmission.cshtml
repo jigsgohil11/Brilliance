@@ -148,9 +148,9 @@
                                                             <span class="input-group-addon">
                                                                 <i class="fa fa-calendar font-green"></i>
                                                             </span>
-                                                            @Html.TextBoxFor(m => m.complaint.DateIncident, Constants.DateFormatString, new { @class = "form-control form-control-inline  date-picker", @placeholder = "Select incident date" })
+                                                            @Html.TextBoxFor(m => m.complaint.DateIncident, Constants.DateFormatString, new { @class = "form-control m-input  date-picker", @placeholder = "Select incident date" })
                                                         </div>
-                                                        @*@Html.ValidationMessageFor(m => m.complaint.DateIncident)*@
+                                                        @Html.ValidationMessageFor(m => m.complaint.DateIncident)
                                                     </div>
                                                 </div>
                                             </div>

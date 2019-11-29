@@ -42,16 +42,24 @@ namespace Brilliance.Models.Entity
         public Guid? ComplaintNatureOfId { get; set; }
         [Required(ErrorMessage = "Received date is required.")]
         public DateTime? DateReceived { get; set; }
-        //[Required(ErrorMessage = "Incident date is required.")]
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = Constants.DateFormatString, ApplyFormatInEditMode = true)]
+        [Required(ErrorMessage = "Incident date is required.")]
         public DateTime? DateIncident { get; set; }
-        [MaxLength]
+        [Required(ErrorMessage = "This field is required.")]
         public string Notes { get; set; }
+        [Required(ErrorMessage = "This field is required.")]
         public string IsResolved { get; set; }
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = Constants.DateFormatString, ApplyFormatInEditMode = true)]
         public DateTime? DateResolved { get; set; }
+        [Required(ErrorMessage = "Policy status is required.")]
         public Guid? ComplaintPolicyStatusId { get; set; }
         public Guid? ComplaintRootCauseId { get; set; }
         public Guid? ComplaintReceivedId { get; set; }
+        [Required(ErrorMessage = "Received Regulatory is required.")]
         public Guid? ComplaintReceivedRegulatoryId { get; set; }
+        [Required(ErrorMessage = "Received Regulatory Feedback is required.")]
         public Guid? ComplaintReceivedRegulatoryFeedbackId { get; set; }
         [MaxLength(50)]
         public string ComplaintReceivedRegulatoryReference { get; set; }
@@ -60,6 +68,7 @@ namespace Brilliance.Models.Entity
         public Guid? ComplaintRegulatedCostId { get; set; }
         [Required(ErrorMessage = "Satisfaction Level is required.")]
         public Guid? SatisfactionLevel { get; set; }
+        [Required(ErrorMessage = "Satisfaction level is required.")]
         public Guid? Satisfactionlevel_resolution { get; set; }
         public string IsComplaint { get; set; }
         public long? CompensationValue { get; set; }
@@ -71,9 +80,16 @@ namespace Brilliance.Models.Entity
         public decimal claimpaidamount_inclVAT { get; set; }
         public string VAT_number { get; set; }
         public string Panel_Attorneys { get; set; }
+        [Required(ErrorMessage = "Case File Stage is required.")]
         public Guid? CaseFileStage { get; set; }
+        [Required(ErrorMessage = "Event type is required.")]
+        public Guid? Eventtype { get; set; }
+        [Required(ErrorMessage = "Description of loss is required.")]
+        public Guid? Descofloss { get; set; }
         public bool? IsActive { get; set; }
-      
+        public string ComplaintType { get; set; }
+
+
         public DateTime? CreatedOn { get; set; }
         public Guid? CreatedBy { get; set; }
         public DateTime? UpdatedOn { get; set; }
@@ -91,6 +107,7 @@ namespace Brilliance.Models.Entity
         public string ReceivedDate { get; set; }
         [ResultColumn]
         public string ResolvedDate { get; set; }
+
 
         [Ignore]
         public string EncryptedComplaintID { get { return ComplaintID != Guid.Empty ? Crypto.Encrypt(Convert.ToString(ComplaintID)) : null; } }

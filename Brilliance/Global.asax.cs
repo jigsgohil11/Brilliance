@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Brilliance.Infrastructure;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -12,6 +13,7 @@ namespace Brilliance
     {
         protected void Application_Start()
         {
+            ModelBinders.Binders.Add(typeof(DateTime?), new CustomDateModelBinder());
             AreaRegistration.RegisterAllAreas();
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);

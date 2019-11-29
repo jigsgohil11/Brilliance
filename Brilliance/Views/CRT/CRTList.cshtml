@@ -37,12 +37,13 @@
                         <thead>
                             <tr>
                                 @*<th class="all">Policy no.</th>*@
-                                <th class="min-tablet">Product category</th>
+                                @*<th class="min-tablet">Product category</th>*@
                                 <th class="desktop">First Name</th>
                                 <th class="desktop">Last Name</th>
                                 <th class="desktop">Contact No.</th>
                                 <th class="desktop">Nature of complaint</th>
                                 <th class="desktop">Received Date</th>
+                                <th class="desktop">Status</th>
                                 <th class="desktop">Resolved Date</th>
                                 <th class="all">Action</th>
                             </tr>
@@ -54,35 +55,36 @@
                                 {
                                     <tr>
                                         @*<td style="background-color:white !important;">@item.PolicyNumber</td>*@
-                                        <td>@item.productcategory</td>
+
                                         <td>@item.FirstName</td>
                                         <td>@item.LastName</td>
                                         <td>@item.PhoneNo</td>
                                         <td>@item.natureofcomplaint</td>
                                         <td>@item.ReceivedDate</td>
                                         <td>
-                                            @if (item.IsResolved != null && item.IsResolved.ToUpper() == "NOT YET")
+                                            @if (item.IsComplaint != null && item.IsComplaint.ToUpper() == "NO")
                                             {
-                                                <label style="font-weight:bold;color:red">Not Yet</label>
-                                            }
-                                            else if (item.IsResolved != null && item.IsResolved.ToUpper() == "YES")
-                                            {
-                                                <label>@item.ResolvedDate</label>
-                                            }
-                                            @*else if (item.DateResolved != null && item.IsComplaint.ToUpper() == "NO")
-                                            {
-                                                <label>@item.ResolvedDate</label>
-                                                <label style="font-weight:bold;color:limegreen">Resolved</label>
-                                            }*@
-                                            else if (item.IsResolved != null && item.IsResolved.ToUpper() == "RESOLVED")
-                                            {
-                                                <label>@item.ResolvedDate</label>
-                                                @*<label style="font-weight:bold;color:limegreen">Resolved</label>*@
+                                                <label style="font-weight:bold;color:red">@item.IsResolved</label>
+
                                             }
                                             else
                                             {
-                                                <label style="font-weight:bold;">New</label>
+                                                if (item.IsResolved != null && item.IsResolved.ToUpper() == "NOT YET")
+                                                {
+                                                    <label style="font-weight:bold;color:red">@item.IsResolved</label>
+                                                }
+                                                else if (item.IsResolved != null && item.IsResolved.ToUpper() == "Resolved")
+                                                {
+                                                    <label style="font-weight:bold;color:green">@item.IsResolved</label>
+                                                }
+                                                else
+                                                {
+                                                    <label style="font-weight:bold;">@item.IsResolved</label>
+                                                }
                                             }
+                                        </td>
+                                        <td>
+                                            @item.ResolvedDate
                                         </td>
                                         <td>
                                             <a class="action btn  btn-primary btn-xs @Constants.Class_Cannot_Access_Update" href="/CRT/CRT/@item.EncryptedComplaintID" title="Edit"><i class="btn-xs fa fa-pencil padding0"></i></a>

@@ -95,17 +95,17 @@ namespace Brilliance.Infrastructure.DataProvider
                     cmd.Parameters.AddWithValue("@ComplaintProductTypeId", Complaintmodel.complaint.ComplaintProductTypeId).SqlDbType = SqlDbType.UniqueIdentifier;
                     cmd.Parameters.AddWithValue("@ComplaintCategoryId", Complaintmodel.complaint.ComplaintCategoryId).SqlDbType = SqlDbType.UniqueIdentifier;
                     cmd.Parameters.AddWithValue("@ComplaintNatureOfId", Complaintmodel.complaint.ComplaintNatureOfId).SqlDbType = SqlDbType.UniqueIdentifier;
-                    cmd.Parameters.AddWithValue("@DateReceived", Complaintmodel.complaint.DateReceived).SqlDbType = SqlDbType.DateTime;
+                    cmd.Parameters.AddWithValue("@DateReceived", DateTime.Now).SqlDbType = SqlDbType.DateTime;
                     cmd.Parameters.AddWithValue("@DateIncident", Complaintmodel.complaint.DateIncident).SqlDbType = SqlDbType.DateTime;
                     if (Complaintmodel.complaint.IsComplaint != null && Complaintmodel.complaint.IsComplaint.ToUpper() == "NO")
                     {
-                        cmd.Parameters.AddWithValue("@IsResolved", "Resolved").SqlDbType = SqlDbType.NVarChar;
+                        cmd.Parameters.AddWithValue("@IsResolved", "Non-Complaint").SqlDbType = SqlDbType.NVarChar;
 
                     }
                     else
                     {
                         if (Complaintmodel.complaint.IsResolved != null && Complaintmodel.complaint.IsResolved.ToUpper() == "YES")
-                            cmd.Parameters.AddWithValue("@IsResolved", "Yes").SqlDbType = SqlDbType.NVarChar;
+                            cmd.Parameters.AddWithValue("@IsResolved", "Resolved").SqlDbType = SqlDbType.NVarChar;
                         else
                             cmd.Parameters.AddWithValue("@IsResolved", "Not yet").SqlDbType = SqlDbType.NVarChar;
                     }
@@ -125,6 +125,9 @@ namespace Brilliance.Infrastructure.DataProvider
                     cmd.Parameters.AddWithValue("@ComplaintCompensationId", Complaintmodel.complaint.ComplaintCompensationId).SqlDbType = SqlDbType.UniqueIdentifier;
                     cmd.Parameters.AddWithValue("@ComplaintRegulatedCostId", Complaintmodel.complaint.ComplaintRegulatedCostId).SqlDbType = SqlDbType.UniqueIdentifier;
                     cmd.Parameters.AddWithValue("@CompensationValue", Complaintmodel.complaint.CompensationValue).SqlDbType = SqlDbType.NVarChar;
+                    cmd.Parameters.AddWithValue("@ComplaintType", "Manual").SqlDbType = SqlDbType.NVarChar;
+                    cmd.Parameters.AddWithValue("@Eventtype", Complaintmodel.complaint.Eventtype).SqlDbType = SqlDbType.UniqueIdentifier;
+                    cmd.Parameters.AddWithValue("@Descofloss", Complaintmodel.complaint.Descofloss).SqlDbType = SqlDbType.UniqueIdentifier;
                     cmd.Parameters.AddWithValue("@CreatedBy", SessionHelper.UserId).SqlDbType = SqlDbType.UniqueIdentifier;
                     cmd.Parameters.AddWithValue("@CreatedOn", DateTime.Now).SqlDbType = SqlDbType.DateTime;
                     cmd.Parameters.AddWithValue("@UpdatedOn", null).SqlDbType = SqlDbType.DateTime;
@@ -171,13 +174,13 @@ namespace Brilliance.Infrastructure.DataProvider
                     cmd.Parameters.AddWithValue("@DateIncident", Complaintmodel.complaint.DateIncident).SqlDbType = SqlDbType.DateTime;
                     if (Complaintmodel.complaint.IsComplaint != null && Complaintmodel.complaint.IsComplaint.ToUpper() == "NO")
                     {
-                        cmd.Parameters.AddWithValue("@IsResolved", "Resolved").SqlDbType = SqlDbType.NVarChar;
+                        cmd.Parameters.AddWithValue("@IsResolved", "Non-Complaint").SqlDbType = SqlDbType.NVarChar;
 
                     }
                     else
                     {
                         if (Complaintmodel.complaint.IsResolved != null && Complaintmodel.complaint.IsResolved.ToUpper() == "YES")
-                            cmd.Parameters.AddWithValue("@IsResolved", "Yes").SqlDbType = SqlDbType.NVarChar;
+                            cmd.Parameters.AddWithValue("@IsResolved", "Resolved").SqlDbType = SqlDbType.NVarChar;
                         else
                             cmd.Parameters.AddWithValue("@IsResolved", "Not yet").SqlDbType = SqlDbType.NVarChar;
                     }
@@ -197,6 +200,8 @@ namespace Brilliance.Infrastructure.DataProvider
                     cmd.Parameters.AddWithValue("@ComplaintCompensationId", Complaintmodel.complaint.ComplaintCompensationId).SqlDbType = SqlDbType.UniqueIdentifier;
                     cmd.Parameters.AddWithValue("@ComplaintRegulatedCostId", Complaintmodel.complaint.ComplaintRegulatedCostId).SqlDbType = SqlDbType.UniqueIdentifier;
                     cmd.Parameters.AddWithValue("@CompensationValue", Complaintmodel.complaint.CompensationValue).SqlDbType = SqlDbType.NVarChar;
+                    cmd.Parameters.AddWithValue("@Eventtype", Complaintmodel.complaint.Eventtype).SqlDbType = SqlDbType.UniqueIdentifier;
+                    cmd.Parameters.AddWithValue("@Descofloss", Complaintmodel.complaint.Descofloss).SqlDbType = SqlDbType.UniqueIdentifier;
                     cmd.Parameters.AddWithValue("@UpdatedOn", DateTime.Now).SqlDbType = SqlDbType.DateTime;
                     cmd.Parameters.AddWithValue("@UpdatedBy", SessionHelper.UserId).SqlDbType = SqlDbType.UniqueIdentifier;
                     cmd.Parameters.AddWithValue("@IsEdit", Complaintmodel.complaint.IsEdit).SqlDbType = SqlDbType.Bit;
