@@ -34,5 +34,6 @@ namespace Brilliance.Models.Entity
         public Guid? UpdatedBy { get; set; }
         public DateTime? UpdatedOn { get; set; }
         
+
     }
 }

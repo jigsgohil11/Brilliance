@@ -1,9 +1,12 @@
 ﻿@using Brilliance.Infrastructure
 @model Brilliance.Models.ViewModel.ComplaintViewModel
 @{
+    /**/
+
     ViewBag.Title = "CRT";
     Layout = "~/Views/Shared/_Layout_public.cshtml";
     int EmpIndex = 0;
+    int index = 0;
 }
 @*<link href="~/assets/global/plugins/bootstrap-summernote/summernote.css" rel="stylesheet" type="text/css" />
 
@@ -321,49 +324,90 @@
                                                         </div>
                                                     }
                                                 </div>
-                                                <div class="row">
-                                                    <div class="col-md-6">
-                                                        <div class="form-group">
-                                                            <label>File note ID: 01 <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>File note date:  2019.09.16</label>
-                                                            @Html.TextAreaFor(m => m.complaint.FirstName, new { @class = "form-control m-input abc", @placeholder = "Enter Description" })
+                                                @if (Model != null && Model.complaint != null && Model.complaint.IsEdit == true && Model.NoteList != null && Model.NoteList.Count > 0)
+                                                {
+                                                    for (int i = 0; i < Model.NoteList.Count; i++)
+                                                    {
+                                                        var NoteText = "Model.NoteList_" + i + "__NoteText";
+                                                        var Amountid = "Model.NoteList_" + i + "__NoteText";
+                                                        <div class="row" id="FileNote_@index">
+                                                            @Html.Hidden("Index", Model.NoteList.Count - 1))
+                                                            <div class="col-md-6">
+                                                                <div class="form-group">
+                                                                    <label>File note ID: @Model.NoteList[i].FileNoteID <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>File note date: @Model.NoteList[i].FileNoteDate</label>
+                                                                    <textarea class="form-control m-input abc" cols="20" id="CRTNotes_0__NoteText" name="CRTNotes[0].NoteText" placeholder="Enter Description" rows="2"></textarea>
+                                                                </div>
+                                                                <label>Author: @Model.NoteList[i].Author</label>
+                                                                <button type="button" onclick="Addnewnote();" class="btn default" style="padding: 3px;color: black;background-color: #acb7ca;margin-left: 275px;">Add note</button>
+                                                            </div>
+                                                            <div class="col-md-6">
+                                                                <div class="col-lg-4">
+                                                                    <div class="form-group">
+                                                                        <label style="margin-top: 20px;">Upload Attachment</label>
+                                                                        <div class="fileinput margin-0 fileinput-new" data-provides="fileinput">
+                                                                            @*<span class="btn green btn-file" style="padding: 1px 5px; font-size: 12px;">
+                                                                                <span class="fa fa-upload"></span>
+                                                                                <span class="fileinput-exists"> Change </span>
+                                                                                <input type="file" onchange="Upload(this)" name="@CustID" id="@CustID" rpid="@i" accept=".doc,.docx,xls,.xlsx,.xlsm,.xltx,.xltm,.pdf,image/*">
+                                                                            </span>*@
+                                                                            <label style="color:red;" id="VALmassage_@i"></label>
+                                                                            <a target="_blank" href="~/ComplaintFiles/@Model.NoteList[i].FilePath">
+                                                                                <span id="fileid">@Model.NoteList[i].FilePath</span>
+                                                                            </a>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
                                                         </div>
-                                                        <label>Author: Web Submission</label>
-                                                    </div>
-                                                    <div class="col-md-6">
-                                                        <div class="col-lg-4">
+                                                    }
+                                                }
+                                                else
+                                                {
+                                                    <div class="row" id="FileNote_@index">
+                                                        @Html.Hidden("Index", index)
+                                                        <div class="col-md-6">
                                                             <div class="form-group">
-                                                                <label style="margin-top: 20px;">Upload Attachment</label>
-                                                                <div class="fileinput margin-0 fileinput-new" data-provides="fileinput">
-                                                                    @*<span class="btn green btn-file" style="padding: 1px 5px; font-size: 12px;">
-                                                                        <span class="fa fa-upload"></span>
-                                                                        <span class="fileinput-exists"> Change </span>
-                                                                        <input type="file" onchange="Upload(this)" rpid="@EmpIndex" isnew="isnew" name="Term_@EmpIndex" id="Term_@EmpIndex" accept=".doc,.docx,.pdf,image/*">
-
-                                                                    </span>
-                                                                    <label style="color:red;" id="VALmassage_@EmpIndex"></label>*@
-                                                                    <input type="file" onchange="Upload(this)" rpid="@EmpIndex" isnew="isnew" name="Term_@EmpIndex" id="Term_@EmpIndex" accept=".doc,.docx,.pdf,image/*">
+                                                                <label>File note ID: 01 <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>File note date:  2019.09.16</label>
+                                                                <textarea class="form-control m-input abc" cols="20" id="CRTNotes_0__NoteText" name="CRTNotes[0].NoteText" placeholder="Enter Description" rows="2"></textarea>
+                                                            </div>
+                                                            <label>Author: Web Submission</label>
+                                                            @*<button type="button" style="padding: 3px;margin-left: 217px;" onclick="RemoveDiv('FileNote_@index');" class="btn default" data-dismiss="modal">Remove</button>*@
+                                                            <button type="button" onclick="Addnewnote();" class="btn default" style="padding: 3px;color: black;background-color: #acb7ca;margin-left: 275px;">Add note</button>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <div class="col-lg-4">
+                                                                <div class="form-group">
+                                                                    <label style="margin-top: 20px;">Upload Attachment</label>
+                                                                    <div class="fileinput margin-0 fileinput-new" data-provides="fileinput">
+                                                                        <input type="file" onchange="Upload(this)" rpid="@index" isnew="isnew" name="CRTNotes[0].FilePath" id="CRTNotes_0__FilePath" accept=".doc,.docx,.pdf,image/*">
+                                                                    </div>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                     </div>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col-md-6">
-                                                        <div class="form-group">
-                                                            <label>Note</label>
-                                                            @if (Model != null && Model.complaint != null && Model.complaint.Notes != null && (Model.complaint.IsResolved.ToUpper() == "NEW" || Model.complaint.IsComplaint.ToUpper() == "NO"))
-                                                            {
-                                                                @Html.TextAreaFor(m => m.complaint.Notes, new { @class = "form-control m-input", @placeholder = "Enter Description", @rows = "4", @disabled = "disabled" })
-                                                            }
-                                                            else
-                                                            {
-                                                                @Html.TextAreaFor(m => m.complaint.Notes, new { @class = "form-control m-input", @placeholder = "Enter Description", @rows = "4" })
-                                                                @*@Html.ValidationMessageFor(m => m.complaint.Notes)*@
-                                                            }
+                                                }
 
-                                                        </div>
-                                                    </div>
+
+                                                <div id="multiple_Notes">
+
                                                 </div>
+
+                                                @*<div class="row">
+                                                        <div class="col-md-6">
+                                                            <div class="form-group">
+                                                                <label>Note</label>
+                                                                @if (Model != null && Model.complaint != null && Model.complaint.Notes != null && (Model.complaint.IsResolved.ToUpper() == "NEW" || Model.complaint.IsComplaint.ToUpper() == "NO"))
+                                                                {
+                                                                    @Html.TextAreaFor(m => m.complaint.Notes, new { @class = "form-control m-input", @placeholder = "Enter Description", @rows = "4", @disabled = "disabled" })
+                                                                }
+                                                                else
+                                                                {
+                                                                    @Html.TextAreaFor(m => m.complaint.Notes, new { @class = "form-control m-input", @placeholder = "Enter Description", @rows = "4" })
+                                                                }
+
+                                                            </div>
+                                                        </div>
+                                                    </div>*@
                                                 @*@if (Model != null && Model.complaint != null && (Model.complaint.IsResolved.ToUpper() == "NEW" || Model.complaint.IsComplaint.ToUpper() == "NO"))*@
                                                 @if (Model != null && Model.complaint != null && Model.complaint.ComplaintType.ToUpper() == "WEB SUBMISSION")
                                                 {
@@ -1278,8 +1322,60 @@
                 $("#frmComplaint").submit();
             }
         }
+
+        function Addnewnote() {
+            //debugger;
+            var ExpIndex = $("#Index").val();
+            var htlml1 = $("#FileNote_" + ExpIndex).html();
+            ExpIndex = parseInt(ExpIndex);
+            ExpIndex = ExpIndex + 1;
+            $("#Index").val(ExpIndex);
+            var value = pad2(ExpIndex + 1);
+
+            var html = "<div class='row notediv'  id='FileNote_" + ExpIndex + "'><input type='hidden' value=" + ExpIndex + "/>"
+            html += "<div class='col-md-6'><div class='form-group'>"
+            //html += "<label>File note ID:" + value + "  <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>File note date:  </label>"
+            html += "<label></label>"
+            html += "<textarea class='form-control m-input abc' cols='20' id='NoteList_" + ExpIndex + "__NoteText' name='NoteList[" + ExpIndex + "].NoteText' placeholder='Enter Description' rows='2'></textarea></div>"
+            //html += "<label>Author: Web Submission</label>"
+            html += "<button type='button' style='padding:3px;margin-left:380px;' onclick='RemoveDiv(" + ExpIndex + ");' class='btn default' data-dismiss='modal'>Remove</button>"
+            html += "<button type='button' onclick='Addnewnote();' class='btn default' style='padding:3px;color:black;background-color:#acb7ca;'>Add note</button>"
+            html += "</div>"
+            html += "<div class='col-md-6'><div class='col-md-4'><div class='form-group'>"
+            html += "<label style='margin-top:20px;'>Upload Attachment</label>"
+            html += "<div class='fileinput margin-0 fileinput-new' data-provides='fileinput'>"
+            html += "<input type='file' onchange='Upload(this)' rpid=" + ExpIndex + " isnew='isnew' name='NoteList[" + ExpIndex + "].FilePath' id='NoteList_" + ExpIndex + "__FilePath' accept='.doc,.docx,.pdf,image/*'>"
+            html += "</div></div></div></div>"
+            html += "</div>";
+
+            $("#multiple_Notes").append(html);
+        }
+        function NotesIndexOrdering() {
+            var note = $("#multiple_Notes");
+            note.find('div.notediv').each(function (i) {
+
+                $(this).find('textarea').attr("id", "NoteList_" + i + "__NoteText");
+                $(this).find('textarea').attr("name", "NoteList[" + i + "].NoteText");
+
+                $(this).find("input[type='file']").find('input').attr("id", "NoteList_" + i + "__FilePath");
+                $(this).find("input[type='file']").find('input').attr("name", "NoteList[" + i + "].FilePath");
+
+            });
+        }
+
+        function RemoveDiv(index) {
+            $("#FileNote_" + index).remove();
+        }
+
+        function pad2(number) {
+            return (number < 10 ? '0' : '') + number
+        }
     </script>
 }
+
+
+
+
 
 
 

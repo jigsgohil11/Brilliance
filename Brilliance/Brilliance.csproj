@@ -174,7 +174,6 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\BaseController.cs" />
-    <Compile Include="Controllers\CISController.cs" />
     <Compile Include="Controllers\CompanyController.cs" />
     <Compile Include="Controllers\ComplaintController.cs" />
     <Compile Include="Controllers\CRTController.cs" />
