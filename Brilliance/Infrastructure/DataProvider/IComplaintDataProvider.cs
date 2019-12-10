@@ -1,6 +1,7 @@
 ﻿using Brilliance.Models.ViewModel;
 using Brilliance.Models;
 using System;
+using System.Data;
 
 namespace Brilliance.Infrastructure.DataProvider
 {
@@ -8,7 +9,7 @@ namespace Brilliance.Infrastructure.DataProvider
     {
         ComplaintListModel ComplaintList();
         ServiceResponse GetComplaint(Guid ComplaintID);
-        ServiceResponse SaveComplaints(ComplaintViewModel Complaintmodel);
+        ServiceResponse SaveComplaints(ComplaintViewModel Complaintmodel,DataTable complaint_note);
         ServiceResponse DeleteComplaint(Guid ComplaintID);
         ServiceResponse GetCompanyCustomRules(Guid CompanyID);
         ServiceResponse GetDivisionByCompany(Guid CompanyID);

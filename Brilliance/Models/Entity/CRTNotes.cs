@@ -33,7 +33,10 @@ namespace Brilliance.Models.Entity
         public DateTime? CreatedOn { get; set; }
         public Guid? UpdatedBy { get; set; }
         public DateTime? UpdatedOn { get; set; }
-        
+
+        [ResultColumn]
+        public string filedate { get; set; }
+
 
     }
 }

@@ -28,10 +28,10 @@
         margin-bottom: -11px;
     }
 </style>
-@*@if (Model != null && Model.complaint != null && Model.complaint.IsResolved.ToUpper() == "NEW")
-    {
-        var status = Model.complaint.IsResolved.ToUpper();
-    }*@
+@if (Model != null && Model.complaint != null && Model.complaint.IsResolved.ToUpper() == "NEW" && Model.complaint.ComplaintType.ToUpper() == "WEB SUBMISSION")
+{
+    var status = Model.complaint.ComplaintType.ToUpper();
+}
 <div class="page-content page-content-dashbrd-backgrnd">
     <div class="page-bar margin-bottom-10">
         <div class="row">
@@ -73,11 +73,11 @@
                                     Complaint Resolution
                                 </a>
                             </li>
-                            <li>
-                                <a href="#tab3" id="m_tabs_5_3" class="hide">
-                                    Claims
-                                </a>
-                            </li>
+                            @*<li>
+                                    <a href="#tab3" id="m_tabs_5_3" class="hide">
+                                        Claims
+                                    </a>
+                                </li>*@
                         }
                         else
                         {
@@ -86,16 +86,17 @@
                                     Complaint Resolution
                                 </a>
                             </li>
-                            <li>
-                                <a href="#tab3" id="m_tabs_5_3">
-                                    Claims
-                                </a>
-                            </li>
+                            @*<li>
+                                    <a href="#tab3" id="m_tabs_5_3">
+                                        Claims
+                                    </a>
+                                </li>*@
                         }
                     </ul>
                 </div>
                 <div class="portlet-body form">
-                    <form action="/CRT/SaveComplaint" id="frmComplaint" data-ajax-success="SaveComplaintResponse(data);" data-ajax="true" data-ajax-method="Post" data-ajax-begin="ShowLoader();">
+                    @*<form action="/CRT/SaveComplaint" id="frmComplaint" data-ajax-success="SaveComplaintResponse(data);" data-ajax="true" data-ajax-method="Post" data-ajax-begin="ShowLoader();">*@
+                    <form action="/CRT/SaveComplaint" id="frmComplaint" method="post" enctype="multipart/form-data">
                         <div class="tab-pane active" id="profile-edit">
                             <div class="row">
                                 <div class="col-md-12">
@@ -324,73 +325,104 @@
                                                         </div>
                                                     }
                                                 </div>
-                                                @if (Model != null && Model.complaint != null && Model.complaint.IsEdit == true && Model.NoteList != null && Model.NoteList.Count > 0)
+                                                @if (Model != null && Model.complaint != null && Model.complaint.IsEditforNotes == true && Model.NoteList != null && Model.NoteList.Count > 0)
                                                 {
                                                     for (int i = 0; i < Model.NoteList.Count; i++)
                                                     {
-                                                        var NoteText = "Model.NoteList_" + i + "__NoteText";
-                                                        var Amountid = "Model.NoteList_" + i + "__NoteText";
-                                                        <div class="row" id="FileNote_@index">
-                                                            @Html.Hidden("Index", Model.NoteList.Count - 1))
+                                                        var NoteText = "NoteList_" + i + "__NoteText";
+                                                        //var Amountid = "NoteList_" + i + "__NoteText";
+                                                        <div id="get_Notes">
+                                                            <div class="row">
+                                                                @Html.Hidden("Index", index-1)
+                                                                <div class="col-md-6">
+                                                                    <div class="form-group">
+                                                                        <label>File note ID: @Model.NoteList[i].FileNoteID <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>File note date: @Model.NoteList[i].filedate</label>
+
+                                                                        <textarea class="form-control m-input abc" cols="20" id="@NoteText" name="CRTNotes[@i].NoteText" placeholder="Enter Description" rows="2" disabled>@Model.NoteList[i].NoteText</textarea>
+                                                                    </div>
+                                                                    <label>Author: @Model.NoteList[i].Author</label><br/>
+                                                                    @if (i == (Model.NoteList.Count - 1))
+                                                                    {
+                                                                        <button type="button" onclick="Addnewnote();" class="btn default" style="padding: 3px;color: black;background-color: #acb7ca;margin-left: 443px;">Add note</button>
+                                                                    }
+                                                                </div>
+                                                                <div class="col-md-6">
+                                                                    <div class="col-lg-4">
+                                                                        <div class="form-group">
+                                                                            @*<label style="margin-top: 20px;">Upload Attachment</label>*@
+                                                                            <label></label>
+                                                                            <div class="fileinput margin-0 fileinput-new" data-provides="fileinput">
+                                                                                <label style="color:red;" id="VALmassage_@i"></label>
+                                                                                @if (Model != null && Model.NoteList != null && !string.IsNullOrEmpty(Model.NoteList[i].FilePath) && File.Exists(HttpContext.Current.Server.MapPath(Constants.ComplaintFilenotePath + Model.NoteList[i].ComplaintID + "/" + Model.NoteList[i].FilePath)))
+                                                                                {
+                                                                                    @*<img class="img-responsive img-profile image-size-custom" src="@string.Format(Constants.ComplaintFilenotePath.Replace("~","") + Model.NoteList[i].FilePath)">*@
+                                                                                    <a target="_blank" href="~/ComplaintFiles/@Model.NoteList[i].ComplaintID/@Model.NoteList[i].FilePath">
+                                                                                        <span id="fileid">@Model.NoteList[i].FilePath</span>
+                                                                                    </a>
+                                                                                }
+                                                                                else
+                                                                                {
+                                                                                    @*<a target="_blank" href="">
+                                                                                        <span id="fileid">No file</span>
+                                                                                    </a>*@
+                                                                                }
+
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                @*<div class="col-md-6">
+                                                                        <div class="col-lg-4">
+                                                                            <div class="form-group">
+                                                                                <label style="margin-top: 20px;">Upload Attachment</label>
+                                                                                <div class="fileinput margin-0 fileinput-new" data-provides="fileinput">
+                                                                                    <span class="btn green btn-file" style="padding: 1px 5px; font-size: 12px;">
+                                                                                            <span class="fa fa-upload"></span>
+                                                                                            <span class="fileinput-exists"> Change </span>
+                                                                                            <input type="file" onchange="Upload(this)" name="@CustID" id="@CustID" rpid="@i" accept=".doc,.docx,xls,.xlsx,.xlsm,.xltx,.xltm,.pdf,image/*">
+                                                                                        </span>
+                                                                                    <label style="color:red;" id="VALmassage_@i"></label>
+                                                                                    <a target="_blank" href="~/ComplaintFiles/@Model.NoteList[i].FilePath">
+                                                                                        <span id="fileid">@Model.NoteList[i].FilePath</span>
+                                                                                    </a>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>*@
+                                                            </div>
+                                                        </div>
+                                                    }
+                                                    <div id="multiple_Notes"></div>
+                                                }
+                                                else
+                                                {
+                                                    <div id="multiple_Notes">
+                                                        <div class="row notediv" id="FileNote_@index">
+                                                            @Html.Hidden("Index", index)
                                                             <div class="col-md-6">
                                                                 <div class="form-group">
-                                                                    <label>File note ID: @Model.NoteList[i].FileNoteID <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>File note date: @Model.NoteList[i].FileNoteDate</label>
-                                                                    <textarea class="form-control m-input abc" cols="20" id="CRTNotes_0__NoteText" name="CRTNotes[0].NoteText" placeholder="Enter Description" rows="2"></textarea>
+                                                                    @*<label>File note ID: 01 <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>File note date:  2019.09.16</label>*@
+                                                                    <input type="hidden" name="NoteList[0].FileName" id="NoteList_0__FileName" value="" />
+                                                                    <input type="hidden" class="CustomField" name="NoteList[0].Attachment" id="NoteList_0__Attachment" value="Term_@index" />
+                                                                    <textarea class="form-control m-input abc" cols="20" id="NoteList0__NoteText" name="NoteList[0].NoteText" placeholder="Enter Description" rows="2"></textarea>
                                                                 </div>
-                                                                <label>Author: @Model.NoteList[i].Author</label>
-                                                                <button type="button" onclick="Addnewnote();" class="btn default" style="padding: 3px;color: black;background-color: #acb7ca;margin-left: 275px;">Add note</button>
+                                                                @*<label>Author: Web Submission</label>*@
+                                                                @*<button type="button" style="padding: 3px;margin-left: 217px;" onclick="RemoveDiv('FileNote_@index');" class="btn default" data-dismiss="modal">Remove</button>*@
+                                                                <button type="button" onclick="Addnewnote();" class="btn default" style="padding: 3px;color: black;background-color: #acb7ca;margin-left: 443px;">Add note</button>
                                                             </div>
                                                             <div class="col-md-6">
                                                                 <div class="col-lg-4">
                                                                     <div class="form-group">
                                                                         <label style="margin-top: 20px;">Upload Attachment</label>
                                                                         <div class="fileinput margin-0 fileinput-new" data-provides="fileinput">
-                                                                            @*<span class="btn green btn-file" style="padding: 1px 5px; font-size: 12px;">
-                                                                                <span class="fa fa-upload"></span>
-                                                                                <span class="fileinput-exists"> Change </span>
-                                                                                <input type="file" onchange="Upload(this)" name="@CustID" id="@CustID" rpid="@i" accept=".doc,.docx,xls,.xlsx,.xlsm,.xltx,.xltm,.pdf,image/*">
-                                                                            </span>*@
-                                                                            <label style="color:red;" id="VALmassage_@i"></label>
-                                                                            <a target="_blank" href="~/ComplaintFiles/@Model.NoteList[i].FilePath">
-                                                                                <span id="fileid">@Model.NoteList[i].FilePath</span>
-                                                                            </a>
+                                                                            <input type="file" onchange="Upload(this)" rpid="@index" isnew="isnew" name="Term_@index" id="Term_@index" accept=".doc,.docx,.pdf,image/*">
                                                                         </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    }
-                                                }
-                                                else
-                                                {
-                                                    <div class="row" id="FileNote_@index">
-                                                        @Html.Hidden("Index", index)
-                                                        <div class="col-md-6">
-                                                            <div class="form-group">
-                                                                <label>File note ID: 01 <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>File note date:  2019.09.16</label>
-                                                                <textarea class="form-control m-input abc" cols="20" id="CRTNotes_0__NoteText" name="CRTNotes[0].NoteText" placeholder="Enter Description" rows="2"></textarea>
-                                                            </div>
-                                                            <label>Author: Web Submission</label>
-                                                            @*<button type="button" style="padding: 3px;margin-left: 217px;" onclick="RemoveDiv('FileNote_@index');" class="btn default" data-dismiss="modal">Remove</button>*@
-                                                            <button type="button" onclick="Addnewnote();" class="btn default" style="padding: 3px;color: black;background-color: #acb7ca;margin-left: 275px;">Add note</button>
-                                                        </div>
-                                                        <div class="col-md-6">
-                                                            <div class="col-lg-4">
-                                                                <div class="form-group">
-                                                                    <label style="margin-top: 20px;">Upload Attachment</label>
-                                                                    <div class="fileinput margin-0 fileinput-new" data-provides="fileinput">
-                                                                        <input type="file" onchange="Upload(this)" rpid="@index" isnew="isnew" name="CRTNotes[0].FilePath" id="CRTNotes_0__FilePath" accept=".doc,.docx,.pdf,image/*">
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 }
-
-
-                                                <div id="multiple_Notes">
-
-                                                </div>
 
                                                 @*<div class="row">
                                                         <div class="col-md-6">
@@ -729,180 +761,12 @@
                                                 </div>
                                                 <div class="col-lg-6 text-right">
                                                     <button type="button" class="btn btn-primary btnNext">Next</button>
-                                                    <button type="submit" class="btn btn-primary btnSubmit">Save</button>
+                                                    <button type="button" onclick="ComplaintFormSubmit();" class="btn btn-primary btnSubmit">Save</button>
                                                     <button type="button" onclick="location.href = '/CRT/CRTList'" class="btn default" data-dismiss="modal">Cancel</button>
                                                 </div>
                                             </div>
                                         </div>
 
-                                        <div class="tab-pane" id="tab3" role="tabpanel">
-                                            <div class="row margin-top10">
-                                                <div class="col-lg-12">
-                                                    <div class="portlet-title">
-                                                        <div class="caption caption-md">
-                                                            <i class="icon-globe theme-font hide"></i>
-                                                            <span class="caption-subject font-blue-madison bold uppercase">Claims</span>
-                                                        </div>
-                                                    </div>
-                                                    <div class="portlet-body">
-                                                        <div class="row">
-                                                            <div class="col-md-6">
-                                                                <div class="row">
-                                                                    <div class="col-md-5">
-                                                                        <label>Claim paid :</label>
-                                                                        <div class="mt-radio-inline">
-                                                                            <label class="mt-radio mt-radio-outline margin-bottom0" style="font-size:13px;">
-                                                                                @Html.RadioButtonFor(m => m.complaint.Isclaimpaid, "No", new { @checked = "checked" })
-                                                                                No
-                                                                                <span></span>
-                                                                            </label>
-                                                                            <label class="mt-radio mt-radio-outline margin-bottom0" style="font-size:13px;">
-                                                                                @Html.RadioButtonFor(m => m.complaint.Isclaimpaid, "Yes")
-                                                                                Yes
-                                                                                <span></span>
-                                                                            </label>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="col-md-7">
-                                                                        <div class="form-group">
-                                                                            <label>Claim payment date</label>
-                                                                            <div class="input-group">
-                                                                                <span class="input-group-addon">
-                                                                                    <i class="fa fa-calendar font-green"></i>
-                                                                                </span>
-                                                                                @Html.TextBoxFor(m => m.complaint.claimpaymentdate, Constants.DateFormatString, new { @class = "form-control form-control-inline  date-picker", @placeholder = "Select claim payment date" })
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-md-6">
-                                                                <div class="row">
-                                                                    <div class="col-md-6">
-                                                                        <label>Claim paid amount (excl VAT)</label>
-                                                                        @Html.TextBoxFor(m => m.complaint.claimpaidamount_exclVAT, new { @class = "form-control m-input" })
-                                                                        @Html.ValidationMessageFor(m => m.complaint.claimpaidamount_exclVAT)
-
-                                                                    </div>
-                                                                    <div class="col-md-6">
-                                                                        <div class="form-group">
-                                                                            <label>Claim paid amount (incl VAT)</label>
-                                                                            @Html.TextBoxFor(m => m.complaint.claimpaidamount_inclVAT, new { @class = "form-control m-input" })
-                                                                            @Html.ValidationMessageFor(m => m.complaint.claimpaidamount_inclVAT)
-
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="row">
-                                                            <div class="col-md-6">
-                                                                <div class="row">
-                                                                    <div class="col-md-5">
-                                                                        <label>Claimant VAT registered :</label>
-                                                                        <div class="mt-radio-inline">
-                                                                            <label class="mt-radio mt-radio-outline margin-bottom0" style="font-size:13px;">
-                                                                                @Html.RadioButtonFor(m => m.complaint.IsVATregistered, "No", new { @checked = "checked" })
-                                                                                No
-                                                                                <span></span>
-                                                                            </label>
-                                                                            <label class="mt-radio mt-radio-outline margin-bottom0" style="font-size:13px;">
-                                                                                @Html.RadioButtonFor(m => m.complaint.IsVATregistered, "Yes")
-                                                                                Yes
-                                                                                <span></span>
-                                                                            </label>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="col-md-7">
-                                                                        <div class="form-group">
-                                                                            <label>VAT number</label>
-                                                                            @Html.TextBoxFor(m => m.complaint.VAT_number, new { @class = "form-control m-input" })
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-md-6">
-                                                                <label></label>
-                                                                <div class="input-group">
-                                                                    <label>Invoice number : <span style="color:rgba(40, 116, 143, 1);font-weight:bold">BR 00112233</span></label>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="row">
-                                                            <div class="col-md-6">
-                                                                <div class="row">
-                                                                    <div class="col-md-5">
-                                                                        <label>Payee :</label>
-                                                                        <div class="mt-radio-inline">
-                                                                            <label class="mt-radio mt-radio-outline margin-bottom0" style="font-size:13px;">
-                                                                                @Html.RadioButtonFor(m => m.complaint.IsPayee, "No", new { @checked = "checked" })
-                                                                                No
-                                                                                <span></span>
-                                                                            </label>
-                                                                            <label class="mt-radio mt-radio-outline margin-bottom0" style="font-size:13px;">
-                                                                                @Html.RadioButtonFor(m => m.complaint.IsPayee, "Yes")
-                                                                                Yes
-                                                                                <span></span>
-                                                                            </label>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="col-md-7">
-                                                                        <div class="form-group">
-                                                                            <label>Panel Attorneys</label>
-                                                                            @Html.TextBoxFor(m => m.complaint.Panel_Attorneys, new { @class = "form-control m-input" })
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-
-                                                        @*<div class="row">
-                                                                <div class="col-md-6">
-                                                                        <div class="form-group">
-                                                                            <label>Regulatory body reference number</label>
-                                                                            <input type="text" id="AreaTitle" name="AreaTitle" class="form-control m-input" placeholder="Enter reference number" />
-                                                                        </div>
-                                                                    </div>
-                                                                <div class="col-md-6">
-                                                                    <div class="form-group">
-                                                                        <label>Case file stage</label>
-                                                                        @Html.DropDownListFor(m => m.complaint.CaseFileStage, new SelectList(Model.CaseFileStageList, "Value", "Text", 0), "--Select File Stage--", new { @data_live_search = "true", @class = "form-control bs-select" })
-                                                                        @Html.ValidationMessageFor(m => m.complaint.CaseFileStage)
-
-                                                                    </div>
-                                                                </div>
-                                                            </div>*@
-
-                                                        <div class="row">
-                                                            <div class="col-md-6">
-                                                                <div class="form-group">
-                                                                    <label>Event type</label>
-                                                                    @Html.DropDownListFor(m => m.complaint.Eventtype, new SelectList(Model.CaseFileStageList, "Value", "Text", 0), "--Select File Stage--", new { @data_live_search = "true", @class = "form-control bs-select" })
-                                                                    @Html.ValidationMessageFor(m => m.complaint.Eventtype)
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-md-6">
-                                                                <div class="form-group">
-                                                                    <label>Description of loss</label>
-                                                                    @Html.DropDownListFor(m => m.complaint.Descofloss, new SelectList(Model.CaseFileStageList, "Value", "Text", 0), "--Select File Stage--", new { @data_live_search = "true", @class = "form-control bs-select" })
-                                                                    @Html.ValidationMessageFor(m => m.complaint.Descofloss)
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="form-actions">
-                                                <div class="col-lg-6">
-                                                    <button type="button" class="btn btn-primary btnPrevious">Previous</button>
-                                                </div>
-                                                <div class="col-lg-6 text-right">
-                                                    <button type="button" class="btn btn-primary btnNext">Next</button>
-                                                    <button type="button" class="btn btn-primary btnSubmit" onclick="ComplaintFormSubmit();">Save</button>
-                                                    <button type="button" onclick="location.href = '/CRT/CRTList'" class="btn default" data-dismiss="modal">Cancel</button>
-                                                </div>
-                                            </div>
-                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -934,7 +798,7 @@
         }
 
         $(document).ready(function () {
-            if (status != null && status == "NEW") {
+            if (status != null && status == "WEB SUBMISSION") {
                 $("#DivProduct, #DivCategory").hide();
                 //$("#m_tabs_5_2").hide();
                 //$("#m_tabs_5_3").hide();
@@ -994,28 +858,28 @@
                     $(this).closest("li").addClass("active");
                     $("#tab1,#tab3").hide();
                     $(".btnPrevious").show();
-                    $(".btnSubmit").hide();
-                    $(".btnNext").show();
-                    $(".bs-select").selectpicker('refresh');
-                }
-            });
-
-            $("#m_tabs_5_3").click(function () {
-                $("#frmComplaint").valid();
-                if ($("#frmComplaint .tab-content .active .field-validation-error").length > 0 || $("#frmComplaint .tab-content .active .field-validation-error").length > 0) { }
-                else {
-                    $("#tab3").fadeIn();
-                    $("#tab3").addClass("active");
-                    $("#tab1,#tab2").removeClass("active");
-                    $(this).closest("ul").children("li").removeClass("active");
-                    $(this).closest("li").addClass("active");
-                    $("#tab1,#tab2").hide();
-                    $(".btnPrevious").show();
                     $(".btnSubmit").show();
                     $(".btnNext").hide();
                     $(".bs-select").selectpicker('refresh');
                 }
             });
+
+            //$("#m_tabs_5_3").click(function () {
+            //    $("#frmComplaint").valid();
+            //    if ($("#frmComplaint .tab-content .active .field-validation-error").length > 0 || $("#frmComplaint .tab-content .active .field-validation-error").length > 0) { }
+            //    else {
+            //        $("#tab3").fadeIn();
+            //        $("#tab3").addClass("active");
+            //        $("#tab1,#tab2").removeClass("active");
+            //        $(this).closest("ul").children("li").removeClass("active");
+            //        $(this).closest("li").addClass("active");
+            //        $("#tab1,#tab2").hide();
+            //        $(".btnPrevious").show();
+            //        $(".btnSubmit").show();
+            //        $(".btnNext").hide();
+            //        $(".bs-select").selectpicker('refresh');
+            //    }
+            //});
 
             if ($("#complaint_regulatory").val() == "No") {
                 $('#complaint_feedback').val("Not Applicable");
@@ -1036,9 +900,7 @@
                 if (selA == "m_tabs_5_1") {
                     $("#m_tabs_5_2").trigger("click");
                 }
-                else if (selA == "m_tabs_5_2") {
-                    $("#m_tabs_5_3").trigger("click");
-                }
+
             }
         });
 
@@ -1046,9 +908,6 @@
             var selA = $(".employee").find("li.active").children("a").attr("id");
             if (selA == "m_tabs_5_2") {
                 $("#m_tabs_5_1").trigger("click");
-            }
-            else if (selA == "m_tabs_5_3") {
-                $("#m_tabs_5_2").trigger("click");
             }
         });
 
@@ -1311,20 +1170,11 @@
             $(".btnPrevious").addClass('hide');
             $(".btnNext").addClass('hide');
             $(".newSubmit").removeClass('hide');
+            AddnewnoteforNocomplaint();
         });
 
-        function ComplaintFormSubmit() {
-            if ($("#frmComplaint").valid()) {
-                $("#frmComplaint *").removeAttr("disabled");
-                //Chkclient();
-                Chkclientforwebsubmission();
-                ShowLoader();
-                $("#frmComplaint").submit();
-            }
-        }
-
-        function Addnewnote() {
-            //debugger;
+        function AddnewnoteforNocomplaint() {
+            debugger;
             var ExpIndex = $("#Index").val();
             var htlml1 = $("#FileNote_" + ExpIndex).html();
             ExpIndex = parseInt(ExpIndex);
@@ -1336,6 +1186,56 @@
             html += "<div class='col-md-6'><div class='form-group'>"
             //html += "<label>File note ID:" + value + "  <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>File note date:  </label>"
             html += "<label></label>"
+            html += "<input type='hidden' name='NoteList[" + ExpIndex + "].FileName id='NoteList_" + ExpIndex + "__FileName' value='' />"
+            html += "<input type='hidden' class='CustomField' name='NoteList[" + ExpIndex + "].Attachment' id='NoteList_" + ExpIndex + "__Attachment' value='' />"
+            html += "<textarea class='form-control m-input abc' cols='20' id='NoteList_" + ExpIndex + "__NoteText' name='NoteList[" + ExpIndex + "].NoteText' placeholder='Enter Description' rows='2'></textarea></div>"
+            //html += "<label>Author: Web Submission</label>"
+           // html += "<button type='button' style='padding:3px;margin-left:380px;' onclick='RemoveDiv(" + ExpIndex + ");' class='btn default' data-dismiss='modal'>Remove</button>"
+            html += "<button type='button' onclick='Addnewnote();' class='btn default' style='padding:3px;color:black;background-color:#acb7ca;margin-left: 443px;'>Add note</button>"
+            html += "</div>"
+            html += "<div class='col-md-6'><div class='col-md-4'><div class='form-group'>"
+            html += "<label style='margin-top:20px;'>Upload Attachment</label>"
+            html += "<div class='fileinput margin-0 fileinput-new' data-provides='fileinput'>"
+            html += "<input type='file' onchange='Upload(this)' rpid=" + ExpIndex + " isnew='isnew' name='Term_" + ExpIndex + "' id='Term_" + ExpIndex + "' accept='.doc,.docx,.pdf,image/*'>"
+            html += "</div></div></div></div>"
+            html += "</div>";
+
+            $("#multiple_Notes").append(html);
+            $("#FileNote_" + ExpIndex + " .CustomField").val("Term_" + ExpIndex + "");
+
+            //$("#" + ID + "").find('input[type="file"]').attr("id", "Term_" + ExpIndex + "");
+            //$("#" + ID + "").find('input[type="file"]').attr("name", "Term_" + ExpIndex + "");
+
+        }
+
+        function ComplaintFormSubmit() {
+
+            if ($("#frmComplaint").valid()) {
+                $("#frmComplaint *").removeAttr("disabled");
+                //Chkclient();
+                Chkclientforwebsubmission();
+                ShowLoader();
+                NotesIndexOrdering();
+                $("#frmComplaint").submit();
+            }
+
+        }
+
+        function Addnewnote() {
+            
+            var ExpIndex = $("#Index").val();
+            var htlml1 = $("#FileNote_" + ExpIndex).html();
+            ExpIndex = parseInt(ExpIndex);
+            ExpIndex = ExpIndex + 1;
+            $("#Index").val(ExpIndex);
+            var value = pad2(ExpIndex + 1);
+
+            var html = "<div class='row notediv'  id='FileNote_" + ExpIndex + "'><input type='hidden' value=" + ExpIndex + "/>"
+            html += "<div class='col-md-6'><div class='form-group'>"
+            //html += "<label>File note ID:" + value + "  <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>File note date:  </label>"
+            html += "<label></label>"
+            html += "<input type='hidden' name='NoteList[" + ExpIndex + "].FileName id='NoteList_" + ExpIndex + "__FileName' value='' />"
+            html += "<input type='hidden' class='CustomField' name='NoteList[" + ExpIndex + "].Attachment' id='NoteList_" + ExpIndex + "__Attachment' value='' />"
             html += "<textarea class='form-control m-input abc' cols='20' id='NoteList_" + ExpIndex + "__NoteText' name='NoteList[" + ExpIndex + "].NoteText' placeholder='Enter Description' rows='2'></textarea></div>"
             //html += "<label>Author: Web Submission</label>"
             html += "<button type='button' style='padding:3px;margin-left:380px;' onclick='RemoveDiv(" + ExpIndex + ");' class='btn default' data-dismiss='modal'>Remove</button>"
@@ -1344,15 +1244,26 @@
             html += "<div class='col-md-6'><div class='col-md-4'><div class='form-group'>"
             html += "<label style='margin-top:20px;'>Upload Attachment</label>"
             html += "<div class='fileinput margin-0 fileinput-new' data-provides='fileinput'>"
-            html += "<input type='file' onchange='Upload(this)' rpid=" + ExpIndex + " isnew='isnew' name='NoteList[" + ExpIndex + "].FilePath' id='NoteList_" + ExpIndex + "__FilePath' accept='.doc,.docx,.pdf,image/*'>"
+            html += "<input type='file' onchange='Upload(this)' rpid=" + ExpIndex + " isnew='isnew' name='Term_" + ExpIndex + "' id='Term_" + ExpIndex + "' accept='.doc,.docx,.pdf,image/*'>"
             html += "</div></div></div></div>"
             html += "</div>";
 
             $("#multiple_Notes").append(html);
+            $("#FileNote_" + ExpIndex + " .CustomField").val("Term_" + ExpIndex + "");
+
+            //$("#" + ID + "").find('input[type="file"]').attr("id", "Term_" + ExpIndex + "");
+            //$("#" + ID + "").find('input[type="file"]').attr("name", "Term_" + ExpIndex + "");
+
         }
         function NotesIndexOrdering() {
             var note = $("#multiple_Notes");
             note.find('div.notediv').each(function (i) {
+
+                $(this).find("input[type='hidden']:eq(0)").attr("id", "NoteList_" + i + "__FileName");
+                $(this).find("input[type='hidden']:eq(0)").attr("name", "NoteList[" + i + "].FileName");
+
+                $(this).find("input[type='hidden']:eq(1)").attr("id", "NoteList_" + i + "__Attachment");
+                $(this).find("input[type='hidden']:eq(1)").attr("name", "NoteList[" + i + "].Attachment");
 
                 $(this).find('textarea').attr("id", "NoteList_" + i + "__NoteText");
                 $(this).find('textarea').attr("name", "NoteList[" + i + "].NoteText");
@@ -1364,14 +1275,36 @@
         }
 
         function RemoveDiv(index) {
-            $("#FileNote_" + index).remove();
+            $("#multiple_Notes").find($("#FileNote_" + index)).remove();
         }
+
+        //function validation() {
+        //    note.find('div.notediv').each(function (i) {
+        //        if()
+        //    });
+        //}
 
         function pad2(number) {
             return (number < 10 ? '0' : '') + number
         }
+
+                            //function Upload(DocID) {
+                            //    var size = DocID.files[0].size;
+                            //    var fileExtension = DocID.value.substring(DocID.value.lastIndexOf(".") + 1);
+                            //    if (fileExtension == "doc" || fileExtension == "docx" || fileExtension == "pdf" || fileExtension == "jpg" || fileExtension == "jpeg" || fileExtension == "png") {
+                            //        if (size > 1048576) {
+                            //            toastr["error"]("File should not be more than 1 MB.", { "positionClass": "toast-top-right", "progressBar": true });
+                            //            DocID.value = "";
+                            //        };
+                            //        document.getElementById('VALmassage').innerHTML = '';
+                            //    }
+                            //    else {
+                            //        document.getElementById('VALmassage').innerHTML = 'File must be doc,docx or pdf!';
+                            //    }
+                            //}
     </script>
 }
+
 
 
 

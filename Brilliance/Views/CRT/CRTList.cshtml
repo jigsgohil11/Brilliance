@@ -79,7 +79,7 @@
                                                 }
                                                 else
                                                 {
-                                                    <label style="font-weight:bold;">@item.IsResolved</label>
+                                                    <label style="font-weight:bold;color:darkblue">@item.IsResolved</label>
                                                 }
                                             }
                                         </td>
@@ -124,6 +124,27 @@
     <script>
         var table = $('#dt_complaint').DataTable({});
     </script>
+    @if (!string.IsNullOrEmpty(Convert.ToString(TempData["Success"])) && Convert.ToString(TempData["Success"]) != "Server Error")
+    {
+        <script>
+            var message = '@TempData["Success"]';
+            toastr.success(message, "Complaint", { "positionClass": "toast-bottom-right", "progressBar": true });
+        </script>
+    }
+    else if (!string.IsNullOrEmpty(Convert.ToString(TempData["Success"])))
+    {
+        <script>
+            var message = '@TempData["Success"]';
+            toastr.error(message, "Complaint", { "positionClass": "toast-bottom-right", "progressBar": true });
+        </script>
+    }
+    else if (!string.IsNullOrEmpty(Convert.ToString(TempData["Failed"])))
+    {
+        <script>
+            var message = '@TempData["Failed"]';
+            toastr.error(message, "Complaint", { "positionClass": "toast-bottom-right", "progressBar": true });
+        </script>
+    }
     <script>
             $(document).ready(function () {
                 ShowPageLoadMessage("complaintsaved", "Complaint");

@@ -132,5 +132,11 @@ namespace Brilliance.Infrastructure
         public const string TECHNICALREVIEW = "TECHNICALREVIEW";
         public const string APPROVED = "APPROVED";
         public const string EandM = "EandM";
+
+        #region profileimage
+       
+        public const string ComplaintFilenotePath = "~/ComplaintFiles/";
+
+        #endregion
     }
 }

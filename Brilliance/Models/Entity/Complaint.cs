@@ -12,7 +12,7 @@ namespace Brilliance.Models.Entity
     {
 
         public Guid ComplaintID { get; set; }
-        [Required(ErrorMessage ="Company is required.")]
+        [Required(ErrorMessage = "Company is required.")]
         public Guid? CompanyId { get; set; }
         [Required(ErrorMessage = "Division is required.")]
         public Guid? DivisionId { get; set; }
@@ -108,12 +108,15 @@ namespace Brilliance.Models.Entity
         [ResultColumn]
         public string ResolvedDate { get; set; }
 
+        [ResultColumn]
+        public bool IsEdit { get; set; }
+
 
         [Ignore]
         public string EncryptedComplaintID { get { return ComplaintID != Guid.Empty ? Crypto.Encrypt(Convert.ToString(ComplaintID)) : null; } }
 
         [Ignore]
-        public bool IsEdit { get { return ComplaintID != Guid.Empty ? true : false; } }
+        public bool IsEditforNotes { get { return ComplaintID != Guid.Empty ? true : false; } }
 
     }
 }

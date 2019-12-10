@@ -56,18 +56,16 @@ namespace Brilliance.Infrastructure.DataProvider
             }
             return complaintlistVM;
         }
-        public ServiceResponse SaveComplaints(ComplaintViewModel Complaintmodel)
+        public ServiceResponse SaveComplaints(ComplaintViewModel Complaintmodel, DataTable complaint_note)
         {
             var response = new ServiceResponse();
             try
             {
 
-
                 if (Complaintmodel.complaint.IsEdit == false)
                 {
-
                     SqlCommand cmd = new SqlCommand();
-                    cmd.Parameters.AddWithValue("@ComplaintID", Guid.NewGuid()).SqlDbType = SqlDbType.UniqueIdentifier;
+                    cmd.Parameters.AddWithValue("@ComplaintID", Complaintmodel.complaint.ComplaintID).SqlDbType = SqlDbType.UniqueIdentifier;
                     cmd.Parameters.AddWithValue("@CompanyId", Complaintmodel.complaint.CompanyId).SqlDbType = SqlDbType.UniqueIdentifier;
                     cmd.Parameters.AddWithValue("@DivisionId", Complaintmodel.complaint.DivisionId).SqlDbType = SqlDbType.UniqueIdentifier;
                     cmd.Parameters.AddWithValue("@PolicyNumber", Complaintmodel.complaint.PolicyNumber).SqlDbType = SqlDbType.NVarChar;
@@ -109,9 +107,9 @@ namespace Brilliance.Infrastructure.DataProvider
                         else
                             cmd.Parameters.AddWithValue("@IsResolved", "Not yet").SqlDbType = SqlDbType.NVarChar;
                     }
-                    
+
                     if (Complaintmodel.complaint.IsComplaint != null && Complaintmodel.complaint.IsComplaint.ToUpper() == "NO")
-                        cmd.Parameters.AddWithValue("@DateResolved",DateTime.Now).SqlDbType = SqlDbType.DateTime;
+                        cmd.Parameters.AddWithValue("@DateResolved", DateTime.Now).SqlDbType = SqlDbType.DateTime;
                     else
                         cmd.Parameters.AddWithValue("@DateResolved", Complaintmodel.complaint.DateResolved).SqlDbType = SqlDbType.DateTime;
 
@@ -133,6 +131,8 @@ namespace Brilliance.Infrastructure.DataProvider
                     cmd.Parameters.AddWithValue("@UpdatedOn", null).SqlDbType = SqlDbType.DateTime;
                     cmd.Parameters.AddWithValue("@UpdatedBy", null).SqlDbType = SqlDbType.UniqueIdentifier;
                     cmd.Parameters.AddWithValue("@IsEdit", Complaintmodel.complaint.IsEdit).SqlDbType = SqlDbType.Bit;
+                    cmd.Parameters.AddWithValue("@dtcomplaintNotes", complaint_note).SqlDbType = SqlDbType.Structured;
+
 
                     DataSet ds = null;
                     ds = BulkInsert("Save_Complaint", cmd);
@@ -205,6 +205,7 @@ namespace Brilliance.Infrastructure.DataProvider
                     cmd.Parameters.AddWithValue("@UpdatedOn", DateTime.Now).SqlDbType = SqlDbType.DateTime;
                     cmd.Parameters.AddWithValue("@UpdatedBy", SessionHelper.UserId).SqlDbType = SqlDbType.UniqueIdentifier;
                     cmd.Parameters.AddWithValue("@IsEdit", Complaintmodel.complaint.IsEdit).SqlDbType = SqlDbType.Bit;
+                    cmd.Parameters.AddWithValue("@dtcomplaintNotes", complaint_note).SqlDbType = SqlDbType.Structured;
 
 
                     DataSet ds = null;
