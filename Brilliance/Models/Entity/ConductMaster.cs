@@ -332,6 +332,7 @@ namespace Brilliance.Models.Entity
         public bool IsDeleted { get; set; }
         [Ignore]
         public bool IsEdit { get { return TemplateId != Guid.Empty ? true : false; } }
+
     }
     public class TemplateMasterOutCome
     {

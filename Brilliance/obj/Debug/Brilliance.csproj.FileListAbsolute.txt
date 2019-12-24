@@ -305,3 +305,16 @@ D:\NEHA_Isoftnetech\Projects\Brilliance\Latest Work\Brilliance\obj\Debug\Brillia
 D:\NEHA_Isoftnetech\Projects\Brilliance\Latest Work\Brilliance\obj\Debug\Brilliance.dll
 D:\NEHA_Isoftnetech\Projects\Brilliance\Latest Work\Brilliance\obj\Debug\Brilliance.pdb
 D:\NEHA_Isoftnetech\Projects\Brilliance\Latest Work\Brilliance\obj\Debug\Brilliance.csprojAssemblyReference.cache
+D:\iSoftNet Work\Brilliance\Latest Work\Brilliance\Brilliance\bin\Microsoft.AspNet.Identity.Core.dll
+D:\iSoftNet Work\Brilliance\Latest Work\Brilliance\Brilliance\bin\Microsoft.AspNet.Identity.Owin.dll
+D:\iSoftNet Work\Brilliance\Latest Work\Brilliance\Brilliance\bin\Microsoft.Owin.dll
+D:\iSoftNet Work\Brilliance\Latest Work\Brilliance\Brilliance\bin\Microsoft.Owin.Security.Cookies.dll
+D:\iSoftNet Work\Brilliance\Latest Work\Brilliance\Brilliance\bin\Microsoft.Owin.Security.dll
+D:\iSoftNet Work\Brilliance\Latest Work\Brilliance\Brilliance\bin\Microsoft.Owin.Security.OAuth.dll
+D:\iSoftNet Work\Brilliance\Latest Work\Brilliance\Brilliance\bin\Owin.dll
+D:\iSoftNet Work\Brilliance\Latest Work\Brilliance\Brilliance\bin\Microsoft.AspNet.Identity.Core.xml
+D:\iSoftNet Work\Brilliance\Latest Work\Brilliance\Brilliance\bin\Microsoft.AspNet.Identity.Owin.xml
+D:\iSoftNet Work\Brilliance\Latest Work\Brilliance\Brilliance\bin\Microsoft.Owin.xml
+D:\iSoftNet Work\Brilliance\Latest Work\Brilliance\Brilliance\bin\Microsoft.Owin.Security.xml
+D:\iSoftNet Work\Brilliance\Latest Work\Brilliance\Brilliance\bin\Microsoft.Owin.Security.Cookies.xml
+D:\iSoftNet Work\Brilliance\Latest Work\Brilliance\Brilliance\bin\Microsoft.Owin.Security.OAuth.xml
