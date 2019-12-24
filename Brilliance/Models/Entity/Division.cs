@@ -13,8 +13,8 @@ namespace Brilliance.Models.Entity
 
         [Key]
         public Guid DivisionID { get; set; }
-        [MaxLength(7)]
-        [Required(ErrorMessage = "Code is required.")]
+
+        //[RegularExpression(@"^.{1,50}$", ErrorMessage = "only 5 character")]
         public string Code { get; set; }
         [MaxLength(167)]
         [Required(ErrorMessage = "Division Name is required.")]
@@ -31,17 +31,31 @@ namespace Brilliance.Models.Entity
         public DateTime? UpdatedOn { get; set; }
         public Guid? CreatedBy { get; set; }
         public Guid? UpdatedBy { get; set; }
+        public Guid? DivisionType { get; set; }
+
         [ResultColumn]
         public string Company { get; set; }
+
+        [ResultColumn]
+        public string Type { get; set; }
         [ResultColumn]
 
         public string Client { get; set; }
 
-        [Ignore]
-        public string EncryptedDivisionID { get { return DivisionID != Guid.Empty ? Crypto.Encrypt(Convert.ToString(DivisionID)) : null; } }
+        [ResultColumn]
+        public string OrganizationName { get; set; }
 
         [Ignore]
-        public bool IsEdit { get { return DivisionID != Guid.Empty ? true : false; } }
+        public string EncryptedDivisionID { get { return DivisionID != Guid.Empty ? Crypto.Encrypt(Convert.ToString(DivisionID)) : null; } }
+        [Ignore]
+        public string EncryptedClientID { get { return ClientID != Guid.Empty ? Crypto.Encrypt(Convert.ToString(ClientID)) : null; } }
+        [Ignore]
+        public string EncryptedCompanyID { get { return CompanyID != Guid.Empty ? Crypto.Encrypt(Convert.ToString(CompanyID)) : null; } }
+
+        //[Ignore]
+        //public bool IsEdit { get { return DivisionID != Guid.Empty ? true : false; } }
+        [ResultColumn]
+        public bool IsEdit { get; set; }
 
     }
 }

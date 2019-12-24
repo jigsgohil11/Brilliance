@@ -71,7 +71,7 @@ namespace Brilliance.Infrastructure.DataProvider
                     cmd.Parameters.AddWithValue("@ClientID", companymodel.company.ClientID).SqlDbType = SqlDbType.UniqueIdentifier;
                     cmd.Parameters.AddWithValue("@Description", companymodel.company.Description).SqlDbType = SqlDbType.NVarChar;
                     cmd.Parameters.AddWithValue("@Address", companymodel.company.Address).SqlDbType = SqlDbType.NVarChar;
-                    cmd.Parameters.AddWithValue("@UnitNo", companymodel.company.UnitNo).SqlDbType = SqlDbType.NVarChar;
+                    cmd.Parameters.AddWithValue("@UnitNo", companymodel.company.FspNo).SqlDbType = SqlDbType.NVarChar;
                     cmd.Parameters.AddWithValue("@Complex", companymodel.company.Complex).SqlDbType = SqlDbType.NVarChar;
                     cmd.Parameters.AddWithValue("@Street", companymodel.company.Street).SqlDbType = SqlDbType.NVarChar;
                     cmd.Parameters.AddWithValue("@StreetNo", companymodel.company.StreetNo).SqlDbType = SqlDbType.NVarChar;
@@ -107,7 +107,7 @@ namespace Brilliance.Infrastructure.DataProvider
                     cmd.Parameters.AddWithValue("@ClientID", companymodel.company.ClientID).SqlDbType = SqlDbType.UniqueIdentifier;
                     cmd.Parameters.AddWithValue("@Description", companymodel.company.Description).SqlDbType = SqlDbType.NVarChar;
                     cmd.Parameters.AddWithValue("@Address", companymodel.company.Address).SqlDbType = SqlDbType.NVarChar;
-                    cmd.Parameters.AddWithValue("@UnitNo", companymodel.company.UnitNo).SqlDbType = SqlDbType.NVarChar;
+                    cmd.Parameters.AddWithValue("@UnitNo", companymodel.company.FspNo).SqlDbType = SqlDbType.NVarChar;
                     cmd.Parameters.AddWithValue("@Complex", companymodel.company.Complex).SqlDbType = SqlDbType.NVarChar;
                     cmd.Parameters.AddWithValue("@Street", companymodel.company.Street).SqlDbType = SqlDbType.NVarChar;
                     cmd.Parameters.AddWithValue("@StreetNo", companymodel.company.StreetNo).SqlDbType = SqlDbType.NVarChar;

@@ -903,11 +903,11 @@ div.DTFC_LeftWrapper table.dataTable, div.DTFC_RightWrapper table.dataTable {
     margin-top: 5px;
 }
 
-.required1:after {
+/*.required1:after {
     content: "*";
     font-weight: bold;
     color: red;
-}
+}*/
 
 .label-custom {
     padding-top: 7px;

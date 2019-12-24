@@ -12,8 +12,8 @@ namespace Brilliance.Models.Entity
     {
         [Key]
         public Guid CompanyID { get; set; }
-        [MaxLength(17)]
-        [Required(ErrorMessage = "Company code is required.")]
+        
+        [StringLength(5, ErrorMessage = "Maximum length is 5")]
         public string CompanyCode { get; set; }
         [MaxLength(370)]
         [Required(ErrorMessage = "Company name is required.")]
@@ -21,7 +21,8 @@ namespace Brilliance.Models.Entity
 
         [Required(ErrorMessage = "Address is required.")]
         public string Address { get; set; }
-        public string UnitNo { get; set; }
+        [StringLength(5, ErrorMessage = "Maximum length is 5")]
+        public string FspNo { get; set; }
         public string Complex { get; set; }
         public string StreetNo { get; set; }
         public string Street { get; set; }
@@ -96,11 +97,18 @@ namespace Brilliance.Models.Entity
         public string Description { get; set; }
         public Guid? SectorID { get; set; }
         public Guid? IndustryID { get; set; }
+
+        [ResultColumn]
+        public string OrganizationName { get; set; }
         [Ignore]
         public string EncryptedCompanyID { get { return CompanyID != Guid.Empty ? Crypto.Encrypt(Convert.ToString(CompanyID)) : null; } }
+        [ResultColumn]
+        public string EncryptedClientID { get { return ClientID != Guid.Empty ? Crypto.Encrypt(Convert.ToString(ClientID)) : null; } }
 
         [Ignore]
         public bool IsEdit { get { return CompanyID != Guid.Empty ? true : false; } }
 
+        [ResultColumn]
+        public bool IsInsert { get; set; }
     }
 }

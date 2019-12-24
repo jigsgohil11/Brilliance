@@ -1,500 +1,462 @@
 ﻿@using Brilliance.Infrastructure;
-    <!DOCTYPE html>
-    <!--
-    Template Name: Metronic - Responsive Admin Dashboard Template build with Twitter Bootstrap 3.3.7
-    Version: 4.7.5
-    Author: KeenThemes
-    Website: http://www.keenthemes.com/
-    Contact: support@keenthemes.com
-    Follow: www.twitter.com/keenthemes
-    Dribbble: www.dribbble.com/keenthemes
-    Like: www.facebook.com/keenthemes
-    Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-template/4021469?ref=keenthemes
-    Renew Support: http://themeforest.net/item/metronic-responsive-admin-dashboard-template/4021469?ref=keenthemes
-    License: You must have a valid license purchased only from themeforest(the above link) in order to legally use the theme for your project.
-    -->
-    <!--[if IE 8]> <html lang="en" class="ie8 no-js"> <![endif]-->
-    <!--[if IE 9]> <html lang="en" class="ie9 no-js"> <![endif]-->
-    <!--[if !IE]><!-->
-    <html lang="en">
-    <!--<![endif]-->
-    <!-- BEGIN HEAD -->
-    <head>
-        <meta charset="utf-8" />
-        <title>Brilliance</title>
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta content="width=device-width, initial-scale=1" name="viewport" />
-        @*<meta content="Preview page of Metronic Admin Theme #1 for bootstrap inputs, input groups, custom checkboxes and radio controls and more" name="description" />*@
-        @*<meta content="" name="author" />*@
-        <!-- BEGIN GLOBAL MANDATORY STYLES -->
-        s
-        <link href="~/assets/global/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
-        <link href="~/assets/global/plugins/simple-line-icons/simple-line-icons.min.css" rel="stylesheet" type="text/css" />
-        <link href="~/assets/global/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
-        <link href="~/assets/global/plugins/bootstrap-switch/css/bootstrap-switch.min.css" rel="stylesheet" type="text/css" />
-        <!-- END GLOBAL MANDATORY STYLES -->
-        <!-- BEGIN THEME GLOBAL STYLES -->
-        @*<link href="~/assets/global/css/components.min.css" rel="stylesheet" id="style_components" type="text/css" />*@
-        <link href="~/assets/global/css/components-rounded.min.css" rel="stylesheet" />
-        <link href="~/assets/apps/css/todo-2.min.css" rel="stylesheet" type="text/css" />
-        <link href="~/assets/global/css/plugins.min.css" rel="stylesheet" type="text/css" />
-        <link href="~/assets/global/plugins/bootstrap-select/css/bootstrap-select.css" rel="stylesheet" type="text/css" />
-        <!-- END THEME GLOBAL STYLES -->
-        <!-- BEGIN PAGE LEVEL STYLES -->
-        <link href="~/assets/pages/css/login-5.min.css" rel="stylesheet" type="text/css" />
-        @*<link href="~/assets/global/css/OMSCustom.css" rel="stylesheet" />*@
-        <!-- END PAGE LEVEL STYLES -->
-        <!-- BEGIN THEME LAYOUT STYLES -->
-        <link href="~/assets/layouts/layout/css/layout.min.css" rel="stylesheet" type="text/css" />
-        <link href="~/assets/layouts/layout/css/themes/darkblue.min.css" rel="stylesheet" type="text/css" id="style_color" />
-        <link href="~/assets/global/plugins/bootstrap-datepicker/css/bootstrap-datepicker3.min.css" rel="stylesheet" />
-        <link href="~/assets/layouts/layout/css/custom.min.css" rel="stylesheet" type="text/css" />
-        <link href="~/assets/global/plugins/bootstrap-toastr/toastr.css" rel="stylesheet" />
-        <link href="~/assets/global/css/OMSCustom.css" rel="stylesheet" />
-        <!-- END THEME LAYOUT STYLES -->
-        <link rel="shortcut icon" href="favicon.ico" />
-    </head>
-    <!-- END HEAD -->
-    <body class="page-header-fixed page-sidebar-closed-hide-logo page-content-white">
-        <div class="page-wrapper">
-            <!-- BEGIN HEADER -->
-            <div class="page-header navbar navbar-fixed-top">
-                <!-- BEGIN HEADER INNER -->
-                <div class="page-header-inner ">
-                    <!-- BEGIN LOGO -->
-                    <div class="page-logo">
-                        <a href="index.html">
-                            @*<img src="../assets/layouts/layout/img/logo.png" alt="logo" class="logo-default" />*@
-                            <img src="~/assets/global/img/brilliance-logo-small.png" alt="logo" class="logo-default" style="height:50px !important" />
-                        </a>
-                        <div class="menu-toggler sidebar-toggler">
-                            <span></span>
-                        </div>
-                    </div>
-                    <!-- END LOGO -->
-                    <!-- BEGIN RESPONSIVE MENU TOGGLER -->
-                    <a href="javascript:;" class="menu-toggler responsive-toggler" data-toggle="collapse" data-target=".navbar-collapse">
-                        <span></span>
+<!DOCTYPE html>
+<!--
+Template Name: Metronic - Responsive Admin Dashboard Template build with Twitter Bootstrap 3.3.7
+Version: 4.7.5
+Author: KeenThemes
+Website: http://www.keenthemes.com/
+Contact: support@keenthemes.com
+Follow: www.twitter.com/keenthemes
+Dribbble: www.dribbble.com/keenthemes
+Like: www.facebook.com/keenthemes
+Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-template/4021469?ref=keenthemes
+Renew Support: http://themeforest.net/item/metronic-responsive-admin-dashboard-template/4021469?ref=keenthemes
+License: You must have a valid license purchased only from themeforest(the above link) in order to legally use the theme for your project.
+-->
+<!--[if IE 8]> <html lang="en" class="ie8 no-js"> <![endif]-->
+<!--[if IE 9]> <html lang="en" class="ie9 no-js"> <![endif]-->
+<!--[if !IE]><!-->
+<html lang="en">
+<!--<![endif]-->
+<!-- BEGIN HEAD -->
+<head>
+    <meta charset="utf-8" />
+    <title>Brilliance</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta content="width=device-width, initial-scale=1" name="viewport" />
+    @*<meta content="Preview page of Metronic Admin Theme #1 for bootstrap inputs, input groups, custom checkboxes and radio controls and more" name="description" />*@
+    @*<meta content="" name="author" />*@
+    <!-- BEGIN GLOBAL MANDATORY STYLES -->
+    s
+    <link href="~/assets/global/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+    <link href="~/assets/global/plugins/simple-line-icons/simple-line-icons.min.css" rel="stylesheet" type="text/css" />
+    <link href="~/assets/global/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="~/assets/global/plugins/bootstrap-switch/css/bootstrap-switch.min.css" rel="stylesheet" type="text/css" />
+    <!-- END GLOBAL MANDATORY STYLES -->
+    <!-- BEGIN THEME GLOBAL STYLES -->
+    @*<link href="~/assets/global/css/components.min.css" rel="stylesheet" id="style_components" type="text/css" />*@
+    <link href="~/assets/global/css/components-rounded.min.css" rel="stylesheet" />
+    <link href="~/assets/apps/css/todo-2.min.css" rel="stylesheet" type="text/css" />
+    <link href="~/assets/global/css/plugins.min.css" rel="stylesheet" type="text/css" />
+    <link href="~/assets/global/plugins/bootstrap-select/css/bootstrap-select.css" rel="stylesheet" type="text/css" />
+    <!-- END THEME GLOBAL STYLES -->
+    <!-- BEGIN PAGE LEVEL STYLES -->
+    <link href="~/assets/pages/css/login-5.min.css" rel="stylesheet" type="text/css" />
+    @*<link href="~/assets/global/css/OMSCustom.css" rel="stylesheet" />*@
+    <!-- END PAGE LEVEL STYLES -->
+    <!-- BEGIN THEME LAYOUT STYLES -->
+    <link href="~/assets/layouts/layout/css/layout.min.css" rel="stylesheet" type="text/css" />
+    <link href="~/assets/layouts/layout/css/themes/darkblue.min.css" rel="stylesheet" type="text/css" id="style_color" />
+    <link href="~/assets/global/plugins/bootstrap-datepicker/css/bootstrap-datepicker3.min.css" rel="stylesheet" />
+    <link href="~/assets/layouts/layout/css/custom.min.css" rel="stylesheet" type="text/css" />
+    <link href="~/assets/global/plugins/bootstrap-toastr/toastr.css" rel="stylesheet" />
+    <link href="~/assets/global/css/OMSCustom.css" rel="stylesheet" />
+    <!-- END THEME LAYOUT STYLES -->
+    <link rel="shortcut icon" href="favicon.ico" />
+</head>
+<!-- END HEAD -->
+<body class="page-header-fixed page-sidebar-closed-hide-logo page-content-white">
+    <div class="page-wrapper">
+        <!-- BEGIN HEADER -->
+        <div class="page-header navbar navbar-fixed-top">
+            <!-- BEGIN HEADER INNER -->
+            <div class="page-header-inner ">
+                <!-- BEGIN LOGO -->
+                <div class="page-logo">
+                    <a href="index.html">
+                        @*<img src="../assets/layouts/layout/img/logo.png" alt="logo" class="logo-default" />*@
+                        <img src="~/assets/global/img/brilliance-logo-small.png" alt="logo" class="logo-default" style="height:50px !important" />
                     </a>
-                    <!-- END RESPONSIVE MENU TOGGLER -->
-                    <!-- BEGIN TOP NAVIGATION MENU -->
-                    <div class="top-menu">
-                        <ul class="nav navbar-nav pull-right">
-                            <!-- BEGIN NOTIFICATION DROPDOWN -->
-                            <!-- DOC: Apply "dropdown-dark" class after "dropdown-extended" to change the dropdown styte -->
-                            <!-- DOC: Apply "dropdown-hoverable" class after below "dropdown" and remove data-toggle="dropdown" data-hover="dropdown" data-close-others="true" attributes to enable hover dropdown mode -->
-                            <!-- DOC: Remove "dropdown-hoverable" and add data-toggle="dropdown" data-hover="dropdown" data-close-others="true" attributes to the below A element with dropdown-toggle class -->
-                            <li class="dropdown dropdown-extended dropdown-notification" id="header_notification_bar">
-                                <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
-                                    <i class="icon-bell"></i>
-                                    <span class="badge badge-default"> 7 </span>
-                                </a>
-                                <ul class="dropdown-menu">
-                                    <li class="external">
-                                        <h3>
-                                            <span class="bold">12 pending</span> notifications
-                                        </h3>
-                                        <a href="page_user_profile_1.html">view all</a>
-                                    </li>
-                                    <li>
-                                        <ul class="dropdown-menu-list scroller" style="height: 250px;" data-handle-color="#637283">
-                                            <li>
-                                                <a href="javascript:;">
-                                                    <span class="time">just now</span>
-                                                    <span class="details">
-                                                        <span class="label label-sm label-icon label-success">
-                                                            <i class="fa fa-plus"></i>
-                                                        </span> New user registered.
-                                                    </span>
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="javascript:;">
-                                                    <span class="time">3 mins</span>
-                                                    <span class="details">
-                                                        <span class="label label-sm label-icon label-danger">
-                                                            <i class="fa fa-bolt"></i>
-                                                        </span> Server #12 overloaded.
-                                                    </span>
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="javascript:;">
-                                                    <span class="time">10 mins</span>
-                                                    <span class="details">
-                                                        <span class="label label-sm label-icon label-warning">
-                                                            <i class="fa fa-bell-o"></i>
-                                                        </span> Server #2 not responding.
-                                                    </span>
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="javascript:;">
-                                                    <span class="time">14 hrs</span>
-                                                    <span class="details">
-                                                        <span class="label label-sm label-icon label-info">
-                                                            <i class="fa fa-bullhorn"></i>
-                                                        </span> Application error.
-                                                    </span>
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="javascript:;">
-                                                    <span class="time">2 days</span>
-                                                    <span class="details">
-                                                        <span class="label label-sm label-icon label-danger">
-                                                            <i class="fa fa-bolt"></i>
-                                                        </span> Database overloaded 68%.
-                                                    </span>
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="javascript:;">
-                                                    <span class="time">3 days</span>
-                                                    <span class="details">
-                                                        <span class="label label-sm label-icon label-danger">
-                                                            <i class="fa fa-bolt"></i>
-                                                        </span> A user IP blocked.
-                                                    </span>
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="javascript:;">
-                                                    <span class="time">4 days</span>
-                                                    <span class="details">
-                                                        <span class="label label-sm label-icon label-warning">
-                                                            <i class="fa fa-bell-o"></i>
-                                                        </span> Storage Server #4 not responding dfdfdfd.
-                                                    </span>
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="javascript:;">
-                                                    <span class="time">5 days</span>
-                                                    <span class="details">
-                                                        <span class="label label-sm label-icon label-info">
-                                                            <i class="fa fa-bullhorn"></i>
-                                                        </span> System Error.
-                                                    </span>
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="javascript:;">
-                                                    <span class="time">9 days</span>
-                                                    <span class="details">
-                                                        <span class="label label-sm label-icon label-danger">
-                                                            <i class="fa fa-bolt"></i>
-                                                        </span> Storage server failed.
-                                                    </span>
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </li>
-                                </ul>
-                            </li>
-                            <!-- END NOTIFICATION DROPDOWN -->
-                            <!-- BEGIN USER LOGIN DROPDOWN -->
-                            <!-- DOC: Apply "dropdown-dark" class after below "dropdown-extended" to change the dropdown styte -->
-                            <li class="dropdown dropdown-user">
-                                <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
-                                    <img alt="" class="img-circle" src="../assets/layouts/layout/img/avatar3_small.jpg" />
-                                    <span class="username username-hide-on-mobile"> Neha </span>
-                                    <i class="fa fa-angle-down"></i>
-                                </a>
-                                <ul class="dropdown-menu dropdown-menu-default">
-                                    <li>
-                                        <a href="page_user_profile_1.html">
-                                            <i class="icon-user"></i> My Profile
-                                        </a>
-                                    </li>
-                                    @*<li>
-                                            <a href="/Setup/User/ChangeProfilePassword">
-                                                <i class="icon-user"></i> Change Password
-                                            </a>
-                                        </li>*@
-                                    <li>
-                                        <a href="/Login/Logout">
-                                            <i class="icon-key"></i> Log Out
-                                        </a>
-                                    </li>
-                                    @*<li>
-                                            <a href="page_user_login_1.html">
-                                                <i class="icon-key"></i> Log Out
-                                            </a>
-                                        </li>*@
-                                </ul>
-                            </li>
-                            <!-- END USER LOGIN DROPDOWN -->
-                        </ul>
+                    <div class="menu-toggler sidebar-toggler">
+                        <span></span>
                     </div>
-                    <!-- END TOP NAVIGATION MENU -->
                 </div>
-                <!-- END HEADER INNER -->
-            </div>
-            <!-- END HEADER -->
-            <!-- BEGIN HEADER & CONTENT DIVIDER -->
-            <div class="clearfix"> </div>
-            <!-- END HEADER & CONTENT DIVIDER -->
-            <!-- BEGIN CONTAINER -->
-            <div class="page-container">
-                <!-- BEGIN SIDEBAR -->
-                <div class="page-sidebar-wrapper">
-                    <div class="page-sidebar navbar-collapse collapse">
-                        <ul class="page-sidebar-menu  page-header-fixed " data-keep-expanded="false" data-auto-scroll="true" data-slide-speed="200" style="padding-top: 20px">
-                            <li class="sidebar-toggler-wrapper hide">
-                                <div class="sidebar-toggler">
-                                    <span></span>
-                                </div>
-                            </li>
-                            <li class="nav-item start">
-                                <a href="/Dashboard/Dashboard">
-                                    <i class="icon-home"></i>
-                                    <span class="title">Dashboard</span>
-                                    <span class="selected"></span>
-                                </a>
-                                @*<ul class="sub-menu">
-                                        <li class="nav-item start ">
-                                            <a href="index.html" class="nav-link ">
-                                                <i class="icon-bar-chart"></i>
-                                                <span class="title">Dashboard 1</span>
+                <!-- END LOGO -->
+                <!-- BEGIN RESPONSIVE MENU TOGGLER -->
+                <a href="javascript:;" class="menu-toggler responsive-toggler" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span></span>
+                </a>
+                <!-- END RESPONSIVE MENU TOGGLER -->
+                <!-- BEGIN TOP NAVIGATION MENU -->
+                <div class="top-menu">
+                    <ul class="nav navbar-nav pull-right">
+                        <!-- BEGIN NOTIFICATION DROPDOWN -->
+                        <!-- DOC: Apply "dropdown-dark" class after "dropdown-extended" to change the dropdown styte -->
+                        <!-- DOC: Apply "dropdown-hoverable" class after below "dropdown" and remove data-toggle="dropdown" data-hover="dropdown" data-close-others="true" attributes to enable hover dropdown mode -->
+                        <!-- DOC: Remove "dropdown-hoverable" and add data-toggle="dropdown" data-hover="dropdown" data-close-others="true" attributes to the below A element with dropdown-toggle class -->
+                        <li class="dropdown dropdown-extended dropdown-notification" id="header_notification_bar">
+                            <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
+                                <i class="icon-bell"></i>
+                                <span class="badge badge-default"> 7 </span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li class="external">
+                                    <h3>
+                                        <span class="bold">12 pending</span> notifications
+                                    </h3>
+                                    <a href="page_user_profile_1.html">view all</a>
+                                </li>
+                                <li>
+                                    <ul class="dropdown-menu-list scroller" style="height: 250px;" data-handle-color="#637283">
+                                        <li>
+                                            <a href="javascript:;">
+                                                <span class="time">just now</span>
+                                                <span class="details">
+                                                    <span class="label label-sm label-icon label-success">
+                                                        <i class="fa fa-plus"></i>
+                                                    </span> New user registered.
+                                                </span>
                                             </a>
                                         </li>
-                                    </ul>*@
+                                        <li>
+                                            <a href="javascript:;">
+                                                <span class="time">3 mins</span>
+                                                <span class="details">
+                                                    <span class="label label-sm label-icon label-danger">
+                                                        <i class="fa fa-bolt"></i>
+                                                    </span> Server #12 overloaded.
+                                                </span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="javascript:;">
+                                                <span class="time">10 mins</span>
+                                                <span class="details">
+                                                    <span class="label label-sm label-icon label-warning">
+                                                        <i class="fa fa-bell-o"></i>
+                                                    </span> Server #2 not responding.
+                                                </span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="javascript:;">
+                                                <span class="time">14 hrs</span>
+                                                <span class="details">
+                                                    <span class="label label-sm label-icon label-info">
+                                                        <i class="fa fa-bullhorn"></i>
+                                                    </span> Application error.
+                                                </span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="javascript:;">
+                                                <span class="time">2 days</span>
+                                                <span class="details">
+                                                    <span class="label label-sm label-icon label-danger">
+                                                        <i class="fa fa-bolt"></i>
+                                                    </span> Database overloaded 68%.
+                                                </span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="javascript:;">
+                                                <span class="time">3 days</span>
+                                                <span class="details">
+                                                    <span class="label label-sm label-icon label-danger">
+                                                        <i class="fa fa-bolt"></i>
+                                                    </span> A user IP blocked.
+                                                </span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="javascript:;">
+                                                <span class="time">4 days</span>
+                                                <span class="details">
+                                                    <span class="label label-sm label-icon label-warning">
+                                                        <i class="fa fa-bell-o"></i>
+                                                    </span> Storage Server #4 not responding dfdfdfd.
+                                                </span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="javascript:;">
+                                                <span class="time">5 days</span>
+                                                <span class="details">
+                                                    <span class="label label-sm label-icon label-info">
+                                                        <i class="fa fa-bullhorn"></i>
+                                                    </span> System Error.
+                                                </span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="javascript:;">
+                                                <span class="time">9 days</span>
+                                                <span class="details">
+                                                    <span class="label label-sm label-icon label-danger">
+                                                        <i class="fa fa-bolt"></i>
+                                                    </span> Storage server failed.
+                                                </span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                        <!-- END NOTIFICATION DROPDOWN -->
+                        <!-- BEGIN USER LOGIN DROPDOWN -->
+                        <!-- DOC: Apply "dropdown-dark" class after below "dropdown-extended" to change the dropdown styte -->
+                        <li class="dropdown dropdown-user">
+                            <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
+                                <img alt="" class="img-circle" src="../assets/layouts/layout/img/avatar3_small.jpg" />
+                                <span class="username username-hide-on-mobile"> Neha </span>
+                                <i class="fa fa-angle-down"></i>
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-default">
+                                <li>
+                                    <a href="page_user_profile_1.html">
+                                        <i class="icon-user"></i> My Profile
+                                    </a>
+                                </li>
+                                @*<li>
+                                        <a href="/Setup/User/ChangeProfilePassword">
+                                            <i class="icon-user"></i> Change Password
+                                        </a>
+                                    </li>*@
+                                <li>
+                                    <a href="/Login/Logout">
+                                        <i class="icon-key"></i> Log Out
+                                    </a>
+                                </li>
+                                @*<li>
+                                        <a href="page_user_login_1.html">
+                                            <i class="icon-key"></i> Log Out
+                                        </a>
+                                    </li>*@
+                            </ul>
+                        </li>
+                        <!-- END USER LOGIN DROPDOWN -->
+                    </ul>
+                </div>
+                <!-- END TOP NAVIGATION MENU -->
+            </div>
+            <!-- END HEADER INNER -->
+        </div>
+        <!-- END HEADER -->
+        <!-- BEGIN HEADER & CONTENT DIVIDER -->
+        <div class="clearfix"> </div>
+        <!-- END HEADER & CONTENT DIVIDER -->
+        <!-- BEGIN CONTAINER -->
+        <div class="page-container">
+            <!-- BEGIN SIDEBAR -->
+            <div class="page-sidebar-wrapper">
+                <div class="page-sidebar navbar-collapse collapse">
+                    <ul class="page-sidebar-menu  page-header-fixed " data-keep-expanded="false" data-auto-scroll="true" data-slide-speed="200" style="padding-top: 20px">
+                        <li class="sidebar-toggler-wrapper hide">
+                            <div class="sidebar-toggler">
+                                <span></span>
+                            </div>
+                        </li>
+                        <li class="nav-item start">
+                            <a href="/Dashboard/Dashboard">
+                                <i class="icon-home"></i>
+                                <span class="title">Dashboard</span>
+                                <span class="selected"></span>
+                            </a>
+                            @*<ul class="sub-menu">
+                                    <li class="nav-item start ">
+                                        <a href="index.html" class="nav-link ">
+                                            <i class="icon-bar-chart"></i>
+                                            <span class="title">Dashboard 1</span>
+                                        </a>
+                                    </li>
+                                </ul>*@
+                        </li>
+                        @*<li class="heading">
+                                <h3 class="uppercase">Features</h3>
+                            </li>*@
+                        @if (Common.IsPermissionAllowed("Complaints").IsView)
+                        {
+                            <li class="nav-item start">
+                                <a href="javascript:;" class="nav-link nav-toggle">
+                                    <i class="icon-settings"></i>
+                                    <span class="title">Complaints</span>
+                                    <span class="arrow"></span>
+                                </a>
+                                <ul class="sub-menu">
+                                    @if (Common.IsPermissionAllowed("Complaints Reporting Tool").IsView)
+                                    {
+
+                                        <li class="nav-item start">
+                                            <a href="/CRT/CRTList" class="nav-link ">
+                                                <span class="title">
+                                                    Complaints Reporting Tool
+                                                </span>
+                                            </a>
+                                        </li>
+
+                                    }
+                                </ul>
                             </li>
-                            @*<li class="heading">
-                                    <h3 class="uppercase">Features</h3>
-                                </li>*@
-                            @if (Common.IsPermissionAllowed("Complaints").IsView)
-                            {
-                                <li class="nav-item start">
-                                    <a href="javascript:;" class="nav-link nav-toggle">
-                                        <i class="icon-settings"></i>
-                                        <span class="title">Complaints</span>
-                                        <span class="arrow"></span>
-                                    </a>
-                                    <ul class="sub-menu">
-                                        @if (Common.IsPermissionAllowed("Complaints Reporting Tool").IsView)
-                                        {
+                        }
+                        @if (Common.IsPermissionAllowed("Conduct System").IsView)
+                        {
+                            <li class="nav-item start">
+                                <a href="avascript:;" class="nav-link nav-toggle">
+                                    <i class="icon-settings"></i>
+                                    <span class="title">Conduct System</span>
+                                    @*<span class="selected"></span>*@
+                                    <span class="arrow"></span>
+                                </a>
+                                <ul class="sub-menu">
+                                    @if (Common.IsPermissionAllowed("Outcome Master").IsView)
+                                    {
+                                        <li class="nav-item start">
+                                            <a href="/CIS/OutComeMaster" class="nav-link ">
+                                                <span class="title">
+                                                    Outcome Master
+                                                </span>
+                                            </a>@*<span class="selected"></span>*@
+                                        </li>
+                                    }
+                                    @if (Common.IsPermissionAllowed("Sub Outcome Master").IsView)
+                                    {
+                                        <li class="nav-item start">
+                                            <a href="/CIS/SuboutComes" class="nav-link ">
+                                                <span class="title">
+                                                    Sub Outcome Master
+                                                </span>
+                                            </a>@*<span class="selected"></span>*@
+                                        </li>
+                                    }
+                                    @if (Common.IsPermissionAllowed("Conduct Improvement").IsView)
+                                    {
+                                        <li class="nav-item start">
+                                            <a href="/CIS/Index" class="nav-link ">
+                                                <span class="title">
+                                                    Conduct Improvement
+                                                </span>
+                                            </a>@*<span class="selected"></span>*@
+                                        </li>
+                                    }
+                                </ul>
+                            </li>
+                        }
+                        @if (Common.IsPermissionAllowed("Admin").IsView)
+                        {
+                            <li class="nav-item start">
+                                <a href="javascript:;" class="nav-link nav-toggle">
+                                    <i class="icon-settings"></i>
+                                    <span class="title">Admin</span>
+                                    @*<span class="selected"></span>*@
+                                    <span class="arrow"></span>
+                                </a>
+                                <ul class="sub-menu">
+                                    @if (Common.IsPermissionAllowed("Organization").IsView)
+                                    {
+                                    <li class="nav-item start">
+                                        <a href="javascript:;" class="nav-link nav-toggle">
+                                            <span class="title">
+                                                Client Admin
+                                            </span>
+                                            <span class="arrow"></span>
+                                        </a>
+                                        <ul class="sub-menu">
+                                            @if (Common.IsPermissionAllowed("Organization").IsView)
+                                            {
+                                                <li class="nav-item start">
+                                                    <a href="/Organization/OrganizationList" class="nav-link ">
+                                                        <span class="title">
+                                                            Client set up
+                                                        </span>
+                                                    </a>
+                                                </li>
+                                                <li class="nav-item start">
+                                                    <a href="/OrganisationAdmin/OrganisationList" class="nav-link ">
+                                                        <span class="title">
+                                                            Organisation admin
+                                                        </span>
+                                                    </a>
+                                                </li>
+                                            }
 
-                                            <li class="nav-item start">
-                                                <a href="/CRT/CRTList" class="nav-link ">
-                                                    <span class="title">
-                                                        Complaints Reporting Tool
-                                                    </span>
-                                                </a>
-                                            </li>
-
-                                        }
-                                    </ul>
-                                </li>
-                            }
-                            @if (Common.IsPermissionAllowed("Conduct System").IsView)
-                            {
-                                <li class="nav-item start">
-                                    <a href="avascript:;" class="nav-link nav-toggle">
-                                        <i class="icon-settings"></i>
-                                        <span class="title">Conduct System</span>
-                                        @*<span class="selected"></span>*@
-                                        <span class="arrow"></span>
-                                    </a>
-                                    <ul class="sub-menu">
-                                        @if (Common.IsPermissionAllowed("Outcome Master").IsView)
-                                    {
-                                    <li class="nav-item start">
-                                        <a href="/CIS/OutComeMaster" class="nav-link ">
-                                            <span class="title">
-                                                Outcome Master
-                                            </span>
-                                        </a>@*<span class="selected"></span>*@
+                                        </ul>
                                     </li>
                                     }
-                                        @if (Common.IsPermissionAllowed("Sub Outcome Master").IsView)
-                                    {
-                                    <li class="nav-item start">
-                                        <a href="/CIS/SuboutComes" class="nav-link ">
-                                            <span class="title">
-                                                Sub Outcome Master
-                                            </span>
-                                        </a>@*<span class="selected"></span>*@
-                                    </li>
-                                    }
-                                        @if (Common.IsPermissionAllowed("Conduct Improvement").IsView)
-                                    {
-                                    <li class="nav-item start">
-                                        <a href="/CIS/Index" class="nav-link ">
-                                            <span class="title">
-                                                Conduct Improvement
-                                            </span>
-                                        </a>@*<span class="selected"></span>*@
-                                    </li>
-                                    }
-                                    </ul>
-                                </li>
-                            }
-                            @if (Common.IsPermissionAllowed("Admin").IsView)
-                            {
-                                <li class="nav-item start">
-                                    <a href="javascript:;" class="nav-link nav-toggle">
-                                        <i class="icon-settings"></i>
-                                        <span class="title">Admin</span>
-                                        @*<span class="selected"></span>*@
-                                        <span class="arrow"></span>
-                                    </a>
-                                    <ul class="sub-menu">
-                                        @if (Common.IsPermissionAllowed("Organization").IsView)
-                                    {
-                                    <li class="nav-item start">
-                                        <a href="/Organization/OrganizationList" class="nav-link ">
-                                            <span class="title">
-                                                Organization
-                                            </span>
-                                        </a>
-                                    </li>
-                                    }
-                                        @if (Common.IsPermissionAllowed("Company").IsView)
-                                    {
-                                    <li class="nav-item start">
-                                        <a href="/Company/CompanyList" class="nav-link ">
-                                            <span class="title">
-                                                Company
-                                            </span>
-                                        </a>
-                                    </li>
-                                    }
-                                        @if (Common.IsPermissionAllowed("Division").IsView)
-                                    {
-                                    <li class="nav-item start">
-                                        <a href="/Division/DivisionList" class="nav-link ">
-                                            <span class="title">
-                                                Division
-                                            </span>
-                                        </a>
-                                    </li>
-                                    }
-                                        @if (Common.IsPermissionAllowed("Product").IsView)
-                                    {
-                                    <li class="nav-item start">
-                                        <a href="/Product/ProductList" class="nav-link ">
-                                            <span class="title">
-                                                Product
-                                            </span>
-                                        </a>
-                                    </li>
-                                    }
-                                        @if (Common.IsPermissionAllowed("General Setup").IsView)
-                                    {
-                                    <li class="nav-item start">
-                                        <a href="/GeneralSetup/ProjectTermListbyCategory" class="nav-link ">
-                                            <span class="title">
-                                                General Setup
-                                            </span>
-                                        </a>
-                                    </li>
-                                    }
-                                        @if (Common.IsPermissionAllowed("Role").IsView)
-                                    {
-                                    <li class="nav-item start">
-                                        <a href="/User/RoleList" class="nav-link ">
-                                            <span class="title">
-                                                Role
-                                            </span>
-                                        </a>
-                                    </li>
-                                    }
-                                        @if (Common.IsPermissionAllowed("User").IsView)
-                                    {
-                                    <li class="nav-item start">
-                                        <a href="/User/UserList" class="nav-link ">
-                                            <span class="title">
-                                                User
-                                            </span>
-                                        </a>
-                                    </li>
-                                    }
-                                    </ul>
-                                </li>
-                            }
-                        </ul>
-                        <!-- END SIDEBAR MENU -->
-                        <!-- END SIDEBAR MENU -->
-                    </div>
-                    <!-- END SIDEBAR -->
+                                    
+                                </ul>
+                            </li>
+                        }
+                    </ul>
+                    <!-- END SIDEBAR MENU -->
+                    <!-- END SIDEBAR MENU -->
                 </div>
                 <!-- END SIDEBAR -->
-                <!-- BEGIN CONTENT -->
-                <div class="page-content-wrapper">
-                    <!-- BEGIN CONTENT BODY -->
-                    @*<div class="page-content">*@
-                    @RenderBody()
-                    <!-- END CONTENT BODY -->
-                    @*</div>*@
-                </div>
-                <!-- END CONTENT -->
             </div>
-            <!-- END CONTAINER -->
+            <!-- END SIDEBAR -->
+            <!-- BEGIN CONTENT -->
+            <div class="page-content-wrapper">
+                <!-- BEGIN CONTENT BODY -->
+                @*<div class="page-content">*@
+                @RenderBody()
+                <!-- END CONTENT BODY -->
+                @*</div>*@
+            </div>
+            <!-- END CONTENT -->
         </div>
-        <div class="page-footer">
-            <div class="page-footer-inner">
-                @System.DateTime.Now.Year &copy; Brilliance
-                @*<a target="_blank" href="http://anejaassociates.com/">Aneja Associates</a>*@
-            </div>
-            <div class="scroll-to-top">
-                <i class="icon-arrow-up"></i>
-            </div>
+        <!-- END CONTAINER -->
+    </div>
+    <div class="page-footer">
+        <div class="page-footer-inner">
+            @System.DateTime.Now.Year &copy; Brilliance
+            @*<a target="_blank" href="http://anejaassociates.com/">Aneja Associates</a>*@
         </div>
-        <!-- END QUICK NAV -->
-        <!--[if lt IE 9]>
-        <script src="../assets/global/plugins/respond.min.js"></script>
-        <script src="../assets/global/plugins/excanvas.min.js"></script>
-        <script src="../assets/global/plugins/ie8.fix.min.js"></script>
-        <![endif]-->
-        <!-- BEGIN CORE PLUGINS -->
-        <script src="~/assets/global/plugins/jquery.min.js" type="text/javascript"></script>
-        <script src="~/assets/global/plugins/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
-        <script src="~/assets/global/plugins/js.cookie.min.js" type="text/javascript"></script>
-        <script src="~/assets/global/plugins/jquery-slimscroll/jquery.slimscroll.min.js" type="text/javascript"></script>
-        <script src="~/assets/global/plugins/jquery.blockui.min.js" type="text/javascript"></script>
-        @*<script src="~/assets/global/plugins/bootstrap-switch/js/bootstrap-switch.min.js" type="text/javascript"></script>*@
-        <script src="~/assets/global/plugins/moment.min.js" type="text/javascript"></script>
-        <script src="~/assets/global/plugins/bootstrap-select/js/bootstrap-select.min.js" type="text/javascript"></script>
-        <!-- END CORE PLUGINS -->
-        <!-- BEGIN THEME GLOBAL SCRIPTS -->
-        <script src="~/assets/global/scripts/app.min.js" type="text/javascript"></script>
-        <script src="~/assets/pages/scripts/components-bootstrap-select.min.js" type="text/javascript"></script>
-        <!-- END THEME GLOBAL SCRIPTS -->
-        <!-- BEGIN THEME LAYOUT SCRIPTS -->
-        <script src="~/assets/layouts/layout/scripts/layout.min.js" type="text/javascript"></script>
-        <script src="~/assets/layouts/layout/scripts/demo.min.js" type="text/javascript"></script>
-        <script src="~/assets/layouts/global/scripts/quick-sidebar.min.js" type="text/javascript"></script>
-        <script src="~/assets/layouts/global/scripts/quick-nav.min.js" type="text/javascript"></script>
-        <!-- END THEME LAYOUT SCRIPTS -->
-        <script src="~/assets/global/plugins/bootstrap-toastr/toastr.js"></script>
-        <script src="~/assets/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
-        <script src="~/assets/global/plugins/bootstrap-timepicker/js/bootstrap-timepicker.min.js"></script>
+        <div class="scroll-to-top">
+            <i class="icon-arrow-up"></i>
+        </div>
+    </div>
+    <!-- END QUICK NAV -->
+    <!--[if lt IE 9]>
+    <script src="../assets/global/plugins/respond.min.js"></script>
+    <script src="../assets/global/plugins/excanvas.min.js"></script>
+    <script src="../assets/global/plugins/ie8.fix.min.js"></script>
+    <![endif]-->
+    <!-- BEGIN CORE PLUGINS -->
+    <script src="~/assets/global/plugins/jquery.min.js" type="text/javascript"></script>
+    <script src="~/assets/global/plugins/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+    <script src="~/assets/global/plugins/js.cookie.min.js" type="text/javascript"></script>
+    <script src="~/assets/global/plugins/jquery-slimscroll/jquery.slimscroll.min.js" type="text/javascript"></script>
+    <script src="~/assets/global/plugins/jquery.blockui.min.js" type="text/javascript"></script>
+    @*<script src="~/assets/global/plugins/bootstrap-switch/js/bootstrap-switch.min.js" type="text/javascript"></script>*@
+    <script src="~/assets/global/plugins/moment.min.js" type="text/javascript"></script>
+    <script src="~/assets/global/plugins/bootstrap-select/js/bootstrap-select.min.js" type="text/javascript"></script>
+    <!-- END CORE PLUGINS -->
+    <!-- BEGIN THEME GLOBAL SCRIPTS -->
+    <script src="~/assets/global/scripts/app.min.js" type="text/javascript"></script>
+    <script src="~/assets/pages/scripts/components-bootstrap-select.min.js" type="text/javascript"></script>
+    <!-- END THEME GLOBAL SCRIPTS -->
+    <!-- BEGIN THEME LAYOUT SCRIPTS -->
+    <script src="~/assets/layouts/layout/scripts/layout.min.js" type="text/javascript"></script>
+    <script src="~/assets/layouts/layout/scripts/demo.min.js" type="text/javascript"></script>
+    <script src="~/assets/layouts/global/scripts/quick-sidebar.min.js" type="text/javascript"></script>
+    <script src="~/assets/layouts/global/scripts/quick-nav.min.js" type="text/javascript"></script>
+    <!-- END THEME LAYOUT SCRIPTS -->
+    <script src="~/assets/global/plugins/bootstrap-toastr/toastr.js"></script>
+    <script src="~/assets/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
+    <script src="~/assets/global/plugins/bootstrap-timepicker/js/bootstrap-timepicker.min.js"></script>
 
-        @System.Web.Optimization.Scripts.Render("~/bundles/jqueryval")
-        <script src="~/assets/global/scripts/OMSCommon.js"></script>
-        <script>
-            $(document).ready(function () {
-                $('#clickmewow').click(function () {
-                    $('#radio1003').attr('checked', 'checked');
-                });
-            })
-        </script>
-
-        <script>
-            var url = window.location.href;
-            var LastChar = url[url.length - 1];
-            if (LastChar == "/") {
-                url = url.slice(0, -1);
-            }
-            $(".page-sidebar-menu a").each(function () {
-                if (url == (this.href)) {
-                    $(this).closest("li").addClass("active");
-                    $(this).closest("li").parent().parent().addClass("active");
-                }
+    @System.Web.Optimization.Scripts.Render("~/bundles/jqueryval")
+    <script src="~/assets/global/scripts/OMSCommon.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#clickmewow').click(function () {
+                $('#radio1003').attr('checked', 'checked');
             });
-        </script>
-        @RenderSection("scripts", required: false)
-    </body>
+        })
+    </script>
+
+    <script>
+        var url = window.location.href;
+        var LastChar = url[url.length - 1];
+        if (LastChar == "/") {
+            url = url.slice(0, -1);
+        }
+        $(".page-sidebar-menu a").each(function () {
+            if (url == (this.href)) {
+                $(this).closest("li").addClass("active");
+                $(this).closest("li").parent().parent().addClass("active");
+            }
+        });
+    </script>
+    @RenderSection("scripts", required: false)
+</body>
 </html>

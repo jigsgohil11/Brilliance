@@ -1,0 +1,371 @@
+﻿@model Brilliance.Models.ViewModel.AdmCompanyViewModel
+@{
+    ViewBag.Title = "Company";
+    Layout = "~/Views/Shared/_Layout_public.cshtml";
+    int index = 0;
+}
+
+<link href="~/assets/global/plugins/datatables/datatables.min.css" rel="stylesheet" type="text/css" />
+<style>
+    .view-subtask {
+        color: #fff;
+        background-color: #c8d046 !important;
+        border-color: #c8d046 !important;
+    }
+</style>
+
+@if (Model.companyList != null && Model.companyList.Count > 0)
+{
+    index = Model.companyList.Count;
+
+    @Html.Hidden("Index", index)
+}
+else
+{
+    @Html.Hidden("Index", index)
+}
+
+<div class="page-content page-content-dashbrd-backgrnd">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="page-bar margin-bottom-10">
+                <div class="row">
+                    <div class="col-md-12 padding-out">
+                        <div class="portlet light padding-header margin-0 custom-padding-bar">
+                            <div class="portlet-title portlet-title-Project-custom">
+                                <div class="caption font-dark">
+                                    @*<i class="icon-settings font-dark"></i>*@
+                                    <span class="caption-subject bold">Client set up : Add Company</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row" style="margin-left:-25px;margin-right:-25px;margin-top:-5px;">
+                <div class="col-lg-12">
+                    <div class="portlet light">
+                        <div class="portlet-body form">
+                            <form id="frmcompany" action="/AdmCompany/SaveCompany" method="post" data-ajax="true" data-ajax-method="Post" data-ajax-success="SaveCompanyResponse(data);">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            @if (Model != null && Model.company != null && Model.company.OrganizationName != null)
+                                            {
+                                                <label>Organisation : @Model.company.OrganizationName</label>
+                                            }
+                                            else
+                                            {
+                                                <label>Organisation : </label>
+                                            }
+                                            @Html.HiddenFor(m => m.company.ClientID)
+                                            @Html.HiddenFor(m => m.company.EncryptedClientID)
+
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div id="companyrows">
+                                    <div class="row">
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <label>Name of Company</label>
+                                                @Html.TextBoxFor(m => m.company.CompanyName, new { @class = "form-control m-input" })
+                                                @Html.ValidationMessageFor(m => m.company.CompanyName)
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <label>Code</label>
+                                                @Html.TextBoxFor(m => m.company.CompanyCode, new { @class = "form-control m-input" })
+                                                @Html.ValidationMessageFor(m => m.company.CompanyCode)
+
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <label>FSP number</label>
+                                                @Html.TextBoxFor(m => m.company.FspNo, new { @class = "form-control m-input" })
+                                                @Html.ValidationMessageFor(m => m.company.FspNo)
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-12" style="text-align:right;">
+                                        <div class="form-group">
+                                            <button type="button" class="btn default" onclick="clearform('frmcompany');">Clear</button>
+                                            <button type="button" id="btnsavecompany" class="btn default" onclick="AddRowForCompany(this);">Add Another Company</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="portlet-body">
+                                    <table class="table table-striped table-bordered table-hover dt-responsive" width="100%" id="dt_company">
+                                        <thead>
+                                            <tr>
+                                                <th style="width: 13%;">Action</th>
+                                                <th>Company</th>
+                                                <th>Code</th>
+                                                <th>Fsp number</th>
+                                                <th>Division</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="company_Body">
+                                            @if (Model.companyList != null && Model.companyList.Count > 0)
+                                            {
+                                                for (int i = 0; i < Model.companyList.Count; i++)
+                                                {
+
+                                                    string RowID = Model.companyList[i].CompanyID.ToString();
+                                                    <tr id="@RowID">
+                                                        <td>
+                                                            <a class="action btn btn-primary btn-xs" href="javascript:;" title="Edit"><i class="btn-xs fa fa-pencil padding0" onclick="CompanyEdit('@i','frmcompany');" emplyerindex="@i"></i></a>
+                                                            <a class="action btn btn-danger btn-xs" href="javascript:void(0);" title="Delete" onclick="DeletecompanyRowData(this,'@RowID');"><i class="btn-xs fa fa-trash-o padding0"></i></a>
+                                                            @Html.HiddenFor(m => Model.companyList[i].CompanyID)
+                                                            @Html.HiddenFor(m => Model.companyList[i].IsEdit)
+                                                        </td>
+                                                        <td class="Company_@RowID">
+                                                            <span>@Model.companyList[i].CompanyName</span>
+                                                            @Html.HiddenFor(m => Model.companyList[i].CompanyName)
+                                                        </td>
+                                                        <td class="Code_@RowID">
+                                                            <span>@Model.companyList[i].CompanyCode</span>
+                                                            @Html.HiddenFor(m => Model.companyList[i].CompanyCode)
+                                                        </td>
+                                                        <td class="Fsp_@RowID">
+                                                            <span>@Model.companyList[i].FspNo</span>
+                                                            @Html.HiddenFor(m => Model.companyList[i].FspNo)
+                                                        </td>
+                                                        <td>
+                                                            <a class="btn btn-circle btn-icon-only btn-default view-subtask" href="/AdmDivision/Division?clientid=@Model.companyList[i].EncryptedClientID&companyid=@Model.companyList[i].EncryptedCompanyID">
+                                                                <b>@Convert.ToInt32(Model.companyList[i].divisioncount)</b>
+                                                            </a>
+                                                        </td>
+                                                    </tr>
+                                                }
+                                            }
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                                <div class="form-actions">
+                                    <div class="col-lg-12  text-right">
+                                        <button type="button" onclick="location.href = '/AdmDivision/Division?clientid=@Model.company.EncryptedClientID'" class="btn uppercase">Add Division</button>
+                                        <button type="button" onclick="CompanyFormSubmit();" class="btn green uppercase">Save and close</button>
+                                        <button type="button" onclick="location.href = '/OrganisationAdmin/OrganisationList'" class="btn default uppercase">Cancel</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade modal-scroll" id="DeleteModal" tabindex="-1" role="basic" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                <h4 class="modal-title">Delete</h4>
+            </div>
+            <div class="modal-body"> You can not delete company.To delete company you have to delete all divisions under this company.</div>
+            <div class="modal-footer">
+                <button type="button" class="btn dark btn-outline" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+
+@section scripts{
+    <script src="~/assets/global/scripts/datatable.js" type="text/javascript"></script>
+    <script src="~/assets/global/plugins/datatables/datatables.min.js" type="text/javascript"></script>
+    <script src="~/assets/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap.js" type="text/javascript"></script>
+    <script>
+        var table = $('#dt_company').DataTable({});
+    </script>
+
+    <script>
+
+
+        function GenerateNewGUID() {
+            function s4() {
+                return Math.floor((1 + Math.random()) * 0x10000)
+                    .toString(16)
+                    .substring(1);
+            }
+            return s4() + s4() + '-' + s4() + '-' + s4() + '-' +
+                s4() + '-' + s4() + s4() + s4();
+        }
+
+        function ClearPopup(form) {
+            $(".field-validation-valid").find('span').html('');
+            $(".field-validation-error").find('span').html('');
+            $('#' + form + ' input[type=text]').val("");
+            //$('#' + form + ' input[type=hidden]').val("");
+            $('#' + form + ' .bs-select').val("");
+            $('#' + form + ' .bs-select').selectpicker('refresh');
+        }
+
+        function clearform(formDis) {
+            ClearPopup(formDis);
+            $("#btnsavecompany").removeAttr("editid");
+            $("#btnsavecompany").removeAttr("emplyerindex");
+        }
+
+        function AddRowForCompany(obj) {
+            debugger;
+            if ($("#dt_company tbody tr").length > 0) {
+                $("#company_Body tr td.dataTables_empty").parent().remove();
+            }
+            var form = "frmcompany";
+            if ($("#frmcompany").valid()) {
+                var EmplyerIndex = $("#Index").val();
+                var ID = GenerateNewGUID();
+                var Company = $("#company_CompanyName").val();
+                var Code = $("#company_CompanyCode").val();
+                var Fsp = $("#company_FspNo").val();
+                var IsEdit = false;
+
+
+                if ($.trim($(obj).attr("editid")) != '' && $.trim($(obj).attr("emplyerindex")) != '') {
+                    if (Company != "") {
+                        var ID = $.trim($(obj).attr("editid"));
+                        var EditIndex = $.trim($(obj).attr("emplyerindex"));
+                        IsEdit = true;
+                        $(obj).removeAttr("editid");
+                        $(obj).removeAttr("emplyerindex");
+                        $("td.Company_" + ID + " span").text(Company);
+                        $("td.Code_" + ID + " span").text(Code);
+                        $("td.Fsp_" + ID + " span").text(Fsp);
+
+                        $("#companyList_" + EditIndex + "__CompanyName").val(Company);
+                        $("#companyList_" + EditIndex + "__CompanyCode").val(Code);
+                        $("#companyList_" + EditIndex + "__FspNo").val(Fsp);
+                        $("#companyList_" + EditIndex + "__IsEdit").val(IsEdit);
+                    }
+                } else {
+
+                    if (Company != "") {
+                        var tr = '<tr id="' + ID + '">';
+                        tr = tr + '<td><a class="action btn btn-primary btn-xs" href="#" title="Edit" onclick="CompanyEdit(' + EmplyerIndex + ',\'' + form + '\');" emplyerindex="' + EmplyerIndex + '"><i class="btn-xs fa fa-pencil padding0"></i></a><a class="action btn btn-danger btn-xs" href="javascript:void(0);" title="Delete" onclick=DeletecompanyRowData(this,"' + ID + '");><i class="btn-xs fa fa-trash-o padding0"></i></a>';
+                        tr = tr + '<input type="hidden" name="companyList[' + EmplyerIndex + '].CompanyID" id="companyList_' + EmplyerIndex + '__CompanyID" value="' + ID + '"/>';
+                        tr = tr + '<input type="hidden" name="companyList[' + EmplyerIndex + '].IsEdit" id="companyList_' + EmplyerIndex + '__IsEdit" value="' + IsEdit + '"/>';
+                        tr = tr + '</td>';
+                        tr = tr + '<td class="Company_' + ID + '"><span>' + Company + '</span><input type="hidden" name="companyList[' + EmplyerIndex + '].CompanyName" id="companyList_' + EmplyerIndex + '__CompanyName" value="' + Company + '"/></td>';
+                        tr = tr + '<td class="Code_' + ID + '"><span>' + Code + '</span><input type="hidden" name="companyList[' + EmplyerIndex + '].CompanyCode" id="companyList_' + EmplyerIndex + '__CompanyCode" value="' + Code + '"/></td>';
+                        tr = tr + '<td class="Fsp_' + ID + '"><span>' + Fsp + '</span><input type="hidden" name="companyList[' + EmplyerIndex + '].FspNo" id="companyList_' + EmplyerIndex + '__FspNo" value="' + Fsp + '"/></td>';
+                        tr = tr + '<td><a class="btn btn-circle btn-icon-only btn-default view-subtask"><b>0</b></a></td>';
+                        tr = tr + '</tr>';
+                        $("#company_Body").append(tr);
+                        EmplyerIndex = parseInt(EmplyerIndex) + 1;
+                        $("#Index").val(EmplyerIndex);
+                    }
+                }
+                ClearPopup(form);
+            }
+        }
+
+        function CompanyEdit(index, formDis) {
+
+            ClearPopup(formDis);
+
+            var EditID = $("#companyList_" + index + "__CompanyID").val();
+            var company = $("#companyList_" + index + "__CompanyName").val();
+            var code = $("#companyList_" + index + "__CompanyCode").val();
+            var fsp = $("#companyList_" + index + "__FspNo").val();
+
+            $("#company_CompanyName").val(company);
+            $("#company_CompanyCode").val(code);
+            $("#company_FspNo").val(fsp);
+
+            $("#btnsavecompany").attr("editid", EditID);
+            $("#btnsavecompany").attr("emplyerindex", index);
+        }
+
+        //function DeletecompanyRowData(obj, CompanyID) {
+        //    $(obj).closest('#' + CompanyID).remove();
+        //    if ($("#company_Body  tr").length == 0) {
+        //        $("#company_Body").append('<tr class="odd"><td valign="top" colspan="7" class="dataTables_empty">No data available in table</td></tr>')
+        //    }
+        //}
+
+
+        function DeletecompanyRowData(obj, CompanyID) {
+            var postData =
+            {
+                companyid: CompanyID
+            };
+            ShowLoader();
+            AjaxCall("/AdmCompany/DeleteCompany", JSON.stringify(postData), "post", "json", "application/json", false).done(function (response) {
+                HideLoader();
+                if (response == "_Logon_") {
+                    window.location.href = "/Login/Login";
+                }
+                else {
+                    if (response.IsSuccess) {
+                        $("#DeleteModal").modal('show');
+                    }
+                    else {
+                        $(obj).closest('#' + CompanyID).remove();
+                        if ($("#company_Body  tr").length == 0) {
+                            $("#company_Body").append('<tr class="odd"><td valign="top" colspan="7" class="dataTables_empty">No data available in table</td></tr>')
+                        }
+                    }
+                }
+            })
+        }
+
+        function CompanyTableIndexOrdering() {
+            var table = $("#dt_company tbody");
+            table.find('tr').each(function (i) {
+                $(this).find('td:eq(0)').find("input[type='hidden']:eq(0)").attr("id", "companyList_" + i + "__CompanyID");
+                $(this).find('td:eq(0)').find("input[type='hidden']:eq(0)").attr("name", "companyList[" + i + "].CompanyID");
+
+                $(this).find('td:eq(0)').find("input[type='hidden']:eq(1)").attr("id", "companyList_" + i + "__IsEdit");
+                $(this).find('td:eq(0)').find("input[type='hidden']:eq(1)").attr("name", "companyList[" + i + "].IsEdit");
+
+                $(this).find('td:eq(1)').find("input[type='hidden']").attr("id", "companyList_" + i + "__CompanyName");
+                $(this).find('td:eq(1)').find("input[type='hidden']").attr("name", "companyList[" + i + "].CompanyName");
+
+                $(this).find('td:eq(2)').find("input[type='hidden']").attr("id", "companyList_" + i + "__CompanyCode");
+                $(this).find('td:eq(2)').find("input[type='hidden']").attr("name", "companyList[" + i + "].CompanyCode");
+
+                $(this).find('td:eq(3)').find("input[type='hidden']").attr("id", "companyList_" + i + "__FspNo");
+                $(this).find('td:eq(3)').find("input[type='hidden']").attr("name", "companyList[" + i + "].FspNo");
+
+
+            });
+        }
+
+        function CompanyFormSubmit() {
+            CompanyTableIndexOrdering();
+            $("#companyrows").addClass('hide');
+            ShowLoader();
+            $("#frmcompany").submit();
+        }
+
+        function SaveCompanyResponse(response) {
+            if (response.IsSuccess) {
+                SetMessageForPageLoad(response.Message, "companysaved");
+                var EncryptedClientID = $("#company_EncryptedClientID").val();
+                window.location.href = "/AdmCompany/Company?id=" + EncryptedClientID + "";
+                ShowPageLoadMessage("companysaved", "Company");
+                //window.location.href = "/OrganisationAdmin/OrganisationList";
+            } else {
+                ShowMessage(response.Message, "error");
+            }
+        }
+
+    </script>
+
+}
+
+
+
+

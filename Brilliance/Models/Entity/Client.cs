@@ -61,9 +61,14 @@ namespace Brilliance.Models.Entity
         public string StreetNo { get; set; }
         public string Street { get; set; }
 
+        [ResultColumn]
+        public string countorganisation { get; set; }
+        [ResultColumn]
+        public bool IsCompanyExist { get; set; }
+
         [Ignore]
         public string EncryptedClientID { get { return ClientID != Guid.Empty ? Crypto.Encrypt(Convert.ToString(ClientID)) : null; } }
-
+       
         [Ignore]
         public bool IsEdit { get { return ClientID != Guid.Empty ? true : false; } }
     }

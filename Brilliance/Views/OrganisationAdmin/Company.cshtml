@@ -1,0 +1,277 @@
+﻿@using Brilliance.Infrastructure
+@model Brilliance.Models.ViewModel.CompanyAdminModel
+@{
+    /**/
+
+    ViewBag.Title = "Company";
+    Layout = "~/Views/Shared/_Layout_public.cshtml";
+    int index = 0;
+
+}
+
+<style>
+    .required11:after {
+        content: "*";
+        font-weight: bold;
+        color: red;
+    }
+</style>
+
+<div class="page-content page-content-dashbrd-backgrnd">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="page-bar margin-bottom-10">
+                <div class="row">
+                    <div class="col-md-12 padding-out">
+                        <div class="portlet light padding-header margin-0 custom-padding-bar">
+                            <div class="portlet-title portlet-title-Project-custom">
+                                <div class="caption font-dark">
+                                    @*<i class="icon-settings font-dark"></i>*@
+                                    <span class="caption-subject bold">Client set up : Add Company</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row" style="margin-left:-25px;margin-right:-25px;margin-top:-5px;">
+                <div class="col-lg-12">
+                    <div class="portlet light">
+                        <div class="portlet-body form">
+                            <form id="frmcompany" action="/OrganisationAdmin/SaveCompany" method="post" data-ajax="true" data-ajax-method="Post" data-ajax-success="SaveCompanyResponse(data);">
+
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            @if (Model != null && Model.company != null && Model.company.OrganizationName != null)
+                                            {
+                                                <label>Organisation : @Model.company.OrganizationName</label>
+                                            }
+                                            else
+                                            {
+                                                <label>Organisation : </label>
+                                            }
+                                            @Html.HiddenFor(m => m.company.ClientID)
+                                            @Html.HiddenFor(m => m.company.EncryptedClientID)
+
+                                        </div>
+                                    </div>
+                                </div>
+                                @{
+                                    var companyname = "Companylist_0_CompanyName";
+                                    var companycode = "Companylist_0_CompanyCode";
+                                    var companyfspno = "Companylist_0_FspNo";
+                                }
+                                @if (Model != null && Model.Companylist.Count > 0)
+                                {
+                                    for (int i = 0; i < Model.Companylist.Count; i++)
+                                    {
+                                        string RowID = Model.Companylist[i].CompanyID.ToString();
+                                        <div class="row" id="@RowID">
+                                            @Html.Hidden("Index", Model.Companylist.Count - 1)
+                                            @Html.HiddenFor(m => m.Companylist[i].CompanyID)
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    @if (i == 0)
+                                                    {
+                                                        <label>Name of Company</label>
+                                                    }
+                                                    <input type="text" id="@companyname" name="Companylist[0].CompanyName" class="form-control m-input" required value="@Model.Companylist[i].CompanyName" disabled/>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-2">
+                                                <div class="form-group">
+                                                    @if (i == 0)
+                                                    {
+                                                        <label>Code</label>
+                                                    }
+                                                    <input type="text" id="@companycode" name="Companylist[0].CompanyCode" class="form-control m-input" value="@Model.Companylist[i].CompanyCode" disabled/>
+                                                </div>
+
+                                            </div>
+                                            <div class="col-md-2">
+                                                <div class="form-group">
+                                                    @if (i == 0)
+                                                    {
+                                                        <label>Fsp number</label>
+                                                    }
+                                                    <input type="text" id="@companyfspno" name="Companylist[0].FspNo" class="form-control m-input" value="@Model.Companylist[i].FspNo" disabled/>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-2">
+                                                <div class="form-group">
+                                                    @if (i == 0)
+                                                    {
+                                                        <label>Division</label>
+                                                        <label>
+                                                            <a>3</a>
+                                                            <a class="action btn  btn-primary btn-xs @Constants.Class_Cannot_Access_Update" href="/Company/Company/@Model.Companylist[i].EncryptedClientID" title="Edit"><i class="btn-xs fa fa-pencil padding0"></i></a>
+                                                            <a class="action btn  btn-danger btn-xs @Constants.Class_Cannot_Access_Remove" href="javascript:void(0);" title="Delete" onclick="fnOpenDeleteModel('DeleteButton','DeleteModal','@Model.Companylist[i].EncryptedClientID.ToString()');"><i class="btn-xs fa fa-trash-o padding0"></i></a>
+                                                            @*<a class="action btn btn-danger btn-xs" href="javascript:void(0);" title="Delete" onclick="DeleteRequisitionRowData(this,'@RowID');"><i class="btn-xs fa fa-trash-o padding0"></i></a>*@
+                                                        </label>
+                                                    }
+                                                    else
+                                                    {
+                                                        <label>
+                                                            <a>3</a>
+                                                            <a class="action btn  btn-primary btn-xs @Constants.Class_Cannot_Access_Update" href="/Company/Company/@Model.Companylist[i].EncryptedClientID" title="Edit"><i class="btn-xs fa fa-pencil padding0"></i></a>
+                                                            <a class="action btn  btn-danger btn-xs @Constants.Class_Cannot_Access_Remove" href="javascript:void(0);" title="Delete" onclick="fnOpenDeleteModel('DeleteButton','DeleteModal','@Model.Companylist[i].EncryptedClientID.ToString()');"><i class="btn-xs fa fa-trash-o padding0"></i></a>
+                                                            @*<a class="action btn btn-danger btn-xs" href="javascript:void(0);" title="Delete" onclick="DeleteRequisitionRowData(this,'@RowID');"><i class="btn-xs fa fa-trash-o padding0"></i></a>*@
+                                                        </label>
+                                                    }
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    }
+                                }
+                                @*else
+                                    {
+                                        <div id="companyrows">
+                                            <div class="row">
+                                                @Html.Hidden("Index", index)
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label class="required11">Name of Company</label>
+                                                        <input type="text" id="@companyname" name="Companylist[0].CompanyName" class="form-control m-input" required />
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <div class="form-group">
+                                                        <label>Code</label>
+                                                        <input type="text" id="@companycode" name="Companylist[0].CompanyCode" class="form-control m-input" />
+                                                    </div>
+
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <div class="form-group">
+                                                        <label>Fsp number</label>
+                                                        <input type="text" id="@companyfspno" name="Companylist[0].FspNo" class="form-control m-input" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    }*@
+
+                                <div id="companyrows">
+                                    <div class="row">
+                                        @Html.Hidden("Index", index)
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="required11">Name of Company</label>
+                                                <input type="text" id="@companyname" name="Companylist[0].CompanyName" class="form-control m-input" required />
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <label>Code</label>
+                                                <input type="text" id="@companycode" name="Companylist[0].CompanyCode" class="form-control m-input" />
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <label>Fsp number</label>
+                                                <input type="text" id="@companyfspno" name="Companylist[0].FspNo" class="form-control m-input" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <a class="uppercase" onclick="addcompany();">Add Another company</a>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <a class="uppercase">Set up test company</a>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                                <div class="form-actions">
+                                    <div class="col-lg-12  text-right">
+                                        <button type="button" onclick="savecompany();" class="btn default uppercase">Save</button>
+                                        <button type="button" onclick="location.href = '/AdmDivision/Division'" class="btn default uppercase">Add Division</button>
+                                        @*<button type="button" onclick="saveandclosecompany();" class="btn default uppercase">Save and close</button>*@
+                                        <button type="button" onclick="location.href = '/OrganisationAdmin/OrganisationList'" class="btn btn default uppercase btnSubmit">Cancel</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section scripts{
+
+    <script>
+        function addcompany() {
+            debugger;
+            var ExpIndex = $("#Index").val();
+            ExpIndex = parseInt(ExpIndex);
+            ExpIndex = ExpIndex + 1;
+            $("#Index").val(ExpIndex);
+
+            function GenerateNewGUID() {
+                function s4() {
+                    return Math.floor((1 + Math.random()) * 0x10000)
+                        .toString(16)
+                        .substring(1);
+                }
+                return s4() + s4() + '-' + s4() + '-' + s4() + '-' +
+                    s4() + '-' + s4() + s4() + s4();
+            }
+            var ID = GenerateNewGUID();
+
+            var html = "<div class='row' id=" + ID + ">"
+            html += "<div class='col-md-6'><div class='form-group'>"
+            html += "<input type='text' name='Companylist[" + ExpIndex + "].CompanyName id='Companylist_" + ExpIndex + "__CompanyName' class='form-control m-input' required/>"
+            html += "</div></div>"
+            html += "<div class='col-md-3'><div class='form-group'>"
+            html += "<input type='text' name='Companylist[" + ExpIndex + "].CompanyCode id='Companylist_" + ExpIndex + "__CompanyCode' class='form-control m-input'/>"
+            html += "</div></div>"
+            html += "<div class='col-md-3'><div class='form-group'>"
+            html += "<input type='text' name='Companylist[" + ExpIndex + "].FspNo id='Companylist_" + ExpIndex + "__FspNo' class='form-control m-input'/>"
+            html += "</div></div></div>";
+            $("#companyrows").append(html);
+
+        }
+
+        //function DeleteRequisitionRowData(obj, RequisitionID) {
+        //    $(obj).closest('#' + RequisitionID).remove();
+        //    if ($("#Requisition_Body tbody tr").length == 0) {
+        //        $("#Requisition_Body").append('<tr class="odd"><td valign="top" colspan="7" class="dataTables_empty">No data available in table</td></tr>')
+        //    }
+        //}
+        function savecompany() {
+
+            if ($("#frmcompany").valid()) {
+                $("#frmcompany").submit();
+            }
+        }
+        function SaveCompanyResponse(response) {
+            if (response.IsSuccess) {
+                SetMessageForPageLoad(response.Message, "companysaved");
+                var EncryptedClientID = $("#company_EncryptedClientID").val();
+                window.location.href = "/OrganisationAdmin/Company?id=" + EncryptedClientID + "";
+                ShowPageLoadMessage("companysaved", "Company");
+            } else {
+                ShowMessage(response.Message, "error");
+            }
+        }
+
+                                    //function saveandclosecompany() {
+                                    //    if ($("#frmcompany").valid()) {
+                                    //        $("#frmcompany").submit();
+                                    //        window.location.href = "/OrganisationAdmin/OrganisationList/";
+                                    //    }
+                                    //}
+    </script>
+
+}
+
+

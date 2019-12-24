@@ -1,0 +1,447 @@
+﻿@model Brilliance.Models.ViewModel.AdmDivisionViewModel
+
+@{
+    ViewBag.Title = "Division";
+    Layout = "~/Views/Shared/_Layout_public.cshtml";
+    int index = 0;
+}
+
+<link href="~/assets/global/plugins/datatables/datatables.min.css" rel="stylesheet" type="text/css" />
+
+@if (Model.divisionList != null && Model.divisionList.Count > 0)
+{
+    index = Model.divisionList.Count;
+
+    @Html.Hidden("Index", index)
+}
+else
+{
+    @Html.Hidden("Index", index)
+}
+
+<div class="page-content page-content-dashbrd-backgrnd">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="page-bar margin-bottom-10">
+                <div class="row">
+                    <div class="col-md-12 padding-out">
+                        <div class="portlet light padding-header margin-0 custom-padding-bar">
+                            <div class="portlet-title portlet-title-Project-custom">
+                                <div class="caption font-dark">
+                                    @*<i class="icon-settings font-dark"></i>*@
+                                    <span class="caption-subject bold">Client set up : Add Division</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row" style="margin-left:-25px;margin-right:-25px;margin-top:-5px;">
+                <div class="col-lg-12">
+                    <div class="portlet light">
+                        <div class="portlet-body form">
+                            <form id="frmdivision" action="/AdmDivision/SaveDivision" method="post" data-ajax="true" data-ajax-method="Post" data-ajax-success="SaveDivisionResponse(data);">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            @if (Model != null && Model.division != null && Model.division.OrganizationName != null)
+                                            {
+                                                <label>Organisation : @Model.division.OrganizationName</label>
+                                            }
+                                            else
+                                            {
+                                                <label>Organisation : </label>
+                                            }
+                                            @Html.HiddenFor(m => m.division.ClientID)
+                                            @Html.HiddenFor(m => m.division.EncryptedClientID)
+                                            @*@Html.HiddenFor(m => m.division.ClientID)*@
+                                            @Html.HiddenFor(m => m.division.EncryptedCompanyID)
+                                           
+
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div id="divisionrows">
+                                    <div class="row">
+                                        @if (Model.division.CompanyID != null && Model.division.CompanyID != Guid.Empty)
+                                        {
+                                            <div class="col-md-3">
+                                                <div class="form-group">
+                                                    <label>Name of Company</label>
+                                                    @Html.DropDownListFor(m => m.division.CompanyID, new SelectList(Model.Companylist, "Value", "Text", 0), new { @data_live_search = "true", @class = "form-control bs-select" })
+                                                </div>
+                                            </div>
+                                        }
+                                        else
+                                        {
+                                            <div class="col-md-3">
+                                                <div class="form-group">
+                                                    <label>Name of Company</label>
+                                                    @Html.DropDownListFor(m => m.division.CompanyID, new SelectList(Model.Companylist, "Value", "Text", 0), "--Select Company--", new { @data_live_search = "true", @class = "form-control bs-select" })
+                                                    @Html.ValidationMessageFor(m => m.division.CompanyID)
+                                                </div>
+                                            </div>
+                                        }
+
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <label>Name of Division</label>
+                                                @Html.TextBoxFor(m => m.division.Name, new { @class = "form-control m-input" })
+                                                @Html.ValidationMessageFor(m => m.division.Name)
+                                            </div>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <div class="form-group">
+                                                <label>Code</label>
+                                                @Html.TextBoxFor(m => m.division.Code, new { @class = "form-control m-input" })
+                                                @Html.ValidationMessageFor(m => m.division.Code)
+                                            </div>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <div class="form-group">
+                                                <label>Type</label>
+                                                @Html.DropDownListFor(m => m.division.DivisionType, new SelectList(Model.TypeList, "Value", "Text", 0), "--Select Type--", new { @data_live_search = "true", @class = "form-control bs-select", @onchange = "chkdivisiontype();" })
+                                            </div>
+                                        </div>
+                                        <div class="col-md-2 hide" id="divothertype">
+                                            <div class="form-group">
+                                                <label>Description</label>
+                                                @Html.TextBoxFor(m => m.division.Description, new { @class = "form-control m-input" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-12" style="text-align:right;">
+                                        <div class="form-group">
+                                            <button type="button" class="btn default" onclick="clearform('frmdivision');">Clear</button>
+                                            <button type="button" id="btnsavedivisions" class="btn default" onclick="AddRowForDivision(this);">Add New division</button>
+                                            @*<button id="btnSaveLeadContacts" type="button" class="btn green" onclick="">Save</button>*@
+                                        </div>
+                                    </div>
+                                    @*<div class="col-md-4">
+                                            <div class="form-group">
+                                                <a class="uppercase" onclick="adddivision();">Add Another division</a>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <a class="uppercase">Set up test division</a>
+                                            </div>
+                                        </div>*@
+                                </div>
+                                <div class="portlet-body">
+
+
+                                    <table class="table table-striped table-bordered table-hover dt-responsive" width="100%" id="dt_division">
+                                        <thead>
+                                            <tr>
+                                                <th style="width: 13%;">Action</th>
+                                                <th>Company</th>
+                                                <th>Division</th>
+                                                <th>Code</th>
+                                                <th>Type</th>
+                                                <th>Description</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="division_Body">
+                                            @if (Model.divisionList != null && Model.divisionList.Count > 0)
+                                            {
+                                                for (int i = 0; i < Model.divisionList.Count; i++)
+                                                {
+
+                                                    string RowID = Model.divisionList[i].DivisionID.ToString();
+                                                    <tr id="@RowID">
+                                                        <td>
+                                                            <a class="action btn btn-primary btn-xs" href="javascript:;" title="Edit"><i class="btn-xs fa fa-pencil padding0" onclick="DivisionEdit('@i','frmdivision');" emplyerindex="@i"></i></a>
+                                                            <a class="action btn btn-danger btn-xs" href="javascript:void(0);" title="Delete" onclick="DeletedivisionRowData(this,'@RowID');"><i class="btn-xs fa fa-trash-o padding0"></i></a>
+                                                            @Html.HiddenFor(m => Model.divisionList[i].DivisionID)
+                                                            @Html.HiddenFor(m => Model.divisionList[i].IsEdit)
+                                                        </td>
+                                                        <td class="Company_@RowID">
+                                                            <span>@Model.divisionList[i].Company</span>
+                                                            @Html.HiddenFor(m => Model.divisionList[i].CompanyID)
+                                                        </td>
+                                                        <td class="Division_@RowID">
+                                                            <span>@Model.divisionList[i].Name</span>
+                                                            @Html.HiddenFor(m => Model.divisionList[i].Name)
+                                                        </td>
+                                                        <td class="Code_@RowID">
+                                                            <span>@Model.divisionList[i].Code</span>
+                                                            @Html.HiddenFor(m => Model.divisionList[i].Code)
+                                                        </td>
+                                                        <td class="Type_@RowID">
+                                                            <span>@Model.divisionList[i].Type</span>
+                                                            @Html.HiddenFor(m => Model.divisionList[i].DivisionType)
+                                                        </td>
+                                                        <td class="Desc_@RowID">
+                                                            <span>@Model.divisionList[i].Description</span>
+                                                            @Html.HiddenFor(m => Model.divisionList[i].Description)
+                                                        </td>
+                                                    </tr>
+                                                }
+                                            }
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                                <div class="form-actions">
+                                    <div class="col-lg-12  text-right">
+                                        @*<button type="button" onclick="savecompany();" class="btn default uppercase">Save</button>*@
+                                        <button type="button" onclick="DivisionFormSubmit();" class="btn green uppercase">Save and close</button>
+                                        <button type="button" onclick="location.href = '/OrganisationAdmin/OrganisationList'" class="btn default uppercase">Cancel</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts{
+    <script src="~/assets/global/scripts/datatable.js" type="text/javascript"></script>
+    <script src="~/assets/global/plugins/datatables/datatables.min.js" type="text/javascript"></script>
+    <script src="~/assets/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap.js" type="text/javascript"></script>
+
+
+    <script>
+        var table = $('#dt_division').DataTable({});
+        //var table = $('#dt_calculation').DataTable({ bFilter: false, bInfo: false, paging: false });
+    </script>
+    @*<script src="~/assets/global/scripts/OMSDatatable.js"></script>*@
+
+
+    <script>
+
+
+
+        function chkdivisiontype() {
+            if ($("#division_DivisionType :selected").text() == "Other") {
+                $("#divothertype").removeClass('hide');
+            }
+            else {
+                $("#division_Description").val('');
+                $("#divothertype").addClass('hide');
+            }
+        }
+        function GenerateNewGUID() {
+            function s4() {
+                return Math.floor((1 + Math.random()) * 0x10000)
+                    .toString(16)
+                    .substring(1);
+            }
+            return s4() + s4() + '-' + s4() + '-' + s4() + '-' +
+                s4() + '-' + s4() + s4() + s4();
+        }
+        function ClearPopup(form) {
+            $(".field-validation-valid").find('span').html('');
+            $(".field-validation-error").find('span').html('');
+            $('#' + form + ' input[type=text]').val("");
+            //$('#' + form + ' input[type=hidden]').val("");
+            $('#' + form + ' .bs-select').val("");
+            $('#' + form + ' .bs-select').selectpicker('refresh');
+        }
+        function clearform(formDis) {
+            ClearPopup(formDis);
+            chkdivisiontype();
+            $("#btnsavedivisions").removeAttr("editid");
+            $("#btnsavedivisions").removeAttr("emplyerindex");
+        }
+
+
+        function AddRowForDivision(obj) {
+            debugger;
+            if ($("#dt_division tbody tr").length > 0) {
+                //$("#Requisition_Body tr.odd").remove();
+                $("#division_Body tr td.dataTables_empty").parent().remove();
+            }
+            var form = "frmdivision";
+            if ($("#frmdivision").valid()) {
+                var EmplyerIndex = $("#Index").val();
+                var ID = GenerateNewGUID();
+                var CompanyVal = $("#division_CompanyID option:selected").text();
+                var CompanyID = $("#division_CompanyID option:selected").val();
+                var Division = $("#division_Name").val();
+                var Code = $("#division_Code").val();
+                var TypeVal = $("#division_DivisionType option:selected").text();
+                if (TypeVal == "--Select Type--") {
+                    TypeVal = "";
+                }
+                var TypeID = $("#division_DivisionType option:selected").val();
+                var Description = $("#division_Description").val();
+                var IsEdit = false;
+
+
+                if ($.trim($(obj).attr("editid")) != '' && $.trim($(obj).attr("emplyerindex")) != '') {
+                    if (CompanyVal != "" && Division != "") {
+                        var ID = $.trim($(obj).attr("editid"));
+                        var EditIndex = $.trim($(obj).attr("emplyerindex"));
+                        IsEdit = true;
+                        $(obj).removeAttr("editid");
+                        $(obj).removeAttr("emplyerindex");
+                        $("td.Company_" + ID + " span").text(CompanyVal);
+                        $("td.Division_" + ID + " span").text(Division);
+                        $("td.Code_" + ID + " span").text(Code);
+                        $("td.Type_" + ID + " span").text(TypeVal);
+                        $("td.Desc_" + ID + " span").text(Description);
+
+                        $("#divisionList_" + EditIndex + "__CompanyID").val(CompanyID);
+                        $("#divisionList_" + EditIndex + "__Name").val(Division);
+                        $("#divisionList_" + EditIndex + "__Code").val(Code);
+                        $("#divisionList_" + EditIndex + "__DivisionType").val(TypeID);
+                        $("#divisionList_" + EditIndex + "__Description").val(Description);
+                        $("#divisionList_" + EditIndex + "__IsEdit").val(IsEdit);
+                    }
+                } else {
+                    debugger;
+                    if (CompanyVal != "" && Division != "") {
+                        //var form = "frmdivision";
+                        var tr = '<tr id="' + ID + '">';
+                        tr = tr + '<td><a class="action btn btn-primary btn-xs" href="#" title="Edit" onclick="DivisionEdit(' + EmplyerIndex + ',\'' + form + '\');" emplyerindex="' + EmplyerIndex + '"><i class="btn-xs fa fa-pencil padding0"></i></a><a class="action btn btn-danger btn-xs" href="javascript:void(0);" title="Delete" onclick=DeletedivisionRowData(this,"' + ID + '");><i class="btn-xs fa fa-trash-o padding0"></i></a>';
+                        tr = tr + '<input type="hidden" name="divisionList[' + EmplyerIndex + '].DivisionID" id="divisionList_' + EmplyerIndex + '__DivisionID" value="' + ID + '"/>';
+                        tr = tr + '<input type="hidden" name="divisionList[' + EmplyerIndex + '].IsEdit" id="divisionList_' + EmplyerIndex + '__IsEdit" value="' + IsEdit + '"/>';
+                        tr = tr + '</td>';
+                        tr = tr + '<td class="Company_' + ID + '"><span>' + CompanyVal + '</span><input type="hidden" name="divisionList[' + EmplyerIndex + '].CompanyID" id="divisionList_' + EmplyerIndex + '__CompanyID" value="' + CompanyID + '"/></td>';
+                        tr = tr + '<td class="Division_' + ID + '"><span>' + Division + '</span><input type="hidden" name="divisionList[' + EmplyerIndex + '].Name" id="divisionList_' + EmplyerIndex + '__Name" value="' + Division + '"/></td>';
+                        tr = tr + '<td class="Code_' + ID + '"><span>' + Code + '</span><input type="hidden" name="divisionList[' + EmplyerIndex + '].Code" id="divisionList_' + EmplyerIndex + '__Code" value="' + Code + '"/></td>';
+                        tr = tr + '<td class="Type_' + ID + '"><span>' + TypeVal + '</span><input type="hidden" name="divisionList[' + EmplyerIndex + '].DivisionType" id="divisionList_' + EmplyerIndex + '__DivisionType" value="' + TypeID + '"/></td>';
+                        tr = tr + '<td class="Desc_' + ID + '"><span>' + Description + '</span><input type="hidden" name="divisionList[' + EmplyerIndex + '].Description" id="divisionList_' + EmplyerIndex + '__Description" value="' + Description + '"/></td>';
+
+                        tr = tr + '</tr>';
+                        $("#division_Body").append(tr);
+                        EmplyerIndex = parseInt(EmplyerIndex) + 1;
+                        $("#Index").val(EmplyerIndex);
+                    }
+                }
+                ClearPopup(form);
+                //chkdivisiontype();
+                // $("#large").modal('hide');
+            }
+        }
+
+        function DivisionEdit(index, formDis) {
+            debugger;
+            //$("#large").modal('show');
+            ClearPopup(formDis);
+
+            var EditID = $("#divisionList_" + index + "__DivisionID").val();
+            var company = ($("#divisionList_" + index + "__CompanyID").val()).toUpperCase();
+            var divisionname = $("#divisionList_" + index + "__Name").val();
+            var code = $("#divisionList_" + index + "__Code").val();
+            var type = ($("#divisionList_" + index + "__DivisionType").val()).toUpperCase();
+            var desc = $("#divisionList_" + index + "__Description").val();
+
+
+            $("#division_CompanyID option[value='" + company + "']").prop("selected", true);
+            $("#division_CompanyID").selectpicker('refresh');
+            $("#division_Name").val(divisionname);
+            $("#division_Code").val(code);
+            $("#division_DivisionType option[value='" + type + "']").prop("selected", true);
+            $("#division_DivisionType").selectpicker('refresh');
+            $("#division_Description").val(desc);
+            chkdivisiontype();
+
+            $("#btnsavedivisions").attr("editid", EditID);
+            $("#btnsavedivisions").attr("emplyerindex", index);
+        }
+
+
+        function DeletedivisionRowData(obj, divisionID) {
+            $(obj).closest('#' + divisionID).remove();
+            if ($("#division_Body  tr").length == 0) {
+                $("#division_Body").append('<tr class="odd"><td valign="top" colspan="7" class="dataTables_empty">No data available in table</td></tr>')
+            }
+        }
+
+        function DivisionTableIndexOrdering() {
+            var table = $("#dt_division tbody");
+            table.find('tr').each(function (i) {
+                $(this).find('td:eq(0)').find("input[type='hidden']:eq(0)").attr("id", "divisionList_" + i + "__DivisionID");
+                $(this).find('td:eq(0)').find("input[type='hidden']:eq(0)").attr("name", "divisionList[" + i + "].DivisionID");
+
+                $(this).find('td:eq(0)').find("input[type='hidden']:eq(1)").attr("id", "divisionList_" + i + "__IsEdit");
+                $(this).find('td:eq(0)').find("input[type='hidden']:eq(1)").attr("name", "divisionList[" + i + "].IsEdit");
+
+                $(this).find('td:eq(1)').find("input[type='hidden']").attr("id", "divisionList_" + i + "__CompanyID");
+                $(this).find('td:eq(1)').find("input[type='hidden']").attr("name", "divisionList[" + i + "].CompanyID");
+
+                $(this).find('td:eq(2)').find("input[type='hidden']").attr("id", "divisionList_" + i + "__Name");
+                $(this).find('td:eq(2)').find("input[type='hidden']").attr("name", "divisionList[" + i + "].Name");
+
+                $(this).find('td:eq(3)').find("input[type='hidden']").attr("id", "divisionList_" + i + "__Code");
+                $(this).find('td:eq(3)').find("input[type='hidden']").attr("name", "divisionList[" + i + "].Code");
+
+                $(this).find('td:eq(4)').find("input[type='hidden']").attr("id", "divisionList_" + i + "__DivisionType");
+                $(this).find('td:eq(4)').find("input[type='hidden']").attr("name", "divisionList[" + i + "].DivisionType");
+
+                $(this).find('td:eq(5)').find("input[type='hidden']").attr("id", "divisionList_" + i + "__Description");
+                $(this).find('td:eq(5)').find("input[type='hidden']").attr("name", "divisionList[" + i + "].Description");
+
+            });
+        }
+
+        function DivisionFormSubmit() {
+            debugger;
+            DivisionTableIndexOrdering();
+            $("#divisionrows").addClass('hide');
+            ShowLoader();
+            $("#frmdivision").submit();
+        }
+        function SaveDivisionResponse(response) {
+            //if (response == "_Logon_") {
+            //    window.location.href = "/Login/Login";
+            //}
+            //else {
+            if (response.IsSuccess) {
+                SetMessageForPageLoad(response.Message, "divisionsaved");
+                var EncryptedClientID = $("#division_EncryptedClientID").val();
+                var EncryptedCompanyID = $("#division_EncryptedCompanyID").val();
+                window.location.href = "/AdmDivision/Division?clientid=" + EncryptedClientID + "&companyid=" + EncryptedCompanyID + "";
+
+                ShowPageLoadMessage("divisionsaved", "Division");
+                //window.location.href = "/OrganisationAdmin/OrganisationList";
+
+            } else {
+                ShowMessage(response.Message, "error");
+            }
+            //}
+        }
+
+
+                                            //function adddivision() {
+                                            //    var ExpIndex = $("#Index").val();
+                                            //    ExpIndex = parseInt(ExpIndex);
+                                            //    ExpIndex = ExpIndex + 1;
+                                            //    $("#Index").val(ExpIndex);
+
+                                            //    var html = "<div class='row'>"
+                                            //    html += "<div class='col-md-6'><div class='form-group'>"
+                                            //    html += "<input type='text' name='Companylist[" + ExpIndex + "].CompanyName id='Companylist_" + ExpIndex + "__CompanyName' class='form-control m-input' required/>"
+                                            //    html += "</div></div>"
+                                            //    html += "<div class='col-md-3'><div class='form-group'>"
+                                            //    html += "<input type='text' name='Companylist[" + ExpIndex + "].CompanyCode id='Companylist_" + ExpIndex + "__CompanyCode' class='form-control m-input'/>"
+                                            //    html += "</div></div>"
+                                            //    html += "<div class='col-md-3'><div class='form-group'>"
+                                            //    html += "<input type='text' name='Companylist[" + ExpIndex + "].FspNo id='Companylist_" + ExpIndex + "__FspNo' class='form-control m-input'/>"
+                                            //    html += "</div></div></div>";
+                                            //    $("#companyrows").append(html);
+
+                                            //}
+
+                                            //function savecompany() {
+                                            //    if ($("#frmcompany").valid()) {
+                                            //        $("#frmcompany").submit();
+                                            //    }
+                                            //}
+
+    </script>
+
+}
+
+
+
