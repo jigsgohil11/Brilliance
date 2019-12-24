@@ -173,6 +173,8 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="Controllers\AdmCompanyController.cs" />
+    <Compile Include="Controllers\AdmDivisionController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\CISController.cs" />
     <Compile Include="Controllers\CompanyController.cs" />
@@ -183,6 +185,7 @@
     <Compile Include="Controllers\GeneralSetupController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
+    <Compile Include="Controllers\OrganisationAdminController.cs" />
     <Compile Include="Controllers\OrganizationController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Controllers\UserController.cs" />
@@ -203,6 +206,8 @@
     <Compile Include="Infrastructure\Crypto.cs" />
     <Compile Include="Infrastructure\CustomAuthorizeAttribute.cs" />
     <Compile Include="Infrastructure\CustomDateModelBinder.cs" />
+    <Compile Include="Infrastructure\DataProvider\AdmCompanyDataProvider.cs" />
+    <Compile Include="Infrastructure\DataProvider\AdmDivisionDataProvider.cs" />
     <Compile Include="Infrastructure\DataProvider\BaseDataProvider.cs" />
     <Compile Include="Infrastructure\DataProvider\ClientDataProvider.cs" />
     <Compile Include="Infrastructure\DataProvider\CompanyDataProvider.cs" />
@@ -210,6 +215,8 @@
     <Compile Include="Infrastructure\DataProvider\ConductDataprovider.cs" />
     <Compile Include="Infrastructure\DataProvider\DivisionDataProvider.cs" />
     <Compile Include="Infrastructure\DataProvider\GeneralSetupDataProvider.cs" />
+    <Compile Include="Infrastructure\DataProvider\IAdmCompanyDataProvider.cs" />
+    <Compile Include="Infrastructure\DataProvider\IAdmDivisionDataProvider.cs" />
     <Compile Include="Infrastructure\DataProvider\IClientDataProvider.cs" />
     <Compile Include="Infrastructure\DataProvider\ICompanyDataProvider.cs" />
     <Compile Include="Infrastructure\DataProvider\IComplaintDataProvider.cs" />
@@ -217,11 +224,13 @@
     <Compile Include="Infrastructure\DataProvider\IDivisionDataProvider.cs" />
     <Compile Include="Infrastructure\DataProvider\IGeneralSetupDataProvider.cs" />
     <Compile Include="Infrastructure\DataProvider\ILoginDataProvider.cs" />
+    <Compile Include="Infrastructure\DataProvider\IOrganisationAdminDataProvider.cs" />
     <Compile Include="Infrastructure\DataProvider\IProductDataProvider.cs" />
     <Compile Include="Infrastructure\DataProvider\ITemplateMaster.cs" />
     <Compile Include="Infrastructure\DataProvider\IUserDataProvider.cs" />
     <Compile Include="Infrastructure\DataProvider\IWebsubmissionDataProvider.cs" />
     <Compile Include="Infrastructure\DataProvider\LoginDataProvider.cs" />
+    <Compile Include="Infrastructure\DataProvider\OrganisationAdminDataProvider.cs" />
     <Compile Include="Infrastructure\DataProvider\ProductDataProvider.cs" />
     <Compile Include="Infrastructure\DataProvider\TemplatemasterDataProvider.cs" />
     <Compile Include="Infrastructure\DataProvider\UserDataProvider.cs" />
@@ -257,6 +266,8 @@
     <Compile Include="Models\SearchValueData.cs" />
     <Compile Include="Models\ServiceResponse.cs" />
     <Compile Include="Models\ViewModel\ActionLoginLogModel.cs" />
+    <Compile Include="Models\ViewModel\AdmCompanyViewModel.cs" />
+    <Compile Include="Models\ViewModel\AdmDivisionViewModel.cs" />
     <Compile Include="Models\ViewModel\ClientViewModel.cs" />
     <Compile Include="Models\ViewModel\CompanyViewModel.cs" />
     <Compile Include="Models\ViewModel\ComplaintViewModel.cs" />
@@ -264,6 +275,7 @@
     <Compile Include="Models\ViewModel\DivisionViewModel.cs" />
     <Compile Include="Models\ViewModel\GeneralSetupViewModel.cs" />
     <Compile Include="Models\ViewModel\LoginUserRoleRightModel.cs" />
+    <Compile Include="Models\ViewModel\OrganisationAdminViewModel.cs" />
     <Compile Include="Models\ViewModel\ProductViewModel.cs" />
     <Compile Include="Models\ViewModel\RoleViewModel.cs" />
     <Compile Include="Models\ViewModel\UserLoginDetails.cs" />
@@ -6888,12 +6900,17 @@
     <Content Include="Views\CIS\TemplateOutcomemaster.cshtml" />
     <Content Include="Views\CIS\TemplateSubOutcomemaster.cshtml" />
     <Content Include="Views\CIS\_partialoutcome.cshtml" />
+    <Content Include="Views\AdmCompany\Company.cshtml" />
+    <Content Include="Views\AdmDivision\Division.cshtml" />
+    <Content Include="Views\OrganisationAdmin\Company.cshtml" />
+    <Content Include="Views\OrganisationAdmin\OrganisationList.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="assets\apps\img\" />
     <Folder Include="assets\global\plugins\angularjs\plugins\angular-file-upload\uploads\" />
     <Folder Include="ComplaintFiles\" />
+    <Folder Include="Views\OrgCompany\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
