@@ -1,0 +1,118 @@
+﻿@using Brilliance.Infrastructure
+@model Brilliance.Models.ViewModel.CrtAdminViewmodel
+
+@{
+    ViewBag.Title = "CRTadmin";
+    Layout = "~/Views/Shared/_Layout_public.cshtml";
+}
+
+<link href="~/assets/global/plugins/bootstrap-datepicker/css/bootstrap-datepicker.min.css" rel="stylesheet" />
+<link href="~/assets/global/plugins/bootstrap-fileinput/bootstrap-fileinput.css" rel="stylesheet" />
+<link href="~/assets/pages/css/profile.min.css" rel="stylesheet" />
+<style>
+    .floatClass {
+        float: left;
+        margin-bottom: 10px;
+    }
+
+    .capright {
+        float: right;
+        display: inline-block;
+        font-size: 18px;
+        line-height: 18px;
+        padding: 5px 0;
+    }
+
+    .col-md-6 {
+        margin-top: -10px;
+    }
+</style>
+<div class="page-content page-content-dashbrd-backgrnd">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="page-bar margin-bottom-10">
+                <div class="row">
+                    <div class="col-md-12 padding-out">
+                        <div class="portlet light padding-header margin-0 custom-padding-bar">
+                            <div class="portlet-title portlet-title-Project-custom">
+                                <div class="caption font-dark">
+                                    <i class="icon-settings font-dark"></i>
+                                    <span class="caption-subject bold uppercase">CRT Administration</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row" style="margin-left:-25px;margin-right:-25px;margin-top:-5px;">
+                <div class="col-lg-12">
+                    <div class="portlet light">
+                        <div class="portlet-body form">
+                            @*<form action="/ClientSetup/SaveClient" id="frmClient" data-ajax-success="SaveClientResponse(data);" data-ajax="true" data-ajax-method="Post" method="post">*@
+                            <form action="/ClientSetup/SaveClient" id="frmClient" method="post" enctype="multipart/form-data">
+                                @*@Html.HiddenFor(m => m.client.ClientID)
+                                    @Html.HiddenFor(m => m.client.Logo)*@
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>For this organisation</label>
+                                            @Html.DropDownListFor(m => m.client.ClientID, new SelectList(Model.clientList, "Value", "Text", 0), "--Select Client--", new { @data_live_search = "true", @class = "form-control bs-select" })
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Configuration at Tier level</label>
+                                            <select id="tierlevel" class="form-control bs-select" data_live_search="true">
+                                                <option value="Organisation">Organisation</option>
+                                                <option value="Company">Company</option>
+                                                <option value="Division">Division</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label><b>Field label configuration</b></label>
+                                            <button type="button" onclick="Addlabels();" class="btn">OPEN</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade modal-scroll bs-modal-lg" id="Labelconfig_popup" tabindex="-1" role="dialog" aria-hidden="true">
+    <div id="LabelsConfig">
+        @if (Model != null)
+        {
+            @Html.Partial("~/Views/AdmCrt/_LabelConfiguration.cshtml",Model)
+        }
+    </div>
+</div>
+
+
+@section scripts{
+    <script src="~/assets/global/plugins/bootstrap-fileinput/bootstrap-fileinput.js"></script>
+    <script src="~/assets/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
+    <script>
+        function Addlabels() {
+            debugger;
+            var value = $("#client_ClientID").val();
+            if (value != "" && value != undefined && value != null) {
+                $("#labelconfig_ClientID").val(value);
+                $("#Labelconfig_popup").modal('show');
+                
+            }
+            else {
+                ShowMessage("Select organisation.", "error");
+            }
+
+        }
+    </script>
+}
+

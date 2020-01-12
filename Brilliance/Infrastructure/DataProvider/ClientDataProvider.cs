@@ -74,8 +74,8 @@ namespace Brilliance.Infrastructure.DataProvider
                     cmd.Parameters.AddWithValue("@ContactPersonEmail", Clients.client.ContactPersonEmail).SqlDbType = SqlDbType.NVarChar;
                     cmd.Parameters.AddWithValue("@MobileNo", Clients.client.MobileNo).SqlDbType = SqlDbType.NVarChar;
                     cmd.Parameters.AddWithValue("@Description", Clients.client.Description).SqlDbType = SqlDbType.NVarChar;
-                    cmd.Parameters.AddWithValue("@Address", Clients.client.Address).SqlDbType = SqlDbType.NVarChar;
-                    cmd.Parameters.AddWithValue("@UnitNo", Clients.client.UnitNo).SqlDbType = SqlDbType.NVarChar;
+                    //cmd.Parameters.AddWithValue("@Address", Clients.client.Address).SqlDbType = SqlDbType.NVarChar;
+                    
                     cmd.Parameters.AddWithValue("@Complex", Clients.client.Complex).SqlDbType = SqlDbType.NVarChar;
                     cmd.Parameters.AddWithValue("@Street", Clients.client.Street).SqlDbType = SqlDbType.NVarChar;
                     cmd.Parameters.AddWithValue("@StreetNo", Clients.client.StreetNo).SqlDbType = SqlDbType.NVarChar;
@@ -102,8 +102,7 @@ namespace Brilliance.Infrastructure.DataProvider
                     cmd.Parameters.AddWithValue("@ContactPersonEmail", Clients.client.ContactPersonEmail).SqlDbType = SqlDbType.NVarChar;
                     cmd.Parameters.AddWithValue("@MobileNo", Clients.client.MobileNo).SqlDbType = SqlDbType.NVarChar;
                     cmd.Parameters.AddWithValue("@Description", Clients.client.Description).SqlDbType = SqlDbType.NVarChar;
-                    cmd.Parameters.AddWithValue("@Address", Clients.client.Address).SqlDbType = SqlDbType.NVarChar;
-                    cmd.Parameters.AddWithValue("@UnitNo", Clients.client.UnitNo).SqlDbType = SqlDbType.NVarChar;
+                    //cmd.Parameters.AddWithValue("@Address", Clients.client.Address).SqlDbType = SqlDbType.NVarChar;           
                     cmd.Parameters.AddWithValue("@Complex", Clients.client.Complex).SqlDbType = SqlDbType.NVarChar;
                     cmd.Parameters.AddWithValue("@Street", Clients.client.Street).SqlDbType = SqlDbType.NVarChar;
                     cmd.Parameters.AddWithValue("@StreetNo", Clients.client.StreetNo).SqlDbType = SqlDbType.NVarChar;

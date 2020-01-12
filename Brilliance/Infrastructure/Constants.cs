@@ -136,6 +136,7 @@ namespace Brilliance.Infrastructure
         #region profileimage
        
         public const string ComplaintFilenotePath = "~/ComplaintFiles/";
+        public const string OrganisationlogoPath = "~/Organisationlogos/";
 
         #endregion
     }

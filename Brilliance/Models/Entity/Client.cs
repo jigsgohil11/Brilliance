@@ -14,30 +14,49 @@ namespace Brilliance.Models.Entity
         [Key]
         [Required]
         public Guid ClientID { get; set; }
-        [MaxLength(7)]
-        [Required(ErrorMessage = "Code is required.")]
+        
         public string ClientCode { get; set; }
-        [MaxLength(167)]
+        
         [Required(ErrorMessage = "Organization name is required.")]
         public string OrganizationName { get; set; }
         [MaxLength(167)]
         public string TotalNumberofUser { get; set; }
-        [MaxLength(67)]
-        [Required(ErrorMessage = "Contact person name is required.")]
+        
         public string ContactPersonName { get; set; }
-        [MaxLength(31)]
-        [Required(ErrorMessage = "Email is required.")]
+        public string ContactPersonSurName { get; set; }
+      
         public string ContactPersonEmail { get; set; }
-        [Required(ErrorMessage = "Contact No. is required.")]
+        
+        [RegularExpression(@"^(\+*)[0-9]*$", ErrorMessage = "Mobile No.should be + and digit.")]
+        public string TelephoneNo { get; set; }
+        
         [RegularExpression(@"^(\+*)[0-9]*$", ErrorMessage = "Mobile No.should be + and digit.")]
         public string MobileNo { get; set; }
+        public string Industry { get; set; }
         public Guid? AssociatePartnerID { get; set; }
-        [Required(ErrorMessage = "Country is required.")]
+        public string VATNo { get; set; }
+       
+        public string AddressLine1 { get; set; }
+        public string AddressLine2 { get; set; }
+        public string AddressLine3 { get; set; }
+
+        
         public Guid? Country { get; set; }
-        [Required(ErrorMessage = "State is required.")]
+        
         public Guid? State { get; set; }
-        [Required(ErrorMessage = "City is required.")]
-        public Guid? City { get; set; }
+        public string City { get; set; }
+        public string Postcode { get; set; }
+        [Required(ErrorMessage = "Entity number is required.")]
+        public string EntityNo { get; set; }
+        public string FSPNo { get; set; }
+        [Required(ErrorMessage = "URL is required.")]
+        public string URLDetails { get; set; }
+        public string Logo { get; set; }
+        public string Skincolours { get; set; }
+        public string Sitepullthrough { get; set; }
+        public string buttonsclr { get; set; }
+        public string headsclr { get; set; }
+        public string subheadsclr { get; set; }
         public bool? IsAcceptedTermsServices { get; set; }
         public bool? IsActive { get; set; }
         public bool? IsBlock { get; set; }
@@ -54,9 +73,7 @@ namespace Brilliance.Models.Entity
         public Guid? UpdatedBy { get; set; }
 
         public string Description { get; set; }
-        [Required(ErrorMessage = "Address is required.")]
-        public string Address { get; set; }
-        public string UnitNo { get; set; }
+        
         public string Complex { get; set; }
         public string StreetNo { get; set; }
         public string Street { get; set; }
@@ -65,11 +82,16 @@ namespace Brilliance.Models.Entity
         public string countorganisation { get; set; }
         [ResultColumn]
         public bool IsCompanyExist { get; set; }
+        [ResultColumn]
+        public bool OrganisationID { get; set; }
 
         [Ignore]
         public string EncryptedClientID { get { return ClientID != Guid.Empty ? Crypto.Encrypt(Convert.ToString(ClientID)) : null; } }
-       
+
+        //[Ignore]
+        //public bool IsEdit { get { return ClientID != Guid.Empty ? true : false; } }
+
         [Ignore]
-        public bool IsEdit { get { return ClientID != Guid.Empty ? true : false; } }
+        public bool IsEdit { get; set; }
     }
 }
