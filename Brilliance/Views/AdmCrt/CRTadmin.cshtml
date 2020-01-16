@@ -49,7 +49,7 @@
                     <div class="portlet light">
                         <div class="portlet-body form">
                             @*<form action="/ClientSetup/SaveClient" id="frmClient" data-ajax-success="SaveClientResponse(data);" data-ajax="true" data-ajax-method="Post" method="post">*@
-                            <form action="/ClientSetup/SaveClient" id="frmClient" method="post" enctype="multipart/form-data">
+                            <form id="frmcompany" action="/Company/SaveCompany" method="post" data-ajax="true" data-ajax-method="Post" data-ajax-success="SaveCompanyResponse(data);">
                                 @*@Html.HiddenFor(m => m.client.ClientID)
                                     @Html.HiddenFor(m => m.client.Logo)*@
                                 <div class="row">
@@ -75,6 +75,7 @@
                                         <div class="form-group">
                                             <label><b>Field label configuration</b></label>
                                             <button type="button" onclick="Addlabels();" class="btn">OPEN</button>
+                                            <button type="button" class="btn">Label List</button>
                                         </div>
                                     </div>
                                 </div>
@@ -90,7 +91,7 @@
     <div id="LabelsConfig">
         @if (Model != null)
         {
-            @Html.Partial("~/Views/AdmCrt/_LabelConfiguration.cshtml",Model)
+            @Html.Partial("~/Views/AdmCrt/_LabelConfiguration.cshtml", Model)
         }
     </div>
 </div>
@@ -101,18 +102,35 @@
     <script src="~/assets/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
     <script>
         function Addlabels() {
-            debugger;
             var value = $("#client_ClientID").val();
             if (value != "" && value != undefined && value != null) {
                 $("#labelconfig_ClientID").val(value);
                 $("#Labelconfig_popup").modal('show');
-                
             }
             else {
                 ShowMessage("Select organisation.", "error");
             }
+        } 
 
-        }
+        //function SaveTemplate() {
+        //    debugger;
+        //    var istemplate = 1;
+        //    if ($("#frmlabelconfig").valid()) {
+        //        //$("#labelconfig_IsTemplate").val(istemplate);
+        //        $("#frmlabelconfig").submit();
+        //    }
+        //}
+        @*function SaveTemplate() {
+            debugger;
+            //var data = $("#labelconfig").val();
+            var data = @Model;
+            var postData = { CRTAdminVM: data };
+            ShowLoader();
+            AjaxCall("/AdmCrt/Savelabelconfig", JSON.stringify(postData), "post", "json", "application/json", false).done(function (data) {
+                HideLoader();
+             
+            });
+        }*@
     </script>
 }
 

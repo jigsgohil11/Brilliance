@@ -43,5 +43,8 @@ namespace Brilliance.Models.Entity
         public bool? IsActive { get; set; }
         public long Seqno { get; set; }
 
+        [ResultColumn]
+        public bool IsEdit { get; set; }
+
     }
 }

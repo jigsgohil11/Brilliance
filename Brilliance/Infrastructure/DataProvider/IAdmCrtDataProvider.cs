@@ -8,5 +8,6 @@ namespace Brilliance.Infrastructure.DataProvider
     interface IAdmCrtDataProvider
     {
         ServiceResponse GetCrtSetup();
+        ServiceResponse Savelabelconfig(CrtAdminViewmodel CRTAdminVM);
     }
 }

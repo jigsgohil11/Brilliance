@@ -19,5 +19,13 @@ namespace Brilliance.Controllers
             response = _iadmcrtDataProvider.GetCrtSetup();
             return View(response.Data);
         }
+        [HttpPost]
+        public ActionResult Savelabelconfig(CrtAdminViewmodel CRTAdminVM)
+        {
+            _iadmcrtDataProvider = new AdmCrtDataProvider();
+            var response = new ServiceResponse();
+            response = _iadmcrtDataProvider.Savelabelconfig(CRTAdminVM);
+            return Json(response);
+        }
     }
 }

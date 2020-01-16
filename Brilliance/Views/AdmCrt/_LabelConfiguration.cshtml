@@ -8,9 +8,23 @@
             <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
             <h4 class="modal-title">Labels for this organisation</h4>
         </div>
-        <form id="form_instance" method="post">
+        <form id="frmlabelconfig" action="/AdmCrt/Savelabelconfig" method="post" data-ajax="true" data-ajax-method="Post" data-ajax-success="SaveCompanyResponse(data);">
             <div class="modal-body">
+                @Html.HiddenFor(m => m.labelconfig.ClientID)
+                @Html.HiddenFor(m => m.labelconfig.IsTemplate)
+                
+
                 <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="col-md-5">Template Name</label>
+                            <div class="col-md-7">
+                                @Html.TextBoxFor(m => m.labelconfig.InstanceName, new { @class = "form-control m-input" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row" style="margin-top:12px;">
                     <div class="col-md-6">
                         <div class="form-group">
                             @Html.HiddenFor(m => m.labelconfig.ClientID)
@@ -25,7 +39,6 @@
                             <label class="col-md-5">Complaint incident date</label>
                             <div class="col-md-7">
                                 @Html.TextBoxFor(m => m.labelconfig.incidentdate, new { @class = "form-control m-input" })
-
                             </div>
                         </div>
                     </div>
@@ -229,7 +242,8 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn default" data-dismiss="modal">Cancel</button>
-                <button id="btnSaveAreaTask" type="button" class="btn green" onclick="AddRowForAreaTasks(this);">Save</button>
+                <button id="btnSaveAreaTask" type="submit" class="btn green">SAVE</button>
+                @*<button id="btnSave" type="button" onclick="SaveTemplate();" class="btn green">SAVE AS NEW TEMPLATE</button>*@
             </div>
         </form>
     </div>
