@@ -9,5 +9,7 @@ namespace Brilliance.Infrastructure.DataProvider
     {
         ServiceResponse GetCrtSetup();
         ServiceResponse Savelabelconfig(CrtAdminViewmodel CRTAdminVM);
+        CrtAdminViewmodel labelconfiglist(Guid ClientID);
+        CrtAdminViewmodel EditLabelConfig(Guid ClientID);
     }
 }

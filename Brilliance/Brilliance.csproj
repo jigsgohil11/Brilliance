@@ -6916,6 +6916,7 @@
     <Content Include="Views\ClientSetup\Client.cshtml" />
     <Content Include="Views\AdmCrt\CRTadmin.cshtml" />
     <Content Include="Views\AdmCrt\_LabelConfiguration.cshtml" />
+    <Content Include="Views\AdmCrt\_LabelConfigList.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

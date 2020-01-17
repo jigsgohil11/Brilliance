@@ -45,6 +45,8 @@ namespace Brilliance.Models.Entity
 
         [ResultColumn]
         public bool IsEdit { get; set; }
+        [ResultColumn]
+        public string OrganizationName { get; set; }
 
     }
 }

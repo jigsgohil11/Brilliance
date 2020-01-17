@@ -27,5 +27,17 @@ namespace Brilliance.Controllers
             response = _iadmcrtDataProvider.Savelabelconfig(CRTAdminVM);
             return Json(response);
         }
+        public ActionResult LabelconfigList(Guid ClientID)
+        {
+            _iadmcrtDataProvider = new AdmCrtDataProvider();
+            CrtAdminViewmodel labellist = _iadmcrtDataProvider.labelconfiglist(ClientID);
+            return PartialView("~/Views/AdmCrt/_LabelConfigList.cshtml", labellist);
+        }
+        public ActionResult EditLabelConfig(Guid LabelconfigID)
+        {
+            _iadmcrtDataProvider = new AdmCrtDataProvider();
+            CrtAdminViewmodel crtadminVM = _iadmcrtDataProvider.EditLabelConfig(LabelconfigID);
+            return PartialView("~/Views/AdmCrt/_LabelConfiguration.cshtml", crtadminVM);
+        }  
     }
 }

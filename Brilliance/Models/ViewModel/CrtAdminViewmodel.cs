@@ -15,11 +15,12 @@ namespace Brilliance.Models.ViewModel
             client = new Client();
             clientList = new List<SelectListItem>();
             labelconfig = new LabelConfiguration();
+            labelconfiglist = new List<LabelConfiguration>();
         }
         public Client client { get; set; }
         public List<SelectListItem> clientList { get; set; }
         public LabelConfiguration labelconfig { get; set; }
-
+        public List<LabelConfiguration> labelconfiglist { get; set; }
     }
 
     //public class CrtAdminLabelConfigViewmodel

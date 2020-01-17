@@ -8,11 +8,12 @@
             <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
             <h4 class="modal-title">Labels for this organisation</h4>
         </div>
-        <form id="frmlabelconfig" action="/AdmCrt/Savelabelconfig" method="post" data-ajax="true" data-ajax-method="Post" data-ajax-success="SaveCompanyResponse(data);">
+        <form id="frmlabelconfig" action="/AdmCrt/Savelabelconfig" method="post" data-ajax="true" data-ajax-method="Post" data-ajax-success="SaveLabelResponse(data);">
             <div class="modal-body">
                 @Html.HiddenFor(m => m.labelconfig.ClientID)
+                @Html.HiddenFor(m => m.labelconfig.LabelconfigID)
                 @Html.HiddenFor(m => m.labelconfig.IsTemplate)
-                
+                @Html.HiddenFor(m => m.labelconfig.IsEdit)
 
                 <div class="row">
                     <div class="col-md-6">
@@ -28,6 +29,7 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             @Html.HiddenFor(m => m.labelconfig.ClientID)
+
                             <label class="col-md-5">Tier 2</label>
                             <div class="col-md-7">
                                 @Html.TextBoxFor(m => m.labelconfig.Tier2, new { @class = "form-control m-input" })

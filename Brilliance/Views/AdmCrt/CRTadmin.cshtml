@@ -75,10 +75,17 @@
                                         <div class="form-group">
                                             <label><b>Field label configuration</b></label>
                                             <button type="button" onclick="Addlabels();" class="btn">OPEN</button>
-                                            <button type="button" class="btn">Label List</button>
+                                            <button type="button" onclick="showlabellist();" class="btn">Label List</button>
                                         </div>
                                     </div>
                                 </div>
+                                @if (Model != null && Model.labelconfiglist != null && Model.labelconfiglist.Count > 0)
+                                {
+                                    <div class="tab-content">
+                                        <div class="row" id="Partialviewbind">
+                                        </div>
+                                    </div>
+                                }
                             </form>
                         </div>
                     </div>
@@ -110,7 +117,70 @@
             else {
                 ShowMessage("Select organisation.", "error");
             }
-        } 
+        }
+
+
+        function showlist() {
+            $("#label_list").removeClass('hide');
+        }
+
+        function showlabellist() {
+            var id = $("#client_ClientID").val();
+        if (id != "" && id != undefined && id != null) {
+                var postData = JSON.stringify({ ClientID: id });
+            ShowLoader();
+            $.ajax({
+                type: "POST",
+                url: "/AdmCrt/LabelconfigList",
+                traditional: true,
+                async: true,
+                data: {
+                    ClientID: id
+                },
+                success: function (data) {
+                    HideLoader();
+                    $("#Partialviewbind").html('');
+                    $("#Partialviewbind").html(data);
+                }
+            });
+            }
+            else {
+                ShowMessage("Select organisation.", "error");
+            }
+        }
+
+
+        function closeList(){
+        $("#Partialviewbind").html('');
+        }
+
+        function EditLabelPopup(id) {
+            ShowLoader();
+            $.ajax({
+                type: "POST",
+                url: "/AdmCrt/EditLabelConfig",
+                traditional: true,
+                async: true,
+                data: {
+                    LabelconfigID: id
+                },
+                success: function (data) {
+                    HideLoader();
+                   $("#Labelconfig_popup").modal('show');
+                        $("#LabelsConfig").html(data);
+                        //".bs-select").selectpicker('refresh');
+                        //$("#" + form).data('validator', null);
+                       // $.validator.unobtrusive.parse($("#" + form));
+                }
+            });
+        }
+
+        function SaveLabelResponse(){
+      
+        $("#Labelconfig_popup").modal('hide');
+        showlabellist();
+        }
+
 
         //function SaveTemplate() {
         //    debugger;
@@ -128,9 +198,12 @@
             ShowLoader();
             AjaxCall("/AdmCrt/Savelabelconfig", JSON.stringify(postData), "post", "json", "application/json", false).done(function (data) {
                 HideLoader();
-             
+
             });
         }*@
+
+
+
     </script>
 }
 
