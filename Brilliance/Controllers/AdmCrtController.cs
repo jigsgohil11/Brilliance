@@ -38,6 +38,27 @@ namespace Brilliance.Controllers
             _iadmcrtDataProvider = new AdmCrtDataProvider();
             CrtAdminViewmodel crtadminVM = _iadmcrtDataProvider.EditLabelConfig(LabelconfigID);
             return PartialView("~/Views/AdmCrt/_LabelConfiguration.cshtml", crtadminVM);
-        }  
+        }
+        public ActionResult DropselectList(Guid ClientID)
+        {
+            _iadmcrtDataProvider = new AdmCrtDataProvider();
+            var response = new ServiceResponse();
+            DropSelectViewmodel model = _iadmcrtDataProvider.DropselectgList(ClientID);
+            return PartialView("~/Views/AdmCrt/_DropselectConfiguration.cshtml", model);
+        }
+        public ActionResult AddDropSelect(string Category,Guid ClientID)
+        {
+            _iadmcrtDataProvider = new AdmCrtDataProvider();
+            DropselectModel model = _iadmcrtDataProvider.AddDropSelect(Category, ClientID);
+            return PartialView("~/Views/AdmCrt/_AddNewDropSelectItem.cshtml", model);
+        }
+        [HttpPost]
+        public ActionResult Savedropselectconfig(Guid ClientID,Guid? Refid,Guid? Refid1,string name,string desc,string category)
+        {
+            _iadmcrtDataProvider = new AdmCrtDataProvider();
+            var response = new ServiceResponse();
+            response = _iadmcrtDataProvider.Savedropselectconfig(ClientID,Refid,Refid1,name,desc,category);
+            return Json(response);
+        }
     }
 }

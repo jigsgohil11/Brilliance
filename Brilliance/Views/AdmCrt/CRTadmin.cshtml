@@ -5,7 +5,7 @@
     ViewBag.Title = "CRTadmin";
     Layout = "~/Views/Shared/_Layout_public.cshtml";
 }
-
+<link href="~/assets/global/plugins/datatables/datatables.min.css" rel="stylesheet" type="text/css" />
 <link href="~/assets/global/plugins/bootstrap-datepicker/css/bootstrap-datepicker.min.css" rel="stylesheet" />
 <link href="~/assets/global/plugins/bootstrap-fileinput/bootstrap-fileinput.css" rel="stylesheet" />
 <link href="~/assets/pages/css/profile.min.css" rel="stylesheet" />
@@ -79,6 +79,14 @@
                                         </div>
                                     </div>
                                 </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label><b>Drop select configuration</b></label>
+                                            <button type="button" onclick="ShowDropselect();" class="btn">OPEN</button>
+                                        </div>
+                                    </div>
+                                </div>
                                 @if (Model != null && Model.labelconfiglist != null && Model.labelconfiglist.Count > 0)
                                 {
                                     <div class="tab-content">
@@ -86,6 +94,184 @@
                                         </div>
                                     </div>
                                 }
+                                <div id="DropSelectsConfig">
+                                    @*@if (Model != null)
+                                        {
+                                            @Html.Partial("~/Views/AdmCrt/_DropselectConfiguration.cshtml", Model)
+                                        }*@
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <label>Client Complaint Portal for this Organisation*</label>
+                                        <div class="mt-radio-inline">
+                                            <label class="mt-radio mt-radio-outline margin-bottom0" style="font-size:13px;">
+                                                @Html.RadioButton("txt", "Yes", new { @class = "class1", @checked = "checked" })
+                                                No
+                                                <span></span>
+                                            </label>
+                                            <label class="mt-radio mt-radio-outline margin-bottom0" style="font-size:13px;">
+                                                @Html.RadioButton("txt", "No", new { @class = "class2" })
+                                                Yes
+                                                <span></span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Show complaint number*</label>
+                                            <div class="mt-radio-inline">
+                                                <label class="mt-radio mt-radio-outline margin-bottom0" style="font-size:13px;">
+                                                    @Html.RadioButton("txt", "Yes", new { @class = "class1", @checked = "checked" })
+                                                    Only on Complaint Capture and Resolution forms
+                                                    <span></span>
+                                                </label>
+                                                <label class="mt-radio mt-radio-outline margin-bottom0" style="font-size:13px;">
+                                                    @Html.RadioButton("txt", "No", new { @class = "class2" })
+                                                    Also on Complaint Register
+                                                    <span></span>
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Show declaration portion*</label>
+
+                                            <div class="mt-radio-inline">
+                                                <label class="mt-radio mt-radio-outline margin-bottom0" style="font-size:13px;">
+                                                    @Html.RadioButton("txt", "Yes", new { @class = "class1", @checked = "checked" })
+                                                    Yes
+                                                    <span></span>
+                                                </label>
+                                                <label class="mt-radio mt-radio-outline margin-bottom0" style="font-size:13px;">
+                                                    @Html.RadioButton("txt", "No", new { @class = "class2" })
+                                                    No
+                                                    <span></span>
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Upload attachment*</label>
+                                            <div class="mt-radio-inline">
+                                                <label class="mt-radio mt-radio-outline margin-bottom0" style="font-size:13px;">
+                                                    @Html.RadioButton("txt", "Yes", new { @class = "class1", @checked = "checked" })
+                                                    Mandatory
+                                                    <span></span>
+                                                </label>
+                                                <label class="mt-radio mt-radio-outline margin-bottom0" style="font-size:13px;">
+                                                    @Html.RadioButton("txt", "No", new { @class = "class2" })
+                                                    Optional
+                                                    <span></span>
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <label>Turnaround timer*</label>
+                                        <div class="mt-radio-inline">
+                                            <label class="mt-radio mt-radio-outline margin-bottom0" style="font-size:13px;">
+                                                @Html.RadioButton("txt", "Yes", new { @class = "class1", @checked = "checked" })
+                                                Yes
+                                                <span></span>
+                                            </label>
+                                            <label class="mt-radio mt-radio-outline margin-bottom0" style="font-size:13px;">
+                                                @Html.RadioButton("txt", "No", new { @class = "class2" })
+                                                No
+                                                <span></span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Web turnaround timer*</label>
+                                            @*<div class="mt-checkbox-inline">
+                                                    <label class="mt-checkbox mt-checkbox-outline margin-bottom0" style="font-size:13px;">
+                                                        @Html.CheckBox("txt", new { @checked = "checked" })
+                                                        Mandatory
+                                                        <span></span>
+                                                    </label>
+                                                    <label class="mt-checkbox mt-checkbox-outline margin-bottom0" style="font-size:13px;">
+                                                        @Html.CheckBox("txt")
+                                                        Optional
+                                                        <span></span>
+                                                    </label>
+                                                </div>*@
+                                            <div class="mt-radio-inline">
+                                                <label class="mt-radio mt-radio-outline margin-bottom0" style="font-size:13px;">
+                                                    @Html.RadioButton("txt", "Yes", new { @class = "class1", @checked = "checked" })
+                                                    Mandatory
+                                                    <span></span>
+                                                </label>
+                                                <label class="mt-radio mt-radio-outline margin-bottom0" style="font-size:13px;">
+                                                    @Html.RadioButton("txt", "No", new { @class = "class2" })
+                                                    Optional
+                                                    <span></span>
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Automatic CRT data extract to SFTP*</label>
+                                            <div class="mt-radio-inline">
+                                                <label class="mt-radio mt-radio-outline margin-bottom0" style="font-size:13px;">
+                                                    @Html.RadioButton("txt", "Yes", new { @class = "class1", @checked = "checked" })
+                                                    Yes
+                                                    <span></span>
+                                                </label>
+                                                <label class="mt-radio mt-radio-outline margin-bottom0" style="font-size:13px;">
+                                                    @Html.RadioButton("txt", "No", new { @class = "class2" })
+                                                    No
+                                                    <span></span>
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Inactivity alert*</label>
+                                            <div class="mt-radio-inline">
+                                                <label class="mt-radio mt-radio-outline margin-bottom0" style="font-size:13px;">
+                                                    @Html.RadioButton("txt", "Yes", new { @class = "class1", @checked = "checked" })
+                                                    Mandatory
+                                                    <span></span>
+                                                </label>
+                                                <label class="mt-radio mt-radio-outline margin-bottom0" style="font-size:13px;">
+                                                    @Html.RadioButton("txt", "No", new { @class = "class2" })
+                                                    Optional
+                                                    <span></span>
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Show assign complaint fields*</label>
+                                            <div class="mt-radio-inline">
+                                                <label class="mt-radio mt-radio-outline margin-bottom0" style="font-size:13px;">
+                                                    @Html.RadioButton("txt", "Yes", new { @class = "class1", @checked = "checked" })
+                                                    Yes
+                                                    <span></span>
+                                                </label>
+                                                <label class="mt-radio mt-radio-outline margin-bottom0" style="font-size:13px;">
+                                                    @Html.RadioButton("txt", "No", new { @class = "class2" })
+                                                    No
+                                                    <span></span>
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </form>
                         </div>
                     </div>
@@ -102,12 +288,20 @@
         }
     </div>
 </div>
+<div class="modal fade modal-scroll bs-modal-lg" id="AddDropselect_popup" tabindex="-1" role="dialog" aria-hidden="true">
+    <div id="AddDropSelects">
+        @*@Html.Partial("~/Views/AdmCrt/_AddNewDropSelectItem.cshtml")*@
+    </div>
+</div>
 
 
 @section scripts{
+    <script src="~/assets/global/scripts/datatable.js" type="text/javascript"></script>
+    <script src="~/assets/global/plugins/datatables/datatables.min.js" type="text/javascript"></script>
     <script src="~/assets/global/plugins/bootstrap-fileinput/bootstrap-fileinput.js"></script>
     <script src="~/assets/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
     <script>
+
         function Addlabels() {
             var value = $("#client_ClientID").val();
             if (value != "" && value != undefined && value != null) {
@@ -119,30 +313,25 @@
             }
         }
 
-
-        function showlist() {
-            $("#label_list").removeClass('hide');
-        }
-
         function showlabellist() {
             var id = $("#client_ClientID").val();
-        if (id != "" && id != undefined && id != null) {
+            if (id != "" && id != undefined && id != null) {
                 var postData = JSON.stringify({ ClientID: id });
-            ShowLoader();
-            $.ajax({
-                type: "POST",
-                url: "/AdmCrt/LabelconfigList",
-                traditional: true,
-                async: true,
-                data: {
-                    ClientID: id
-                },
-                success: function (data) {
-                    HideLoader();
-                    $("#Partialviewbind").html('');
-                    $("#Partialviewbind").html(data);
-                }
-            });
+                ShowLoader();
+                $.ajax({
+                    type: "POST",
+                    url: "/AdmCrt/LabelconfigList",
+                    traditional: true,
+                    async: true,
+                    data: {
+                        ClientID: id
+                    },
+                    success: function (data) {
+                        HideLoader();
+                        $("#Partialviewbind").html('');
+                        $("#Partialviewbind").html(data);
+                    }
+                });
             }
             else {
                 ShowMessage("Select organisation.", "error");
@@ -150,8 +339,11 @@
         }
 
 
-        function closeList(){
-        $("#Partialviewbind").html('');
+        function closeList() {
+            $("#Partialviewbind").html('');
+        }
+        function closeListdrop() {
+            $("#DropSelectsConfig").html('');
         }
 
         function EditLabelPopup(id) {
@@ -166,44 +358,153 @@
                 },
                 success: function (data) {
                     HideLoader();
-                   $("#Labelconfig_popup").modal('show');
-                        $("#LabelsConfig").html(data);
-                        //".bs-select").selectpicker('refresh');
-                        //$("#" + form).data('validator', null);
-                       // $.validator.unobtrusive.parse($("#" + form));
+                    $("#Labelconfig_popup").modal('show');
+                    $("#LabelsConfig").html(data);
+                    //".bs-select").selectpicker('refresh');
+                    //$("#" + form).data('validator', null);
+                    // $.validator.unobtrusive.parse($("#" + form));
                 }
             });
         }
 
-        function SaveLabelResponse(){
-      
-        $("#Labelconfig_popup").modal('hide');
-        showlabellist();
+        function SaveLabelResponse() {
+            $("#Labelconfig_popup").modal('hide');
+            showlabellist();
         }
 
+        function ShowDropselect() {
+            debugger;
+            var id = $("#client_ClientID").val();
+            if (id != "" && id != undefined && id != null) {
+                var postData = JSON.stringify({ ClientID: id });
+                ShowLoader();
+                $.ajax({
+                    type: "POST",
+                    url: "/AdmCrt/DropselectList",
+                    traditional: true,
+                    async: true,
+                    data: {
+                        ClientID: id
+                    },
+                    success: function (data) {
+                        HideLoader();
+                        $("#DropSelectsConfig").html('');
+                        $("#DropSelectsConfig").html(data);
+                    }
+                });
+            }
+            else {
+                ShowMessage("Select organisation.", "error");
+            }
+        }
 
-        //function SaveTemplate() {
-        //    debugger;
-        //    var istemplate = 1;
-        //    if ($("#frmlabelconfig").valid()) {
-        //        //$("#labelconfig_IsTemplate").val(istemplate);
-        //        $("#frmlabelconfig").submit();
+      
+
+        //function ShowDropselect() {
+        //    var value = $("#client_ClientID").val();
+        //    if (value != "" && value != undefined && value != null) {
+        //        $("#_DropselectConfiguration_ClientID").val(value);
+        //        $("#DropSelectsConfig").show();
+        //    }
+        //    else {
+        //        ShowMessage("Select organisation.", "error");
         //    }
         //}
-        @*function SaveTemplate() {
+
+        function AddDropselect(category, id) {
             debugger;
-            //var data = $("#labelconfig").val();
-            var data = @Model;
-            var postData = { CRTAdminVM: data };
             ShowLoader();
-            AjaxCall("/AdmCrt/Savelabelconfig", JSON.stringify(postData), "post", "json", "application/json", false).done(function (data) {
-                HideLoader();
+            $.ajax({
+                type: "POST",
+                url: "/AdmCrt/AddDropSelect  ",
+                traditional: true,
+                async: true,
+                data: {
+                    Category: category,
+                    ClientID: id
 
+                },
+                success: function (data) {
+                    HideLoader();
+                    $("#AddDropselect_popup").modal('show');
+                    $("#AddDropSelects").html(data);
+                    var table = $('#dt_droptable').DataTable({});
+                    //".bs-select").selectpicker('refresh');
+                    //$("#" + form).data('validator', null);
+                    // $.validator.unobtrusive.parse($("#" + form));
+                }
             });
-        }*@
+        }
+
+        function clearform(form) {
+            $('#' + form + ' input[type=text]').val("");
+            $('#' + form + ' .bs-select').val("");
+            $('#' + form + ' .bs-select').selectpicker('refresh');
+        }
+
+        //function DropselectFormSubmit() {
+
+        //    if ($("#form_instance").valid()) {
+        //        // $("#frmComplaint *").removeAttr("disabled");
+        //        //Chkclientforwebsubmission();
+        //        ShowLoader();
+        //        //NotesIndexOrdering();
+        //        $("#form_instance").submit();
+        //    }
+
+        //}
+
+        function DropselectFormSubmit() {
+            debugger;
+            var name = $("#dropselectconfig_Name").val();
+            var desc = $("#dropselectconfig_Desc").val();
+            var category = $("#dropselectconfig_ProjecttermCategoryName").val();
+            var refid = $("#dropselectconfig_RefTermID :selected").text();
+            var refid1 = $("#dropselectconfig_RefTermID1 :selected").text();
 
 
+            ShowLoader();
+            $.ajax({
+                type: "POST",
+                url: "/AdmCrt/Savedropselectconfig",
+                traditional: true,
+                async: true,
+                data: {
+                    ClientID: $("#dropselectconfig_ClientID").val(),
+                    Refid: $("#dropselectconfig_RefTermID").val(),
+                    Refid1: $("#dropselectconfig_RefTermID1").val(),
+                    name: $("#dropselectconfig_Name").val(),
+                    desc: $("#dropselectconfig_Desc").val(),
+                    category: $("#dropselectconfig_ProjecttermCategoryName").val()
 
+                },
+                success: function (data) {
+                    HideLoader();
+                    var tr = '<tr>';
+                    tr += '<td></td>';
+                    if (category != null && category != '' && category != undefined && category == 'PRODUCT TYPE')
+                    {
+                        tr += '<td><span>' + refid + '</span></td>';
+                    }
+                    if (category != null && category != '' && category != undefined && category == 'NATURE OF COMPLAINT') {
+                        tr += '<td><span>' + refid + '</span></td>';
+                    }
+                    if (category != null && category != '' && category != undefined && category == 'TCF OUTCOME') {
+                        tr += '<td><span>' + refid + '</span></td>';
+                        tr += '<td><span>' + refid1 + '</span></td>';
+                    }
+                    tr += '<td><span>' + name + '</span></td>';
+                    //tr += '<td><span>' + desc + '</span></td>';
+                    //tr += '<td><a class="action btn  btn-primary btn-xs" href="" title="Edit"><i class="btn-xs fa fa-pencil padding0"></i></a>';
+                    //tr += '<a class="action btn  btn-danger btn-xs" href="javascript:void(0);" title="Delete" onclick=""><i class="btn-xs fa fa-trash-o padding0"></i></a>';
+                    //tr += '</td>';
+                    tr += '</tr>';
+
+                    $("#tbody_dropselect").append(tr);
+
+                }
+            });
+        }
     </script>
 }
 

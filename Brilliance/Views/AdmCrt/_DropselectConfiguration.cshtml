@@ -1,0 +1,202 @@
+﻿@model Brilliance.Models.ViewModel.DropSelectViewmodel
+@using Brilliance.Infrastructure
+
+<div class="row" style="text-align:right;margin-right: 16px;margin-bottom: 5px;">
+    <button type="button" class="close" aria-label="Close" onclick="closeListdrop();">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+
+<div class="modal-body">
+    @*<div class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+                @Html.HiddenFor(m => m.dropselect.ClientID)
+                <label class="col-md-5">Tier 2</label>
+                <div class="col-md-5">
+                    @Html.DropDownList("StudentGender", new SelectList(Model.policystatusList, "Value", "Text", 0), "Tier 2", new { @class = "form-control" })
+                </div>
+                <div class="col-md-2"><a class="action btn  btn-primary btn-xs @Constants.Class_Cannot_Access_Update" href="#" onclick="AddDropselect('PRODUCT CATEGORY','@Model.dropselect.ClientID');" title="Edit"><i class="btn-xs fa fa-pencil padding0"></i></a></div>
+            </div>
+        </div>
+       
+    </div>*@
+    <div class="row" style="margin-top:12px;">
+        @*<div class="col-md-6">
+            <div class="form-group">
+                <label class="col-md-5">Tier 3</label>
+                <div class="col-md-5">
+                    @Html.DropDownList("StudentGender", new SelectList(Model.complaintcategoryList, "Value", "Text", 0), "Select Gender", new { @class = "form-control" })
+
+                </div>
+                <div class="col-md-2"><a class="action btn  btn-primary btn-xs @Constants.Class_Cannot_Access_Update" href="#" onclick="AddDropselect();" title="Edit"><i class="btn-xs fa fa-pencil padding0"></i></a></div>
+            </div>
+        </div>*@
+        <div class="col-md-6">
+            <div class="form-group">
+                <label class="col-md-5">Root cause</label>
+                <div class="col-md-5">
+                    @Html.DropDownList("StudentGender", new SelectList(Model.rootList, "Value", "Text", 0), "Root cause", new { @class = "form-control" })
+                </div>
+                <div class="col-md-2"><a class="action btn  btn-primary btn-xs @Constants.Class_Cannot_Access_Update" href="#" onclick="AddDropselect('COMPLAINT ROOT CAUSE','@Model.dropselect.ClientID');" title="Edit"><i class="btn-xs fa fa-pencil padding0"></i></a></div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label class="col-md-5">Policy status</label>
+                <div class="col-md-5">
+                    @*@Html.TextBoxFor(m => m.labelconfig.policystatus, new { @class = "form-control m-input" })*@
+                    @Html.DropDownList("StudentGender", new SelectList(Model.policystatusList, "Value", "Text", 0), "Policy status", new { @class = "form-control" })
+                </div>
+                <div class="col-md-2"><a class="action btn  btn-primary btn-xs @Constants.Class_Cannot_Access_Update" href="#" onclick="AddDropselect('COMPLAINT POLICY STATUS','@Model.dropselect.ClientID');" title="Edit"><i class="btn-xs fa fa-pencil padding0"></i></a></div>
+
+            </div>
+        </div>
+
+    </div>
+    <div class="row" style="margin-top:12px;">
+        <div class="col-md-6">
+            <div class="form-group">
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label class="col-md-5">
+                    How complaint received
+                </label>
+                <div class="col-md-5">
+                    @Html.DropDownList("StudentGender", new SelectList(Model.complaintreceivedList, "Value", "Text", 0), "How complaint received", new { @class = "form-control" })
+                </div>
+                <div class="col-md-2"><a class="action btn  btn-primary btn-xs @Constants.Class_Cannot_Access_Update" href="#" onclick="AddDropselect('COMPLAINT RECEIVED','@Model.dropselect.ClientID');" title="Edit"><i class="btn-xs fa fa-pencil padding0"></i></a></div>
+
+            </div>
+        </div>
+    </div>
+    <div class="row" style="margin-top:12px;">
+        <div class="col-md-6">
+            <div class="form-group">
+                <label class="col-md-5">Product category</label>
+                <div class="col-md-5">
+                    @Html.DropDownList("StudentGender", new SelectList(Model.productcategoryList, "Value", "Text", 0), "Product category", new { @class = "form-control" })
+                </div>
+                <div class="col-md-2"><a class="action btn  btn-primary btn-xs @Constants.Class_Cannot_Access_Update" href="#" onclick="AddDropselect('PRODUCT CATEGORY','@Model.dropselect.ClientID');" title="Edit"><i class="btn-xs fa fa-pencil padding0"></i></a></div>
+
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label class="col-md-5">Complaint from regulatory body</label>
+                <div class="col-md-5">
+                    @Html.DropDownList("StudentGender", new SelectList(Model.complaintregulatoryList, "Value", "Text", 0), "Complaint from regulatory body", new { @class = "form-control" })
+                </div>
+                <div class="col-md-2"><a class="action btn  btn-primary btn-xs @Constants.Class_Cannot_Access_Update" href="#" onclick="AddDropselect('COMPLAINT RECEIVED REGULATORY','@Model.dropselect.ClientID');" title="Edit"><i class="btn-xs fa fa-pencil padding0"></i></a></div>
+
+            </div>
+        </div>
+    </div>
+    <div class="row" style="margin-top:12px;">
+        <div class="col-md-6">
+            <div class="form-group">
+                <label class="col-md-5">Product type</label>
+                <div class="col-md-5">
+                    @Html.DropDownList("StudentGender", new SelectList(Model.producttypeList, "Value", "Text", 0), "Product type", new { @class = "form-control" })
+                </div>
+                <div class="col-md-2"><a class="action btn  btn-primary btn-xs @Constants.Class_Cannot_Access_Update" href="#" onclick="AddDropselect('PRODUCT TYPE','@Model.dropselect.ClientID');" title="Edit"><i class="btn-xs fa fa-pencil padding0"></i></a></div>
+
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label class="col-md-5">Feedback from regulatory body</label>
+                <div class="col-md-5">
+                    @Html.DropDownList("StudentGender", new SelectList(Model.feedbackregulatoryList, "Value", "Text", 0), "Feedback from regulatory body", new { @class = "form-control" })
+                </div>
+                <div class="col-md-2"><a class="action btn  btn-primary btn-xs @Constants.Class_Cannot_Access_Update" href="#" onclick="AddDropselect('COMPLAINT RECEIVED REGULATORY FEEDBACK','@Model.dropselect.ClientID');" title="Edit"><i class="btn-xs fa fa-pencil padding0"></i></a></div>
+
+            </div>
+        </div>
+    </div>
+    <div class="row" style="margin-top:12px;">
+        <div class="col-md-6">
+            <div class="form-group">
+                <label class="col-md-5">Complaint category</label>
+                <div class="col-md-5">
+                    @Html.DropDownList("StudentGender", new SelectList(Model.complaintcategoryList, "Value", "Text", 0), "Complaint category", new { @class = "form-control" })
+                </div>
+                <div class="col-md-2"><a class="action btn  btn-primary btn-xs @Constants.Class_Cannot_Access_Update" href="#" onclick="AddDropselect('COMPLAINT CATEGORY','@Model.dropselect.ClientID');" title="Edit"><i class="btn-xs fa fa-pencil padding0"></i></a></div>
+
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label class="col-md-5">Overall outcome</label>
+                <div class="col-md-5">
+                    @Html.DropDownList("StudentGender", new SelectList(Model.overalloutcomeList, "Value", "Text", 0), "Overall outcome", new { @class = "form-control" })
+                </div>
+                <div class="col-md-2"><a class="action btn  btn-primary btn-xs @Constants.Class_Cannot_Access_Update" href="#" onclick="AddDropselect('COMPLAINT OVERALL OUTCOME','@Model.dropselect.ClientID');" title="Edit"><i class="btn-xs fa fa-pencil padding0"></i></a></div>
+
+            </div>
+        </div>
+    </div>
+    <div class="row" style="margin-top:12px;">
+        <div class="col-md-6">
+            <div class="form-group">
+                <label class="col-md-5">Nature of complaint</label>
+                <div class="col-md-5">
+                    @Html.DropDownList("StudentGender", new SelectList(Model.natureList, "Value", "Text", 0), "Nature of complaint", new { @class = "form-control" })
+                </div>
+                <div class="col-md-2"><a class="action btn  btn-primary btn-xs @Constants.Class_Cannot_Access_Update" href="#" onclick="AddDropselect('NATURE OF COMPLAINT','@Model.dropselect.ClientID');" title="Edit"><i class="btn-xs fa fa-pencil padding0"></i></a></div>
+
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label class="col-md-5">Compensation/Payment</label>
+                <div class="col-md-5">
+                    @Html.DropDownList("StudentGender", new SelectList(Model.compensationList, "Value", "Text", 0), "Compensation/Payment", new { @class = "form-control" })
+                </div>
+                <div class="col-md-2"><a class="action btn  btn-primary btn-xs @Constants.Class_Cannot_Access_Update" href="#" onclick="AddDropselect('COMPLAINT COMPENSATION','@Model.dropselect.ClientID');" title="Edit"><i class="btn-xs fa fa-pencil padding0"></i></a></div>
+
+            </div>
+        </div>
+    </div>
+    <div class="row" style="margin-top:12px;">
+        <div class="col-md-6">
+            <div class="form-group">
+                <label class="col-md-5">TCF outcome</label>
+                <div class="col-md-5">
+                    @Html.DropDownList("StudentGender", new SelectList(Model.TcfList, "Value", "Text", 0), "TCF outcome" ,new { @class = "form-control" })
+                </div>
+                <div class="col-md-2"><a class="action btn  btn-primary btn-xs @Constants.Class_Cannot_Access_Update" href="#" onclick="AddDropselect('TCF OUTCOME','@Model.dropselect.ClientID');" title="Edit"><i class="btn-xs fa fa-pencil padding0"></i></a></div>
+
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label class="col-md-5">Regulated costs</label>
+                <div class="col-md-5">
+                    @Html.DropDownList("StudentGender", new SelectList(Model.regulatedcostList, "Value", "Text", 0), "Regulated costs", new { @class = "form-control" })
+                </div>
+                <div class="col-md-2"><a class="action btn  btn-primary btn-xs @Constants.Class_Cannot_Access_Update" href="#" onclick="AddDropselect('COMPLAINT REGULATED COST','@Model.dropselect.ClientID');" title="Edit"><i class="btn-xs fa fa-pencil padding0"></i></a></div>
+
+            </div>
+        </div>
+    </div>
+</div>
+@*
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content" style="width: 1213px;margin-left: -125px;">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                    <h4 class="modal-title">Labels for this organisation</h4>
+                </div>
+                <form id="form_instance" method="post">
+
+                    <div class="modal-footer">
+                            <button type="button" class="btn default" data-dismiss="modal">Cancel</button>
+                            <button id="btnSaveAreaTask" type="button" class="btn green" onclick="AddRowForAreaTasks(this);">Save</button>
+                        </div>
+            </form>
+        </div>
+    </div>
+*@

@@ -6917,13 +6917,14 @@
     <Content Include="Views\AdmCrt\CRTadmin.cshtml" />
     <Content Include="Views\AdmCrt\_LabelConfiguration.cshtml" />
     <Content Include="Views\AdmCrt\_LabelConfigList.cshtml" />
+    <Content Include="Views\AdmCrt\_AddNewDropSelectItem.cshtml" />
+    <Content Include="Views\AdmCrt\_DropselectConfiguration.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="assets\apps\img\" />
     <Folder Include="assets\global\plugins\angularjs\plugins\angular-file-upload\uploads\" />
     <Folder Include="ComplaintFiles\" />
-    <Folder Include="Views\CRTAdmin\" />
     <Folder Include="Views\OrgCompany\" />
   </ItemGroup>
   <ItemGroup>

@@ -11,5 +11,10 @@ namespace Brilliance.Infrastructure.DataProvider
         ServiceResponse Savelabelconfig(CrtAdminViewmodel CRTAdminVM);
         CrtAdminViewmodel labelconfiglist(Guid ClientID);
         CrtAdminViewmodel EditLabelConfig(Guid ClientID);
+        DropSelectViewmodel DropselectgList(Guid ClientID);
+        DropselectModel AddDropSelect(string Category, Guid ClientID);
+        ServiceResponse Savedropselectconfig(Guid ClientID, Guid? Refid, Guid? Refid1, string name, string desc, string category);
     }
 }
+
+

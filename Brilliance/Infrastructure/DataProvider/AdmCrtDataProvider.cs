@@ -150,7 +150,6 @@ namespace Brilliance.Infrastructure.DataProvider
             return CrtVM;
         }
 
-
         public CrtAdminViewmodel EditLabelConfig(Guid LabelconfigID)
         {
             var CrtVM = new CrtAdminViewmodel();
@@ -169,6 +168,113 @@ namespace Brilliance.Infrastructure.DataProvider
                 
             }
             return CrtVM;
+        }
+
+        public DropSelectViewmodel DropselectgList(Guid ClientID)
+        {
+            var CrtVM = new DropSelectViewmodel();
+            var response = new ServiceResponse();
+            try
+            {
+                var searchList = new List<SearchValueData>();
+                searchList.Add(new SearchValueData { Name = "ClientID", Value = Convert.ToString(ClientID) });
+
+                CrtVM = GetMultipleEntity<DropSelectViewmodel>("GetDropselectList", searchList);
+                //ProjecttermList.projecttermcategory.CategoryName = categorylist[0].DisplayName;
+                //ProjecttermList.projecttermcategory.ProjectTermCategoryID = ProjectTermCategoryID;
+                CrtVM.dropselect.ClientID = ClientID;
+                response.Data = CrtVM;
+                response.IsSuccess = true;
+            }
+            catch (Exception ex)
+            {
+
+            }
+            return CrtVM;
+        }
+
+        public DropselectModel AddDropSelect(string Category, Guid ClientID)
+        {
+            var CrtVM = new DropselectModel();
+            var response = new ServiceResponse();
+            try
+            {
+                var searchList = new List<SearchValueData>();
+                searchList.Add(new SearchValueData { Name = "ClientID", Value = Convert.ToString(ClientID) });
+                searchList.Add(new SearchValueData { Name = "Category", Value = Category });
+                CrtVM = GetMultipleEntity<DropselectModel>("Crt_GetDropselectConfigData", searchList);
+                CrtVM.dropselectconfig = new dropselectconfig();
+                CrtVM.dropselectconfig.ClientID = ClientID;
+                CrtVM.dropselectconfig.ProjecttermCategoryName = Category;
+                response.IsSuccess = true;
+            }
+            catch (Exception ex)
+            {
+
+            }
+            return CrtVM;
+        }
+
+        public ServiceResponse Savedropselectconfig(Guid ClientID, Guid? Refid, Guid? Refid1, string name, string desc, string category)
+        {
+            var response = new ServiceResponse();
+            try
+            {
+
+                SqlCommand cmd = new SqlCommand();
+                cmd.Parameters.AddWithValue("@ProjecttermID", Guid.NewGuid()).SqlDbType = SqlDbType.UniqueIdentifier;
+                cmd.Parameters.AddWithValue("@ClientID", ClientID).SqlDbType = SqlDbType.UniqueIdentifier;
+                cmd.Parameters.AddWithValue("@Name", name).SqlDbType = SqlDbType.NVarChar;
+                cmd.Parameters.AddWithValue("@Desc", desc).SqlDbType = SqlDbType.NVarChar;
+                cmd.Parameters.AddWithValue("@ProjecttermCategoryName", category).SqlDbType = SqlDbType.NVarChar;
+                cmd.Parameters.AddWithValue("@RefTermID", Refid).SqlDbType = SqlDbType.UniqueIdentifier;
+                cmd.Parameters.AddWithValue("@RefTermID1", Refid1).SqlDbType = SqlDbType.UniqueIdentifier;
+                cmd.Parameters.AddWithValue("@CreatedBy", SessionHelper.UserId).SqlDbType = SqlDbType.UniqueIdentifier;
+                cmd.Parameters.AddWithValue("@CreatedOn", DateTime.Now).SqlDbType = SqlDbType.DateTime;
+                //cmd.Parameters.AddWithValue("@IsEdit", CRTAdminVM.labelconfig.IsEdit).SqlDbType = SqlDbType.Bit;
+
+                DataSet ds = null;
+                ds = BulkInsert("Savedropselectconfig", cmd);
+                response.IsSuccess = true;
+                response.Message = "Record Saved Successfully.";
+
+                //if (CRTAdminVM.labelconfig.IsEdit == false)
+                //{
+                //    SqlCommand cmd = new SqlCommand();
+                //    cmd.Parameters.AddWithValue("@LabelconfigID", Guid.NewGuid()).SqlDbType = SqlDbType.UniqueIdentifier;
+                //    cmd.Parameters.AddWithValue("@ClientID", CRTAdminVM.labelconfig.ClientID).SqlDbType = SqlDbType.UniqueIdentifier;
+                //    cmd.Parameters.AddWithValue("@IsEdit", CRTAdminVM.labelconfig.IsEdit).SqlDbType = SqlDbType.Bit;
+
+                //    DataSet ds = null;
+                //    ds = BulkInsert("SaveCRT_Labelconfig", cmd);
+                //    response.IsSuccess = true;
+                //    response.Message = "Record Saved Successfully.";
+
+                //}
+                //else
+                //{
+                //    SqlCommand cmd = new SqlCommand();
+                //    cmd.Parameters.AddWithValue("@LabelconfigID", CRTAdminVM.labelconfig.LabelconfigID).SqlDbType = SqlDbType.UniqueIdentifier;
+                //    cmd.Parameters.AddWithValue("@ClientID", CRTAdminVM.labelconfig.ClientID).SqlDbType = SqlDbType.UniqueIdentifier;
+                //    cmd.Parameters.AddWithValue("@instanceName", CRTAdminVM.labelconfig.InstanceName).SqlDbType = SqlDbType.NVarChar;
+                //    cmd.Parameters.AddWithValue("@IsEdit", CRTAdminVM.labelconfig.IsEdit).SqlDbType = SqlDbType.Bit;
+
+                //    DataSet ds = null;
+                //    ds = BulkInsert("SaveCRT_Labelconfig", cmd);
+                //    response.IsSuccess = true;
+                //    response.Message = "Record updated Successfully.";
+                //}
+
+
+
+
+            }
+            catch (Exception ex)
+            {
+                response.Message = "Internal server error";
+            }
+
+            return response;
         }
     }
 }
