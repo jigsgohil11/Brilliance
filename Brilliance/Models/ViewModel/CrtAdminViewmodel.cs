@@ -95,9 +95,13 @@ namespace Brilliance.Models.ViewModel
     {
         public Guid TermID { get; set; }
         public string Term { get; set; }
-        public string TermCode { get; set; }
+        public string AboutTerm { get; set; }
         public Guid? RefTermID { get; set; }
+        public Guid? RefTermID1 { get; set; }
         public Guid? ClientID { get; set; }
+        public string Refname { get; set; }
+        public string Refname1 { get; set; }
+
     }
 
 

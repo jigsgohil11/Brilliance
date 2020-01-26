@@ -42,6 +42,7 @@ namespace Brilliance.Controllers
         public ActionResult DropselectList(Guid ClientID)
         {
             _iadmcrtDataProvider = new AdmCrtDataProvider();
+
             var response = new ServiceResponse();
             DropSelectViewmodel model = _iadmcrtDataProvider.DropselectgList(ClientID);
             return PartialView("~/Views/AdmCrt/_DropselectConfiguration.cshtml", model);
@@ -53,11 +54,18 @@ namespace Brilliance.Controllers
             return PartialView("~/Views/AdmCrt/_AddNewDropSelectItem.cshtml", model);
         }
         [HttpPost]
-        public ActionResult Savedropselectconfig(Guid ClientID,Guid? Refid,Guid? Refid1,string name,string desc,string category)
+        public ActionResult Savedropselectconfig(Guid TermId,Guid ClientID,Guid? Refid,Guid? Refid1,string name,string desc,string category,bool isedit)
         {
             _iadmcrtDataProvider = new AdmCrtDataProvider();
             var response = new ServiceResponse();
-            response = _iadmcrtDataProvider.Savedropselectconfig(ClientID,Refid,Refid1,name,desc,category);
+            response = _iadmcrtDataProvider.Savedropselectconfig(TermId, ClientID,Refid,Refid1,name,desc,category, isedit);
+            return Json(response);
+        }
+        public ActionResult Deletedropselectconfig(Guid TermId)
+        {
+            _iadmcrtDataProvider = new AdmCrtDataProvider();
+            var response = new ServiceResponse();
+            response = _iadmcrtDataProvider.Deletedropselectconfig(TermId);
             return Json(response);
         }
     }

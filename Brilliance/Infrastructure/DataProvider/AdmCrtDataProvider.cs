@@ -19,7 +19,7 @@ namespace Brilliance.Infrastructure.DataProvider
             {
                 var searchList = new List<SearchValueData>();
                 crtViewModel = GetMultipleEntity<CrtAdminViewmodel>("Adm_GetCRTsetupdata", searchList);
-               
+
                 response.Data = crtViewModel;
                 response.IsSuccess = true;
             }
@@ -114,9 +114,9 @@ namespace Brilliance.Infrastructure.DataProvider
                     response.IsSuccess = true;
                     response.Message = "Record updated Successfully.";
                 }
-                
 
-              
+
+
 
             }
             catch (Exception ex)
@@ -165,10 +165,11 @@ namespace Brilliance.Infrastructure.DataProvider
             }
             catch (Exception ex)
             {
-                
+
             }
             return CrtVM;
         }
+
 
         public DropSelectViewmodel DropselectgList(Guid ClientID)
         {
@@ -215,59 +216,76 @@ namespace Brilliance.Infrastructure.DataProvider
             return CrtVM;
         }
 
-        public ServiceResponse Savedropselectconfig(Guid ClientID, Guid? Refid, Guid? Refid1, string name, string desc, string category)
+        public ServiceResponse Savedropselectconfig(Guid TermId, Guid ClientID, Guid? Refid, Guid? Refid1, string name, string desc, string category, bool isedit)
         {
             var response = new ServiceResponse();
             try
             {
+                if (isedit == false)
+                {
+                    SqlCommand cmd = new SqlCommand();
+                    cmd.Parameters.AddWithValue("@ProjecttermID", TermId).SqlDbType = SqlDbType.UniqueIdentifier;
+                    cmd.Parameters.AddWithValue("@ClientID", ClientID).SqlDbType = SqlDbType.UniqueIdentifier;
+                    cmd.Parameters.AddWithValue("@Name", name).SqlDbType = SqlDbType.NVarChar;
+                    cmd.Parameters.AddWithValue("@Desc", desc).SqlDbType = SqlDbType.NVarChar;
+                    cmd.Parameters.AddWithValue("@ProjecttermCategoryName", category).SqlDbType = SqlDbType.NVarChar;
+                    cmd.Parameters.AddWithValue("@RefTermID", Refid).SqlDbType = SqlDbType.UniqueIdentifier;
+                    cmd.Parameters.AddWithValue("@RefTermID1", Refid1).SqlDbType = SqlDbType.UniqueIdentifier;
+                    cmd.Parameters.AddWithValue("@CreatedBy", SessionHelper.UserId).SqlDbType = SqlDbType.UniqueIdentifier;
+                    cmd.Parameters.AddWithValue("@CreatedOn", DateTime.Now).SqlDbType = SqlDbType.DateTime;
+                    cmd.Parameters.AddWithValue("@UpdatedBy", null).SqlDbType = SqlDbType.UniqueIdentifier;
+                    cmd.Parameters.AddWithValue("@UpdatedOn", null).SqlDbType = SqlDbType.DateTime;
+                    cmd.Parameters.AddWithValue("@IsEdit", isedit).SqlDbType = SqlDbType.Bit;
 
+                    DataSet ds = null;
+                    ds = BulkInsert("Savedropselectconfig", cmd);
+                    response.IsSuccess = true;
+                    response.Message = "Record Saved Successfully.";
+                }
+                else
+                {
+                    SqlCommand cmd = new SqlCommand();
+                    cmd.Parameters.AddWithValue("@ProjecttermID", TermId).SqlDbType = SqlDbType.UniqueIdentifier;
+                    cmd.Parameters.AddWithValue("@ClientID", ClientID).SqlDbType = SqlDbType.UniqueIdentifier;
+                    cmd.Parameters.AddWithValue("@Name", name).SqlDbType = SqlDbType.NVarChar;
+                    cmd.Parameters.AddWithValue("@Desc", desc).SqlDbType = SqlDbType.NVarChar;
+                    cmd.Parameters.AddWithValue("@ProjecttermCategoryName", category).SqlDbType = SqlDbType.NVarChar;
+                    cmd.Parameters.AddWithValue("@RefTermID", Refid).SqlDbType = SqlDbType.UniqueIdentifier;
+                    cmd.Parameters.AddWithValue("@RefTermID1", Refid1).SqlDbType = SqlDbType.UniqueIdentifier;
+                    cmd.Parameters.AddWithValue("@CreatedBy", null).SqlDbType = SqlDbType.UniqueIdentifier;
+                    cmd.Parameters.AddWithValue("@CreatedOn", null).SqlDbType = SqlDbType.DateTime;
+                    cmd.Parameters.AddWithValue("@UpdatedBy", SessionHelper.UserId).SqlDbType = SqlDbType.UniqueIdentifier;
+                    cmd.Parameters.AddWithValue("@UpdatedOn", DateTime.Now).SqlDbType = SqlDbType.DateTime;
+                    cmd.Parameters.AddWithValue("@IsEdit", isedit).SqlDbType = SqlDbType.Bit;
+
+                    DataSet ds = null;
+                    ds = BulkInsert("Savedropselectconfig", cmd);
+                    response.IsSuccess = true;
+                    response.Message = "Record Saved Successfully.";
+                }
+
+
+
+            }
+            catch (Exception ex)
+            {
+                response.Message = "Internal server error";
+            }
+
+            return response;
+        }
+        public ServiceResponse Deletedropselectconfig(Guid TermId)
+        {
+            var response = new ServiceResponse();
+            try
+            {
                 SqlCommand cmd = new SqlCommand();
-                cmd.Parameters.AddWithValue("@ProjecttermID", Guid.NewGuid()).SqlDbType = SqlDbType.UniqueIdentifier;
-                cmd.Parameters.AddWithValue("@ClientID", ClientID).SqlDbType = SqlDbType.UniqueIdentifier;
-                cmd.Parameters.AddWithValue("@Name", name).SqlDbType = SqlDbType.NVarChar;
-                cmd.Parameters.AddWithValue("@Desc", desc).SqlDbType = SqlDbType.NVarChar;
-                cmd.Parameters.AddWithValue("@ProjecttermCategoryName", category).SqlDbType = SqlDbType.NVarChar;
-                cmd.Parameters.AddWithValue("@RefTermID", Refid).SqlDbType = SqlDbType.UniqueIdentifier;
-                cmd.Parameters.AddWithValue("@RefTermID1", Refid1).SqlDbType = SqlDbType.UniqueIdentifier;
-                cmd.Parameters.AddWithValue("@CreatedBy", SessionHelper.UserId).SqlDbType = SqlDbType.UniqueIdentifier;
-                cmd.Parameters.AddWithValue("@CreatedOn", DateTime.Now).SqlDbType = SqlDbType.DateTime;
-                //cmd.Parameters.AddWithValue("@IsEdit", CRTAdminVM.labelconfig.IsEdit).SqlDbType = SqlDbType.Bit;
+                cmd.Parameters.AddWithValue("@ProjecttermID", TermId).SqlDbType = SqlDbType.UniqueIdentifier;
 
                 DataSet ds = null;
-                ds = BulkInsert("Savedropselectconfig", cmd);
+                ds = BulkInsert("Deletedropselectconfig", cmd);
                 response.IsSuccess = true;
                 response.Message = "Record Saved Successfully.";
-
-                //if (CRTAdminVM.labelconfig.IsEdit == false)
-                //{
-                //    SqlCommand cmd = new SqlCommand();
-                //    cmd.Parameters.AddWithValue("@LabelconfigID", Guid.NewGuid()).SqlDbType = SqlDbType.UniqueIdentifier;
-                //    cmd.Parameters.AddWithValue("@ClientID", CRTAdminVM.labelconfig.ClientID).SqlDbType = SqlDbType.UniqueIdentifier;
-                //    cmd.Parameters.AddWithValue("@IsEdit", CRTAdminVM.labelconfig.IsEdit).SqlDbType = SqlDbType.Bit;
-
-                //    DataSet ds = null;
-                //    ds = BulkInsert("SaveCRT_Labelconfig", cmd);
-                //    response.IsSuccess = true;
-                //    response.Message = "Record Saved Successfully.";
-
-                //}
-                //else
-                //{
-                //    SqlCommand cmd = new SqlCommand();
-                //    cmd.Parameters.AddWithValue("@LabelconfigID", CRTAdminVM.labelconfig.LabelconfigID).SqlDbType = SqlDbType.UniqueIdentifier;
-                //    cmd.Parameters.AddWithValue("@ClientID", CRTAdminVM.labelconfig.ClientID).SqlDbType = SqlDbType.UniqueIdentifier;
-                //    cmd.Parameters.AddWithValue("@instanceName", CRTAdminVM.labelconfig.InstanceName).SqlDbType = SqlDbType.NVarChar;
-                //    cmd.Parameters.AddWithValue("@IsEdit", CRTAdminVM.labelconfig.IsEdit).SqlDbType = SqlDbType.Bit;
-
-                //    DataSet ds = null;
-                //    ds = BulkInsert("SaveCRT_Labelconfig", cmd);
-                //    response.IsSuccess = true;
-                //    response.Message = "Record updated Successfully.";
-                //}
-
-
-
-
             }
             catch (Exception ex)
             {

@@ -1,5 +1,8 @@
 ﻿@model Brilliance.Models.ViewModel.DropselectModel
 @using Brilliance.Infrastructure
+@{
+    int index = 0;
+}
 <div class="modal-dialog modal-lg">
     <div class="modal-content" style="width: 1213px;margin-left: -125px;">
         <div class="modal-header">
@@ -114,42 +117,48 @@
                                                 <th class="all">Name</th>
                                             }
                                             @*<th class="desktop">Description</th>*@
-                                            @*<th class="all">Action</th>*@
+                                            <th class="all">Action</th>
                                         </tr>
                                     </thead>
                                     <tbody id="tbody_dropselect">
 
                                         @if (Model != null && Model.projecttermlist.Count > 0)
                                         {
-                                            int index = 0;
+
                                             foreach (var item in Model.projecttermlist)
                                             {
                                                 index++;
-                                                <tr>
+                                                <tr id="tr_@item.TermID">
                                                     <td width="1%">@index</td>
                                                     @if (Model != null && Model.dropselectconfig != null && Model.dropselectconfig.ProjecttermCategoryName == "PRODUCT TYPE")
                                                     {
-                                                        <td>@item.Term</td>
+                                                        <td>
+                                                            <span class="Product_">@item.Refname</span>
+                                                            <input type="hidden" class="refid_" value="@item.RefTermID" />
+                                                        </td>
                                                     }
                                                     @if (Model != null && Model.dropselectconfig != null && Model.dropselectconfig.ProjecttermCategoryName == "NATURE OF COMPLAINT")
                                                     {
-                                                        <td>@item.Term</td>
+                                                        <td><span class="Category_">@item.Refname</span><input type="hidden" class="refid_" value="@item.RefTermID" /></td>
+
                                                     }
                                                     @if (Model != null && Model.dropselectconfig != null && Model.dropselectconfig.ProjecttermCategoryName == "TCF OUTCOME")
                                                     {
-                                                        <td>@item.Term</td>
-                                                        <td>@item.Term</td>
+                                                        <td><span class="Type_">@item.Refname</span><input type="hidden" class="refid_" value="@item.RefTermID" /></td>
+                                                        <td><span class="Nature_">@item.Refname1</span> <input type="hidden" class="refid1_" value="@item.RefTermID1" /></td>
                                                     }
-                                                    <td style="background-color:white !important;">@item.Term</td>
+                                                    <td style="background-color:white !important;">
+                                                        <span class="Term_">@item.Term</span>
+                                                        <input type="hidden" class="desc_" value="@item.AboutTerm" />
+                                                    </td>
                                                     @*<td width="15%">@item.TermCode</td>*@
-                                                    @*<td>
-                                                        <a class="action btn  btn-primary btn-xs @Constants.Class_Cannot_Access_Update" href="/Division/Division/@item.TermID" title="Edit"><i class="btn-xs fa fa-pencil padding0"></i></a>
-                                                        <a class="action btn  btn-danger btn-xs @Constants.Class_Cannot_Access_Remove" href="javascript:void(0);" title="Delete" onclick="fnOpenDeleteModel('DeleteButton','DeleteModal','@item.TermID.ToString()');"><i class="btn-xs fa fa-trash-o padding0"></i></a>
-                                                    </td>*@
+                                                    <td>
+                                                        <a class="action btn  btn-primary btn-xs @Constants.Class_Cannot_Access_Update" onclick="DropselectEdit('@item.TermID','@Model.dropselectconfig.ProjecttermCategoryName');" title="Edit"><i class="btn-xs fa fa-pencil padding0"></i></a>
+                                                        <a class="action btn  btn-danger btn-xs @Constants.Class_Cannot_Access_Remove" href="javascript:void(0);" title="Delete" onclick="Deletedropselect('@item.TermID.ToString()');"><i class="btn-xs fa fa-trash-o padding0"></i></a>
+                                                    </td>
                                                 </tr>
                                             }
                                         }
-
                                     </tbody>
                                 </table>
                             </div>

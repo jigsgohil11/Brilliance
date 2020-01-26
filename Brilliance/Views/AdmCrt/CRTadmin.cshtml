@@ -301,6 +301,15 @@
     <script src="~/assets/global/plugins/bootstrap-fileinput/bootstrap-fileinput.js"></script>
     <script src="~/assets/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
     <script>
+        function GenerateNewGUID() {
+            function s4() {
+                return Math.floor((1 + Math.random()) * 0x10000)
+                    .toString(16)
+                    .substring(1);
+            }
+            return s4() + s4() + '-' + s4() + '-' + s4() + '-' +
+                s4() + '-' + s4() + s4() + s4();
+        }
 
         function Addlabels() {
             var value = $("#client_ClientID").val();
@@ -398,7 +407,7 @@
             }
         }
 
-      
+
 
         //function ShowDropselect() {
         //    var value = $("#client_ClientID").val();
@@ -454,15 +463,25 @@
 
         //}
 
-        function DropselectFormSubmit() {
+        function DropselectFormSubmit(obj) {
             debugger;
+            var IsEdit = false;
+            var ID;
             var name = $("#dropselectconfig_Name").val();
             var desc = $("#dropselectconfig_Desc").val();
             var category = $("#dropselectconfig_ProjecttermCategoryName").val();
-            var refid = $("#dropselectconfig_RefTermID :selected").text();
-            var refid1 = $("#dropselectconfig_RefTermID1 :selected").text();
+            var refid = $("#dropselectconfig_RefTermID").val();
+            var refid1 = $("#dropselectconfig_RefTermID1").val();
+            var refname = $("#dropselectconfig_RefTermID :selected").text();
+            var refname1 = $("#dropselectconfig_RefTermID1 :selected").text();
 
-
+            if ($.trim($(obj).attr("editid")) != '') {
+                IsEdit = true;
+                 ID = $.trim($(obj).attr("editid"));
+            }
+            else {
+                 ID = GenerateNewGUID();
+            }
             ShowLoader();
             $.ajax({
                 type: "POST",
@@ -470,38 +489,116 @@
                 traditional: true,
                 async: true,
                 data: {
+                    TermId: ID,
                     ClientID: $("#dropselectconfig_ClientID").val(),
                     Refid: $("#dropselectconfig_RefTermID").val(),
                     Refid1: $("#dropselectconfig_RefTermID1").val(),
                     name: $("#dropselectconfig_Name").val(),
                     desc: $("#dropselectconfig_Desc").val(),
-                    category: $("#dropselectconfig_ProjecttermCategoryName").val()
-
+                    category: $("#dropselectconfig_ProjecttermCategoryName").val(),
+                    isedit: IsEdit
                 },
                 success: function (data) {
                     HideLoader();
-                    var tr = '<tr>';
-                    tr += '<td></td>';
-                    if (category != null && category != '' && category != undefined && category == 'PRODUCT TYPE')
-                    {
-                        tr += '<td><span>' + refid + '</span></td>';
-                    }
-                    if (category != null && category != '' && category != undefined && category == 'NATURE OF COMPLAINT') {
-                        tr += '<td><span>' + refid + '</span></td>';
-                    }
-                    if (category != null && category != '' && category != undefined && category == 'TCF OUTCOME') {
-                        tr += '<td><span>' + refid + '</span></td>';
-                        tr += '<td><span>' + refid1 + '</span></td>';
-                    }
-                    tr += '<td><span>' + name + '</span></td>';
-                    //tr += '<td><span>' + desc + '</span></td>';
-                    //tr += '<td><a class="action btn  btn-primary btn-xs" href="" title="Edit"><i class="btn-xs fa fa-pencil padding0"></i></a>';
-                    //tr += '<a class="action btn  btn-danger btn-xs" href="javascript:void(0);" title="Delete" onclick=""><i class="btn-xs fa fa-trash-o padding0"></i></a>';
-                    //tr += '</td>';
-                    tr += '</tr>';
+                    if ($.trim($(obj).attr("editid")) != '') {
+                        
+                        //var EditIndex = $.trim($(obj).attr("emplyerindex"));
+                        IsEdit = true;
+                        $(obj).removeAttr("editid");
+                        //$(obj).removeAttr("emplyerindex");
+                        $("#tr_" + ID + "").find('.Term_').html(name);
+                        $("#tr_" + ID + "").find('.desc_').val(desc);
+                        $("#tr_" + ID + "").find('.Product_').html(refname);
+                        $("#tr_" + ID + "").find('.Category_').html(refname);
+                        $("#tr_" + ID + "").find('.Type_').html(refname);
+                        $("#tr_" + ID + "").find('.Nature_').html(refname1);
 
-                    $("#tbody_dropselect").append(tr);
+                        //$("td.Company_" + ID + " span").text(Company);
+                        //$("td.Code_" + ID + " span").text(Code);
+                        //$("td.Fsp_" + ID + " span").text(Fsp);
 
+                        //$("#companyList_" + EditIndex + "__CompanyName").val(Company);
+                        //$("#companyList_" + EditIndex + "__CompanyCode").val(Code);
+                        //$("#companyList_" + EditIndex + "__FspNo").val(Fsp);
+                        //$("#companyList_" + EditIndex + "__IsEdit").val(IsEdit);
+                    }
+                    else {
+                        var tr = '<tr id="tr_' + ID + '">';
+                        tr += '<td></td>';
+                        if (category != null && category != '' && category != undefined && category == 'PRODUCT TYPE') {
+                            tr += '<td><span class="Product_">' + refname + '</span><input type="hidden" class="refid_" value="' + refid + '" /></td>';
+                        }
+                        if (category != null && category != '' && category != undefined && category == 'NATURE OF COMPLAINT') {
+                            tr += '<td><span class="Category_">' + refname + '</span><input type="hidden" class="refid_" value="' + refid + '" /></td>';
+                        }
+                        if (category != null && category != '' && category != undefined && category == 'TCF OUTCOME') {
+                            tr += '<td><span class="Type_">' + refname + '</span><input type="hidden" class="refid_" value="' + refid + '" /></td>';
+                            tr += '<td><span  class="Nature_">' + refname1 + '</span><input type="hidden" class="refid1_" value="' + refid1 + '" /></td>';
+                        }
+                        tr += '<td><span class="Term_">' + name + '</span><input type="hidden" class="desc_" value="' + desc + '"/></td>';
+                        //tr += '<td><span>' + desc + '</span></td>';
+                        tr += '<td><a class="action btn  btn-primary btn-xs" onclick="DropselectEdit(' + ID + ',' + category + ');" title="Edit"><i class="btn-xs fa fa-pencil padding0"></i></a>';
+                        tr += '<a class="action btn  btn-danger btn-xs" href="javascript:void(0);" title="Delete" onclick=""><i class="btn-xs fa fa-trash-o padding0"></i></a>';
+                        tr += '</td>';
+                        tr += '</tr>';
+
+                        $("#tbody_dropselect").append(tr);
+                    }
+                    clearform('form_instance');
+                }
+            });
+        }
+
+        function DropselectEdit(ID,category) {
+            debugger;
+            //ClearPopup(formDis);
+            var refname = "";
+            var refname1 = "";
+            var refid = "";
+            var refid1 = "";
+            var EditID = ID;
+            var name = $("#tr_" + ID + "").find('.Term_').html();
+            var desc = $("#tr_" + ID + "").find('.desc_').val();
+            if (category != null && category != '' && category != undefined && category == 'PRODUCT TYPE') {
+                refname = $("#tr_" + ID + "").find('.Product_').html();
+                refid = ($("#tr_" + ID + "").find('.refid_').val()).toUpperCase();
+            }
+            if (category != null && category != '' && category != undefined && category == 'NATURE OF COMPLAINT') {
+                refname = $("#tr_" + ID + "").find('.Category_').html();
+                refid = ($("#tr_" + ID + "").find('.refid_').val()).toUpperCase();
+            }
+            if (category != null && category != '' && category != undefined && category == 'TCF OUTCOME') {
+                refname = $("#tr_" + ID + "").find('.Type_').html();
+                refname1 = $("#tr_" + ID + "").find('.Nature_').html();
+                refid = ($("#tr_" + ID + "").find('.refid_').val()).toUpperCase();
+                refid1 = ($("#tr_" + ID + "").find('.refid1_').val()).toUpperCase();
+            }
+
+            $("#dropselectconfig_RefTermID option[value='" + refid + "']").prop("selected", true);
+            $("#dropselectconfig_RefTermID1 option[value='" + refid1 + "']").prop("selected", true);
+            $("#dropselectconfig_RefTermID").selectpicker('refresh');
+            $("#dropselectconfig_RefTermID1").selectpicker('refresh');
+            $("#dropselectconfig_Name").val(name);
+            $("#dropselectconfig_Desc").val(desc);
+
+            $("#btnsavecompany").attr("editid", EditID);
+            //$("#btnsavecompany").attr("emplyerindex", index);
+        }
+
+
+        function Deletedropselect(id) {
+            ShowLoader();
+            $.ajax({
+                type: "POST",
+                url: "/AdmCrt/Savedropselectconfig",
+                traditional: true,
+                async: true,
+                data: {
+                    TermId: id
+                },
+                success: function (data) {
+                    HideLoader();
+                    
                 }
             });
         }
