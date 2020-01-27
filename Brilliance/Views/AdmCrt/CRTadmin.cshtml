@@ -105,15 +105,16 @@
                                         <label>Client Complaint Portal for this Organisation*</label>
                                         <div class="mt-radio-inline">
                                             <label class="mt-radio mt-radio-outline margin-bottom0" style="font-size:13px;">
-                                                @Html.RadioButton("txt", "Yes", new { @class = "class1", @checked = "checked" })
-                                                No
-                                                <span></span>
-                                            </label>
-                                            <label class="mt-radio mt-radio-outline margin-bottom0" style="font-size:13px;">
-                                                @Html.RadioButton("txt", "No", new { @class = "class2" })
+                                                @Html.RadioButton("Portal", "Yes", new { @class = "class1", @checked = "checked", @onchange = "showUrldiv();" })
                                                 Yes
                                                 <span></span>
                                             </label>
+                                            <label class="mt-radio mt-radio-outline margin-bottom0" style="font-size:13px;">
+                                                @Html.RadioButton("Portal", "No", new { @class = "class2", @onchange = "showUrldiv();" })
+                                                No
+                                                <span></span>
+                                            </label>
+
                                         </div>
                                     </div>
                                     <div class="col-md-6">
@@ -121,16 +122,24 @@
                                             <label>Show complaint number*</label>
                                             <div class="mt-radio-inline">
                                                 <label class="mt-radio mt-radio-outline margin-bottom0" style="font-size:13px;">
-                                                    @Html.RadioButton("txt", "Yes", new { @class = "class1", @checked = "checked" })
+                                                    @Html.RadioButton("number", "Yes", new { @class = "class1", @checked = "checked"})
                                                     Only on Complaint Capture and Resolution forms
                                                     <span></span>
                                                 </label>
                                                 <label class="mt-radio mt-radio-outline margin-bottom0" style="font-size:13px;">
-                                                    @Html.RadioButton("txt", "No", new { @class = "class2" })
+                                                    @Html.RadioButton("number", "No", new { @class = "class2" })
                                                     Also on Complaint Register
                                                     <span></span>
                                                 </label>
                                             </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div id="UrlDiv" class="row hide">
+                                    <div class="col-md-6" style="margin-bottom: 18px;">
+                                        <label class="col-md-1">URL</label>
+                                        <div class="col-md-5">
+                                            <input type="text" class="form-control m-input" id="hours" />
                                         </div>
                                     </div>
                                 </div>
@@ -141,13 +150,13 @@
 
                                             <div class="mt-radio-inline">
                                                 <label class="mt-radio mt-radio-outline margin-bottom0" style="font-size:13px;">
-                                                    @Html.RadioButton("txt", "Yes", new { @class = "class1", @checked = "checked" })
-                                                    Yes
+                                                    @Html.RadioButton("declaration", "No", new { @class = "class1", @checked = "checked" })
+                                                    No
                                                     <span></span>
                                                 </label>
                                                 <label class="mt-radio mt-radio-outline margin-bottom0" style="font-size:13px;">
-                                                    @Html.RadioButton("txt", "No", new { @class = "class2" })
-                                                    No
+                                                    @Html.RadioButton("declaration", "Yes", new { @class = "class2" })
+                                                    Yes
                                                     <span></span>
                                                 </label>
                                             </div>
@@ -158,12 +167,12 @@
                                             <label>Upload attachment*</label>
                                             <div class="mt-radio-inline">
                                                 <label class="mt-radio mt-radio-outline margin-bottom0" style="font-size:13px;">
-                                                    @Html.RadioButton("txt", "Yes", new { @class = "class1", @checked = "checked" })
+                                                    @Html.RadioButton("Upload", "Yes", new { @class = "class1" })
                                                     Mandatory
                                                     <span></span>
                                                 </label>
                                                 <label class="mt-radio mt-radio-outline margin-bottom0" style="font-size:13px;">
-                                                    @Html.RadioButton("txt", "No", new { @class = "class2" })
+                                                    @Html.RadioButton("Upload", "No", new { @class = "class2", @checked = "checked" })
                                                     Optional
                                                     <span></span>
                                                 </label>
@@ -172,84 +181,129 @@
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <div class="col-md-6">
+                                    <div class="col-md-3">
                                         <label>Turnaround timer*</label>
                                         <div class="mt-radio-inline">
                                             <label class="mt-radio mt-radio-outline margin-bottom0" style="font-size:13px;">
-                                                @Html.RadioButton("txt", "Yes", new { @class = "class1", @checked = "checked" })
+                                                @Html.RadioButton("turnaround", "Yes", new { @class = "class1", @checked = "checked", @onchange = "showdiv();" })
                                                 Yes
                                                 <span></span>
                                             </label>
                                             <label class="mt-radio mt-radio-outline margin-bottom0" style="font-size:13px;">
-                                                @Html.RadioButton("txt", "No", new { @class = "class2" })
+                                                @Html.RadioButton("turnaround", "No", new { @class = "class2", @onchange = "showdiv();" })
                                                 No
                                                 <span></span>
                                             </label>
                                         </div>
                                     </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label>Web turnaround timer*</label>
-                                            @*<div class="mt-checkbox-inline">
-                                                    <label class="mt-checkbox mt-checkbox-outline margin-bottom0" style="font-size:13px;">
-                                                        @Html.CheckBox("txt", new { @checked = "checked" })
-                                                        Mandatory
-                                                        <span></span>
-                                                    </label>
-                                                    <label class="mt-checkbox mt-checkbox-outline margin-bottom0" style="font-size:13px;">
-                                                        @Html.CheckBox("txt")
-                                                        Optional
-                                                        <span></span>
-                                                    </label>
-                                                </div>*@
-                                            <div class="mt-radio-inline">
-                                                <label class="mt-radio mt-radio-outline margin-bottom0" style="font-size:13px;">
-                                                    @Html.RadioButton("txt", "Yes", new { @class = "class1", @checked = "checked" })
-                                                    Mandatory
-                                                    <span></span>
-                                                </label>
-                                                <label class="mt-radio mt-radio-outline margin-bottom0" style="font-size:13px;">
-                                                    @Html.RadioButton("txt", "No", new { @class = "class2" })
-                                                    Optional
-                                                    <span></span>
-                                                </label>
-                                            </div>
+                                    <div id="timerDiv" class="col-md-9 hide">
+                                        <label class="col-md-1">Hours</label>
+                                        <div class="col-md-1">
+                                            <input type="text" class="form-control m-input" id="hours" />
+                                        </div>
+                                        <label class="col-md-1">of times</label>
+                                        <div class="col-md-1">
+                                            <input type="text" class="form-control m-input" id="hours" />
+                                        </div>
+                                        <label class="col-md-2">Email to</label>
+                                        <div class="col-md-5">
+                                            <input type="text" class="form-control m-input" id="hours" />
                                         </div>
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <div class="col-md-6">
+                                    <div class="col-md-3">
                                         <div class="form-group">
-                                            <label>Automatic CRT data extract to SFTP*</label>
+                                            <label>Web turnaround timer*</label>
                                             <div class="mt-radio-inline">
                                                 <label class="mt-radio mt-radio-outline margin-bottom0" style="font-size:13px;">
-                                                    @Html.RadioButton("txt", "Yes", new { @class = "class1", @checked = "checked" })
+                                                    @Html.RadioButton("webturn", "Yes", new { @class = "class1", @onchange = "showWebdiv();" })
                                                     Yes
                                                     <span></span>
                                                 </label>
                                                 <label class="mt-radio mt-radio-outline margin-bottom0" style="font-size:13px;">
-                                                    @Html.RadioButton("txt", "No", new { @class = "class2" })
+                                                    @Html.RadioButton("webturn", "No", new { @class = "class2", @checked = "checked", @onchange = "showWebdiv();" })
                                                     No
                                                     <span></span>
                                                 </label>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label>Inactivity alert*</label>
-                                            <div class="mt-radio-inline">
-                                                <label class="mt-radio mt-radio-outline margin-bottom0" style="font-size:13px;">
-                                                    @Html.RadioButton("txt", "Yes", new { @class = "class1", @checked = "checked" })
+                                    <div id="webDiv" class="col-md-9 hide">
+                                        <label class="col-md-1">Hours</label>
+                                        <div class="col-md-1">
+                                            <input type="text" class="form-control m-input" id="hours" />
+                                        </div>
+                                        <label class="col-md-1">of times</label>
+                                        <div class="col-md-1">
+                                            <input type="text" class="form-control m-input" id="hours" />
+                                        </div>
+                                        <label class="col-md-2">Email to</label>
+                                        <div class="col-md-5">
+                                            <input type="text" class="form-control m-input" id="hours" />
+                                        </div>
+                                    </div>
+
+                                </div>
+                                @*<div class="row">
+                                        <div class="mt-checkbox-inline">
+                                                <label class="mt-checkbox mt-checkbox-outline margin-bottom0" style="font-size:13px;">
+                                                    @Html.CheckBox("txt", new { @checked = "checked" })
                                                     Mandatory
                                                     <span></span>
                                                 </label>
-                                                <label class="mt-radio mt-radio-outline margin-bottom0" style="font-size:13px;">
-                                                    @Html.RadioButton("txt", "No", new { @class = "class2" })
+                                                <label class="mt-checkbox mt-checkbox-outline margin-bottom0" style="font-size:13px;">
+                                                    @Html.CheckBox("txt")
                                                     Optional
                                                     <span></span>
                                                 </label>
                                             </div>
+                                    </div>*@
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Automatic CRT data extract to SFTP*</label>
+                                            <div class="mt-radio-inline">
+                                                <label class="mt-radio mt-radio-outline margin-bottom0" style="font-size:13px;">
+                                                    @Html.RadioButton("sftp", "No", new { @class = "class1", @checked = "checked" })
+                                                    No
+                                                    <span></span>
+                                                </label>
+                                                <label class="mt-radio mt-radio-outline margin-bottom0" style="font-size:13px;">
+                                                    @Html.RadioButton("sftp", "Yes", new { @class = "class2" })
+                                                    Yes
+                                                    <span></span>
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label>Inactivity alert*</label>
+                                            <div class="mt-radio-inline">
+                                                <label class="mt-radio mt-radio-outline margin-bottom0" style="font-size:13px;">
+                                                    @Html.RadioButton("inactivity", "No", new { @class = "class1", @onchange = "showalertDiv();" })
+                                                    No
+                                                    <span></span>
+                                                </label>
+                                                <label class="mt-radio mt-radio-outline margin-bottom0" style="font-size:13px;">
+                                                    @Html.RadioButton("inactivity", "Yes", new { @class = "class2", @checked = "checked", @onchange = "showalertDiv();" })
+                                                    Yes
+                                                    <span></span>
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div id="alertDiv" class="col-md-9 hide">
+                                        <label class="col-md-1">Days</label>
+                                        <div class="col-md-3">
+                                            <input type="text" class="form-control m-input" id="hours" />
+                                        </div>
+                                        <label class="col-md-2">Email to</label>
+                                        <div class="col-md-5">
+                                            <input type="text" class="form-control m-input" id="hours" />
                                         </div>
                                     </div>
                                 </div>
@@ -259,12 +313,12 @@
                                             <label>Show assign complaint fields*</label>
                                             <div class="mt-radio-inline">
                                                 <label class="mt-radio mt-radio-outline margin-bottom0" style="font-size:13px;">
-                                                    @Html.RadioButton("txt", "Yes", new { @class = "class1", @checked = "checked" })
+                                                    @Html.RadioButton("txt", "Yes", new { @class = "class1" })
                                                     Yes
                                                     <span></span>
                                                 </label>
                                                 <label class="mt-radio mt-radio-outline margin-bottom0" style="font-size:13px;">
-                                                    @Html.RadioButton("txt", "No", new { @class = "class2" })
+                                                    @Html.RadioButton("txt", "No", new { @class = "class2", @checked = "checked" })
                                                     No
                                                     <span></span>
                                                 </label>
@@ -301,6 +355,33 @@
     <script src="~/assets/global/plugins/bootstrap-fileinput/bootstrap-fileinput.js"></script>
     <script src="~/assets/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
     <script>
+
+        $(document).ready(function () {
+            if ($("input[id=turnaround]:checked").val().toUpperCase() == "YES") {
+                $("#timerDiv").removeClass('hide');
+            }
+            else {
+                $("#timerDiv").addClass('hide');
+            }
+            if ($("input[id=webturn]:checked").val().toUpperCase() == "YES") {
+                $("#webDiv").removeClass('hide');
+            }
+            else {
+                $("#webDiv").addClass('hide');
+            }
+            if ($("input[id=inactivity]:checked").val().toUpperCase() == "YES") {
+                $("#alertDiv").removeClass('hide');
+            }
+            else {
+                $("#alertDiv").addClass('hide');
+            }
+            if ($("input[id=Portal]:checked").val().toUpperCase() == "YES") {
+                $("#UrlDiv").removeClass('hide');
+            }
+            else {
+                $("#UrlDiv").addClass('hide');
+            }
+        });
         function GenerateNewGUID() {
             function s4() {
                 return Math.floor((1 + Math.random()) * 0x10000)
@@ -477,10 +558,10 @@
 
             if ($.trim($(obj).attr("editid")) != '') {
                 IsEdit = true;
-                 ID = $.trim($(obj).attr("editid"));
+                ID = $.trim($(obj).attr("editid"));
             }
             else {
-                 ID = GenerateNewGUID();
+                ID = GenerateNewGUID();
             }
             ShowLoader();
             $.ajax({
@@ -501,7 +582,7 @@
                 success: function (data) {
                     HideLoader();
                     if ($.trim($(obj).attr("editid")) != '') {
-                        
+
                         //var EditIndex = $.trim($(obj).attr("emplyerindex"));
                         IsEdit = true;
                         $(obj).removeAttr("editid");
@@ -549,7 +630,7 @@
             });
         }
 
-        function DropselectEdit(ID,category) {
+        function DropselectEdit(ID, category) {
             debugger;
             //ClearPopup(formDis);
             var refname = "";
@@ -590,7 +671,7 @@
             ShowLoader();
             $.ajax({
                 type: "POST",
-                url: "/AdmCrt/Savedropselectconfig",
+                url: "/AdmCrt/Deletedropselectconfig",
                 traditional: true,
                 async: true,
                 data: {
@@ -598,10 +679,45 @@
                 },
                 success: function (data) {
                     HideLoader();
-                    
+                    $("#tr_" + id + "").remove();
                 }
             });
         }
+
+        function showdiv() {
+            if ($("input[id=turnaround]:checked").val().toUpperCase() == "YES") {
+                $("#timerDiv").removeClass('hide');
+            }
+            else {
+                $("#timerDiv").addClass('hide');
+            }
+        }
+        function showWebdiv() {
+            if ($("input[id=webturn]:checked").val().toUpperCase() == "YES") {
+                $("#webDiv").removeClass('hide');
+            }
+            else {
+                $("#webDiv").addClass('hide');
+            }
+        }
+        function showalertDiv() {
+            if ($("input[id=inactivity]:checked").val().toUpperCase() == "YES") {
+                $("#alertDiv").removeClass('hide');
+            }
+            else {
+                $("#alertDiv").addClass('hide');
+            }
+        }
+        function showUrldiv() {
+            if ($("input[id=Portal]:checked").val().toUpperCase() == "YES") {
+                $("#UrlDiv").removeClass('hide');
+            }
+            else {
+                $("#UrlDiv").addClass('hide');
+            }
+        }
+        3
     </script>
 }
 
+83

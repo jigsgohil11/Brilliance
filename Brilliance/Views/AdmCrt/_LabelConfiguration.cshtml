@@ -1,6 +1,6 @@
 ﻿@model Brilliance.Models.ViewModel.CrtAdminViewmodel
 @using Brilliance.Infrastructure
-
+@Html.Hidden("Applications", Common.SerializeObject(Model))
 
 <div class="modal-dialog modal-lg">
     <div class="modal-content" style="width: 1213px;margin-left: -125px;">
