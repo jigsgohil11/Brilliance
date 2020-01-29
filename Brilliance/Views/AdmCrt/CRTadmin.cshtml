@@ -355,7 +355,7 @@
     <script src="~/assets/global/plugins/bootstrap-fileinput/bootstrap-fileinput.js"></script>
     <script src="~/assets/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
     <script>
-
+        
         $(document).ready(function () {
             if ($("input[id=turnaround]:checked").val().toUpperCase() == "YES") {
                 $("#timerDiv").removeClass('hide');
@@ -716,8 +716,33 @@
                 $("#UrlDiv").addClass('hide');
             }
         }
-        3
+
+        
+        function saveform() {
+        debugger;
+            ShowLoader();
+        var data=$("#Applications").val();
+            $.ajax({
+                type: "POST",
+                url: "/AdmCrt/Savelabelconfig",
+                traditional: true,
+                async: true,
+                data: {
+                    CRTAdminVM: data
+                },
+                success: function (data) {
+                    HideLoader();
+                    $("#Labelconfig_popup").modal('show');
+                    $("#LabelsConfig").html(data);
+                    //".bs-select").selectpicker('refresh');
+                    //$("#" + form).data('validator', null);
+                    // $.validator.unobtrusive.parse($("#" + form));
+                }
+            });
+        }
+
+       
+        
     </script>
 }
 
-83
