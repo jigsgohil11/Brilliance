@@ -13,6 +13,7 @@ namespace Brilliance.Models.Entity
         [Key]
         public Guid LabelconfigID { get; set; }
         public Guid? ClientID { get; set; }
+        [Required(ErrorMessage = "Instance name is required.")]
         public string InstanceName { get; set; }
         public string Tier2 { get; set; }
         public string Tier3 { get; set; }

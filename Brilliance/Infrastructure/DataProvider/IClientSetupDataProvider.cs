@@ -9,6 +9,8 @@ namespace Brilliance.Infrastructure.DataProvider
     {
         ServiceResponse GetClient(Guid ClientID);
         ServiceResponse SaveClient(ClientSetupViewModel Clients,HttpPostedFileBase orglogo);
-        //ServiceResponse DeleteDivision(Guid DivisionID);
+        ServiceResponse GetInstanceDetail(Guid ClientID);
+        ServiceResponse Getsubscription(Guid ClientID);
+        ServiceResponse SaveInstance(AppSubscriptionViewModel AppModel);
     }
 }

@@ -1,0 +1,142 @@
+﻿@using Brilliance.Infrastructure
+@model Brilliance.Models.ViewModel.AppSubscriptionViewModel
+@{
+    ViewBag.Title = "InstanceSubscription";
+    Layout = "~/Views/Shared/_Layout_public.cshtml";
+}
+
+<link href="~/assets/global/plugins/bootstrap-datepicker/css/bootstrap-datepicker.min.css" rel="stylesheet" />
+<link href="~/assets/global/plugins/bootstrap-fileinput/bootstrap-fileinput.css" rel="stylesheet" />
+<link href="~/assets/pages/css/profile.min.css" rel="stylesheet" />
+<div class="page-content page-content-dashbrd-backgrnd">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="page-bar margin-bottom-10">
+                <div class="row">
+                    <div class="col-md-12 padding-out">
+                        <div class="portlet light padding-header margin-0 custom-padding-bar">
+                            <div class="portlet-title portlet-title-Project-custom">
+                                <div class="caption font-dark">
+                                    <i class="icon-settings font-dark"></i>
+                                    <span class="caption-subject bold uppercase">App Subscription</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="portlet-body">
+                    <div class="table-scrollable-borderless">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr class="uppercase">
+                                    <th> Brilliance apps subscribed to </th>
+                                    <th> Current users  </th>
+                                    <th> Set up info </th>
+                                    <th> Template </th>
+                                    <th> Add another instance </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                        <td>
+                                            <input type="checkbox" id="crt_subscribe" name="crt_subscribe" />
+                                            CRT
+                                        </td>
+                                        <td> 0 </td>
+                                        <td>
+                                            <a class="action btn  btn-primary btn-xs @Constants.Class_Cannot_Access_Update" href="" title="Edit"><i class="btn-xs fa fa-pencil padding0"></i></a>
+                                        </td>
+                                        <td>Default</td>
+                                        <td>
+                                            <a href="#" onclick="Addinstance('@Model.instance.ClientID');" title="Add instance">
+                                                <i class="fa fa-plus"></i>
+                                            </a>
+                                        </td>
+                                    </tr>
+
+                                @if (Model != null && Model.instancelist.Count > 0)
+                                {
+                                    foreach (var item in Model.instancelist)
+                                    {
+                                        <tr>
+                                            <td>
+                                                <input type="checkbox" id="crt_subscribe" name="crt_subscribe" />
+                                                @item.PrefferedName
+                                            </td>
+                                            <td> 0 </td>
+                                            <td>
+                                                <a class="action btn  btn-primary btn-xs @Constants.Class_Cannot_Access_Update" href="" title="Edit"><i class="btn-xs fa fa-pencil padding0"></i></a>
+                                            </td>
+                                            <td>@item.Template</td>
+                                            <td>
+                                                <a href="#" onclick="Addinstance('@Model.instance.ClientID','form_instance');" title="Add instance">
+                                                    <i class="fa fa-plus"></i>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    }
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade modal-scroll bs-modal-lg" id="instance_popup" tabindex="-1" role="dialog" aria-hidden="true">
+    <div id="CrtIstance">
+
+    </div>
+</div>
+
+@section scripts{
+    <script src="~/assets/global/plugins/bootstrap-fileinput/bootstrap-fileinput.js"></script>
+    <script src="~/assets/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
+
+    <script>
+        //function Addinstance() {
+        //    $("#instance_popup").modal('show');
+        //    $('.date-picker').datepicker({
+        //        format: 'dd/mm/yyyy',
+        //        autoclose: true,
+        //        orientation: "bottom",
+        //        todayHighlight: true,
+        //        //startDate: new_date.format("DD/MM/YYYY")
+        //    })
+        //}
+
+         function Addinstance(id,form) {
+                var postData = {
+                    ClientID: id
+                }
+                ShowLoader();
+                AjaxCall("/ClientSetup/GetInstanceDetail", JSON.stringify(postData), "post", "json", "application/json", false).done(function (data) {
+                    HideLoader();
+                     $("#CrtIstance").html(data);
+                       $("#instance_popup").modal('show');
+                       $('.date-picker').datepicker({
+                        format: 'dd/mm/yyyy',
+                        autoclose: true,
+                        orientation: "bottom",
+                        todayHighlight: true,
+                        //startDate: new_date.format("DD/MM/YYYY")
+                    })
+                    $(".bs-select").selectpicker('refresh');
+                    $("#" + form).data('validator', null);
+                    $.validator.unobtrusive.parse($("#" + form));
+                });
+        }
+
+
+         function SaveinstanceResponse(response) {
+            $("#instance_popup").modal('hide');
+            var EncryptedClientID = $("#instance_EncryptedInstanceID").val();
+            window.location.href = "/ClientSetup/InstanceSubscription?id=" + EncryptedClientID + "";
+        }
+
+    </script>
+}

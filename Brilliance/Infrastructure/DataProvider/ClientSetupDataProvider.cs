@@ -71,6 +71,8 @@ namespace Brilliance.Infrastructure.DataProvider
                     cmd.Parameters.AddWithValue("@buttonsclr", Clients.client.buttonsclr).SqlDbType = SqlDbType.NVarChar;
                     cmd.Parameters.AddWithValue("@headsclr", Clients.client.headsclr).SqlDbType = SqlDbType.NVarChar;
                     cmd.Parameters.AddWithValue("@subheadsclr", Clients.client.subheadsclr).SqlDbType = SqlDbType.NVarChar;
+                    cmd.Parameters.AddWithValue("@IsCrtSubscribe", Clients.client.IsCrtSubscribe).SqlDbType = SqlDbType.Bit;
+                    cmd.Parameters.AddWithValue("@IsCISSubscribe", Clients.client.IsCISSubscribe).SqlDbType = SqlDbType.Bit;
                     cmd.Parameters.AddWithValue("@IsEdit", Clients.client.IsEdit).SqlDbType = SqlDbType.Bit;
 
                     DataSet ds = null;
@@ -98,5 +100,83 @@ namespace Brilliance.Infrastructure.DataProvider
 
             return response;
         }
+
+        public ServiceResponse Getsubscription(Guid ClientID)
+        {
+            var response = new ServiceResponse();
+            AppSubscriptionViewModel subscriptionVM = new AppSubscriptionViewModel();
+            var searchList = new List<SearchValueData>();
+            try
+            {
+                var searchValueData = new SearchValueData { Name = "ClientID", Value = Convert.ToString(ClientID) };
+                searchList.Add(searchValueData);
+
+
+                List<Instance> list = GetEntityList<Instance>("Get_InstanceList", searchList);
+                subscriptionVM.instance.ClientID = ClientID;
+                subscriptionVM.instancelist = list;
+                response.Data = subscriptionVM;
+            }
+            catch (Exception ex)
+
+            {
+                response.Message = "Server Error";
+            }
+
+            return response;
+        }
+
+        public ServiceResponse GetInstanceDetail(Guid ClientID)
+        {
+            var response = new ServiceResponse();
+            AppSubscriptionViewModel subscriptionVM = new AppSubscriptionViewModel();
+            var searchList = new List<SearchValueData>();
+            try
+            {
+                var searchValueData = new SearchValueData { Name = "ClientID", Value = Convert.ToString(ClientID) };
+                searchList.Add(searchValueData);
+                subscriptionVM = GetMultipleEntity<AppSubscriptionViewModel>("Get_InstanceDetail", searchList);
+                subscriptionVM.instance.ClientID = ClientID;
+                response.Data = subscriptionVM;
+            }
+            catch (Exception ex)
+
+            {
+                response.Message = "Server Error";
+            }
+
+            return response;
+        }
+
+        public ServiceResponse SaveInstance(AppSubscriptionViewModel AppModel)
+        {
+            var response = new ServiceResponse();
+            try
+            {
+                SqlCommand cmd = new SqlCommand();
+                cmd.Parameters.AddWithValue("@InstanceID", Guid.NewGuid()).SqlDbType = SqlDbType.UniqueIdentifier;
+                cmd.Parameters.AddWithValue("@TemplateID", AppModel.instance.TemplateID).SqlDbType = SqlDbType.UniqueIdentifier;
+                cmd.Parameters.AddWithValue("@ClientID", AppModel.instance.ClientID).SqlDbType = SqlDbType.UniqueIdentifier;
+                cmd.Parameters.AddWithValue("@PrefferedName", AppModel.instance.PrefferedName).SqlDbType = SqlDbType.NVarChar;
+                cmd.Parameters.AddWithValue("@Initialstartdate", AppModel.instance.Initialstartdate).SqlDbType = SqlDbType.DateTime;
+                cmd.Parameters.AddWithValue("@PeriodFrom", AppModel.instance.PeriodFrom).SqlDbType = SqlDbType.DateTime;
+                cmd.Parameters.AddWithValue("@PeriodTo", AppModel.instance.PeriodTo).SqlDbType = SqlDbType.DateTime;
+                cmd.Parameters.AddWithValue("@CreatedBy", SessionHelper.UserId).SqlDbType = SqlDbType.UniqueIdentifier;
+                cmd.Parameters.AddWithValue("@CreatedOn", DateTime.Now).SqlDbType = SqlDbType.DateTime;
+
+
+                DataSet ds = null;
+                ds = BulkInsert("Save_Instance", cmd);
+                response.IsSuccess = true;
+                response.Message = "Record Created Successfully.";
+            }
+            catch (Exception ex)
+            {
+                response.Message = "Internal server error";
+            }
+
+            return response;
+        }
+
     }
 }

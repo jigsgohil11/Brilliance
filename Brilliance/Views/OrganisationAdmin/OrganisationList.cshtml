@@ -76,11 +76,12 @@
                                             }
 
                                         </td>
-                                        <td width="20%" style="background-color:white !important;">3</td>
-                                        <td width="20%" style="background-color:white !important;">3</td>
-                                        <td width="10%">
+                                        <td width="10%" style="background-color:white !important;">3</td>
+                                        <td width="10%" style="background-color:white !important;">3</td>
+                                        <td width="20%">
                                             <a class="action btn  btn-primary btn-xs @Constants.Class_Cannot_Access_Update" href="/ClientSetup/Client/@item.EncryptedClientID" title="Edit"><i class="btn-xs fa fa-pencil padding0"></i></a>
                                             <a class="action btn  btn-danger btn-xs @Constants.Class_Cannot_Access_Remove" href="javascript:void(0);" title="Delete" onclick="fnOpenDeleteModel('DeleteButton','DeleteModal','@item.EncryptedClientID.ToString()');"><i class="btn-xs fa fa-trash-o padding0"></i></a>
+                                            <a class="action btn  btn-danger btn-xs @Constants.Class_Cannot_Access_Remove"  title="App Subscription" href="/ClientSetup/InstanceSubscription/@item.EncryptedClientID">Add subscription</a>
                                         </td>
                                     </tr>
                                 }
@@ -125,9 +126,7 @@
             ShowPageLoadMessage("Organizationsaved", "Organization");
             ShowPageLoadMessage("divisionsaved", "Division");
             //ShowPageLoadMessage("companysaved", "Company");
-
         });
         var table = $('#dt_client').DataTable({});
     </script>
-
 }

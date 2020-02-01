@@ -1,0 +1,79 @@
+﻿@model Brilliance.Models.ViewModel.AppSubscriptionViewModel
+@using Brilliance.Infrastructure
+
+<div class="modal-dialog modal-lg">
+    <div class="modal-content">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+            <h4 class="modal-title">Info on this CRT instance</h4>
+        </div>
+        
+            <form action="/ClientSetup/SaveInstance" id="form_instance" data-ajax-success="SaveinstanceResponse(data);" data-ajax="true" data-ajax-method="Post" method="post">
+            <div class="modal-body">
+                <div class="row">
+                    @Html.HiddenFor(m => m.instance.ClientID)
+                    @Html.HiddenFor(m => m.instance.EncryptedClientID)
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label class="col-md-4 control-label">Template</label>
+                            <div class="col-md-6 input-group">
+                                @Html.DropDownListFor(m => m.instance.TemplateID, new SelectList(Model.Templatelist, "Value", "Text", 0), new { @data_live_search = "true", @class = "form-control bs-select" })
+                                @Html.HiddenFor(m => m.instance.TemplateID)
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row" style="margin-top: 9px;">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label class="col-md-4 control-label">Client preferred name for app</label>
+                            <div class="col-md-6 input-group">
+                                @Html.TextBoxFor(m => m.instance.PrefferedName, new { @class = "form-control m-input" })
+                                @Html.HiddenFor(m => m.instance.PrefferedName)
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row" style="margin-top: 9px;">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label class="col-md-4 control-label">Initial start date of subscription</label>
+                            @*<div class="col-md-6">
+                            <input type="text" class="form-control input-inline date-picker" />
+                        </div>*@
+                            <div class="input-group col-md-6">
+                                <span class="input-group-addon">
+                                    <i class="fa fa-calendar font-green"></i>
+                                </span>
+                                @Html.TextBoxFor(m => m.instance.Initialstartdate, new { @class = "form-control input-inline date-picker" })
+                                @Html.HiddenFor(m => m.instance.Initialstartdate)
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row" style="margin-top: 9px;">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label class="col-md-4 control-label">Current subscription period</label>
+                            <div class="col-md-3">
+                                @Html.TextBoxFor(m => m.instance.PeriodFrom, new { @class = "form-control input-inline date-picker" })
+                                @Html.HiddenFor(m => m.instance.PeriodFrom)
+                            </div>
+                            <label class="col-md-1 control-label">to</label>
+                            <div class="col-md-3">
+                                @Html.TextBoxFor(m => m.instance.PeriodTo, new { @class = "form-control input-inline date-picker" })
+                                @Html.HiddenFor(m => m.instance.PeriodTo)
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn default" data-dismiss="modal">Cancel</button>
+                <button id="btnSaveAreaTask" type="submit" class="btn green">Save</button>
+            </div>
+        </form>
+    </div>
+</div>
+<!-- /.modal-content -->

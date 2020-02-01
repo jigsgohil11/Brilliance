@@ -260,6 +260,7 @@
     <Compile Include="Models\Entity\CRTNotes.cs" />
     <Compile Include="Models\Entity\Division.cs" />
     <Compile Include="Models\Entity\DuplicateDataCheck.cs" />
+    <Compile Include="Models\Entity\Instance.cs" />
     <Compile Include="Models\Entity\LabelConfiguration.cs" />
     <Compile Include="Models\Entity\Login.cs" />
     <Compile Include="Models\Entity\LoginLog.cs" />
@@ -275,6 +276,7 @@
     <Compile Include="Models\ViewModel\ActionLoginLogModel.cs" />
     <Compile Include="Models\ViewModel\AdmCompanyViewModel.cs" />
     <Compile Include="Models\ViewModel\AdmDivisionViewModel.cs" />
+    <Compile Include="Models\ViewModel\AppSubscriptionViewModel.cs" />
     <Compile Include="Models\ViewModel\ClientSetupViewModel.cs" />
     <Compile Include="Models\ViewModel\ClientViewModel.cs" />
     <Compile Include="Models\ViewModel\CompanyViewModel.cs" />
@@ -6919,6 +6921,8 @@
     <Content Include="Views\AdmCrt\_LabelConfigList.cshtml" />
     <Content Include="Views\AdmCrt\_AddNewDropSelectItem.cshtml" />
     <Content Include="Views\AdmCrt\_DropselectConfiguration.cshtml" />
+    <Content Include="Views\ClientSetup\_AddInstance.cshtml" />
+    <Content Include="Views\ClientSetup\InstanceSubscription.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

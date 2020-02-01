@@ -4,6 +4,7 @@ using Brilliance.Infrastructure;
 using Brilliance.Models;
 using System;
 using System.Web.Mvc;
+using Brilliance.Models.Entity;
 
 namespace Brilliance.Controllers
 {

@@ -67,7 +67,34 @@ namespace Brilliance.Controllers
             }
             TempData["Success"] = response.Message;
             return RedirectToAction("OrganisationList", "OrganisationAdmin");
+            //return RedirectToAction("InstanceSubscription", "ClientSetup");
             //return Json(response);
+        }
+
+        public ActionResult InstanceSubscription(string id)
+        {
+            _iclientsetupDataProvider = new ClientSetupDataProvider();
+            var response = new ServiceResponse();
+            Guid ClientID = Common.CheckIdNullOrEmpty(id);
+            response = _iclientsetupDataProvider.Getsubscription(ClientID);
+            return View(response.Data);
+        }
+
+        public ActionResult GetInstanceDetail(Guid ClientID)
+        {
+            _iclientsetupDataProvider = new ClientSetupDataProvider();
+            var response = new ServiceResponse();
+            // Guid ClientID = Common.CheckIdNullOrEmpty(id);
+            response = _iclientsetupDataProvider.GetInstanceDetail(ClientID);
+            return PartialView("~/Views/ClientSetup/_AddInstance.cshtml", response.Data);
+        }
+        [HttpPost]
+        public ActionResult SaveInstance(AppSubscriptionViewModel AppModel)
+        {
+            _iclientsetupDataProvider = new ClientSetupDataProvider();
+            var response = new ServiceResponse();
+            response = _iclientsetupDataProvider.SaveInstance(AppModel);
+            return Json(response);
         }
     }
 }

@@ -262,10 +262,10 @@
                                             <div class="row">
                                                 <div class="form-group">
                                                     @*<label class="col-md-3 control-label">Buttons 2: RGB</label>
-                                                    <div class="col-md-3">
-                                                        <input type="text" class="form-control" placeholder="Enter text" style="margin-left: -60px;">
-                                                        @Html.TextBoxFor(m => m.client.buttonsclr, new { @class = "form-control m-input" })
-                                                    </div>*@
+                                                        <div class="col-md-3">
+                                                            <input type="text" class="form-control" placeholder="Enter text" style="margin-left: -60px;">
+                                                            @Html.TextBoxFor(m => m.client.buttonsclr, new { @class = "form-control m-input" })
+                                                        </div>*@
                                                     <label class="col-md-3 control-label">Subheads: RGB</label>
                                                     <div class="col-md-3">
                                                         @Html.TextBoxFor(m => m.client.subheadsclr, new { @class = "form-control m-input" })
@@ -274,39 +274,19 @@
                                             </div>
                                         </div>
                                     </div>
-                                   
                                 </div>
 
                                 <div class="row">
-                                    <div class="portlet-body">
-                                        <div class="table-scrollable-borderless">
-                                            <table class="table table-hover">
-                                                <thead>
-                                                    <tr class="uppercase">
-                                                        <th> Brilliance apps subscribed to </th>
-                                                        <th> Current users  </th>
-                                                        <th> Set up info </th>
-                                                        <th> Add another instance </th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    <tr>
-                                                        <td>
-                                                            <input type="checkbox" id="crt_subscribe" name="crt_subscribe" />
-                                                            CRT
-                                                        </td>
-                                                        <td> 0 </td>
-                                                        <td>
-                                                            <a class="action btn  btn-primary btn-xs @Constants.Class_Cannot_Access_Update" href="" title="Edit"><i class="btn-xs fa fa-pencil padding0"></i></a>
-                                                        </td>
-                                                        <td>
-                                                            <a href="#" onclick="Addinstance();" title="Add division">
-                                                                <i class="fa fa-plus"></i>
-                                                            </a>
-                                                        </td>
-                                                    </tr>
-                                                </tbody>
-                                            </table>
+                                    <div class="col-md-4">
+                                        <label>Brilliance apps subscribed to</label>
+                                        <div class="row">
+                                            <div class="form-group" style="margin-left: 15px;">
+                                               
+                                                <input type="checkbox" id="client_IsCrtSubscribe" name="client_IsCrtSubscribe" style="margin-left: 15px;" />
+                                                CRT
+                                                <input type="checkbox" id="client_IsCISSubscribe" name="client_IsCISSubscribe" style="margin-left: 15px;" checked="" />
+                                                CIS
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -327,78 +307,8 @@
     </div>
 </div>
 
-<div class="modal fade modal-scroll bs-modal-lg" id="large" tabindex="-1" role="dialog" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-                <h4 class="modal-title">Info on this CRT instance</h4>
-            </div>
-            <form id="form_instance" method="post">
-                <div class="modal-body">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="form-group">
-                                <label class="col-md-4 control-label">Template</label>
-                                <div class="col-md-6 input-group">
-                                    <input type="text" class="form-control input-inline" />
-                                </div>
-                            </div>
-                        </div>
 
-                    </div>
-                    <div class="row" style="margin-top: 9px;">
-                        <div class="col-md-12">
-                            <div class="form-group">
-                                <label class="col-md-4 control-label">Client preferred name for app</label>
-                                <div class="col-md-6 input-group">
-                                    <input type="text" class="form-control input-inline" />
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row" style="margin-top: 9px;">
-                        <div class="col-md-12">
-                            <div class="form-group">
-                                <label class="col-md-4 control-label">Initial start date of subscription</label>
-                                @*<div class="col-md-6">
-                                        <input type="text" class="form-control input-inline date-picker" />
-                                    </div>*@
-                                <div class="input-group col-md-6">
-                                    <span class="input-group-addon">
-                                        <i class="fa fa-calendar font-green"></i>
-                                    </span>
-                                    <input type="text" class="form-control input-inline date-picker" />
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row" style="margin-top: 9px;">
-                        <div class="col-md-12">
-                            <div class="form-group">
-                                <label class="col-md-4 control-label">Current subscription period</label>
-                                <div class="col-md-3">
-                                    <input type="text" class="form-control input-inline  date-picker" />
-                                </div>
-                                <label class="col-md-1 control-label">to</label>
-                                <div class="col-md-3">
-                                    <input type="text" class="form-control input-inline  date-picker" />
-                                </div>
-                            </div>
 
-                        </div>
-                    </div>
-                </div>
-
-                <div class="modal-footer">
-                    <button type="button" class="btn default" data-dismiss="modal">Cancel</button>
-                    <button id="btnSaveAreaTask" type="button" class="btn green" onclick="AddRowForAreaTasks(this);">Add</button>
-                </div>
-            </form>
-        </div>
-    </div>
-    <!-- /.modal-content -->
-</div>
 
 
 @section scripts{
@@ -417,16 +327,29 @@
                 $("#client_subheadsclr").val('');
             }
         })
-        function Addinstance() {
-            $("#large").modal('show');
-            $('.date-picker').datepicker({
-                format: 'dd/mm/yyyy',
-                autoclose: true,
-                orientation: "bottom",
-                todayHighlight: true,
-                startDate: new_date.format("DD/MM/YYYY")
-            })
-        }
+
+
+
+
+        //function Addinstance() {
+        //        var postData = {
+
+        //        }
+        //        ShowLoader();
+        //        AjaxCall("/ClientSetup/GetInstanceDetail", JSON.stringify(postData), "post", "json", "application/json", false).done(function (data) {
+        //            HideLoader();
+        //             $("#CrtIstance").html(data);
+        //               $("#instance_popup").modal('show');
+        //               $('.date-picker').datepicker({
+        //                format: 'dd/mm/yyyy',
+        //                autoclose: true,
+        //                orientation: "bottom",
+        //                todayHighlight: true,
+        //                //startDate: new_date.format("DD/MM/YYYY")
+        //          })
+        //        });
+        //    }
+
         //function showdiv() {
         //    $(".customcolors").removeClass('hide');
         //}
@@ -439,6 +362,6 @@
             $("#client_headsclr").val('');
             $("#client_subheadsclr").val('');
         });
-            
+
     </script>
 }   

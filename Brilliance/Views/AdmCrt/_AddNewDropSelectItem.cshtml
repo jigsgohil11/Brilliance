@@ -26,7 +26,7 @@
                                 <div class="form-group">
                                     <label>Product category</label>
                                     @Html.DropDownListFor(m => m.dropselectconfig.RefTermID, new SelectList(Model.ProductcategoryList, "Value", "Text", 0), "--Select Product Category--", new { @data_live_search = "true", @class = "form-control bs-select" })
-
+                                    @Html.ValidationMessageFor(m => m.dropselectconfig.RefTermID)
                                 </div>
                             </div>
                         }
@@ -36,6 +36,7 @@
                                 <div class="form-group">
                                     <label>Complaint category</label>
                                     @Html.DropDownListFor(m => m.dropselectconfig.RefTermID, new SelectList(Model.ComplaintcategoryList, "Value", "Text", 0), "--Select Complaint Category--", new { @data_live_search = "true", @class = "form-control bs-select" })
+                                    @Html.ValidationMessageFor(m => m.dropselectconfig.RefTermID)
                                 </div>
                             </div>
                         }
@@ -45,12 +46,16 @@
                                 <div class="form-group">
                                     <label>Complaint type</label>
                                     @Html.DropDownListFor(m => m.dropselectconfig.RefTermID, new SelectList(Model.ComplaintcategoryList, "Value", "Text", 0), "--Select Complaint type--", new { @data_live_search = "true", @class = "form-control bs-select" })
+                                    @Html.ValidationMessageFor(m => m.dropselectconfig.RefTermID)
+
                                 </div>
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group">
                                     <label>Customer's reason for complaint</label>
                                     @Html.DropDownListFor(m => m.dropselectconfig.RefTermID1, new SelectList(Model.NatureList, "Value", "Text", 0), "--Select Customer's reason--", new { @data_live_search = "true", @class = "form-control bs-select" })
+                                    @Html.ValidationMessageFor(m => m.dropselectconfig.RefTermID1)
+
                                 </div>
                             </div>
                         }
@@ -66,7 +71,8 @@
                                     <label>Name</label>
                                 }
                                 @Html.TextBoxFor(m => m.dropselectconfig.Name, new { @class = "form-control m-input" })
-                                @*@Html.ValidationMessageFor(m => m.company.CompanyName)*@
+                                @Html.ValidationMessageFor(m => m.dropselectconfig.Name)
+
                             </div>
                         </div>
                         <div class="col-md-3">

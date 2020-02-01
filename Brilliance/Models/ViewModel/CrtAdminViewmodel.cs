@@ -3,6 +3,7 @@ using Brilliance.Models.Entity;
 using PetaPoco;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Web.Mvc;
 
 
@@ -81,9 +82,12 @@ namespace Brilliance.Models.ViewModel
     public class dropselectconfig
     {
         public Guid ProjectTermID { get; set; }
+        [Required(ErrorMessage = "Name is required.")]
         public string Name { get; set; }
         public string Desc { get; set; }
+        [Required(ErrorMessage = "This field is required.")]
         public Guid? RefTermID { get; set; }
+        [Required(ErrorMessage = "This field is required.")]
         public Guid? RefTermID1 { get; set; }
         public Guid? ClientID { get; set; }
         public Guid? ProjecttermCategoryID { get; set; }

@@ -77,6 +77,8 @@ namespace Brilliance.Models.Entity
         public string Complex { get; set; }
         public string StreetNo { get; set; }
         public string Street { get; set; }
+        public bool IsCrtSubscribe { get; set; }
+        public bool IsCISSubscribe { get; set; }
 
         [ResultColumn]
         public string countorganisation { get; set; }

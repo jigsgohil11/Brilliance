@@ -122,7 +122,7 @@
                                             <label>Show complaint number*</label>
                                             <div class="mt-radio-inline">
                                                 <label class="mt-radio mt-radio-outline margin-bottom0" style="font-size:13px;">
-                                                    @Html.RadioButton("number", "Yes", new { @class = "class1", @checked = "checked"})
+                                                    @Html.RadioButton("number", "Yes", new { @class = "class1", @checked = "checked" })
                                                     Only on Complaint Capture and Resolution forms
                                                     <span></span>
                                                 </label>
@@ -355,7 +355,7 @@
     <script src="~/assets/global/plugins/bootstrap-fileinput/bootstrap-fileinput.js"></script>
     <script src="~/assets/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
     <script>
-        
+
         $(document).ready(function () {
             if ($("input[id=turnaround]:checked").val().toUpperCase() == "YES") {
                 $("#timerDiv").removeClass('hide');
@@ -393,6 +393,7 @@
         }
 
         function Addlabels() {
+            debugger;
             var value = $("#client_ClientID").val();
             if (value != "" && value != undefined && value != null) {
                 $("#labelconfig_ClientID").val(value);
@@ -546,92 +547,93 @@
 
         function DropselectFormSubmit(obj) {
             debugger;
-            var IsEdit = false;
-            var ID;
-            var name = $("#dropselectconfig_Name").val();
-            var desc = $("#dropselectconfig_Desc").val();
-            var category = $("#dropselectconfig_ProjecttermCategoryName").val();
-            var refid = $("#dropselectconfig_RefTermID").val();
-            var refid1 = $("#dropselectconfig_RefTermID1").val();
-            var refname = $("#dropselectconfig_RefTermID :selected").text();
-            var refname1 = $("#dropselectconfig_RefTermID1 :selected").text();
+            if ($("#form_instance").valid()) {
 
-            if ($.trim($(obj).attr("editid")) != '') {
-                IsEdit = true;
-                ID = $.trim($(obj).attr("editid"));
-            }
-            else {
-                ID = GenerateNewGUID();
-            }
-            ShowLoader();
-            $.ajax({
-                type: "POST",
-                url: "/AdmCrt/Savedropselectconfig",
-                traditional: true,
-                async: true,
-                data: {
-                    TermId: ID,
-                    ClientID: $("#dropselectconfig_ClientID").val(),
-                    Refid: $("#dropselectconfig_RefTermID").val(),
-                    Refid1: $("#dropselectconfig_RefTermID1").val(),
-                    name: $("#dropselectconfig_Name").val(),
-                    desc: $("#dropselectconfig_Desc").val(),
-                    category: $("#dropselectconfig_ProjecttermCategoryName").val(),
-                    isedit: IsEdit
-                },
-                success: function (data) {
-                    HideLoader();
-                    if ($.trim($(obj).attr("editid")) != '') {
+                var IsEdit = false;
+                var ID;
+                var name = $("#dropselectconfig_Name").val();
+                var desc = $("#dropselectconfig_Desc").val();
+                var category = $("#dropselectconfig_ProjecttermCategoryName").val();
+                var refid = $("#dropselectconfig_RefTermID").val();
+                var refid1 = $("#dropselectconfig_RefTermID1").val();
+                var refname = $("#dropselectconfig_RefTermID :selected").text();
+                var refname1 = $("#dropselectconfig_RefTermID1 :selected").text();
 
-                        //var EditIndex = $.trim($(obj).attr("emplyerindex"));
-                        IsEdit = true;
-                        $(obj).removeAttr("editid");
-                        //$(obj).removeAttr("emplyerindex");
-                        $("#tr_" + ID + "").find('.Term_').html(name);
-                        $("#tr_" + ID + "").find('.desc_').val(desc);
-                        $("#tr_" + ID + "").find('.Product_').html(refname);
-                        $("#tr_" + ID + "").find('.Category_').html(refname);
-                        $("#tr_" + ID + "").find('.Type_').html(refname);
-                        $("#tr_" + ID + "").find('.Nature_').html(refname1);
-
-                        //$("td.Company_" + ID + " span").text(Company);
-                        //$("td.Code_" + ID + " span").text(Code);
-                        //$("td.Fsp_" + ID + " span").text(Fsp);
-
-                        //$("#companyList_" + EditIndex + "__CompanyName").val(Company);
-                        //$("#companyList_" + EditIndex + "__CompanyCode").val(Code);
-                        //$("#companyList_" + EditIndex + "__FspNo").val(Fsp);
-                        //$("#companyList_" + EditIndex + "__IsEdit").val(IsEdit);
-                    }
-                    else {
-                        var tr = '<tr id="tr_' + ID + '">';
-                        tr += '<td></td>';
-                        if (category != null && category != '' && category != undefined && category == 'PRODUCT TYPE') {
-                            tr += '<td><span class="Product_">' + refname + '</span><input type="hidden" class="refid_" value="' + refid + '" /></td>';
-                        }
-                        if (category != null && category != '' && category != undefined && category == 'NATURE OF COMPLAINT') {
-                            tr += '<td><span class="Category_">' + refname + '</span><input type="hidden" class="refid_" value="' + refid + '" /></td>';
-                        }
-                        if (category != null && category != '' && category != undefined && category == 'TCF OUTCOME') {
-                            tr += '<td><span class="Type_">' + refname + '</span><input type="hidden" class="refid_" value="' + refid + '" /></td>';
-                            tr += '<td><span  class="Nature_">' + refname1 + '</span><input type="hidden" class="refid1_" value="' + refid1 + '" /></td>';
-                        }
-                        tr += '<td><span class="Term_">' + name + '</span><input type="hidden" class="desc_" value="' + desc + '"/></td>';
-                        //tr += '<td><span>' + desc + '</span></td>';
-                        tr += '<td><a class="action btn  btn-primary btn-xs" onclick="DropselectEdit(' + ID + ',' + category + ');" title="Edit"><i class="btn-xs fa fa-pencil padding0"></i></a>';
-                        tr += '<a class="action btn  btn-danger btn-xs" href="javascript:void(0);" title="Delete" onclick=""><i class="btn-xs fa fa-trash-o padding0"></i></a>';
-                        tr += '</td>';
-                        tr += '</tr>';
-
-                        $("#tbody_dropselect").append(tr);
-                    }
-                    clearform('form_instance');
+                if ($.trim($(obj).attr("editid")) != '') {
+                    IsEdit = true;
+                    ID = $.trim($(obj).attr("editid"));
                 }
-            });
+                else {
+                    ID = GenerateNewGUID();
+                }
+                ShowLoader();
+                $.ajax({
+                    type: "POST",
+                    url: "/AdmCrt/Savedropselectconfig",
+                    traditional: true,
+                    async: true,
+                    data: {
+                        TermId: ID,
+                        ClientID: $("#dropselectconfig_ClientID").val(),
+                        Refid: $("#dropselectconfig_RefTermID").val(),
+                        Refid1: $("#dropselectconfig_RefTermID1").val(),
+                        name: $("#dropselectconfig_Name").val(),
+                        desc: $("#dropselectconfig_Desc").val(),
+                        category: $("#dropselectconfig_ProjecttermCategoryName").val(),
+                        isedit: IsEdit
+                    },
+                    success: function (data) {
+                        HideLoader();
+                        if ($.trim($(obj).attr("editid")) != '') {
+
+                            //var EditIndex = $.trim($(obj).attr("emplyerindex"));
+                            IsEdit = true;
+                            $(obj).removeAttr("editid");
+                            //$(obj).removeAttr("emplyerindex");
+                            $("#tr_" + ID + "").find('.Term_').html(name);
+                            $("#tr_" + ID + "").find('.desc_').val(desc);
+                            $("#tr_" + ID + "").find('.Product_').html(refname);
+                            $("#tr_" + ID + "").find('.Category_').html(refname);
+                            $("#tr_" + ID + "").find('.Type_').html(refname);
+                            $("#tr_" + ID + "").find('.Nature_').html(refname1);
+
+                            //$("td.Company_" + ID + " span").text(Company);
+                            //$("td.Code_" + ID + " span").text(Code);
+                            //$("td.Fsp_" + ID + " span").text(Fsp);
+
+                            //$("#companyList_" + EditIndex + "__CompanyName").val(Company);
+                            //$("#companyList_" + EditIndex + "__CompanyCode").val(Code);
+                            //$("#companyList_" + EditIndex + "__FspNo").val(Fsp);
+                            //$("#companyList_" + EditIndex + "__IsEdit").val(IsEdit);
+                        }
+                        else {
+                            var tr = '<tr id="tr_' + ID + '">';
+                            tr += '<td></td>';
+                            if (category != null && category != '' && category != undefined && category == 'PRODUCT TYPE') {
+                                tr += '<td><span class="Product_">' + refname + '</span><input type="hidden" class="refid_" value="' + refid + '" /></td>';
+                            }
+                            if (category != null && category != '' && category != undefined && category == 'NATURE OF COMPLAINT') {
+                                tr += '<td><span class="Category_">' + refname + '</span><input type="hidden" class="refid_" value="' + refid + '" /></td>';
+                            }
+                            if (category != null && category != '' && category != undefined && category == 'TCF OUTCOME') {
+                                tr += '<td><span class="Type_">' + refname + '</span><input type="hidden" class="refid_" value="' + refid + '" /></td>';
+                                tr += '<td><span  class="Nature_">' + refname1 + '</span><input type="hidden" class="refid1_" value="' + refid1 + '" /></td>';
+                            }
+                            tr += '<td><span class="Term_">' + name + '</span><input type="hidden" class="desc_" value="' + desc + '"/></td>';
+                            //tr += '<td><span>' + desc + '</span></td>';
+                            tr += '<td><a class="action btn  btn-primary btn-xs" onclick="DropselectEdit("' + ID + '","' + category + '");" title="Edit"><i class="btn-xs fa fa-pencil padding0"></i></a>';
+                            tr += '<a class="action btn  btn-danger btn-xs" title="Delete" href="javascript:void(0);" onclick="Deletedropselect("' + ID + '");"><i class="btn-xs fa fa-trash-o padding0"></i></a>';
+                            tr += '</td>';
+                            tr += '</tr>';
+                            $("#tbody_dropselect").append(tr);
+                        }
+                        clearform('form_instance');
+                    }
+                });
+            }
         }
 
         function DropselectEdit(ID, category) {
-            debugger;
             //ClearPopup(formDis);
             var refname = "";
             var refname1 = "";
@@ -668,6 +670,7 @@
 
 
         function Deletedropselect(id) {
+            debugger;
             ShowLoader();
             $.ajax({
                 type: "POST",
@@ -716,33 +719,14 @@
                 $("#UrlDiv").addClass('hide');
             }
         }
+        function Savelabelform() {
 
-        
-        function saveform() {
-        debugger;
-            ShowLoader();
-        var data=$("#Applications").val();
-            $.ajax({
-                type: "POST",
-                url: "/AdmCrt/Savelabelconfig",
-                traditional: true,
-                async: true,
-                data: {
-                    CRTAdminVM: data
-                },
-                success: function (data) {
-                    HideLoader();
-                    $("#Labelconfig_popup").modal('show');
-                    $("#LabelsConfig").html(data);
-                    //".bs-select").selectpicker('refresh');
-                    //$("#" + form).data('validator', null);
-                    // $.validator.unobtrusive.parse($("#" + form));
-                }
-            });
+            var model = $("#Applications").val();
+
         }
 
-       
-        
+
+
     </script>
 }
 
