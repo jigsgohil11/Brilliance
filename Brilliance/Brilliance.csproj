@@ -173,6 +173,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="Controllers\AdmCisController.cs" />
     <Compile Include="Controllers\AdmCompanyController.cs" />
     <Compile Include="Controllers\AdmCrtController.cs" />
     <Compile Include="Controllers\AdmDivisionController.cs" />
@@ -6923,6 +6924,7 @@
     <Content Include="Views\AdmCrt\_DropselectConfiguration.cshtml" />
     <Content Include="Views\ClientSetup\_AddInstance.cshtml" />
     <Content Include="Views\ClientSetup\InstanceSubscription.cshtml" />
+    <Content Include="Views\AdmCis\CISadmin.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
