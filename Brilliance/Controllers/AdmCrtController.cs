@@ -12,7 +12,7 @@ namespace Brilliance.Controllers
     {
         private IAdmCrtDataProvider _iadmcrtDataProvider;
 
-        // GET: AdmCrt
+        // GET: AdmCrtWWA@
         public ActionResult CRTadmin()
         {
             _iadmcrtDataProvider = new AdmCrtDataProvider();
@@ -20,14 +20,21 @@ namespace Brilliance.Controllers
             response = _iadmcrtDataProvider.GetCrtSetup();
             return View(response.Data);
         }
+        
         [HttpPost]
-        public ActionResult Savelabelconfig(CrtAdminViewmodel CRTAdminVM)
+        public ActionResult Savelabelconfig(string InstanceName, string Tier2, string incidentdate, string Tier3, string policystatus,
+                                            string Accnumber, string Rootcause, string Idnumber, string howcomreceived, string contactno,
+                                            string Compregulatory, string emailaddress, string feedbackregulatory, string productcategory, string Overalloutcome,
+                                            string Producttype, string Compensation, string Compcategory, string Regulatedcost, string Nature,
+                                            string Value, string TCF, string DissatisfactionLevel, string SatisfactionResolution,bool? IsTemplate,bool? IsEdit,Guid? ClientID,Guid? LabelconfigID)
         {
             _iadmcrtDataProvider = new AdmCrtDataProvider();
             var response = new ServiceResponse();
-            response = _iadmcrtDataProvider.Savelabelconfig(CRTAdminVM);
+            response = _iadmcrtDataProvider.Savelabelconfig(InstanceName, Tier2, incidentdate, Tier3, policystatus, Accnumber, Rootcause, Idnumber, howcomreceived, contactno,
+                                            Compregulatory, emailaddress, feedbackregulatory, productcategory, Overalloutcome, Producttype, Compensation, Compcategory,
+                                            Regulatedcost, Nature, Value, TCF, DissatisfactionLevel, SatisfactionResolution, IsTemplate, IsEdit, ClientID, LabelconfigID);
             return Json(response);
-        }
+        }   
         public ActionResult LabelconfigList(Guid ClientID)
         {
             _iadmcrtDataProvider = new AdmCrtDataProvider();

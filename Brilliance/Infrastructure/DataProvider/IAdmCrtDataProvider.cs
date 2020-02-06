@@ -8,7 +8,12 @@ namespace Brilliance.Infrastructure.DataProvider
     interface IAdmCrtDataProvider
     {
         ServiceResponse GetCrtSetup();
-        ServiceResponse Savelabelconfig(CrtAdminViewmodel CRTAdminVM);
+        ServiceResponse Savelabelconfig(string InstanceName, string Tier2, string incidentdate, string Tier3, string policystatus,
+                                            string Accnumber, string Rootcause, string Idnumber, string howcomreceived, string contactno,
+                                            string Compregulatory, string emailaddress, string feedbackregulatory, string productcategory, string Overalloutcome,
+                                            string Producttype, string Compensation, string Compcategory, string Regulatedcost, string Nature,
+                                            string Value, string TCF, string DissatisfactionLevel, string SatisfactionResolution, bool? IsTemplate, bool? IsEdit, Guid? ClientID,
+                                            Guid? LabelconfigID);
         CrtAdminViewmodel labelconfiglist(Guid ClientID);
         CrtAdminViewmodel EditLabelConfig(Guid ClientID);
         DropSelectViewmodel DropselectgList(Guid ClientID);

@@ -8,7 +8,8 @@
             <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
             <h4 class="modal-title">Labels for this organisation</h4>
         </div>
-        <form id="frmlabelconfig" action="/AdmCrt/Savelabelconfig" method="post" data-ajax="true" data-ajax-method="Post" data-ajax-success="SaveLabelResponse(data);">
+        @*<form id="frmlabelconfig" action="/AdmCrt/Savelabelconfig" method="post" data-ajax="true" data-ajax-method="Post" data-ajax-success="SaveLabelResponse(data);">*@
+        <form id="frmlabelconfig" action="/AdmCrt/Savelabelconfig" method="post">
             <div class="modal-body">
                 @Html.HiddenFor(m => m.labelconfig.ClientID)
                 @Html.HiddenFor(m => m.labelconfig.LabelconfigID)
@@ -246,10 +247,10 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn default" data-dismiss="modal">Cancel</button>
-                <button id="btnSaveAreaTask" type="submit" class="btn green">SAVE</button>
-                @*<button id="btnSaveAreaTask" type="button" onclick="submitlabels(true);" class="btn green">SAVE</button>*@
+                @*<button id="btnSaveAreaTask" type="submit" class="btn green">SAVE</button>*@
+                <button id="btnSaveAreaTask" type="button" onclick="submitlabels(false);" class="btn green">SAVE</button>
                 @*<button id="btnSaveAreaTask" type="button" onclick="Savelabelform(@Common.SerializeObject(Model));" class="btn green">SAVE</button>*@
-                @*<button id="btnSave" type="button" onclick="SaveTemplate();" class="btn green">SAVE AS NEW TEMPLATE</button>*@
+                <button id="btnSave" type="button" onclick="submitlabels(true);" class="btn green">SAVE AS NEW TEMPLATE</button>
             </div>
         </form>
     </div>

@@ -29,45 +29,49 @@ namespace Brilliance.Infrastructure.DataProvider
             }
             return response;
         }
-        public ServiceResponse Savelabelconfig(CrtAdminViewmodel CRTAdminVM)
+        public ServiceResponse Savelabelconfig(string InstanceName, string Tier2, string incidentdate, string Tier3, string policystatus,
+                                            string Accnumber, string Rootcause, string Idnumber, string howcomreceived, string contactno,
+                                            string Compregulatory, string emailaddress, string feedbackregulatory, string productcategory, string Overalloutcome,
+                                            string Producttype, string Compensation, string Compcategory, string Regulatedcost, string Nature,
+                                            string Value, string TCF, string DissatisfactionLevel, string SatisfactionResolution, bool? IsTemplate, bool? IsEdit,Guid? ClientID,Guid? LabelconfigID)
         {
             var response = new ServiceResponse();
             try
             {
 
-                if (CRTAdminVM.labelconfig.IsEdit == false)
+                if (IsEdit == false)
                 {
                     SqlCommand cmd = new SqlCommand();
                     cmd.Parameters.AddWithValue("@LabelconfigID", Guid.NewGuid()).SqlDbType = SqlDbType.UniqueIdentifier;
-                    cmd.Parameters.AddWithValue("@ClientID", CRTAdminVM.labelconfig.ClientID).SqlDbType = SqlDbType.UniqueIdentifier;
-                    cmd.Parameters.AddWithValue("@instanceName", CRTAdminVM.labelconfig.InstanceName).SqlDbType = SqlDbType.NVarChar;
-                    cmd.Parameters.AddWithValue("@Tier2", CRTAdminVM.labelconfig.Tier2).SqlDbType = SqlDbType.NVarChar;
-                    cmd.Parameters.AddWithValue("@Tier3", CRTAdminVM.labelconfig.Tier3).SqlDbType = SqlDbType.NVarChar;
-                    cmd.Parameters.AddWithValue("@Accnumber", CRTAdminVM.labelconfig.Accnumber).SqlDbType = SqlDbType.NVarChar;
-                    cmd.Parameters.AddWithValue("@Idnumber", CRTAdminVM.labelconfig.Idnumber).SqlDbType = SqlDbType.NVarChar;
-                    cmd.Parameters.AddWithValue("@contactno", CRTAdminVM.labelconfig.contactno).SqlDbType = SqlDbType.NVarChar;
-                    cmd.Parameters.AddWithValue("@emailaddress", CRTAdminVM.labelconfig.emailaddress).SqlDbType = SqlDbType.NVarChar;
-                    cmd.Parameters.AddWithValue("@productcategory", CRTAdminVM.labelconfig.productcategory).SqlDbType = SqlDbType.NVarChar;
-                    cmd.Parameters.AddWithValue("@Producttype", CRTAdminVM.labelconfig.Producttype).SqlDbType = SqlDbType.NVarChar;
-                    cmd.Parameters.AddWithValue("@Compcategory", CRTAdminVM.labelconfig.Compcategory).SqlDbType = SqlDbType.NVarChar;
-                    cmd.Parameters.AddWithValue("@Nature", CRTAdminVM.labelconfig.Nature).SqlDbType = SqlDbType.NVarChar;
-                    cmd.Parameters.AddWithValue("@TCF", CRTAdminVM.labelconfig.TCF).SqlDbType = SqlDbType.NVarChar;
-                    cmd.Parameters.AddWithValue("@incidentdate", CRTAdminVM.labelconfig.incidentdate).SqlDbType = SqlDbType.NVarChar;
-                    cmd.Parameters.AddWithValue("@policystatus", CRTAdminVM.labelconfig.policystatus).SqlDbType = SqlDbType.NVarChar;
-                    cmd.Parameters.AddWithValue("@Rootcause", CRTAdminVM.labelconfig.Rootcause).SqlDbType = SqlDbType.NVarChar;
-                    cmd.Parameters.AddWithValue("@howcomreceived", CRTAdminVM.labelconfig.howcomreceived).SqlDbType = SqlDbType.NVarChar;
-                    cmd.Parameters.AddWithValue("@Compregulatory", CRTAdminVM.labelconfig.Compregulatory).SqlDbType = SqlDbType.NVarChar;
-                    cmd.Parameters.AddWithValue("@feedbackregulatory", CRTAdminVM.labelconfig.feedbackregulatory).SqlDbType = SqlDbType.NVarChar;
-                    cmd.Parameters.AddWithValue("@Overalloutcome", CRTAdminVM.labelconfig.Overalloutcome).SqlDbType = SqlDbType.NVarChar;
-                    cmd.Parameters.AddWithValue("@Compensation", CRTAdminVM.labelconfig.Compensation).SqlDbType = SqlDbType.NVarChar;
-                    cmd.Parameters.AddWithValue("@Regulatedcost", CRTAdminVM.labelconfig.Regulatedcost).SqlDbType = SqlDbType.NVarChar;
-                    cmd.Parameters.AddWithValue("@Value", CRTAdminVM.labelconfig.Value).SqlDbType = SqlDbType.NVarChar;
-                    cmd.Parameters.AddWithValue("@DissatisfactionLevel", CRTAdminVM.labelconfig.DissatisfactionLevel).SqlDbType = SqlDbType.NVarChar;
-                    cmd.Parameters.AddWithValue("@SatisfactionResolution", CRTAdminVM.labelconfig.SatisfactionResolution).SqlDbType = SqlDbType.NVarChar;
-                    cmd.Parameters.AddWithValue("@IsTemplate", CRTAdminVM.labelconfig.IsTemplate).SqlDbType = SqlDbType.Bit;
-                    cmd.Parameters.AddWithValue("@CreatedBy", CRTAdminVM.labelconfig.CreatedBy).SqlDbType = SqlDbType.UniqueIdentifier;
-                    cmd.Parameters.AddWithValue("@CreatedOn", CRTAdminVM.labelconfig.CreatedOn).SqlDbType = SqlDbType.DateTime;
-                    cmd.Parameters.AddWithValue("@IsEdit", CRTAdminVM.labelconfig.IsEdit).SqlDbType = SqlDbType.Bit;
+                    cmd.Parameters.AddWithValue("@ClientID", ClientID).SqlDbType = SqlDbType.UniqueIdentifier;
+                    cmd.Parameters.AddWithValue("@instanceName", InstanceName).SqlDbType = SqlDbType.NVarChar;
+                    cmd.Parameters.AddWithValue("@Tier2", Tier2).SqlDbType = SqlDbType.NVarChar;
+                    cmd.Parameters.AddWithValue("@Tier3",Tier3).SqlDbType = SqlDbType.NVarChar;
+                    cmd.Parameters.AddWithValue("@Accnumber",Accnumber).SqlDbType = SqlDbType.NVarChar;
+                    cmd.Parameters.AddWithValue("@Idnumber",Idnumber).SqlDbType = SqlDbType.NVarChar;
+                    cmd.Parameters.AddWithValue("@contactno",contactno).SqlDbType = SqlDbType.NVarChar;
+                    cmd.Parameters.AddWithValue("@emailaddress",emailaddress).SqlDbType = SqlDbType.NVarChar;
+                    cmd.Parameters.AddWithValue("@productcategory",productcategory).SqlDbType = SqlDbType.NVarChar;
+                    cmd.Parameters.AddWithValue("@Producttype",Producttype).SqlDbType = SqlDbType.NVarChar;
+                    cmd.Parameters.AddWithValue("@Compcategory",Compcategory).SqlDbType = SqlDbType.NVarChar;
+                    cmd.Parameters.AddWithValue("@Nature",Nature).SqlDbType = SqlDbType.NVarChar;
+                    cmd.Parameters.AddWithValue("@TCF",TCF).SqlDbType = SqlDbType.NVarChar;
+                    cmd.Parameters.AddWithValue("@incidentdate",incidentdate).SqlDbType = SqlDbType.NVarChar;
+                    cmd.Parameters.AddWithValue("@policystatus",policystatus).SqlDbType = SqlDbType.NVarChar;
+                    cmd.Parameters.AddWithValue("@Rootcause",Rootcause).SqlDbType = SqlDbType.NVarChar;
+                    cmd.Parameters.AddWithValue("@howcomreceived",howcomreceived).SqlDbType = SqlDbType.NVarChar;
+                    cmd.Parameters.AddWithValue("@Compregulatory",Compregulatory).SqlDbType = SqlDbType.NVarChar;
+                    cmd.Parameters.AddWithValue("@feedbackregulatory",feedbackregulatory).SqlDbType = SqlDbType.NVarChar;
+                    cmd.Parameters.AddWithValue("@Overalloutcome",Overalloutcome).SqlDbType = SqlDbType.NVarChar;
+                    cmd.Parameters.AddWithValue("@Compensation",Compensation).SqlDbType = SqlDbType.NVarChar;
+                    cmd.Parameters.AddWithValue("@Regulatedcost",Regulatedcost).SqlDbType = SqlDbType.NVarChar;
+                    cmd.Parameters.AddWithValue("@Value",Value).SqlDbType = SqlDbType.NVarChar;
+                    cmd.Parameters.AddWithValue("@DissatisfactionLevel",DissatisfactionLevel).SqlDbType = SqlDbType.NVarChar;
+                    cmd.Parameters.AddWithValue("@SatisfactionResolution",SatisfactionResolution).SqlDbType = SqlDbType.NVarChar;
+                    cmd.Parameters.AddWithValue("@IsTemplate",IsTemplate).SqlDbType = SqlDbType.Bit;
+                    cmd.Parameters.AddWithValue("@CreatedBy",SessionHelper.UserId).SqlDbType = SqlDbType.UniqueIdentifier;
+                    cmd.Parameters.AddWithValue("@CreatedOn",DateTime.Now).SqlDbType = SqlDbType.DateTime;
+                    cmd.Parameters.AddWithValue("@IsEdit",IsEdit).SqlDbType = SqlDbType.Bit;
 
                     DataSet ds = null;
                     ds = BulkInsert("SaveCRT_Labelconfig", cmd);
@@ -78,41 +82,41 @@ namespace Brilliance.Infrastructure.DataProvider
                 else
                 {
                     SqlCommand cmd = new SqlCommand();
-                    cmd.Parameters.AddWithValue("@LabelconfigID", CRTAdminVM.labelconfig.LabelconfigID).SqlDbType = SqlDbType.UniqueIdentifier;
-                    cmd.Parameters.AddWithValue("@ClientID", CRTAdminVM.labelconfig.ClientID).SqlDbType = SqlDbType.UniqueIdentifier;
-                    cmd.Parameters.AddWithValue("@instanceName", CRTAdminVM.labelconfig.InstanceName).SqlDbType = SqlDbType.NVarChar;
-                    cmd.Parameters.AddWithValue("@Tier2", CRTAdminVM.labelconfig.Tier2).SqlDbType = SqlDbType.NVarChar;
-                    cmd.Parameters.AddWithValue("@Tier3", CRTAdminVM.labelconfig.Tier3).SqlDbType = SqlDbType.NVarChar;
-                    cmd.Parameters.AddWithValue("@Accnumber", CRTAdminVM.labelconfig.Accnumber).SqlDbType = SqlDbType.NVarChar;
-                    cmd.Parameters.AddWithValue("@Idnumber", CRTAdminVM.labelconfig.Idnumber).SqlDbType = SqlDbType.NVarChar;
-                    cmd.Parameters.AddWithValue("@contactno", CRTAdminVM.labelconfig.contactno).SqlDbType = SqlDbType.NVarChar;
-                    cmd.Parameters.AddWithValue("@emailaddress", CRTAdminVM.labelconfig.emailaddress).SqlDbType = SqlDbType.NVarChar;
-                    cmd.Parameters.AddWithValue("@productcategory", CRTAdminVM.labelconfig.productcategory).SqlDbType = SqlDbType.NVarChar;
-                    cmd.Parameters.AddWithValue("@Producttype", CRTAdminVM.labelconfig.Producttype).SqlDbType = SqlDbType.NVarChar;
-                    cmd.Parameters.AddWithValue("@Compcategory", CRTAdminVM.labelconfig.Compcategory).SqlDbType = SqlDbType.NVarChar;
-                    cmd.Parameters.AddWithValue("@Nature", CRTAdminVM.labelconfig.Nature).SqlDbType = SqlDbType.NVarChar;
-                    cmd.Parameters.AddWithValue("@TCF", CRTAdminVM.labelconfig.TCF).SqlDbType = SqlDbType.NVarChar;
-                    cmd.Parameters.AddWithValue("@incidentdate", CRTAdminVM.labelconfig.incidentdate).SqlDbType = SqlDbType.NVarChar;
-                    cmd.Parameters.AddWithValue("@policystatus", CRTAdminVM.labelconfig.policystatus).SqlDbType = SqlDbType.NVarChar;
-                    cmd.Parameters.AddWithValue("@Rootcause", CRTAdminVM.labelconfig.Rootcause).SqlDbType = SqlDbType.NVarChar;
-                    cmd.Parameters.AddWithValue("@howcomreceived", CRTAdminVM.labelconfig.howcomreceived).SqlDbType = SqlDbType.NVarChar;
-                    cmd.Parameters.AddWithValue("@Compregulatory", CRTAdminVM.labelconfig.Compregulatory).SqlDbType = SqlDbType.NVarChar;
-                    cmd.Parameters.AddWithValue("@feedbackregulatory", CRTAdminVM.labelconfig.feedbackregulatory).SqlDbType = SqlDbType.NVarChar;
-                    cmd.Parameters.AddWithValue("@Overalloutcome", CRTAdminVM.labelconfig.Overalloutcome).SqlDbType = SqlDbType.NVarChar;
-                    cmd.Parameters.AddWithValue("@Compensation", CRTAdminVM.labelconfig.Compensation).SqlDbType = SqlDbType.NVarChar;
-                    cmd.Parameters.AddWithValue("@Regulatedcost", CRTAdminVM.labelconfig.Regulatedcost).SqlDbType = SqlDbType.NVarChar;
-                    cmd.Parameters.AddWithValue("@Value", CRTAdminVM.labelconfig.Value).SqlDbType = SqlDbType.NVarChar;
-                    cmd.Parameters.AddWithValue("@DissatisfactionLevel", CRTAdminVM.labelconfig.DissatisfactionLevel).SqlDbType = SqlDbType.NVarChar;
-                    cmd.Parameters.AddWithValue("@SatisfactionResolution", CRTAdminVM.labelconfig.SatisfactionResolution).SqlDbType = SqlDbType.NVarChar;
-                    cmd.Parameters.AddWithValue("@IsTemplate", CRTAdminVM.labelconfig.IsTemplate).SqlDbType = SqlDbType.Bit;
-                    cmd.Parameters.AddWithValue("@CreatedBy", CRTAdminVM.labelconfig.CreatedBy).SqlDbType = SqlDbType.UniqueIdentifier;
-                    cmd.Parameters.AddWithValue("@CreatedOn", CRTAdminVM.labelconfig.CreatedOn).SqlDbType = SqlDbType.DateTime;
-                    cmd.Parameters.AddWithValue("@IsEdit", CRTAdminVM.labelconfig.IsEdit).SqlDbType = SqlDbType.Bit;
+                    cmd.Parameters.AddWithValue("@LabelconfigID", LabelconfigID).SqlDbType = SqlDbType.UniqueIdentifier;
+                    cmd.Parameters.AddWithValue("@ClientID", ClientID).SqlDbType = SqlDbType.UniqueIdentifier;
+                    cmd.Parameters.AddWithValue("@instanceName", InstanceName).SqlDbType = SqlDbType.NVarChar;
+                    cmd.Parameters.AddWithValue("@Tier2", Tier2).SqlDbType = SqlDbType.NVarChar;
+                    cmd.Parameters.AddWithValue("@Tier3", Tier3).SqlDbType = SqlDbType.NVarChar;
+                    cmd.Parameters.AddWithValue("@Accnumber", Accnumber).SqlDbType = SqlDbType.NVarChar;
+                    cmd.Parameters.AddWithValue("@Idnumber", Idnumber).SqlDbType = SqlDbType.NVarChar;
+                    cmd.Parameters.AddWithValue("@contactno", contactno).SqlDbType = SqlDbType.NVarChar;
+                    cmd.Parameters.AddWithValue("@emailaddress", emailaddress).SqlDbType = SqlDbType.NVarChar;
+                    cmd.Parameters.AddWithValue("@productcategory", productcategory).SqlDbType = SqlDbType.NVarChar;
+                    cmd.Parameters.AddWithValue("@Producttype", Producttype).SqlDbType = SqlDbType.NVarChar;
+                    cmd.Parameters.AddWithValue("@Compcategory", Compcategory).SqlDbType = SqlDbType.NVarChar;
+                    cmd.Parameters.AddWithValue("@Nature", Nature).SqlDbType = SqlDbType.NVarChar;
+                    cmd.Parameters.AddWithValue("@TCF", TCF).SqlDbType = SqlDbType.NVarChar;
+                    cmd.Parameters.AddWithValue("@incidentdate", incidentdate).SqlDbType = SqlDbType.NVarChar;
+                    cmd.Parameters.AddWithValue("@policystatus", policystatus).SqlDbType = SqlDbType.NVarChar;
+                    cmd.Parameters.AddWithValue("@Rootcause", Rootcause).SqlDbType = SqlDbType.NVarChar;
+                    cmd.Parameters.AddWithValue("@howcomreceived", howcomreceived).SqlDbType = SqlDbType.NVarChar;
+                    cmd.Parameters.AddWithValue("@Compregulatory", Compregulatory).SqlDbType = SqlDbType.NVarChar;
+                    cmd.Parameters.AddWithValue("@feedbackregulatory", feedbackregulatory).SqlDbType = SqlDbType.NVarChar;
+                    cmd.Parameters.AddWithValue("@Overalloutcome", Overalloutcome).SqlDbType = SqlDbType.NVarChar;
+                    cmd.Parameters.AddWithValue("@Compensation", Compensation).SqlDbType = SqlDbType.NVarChar;
+                    cmd.Parameters.AddWithValue("@Regulatedcost", Regulatedcost).SqlDbType = SqlDbType.NVarChar;
+                    cmd.Parameters.AddWithValue("@Value", Value).SqlDbType = SqlDbType.NVarChar;
+                    cmd.Parameters.AddWithValue("@DissatisfactionLevel", DissatisfactionLevel).SqlDbType = SqlDbType.NVarChar;
+                    cmd.Parameters.AddWithValue("@SatisfactionResolution", SatisfactionResolution).SqlDbType = SqlDbType.NVarChar;
+                    cmd.Parameters.AddWithValue("@IsTemplate", IsTemplate).SqlDbType = SqlDbType.Bit;
+                    cmd.Parameters.AddWithValue("@CreatedBy", SessionHelper.UserId).SqlDbType = SqlDbType.UniqueIdentifier;
+                    cmd.Parameters.AddWithValue("@CreatedOn", DateTime.Now).SqlDbType = SqlDbType.DateTime;
+                    cmd.Parameters.AddWithValue("@IsEdit", IsEdit).SqlDbType = SqlDbType.Bit;
 
                     DataSet ds = null;
                     ds = BulkInsert("SaveCRT_Labelconfig", cmd);
                     response.IsSuccess = true;
-                    response.Message = "Record updated Successfully.";
+                    response.Message = "Record Saved Successfully.";
                 }
 
 

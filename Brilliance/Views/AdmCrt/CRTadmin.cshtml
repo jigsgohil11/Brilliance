@@ -726,7 +726,53 @@
         }
 
 
+          function submitlabels(istemplate) {
+        debugger;
+           var formData = new FormData();
+           formData.append('InstanceName', $("#labelconfig_InstanceName").val());
+           formData.append('Tier2', $("#labelconfig_Tier2").val());
+           formData.append('incidentdate', $("#labelconfig_incidentdate").val());
+           formData.append('Tier3', $("#labelconfig_Tier3").val());
+           formData.append('policystatus', $("#labelconfig_policystatus").val());
+           formData.append('Accnumber', $("#labelconfig_Accnumber").val());
+           formData.append('Rootcause', $("#labelconfig_Rootcause").val());
+           formData.append('Idnumber', $("#labelconfig_Idnumber").val());
+           formData.append('howcomreceived', $("#labelconfig_howcomreceived").val());
+           formData.append('contactno', $("#labelconfig_contactno").val());
+           formData.append('Compregulatory', $("#labelconfig_Compregulatory").val());
+           formData.append('emailaddress', $("#labelconfig_emailaddress").val());
+           formData.append('feedbackregulatory', $("#labelconfig_feedbackregulatory").val());
+           formData.append('productcategory', $("#labelconfig_productcategory").val());
+           formData.append('Overalloutcome', $("#labelconfig_Overalloutcome").val());
+           formData.append('Producttype', $("#labelconfig_Producttype").val());
+           formData.append('Compensation', $("#labelconfig_Compensation").val());
+           formData.append('Compcategory', $("#labelconfig_Compcategory").val());
+           formData.append('Regulatedcost', $("#labelconfig_Regulatedcost").val());
+           formData.append('Nature', $("#labelconfig_Nature").val());
+           formData.append('Value', $("#labelconfig_Value").val());
+           formData.append('TCF', $("#labelconfig_TCF").val());
+           formData.append('DissatisfactionLevel', $("#labelconfig_DissatisfactionLevel").val());
+           formData.append('SatisfactionResolution', $("#labelconfig_SatisfactionResolution").val());
+           formData.append('IsTemplate',istemplate);
+           formData.append('IsEdit', $("#labelconfig_IsEdit").val());
+           formData.append('ClientID', $("#labelconfig_ClientID").val());
+           formData.append('LabelconfigID', $("#labelconfig_LabelconfigID").val());
+          
+           
 
+           $.ajax({
+             url: "/AdmCrt/Savelabelconfig",
+             type: 'post',
+              cache: false,
+              contentType: false,
+              processData: false,
+              data: formData,
+              success: function (data) {
+                  $("#Labelconfig_popup").modal('hide');
+                  showlabellist();
+            }
+           });
+        }
     </script>
 }
 
