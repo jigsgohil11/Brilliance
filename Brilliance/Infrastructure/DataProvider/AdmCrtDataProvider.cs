@@ -298,5 +298,39 @@ namespace Brilliance.Infrastructure.DataProvider
 
             return response;
         }
+
+        public ServiceResponse SaveCRTconfig(CrtAdminViewmodel crtadminVM)
+        {
+            var response = new ServiceResponse();
+            try
+            {
+                SqlCommand cmd = new SqlCommand();
+                cmd.Parameters.AddWithValue("@ClientID", crtadminVM.client.ClientID).SqlDbType = SqlDbType.UniqueIdentifier;
+                cmd.Parameters.AddWithValue("@IsPortal", crtadminVM.client.IsPortal).SqlDbType = SqlDbType.NVarChar;
+                cmd.Parameters.AddWithValue("@ShowComplaintNumber", crtadminVM.client.ShowComplaintNumber).SqlDbType = SqlDbType.NVarChar;
+                cmd.Parameters.AddWithValue("@URL", crtadminVM.client.URL).SqlDbType = SqlDbType.NVarChar;
+                cmd.Parameters.AddWithValue("@IsShowDeclaration", crtadminVM.client.IsShowDeclaration).SqlDbType = SqlDbType.NVarChar;
+                cmd.Parameters.AddWithValue("@IsUploadattachment", crtadminVM.client.IsUploadattachment).SqlDbType = SqlDbType.NVarChar;
+                cmd.Parameters.AddWithValue("@IsTurnaroundTimer", crtadminVM.client.IsTurnaroundTimer).SqlDbType = SqlDbType.NVarChar;
+                cmd.Parameters.AddWithValue("@Turnaround_hours", crtadminVM.client.Turnaround_hours).SqlDbType = SqlDbType.NVarChar;
+                cmd.Parameters.AddWithValue("@Turnaround_times", crtadminVM.client.Turnaround_times).SqlDbType = SqlDbType.NVarChar;
+                cmd.Parameters.AddWithValue("@Turnaround_email", crtadminVM.client.Turnaround_email).SqlDbType = SqlDbType.NVarChar;
+                cmd.Parameters.AddWithValue("@IsWebturnaroundTimer", crtadminVM.client.IsWebturnaroundTimer).SqlDbType = SqlDbType.NVarChar;
+                cmd.Parameters.AddWithValue("@WebTurnaround_hours", crtadminVM.client.WebTurnaround_hours).SqlDbType = SqlDbType.NVarChar;
+                cmd.Parameters.AddWithValue("@WebTurnaround_times", crtadminVM.client.WebTurnaround_times).SqlDbType = SqlDbType.NVarChar;
+                cmd.Parameters.AddWithValue("@WebTurnaround_email", crtadminVM.client.WebTurnaround_email).SqlDbType = SqlDbType.NVarChar;
+
+                DataSet ds = null;
+                ds = BulkInsert("SaveCRTconfig", cmd);
+                response.IsSuccess = true;
+                response.Message = "Record Saved Successfully.";
+            }
+            catch (Exception ex)
+            {
+                response.Message = "Internal server error";
+            }
+
+            return response;
+        }
     }
 }

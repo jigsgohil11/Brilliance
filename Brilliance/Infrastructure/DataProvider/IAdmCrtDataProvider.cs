@@ -20,6 +20,7 @@ namespace Brilliance.Infrastructure.DataProvider
         DropselectModel AddDropSelect(string Category, Guid ClientID);
         ServiceResponse Savedropselectconfig(Guid TermId, Guid ClientID, Guid? Refid, Guid? Refid1, string name, string desc, string category, bool isedit);
         ServiceResponse Deletedropselectconfig(Guid TermId);
+        ServiceResponse SaveCRTconfig(CrtAdminViewmodel crtadminVM);
 
     }
 }

@@ -80,6 +80,22 @@ namespace Brilliance.Models.Entity
         public bool IsCrtSubscribe { get; set; }
         public bool IsCISSubscribe { get; set; }
 
+        public string IsPortal { get; set; }
+        public string ShowComplaintNumber { get; set; }
+        public string URL { get; set; }
+        public string IsShowDeclaration { get; set; }
+        public string IsUploadattachment { get; set; }
+        public string IsTurnaroundTimer { get; set; }
+        public string IsWebturnaroundTimer { get; set; }
+        public string Turnaround_hours { get; set; }
+        public string Turnaround_times { get; set; }
+
+
+        public string Turnaround_email { get; set; }
+        public string WebTurnaround_hours { get; set; }
+        public string WebTurnaround_times { get; set; }
+        public string WebTurnaround_email { get; set; }
+
         [ResultColumn]
         public string countorganisation { get; set; }
         [ResultColumn]
