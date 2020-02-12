@@ -49,14 +49,14 @@
                     <div class="portlet light">
                         <div class="portlet-body form">
                             @*<form action="/ClientSetup/SaveClient" id="frmClient" data-ajax-success="SaveClientResponse(data);" data-ajax="true" data-ajax-method="Post" method="post">*@
-                            <form id="frmcrtconfig" action="/AdmCrt/SaveCRTconfig" method="post" data-ajax="true" data-ajax-method="Post" data-ajax-success="SaveCompanyResponse(data);">
+                            <form id="frmcrtconfig" action="/AdmCrt/SaveCRTconfig" method="post" data-ajax="true" data-ajax-method="Post" data-ajax-success="SaveCRTconfigResponse(data);">
                                 @*@Html.HiddenFor(m => m.client.ClientID)
                                     @Html.HiddenFor(m => m.client.Logo)*@
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label>For this organisation</label>
-                                            @Html.DropDownListFor(m => m.client.ClientID, new SelectList(Model.clientList, "Value", "Text", 0), "--Select Client--", new { @data_live_search = "true", @class = "form-control bs-select" })
+                                            @Html.DropDownListFor(m => m.client.ClientID, new SelectList(Model.clientList, "Value", "Text", 0), "--Select Client--", new { @data_live_search = "true", @class = "form-control bs-select", @onchange = "GetCRTDetails();" })
                                         </div>
                                     </div>
                                     <div class="col-md-6">
@@ -166,16 +166,17 @@
                                             <label>Upload attachment*</label>
                                             <div class="mt-radio-inline">
                                                 <label class="mt-radio mt-radio-outline margin-bottom0" style="font-size:13px;">
-                                                    @Html.RadioButtonFor(m => m.client.IsUploadattachment, "Yes", new { @class = "class1" })
+                                                    @Html.RadioButtonFor(m => m.client.IsUploadattachment, "Mandatory", new { @class = "class1" })
                                                     Mandatory
                                                     <span></span>
                                                 </label>
                                                 <label class="mt-radio mt-radio-outline margin-bottom0" style="font-size:13px;">
-                                                    @Html.RadioButtonFor(m => m.client.IsUploadattachment, "No", new { @class = "class2", @checked = "checked" })
+                                                    @Html.RadioButtonFor(m => m.client.IsUploadattachment, "Optional", new { @class = "class2", @checked = "checked" })
                                                     Optional
                                                     <span></span>
                                                 </label>
                                             </div>
+
                                         </div>
                                     </div>
                                 </div>
@@ -226,6 +227,7 @@
                                                     <span></span>
                                                 </label>
                                             </div>
+
                                         </div>
                                     </div>
                                     <div id="webDiv" class="col-md-9 hide">
@@ -333,25 +335,25 @@
                                     <div class="col-md-6">
                                         <div class="row">
                                             @*<div class="col-md-3">
-                                                <div class="form-group">
-                                                    <button type="button" class="btn">Back To Top</button>
+                                                    <div class="form-group">
+                                                        <button type="button" class="btn">Back To Top</button>
+                                                    </div>
                                                 </div>
-                                            </div>
+                                                <div class="col-md-3">
+                                                    <div class="form-group">
+                                                        <button type="button" class="btn">Save</button>
+                                                    </div>
+                                                </div>*@
                                             <div class="col-md-3">
-                                                <div class="form-group">
-                                                    <button type="button" class="btn">Save</button>
-                                                </div>
-                                            </div>*@
-                                            @*<div class="col-md-3">
                                                 <div class="form-group">
                                                     <button type="button" onclick="SubmitCRTconfig()" class="btn">Save And Close</button>
                                                 </div>
                                             </div>
                                             <div class="col-md-3">
                                                 <div class="form-group">
-                                                    <button type="button" class="btn">Cancel</button>
+                                                    <button type="button" onclick="location.href = '/AdmCrt/CRTadmin'" class="btn">Cancel</button>
                                                 </div>
-                                            </div>*@
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="col-md-3">
@@ -407,12 +409,12 @@
             else {
                 $("#UrlDiv").addClass('hide');
             }
-            if ($("input[id=inactivity]:checked").val().toUpperCase() == "YES") {
-                $("#alertDiv").removeClass('hide');
-            }
-            else {
-                $("#alertDiv").addClass('hide');
-            }
+            //if ($("input[id=inactivity]:checked").val().toUpperCase() == "YES") {
+            //    $("#alertDiv").removeClass('hide');
+            //}
+            //else {
+            //    $("#alertDiv").addClass('hide');
+            //}
 
         });
         function GenerateNewGUID() {
@@ -817,6 +819,35 @@
             }
         }
 
+        function SaveCRTconfigResponse(response) {
+            if (response.IsSuccess) {
+                debugger;
+                var id = $("#client_ClientID").val();
+                //SetMessageForPageLoad(response.Message, "Companysaved");
+                window.location.href = "/AdmCrt/CRTadmin?id=" + id + "";
+            } else {
+                ShowMessage(response.Message, "error");
+            }
+        }
+
+        function GetCRTDetails() {
+            var id = $("#client_ClientID").val();
+            window.location.href = "/AdmCrt/CRTadmin?id=" + id + "";
+            //$.ajax({
+            //    type: "POST",
+            //    url: "/AdmCrt/LabelconfigList",
+            //    traditional: true,
+            //    async: true,
+            //    data: {
+            //        ClientID: id
+            //    },
+            //    success: function (data) {
+            //        HideLoader();
+            //        $("#Partialviewbind").html('');
+            //        $("#Partialviewbind").html(data);
+            //    }
+            //});
+        }
     </script>
 }
 

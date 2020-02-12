@@ -13,11 +13,12 @@ namespace Brilliance.Controllers
         private IAdmCrtDataProvider _iadmcrtDataProvider;
 
         // GET: AdmCrtWWA@
-        public ActionResult CRTadmin()
+        public ActionResult CRTadmin(string id)
         {
             _iadmcrtDataProvider = new AdmCrtDataProvider();
             var response = new ServiceResponse();
-            response = _iadmcrtDataProvider.GetCrtSetup();
+            Guid ClientID = Common.CheckIdNullOrEmptyNonEncrypt(id);
+            response = _iadmcrtDataProvider.GetCrtSetup(ClientID);
             return View(response.Data);
         }
 

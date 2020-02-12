@@ -7,7 +7,7 @@ namespace Brilliance.Infrastructure.DataProvider
 {
     interface IAdmCrtDataProvider
     {
-        ServiceResponse GetCrtSetup();
+        ServiceResponse GetCrtSetup(Guid ClientID);
         ServiceResponse Savelabelconfig(string InstanceName, string Tier2, string incidentdate, string Tier3, string policystatus,
                                             string Accnumber, string Rootcause, string Idnumber, string howcomreceived, string contactno,
                                             string Compregulatory, string emailaddress, string feedbackregulatory, string productcategory, string Overalloutcome,
