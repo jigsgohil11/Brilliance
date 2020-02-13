@@ -611,9 +611,10 @@
 <div class="modal fade modal-scroll bs-modal-lg" id="Labelconfig_popup" tabindex="-1" role="dialog" aria-hidden="true">
     <div id="LabelsConfig">
         @*@if (Model != null)
-            {
-                @Html.Partial("~/Views/AdmCrt/_LabelConfiguration.cshtml", Model)
-            }*@
+        {
+            @Html.Partial("~/Views/AdmCrt/_LabelConfiguration.cshtml", Model)
+        }*@
+        @Html.Partial("~/Views/AdmCis/_LabelConfiguration.cshtml", null)
     </div>
 </div>
 <div class="modal fade modal-scroll bs-modal-lg" id="AddDropselect_popup" tabindex="-1" role="dialog" aria-hidden="true">
@@ -666,14 +667,14 @@
         }
 
         function Addlabels() {
-            var value = $("#client_ClientID").val();
-            if (value != "" && value != undefined && value != null) {
-                $("#labelconfig_ClientID").val(value);
+            //var value = $("#client_ClientID").val();
+            //if (value != "" && value != undefined && value != null) {
+            //    $("#labelconfig_ClientID").val(value);
                 $("#Labelconfig_popup").modal('show');
-            }
-            else {
-                ShowMessage("Select organisation.", "error");
-            }
+            //}
+            //else {
+            //    ShowMessage("Select organisation.", "error");
+            //}
         }
 
         function showlabellist() {

@@ -1,0 +1,258 @@
+﻿@model Brilliance.Models.ViewModel.CrtAdminViewmodel
+@using Brilliance.Infrastructure
+@*@Html.Hidden("Applications", Common.SerializeObject(Model))*@
+
+<div class="modal-dialog modal-lg">
+    <div class="modal-content" style="width: 1213px;margin-left: -125px;">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+            <h4 class="modal-title">Labels for this organisation</h4>
+        </div>
+        @*<form id="frmlabelconfig" action="/AdmCrt/Savelabelconfig" method="post" data-ajax="true" data-ajax-method="Post" data-ajax-success="SaveLabelResponse(data);">*@
+        <form id="frmlabelconfig" action="/AdmCrt/Savelabelconfig" method="post">
+            <div class="modal-body">
+                @Html.HiddenFor(m => m.labelconfig.ClientID)
+                @Html.HiddenFor(m => m.labelconfig.LabelconfigID)
+                @Html.HiddenFor(m => m.labelconfig.IsTemplate)
+                @Html.HiddenFor(m => m.labelconfig.IsEdit)
+                <input type="hidden" id="istemplate" />
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="col-md-5">Template Name</label>
+                            <div class="col-md-7">
+                                @Html.TextBoxFor(m => m.labelconfig.InstanceName, new { @class = "form-control m-input" })
+                                @Html.ValidationMessageFor(m => m.labelconfig.InstanceName)
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row" style="margin-top:12px;">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            @Html.HiddenFor(m => m.labelconfig.ClientID)
+
+                            <label class="col-md-5">Tier 2</label>
+                            <div class="col-md-7">
+                                @Html.TextBoxFor(m => m.labelconfig.Tier2, new { @class = "form-control m-input" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="col-md-5">Complaint incident date</label>
+                            <div class="col-md-7">
+                                @Html.TextBoxFor(m => m.labelconfig.incidentdate, new { @class = "form-control m-input" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row" style="margin-top:12px;">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="col-md-5">Tier 3</label>
+                            <div class="col-md-7">
+                                @Html.TextBoxFor(m => m.labelconfig.Tier3, new { @class = "form-control m-input" })
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="col-md-5">Policy status</label>
+                            <div class="col-md-7">
+                                @Html.TextBoxFor(m => m.labelconfig.policystatus, new { @class = "form-control m-input" })
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row" style="margin-top:12px;">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="col-md-5">Account number</label>
+                            <div class="col-md-7">
+                                @Html.TextBoxFor(m => m.labelconfig.Accnumber, new { @class = "form-control m-input" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="col-md-5">Root cause</label>
+                            <div class="col-md-7">
+                                @Html.TextBoxFor(m => m.labelconfig.Rootcause, new { @class = "form-control m-input" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row" style="margin-top:12px;">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="col-md-5">ID number</label>
+                            <div class="col-md-7">
+                                @Html.TextBoxFor(m => m.labelconfig.Idnumber, new { @class = "form-control m-input" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="col-md-5">How complaint received</label>
+                            <div class="col-md-7">
+                                @Html.TextBoxFor(m => m.labelconfig.howcomreceived, new { @class = "form-control m-input" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row" style="margin-top:12px;">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="col-md-5">Contact number</label>
+                            <div class="col-md-7">
+                                @Html.TextBoxFor(m => m.labelconfig.contactno, new { @class = "form-control m-input" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="col-md-5">Complaint from regulatory body</label>
+                            <div class="col-md-7">
+                                @Html.TextBoxFor(m => m.labelconfig.Compregulatory, new { @class = "form-control m-input" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row" style="margin-top:12px;">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="col-md-5">Email address</label>
+                            <div class="col-md-7">
+                                @Html.TextBoxFor(m => m.labelconfig.emailaddress, new { @class = "form-control m-input" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="col-md-5">Feedback from regulatory body</label>
+                            <div class="col-md-7">
+                                @Html.TextBoxFor(m => m.labelconfig.feedbackregulatory, new { @class = "form-control m-input" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row" style="margin-top:12px;">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="col-md-5">Product category</label>
+                            <div class="col-md-7">
+                                @Html.TextBoxFor(m => m.labelconfig.productcategory, new { @class = "form-control m-input" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="col-md-5">Overall outcome</label>
+                            <div class="col-md-7">
+                                @Html.TextBoxFor(m => m.labelconfig.Overalloutcome, new { @class = "form-control m-input" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row" style="margin-top:12px;">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="col-md-5">Product type</label>
+                            <div class="col-md-7">
+                                @Html.TextBoxFor(m => m.labelconfig.Producttype, new { @class = "form-control m-input" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="col-md-5">Compensation/Payment</label>
+                            <div class="col-md-7">
+                                @Html.TextBoxFor(m => m.labelconfig.Compensation, new { @class = "form-control m-input" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row" style="margin-top:12px;">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="col-md-5">Complaint category</label>
+                            <div class="col-md-7">
+                                @Html.TextBoxFor(m => m.labelconfig.Compcategory, new { @class = "form-control m-input" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="col-md-5">Regulated costs</label>
+                            <div class="col-md-7">
+                                @Html.TextBoxFor(m => m.labelconfig.Regulatedcost, new { @class = "form-control m-input" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row" style="margin-top:12px;">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="col-md-5">Nature of complaint</label>
+                            <div class="col-md-7">
+                                @Html.TextBoxFor(m => m.labelconfig.Nature, new { @class = "form-control m-input" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="col-md-5">Value</label>
+                            <div class="col-md-7">
+                                @Html.TextBoxFor(m => m.labelconfig.Value, new { @class = "form-control m-input" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row" style="margin-top:12px;">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="col-md-5">TCF outcome</label>
+                            <div class="col-md-7">
+                                @Html.TextBoxFor(m => m.labelconfig.TCF, new { @class = "form-control m-input" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="col-md-5">Level of dissatisfaction</label>
+                            <div class="col-md-7">
+                                @Html.TextBoxFor(m => m.labelconfig.DissatisfactionLevel, new { @class = "form-control m-input" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row" style="margin-top:12px;">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="col-md-5">Satisfaction post resolution</label>
+                            <div class="col-md-7">
+                                @Html.TextBoxFor(m => m.labelconfig.SatisfactionResolution, new { @class = "form-control m-input" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn default" data-dismiss="modal">Cancel</button>
+                @*<button id="btnSaveAreaTask" type="submit" class="btn green">SAVE</button>*@
+                <button id="btnSaveAreaTask" type="button" onclick="submitlabels(false);" class="btn green">SAVE</button>
+                @*<button id="btnSaveAreaTask" type="button" onclick="Savelabelform(@Common.SerializeObject(Model));" class="btn green">SAVE</button>*@
+                <button id="btnSave" type="button" onclick="submitlabels(true);" class="btn green">SAVE AS NEW TEMPLATE</button>
+            </div>
+        </form>
+    </div>
+</div>
+

@@ -6925,6 +6925,7 @@
     <Content Include="Views\ClientSetup\_AddInstance.cshtml" />
     <Content Include="Views\ClientSetup\InstanceSubscription.cshtml" />
     <Content Include="Views\AdmCis\CISadmin.cshtml" />
+    <Content Include="Views\AdmCis\_LabelConfiguration.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
