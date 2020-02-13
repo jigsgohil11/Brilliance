@@ -13,20 +13,21 @@ namespace Brilliance.Controllers
         private IAdmCrtDataProvider _iadmcrtDataProvider;
 
         // GET: AdmCrtWWA@
-        public ActionResult CRTadmin()
+        public ActionResult CRTadmin(string id)
         {
             _iadmcrtDataProvider = new AdmCrtDataProvider();
             var response = new ServiceResponse();
-            response = _iadmcrtDataProvider.GetCrtSetup();
+            Guid ClientID = Common.CheckIdNullOrEmptyNonEncrypt(id);
+            response = _iadmcrtDataProvider.GetCrtSetup(ClientID);
             return View(response.Data);
         }
-        
+
         [HttpPost]
         public ActionResult Savelabelconfig(string InstanceName, string Tier2, string incidentdate, string Tier3, string policystatus,
                                             string Accnumber, string Rootcause, string Idnumber, string howcomreceived, string contactno,
                                             string Compregulatory, string emailaddress, string feedbackregulatory, string productcategory, string Overalloutcome,
                                             string Producttype, string Compensation, string Compcategory, string Regulatedcost, string Nature,
-                                            string Value, string TCF, string DissatisfactionLevel, string SatisfactionResolution,bool? IsTemplate,bool? IsEdit,Guid? ClientID,Guid? LabelconfigID)
+                                            string Value, string TCF, string DissatisfactionLevel, string SatisfactionResolution, bool? IsTemplate, bool? IsEdit, Guid? ClientID, Guid? LabelconfigID)
         {
             _iadmcrtDataProvider = new AdmCrtDataProvider();
             var response = new ServiceResponse();
@@ -34,7 +35,7 @@ namespace Brilliance.Controllers
                                             Compregulatory, emailaddress, feedbackregulatory, productcategory, Overalloutcome, Producttype, Compensation, Compcategory,
                                             Regulatedcost, Nature, Value, TCF, DissatisfactionLevel, SatisfactionResolution, IsTemplate, IsEdit, ClientID, LabelconfigID);
             return Json(response);
-        }   
+        }
         public ActionResult LabelconfigList(Guid ClientID)
         {
             _iadmcrtDataProvider = new AdmCrtDataProvider();
@@ -55,18 +56,18 @@ namespace Brilliance.Controllers
             DropSelectViewmodel model = _iadmcrtDataProvider.DropselectgList(ClientID);
             return PartialView("~/Views/AdmCrt/_DropselectConfiguration.cshtml", model);
         }
-        public ActionResult AddDropSelect(string Category,Guid ClientID)
+        public ActionResult AddDropSelect(string Category, Guid ClientID)
         {
             _iadmcrtDataProvider = new AdmCrtDataProvider();
             DropselectModel model = _iadmcrtDataProvider.AddDropSelect(Category, ClientID);
             return PartialView("~/Views/AdmCrt/_AddNewDropSelectItem.cshtml", model);
         }
         [HttpPost]
-        public ActionResult Savedropselectconfig(Guid TermId,Guid ClientID,Guid? Refid,Guid? Refid1,string name,string desc,string category,bool isedit)
+        public ActionResult Savedropselectconfig(Guid TermId, Guid ClientID, Guid? Refid, Guid? Refid1, string name, string desc, string category, bool isedit)
         {
             _iadmcrtDataProvider = new AdmCrtDataProvider();
             var response = new ServiceResponse();
-            response = _iadmcrtDataProvider.Savedropselectconfig(TermId, ClientID,Refid,Refid1,name,desc,category, isedit);
+            response = _iadmcrtDataProvider.Savedropselectconfig(TermId, ClientID, Refid, Refid1, name, desc, category, isedit);
             return Json(response);
         }
         public ActionResult Deletedropselectconfig(Guid TermId)
@@ -74,6 +75,14 @@ namespace Brilliance.Controllers
             _iadmcrtDataProvider = new AdmCrtDataProvider();
             var response = new ServiceResponse();
             response = _iadmcrtDataProvider.Deletedropselectconfig(TermId);
+            return Json(response);
+        }
+        [HttpPost]
+        public ActionResult SaveCRTconfig(CrtAdminViewmodel crtadminVM)
+        {
+            _iadmcrtDataProvider = new AdmCrtDataProvider();
+            var response = new ServiceResponse();
+            response = _iadmcrtDataProvider.SaveCRTconfig(crtadminVM);
             return Json(response);
         }
     }

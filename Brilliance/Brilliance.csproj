@@ -6920,11 +6920,11 @@
     <Content Include="Views\AdmCrt\CRTadmin.cshtml" />
     <Content Include="Views\AdmCrt\_LabelConfiguration.cshtml" />
     <Content Include="Views\AdmCrt\_LabelConfigList.cshtml" />
-    <Content Include="Views\AdmCrt\_AddNewDropSelectItem.cshtml" />
     <Content Include="Views\AdmCrt\_DropselectConfiguration.cshtml" />
     <Content Include="Views\ClientSetup\_AddInstance.cshtml" />
     <Content Include="Views\ClientSetup\InstanceSubscription.cshtml" />
     <Content Include="Views\AdmCis\CISadmin.cshtml" />
+    <Content Include="Views\AdmCrt\_AddNewDropSelectItem.cshtml" />
     <Content Include="Views\AdmCis\_LabelConfiguration.cshtml" />
   </ItemGroup>
   <ItemGroup>

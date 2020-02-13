@@ -70,7 +70,7 @@
                                 {
                                     <label>Name</label>
                                 }
-                                @Html.TextBoxFor(m => m.dropselectconfig.Name, new { @class = "form-control m-input" })
+                                @Html.TextBoxFor(m => m.dropselectconfig.Name, new { @class = "form-control m-input", @required = "" })
                                 @Html.ValidationMessageFor(m => m.dropselectconfig.Name)
 
                             </div>
@@ -127,7 +127,6 @@
                                         </tr>
                                     </thead>
                                     <tbody id="tbody_dropselect">
-
                                         @if (Model != null && Model.projecttermlist.Count > 0)
                                         {
 
