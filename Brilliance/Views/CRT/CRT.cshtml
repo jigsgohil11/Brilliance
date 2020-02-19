@@ -5,7 +5,7 @@
 
     ViewBag.Title = "CRT";
     Layout = "~/Views/Shared/_Layout_public.cshtml";
-    
+
     int index = 0;
 }
 @*<link href="~/assets/global/plugins/bootstrap-summernote/summernote.css" rel="stylesheet" type="text/css" />
@@ -110,14 +110,14 @@
                                                     <div class="row">
                                                         <div class="col-md-6">
                                                             <div class="form-group">
-                                                                <label>Company<span style="font-weight: bold;color: red;">*</span></label>
+                                                                <label>Tier2<span style="font-weight: bold;color: red;">*</span></label>
                                                                 @Html.DropDownListFor(m => m.complaint.CompanyId, new SelectList(Model.CompanyList, "Value", "Text", 0), "--Select Company--", new { @data_live_search = "true", @class = "form-control bs-select", @onchange = "Getdata(this);", @disabled = "disabled" })
                                                                 @Html.ValidationMessageFor(m => m.complaint.CompanyId)
                                                             </div>
                                                         </div>
                                                         <div class="col-md-6">
                                                             <div class="form-group">
-                                                                <label>Division<span style="font-weight: bold;color: red;">*</span></label>
+                                                                <label>Tier3<span style="font-weight: bold;color: red;">*</span></label>
                                                                 @Html.DropDownListFor(m => m.complaint.DivisionId, new SelectList(Model.DivisionList, "Value", "Text", 0), "--Select Division--", new { @data_live_search = "true", @class = "form-control bs-select", @disabled = "disabled" })
                                                                 @Html.ValidationMessageFor(m => m.complaint.DivisionId)
                                                             </div>
@@ -128,7 +128,14 @@
                                                             <div class="row">
                                                                 <div class="col-md-9">
                                                                     <div class="form-group">
-                                                                        <label>Policy/Account number</label>
+                                                                        @if (Model != null && Model.Labelconfig != null && Model.Labelconfig.Tier3 != null && Model.Labelconfig.Tier3 != "")
+                                                                        {
+                                                                            <label>@Model.Labelconfig.Tier3</label>
+                                                                        }
+                                                                        else
+                                                                        {
+                                                                            <label>Policy/Account number</label>
+                                                                        }
                                                                         @Html.TextBoxFor(m => m.complaint.PolicyNumber, new { @class = "form-control m-input", @placeholder = "Enter policy number", @disabled = "disabled" })
                                                                         @Html.ValidationMessageFor(m => m.complaint.PolicyNumber)
                                                                     </div>
@@ -190,14 +197,28 @@
                                                     <div class="row">
                                                         <div class="col-md-6">
                                                             <div class="form-group">
-                                                                <label>Company<span style="font-weight: bold;color: red;">*</span></label>
+                                                                @if (Model != null && Model.Labelconfig != null && Model.Labelconfig.Tier2 != null && Model.Labelconfig.Tier2 != "")
+                                                                {
+                                                                    <label>@Model.Labelconfig.Tier2<span style="font-weight: bold;color: red;">*</span></label>
+                                                                }
+                                                                else
+                                                                {
+                                                                    <label>Tier2<span style="font-weight: bold;color: red;">*</span></label>
+                                                                }
                                                                 @Html.DropDownListFor(m => m.complaint.CompanyId, new SelectList(Model.CompanyList, "Value", "Text", 0), "--Select Company--", new { @data_live_search = "true", @class = "form-control bs-select", @onchange = "Getdata(this);" })
                                                                 @Html.ValidationMessageFor(m => m.complaint.CompanyId)
                                                             </div>
                                                         </div>
                                                         <div class="col-md-6">
                                                             <div class="form-group">
-                                                                <label>Division<span style="font-weight: bold;color: red;">*</span></label>
+                                                                @if (Model != null && Model.Labelconfig != null && Model.Labelconfig.Tier3 != null && Model.Labelconfig.Tier3 != "")
+                                                                {
+                                                                    <label>@Model.Labelconfig.Tier3<span style="font-weight: bold;color: red;">*</span></label>
+                                                                }
+                                                                else
+                                                                {
+                                                                    <label>Tier3<span style="font-weight: bold;color: red;">*</span></label>
+                                                                }
                                                                 @Html.DropDownListFor(m => m.complaint.DivisionId, new SelectList(Model.DivisionList, "Value", "Text", 0), "--Select Division--", new { @data_live_search = "true", @class = "form-control bs-select" })
                                                                 @Html.ValidationMessageFor(m => m.complaint.DivisionId)
                                                             </div>
@@ -208,7 +229,14 @@
                                                             <div class="row">
                                                                 <div class="col-md-9">
                                                                     <div class="form-group">
-                                                                        <label>Policy/Account number</label>
+                                                                        @if (Model != null && Model.Labelconfig != null && Model.Labelconfig.Accnumber != null && Model.Labelconfig.Accnumber != "")
+                                                                        {
+                                                                            <label>@Model.Labelconfig.Accnumber<span style="font-weight: bold;color: red;">*</span></label>
+                                                                        }
+                                                                        else
+                                                                        {
+                                                                            <label>Account number</label>
+                                                                        }
                                                                         @Html.TextBoxFor(m => m.complaint.PolicyNumber, new { @class = "form-control m-input", @placeholder = "Enter policy number" })
                                                                         @Html.ValidationMessageFor(m => m.complaint.PolicyNumber)
                                                                     </div>
@@ -226,7 +254,14 @@
                                                         </div>
                                                         <div class="col-md-6">
                                                             <div class="form-group">
-                                                                <label>ID number</label>
+                                                                @if (Model != null && Model.Labelconfig != null && Model.Labelconfig.Idnumber != null && Model.Labelconfig.Idnumber != "")
+                                                                {
+                                                                    <label>@Model.Labelconfig.Idnumber</label>
+                                                                }
+                                                                else
+                                                                {
+                                                                    <label>ID number</label>
+                                                                }
                                                                 @Html.TextBoxFor(m => m.complaint.ClientIdentificationNumber, new { @class = "form-control m-input", @placeholder = "Enter ID number" })
                                                                 @*@Html.ValidationMessageFor(m => m.complaint.ClientIdentificationNumber)*@
                                                             </div>
@@ -251,14 +286,28 @@
                                                     <div class="row">
                                                         <div class="col-md-6">
                                                             <div class="form-group">
-                                                                <label>Contact number</label>
+                                                                @if (Model != null && Model.Labelconfig != null && Model.Labelconfig.contactno != null && Model.Labelconfig.contactno != "")
+                                                                {
+                                                                    <label>@Model.Labelconfig.contactno</label>
+                                                                }
+                                                                else
+                                                                {
+                                                                    <label>Contact number</label>
+                                                                }
                                                                 @Html.TextBoxFor(m => m.complaint.PhoneNo, new { @class = "form-control m-input", @placeholder = "Enter contat no." })
                                                                 @Html.ValidationMessageFor(m => m.complaint.PhoneNo)
                                                             </div>
                                                         </div>
                                                         <div class="col-md-6">
                                                             <div class="form-group">
-                                                                <label>Email address</label>
+                                                                @if (Model != null && Model.Labelconfig != null && Model.Labelconfig.emailaddress != null && Model.Labelconfig.emailaddress != "")
+                                                                {
+                                                                    <label>@Model.Labelconfig.emailaddress</label>
+                                                                }
+                                                                else
+                                                                {
+                                                                    <label>Email address</label>
+                                                                }
                                                                 @Html.TextBoxFor(m => m.complaint.Email, new { @class = "form-control email m-input", @placeholder = "Enter email" })
                                                                 @Html.ValidationMessageFor(m => m.complaint.Email)
                                                             </div>
@@ -269,7 +318,14 @@
                                                 <div class="row">
                                                     <div class="col-md-6" id="DisSatisfactionLevel">
                                                         <div class="form-group">
-                                                            <label>Level of dissatisfaction</label>
+                                                            @if (Model != null && Model.Labelconfig != null && Model.Labelconfig.DissatisfactionLevel != null && Model.Labelconfig.DissatisfactionLevel != "")
+                                                            {
+                                                                <label>@Model.Labelconfig.DissatisfactionLevel</label>
+                                                            }
+                                                            else
+                                                            {
+                                                                <label>Level of dissatisfaction</label>
+                                                            }
                                                             @*@if (Model != null && Model.complaint != null && (Model.complaint.IsResolved.ToUpper() == "NEW" || Model.complaint.IsComplaint.ToUpper() == "NO"))*@
                                                             @if (Model != null && Model.complaint != null && Model.complaint.ComplaintType.ToUpper() == "WEB SUBMISSION")
                                                             {
@@ -333,14 +389,14 @@
                                                         //var Amountid = "NoteList_" + i + "__NoteText";
                                                         <div id="get_Notes">
                                                             <div class="row">
-                                                                @Html.Hidden("Index", index-1)
+                                                                @Html.Hidden("Index", index - 1)
                                                                 <div class="col-md-6">
                                                                     <div class="form-group">
                                                                         <label>File note ID: @Model.NoteList[i].FileNoteID <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>File note date: @Model.NoteList[i].filedate</label>
 
                                                                         <textarea class="form-control m-input abc" cols="20" id="@NoteText" name="CRTNotes[@i].NoteText" placeholder="Enter Description" rows="2" disabled>@Model.NoteList[i].NoteText</textarea>
                                                                     </div>
-                                                                    <label>Author: @Model.NoteList[i].Author</label><br/>
+                                                                    <label>Author: @Model.NoteList[i].Author</label><br />
                                                                     @if (i == (Model.NoteList.Count - 1))
                                                                     {
                                                                         <button type="button" onclick="Addnewnote();" class="btn default" style="padding: 3px;color: black;background-color: #acb7ca;margin-left: 443px;">Add note</button>
@@ -363,8 +419,8 @@
                                                                                 else
                                                                                 {
                                                                                     @*<a target="_blank" href="">
-                                                                                        <span id="fileid">No file</span>
-                                                                                    </a>*@
+                                                                                            <span id="fileid">No file</span>
+                                                                                        </a>*@
                                                                                 }
 
                                                                             </div>
@@ -446,14 +502,14 @@
                                                     <div class="row hide" id="DivProduct">
                                                         <div class="col-md-6">
                                                             <div class="form-group">
-                                                                <label>Product Category</label>
+                                                                <label>Product Category<span style="font-weight: bold;color: red;">*</span></label>
                                                                 @Html.DropDownListFor(m => m.complaint.ComplaintProductTypeId, new SelectList(Model.ProductTypeList, "Value", "Text", 0), "--Select Product Category--", new { @data_live_search = "true", @class = "form-control bs-select", @onchange = "GetProductType(this);" })
                                                                 @Html.ValidationMessageFor(m => m.complaint.ComplaintProductTypeId)
                                                             </div>
                                                         </div>
                                                         <div class="col-md-6">
                                                             <div class="form-group">
-                                                                <label>Product Type</label>
+                                                                <label>Product Type<span style="font-weight: bold;color: red;">*</span></label>
                                                                 @Html.DropDownListFor(m => m.complaint.ComplaintProductId, new SelectList(Model.ProductCategorylist, "Value", "Text", 0), "--Select Product--", new { @data_live_search = "true", @class = "form-control bs-select" })
                                                                 @Html.ValidationMessageFor(m => m.complaint.ComplaintProductId)
                                                             </div>
@@ -481,14 +537,28 @@
                                                     <div class="row" id="DivProduct">
                                                         <div class="col-md-6">
                                                             <div class="form-group">
-                                                                <label>Product Category</label>
+                                                                @if (Model != null && Model.Labelconfig != null && Model.Labelconfig.productcategory != null && Model.Labelconfig.productcategory != "")
+                                                                {
+                                                                    <label>@Model.Labelconfig.productcategory<span style="font-weight: bold;color: red;">*</span></label>
+                                                                }
+                                                                else
+                                                                {
+                                                                    <label>Product Category<span style="font-weight: bold;color: red;">*</span></label>
+                                                                }
                                                                 @Html.DropDownListFor(m => m.complaint.ComplaintProductTypeId, new SelectList(Model.ProductTypeList, "Value", "Text", 0), "--Select Product Category--", new { @data_live_search = "true", @class = "form-control bs-select", @onchange = "GetProductType(this);" })
                                                                 @Html.ValidationMessageFor(m => m.complaint.ComplaintProductTypeId)
                                                             </div>
                                                         </div>
                                                         <div class="col-md-6">
                                                             <div class="form-group">
-                                                                <label>Product Type</label>
+                                                                @if (Model != null && Model.Labelconfig != null && Model.Labelconfig.Producttype != null && Model.Labelconfig.Producttype != "")
+                                                                {
+                                                                    <label>@Model.Labelconfig.Producttype<span style="font-weight: bold;color: red;">*</span></label>
+                                                                }
+                                                                else
+                                                                {
+                                                                    <label>Product Type<span style="font-weight: bold;color: red;">*</span></label>
+                                                                }
                                                                 @Html.DropDownListFor(m => m.complaint.ComplaintProductId, new SelectList(Model.ProductCategorylist, "Value", "Text", 0), "--Select Product--", new { @data_live_search = "true", @class = "form-control bs-select" })
                                                                 @Html.ValidationMessageFor(m => m.complaint.ComplaintProductId)
                                                             </div>
@@ -497,14 +567,28 @@
                                                     <div class="row" id="DivCategory">
                                                         <div class="col-md-6">
                                                             <div class="form-group">
-                                                                <label>Complaint category<span style="font-weight: bold;color: red;">*</span></label>
+                                                                @if (Model != null && Model.Labelconfig != null && Model.Labelconfig.Compcategory != null && Model.Labelconfig.Compcategory != "")
+                                                                {
+                                                                    <label>@Model.Labelconfig.Compcategory<span style="font-weight: bold;color: red;">*</span></label>
+                                                                }
+                                                                else
+                                                                {
+                                                                    <label>Complaint category<span style="font-weight: bold;color: red;">*</span></label>
+                                                                }
                                                                 @Html.DropDownListFor(m => m.complaint.ComplaintCategoryId, new SelectList(Model.ComplaintCategoryList, "Value", "Text", 0), "--Select Complaint Category--", new { @data_live_search = "true", @class = "form-control bs-select", @onchange = "GetNatureOfComplaint(this);" })
                                                                 @Html.ValidationMessageFor(m => m.complaint.ComplaintCategoryId)
                                                             </div>
                                                         </div>
                                                         <div class="col-md-6">
                                                             <div class="form-group">
-                                                                <label>Nature of complaint<span style="font-weight: bold;color: red;">*</span></label>
+                                                                @if (Model != null && Model.Labelconfig != null && Model.Labelconfig.Nature != null && Model.Labelconfig.Nature != "")
+                                                                {
+                                                                <label>@Model.Labelconfig.Nature<span style="font-weight: bold;color: red;">*</span><</label>
+                                                                }
+                                                                else
+                                                                {
+                                                                    <label>Nature of complaint<span style="font-weight: bold;color: red;">*</span></label>
+                                                                }
                                                                 @Html.DropDownListFor(m => m.complaint.ComplaintNatureOfId, new SelectList(Model.ComplaintNatureList, "Value", "Text", 0), "--Select Complaint Nature--", new { @data_live_search = "true", @class = "form-control bs-select" })
                                                                 @Html.ValidationMessageFor(m => m.complaint.ComplaintNatureOfId)
                                                             </div>
@@ -560,7 +644,14 @@
                                                         </div>
                                                         <div class="col-md-6">
                                                             <div class="form-group">
-                                                                <label>Complaint incident date&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<label style="font:5px;"><span class="text-right">(date when dissatisfactory experience occcured)</span></label></label>
+                                                                @if (Model != null && Model.Labelconfig != null && Model.Labelconfig.incidentdate != null && Model.Labelconfig.incidentdate != "")
+                                                                {
+                                                                    <label>@Model.Labelconfig.incidentdate&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<label style="font:5px;"><span class="text-right">(date when dissatisfactory experience occcured)</span></label></label>
+                                                                }
+                                                                else
+                                                                {
+                                                                    <label>Complaint incident date&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<label style="font:5px;"><span class="text-right">(date when dissatisfactory experience occcured)</span></label></label>
+                                                                }
                                                                 <div class="input-group">
                                                                     <span class="input-group-addon">
                                                                         <i class="fa fa-calendar font-green"></i>
@@ -577,7 +668,15 @@
                                                 <div class="row">
                                                     <div class="col-md-12">
                                                         <div class="form-group">
-                                                            <label>TCF Outcome : <b style="color:lightgray">Outcome</b></label>
+                                                            @if (Model != null && Model.Labelconfig != null && Model.Labelconfig.TCF != null && Model.Labelconfig.TCF != "")
+                                                            {
+                                                            <label>@Model.Labelconfig.TCF : <b style="color:lightgray">Outcome</b></label>
+                                                            }
+                                                            else
+                                                            {
+                                                                <label>TCF Outcome : <b style="color:lightgray">Outcome</b></label>
+                                                            }
+                                                            
                                                         </div>
                                                     </div>
                                                 </div>
@@ -667,13 +766,27 @@
                                                         <div class="row">
                                                             <div class="col-md-6">
                                                                 <div class="form-group">
-                                                                    <label>Root cause</label>
+                                                                    @if (Model != null && Model.Labelconfig != null && Model.Labelconfig.Rootcause != null && Model.Labelconfig.Rootcause != "")
+                                                                    {
+                                                                        <label>@Model.Labelconfig.Rootcause<span style="font-weight: bold;color: red;">*</span></label>
+                                                                    }
+                                                                    else
+                                                                    {
+                                                                        <label>Root cause</label>
+                                                                    }
                                                                     @Html.DropDownListFor(m => m.complaint.ComplaintRootCauseId, new SelectList(Model.RootcauseList, "Value", "Text", 0), "--Select Policy Status--", new { @data_live_search = "true", @class = "form-control bs-select" })
                                                                 </div>
                                                             </div>
                                                             <div class="col-md-6">
                                                                 <div class="form-group">
-                                                                    <label>How complaint received?</label>
+                                                                    @if (Model != null && Model.Labelconfig != null && Model.Labelconfig.howcomreceived != null && Model.Labelconfig.howcomreceived != "")
+                                                                    {
+                                                                        <label>@Model.Labelconfig.howcomreceived</label>
+                                                                    }
+                                                                    else
+                                                                    {
+                                                                        <label>How complaint received?</label>
+                                                                    }
                                                                     @Html.DropDownListFor(m => m.complaint.ComplaintReceivedId, new SelectList(Model.ComplaintreceivedList, "Value", "Text", 0), "--Select received method--", new { @data_live_search = "true", @class = "form-control bs-select" })
 
                                                                 </div>
@@ -682,14 +795,28 @@
                                                         <div class="row">
                                                             <div class="col-md-6" id="SatisfactionLevel">
                                                                 <div class="form-group">
-                                                                    <label>Level of satisfaction after resolution communicated</label>
+                                                                    @if (Model != null && Model.Labelconfig != null && Model.Labelconfig.SatisfactionResolution != null && Model.Labelconfig.SatisfactionResolution != "")
+                                                                    {
+                                                                        <label>@Model.Labelconfig.SatisfactionResolution</label>
+                                                                    }
+                                                                    else
+                                                                    {
+                                                                        <label>Level of satisfaction after resolution communicated</label>
+                                                                    }
                                                                     @Html.DropDownListFor(m => m.complaint.Satisfactionlevel_resolution, new SelectList(Model.SatisfactionLevelResolutionList, "Value", "Text", 0), "--Select Satisfaction Level --", new { @data_live_search = "true", @class = "form-control bs-select" })
                                                                     @Html.ValidationMessageFor(m => m.complaint.Satisfactionlevel_resolution)
                                                                 </div>
                                                             </div>
                                                             <div class="col-md-6">
                                                                 <div class="form-group">
-                                                                    <label>Policy status</label>
+                                                                    @if (Model != null && Model.Labelconfig != null && Model.Labelconfig.policystatus != null && Model.Labelconfig.policystatus != "")
+                                                                    {
+                                                                        <label>@Model.Labelconfig.policystatus</label>
+                                                                    }
+                                                                    else
+                                                                    {
+                                                                        <label>Policy status</label>
+                                                                    }
                                                                     @Html.DropDownListFor(m => m.complaint.ComplaintPolicyStatusId, new SelectList(Model.PolicyList, "Value", "Text", 0), "--Select Policy Status--", new { @data_live_search = "true", @class = "form-control bs-select" })
                                                                     @Html.ValidationMessageFor(m => m.complaint.ComplaintPolicyStatusId)
                                                                 </div>
@@ -698,14 +825,28 @@
                                                         <div class="row">
                                                             <div class="col-md-6">
                                                                 <div class="form-group">
-                                                                    <label>Complaint from regulatory body?</label>
+                                                                    @if (Model != null && Model.Labelconfig != null && Model.Labelconfig.Compregulatory != null && Model.Labelconfig.Compregulatory != "")
+                                                                    {
+                                                                        <label>@Model.Labelconfig.Compregulatory</label>
+                                                                    }
+                                                                    else
+                                                                    {
+                                                                        <label>Complaint from regulatory body?</label>
+                                                                    }
                                                                     @Html.DropDownListFor(m => m.complaint.ComplaintReceivedRegulatoryId, new SelectList(Model.ComplaintReceivedRegulatoryList, "Value", "Text", 0), "Choose..", new { @data_live_search = "true", @class = "form-control bs-select", @onchange = "chkdropdown(this);" })
                                                                     @Html.ValidationMessageFor(m => m.complaint.ComplaintReceivedRegulatoryId)
                                                                 </div>
                                                             </div>
                                                             <div class="col-md-6">
                                                                 <div class="form-group">
-                                                                    <label>Feedback from regulatory body</label>
+                                                                    @if (Model != null && Model.Labelconfig != null && Model.Labelconfig.feedbackregulatory != null && Model.Labelconfig.feedbackregulatory != "")
+                                                                    {
+                                                                        <label>@Model.Labelconfig.feedbackregulatory</label>
+                                                                    }
+                                                                    else
+                                                                    {
+                                                                        <label>Feedback from regulatory body</label>
+                                                                    }
                                                                     @Html.DropDownListFor(m => m.complaint.ComplaintReceivedRegulatoryFeedbackId, new SelectList(Model.ComplaintReceivedRegulatoryFeedbackList, "Value", "Text", 0), "Choose..", new { @data_live_search = "true", @class = "form-control bs-select" })
                                                                     @Html.ValidationMessageFor(m => m.complaint.ComplaintReceivedRegulatoryFeedbackId)
                                                                 </div>
@@ -726,14 +867,28 @@
                                                         <div class="row">
                                                             <div class="col-md-6">
                                                                 <div class="form-group">
-                                                                    <label>Overall outcome</label>
+                                                                    @if (Model != null && Model.Labelconfig != null && Model.Labelconfig.Overalloutcome!= null && Model.Labelconfig.Overalloutcome != "")
+                                                                    {
+                                                                        <label>@Model.Labelconfig.Overalloutcome</label>
+                                                                    }
+                                                                    else
+                                                                    {
+                                                                        <label>Overall outcome</label>
+                                                                    }
                                                                     @Html.DropDownListFor(m => m.complaint.ComplaintOverallOutcomeId, new SelectList(Model.ComplaintOverallOutcomeList, "Value", "Text", 0), "--Select Overall Outcome--", new { @data_live_search = "true", @class = "form-control bs-select" })
 
                                                                 </div>
                                                             </div>
                                                             <div class="col-md-6">
                                                                 <div class="form-group">
-                                                                    <label>Compensation / Payment</label>
+                                                                    @if (Model != null && Model.Labelconfig != null && Model.Labelconfig.Compensation != null && Model.Labelconfig.Compensation != "")
+                                                                    {
+                                                                        <label>@Model.Labelconfig.Compensation</label>
+                                                                    }
+                                                                    else
+                                                                    {
+                                                                        <label>Compensation / Payment</label>
+                                                                    }
                                                                     @Html.DropDownListFor(m => m.complaint.ComplaintCompensationId, new SelectList(Model.ComplaintCompensationList, "Value", "Text", 0), "--Select Compensation--", new { @data_live_search = "true", @class = "form-control bs-select" })
                                                                 </div>
                                                             </div>
@@ -741,13 +896,27 @@
                                                         <div class="row">
                                                             <div class="col-md-6">
                                                                 <div class="form-group">
-                                                                    <label>Regulated costs</label>
+                                                                    @if (Model != null && Model.Labelconfig != null && Model.Labelconfig.Regulatedcost != null && Model.Labelconfig.Regulatedcost != "")
+                                                                    {
+                                                                        <label>@Model.Labelconfig.Regulatedcost</label>
+                                                                    }
+                                                                    else
+                                                                    {
+                                                                        <label>Regulated costs</label>
+                                                                    }
                                                                     @Html.DropDownListFor(m => m.complaint.ComplaintRegulatedCostId, new SelectList(Model.ComplaintCompensationList, "Value", "Text", 0), "--Select costs--", new { @data_live_search = "true", @class = "form-control bs-select" })
                                                                 </div>
                                                             </div>
                                                             <div class="col-md-6">
                                                                 <div class="form-group">
-                                                                    <label>Value</label>
+                                                                    @if (Model != null && Model.Labelconfig != null && Model.Labelconfig.Value != null && Model.Labelconfig.Value != "")
+                                                                    {
+                                                                        <label>@Model.Labelconfig.Value</label>
+                                                                    }
+                                                                    else
+                                                                    {
+                                                                        <label>Value</label>
+                                                                    }
                                                                     @Html.TextBoxFor(m => m.complaint.CompensationValue, new { @class = "form-control m-input", @placeholder = "Enter value" })
                                                                 </div>
                                                             </div>
@@ -1190,7 +1359,7 @@
             html += "<input type='hidden' class='CustomField' name='NoteList[" + ExpIndex + "].Attachment' id='NoteList_" + ExpIndex + "__Attachment' value='' />"
             html += "<textarea class='form-control m-input abc' cols='20' id='NoteList_" + ExpIndex + "__NoteText' name='NoteList[" + ExpIndex + "].NoteText' placeholder='Enter Description' rows='2'></textarea></div>"
             //html += "<label>Author: Web Submission</label>"
-           // html += "<button type='button' style='padding:3px;margin-left:380px;' onclick='RemoveDiv(" + ExpIndex + ");' class='btn default' data-dismiss='modal'>Remove</button>"
+            // html += "<button type='button' style='padding:3px;margin-left:380px;' onclick='RemoveDiv(" + ExpIndex + ");' class='btn default' data-dismiss='modal'>Remove</button>"
             html += "<button type='button' onclick='Addnewnote();' class='btn default' style='padding:3px;color:black;background-color:#acb7ca;margin-left: 443px;'>Add note</button>"
             html += "</div>"
             html += "<div class='col-md-6'><div class='col-md-4'><div class='form-group'>"
@@ -1222,7 +1391,7 @@
         }
 
         function Addnewnote() {
-            
+
             var ExpIndex = $("#Index").val();
             var htlml1 = $("#FileNote_" + ExpIndex).html();
             ExpIndex = parseInt(ExpIndex);
@@ -1288,20 +1457,20 @@
             return (number < 10 ? '0' : '') + number
         }
 
-                            //function Upload(DocID) {
-                            //    var size = DocID.files[0].size;
-                            //    var fileExtension = DocID.value.substring(DocID.value.lastIndexOf(".") + 1);
-                            //    if (fileExtension == "doc" || fileExtension == "docx" || fileExtension == "pdf" || fileExtension == "jpg" || fileExtension == "jpeg" || fileExtension == "png") {
-                            //        if (size > 1048576) {
-                            //            toastr["error"]("File should not be more than 1 MB.", { "positionClass": "toast-top-right", "progressBar": true });
-                            //            DocID.value = "";
-                            //        };
-                            //        document.getElementById('VALmassage').innerHTML = '';
-                            //    }
-                            //    else {
-                            //        document.getElementById('VALmassage').innerHTML = 'File must be doc,docx or pdf!';
-                            //    }
-                            //}
+                                            //function Upload(DocID) {
+                                            //    var size = DocID.files[0].size;
+                                            //    var fileExtension = DocID.value.substring(DocID.value.lastIndexOf(".") + 1);
+                                            //    if (fileExtension == "doc" || fileExtension == "docx" || fileExtension == "pdf" || fileExtension == "jpg" || fileExtension == "jpeg" || fileExtension == "png") {
+                                            //        if (size > 1048576) {
+                                            //            toastr["error"]("File should not be more than 1 MB.", { "positionClass": "toast-top-right", "progressBar": true });
+                                            //            DocID.value = "";
+                                            //        };
+                                            //        document.getElementById('VALmassage').innerHTML = '';
+                                            //    }
+                                            //    else {
+                                            //        document.getElementById('VALmassage').innerHTML = 'File must be doc,docx or pdf!';
+                                            //    }
+                                            //}
     </script>
 }
 

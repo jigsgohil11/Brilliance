@@ -209,6 +209,11 @@ namespace Brilliance.Controllers
             return Json(response.Data, JsonRequestBehavior.AllowGet);
         }
 
+        public ActionResult CrtTemplates()
+        {
+            return View();
+        }
+
 
 
     }
