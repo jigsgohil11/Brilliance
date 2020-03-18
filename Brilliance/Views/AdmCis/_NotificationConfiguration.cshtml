@@ -1,0 +1,386 @@
+﻿@model Brilliance.Models.ViewModel.CrtAdminViewmodel
+@using Brilliance.Infrastructure
+
+
+<div class="modal-dialog modal-lg">
+    <div class="modal-content" style="width: 1213px;margin-left: -125px;">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+            <h4 class="modal-title">Notification  for this organisation</h4>
+        </div>
+        <form>
+            <div class="row" style="margin-top:12px;">
+                <div class="form-group">
+                    <div class="col-md-2">
+                        @Html.TextBoxFor(m => m.labelconfig.InstanceName, new { @class = "form-control m-input", placeholder = "001" })
+                    </div>
+                    <div class="col-md-4">
+                        @Html.TextBoxFor(m => m.labelconfig.InstanceName, new { @class = "form-control m-input", placeholder = "Notification to new Responsible persons – for users" })
+                    </div>
+                    <div class="col-md-4">
+                        @Html.TextBoxFor(m => m.labelconfig.InstanceName, new { @class = "form-control m-input", placeholder = "User name selected" })
+                    </div>
+                </div>
+            </div>
+            <div class="row" style="margin-top:12px;">
+                <div class="form-group">
+                    <div class="col-md-2">
+                        @Html.TextBoxFor(m => m.labelconfig.InstanceName, new { @class = "form-control m-input", placeholder = "002" })
+                    </div>
+                    <div class="col-md-4">
+                        @Html.TextBoxFor(m => m.labelconfig.InstanceName, new { @class = "form-control m-input", placeholder = "Notification to new Responsible persons – for non-users" })
+                    </div>
+                    <div class="col-md-4">
+                        @Html.TextBoxFor(m => m.labelconfig.InstanceName, new { @class = "form-control m-input", placeholder = "Non-user name selected" })
+                    </div>
+                </div>
+            </div>
+            <div class="row" style="margin-top:12px;">
+                <div class="form-group">
+                    <div class="col-md-2">
+                        @Html.TextBoxFor(m => m.labelconfig.InstanceName, new { @class = "form-control m-input", placeholder = "003" })
+                    </div>
+                    <div class="col-md-4">
+                        @Html.TextBoxFor(m => m.labelconfig.InstanceName, new { @class = "form-control m-input", placeholder = "Mid-way point reminder to attend to business practice" })
+                    </div>
+                    <div class="col-md-4">
+                        @Html.TextBoxFor(m => m.labelconfig.InstanceName, new { @class = "form-control m-input", placeholder = "Relevant responsible person" })
+                    </div>
+                </div>
+            </div>
+            <div class="row" style="margin-top:12px;">
+                <div class="form-group">
+                    <div class="col-md-2">
+                        @Html.TextBoxFor(m => m.labelconfig.InstanceName, new { @class = "form-control m-input", placeholder = "004" })
+                    </div>
+                    <div class="col-md-4">
+                        @Html.TextBoxFor(m => m.labelconfig.InstanceName, new { @class = "form-control m-input", placeholder = "Three-quarter point reminder to attend to business practice" })
+                    </div>
+                    <div class="col-md-4">
+                        @Html.TextBoxFor(m => m.labelconfig.InstanceName, new { @class = "form-control m-input", placeholder = "Relevant responsible person" })
+                    </div>
+                </div>
+            </div>
+            <div class="row" style="margin-top:12px;">
+                <div class="form-group">
+                    <div class="col-md-2">
+                        @Html.TextBoxFor(m => m.labelconfig.InstanceName, new { @class = "form-control m-input", placeholder = "005" })
+                    </div>
+                    <div class="col-md-4">
+                        @Html.TextBoxFor(m => m.labelconfig.InstanceName, new { @class = "form-control m-input", placeholder = "Two working days before the due date of a business practice" })
+                    </div>
+                    <div class="col-md-4">
+                        @Html.TextBoxFor(m => m.labelconfig.InstanceName, new { @class = "form-control m-input", placeholder = "Relevant responsible person" })
+                    </div>
+                </div>
+            </div>
+            <div class="row" style="margin-top:12px;">
+                <div class="form-group">
+                    <div class="col-md-2">
+                        @Html.TextBoxFor(m => m.labelconfig.InstanceName, new { @class = "form-control m-input", placeholder = "006" })
+                    </div>
+                    <div class="col-md-4">
+                        @Html.TextBoxFor(m => m.labelconfig.InstanceName, new { @class = "form-control m-input", placeholder = "On the due date of a business practice" })
+                    </div>
+                    <div class="col-md-4">
+                        @Html.TextBoxFor(m => m.labelconfig.InstanceName, new { @class = "form-control m-input", placeholder = "Relevant responsible person" })
+                    </div>
+                </div>
+            </div>
+            <div class="row" style="margin-top:12px;">
+                <div class="form-group">
+                    <div class="col-md-2">
+                        @Html.TextBoxFor(m => m.labelconfig.InstanceName, new { @class = "form-control m-input", placeholder = "007" })
+                    </div>
+                    <div class="col-md-4">
+                        @Html.TextBoxFor(m => m.labelconfig.InstanceName, new { @class = "form-control m-input", placeholder = "First input reminder – update your CIT" })
+                    </div>
+                    <div class="col-md-4">
+                        @Html.TextBoxFor(m => m.labelconfig.InstanceName, new { @class = "form-control m-input", placeholder = "Relevant Level 3 users" })
+                    </div>
+                </div>
+            </div>
+            <div class="row" style="margin-top:12px;">
+                <div class="form-group">
+                    <div class="col-md-2">
+                        @Html.TextBoxFor(m => m.labelconfig.InstanceName, new { @class = "form-control m-input", placeholder = "008" })
+                    </div>
+                    <div class="col-md-4">
+                        @Html.TextBoxFor(m => m.labelconfig.InstanceName, new { @class = "form-control m-input", placeholder = "Second input reminder – update your CIT" })
+                    </div>
+                    <div class="col-md-4">
+                        @Html.TextBoxFor(m => m.labelconfig.InstanceName, new { @class = "form-control m-input", placeholder = "Relevant Level 3 users" })
+                    </div>
+                </div>
+            </div>
+            <div class="row" style="margin-top:12px;">
+                <div class="form-group">
+                    <div class="col-md-2">
+                        @Html.TextBoxFor(m => m.labelconfig.InstanceName, new { @class = "form-control m-input", placeholder = "009" })
+                    </div>
+                    <div class="col-md-4">
+                        @Html.TextBoxFor(m => m.labelconfig.InstanceName, new { @class = "form-control m-input", placeholder = "Third input reminder – update your CIT" })
+                    </div>
+                    <div class="col-md-4">
+                        @Html.TextBoxFor(m => m.labelconfig.InstanceName, new { @class = "form-control m-input", placeholder = "Relevant Level 3 users" })
+                    </div>
+                </div>
+            </div>
+            <div class="row" style="margin-top:12px;">
+                <div class="form-group">
+                    <div class="col-md-2">
+                        @Html.TextBoxFor(m => m.labelconfig.InstanceName, new { @class = "form-control m-input", placeholder = "010" })
+                    </div>
+                    <div class="col-md-4">
+                        @Html.TextBoxFor(m => m.labelconfig.InstanceName, new { @class = "form-control m-input", placeholder = "Fourth input reminder – update your CIT" })
+                    </div>
+                    <div class="col-md-4">
+                        @Html.TextBoxFor(m => m.labelconfig.InstanceName, new { @class = "form-control m-input", placeholder = "Relevant Level 3 users" })
+                    </div>
+                </div>
+            </div>
+            <div class="row" style="margin-top:12px;">
+                <div class="form-group">
+                    <div class="col-md-2">
+                        @Html.TextBoxFor(m => m.labelconfig.InstanceName, new { @class = "form-control m-input", placeholder = "011" })
+                    </div>
+                    <div class="col-md-4">
+                        @Html.TextBoxFor(m => m.labelconfig.InstanceName, new { @class = "form-control m-input", placeholder = "Fifth input reminder – update your CIT" })
+                    </div>
+                    <div class="col-md-4">
+                        @Html.TextBoxFor(m => m.labelconfig.InstanceName, new { @class = "form-control m-input", placeholder = "Relevant Level 3 users" })
+                    </div>
+                </div>
+            </div>
+            <div class="row" style="margin-top:12px;">
+                <div class="form-group">
+                    <div class="col-md-2">
+                        @Html.TextBoxFor(m => m.labelconfig.InstanceName, new { @class = "form-control m-input", placeholder = "012" })
+                    </div>
+                    <div class="col-md-4">
+                        @Html.TextBoxFor(m => m.labelconfig.InstanceName, new { @class = "form-control m-input", placeholder = "Inactivity alert" })
+                    </div>
+                    <div class="col-md-4">
+                        @Html.TextBoxFor(m => m.labelconfig.InstanceName, new { @class = "form-control m-input", placeholder = "Relevant Level 3 users; Level 1 " })
+                    </div>
+                </div>
+            </div>
+            <div class="row" style="margin-top:12px;">
+                <div class="form-group">
+                    <div class="col-md-2">
+                        @Html.TextBoxFor(m => m.labelconfig.InstanceName, new { @class = "form-control m-input", placeholder = "013" })
+                    </div>
+                    <div class="col-md-4">
+                        @Html.TextBoxFor(m => m.labelconfig.InstanceName, new { @class = "form-control m-input", placeholder = "Task notification to task Responsible person – for users" })
+                    </div>
+                    <div class="col-md-4">
+                        @Html.TextBoxFor(m => m.labelconfig.InstanceName, new { @class = "form-control m-input", placeholder = "User name selected" })
+                    </div>
+                </div>
+            </div>
+            <div class="row" style="margin-top:12px;">
+                <div class="form-group">
+                    <div class="col-md-2">
+                        @Html.TextBoxFor(m => m.labelconfig.InstanceName, new { @class = "form-control m-input", placeholder = "014" })
+                    </div>
+                    <div class="col-md-4">
+                        @Html.TextBoxFor(m => m.labelconfig.InstanceName, new { @class = "form-control m-input", placeholder = "Task notification to task Responsible person – for non-users" })
+                    </div>
+                    <div class="col-md-4">
+                        @Html.TextBoxFor(m => m.labelconfig.InstanceName, new { @class = "form-control m-input", placeholder = "Non-user name selected" })
+                    </div>
+                </div>
+            </div>
+            <div class="row" style="margin-top:12px;">
+                <div class="form-group">
+                    <div class="col-md-2">
+                        @Html.TextBoxFor(m => m.labelconfig.InstanceName, new { @class = "form-control m-input", placeholder = "015" })
+                    </div>
+                    <div class="col-md-4">
+                        @Html.TextBoxFor(m => m.labelconfig.InstanceName, new { @class = "form-control m-input", placeholder = "Mid-way point reminder to attend to task" })
+                    </div>
+                    <div class="col-md-4">
+                        @Html.TextBoxFor(m => m.labelconfig.InstanceName, new { @class = "form-control m-input", placeholder = "Relevant task responsible person" })
+                    </div>
+                </div>
+            </div>
+            <div class="row" style="margin-top:12px;">
+                <div class="form-group">
+                    <div class="col-md-2">
+                        @Html.TextBoxFor(m => m.labelconfig.InstanceName, new { @class = "form-control m-input", placeholder = "016" })
+                    </div>
+                    <div class="col-md-4">
+                        @Html.TextBoxFor(m => m.labelconfig.InstanceName, new { @class = "form-control m-input", placeholder = "Three-quarter point reminder to attend to task" })
+                    </div>
+                    <div class="col-md-4">
+                        @Html.TextBoxFor(m => m.labelconfig.InstanceName, new { @class = "form-control m-input", placeholder = "Relevant task responsible person" })
+                    </div>
+                </div>
+            </div>
+            <div class="row" style="margin-top:12px;">
+                <div class="form-group">
+                    <div class="col-md-2">
+                        @Html.TextBoxFor(m => m.labelconfig.InstanceName, new { @class = "form-control m-input", placeholder = "017" })
+                    </div>
+                    <div class="col-md-4">
+                        @Html.TextBoxFor(m => m.labelconfig.InstanceName, new { @class = "form-control m-input", placeholder = "Two working days before the due date of a task" })
+                    </div>
+                    <div class="col-md-4">
+                        @Html.TextBoxFor(m => m.labelconfig.InstanceName, new { @class = "form-control m-input", placeholder = "Relevant task responsible person" })
+                    </div>
+                </div>
+            </div>
+            <div class="row" style="margin-top:12px;">
+                <div class="form-group">
+                    <div class="col-md-2">
+                        @Html.TextBoxFor(m => m.labelconfig.InstanceName, new { @class = "form-control m-input", placeholder = "018" })
+                    </div>
+                    <div class="col-md-4">
+                        @Html.TextBoxFor(m => m.labelconfig.InstanceName, new { @class = "form-control m-input", placeholder = "On the due date of a task" })
+                    </div>
+                    <div class="col-md-4">
+                        @Html.TextBoxFor(m => m.labelconfig.InstanceName, new { @class = "form-control m-input", placeholder = "Relevant task responsible person" })
+                    </div>
+                </div>
+            </div>
+            <div class="row" style="margin-top:12px;">
+                <div class="form-group">
+                    <div class="col-md-2">
+                        @Html.TextBoxFor(m => m.labelconfig.InstanceName, new { @class = "form-control m-input", placeholder = "019" })
+                    </div>
+                    <div class="col-md-4">
+                        @Html.TextBoxFor(m => m.labelconfig.InstanceName, new { @class = "form-control m-input", placeholder = "Cycle due to end warning" })
+                    </div>
+                    <div class="col-md-4">
+                        @Html.TextBoxFor(m => m.labelconfig.InstanceName, new { @class = "form-control m-input", placeholder = "Brilliance users" })
+                    </div>
+                </div>
+            </div>
+            <div class="row" style="margin-top:12px;">
+                <div class="form-group">
+                    <div class="col-md-2">
+                        @Html.TextBoxFor(m => m.labelconfig.InstanceName, new { @class = "form-control m-input", placeholder = "020" })
+                    </div>
+                    <div class="col-md-4">
+                        @Html.TextBoxFor(m => m.labelconfig.InstanceName, new { @class = "form-control m-input", placeholder = "Evidence due to expire – first warning" })
+                    </div>
+                    <div class="col-md-4">
+                        @Html.TextBoxFor(m => m.labelconfig.InstanceName, new { @class = "form-control m-input", placeholder = "Relevant Responsible person" })
+                    </div>
+                </div>
+            </div>
+            <div class="row" style="margin-top:12px;">
+                <div class="form-group">
+                    <div class="col-md-2">
+                        @Html.TextBoxFor(m => m.labelconfig.InstanceName, new { @class = "form-control m-input", placeholder = "021" })
+                    </div>
+                    <div class="col-md-4">
+                        @Html.TextBoxFor(m => m.labelconfig.InstanceName, new { @class = "form-control m-input", placeholder = "Evidence due to expire – second warning" })
+                    </div>
+                    <div class="col-md-4">
+                        @Html.TextBoxFor(m => m.labelconfig.InstanceName, new { @class = "form-control m-input", placeholder = "Relevant Responsible person; Relevant Level 2" })
+                    </div>
+                </div>
+            </div>
+            <div class="row" style="margin-top:12px;">
+                <div class="form-group">
+                    <div class="col-md-2">
+                        @Html.TextBoxFor(m => m.labelconfig.InstanceName, new { @class = "form-control m-input", placeholder = "022" })
+                    </div>
+                    <div class="col-md-4">
+                        @Html.TextBoxFor(m => m.labelconfig.InstanceName, new { @class = "form-control m-input", placeholder = "Evidence due to expire – final warning" })
+                    </div>
+                    <div class="col-md-4">
+                        @Html.TextBoxFor(m => m.labelconfig.InstanceName, new { @class = "form-control m-input", placeholder = "Relevant Responsible person; Level 1 " })
+                    </div>
+                </div>
+            </div>
+            <div class="row" style="margin-top:12px;">
+                <div class="form-group">
+                    <div class="col-md-2">
+                        @Html.TextBoxFor(m => m.labelconfig.InstanceName, new { @class = "form-control m-input", placeholder = "023" })
+                    </div>
+                    <div class="col-md-4">
+                        @Html.TextBoxFor(m => m.labelconfig.InstanceName, new { @class = "form-control m-input", placeholder = "Downgrade due to missed deadline for business practice" })
+                    </div>
+                    <div class="col-md-4">
+                        @Html.TextBoxFor(m => m.labelconfig.InstanceName, new { @class = "form-control m-input", placeholder = "Relevant Responsible person; Relevant Level 2; Level 1" })
+                    </div>
+                </div>
+            </div>
+            <div class="row" style="margin-top:12px;">
+                <div class="form-group">
+                    <div class="col-md-2">
+                        @Html.TextBoxFor(m => m.labelconfig.InstanceName, new { @class = "form-control m-input", placeholder = "024" })
+                    </div>
+                    <div class="col-md-4">
+                        @Html.TextBoxFor(m => m.labelconfig.InstanceName, new { @class = "form-control m-input", placeholder = "Business practice extended – final allowed due date" })
+                    </div>
+                    <div class="col-md-4">
+                        @Html.TextBoxFor(m => m.labelconfig.InstanceName, new { @class = "form-control m-input", placeholder = "Relevant Level 2;  Level 1" })
+                    </div>
+                </div>
+            </div>
+            <div class="row" style="margin-top:12px;">
+                <div class="form-group">
+                    <div class="col-md-2">
+                        @Html.TextBoxFor(m => m.labelconfig.InstanceName, new { @class = "form-control m-input", placeholder = "025" })
+                    </div>
+                    <div class="col-md-4">
+                        @Html.TextBoxFor(m => m.labelconfig.InstanceName, new { @class = "form-control m-input", placeholder = "Wording of this business practice has been updated" })
+                    </div>
+                    <div class="col-md-4">
+                        @Html.TextBoxFor(m => m.labelconfig.InstanceName, new { @class = "form-control m-input", placeholder = "Relevant Responsible person; Level 1 " })
+                    </div>
+                </div>
+            </div>
+            <div class="row" style="margin-top:12px;">
+                <div class="form-group">
+                    <div class="col-md-2">
+                        @Html.TextBoxFor(m => m.labelconfig.InstanceName, new { @class = "form-control m-input", placeholder = "026" })
+                    </div>
+                    <div class="col-md-4">
+                        @Html.TextBoxFor(m => m.labelconfig.InstanceName, new { @class = "form-control m-input", placeholder = "No ratings done penalty warning – first warning irrespective of cycle" })
+                    </div>
+                    <div class="col-md-4">
+                        @Html.TextBoxFor(m => m.labelconfig.InstanceName, new { @class = "form-control m-input", placeholder = "Relevant Level 3" })
+                    </div>
+                </div>
+            </div>
+            <div class="row" style="margin-top:12px;">
+                <div class="form-group">
+                    <div class="col-md-2">
+                        @Html.TextBoxFor(m => m.labelconfig.InstanceName, new { @class = "form-control m-input", placeholder = "027" })
+                    </div>
+                    <div class="col-md-4">
+                        @Html.TextBoxFor(m => m.labelconfig.InstanceName, new { @class = "form-control m-input", placeholder = "No ratings done penalty warning – second warning irrespective of cycle" })
+                    </div>
+                    <div class="col-md-4">
+                        @Html.TextBoxFor(m => m.labelconfig.InstanceName, new { @class = "form-control m-input", placeholder = "Relevant Level 3; Relevant Level 2;  Level 1" })
+                    </div>
+                </div>
+            </div>
+            <div class="row" style="margin-top:12px;">
+                <div class="form-group">
+                    <div class="col-md-2">
+                        @Html.TextBoxFor(m => m.labelconfig.InstanceName, new { @class = "form-control m-input", placeholder = "028" })
+                    </div>
+                    <div class="col-md-4">
+                        @Html.TextBoxFor(m => m.labelconfig.InstanceName, new { @class = "form-control m-input", placeholder = "Non-rated item penalty score" })
+                    </div>
+                    <div class="col-md-4">
+                        @Html.TextBoxFor(m => m.labelconfig.InstanceName, new { @class = "form-control m-input", placeholder = "Relevant Level 3; Relevant Level 2;  Level 1" })
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn default" data-dismiss="modal">Cancel</button>
+                @*<button id="btnSaveAreaTask" type="submit" class="btn green">SAVE</button>*@
+                <button id="btnSaveAreaTask" type="button" onclick="submitlabels(false);" class="btn green">SAVE</button>
+                @*<button id="btnSaveAreaTask" type="button" onclick="Savelabelform(@Common.SerializeObject(Model));" class="btn green">SAVE</button>*@
+                <button id="btnSave" type="button" onclick="submitlabels(true);" class="btn green">SAVE AS NEW TEMPLATE</button>
+            </div>
+        </form>
+    </div>
+</div>
+
