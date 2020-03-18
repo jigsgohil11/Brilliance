@@ -6471,6 +6471,7 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\kendoStyles.css" />
     <Content Include="Images\iconfinder_add_green_619545.png" />
+    <Content Include="Organisationlogos\31329ded-4136-4945-afc9-d61a1ac43609.jpg" />
     <Content Include="Scripts\moment-with-locales.js" />
     <Content Include="Scripts\moment-with-locales.min.js" />
     <Content Include="Scripts\moment.js" />
@@ -6837,7 +6838,6 @@
     <Content Include="assets\global\plugins\wysihtml\minified\wysihtml.min.map" />
     <Content Include="assets\global\plugins\wysihtml\minified\wysihtml.table_editing.min.map" />
     <Content Include="assets\global\plugins\wysihtml\minified\wysihtml.toolbar.min.map" />
-    <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\bootstrapvalidator.min.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
@@ -6927,12 +6927,17 @@
     <Content Include="Views\AdmCrt\_AddNewDropSelectItem.cshtml" />
     <Content Include="Views\AdmCis\_LabelConfiguration.cshtml" />
     <Content Include="Views\CRT\CrtTemplates.cshtml" />
+    <Content Include="Views\AdmCis\_AddBusinessConfiguration.cshtml" />
+    <Content Include="Views\AdmCis\_AddDropselectConfiguration.cshtml" />
+    <Content Include="Views\AdmCis\_NotificationConfiguration.cshtml" />
+    <Content Include="Views\AdmCis\_OutcomeConfiguration.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="assets\apps\img\" />
     <Folder Include="assets\global\plugins\angularjs\plugins\angular-file-upload\uploads\" />
     <Folder Include="ComplaintFiles\" />
+    <Folder Include="Properties\PublishProfiles\" />
     <Folder Include="Views\OrgCompany\" />
   </ItemGroup>
   <ItemGroup>
