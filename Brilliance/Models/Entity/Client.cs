@@ -80,6 +80,12 @@ namespace Brilliance.Models.Entity
         public bool IsCrtSubscribe { get; set; }
         public bool IsCISSubscribe { get; set; }
 
+        public bool IsViewDissatisfationLevel { get; set; }
+        public bool IsRequireDissatisfationLevel { get; set; }
+        public bool IsViewSatisfationLevel { get; set; }
+        public bool IsRequireSatisfationLevel { get; set; }
+
+
         public string IsPortal { get; set; }
         public string ShowComplaintNumber { get; set; }
         public string URL { get; set; }
@@ -102,6 +108,8 @@ namespace Brilliance.Models.Entity
         public bool IsCompanyExist { get; set; }
         [ResultColumn]
         public bool OrganisationID { get; set; }
+        [ResultColumn]
+        public Guid? TemplateID { get; set; }
 
         [Ignore]
         public string EncryptedClientID { get { return ClientID != Guid.Empty ? Crypto.Encrypt(Convert.ToString(ClientID)) : null; } }

@@ -7,6 +7,10 @@ using System.Web.Mvc;
 using System.Data;
 using System.Web;
 using System.IO;
+using NPOI.SS.UserModel;
+using NPOI.HSSF.UserModel;
+using NPOI.SS.Util;
+using ICSharpCode.SharpZipLib.Zip;
 
 namespace Brilliance.Controllers
 {
@@ -193,19 +197,30 @@ namespace Brilliance.Controllers
             return Json(response.Data, JsonRequestBehavior.AllowGet);
         }
 
-        public ActionResult GetProductByProductCategory(string id)
+        public ActionResult GetProductByProductCategory(string id, string clientid)
         {
             _icomplaintDataProvider = new ComplaintDataProvider();
             Guid ProductCategoryID = Common.CheckIdNullOrEmptyNonEncrypt(id);
-            ServiceResponse response = _icomplaintDataProvider.GetProductByProductCategory(ProductCategoryID);
+            Guid ClientID = Common.CheckIdNullOrEmptyNonEncrypt(clientid);
+            ServiceResponse response = _icomplaintDataProvider.GetProductByProductCategory(ProductCategoryID, ClientID);
             return Json(response.Data, JsonRequestBehavior.AllowGet);
         }
 
-        public ActionResult GetNatureOfComplaintList(string id)
+        public ActionResult GetNatureOfComplaintList(string id, string clientid)
         {
             _icomplaintDataProvider = new ComplaintDataProvider();
             Guid ComplaintCategoryID = Common.CheckIdNullOrEmptyNonEncrypt(id);
-            ServiceResponse response = _icomplaintDataProvider.GetNatureOfComplaintList(ComplaintCategoryID);
+            Guid ClientID = Common.CheckIdNullOrEmptyNonEncrypt(clientid);
+            ServiceResponse response = _icomplaintDataProvider.GetNatureOfComplaintList(ComplaintCategoryID, ClientID);
+            return Json(response.Data, JsonRequestBehavior.AllowGet);
+        }
+        public ActionResult GetTCFOutcome(string Categoryid, string Natureid, string clientid)
+        {
+            _icomplaintDataProvider = new ComplaintDataProvider();
+            Guid ComplaintCategoryID = Common.CheckIdNullOrEmptyNonEncrypt(Categoryid);
+            Guid NatureID = Common.CheckIdNullOrEmptyNonEncrypt(Natureid);
+            Guid ClientID = Common.CheckIdNullOrEmptyNonEncrypt(clientid);
+            ServiceResponse response = _icomplaintDataProvider.GetTCFOutcome(ComplaintCategoryID, NatureID, ClientID);
             return Json(response.Data, JsonRequestBehavior.AllowGet);
         }
 
@@ -213,8 +228,10 @@ namespace Brilliance.Controllers
         {
             return View();
         }
-
-
+        public ActionResult CRTReports()
+        {
+            return View();
+        }
 
     }
 }

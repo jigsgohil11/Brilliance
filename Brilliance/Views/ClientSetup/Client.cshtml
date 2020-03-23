@@ -275,17 +275,49 @@
                                         </div>
                                     </div>
                                 </div>
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label>View Level of Dissatisfaction</label>
+                                            @Html.CheckBoxFor(m => m.client.IsViewDissatisfationLevel, new { @class = "form-control m-input", @checked = "checked" })
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label>Require Level of Dissatisfaction</label>
+                                            @Html.CheckBoxFor(m => m.client.IsRequireDissatisfationLevel, new { @class = "form-control m-input", @checked = "checked" })
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label>View Level of Satisfaction</label>
+                                            @Html.CheckBoxFor(m => m.client.IsViewSatisfationLevel, new { @class = "form-control m-input", @checked = "checked" })
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label>Require Level of Satisfaction</label>
+                                            @Html.CheckBoxFor(m => m.client.IsRequireSatisfationLevel, new { @class = "form-control m-input", @checked = "checked" })
+                                        </div>
+                                    </div>
+                                </div>
 
                                 <div class="row">
                                     <div class="col-md-4">
                                         <label>Brilliance apps subscribed to</label>
                                         <div class="row">
                                             <div class="form-group" style="margin-left: 15px;">
-                                               
-                                                <input type="checkbox" id="client_IsCrtSubscribe" name="client_IsCrtSubscribe" style="margin-left: 15px;" />
-                                                CRT
-                                                <input type="checkbox" id="client_IsCISSubscribe" name="client_IsCISSubscribe" style="margin-left: 15px;" checked="" />
-                                                CIS
+                                                @*@Html.CheckBoxFor(m => m.client.IsCrtSubscribe, new { @checked = Model.client.IsCrtSubscribe == true ? true : false })CRT
+                                                    @Html.CheckBoxFor(m => m.client.IsCISSubscribe, new { @checked = Model.client.IsCISSubscribe == true ? true : false })CIS*@
+
+                                                @*<input type="checkbox" id="client_IsCrtSubscribe" name="client_IsCrtSubscribe" style="margin-left: 15px;" checked="@(Model.client.IsCrtSubscribe==true?true:false)" />
+                                                    CRT
+                                                    <input type="checkbox" id="client_IsCISSubscribe" name="client_IsCISSubscribe" style="margin-left: 15px;" checked="@(Model.client.IsCISSubscribe==true?true:false)" />
+                                                    CIS*@
+
+                                                @Html.CheckBoxFor(m => m.client.IsCrtSubscribe, new { @checked = "checked" })<span>CRT</span>
+                                                @Html.CheckBoxFor(m => m.client.IsCISSubscribe, new { @checked = "checked" })<span>CIS</span>
+
                                             </div>
                                         </div>
                                     </div>

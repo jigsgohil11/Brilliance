@@ -12,7 +12,7 @@ namespace Brilliance.Controllers
     {
         private IAdmCrtDataProvider _iadmcrtDataProvider;
 
-        // GET: AdmCrtWWA@
+        // GET: AdmCrt
         public ActionResult CRTadmin(string id)
         {
             _iadmcrtDataProvider = new AdmCrtDataProvider();
@@ -21,19 +21,25 @@ namespace Brilliance.Controllers
             response = _iadmcrtDataProvider.GetCrtSetup(ClientID);
             return View(response.Data);
         }
+        public ActionResult GetLabelConfig(Guid TemplateID,Guid ClientID,bool? IsEdit)
+        {
+            _iadmcrtDataProvider = new AdmCrtDataProvider();
+            CrtAdminViewmodel crtadminVM = _iadmcrtDataProvider.GetLabelConfig(TemplateID, ClientID, IsEdit);
+            return PartialView("~/Views/AdmCrt/_LabelConfiguration.cshtml", crtadminVM);    
+        }
 
         [HttpPost]
-        public ActionResult Savelabelconfig(string InstanceName, string Tier2, string incidentdate, string Tier3, string policystatus,
+        public ActionResult Savelabelconfig(string TemplateName, string Tier2, string incidentdate, string Tier3, string policystatus,
                                             string Accnumber, string Rootcause, string Idnumber, string howcomreceived, string contactno,
                                             string Compregulatory, string emailaddress, string feedbackregulatory, string productcategory, string Overalloutcome,
                                             string Producttype, string Compensation, string Compcategory, string Regulatedcost, string Nature,
-                                            string Value, string TCF, string DissatisfactionLevel, string SatisfactionResolution, bool? IsTemplate, bool? IsEdit, Guid? ClientID, Guid? LabelconfigID)
+                                            string Value, string TCF, string DissatisfactionLevel, string SatisfactionResolution, bool? IsTemplate, bool? IsEdit, Guid? ClientID, Guid? RefTempID)
         {
             _iadmcrtDataProvider = new AdmCrtDataProvider();
             var response = new ServiceResponse();
-            response = _iadmcrtDataProvider.Savelabelconfig(InstanceName, Tier2, incidentdate, Tier3, policystatus, Accnumber, Rootcause, Idnumber, howcomreceived, contactno,
+            response = _iadmcrtDataProvider.Savelabelconfig(TemplateName, Tier2, incidentdate, Tier3, policystatus, Accnumber, Rootcause, Idnumber, howcomreceived, contactno,
                                             Compregulatory, emailaddress, feedbackregulatory, productcategory, Overalloutcome, Producttype, Compensation, Compcategory,
-                                            Regulatedcost, Nature, Value, TCF, DissatisfactionLevel, SatisfactionResolution, IsTemplate, IsEdit, ClientID, LabelconfigID);
+                                            Regulatedcost, Nature, Value, TCF, DissatisfactionLevel, SatisfactionResolution, IsTemplate, IsEdit, ClientID, RefTempID);
             return Json(response);
         }
         public ActionResult LabelconfigList(Guid ClientID)
@@ -84,6 +90,21 @@ namespace Brilliance.Controllers
             var response = new ServiceResponse();
             response = _iadmcrtDataProvider.SaveCRTconfig(crtadminVM);
             return Json(response);
+        }
+        [HttpPost]
+        public ActionResult SavedropselectInTemplate(Guid ClientID)
+        {
+            _iadmcrtDataProvider = new AdmCrtDataProvider();
+            var response = new ServiceResponse();
+            response = _iadmcrtDataProvider.SavedropselectInTemplate(ClientID);
+            return Json(response);
+        }
+        public ActionResult GetComplaintReasonList(Guid ComplaintTypeID,Guid ClientID)
+        {
+            _iadmcrtDataProvider = new AdmCrtDataProvider();
+            //Guid ComplaintCategoryID = Common.CheckIdNullOrEmptyNonEncrypt(id);
+            ServiceResponse response = _iadmcrtDataProvider.GetComplaintReasonList(ComplaintTypeID, ClientID);
+            return Json(response.Data, JsonRequestBehavior.AllowGet);
         }
     }
 }

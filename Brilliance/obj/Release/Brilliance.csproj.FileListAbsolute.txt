@@ -161,3 +161,9 @@ D:\NEHA_Isoftnetech\Projects\Brilliance\Latest Work\Brilliance\obj\Release\Brill
 D:\NEHA_Isoftnetech\Projects\Brilliance\Latest Work\Brilliance\obj\Release\Brilliance.csproj.CopyComplete
 D:\NEHA_Isoftnetech\Projects\Brilliance\Latest Work\Brilliance\obj\Release\Brilliance.dll
 D:\NEHA_Isoftnetech\Projects\Brilliance\Latest Work\Brilliance\obj\Release\Brilliance.pdb
+D:\NEHA_Isoftnetech\Projects\Brilliance\Latest Work\Brilliance\bin\ICSharpCode.SharpZipLib.dll
+D:\NEHA_Isoftnetech\Projects\Brilliance\Latest Work\Brilliance\bin\NPOI.dll
+D:\NEHA_Isoftnetech\Projects\Brilliance\Latest Work\Brilliance\bin\NPOI.OOXML.dll
+D:\NEHA_Isoftnetech\Projects\Brilliance\Latest Work\Brilliance\bin\NPOI.OpenXml4Net.dll
+D:\NEHA_Isoftnetech\Projects\Brilliance\Latest Work\Brilliance\bin\NPOI.OpenXmlFormats.dll
+D:\NEHA_Isoftnetech\Projects\Brilliance\Latest Work\Brilliance\bin\ICSharpCode.SharpZipLib.xml

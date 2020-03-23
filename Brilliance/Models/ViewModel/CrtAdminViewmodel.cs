@@ -15,13 +15,15 @@ namespace Brilliance.Models.ViewModel
         {
             client = new Client();
             clientList = new List<SelectListItem>();
+            TemplateList = new List<SelectListItem>();
             labelconfig = new LabelConfiguration();
-            labelconfiglist = new List<LabelConfiguration>();
+            //labelconfiglist = new List<LabelConfiguration>();
         }
         public Client client { get; set; }
         public List<SelectListItem> clientList { get; set; }
+        public List<SelectListItem> TemplateList { get; set; }
         public LabelConfiguration labelconfig { get; set; }
-        public List<LabelConfiguration> labelconfiglist { get; set; }
+        //public List<LabelConfiguration> labelconfiglist { get; set; }
     }
 
     public class DropSelectViewmodel
@@ -41,6 +43,8 @@ namespace Brilliance.Models.ViewModel
             overalloutcomeList = new List<SelectListItem>();
             compensationList = new List<SelectListItem>();
             regulatedcostList = new List<SelectListItem>();
+            dissatisfactionlevelList = new List<SelectListItem>();
+            satisfactionresolutionList = new List<SelectListItem>();
             dropselect = new dropselectconfig();
         }
 
@@ -57,8 +61,9 @@ namespace Brilliance.Models.ViewModel
         public List<SelectListItem> overalloutcomeList { get; set; }
         public List<SelectListItem> compensationList { get; set; }
         public List<SelectListItem> regulatedcostList { get; set; }
+        public List<SelectListItem> dissatisfactionlevelList { get; set; }
+        public List<SelectListItem> satisfactionresolutionList { get; set; }
         public dropselectconfig dropselect { get; set; }
-
     }
 
     public class DropselectModel

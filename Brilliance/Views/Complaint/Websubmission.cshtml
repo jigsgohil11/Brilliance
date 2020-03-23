@@ -58,14 +58,30 @@
                                             <div class="row">
                                                 <div class="col-md-6">
                                                     <div class="form-group">
-                                                        <label>Company<span style="font-weight: bold;color: red;">*</span></label>
+                                                        @*<label>Company<span style="font-weight: bold;color: red;">*</span></label>*@
+                                                        @if (Model != null && Model.Labelconfig != null && Model.Labelconfig.Tier2 != null && Model.Labelconfig.Tier2 != "")
+                                                        {
+                                                            <label>@Model.Labelconfig.Tier2<span style="font-weight: bold;color: red;">*</span></label>
+                                                        }
+                                                        else
+                                                        {
+                                                            <label>Company<span style="font-weight: bold;color: red;">*</span></label>
+                                                        }
                                                         @Html.DropDownListFor(m => m.complaint.CompanyId, new SelectList(Model.CompanyList, "Value", "Text", 0), "--Select Company--", new { @data_live_search = "true", @class = "form-control bs-select", @onchange = "Getdata(this);" })
                                                         @Html.ValidationMessageFor(m => m.complaint.CompanyId)
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="form-group">
-                                                        <label>Division<span style="font-weight: bold;color: red;">*</span></label>
+                                                        @*<label>Division<span style="font-weight: bold;color: red;">*</span></label>*@
+                                                        @if (Model != null && Model.Labelconfig != null && Model.Labelconfig.Tier3 != null && Model.Labelconfig.Tier3 != "")
+                                                        {
+                                                            <label>@Model.Labelconfig.Tier3<span style="font-weight: bold;color: red;">*</span></label>
+                                                        }
+                                                        else
+                                                        {
+                                                            <label>Division<span style="font-weight: bold;color: red;">*</span></label>
+                                                        }
                                                         @Html.DropDownListFor(m => m.complaint.DivisionId, new SelectList(Model.DivisionList, "Value", "Text", 0), "--Select Division--", new { @data_live_search = "true", @class = "form-control bs-select" })
                                                         @Html.ValidationMessageFor(m => m.complaint.DivisionId)
                                                     </div>
@@ -76,7 +92,15 @@
                                                     <div class="row">
                                                         <div class="col-md-9">
                                                             <div class="form-group">
-                                                                <label>Policy/Account number</label>
+                                                                @*<label>Policy/Account number</label>*@
+                                                                @if (Model != null && Model.Labelconfig != null && Model.Labelconfig.Accnumber != null && Model.Labelconfig.Accnumber != "")
+                                                                {
+                                                                    <label>@Model.Labelconfig.Accnumber<span style="font-weight: bold;color: red;">*</span></label>
+                                                                }
+                                                                else
+                                                                {
+                                                                    <label>Policy/Account number</label>
+                                                                }
                                                                 @Html.TextBoxFor(m => m.complaint.PolicyNumber, new { @class = "form-control m-input", @placeholder = "Enter policy number" })
                                                                 @Html.ValidationMessageFor(m => m.complaint.PolicyNumber)
                                                             </div>
@@ -94,7 +118,15 @@
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="form-group">
-                                                        <label>ID number</label>
+                                                        @*<label>ID number</label>*@
+                                                        @if (Model != null && Model.Labelconfig != null && Model.Labelconfig.Idnumber != null && Model.Labelconfig.Idnumber != "")
+                                                        {
+                                                            <label>@Model.Labelconfig.Idnumber</label>
+                                                        }
+                                                        else
+                                                        {
+                                                            <label>ID number</label>
+                                                        }
                                                         @Html.TextBoxFor(m => m.complaint.ClientIdentificationNumber, new { @class = "form-control m-input", @placeholder = "Enter ID number" })
                                                     </div>
                                                 </div>
@@ -118,14 +150,30 @@
                                             <div class="row">
                                                 <div class="col-md-6">
                                                     <div class="form-group">
-                                                        <label>Contact number</label>
+                                                        @*<label>Contact number</label>*@
+                                                        @if (Model != null && Model.Labelconfig != null && Model.Labelconfig.contactno != null && Model.Labelconfig.contactno != "")
+                                                        {
+                                                            <label>@Model.Labelconfig.contactno</label>
+                                                        }
+                                                        else
+                                                        {
+                                                            <label>Contact number</label>
+                                                        }
                                                         @Html.TextBoxFor(m => m.complaint.PhoneNo, new { @class = "form-control m-input", @placeholder = "Enter contat no." })
                                                         @Html.ValidationMessageFor(m => m.complaint.PhoneNo)
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="form-group">
-                                                        <label>Email address</label>
+                                                        @*<label>Email address</label>*@
+                                                        @if (Model != null && Model.Labelconfig != null && Model.Labelconfig.emailaddress != null && Model.Labelconfig.emailaddress != "")
+                                                        {
+                                                            <label>@Model.Labelconfig.emailaddress</label>
+                                                        }
+                                                        else
+                                                        {
+                                                            <label>Email address</label>
+                                                        }
                                                         @Html.TextBoxFor(m => m.complaint.Email, new { @class = "form-control email m-input", @placeholder = "Enter email" })
                                                         @Html.ValidationMessageFor(m => m.complaint.Email)
                                                     </div>
@@ -134,7 +182,15 @@
                                             <div class="row">
                                                 <div class="col-md-6" id="DisSatisfactionLevel">
                                                     <div class="form-group">
-                                                        <label>Level of dissatisfaction<span style="font-weight: bold;color: red;">*</span></label>
+                                                        @*<label>Level of dissatisfaction<span style="font-weight: bold;color: red;">*</span></label>*@
+                                                        @if (Model != null && Model.Labelconfig != null && Model.Labelconfig.DissatisfactionLevel != null && Model.Labelconfig.DissatisfactionLevel != "")
+                                                        {
+                                                            <label>@Model.Labelconfig.DissatisfactionLevel<span style="font-weight: bold;color: red;">*</span></label>
+                                                        }
+                                                        else
+                                                        {
+                                                            <label>Level of dissatisfaction<span style="font-weight: bold;color: red;">*</span></label>
+                                                        }
                                                         @Html.DropDownListFor(m => m.complaint.SatisfactionLevel, new SelectList(Model.DisatisfactionLevelList, "Value", "Text", 0), "--Select dissatisfaction level--", new { @data_live_search = "true", @class = "form-control bs-select", @onchange = "chkLevelOfDissatisfaction(this);" })
                                                         @Html.ValidationMessageFor(m => m.complaint.SatisfactionLevel)
                                                     </div>
@@ -143,7 +199,15 @@
                                             <div class="row">
                                                 <div class="col-md-6">
                                                     <div class="form-group">
-                                                        <label>Complaint incident date&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-weight: bold;color: red;">*</span><label style="font:5px;"><span class="text-right">(date when dissatisfactory experience occcured)</span></label></label>
+                                                        @*<label>Complaint incident date&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-weight: bold;color: red;">*</span><label style="font:5px;"><span class="text-right">(date when dissatisfactory experience occcured)</span></label></label>*@
+                                                        @if (Model != null && Model.Labelconfig != null && Model.Labelconfig.incidentdate != null && Model.Labelconfig.incidentdate != "")
+                                                        {
+                                                            <label>@Model.Labelconfig.incidentdate&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-weight: bold;color: red;">*</span><label style="font:5px;"><span class="text-right">(date when dissatisfactory experience occcured)</span></label></label>
+                                                        }
+                                                        else
+                                                        {
+                                                            <label>Complaint incident date&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-weight: bold;color: red;">*</span><label style="font:5px;"><span class="text-right">(date when dissatisfactory experience occcured)</span></label></label>
+                                                        }
                                                         <div class="input-group">
                                                             <span class="input-group-addon">
                                                                 <i class="fa fa-calendar font-green"></i>

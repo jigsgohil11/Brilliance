@@ -19,7 +19,8 @@ namespace Brilliance.Infrastructure.DataProvider
             {
                 var searchList = new List<SearchValueData>()
                 {
-                        new SearchValueData { Name = "ComplaintID" ,Value = Convert.ToString(ComplaintID)}
+                        new SearchValueData { Name = "ComplaintID" ,Value = Convert.ToString(ComplaintID)},
+                        new SearchValueData { Name = "ClientID" ,Value = "B3E5F363-8293-4069-8239-4220AA40CA26"}
                 };
 
                 Complaintmodel = GetMultipleEntity<ComplaintViewModel>("GetComplaintdata", searchList);
@@ -124,6 +125,7 @@ namespace Brilliance.Infrastructure.DataProvider
                     cmd.Parameters.AddWithValue("@ComplaintRegulatedCostId", Complaintmodel.complaint.ComplaintRegulatedCostId).SqlDbType = SqlDbType.UniqueIdentifier;
                     cmd.Parameters.AddWithValue("@CompensationValue", Complaintmodel.complaint.CompensationValue).SqlDbType = SqlDbType.NVarChar;
                     cmd.Parameters.AddWithValue("@ComplaintType", "Manual").SqlDbType = SqlDbType.NVarChar;
+                    cmd.Parameters.AddWithValue("@TCFOutcome", Complaintmodel.complaint.TCFOutcome).SqlDbType = SqlDbType.NVarChar;
                     cmd.Parameters.AddWithValue("@Eventtype", Complaintmodel.complaint.Eventtype).SqlDbType = SqlDbType.UniqueIdentifier;
                     cmd.Parameters.AddWithValue("@Descofloss", Complaintmodel.complaint.Descofloss).SqlDbType = SqlDbType.UniqueIdentifier;
                     cmd.Parameters.AddWithValue("@CreatedBy", SessionHelper.UserId).SqlDbType = SqlDbType.UniqueIdentifier;
@@ -200,6 +202,7 @@ namespace Brilliance.Infrastructure.DataProvider
                     cmd.Parameters.AddWithValue("@ComplaintCompensationId", Complaintmodel.complaint.ComplaintCompensationId).SqlDbType = SqlDbType.UniqueIdentifier;
                     cmd.Parameters.AddWithValue("@ComplaintRegulatedCostId", Complaintmodel.complaint.ComplaintRegulatedCostId).SqlDbType = SqlDbType.UniqueIdentifier;
                     cmd.Parameters.AddWithValue("@CompensationValue", Complaintmodel.complaint.CompensationValue).SqlDbType = SqlDbType.NVarChar;
+                    cmd.Parameters.AddWithValue("@TCFOutcome", Complaintmodel.complaint.TCFOutcome).SqlDbType = SqlDbType.NVarChar;
                     cmd.Parameters.AddWithValue("@Eventtype", Complaintmodel.complaint.Eventtype).SqlDbType = SqlDbType.UniqueIdentifier;
                     cmd.Parameters.AddWithValue("@Descofloss", Complaintmodel.complaint.Descofloss).SqlDbType = SqlDbType.UniqueIdentifier;
                     cmd.Parameters.AddWithValue("@UpdatedOn", DateTime.Now).SqlDbType = SqlDbType.DateTime;
@@ -296,14 +299,15 @@ namespace Brilliance.Infrastructure.DataProvider
             }
             return response;
         }
-        public ServiceResponse GetProductByProductCategory(Guid ProductCategoryID)
+        public ServiceResponse GetProductByProductCategory(Guid ProductCategoryID, Guid ClientID)
         {
             var response = new ServiceResponse();
             var searchvaluedata = new List<SearchValueData>();
             try
             {
                 searchvaluedata.Add(new SearchValueData { Name = "ProductCategoryID", Value = Convert.ToString(ProductCategoryID) });
-                List<SelectListItem> Products = GetEntityList<SelectListItem>("GetProductListByProductCategory", searchvaluedata);
+                searchvaluedata.Add(new SearchValueData { Name = "ClientID", Value = "B3E5F363-8293-4069-8239-4220AA40CA26" });
+                List<SelectListItem> Products = GetEntityList<SelectListItem>("GetProductTypeList", searchvaluedata);
                 response.Data = Products;
                 response.IsSuccess = true;
             }
@@ -313,13 +317,14 @@ namespace Brilliance.Infrastructure.DataProvider
             }
             return response;
         }
-        public ServiceResponse GetNatureOfComplaintList(Guid ComplaintCategoryID)
+        public ServiceResponse GetNatureOfComplaintList(Guid ComplaintCategoryID, Guid ClientID)
         {
             var response = new ServiceResponse();
             var searchvaluedata = new List<SearchValueData>();
             try
             {
                 searchvaluedata.Add(new SearchValueData { Name = "ComplaintCategoryID", Value = Convert.ToString(ComplaintCategoryID) });
+                searchvaluedata.Add(new SearchValueData { Name = "ClientID", Value = "B3E5F363-8293-4069-8239-4220AA40CA26" });
                 List<SelectListItem> NatureOfComplaints = GetEntityList<SelectListItem>("GetNatureOfComplaintList", searchvaluedata);
                 response.Data = NatureOfComplaints;
                 response.IsSuccess = true;
@@ -330,5 +335,57 @@ namespace Brilliance.Infrastructure.DataProvider
             }
             return response;
         }
+
+        public ServiceResponse GetTCFOutcome(Guid ComplaintCategoryID, Guid NatureID, Guid ClientID)
+        {
+            var response = new ServiceResponse();
+            var searchvaluedata = new List<SearchValueData>();
+            try
+            {
+                searchvaluedata.Add(new SearchValueData { Name = "ComplaintCategoryID", Value = Convert.ToString(ComplaintCategoryID) });
+                searchvaluedata.Add(new SearchValueData { Name = "NatureID", Value = Convert.ToString(NatureID) });
+                searchvaluedata.Add(new SearchValueData { Name = "ClientID", Value = "B3E5F363-8293-4069-8239-4220AA40CA26" });
+                projectterm projectterm = GetEntity<projectterm>("GetTCFOutcome", searchvaluedata);
+                response.Data = projectterm;
+                if (response.Data == null)
+                {
+                    projectterm projectterm1 = new projectterm();
+                    response.Data = projectterm1;
+                }
+                response.IsSuccess = true;
+            }
+            catch (Exception ex)
+            {
+                response.Message = "Internal Server Error";
+            }
+            return response;
+        }
+
+        //public ServiceResponse GetCRTDataPdf()
+        //{
+        //    var response = new ServiceResponse();
+        //   // ApplicantReportViewModel ApplicantReportVM = new ApplicantReportViewModel();
+        //    var searchList = new List<SearchValueData>();
+        //    try
+        //    {
+        //        var searchValueData = new SearchValueData { Name = "CandidateID", Value = Convert.ToString(CandidateID) };
+        //        searchList.Add(searchValueData);
+        //        var searchValueData1 = new SearchValueData { Name = "RequisitionDetailID", Value = Convert.ToString(RequisitionDetailID) };
+        //        searchList.Add(searchValueData1);
+
+        //        ApplicantReportVM = GetMultipleEntity<ApplicantReportViewModel>("Hr_GetApplicantDetailsForReport", searchList);
+
+        //        response.Data = ApplicantReportVM;
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        response.Message = "Server Error";
+        //    }
+
+        //    return response;
+        //}
+
+
+
     }
 }

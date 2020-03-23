@@ -9,26 +9,54 @@
 <link href="~/assets/global/plugins/datatables/datatables.min.css" rel="stylesheet" type="text/css" />
 @*<link href="~/assets/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap.css" rel="stylesheet" type="text/css" />*@
 <div class="page-content page-content-dashbrd-backgrnd">
+    @*<div class="page-bar margin-bottom-10">
+            <div class="row">
+                <div class="col-md-12 padding-out">
+                    <div class="portlet light padding-header margin-0 custom-padding-bar">
+                        <div class="portlet-title portlet-title-Project-custom">
+                            <div class="caption font-dark">
+                                <i class="icon-settings font-dark"></i>
+                                <span class="caption-subject bold uppercase">Complaints reporting Tool</span>
+                            </div>
+                            <div class="caption font-dark pull-right">
+                                <a class="btn btn-circle btn-icon-only btn-default" title="Add Complaint" href="/CRT/CRT">
+                                    <i class="fa fa-plus"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>*@
     <div class="page-bar margin-bottom-10">
         <div class="row">
             <div class="col-md-12 padding-out">
                 <div class="portlet light padding-header margin-0 custom-padding-bar">
                     <div class="portlet-title portlet-title-Project-custom">
-                        <div class="caption font-dark">
-                            <i class="icon-settings font-dark"></i>
-                            <span class="caption-subject bold uppercase">Complaints reporting Tool</span>
-                        </div>
-                        <div class="caption font-dark pull-right">
-                            <a class="btn btn-circle btn-icon-only btn-default" title="Add Complaint" href="/CRT/CRT">
-                                <i class="fa fa-plus"></i>
-                            </a>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="caption font-dark">
+                                    <i class="icon-settings font-dark"></i>
+                                    <span class="caption-subject bold uppercase" style="font-size:16px;">Complaints Reporting Tool</span>
+                                </div>
+                                <div class="uppercase" style="margin-top:25px;font-size:16px;color:#153e62">Complaints Register - @DateTime.Now.ToString("MMMM yyyy")</div>
+                            </div>
+                            <div class="col-md-6">
+                                <img class="img-responsive pull-right" src="~/assets/global/img/Guard-risk.jpg" style="max-width: 250px; max-height: 110px; line-height: 20px;margin-left:350px;" alt="">
+                            </div>
+
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <div class="row">
+    <div class="caption font-dark">
+        <a class="action btn  btn-primary @Constants.Class_Cannot_Access_Update" style="padding:2px;" href="/CRT/CRT" title="Edit">Add new complaint</a>
+        <a class="action btn  btn-primary @Constants.Class_Cannot_Access_Update" style="padding:2px;" href="/CRT/CRTReports" title="Edit">Reports</a>
+
+    </div>
+    <div class="row" style="margin-top:5px;">
         <div class="col-md-12 custom-decrease-padding">
             <!-- BEGIN EXAMPLE TABLE PORTLET-->
             <div class="portlet light bordered portlet-custom-decrease-padding">
@@ -99,6 +127,66 @@
             </div>
         </div>
     </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="form-group">
+                <label><b>No complaints received this month</b></label><br />
+                <label style="font-size:10px;">I officially declare and submit to the Regulator that we did not receive any complaints this month.</label>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12 custom-decrease-padding">
+            <!-- BEGIN EXAMPLE TABLE PORTLET-->
+            <div class="portlet light bordered portlet-custom-decrease-padding">
+                <div class="portlet-body">
+                    <table class="table  table-bordered table-hover dt-responsive" width="100%" id="dt_complaint">
+                        <thead>
+                            <tr>
+                                @*<th class="all">Policy no.</th>*@
+                                @*<th class="min-tablet">Product category</th>*@
+                                <th class="desktop">Cell Owner</th>
+                                <th class="desktop">Binder Holder</th>
+                                <th class="desktop">Declared By</th>
+                                <th class="all">Declared Date</th>
+                                <th class="all">Declare</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                @*<td style="background-color:white !important;">@item.PolicyNumber</td>*@
+
+                                <td>Cell Owner 2 (Demo)</td>
+                                <td>Binder holder 3 (Demo)</td>
+                                <td></td>
+                                <td></td>
+                                <td>
+                                    <a class="action btn btn-xs  btn-primary cannot_access_update" style="font-size: 12px!important" onclick="OpenDeclareModel();" title="Edit">Declare</a>
+                                </td>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade modal-scroll" id="DeclarationModal" tabindex="-1" role="basic" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                <h4 class="modal-title" style="color:#5f829c!important;">No complaints received</h4>
+            </div>
+            <div class="modal-body"> How is it possible for you to declare that there are no complaints this month before reaching the last working day of the month? </div>
+            <div class="modal-footer">
+                <button type="button" class="btn" style="background-color:#153e62;color:#fff;" id="DeleteButton" onclick="DeleteAnyEntity('/CRT/DeleteComplaint', 'DeleteButton', 'DeleteModal', 'complaintsaved','dt_complaint','/CRT/CRTList');">Proceed nonetheless</button>
+                <button type="button" class="btn dark btn-outline" data-dismiss="modal">Undo</button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
 </div>
 <div class="modal fade modal-scroll" id="DeleteModal" tabindex="-1" role="basic" aria-hidden="true">
     <div class="modal-dialog">
@@ -107,10 +195,9 @@
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
                 <h4 class="modal-title">Delete</h4>
             </div>
-            <div class="modal-body"> Are you sure want delete ? </div>
+            <div class="modal-body"> You can not delete company.To delete company you have to delete all divisions under this company.</div>
             <div class="modal-footer">
                 <button type="button" class="btn dark btn-outline" data-dismiss="modal">Close</button>
-                <button type="button" class="btn green" id="DeleteButton" onclick="DeleteAnyEntity('/CRT/DeleteComplaint', 'DeleteButton', 'DeleteModal', 'complaintsaved','dt_complaint','/CRT/CRTList');">Yes</button>
             </div>
         </div>
         <!-- /.modal-content -->
@@ -153,4 +240,9 @@
 
     </script>
     <script src="~/assets/global/scripts/OMSDatatable.js"></script>
+    <script>
+        function OpenDeclareModel() {
+            $("#DeclarationModal").modal('show');
+        }
+    </script>
 }

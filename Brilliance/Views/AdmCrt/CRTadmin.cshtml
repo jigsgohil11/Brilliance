@@ -70,12 +70,67 @@
                                         </div>
                                     </div>
                                 </div>
+                                @if (Model != null && Model.labelconfig != null && Model.labelconfig.LabelconfigID != Guid.Empty)
+                                {
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>Template : @Model.labelconfig.TemplateName</label>
+                                                @*@Html.DropDownListFor(m => m.client.TemplateID, new SelectList(Model.TemplateList, "Value", "Text", 0), "--Select Template--", new { @data_live_search = "true", @class = "form-control bs-select", @disabled = "disabled" })*@
+                                            </div>
+                                        </div>
+                                    </div>
+                                }
+                                else
+                                {
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>Template</label>
+                                                @Html.DropDownListFor(m => m.client.TemplateID, new SelectList(Model.TemplateList, "Value", "Text", 0), "--Select Template--", new { @data_live_search = "true", @class = "form-control bs-select", @onchange = "GetLabels();" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                }
+
+                                @*<div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label><b>CRT this organisation subscribed to :</b></label>
+                                                <table>
+                                                    <tr>
+                                                        <td>CRT</td>
+                                                        <td>prefered name</td>
+                                                        <td>Edit</td>
+                                                        <td>Template</td>
+                                                        <td><input type="text" id="aaa" class="form-control"/></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>CRT</td>
+                                                        <td>prefered name</td>
+                                                        <td>Edit</td>
+                                                        <td>Template</td>
+                                                        <td><input type="text" id="aaa" class="form-control" /></td>
+                                                    </tr>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>*@
                                 <div class="row">
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label><b>Field label configuration</b></label>
-                                            <button type="button" onclick="Addlabels();" class="btn">OPEN</button>
-                                            <button type="button" onclick="showlabellist();" class="btn">Label List</button>
+                                            @*<button type="button" onclick="Addlabels();" class="btn">OPEN</button>*@
+                                            @if (Model != null && Model.labelconfig != null && Model.labelconfig.LabelconfigID != Guid.Empty)
+                                            {
+                                                <button type="button" onclick="GetLabelsForEdit('@Model.labelconfig.LabelconfigID');" class="btn">OPEN</button>
+                                            }
+                                            else
+                                            {
+                                                <button type="button" onclick="GetLabels();" class="btn">OPEN</button>
+
+                                            }
+                                            @*<button type="button" onclick="showlabellist();" class="btn">Label List</button>*@
                                         </div>
                                     </div>
                                 </div>
@@ -84,21 +139,29 @@
                                         <div class="form-group">
                                             <label><b>Drop select configuration</b></label>
                                             <button type="button" onclick="ShowDropselect();" class="btn">OPEN</button>
+                                            <button type="button" onclick="SaveInTemplate();" class="btn">Save In Template</button>
                                         </div>
                                     </div>
                                 </div>
-                                @if (Model != null && Model.labelconfiglist != null && Model.labelconfiglist.Count > 0)
-                                {
-                                    <div class="tab-content">
-                                        <div class="row" id="Partialviewbind">
+                                @*@if (Model != null && Model.labelconfiglist != null && Model.labelconfiglist.Count > 0)
+                                    {
+                                        <div class="tab-content">
+                                            <div class="row" id="Partialviewbind">
+                                            </div>
                                         </div>
-                                    </div>
-                                }
+                                    }*@
                                 <div id="DropSelectsConfig">
                                     @*@if (Model != null)
                                         {
                                             @Html.Partial("~/Views/AdmCrt/_DropselectConfiguration.cshtml", Model)
                                         }*@
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label><b>Client configuration</b></label>
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-md-6">
@@ -763,49 +826,108 @@
         }
 
         function submitlabels(istemplate) {
-            debugger;
-            var formData = new FormData();
-            formData.append('InstanceName', $("#labelconfig_InstanceName").val());
-            formData.append('Tier2', $("#labelconfig_Tier2").val());
-            formData.append('incidentdate', $("#labelconfig_incidentdate").val());
-            formData.append('Tier3', $("#labelconfig_Tier3").val());
-            formData.append('policystatus', $("#labelconfig_policystatus").val());
-            formData.append('Accnumber', $("#labelconfig_Accnumber").val());
-            formData.append('Rootcause', $("#labelconfig_Rootcause").val());
-            formData.append('Idnumber', $("#labelconfig_Idnumber").val());
-            formData.append('howcomreceived', $("#labelconfig_howcomreceived").val());
-            formData.append('contactno', $("#labelconfig_contactno").val());
-            formData.append('Compregulatory', $("#labelconfig_Compregulatory").val());
-            formData.append('emailaddress', $("#labelconfig_emailaddress").val());
-            formData.append('feedbackregulatory', $("#labelconfig_feedbackregulatory").val());
-            formData.append('productcategory', $("#labelconfig_productcategory").val());
-            formData.append('Overalloutcome', $("#labelconfig_Overalloutcome").val());
-            formData.append('Producttype', $("#labelconfig_Producttype").val());
-            formData.append('Compensation', $("#labelconfig_Compensation").val());
-            formData.append('Compcategory', $("#labelconfig_Compcategory").val());
-            formData.append('Regulatedcost', $("#labelconfig_Regulatedcost").val());
-            formData.append('Nature', $("#labelconfig_Nature").val());
-            formData.append('Value', $("#labelconfig_Value").val());
-            formData.append('TCF', $("#labelconfig_TCF").val());
-            formData.append('DissatisfactionLevel', $("#labelconfig_DissatisfactionLevel").val());
-            formData.append('SatisfactionResolution', $("#labelconfig_SatisfactionResolution").val());
-            formData.append('IsTemplate', istemplate);
-            formData.append('IsEdit', $("#labelconfig_IsEdit").val());
-            formData.append('ClientID', $("#labelconfig_ClientID").val());
-            formData.append('LabelconfigID', $("#labelconfig_LabelconfigID").val());
 
-            $.ajax({
-                url: "/AdmCrt/Savelabelconfig",
-                type: 'post',
-                cache: false,
-                contentType: false,
-                processData: false,
-                data: formData,
-                success: function (data) {
-                    $("#Labelconfig_popup").modal('hide');
-                    showlabellist();
+            if (istemplate == true) {
+                $("#Div_OnSaveTemplate").removeClass('hide');
+            }
+            else {
+                $("#Div_OnSaveTemplate").addClass('hide');
+                $("#labelconfig_PreferredTempName").val('');
+            }
+            if (istemplate == true) {
+                if ($("#labelconfig_PreferredTempName").val() != "" && $("#labelconfig_PreferredTempName").val() != undefined && $("#labelconfig_PreferredTempName").val() != null) {
+                    var formData = new FormData();
+                    formData.append('TemplateName', $("#labelconfig_PreferredTempName").val());
+                    formData.append('Tier2', $("#labelconfig_Tier2").val());
+                    formData.append('incidentdate', $("#labelconfig_incidentdate").val());
+                    formData.append('Tier3', $("#labelconfig_Tier3").val());
+                    formData.append('policystatus', $("#labelconfig_policystatus").val());
+                    formData.append('Accnumber', $("#labelconfig_Accnumber").val());
+                    formData.append('Rootcause', $("#labelconfig_Rootcause").val());
+                    formData.append('Idnumber', $("#labelconfig_Idnumber").val());
+                    formData.append('howcomreceived', $("#labelconfig_howcomreceived").val());
+                    formData.append('contactno', $("#labelconfig_contactno").val());
+                    formData.append('Compregulatory', $("#labelconfig_Compregulatory").val());
+                    formData.append('emailaddress', $("#labelconfig_emailaddress").val());
+                    formData.append('feedbackregulatory', $("#labelconfig_feedbackregulatory").val());
+                    formData.append('productcategory', $("#labelconfig_productcategory").val());
+                    formData.append('Overalloutcome', $("#labelconfig_Overalloutcome").val());
+                    formData.append('Producttype', $("#labelconfig_Producttype").val());
+                    formData.append('Compensation', $("#labelconfig_Compensation").val());
+                    formData.append('Compcategory', $("#labelconfig_Compcategory").val());
+                    formData.append('Regulatedcost', $("#labelconfig_Regulatedcost").val());
+                    formData.append('Nature', $("#labelconfig_Nature").val());
+                    formData.append('Value', $("#labelconfig_Value").val());
+                    formData.append('TCF', $("#labelconfig_TCF").val());
+                    formData.append('DissatisfactionLevel', $("#labelconfig_DissatisfactionLevel").val());
+                    formData.append('SatisfactionResolution', $("#labelconfig_SatisfactionResolution").val());
+                    formData.append('IsTemplate', istemplate);
+                    formData.append('IsEdit', $("#labelconfig_IsEdit").val());
+                    formData.append('ClientID', $("#labelconfig_ClientID").val());
+                    formData.append('RefTempID', $("#labelconfig_TemplateID").val());
+
+                    $.ajax({
+                        url: "/AdmCrt/Savelabelconfig",
+                        type: 'post',
+                        cache: false,
+                        contentType: false,
+                        processData: false,
+                        data: formData,
+                        success: function (data) {
+                            $("#Labelconfig_popup").modal('hide');
+                            //showlabellist();
+                        }
+                    });
                 }
-            });
+                else {
+                    ShowMessage("Select Template name.", "error");
+                }
+            }
+            else {
+                $("#labelconfig_TemplateName").removeAttr('disabled');
+                var formData = new FormData();
+                formData.append('TemplateName', $("#labelconfig_TemplateName").val());
+                formData.append('Tier2', $("#labelconfig_Tier2").val());
+                formData.append('incidentdate', $("#labelconfig_incidentdate").val());
+                formData.append('Tier3', $("#labelconfig_Tier3").val());
+                formData.append('policystatus', $("#labelconfig_policystatus").val());
+                formData.append('Accnumber', $("#labelconfig_Accnumber").val());
+                formData.append('Rootcause', $("#labelconfig_Rootcause").val());
+                formData.append('Idnumber', $("#labelconfig_Idnumber").val());
+                formData.append('howcomreceived', $("#labelconfig_howcomreceived").val());
+                formData.append('contactno', $("#labelconfig_contactno").val());
+                formData.append('Compregulatory', $("#labelconfig_Compregulatory").val());
+                formData.append('emailaddress', $("#labelconfig_emailaddress").val());
+                formData.append('feedbackregulatory', $("#labelconfig_feedbackregulatory").val());
+                formData.append('productcategory', $("#labelconfig_productcategory").val());
+                formData.append('Overalloutcome', $("#labelconfig_Overalloutcome").val());
+                formData.append('Producttype', $("#labelconfig_Producttype").val());
+                formData.append('Compensation', $("#labelconfig_Compensation").val());
+                formData.append('Compcategory', $("#labelconfig_Compcategory").val());
+                formData.append('Regulatedcost', $("#labelconfig_Regulatedcost").val());
+                formData.append('Nature', $("#labelconfig_Nature").val());
+                formData.append('Value', $("#labelconfig_Value").val());
+                formData.append('TCF', $("#labelconfig_TCF").val());
+                formData.append('DissatisfactionLevel', $("#labelconfig_DissatisfactionLevel").val());
+                formData.append('SatisfactionResolution', $("#labelconfig_SatisfactionResolution").val());
+                formData.append('IsTemplate', istemplate);
+                formData.append('IsEdit', $("#labelconfig_IsEdit").val());
+                formData.append('ClientID', $("#labelconfig_ClientID").val());
+                formData.append('RefTempID', $("#labelconfig_TemplateID").val());
+
+                $.ajax({
+                    url: "/AdmCrt/Savelabelconfig",
+                    type: 'post',
+                    cache: false,
+                    contentType: false,
+                    processData: false,
+                    data: formData,
+                    success: function (data) {
+                        $("#Labelconfig_popup").modal('hide');
+                        //showlabellist();
+                    }
+                });
+            }
         }
 
         function SubmitCRTconfig() {
@@ -847,6 +969,137 @@
             //        $("#Partialviewbind").html(data);
             //    }
             //});
+        }
+
+        function Addlabels() {
+            debugger;
+            var value = $("#client_ClientID").val();
+            if (value != "" && value != undefined && value != null) {
+                $("#labelconfig_ClientID").val(value);
+                $("#Labelconfig_popup").modal('show');
+            }
+            else {
+                ShowMessage("Select organisation.", "error");
+            }
+        }
+
+        function GetLabels() {
+            var temid = $("#client_TemplateID").val();
+            var value = $("#client_ClientID").val();
+            if (value != "" && value != undefined && value != null) {
+                if (temid != "" && temid != undefined && temid != null) {
+                    $.ajax({
+                        type: "POST",
+                        url: "/AdmCrt/GetLabelConfig",
+                        traditional: true,
+                        async: true,
+                        data: {
+                            TemplateID: temid,
+                            ClientID: value,
+                            IsEdit: false
+                        },
+                        success: function (data) {
+                            HideLoader();
+                            //$("#labelconfig_ClientID").val(value);
+                            $("#Labelconfig_popup").modal('show');
+                            $("#LabelsConfig").html(data);
+                            //$("#Labelconfig_popup").modal('hide');
+                            //showlabellist();
+                        }
+                    });
+                }
+                else {
+                    ShowMessage("Select Template.", "error");
+                }
+            }
+            else {
+                ShowMessage("Select organisation.", "error");
+            }
+        }
+
+        function GetLabelsForEdit(tempid) {
+            debugger;
+            //var temid = $("#client_TemplateID").val();
+            var value = $("#client_ClientID").val();
+            if (value != "" && value != undefined && value != null) {
+                if (tempid != "" && tempid != undefined && tempid != null) {
+                    $.ajax({
+                        type: "POST",
+                        url: "/AdmCrt/GetLabelConfig",
+                        traditional: true,
+                        async: true,
+                        data: {
+                            TemplateID: tempid,
+                            ClientID: value,
+                            IsEdit: true
+                        },
+                        success: function (data) {
+                            HideLoader();
+                            $("#labelconfig_ClientID").val(value);
+                            $("#Labelconfig_popup").modal('show');
+                            $("#LabelsConfig").html(data);
+                            //$("#Labelconfig_popup").modal('hide');
+                            //showlabellist();
+                        }
+                    });
+                }
+                else {
+                    ShowMessage("Select Template.", "error");
+                }
+            }
+            else {
+                ShowMessage("Select organisation.", "error");
+            }
+
+
+        }
+
+        function SaveInTemplate() {
+            //var temid = $("#client_TemplateID").val();
+            var value = $("#client_ClientID").val();
+            $.ajax({
+                type: "POST",
+                url: "/AdmCrt/SavedropselectInTemplate",
+                traditional: true,
+                async: true,
+                data: {
+                    ClientID: value
+                },
+                success: function (data) {
+                    ShowLoader();
+                    ShowMessage("Drop select data is successfully saved in template.", "success");
+                    //$("#Labelconfig_popup").modal('show');
+                    //$("#LabelsConfig").html(data);
+                }
+            });
+        }
+
+        function GetReason(Obj) {
+            debugger;
+            var complaintTypeVal = $('#' + Obj.id).val();
+            var id = $("#dropselectconfig_ClientID").val();
+            var postData = {
+                ComplaintTypeID: complaintTypeVal,
+                ClientID:id
+            };
+            ShowLoader();
+            AjaxCall("/AdmCrt/GetComplaintReasonList", JSON.stringify(postData), "post", "json", "application/json", false).done(function (data) {
+                HideLoader();
+                if (data != null && data.length > 0) {
+                    $("#dropselectconfig_RefTermID1").html('');
+                    $("#dropselectconfig_RefTermID1").append('<option value="">-- Select Complaint Nature --</option>');
+                    $("#dropselectconfig_RefTermID1").selectpicker('refresh');
+                    for (key in data) {
+                        $("#dropselectconfig_RefTermID1").append('<option value="' + data[key].Value + '">' + data[key].Text + '</option>');
+                    }
+                    $("#dropselectconfig_RefTermID1").selectpicker('refresh');
+                }
+                else {
+                    $("#dropselectconfig_RefTermID1").html('');
+                    $("#dropselectconfig_RefTermID1").append('<option value="">-- Select Complaint Nature --</option>');
+                    $("#dropselectconfig_RefTermID1").selectpicker('refresh');
+                }
+            });
         }
     </script>
 }

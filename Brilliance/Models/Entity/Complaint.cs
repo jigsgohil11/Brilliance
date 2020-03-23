@@ -88,6 +88,7 @@ namespace Brilliance.Models.Entity
         public Guid? Descofloss { get; set; }
         public bool? IsActive { get; set; }
         public string ComplaintType { get; set; }
+        public string TCFOutcome { get; set; }
 
 
         public DateTime? CreatedOn { get; set; }

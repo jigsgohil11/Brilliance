@@ -263,6 +263,7 @@ D:\NEHA_Isoftnetech\Projects\Brilliance\Latest Work\Brilliance\bin\Antlr3.Runtim
 D:\NEHA_Isoftnetech\Projects\Brilliance\Latest Work\Brilliance\bin\Elmah.dll
 D:\NEHA_Isoftnetech\Projects\Brilliance\Latest Work\Brilliance\bin\EntityFramework.dll
 D:\NEHA_Isoftnetech\Projects\Brilliance\Latest Work\Brilliance\bin\EntityFramework.SqlServer.dll
+D:\NEHA_Isoftnetech\Projects\Brilliance\Latest Work\Brilliance\bin\ICSharpCode.SharpZipLib.dll
 D:\NEHA_Isoftnetech\Projects\Brilliance\Latest Work\Brilliance\bin\Microsoft.AI.Agent.Intercept.dll
 D:\NEHA_Isoftnetech\Projects\Brilliance\Latest Work\Brilliance\bin\Microsoft.AI.DependencyCollector.dll
 D:\NEHA_Isoftnetech\Projects\Brilliance\Latest Work\Brilliance\bin\Microsoft.AI.PerfCounterCollector.dll
@@ -279,6 +280,10 @@ D:\NEHA_Isoftnetech\Projects\Brilliance\Latest Work\Brilliance\bin\Microsoft.Owi
 D:\NEHA_Isoftnetech\Projects\Brilliance\Latest Work\Brilliance\bin\Microsoft.Owin.Security.OAuth.dll
 D:\NEHA_Isoftnetech\Projects\Brilliance\Latest Work\Brilliance\bin\Microsoft.Web.Infrastructure.dll
 D:\NEHA_Isoftnetech\Projects\Brilliance\Latest Work\Brilliance\bin\Newtonsoft.Json.dll
+D:\NEHA_Isoftnetech\Projects\Brilliance\Latest Work\Brilliance\bin\NPOI.dll
+D:\NEHA_Isoftnetech\Projects\Brilliance\Latest Work\Brilliance\bin\NPOI.OOXML.dll
+D:\NEHA_Isoftnetech\Projects\Brilliance\Latest Work\Brilliance\bin\NPOI.OpenXml4Net.dll
+D:\NEHA_Isoftnetech\Projects\Brilliance\Latest Work\Brilliance\bin\NPOI.OpenXmlFormats.dll
 D:\NEHA_Isoftnetech\Projects\Brilliance\Latest Work\Brilliance\bin\Owin.dll
 D:\NEHA_Isoftnetech\Projects\Brilliance\Latest Work\Brilliance\bin\System.Web.Helpers.dll
 D:\NEHA_Isoftnetech\Projects\Brilliance\Latest Work\Brilliance\bin\System.Web.Mvc.dll
@@ -290,6 +295,7 @@ D:\NEHA_Isoftnetech\Projects\Brilliance\Latest Work\Brilliance\bin\System.Web.We
 D:\NEHA_Isoftnetech\Projects\Brilliance\Latest Work\Brilliance\bin\WebGrease.dll
 D:\NEHA_Isoftnetech\Projects\Brilliance\Latest Work\Brilliance\bin\EntityFramework.xml
 D:\NEHA_Isoftnetech\Projects\Brilliance\Latest Work\Brilliance\bin\EntityFramework.SqlServer.xml
+D:\NEHA_Isoftnetech\Projects\Brilliance\Latest Work\Brilliance\bin\ICSharpCode.SharpZipLib.xml
 D:\NEHA_Isoftnetech\Projects\Brilliance\Latest Work\Brilliance\bin\Microsoft.AspNet.Identity.Core.xml
 D:\NEHA_Isoftnetech\Projects\Brilliance\Latest Work\Brilliance\bin\Microsoft.AspNet.Identity.Owin.xml
 D:\NEHA_Isoftnetech\Projects\Brilliance\Latest Work\Brilliance\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml

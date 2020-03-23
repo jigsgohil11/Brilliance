@@ -17,7 +17,8 @@ namespace Brilliance.Infrastructure.DataProvider
             {
                 var searchList = new List<SearchValueData>()
                 {
-                        new SearchValueData { Name = "ComplaintID" ,Value = Convert.ToString(Guid.Empty) }
+                        new SearchValueData { Name = "ComplaintID" ,Value = Convert.ToString(Guid.Empty) },
+                        new SearchValueData { Name = "ClientID" ,Value = "B3E5F363-8293-4069-8239-4220AA40CA26"}
                 };
 
                 Complaintmodel = GetMultipleEntity<ComplaintViewModel>("GetComplaintdata", searchList);

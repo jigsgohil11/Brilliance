@@ -5,16 +5,17 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Brilliance.Models.Entity
 {
-    [TableName("CRT_LabelConfiguration")]
+    [TableName("CRT_LabelConfig")]
     [PrimaryKey("LabelconfigID")]
     [Sort("SeqNo", "ASC")]
     public class LabelConfiguration
     {
         [Key]
         public Guid LabelconfigID { get; set; }
+        public Guid? RefTemplateID { get; set; }
         public Guid? ClientID { get; set; }
-        [Required(ErrorMessage = "Instance name is required.")]
-        public string InstanceName { get; set; }
+        public Guid? InstanceID { get; set; }
+        public string TemplateName { get; set; }
         public string Tier2 { get; set; }
         public string Tier3 { get; set; }
         public string incidentdate { get; set; }
@@ -41,11 +42,14 @@ namespace Brilliance.Models.Entity
         public bool? IsTemplate { get; set; }
         public Guid? CreatedBy { get; set; }
         public DateTime? CreatedOn { get; set; }
-        public bool? IsActive { get; set; }
-        public long Seqno { get; set; }
-
         [ResultColumn]
-        public bool IsEdit { get; set; }
+        public string PreferredTempName { get; set; }
+        [ResultColumn]
+        public Guid? TemplateID { get; set; }
+        [ResultColumn]
+        public bool? IsEdit { get; set; }
+        [ResultColumn]
+        public bool IsExistinTemplate { get; set; }
         [ResultColumn]
         public string OrganizationName { get; set; }
 

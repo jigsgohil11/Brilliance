@@ -28,6 +28,7 @@ namespace Brilliance.Models.ViewModel
             ComplaintRegulatedCostList = new List<SelectListItem>();
             CaseFileStageList = new List<SelectListItem>();
             Labelconfig= new LabelConfiguration();
+            client = new Client();
         }
         public Complaint complaint { get; set; }
         public List<CRTNotes> NoteList { get; set; }
@@ -49,6 +50,7 @@ namespace Brilliance.Models.ViewModel
         public List<SelectListItem> ComplaintRegulatedCostList { get; set; }
         public List<SelectListItem> CaseFileStageList { get; set; }
         public LabelConfiguration Labelconfig { get; set; }
+        public Client client { get; set; }
     }
 
     public class ComplaintListModel

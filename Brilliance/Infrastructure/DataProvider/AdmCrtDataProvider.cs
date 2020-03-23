@@ -21,21 +21,44 @@ namespace Brilliance.Infrastructure.DataProvider
 
                 searchList.Add(new SearchValueData { Name = "ClientID", Value = Convert.ToString(ClientID) });
                 crtViewModel = GetMultipleEntity<CrtAdminViewmodel>("Adm_GetCRTsetupdata", searchList);
-
                 response.Data = crtViewModel;
                 response.IsSuccess = true;
             }
             catch (Exception ex)
             {
 
+                 
             }
             return response;
         }
-        public ServiceResponse Savelabelconfig(string InstanceName, string Tier2, string incidentdate, string Tier3, string policystatus,
+        public CrtAdminViewmodel GetLabelConfig(Guid TemplateID, Guid ClientID,bool? IsEdit)
+        {
+            var CrtVM = new CrtAdminViewmodel();
+            var response = new ServiceResponse();
+            try
+            {
+                var searchList = new List<SearchValueData>();
+                searchList.Add(new SearchValueData { Name = "TemplateID", Value = Convert.ToString(TemplateID) });
+                searchList.Add(new SearchValueData { Name = "ClientID", Value = Convert.ToString(ClientID) });
+                searchList.Add(new SearchValueData { Name = "IsEdit", Value = Convert.ToString(IsEdit) });
+                LabelConfiguration labelconfig = GetEntity<LabelConfiguration>("Crt_GetLabelsfromTemplate", searchList);
+                CrtVM.labelconfig = labelconfig;
+                CrtVM.labelconfig.IsEdit = IsEdit;
+                CrtVM.labelconfig.ClientID = ClientID;
+                CrtVM.labelconfig.TemplateID = TemplateID;
+                response.IsSuccess = true;
+            }
+            catch (Exception ex)
+            {
+
+            }
+            return CrtVM;
+        }
+        public ServiceResponse Savelabelconfig(string TemplateName, string Tier2, string incidentdate, string Tier3, string policystatus,
                                             string Accnumber, string Rootcause, string Idnumber, string howcomreceived, string contactno,
                                             string Compregulatory, string emailaddress, string feedbackregulatory, string productcategory, string Overalloutcome,
                                             string Producttype, string Compensation, string Compcategory, string Regulatedcost, string Nature,
-                                            string Value, string TCF, string DissatisfactionLevel, string SatisfactionResolution, bool? IsTemplate, bool? IsEdit,Guid? ClientID,Guid? LabelconfigID)
+                                            string Value, string TCF, string DissatisfactionLevel, string SatisfactionResolution, bool? IsTemplate, bool? IsEdit, Guid? ClientID, Guid? RefTempID)
         {
             var response = new ServiceResponse();
             try
@@ -45,35 +68,36 @@ namespace Brilliance.Infrastructure.DataProvider
                 {
                     SqlCommand cmd = new SqlCommand();
                     cmd.Parameters.AddWithValue("@LabelconfigID", Guid.NewGuid()).SqlDbType = SqlDbType.UniqueIdentifier;
+                    cmd.Parameters.AddWithValue("@RefTemplateID", RefTempID).SqlDbType = SqlDbType.UniqueIdentifier;
                     cmd.Parameters.AddWithValue("@ClientID", ClientID).SqlDbType = SqlDbType.UniqueIdentifier;
-                    cmd.Parameters.AddWithValue("@instanceName", InstanceName).SqlDbType = SqlDbType.NVarChar;
+                    cmd.Parameters.AddWithValue("@TemplateName", TemplateName).SqlDbType = SqlDbType.NVarChar;
                     cmd.Parameters.AddWithValue("@Tier2", Tier2).SqlDbType = SqlDbType.NVarChar;
-                    cmd.Parameters.AddWithValue("@Tier3",Tier3).SqlDbType = SqlDbType.NVarChar;
-                    cmd.Parameters.AddWithValue("@Accnumber",Accnumber).SqlDbType = SqlDbType.NVarChar;
-                    cmd.Parameters.AddWithValue("@Idnumber",Idnumber).SqlDbType = SqlDbType.NVarChar;
-                    cmd.Parameters.AddWithValue("@contactno",contactno).SqlDbType = SqlDbType.NVarChar;
-                    cmd.Parameters.AddWithValue("@emailaddress",emailaddress).SqlDbType = SqlDbType.NVarChar;
-                    cmd.Parameters.AddWithValue("@productcategory",productcategory).SqlDbType = SqlDbType.NVarChar;
-                    cmd.Parameters.AddWithValue("@Producttype",Producttype).SqlDbType = SqlDbType.NVarChar;
-                    cmd.Parameters.AddWithValue("@Compcategory",Compcategory).SqlDbType = SqlDbType.NVarChar;
-                    cmd.Parameters.AddWithValue("@Nature",Nature).SqlDbType = SqlDbType.NVarChar;
-                    cmd.Parameters.AddWithValue("@TCF",TCF).SqlDbType = SqlDbType.NVarChar;
-                    cmd.Parameters.AddWithValue("@incidentdate",incidentdate).SqlDbType = SqlDbType.NVarChar;
-                    cmd.Parameters.AddWithValue("@policystatus",policystatus).SqlDbType = SqlDbType.NVarChar;
-                    cmd.Parameters.AddWithValue("@Rootcause",Rootcause).SqlDbType = SqlDbType.NVarChar;
-                    cmd.Parameters.AddWithValue("@howcomreceived",howcomreceived).SqlDbType = SqlDbType.NVarChar;
-                    cmd.Parameters.AddWithValue("@Compregulatory",Compregulatory).SqlDbType = SqlDbType.NVarChar;
-                    cmd.Parameters.AddWithValue("@feedbackregulatory",feedbackregulatory).SqlDbType = SqlDbType.NVarChar;
-                    cmd.Parameters.AddWithValue("@Overalloutcome",Overalloutcome).SqlDbType = SqlDbType.NVarChar;
-                    cmd.Parameters.AddWithValue("@Compensation",Compensation).SqlDbType = SqlDbType.NVarChar;
-                    cmd.Parameters.AddWithValue("@Regulatedcost",Regulatedcost).SqlDbType = SqlDbType.NVarChar;
-                    cmd.Parameters.AddWithValue("@Value",Value).SqlDbType = SqlDbType.NVarChar;
-                    cmd.Parameters.AddWithValue("@DissatisfactionLevel",DissatisfactionLevel).SqlDbType = SqlDbType.NVarChar;
-                    cmd.Parameters.AddWithValue("@SatisfactionResolution",SatisfactionResolution).SqlDbType = SqlDbType.NVarChar;
-                    cmd.Parameters.AddWithValue("@IsTemplate",IsTemplate).SqlDbType = SqlDbType.Bit;
-                    cmd.Parameters.AddWithValue("@CreatedBy",SessionHelper.UserId).SqlDbType = SqlDbType.UniqueIdentifier;
-                    cmd.Parameters.AddWithValue("@CreatedOn",DateTime.Now).SqlDbType = SqlDbType.DateTime;
-                    cmd.Parameters.AddWithValue("@IsEdit",IsEdit).SqlDbType = SqlDbType.Bit;
+                    cmd.Parameters.AddWithValue("@Tier3", Tier3).SqlDbType = SqlDbType.NVarChar;
+                    cmd.Parameters.AddWithValue("@Accnumber", Accnumber).SqlDbType = SqlDbType.NVarChar;
+                    cmd.Parameters.AddWithValue("@Idnumber", Idnumber).SqlDbType = SqlDbType.NVarChar;
+                    cmd.Parameters.AddWithValue("@contactno", contactno).SqlDbType = SqlDbType.NVarChar;
+                    cmd.Parameters.AddWithValue("@emailaddress", emailaddress).SqlDbType = SqlDbType.NVarChar;
+                    cmd.Parameters.AddWithValue("@productcategory", productcategory).SqlDbType = SqlDbType.NVarChar;
+                    cmd.Parameters.AddWithValue("@Producttype", Producttype).SqlDbType = SqlDbType.NVarChar;
+                    cmd.Parameters.AddWithValue("@Compcategory", Compcategory).SqlDbType = SqlDbType.NVarChar;
+                    cmd.Parameters.AddWithValue("@Nature", Nature).SqlDbType = SqlDbType.NVarChar;
+                    cmd.Parameters.AddWithValue("@TCF", TCF).SqlDbType = SqlDbType.NVarChar;
+                    cmd.Parameters.AddWithValue("@incidentdate", incidentdate).SqlDbType = SqlDbType.NVarChar;
+                    cmd.Parameters.AddWithValue("@policystatus", policystatus).SqlDbType = SqlDbType.NVarChar;
+                    cmd.Parameters.AddWithValue("@Rootcause", Rootcause).SqlDbType = SqlDbType.NVarChar;
+                    cmd.Parameters.AddWithValue("@howcomreceived", howcomreceived).SqlDbType = SqlDbType.NVarChar;
+                    cmd.Parameters.AddWithValue("@Compregulatory", Compregulatory).SqlDbType = SqlDbType.NVarChar;
+                    cmd.Parameters.AddWithValue("@feedbackregulatory", feedbackregulatory).SqlDbType = SqlDbType.NVarChar;
+                    cmd.Parameters.AddWithValue("@Overalloutcome", Overalloutcome).SqlDbType = SqlDbType.NVarChar;
+                    cmd.Parameters.AddWithValue("@Compensation", Compensation).SqlDbType = SqlDbType.NVarChar;
+                    cmd.Parameters.AddWithValue("@Regulatedcost", Regulatedcost).SqlDbType = SqlDbType.NVarChar;
+                    cmd.Parameters.AddWithValue("@Value", Value).SqlDbType = SqlDbType.NVarChar;
+                    cmd.Parameters.AddWithValue("@DissatisfactionLevel", DissatisfactionLevel).SqlDbType = SqlDbType.NVarChar;
+                    cmd.Parameters.AddWithValue("@SatisfactionResolution", SatisfactionResolution).SqlDbType = SqlDbType.NVarChar;
+                    cmd.Parameters.AddWithValue("@IsTemplate", IsTemplate).SqlDbType = SqlDbType.Bit;
+                    cmd.Parameters.AddWithValue("@CreatedBy", SessionHelper.UserId).SqlDbType = SqlDbType.UniqueIdentifier;
+                    cmd.Parameters.AddWithValue("@CreatedOn", DateTime.Now).SqlDbType = SqlDbType.DateTime;
+                    cmd.Parameters.AddWithValue("@IsEdit", IsEdit).SqlDbType = SqlDbType.Bit;
 
                     DataSet ds = null;
                     ds = BulkInsert("SaveCRT_Labelconfig", cmd);
@@ -84,9 +108,10 @@ namespace Brilliance.Infrastructure.DataProvider
                 else
                 {
                     SqlCommand cmd = new SqlCommand();
-                    cmd.Parameters.AddWithValue("@LabelconfigID", LabelconfigID).SqlDbType = SqlDbType.UniqueIdentifier;
+                   cmd.Parameters.AddWithValue("@LabelconfigID", RefTempID).SqlDbType = SqlDbType.UniqueIdentifier;
+                    cmd.Parameters.AddWithValue("@RefTemplateID", RefTempID).SqlDbType = SqlDbType.UniqueIdentifier;
                     cmd.Parameters.AddWithValue("@ClientID", ClientID).SqlDbType = SqlDbType.UniqueIdentifier;
-                    cmd.Parameters.AddWithValue("@instanceName", InstanceName).SqlDbType = SqlDbType.NVarChar;
+                    cmd.Parameters.AddWithValue("@TemplateName", TemplateName).SqlDbType = SqlDbType.NVarChar;
                     cmd.Parameters.AddWithValue("@Tier2", Tier2).SqlDbType = SqlDbType.NVarChar;
                     cmd.Parameters.AddWithValue("@Tier3", Tier3).SqlDbType = SqlDbType.NVarChar;
                     cmd.Parameters.AddWithValue("@Accnumber", Accnumber).SqlDbType = SqlDbType.NVarChar;
@@ -120,10 +145,6 @@ namespace Brilliance.Infrastructure.DataProvider
                     response.IsSuccess = true;
                     response.Message = "Record Saved Successfully.";
                 }
-
-
-
-
             }
             catch (Exception ex)
             {
@@ -146,7 +167,7 @@ namespace Brilliance.Infrastructure.DataProvider
                 //ProjecttermList.projecttermcategory.ProjectTermCategoryID = ProjectTermCategoryID;
                 if (labellist.Count > 0)
                 {
-                    CrtVM.labelconfiglist = labellist;
+                    //CrtVM.labelconfiglist = labellist;
                 }
             }
             catch (Exception ex)
@@ -165,8 +186,8 @@ namespace Brilliance.Infrastructure.DataProvider
                 var searchList = new List<SearchValueData>();
                 searchList.Add(new SearchValueData { Name = "LabelconfigID", Value = Convert.ToString(LabelconfigID) });
                 CrtVM = GetMultipleEntity<CrtAdminViewmodel>("Crt_GetLabelConfigData", searchList);
-                CrtVM.labelconfig.IsEdit = true;
-                CrtVM.labelconfig.LabelconfigID = LabelconfigID;
+                //CrtVM.labelconfig.IsEdit = true;
+                //CrtVM.labelconfig.LabelconfigID = LabelconfigID;
                 response.IsSuccess = true;
             }
             catch (Exception ex)
@@ -332,6 +353,46 @@ namespace Brilliance.Infrastructure.DataProvider
                 response.Message = "Internal server error";
             }
 
+            return response;
+        }
+
+        public ServiceResponse SavedropselectInTemplate(Guid ClientID)
+        {
+            var CrtVM = new CrtAdminViewmodel();
+            var response = new ServiceResponse();
+            try
+            {
+                SqlCommand cmd = new SqlCommand();
+                cmd.Parameters.AddWithValue("@ClientID", ClientID).SqlDbType = SqlDbType.UniqueIdentifier;
+
+                DataSet ds = null;
+                ds = BulkInsert("SavedropselectInTemplate", cmd);
+                response.IsSuccess = true;
+                response.Message = "Record Saved Successfully.";
+            }
+            catch (Exception ex)
+            {
+                response.Message = "Internal server error";
+            }
+            return response;
+        }
+
+        public ServiceResponse GetComplaintReasonList(Guid ComplaintTypeID, Guid ClientID)
+        {
+            var response = new ServiceResponse();
+            var searchvaluedata = new List<SearchValueData>();
+            try
+            {
+                searchvaluedata.Add(new SearchValueData { Name = "ComplaintTypeID", Value = Convert.ToString(ComplaintTypeID) });
+                searchvaluedata.Add(new SearchValueData { Name = "ClientID", Value = Convert.ToString(ClientID) });
+                List<SelectListItem> NatureOfComplaints = GetEntityList<SelectListItem>("GetCustomerReasonList", searchvaluedata);
+                response.Data = NatureOfComplaints;
+                response.IsSuccess = true;
+            }
+            catch (Exception ex)
+            {
+                response.Message = "Internal Server Error";
+            }
             return response;
         }
     }

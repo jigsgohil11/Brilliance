@@ -1,0 +1,352 @@
+﻿@*@model Hr.Models.ViewModel.ApplicantReportViewModel
+@using DataProviderMaster.Infrastructure
+@{
+    ViewBag.Title = "ApplicantReport";
+}
+<link href="~/assets/global/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+<link href="~/assets/global/css/OMSCustom.css" rel="stylesheet" />
+
+<link href="~/assets/global/css/report.css" rel="stylesheet" />
+<style>
+    .table td, .table th {
+        font-size: 12px;
+    }
+
+    .table thead tr th {
+        font-size: 12px;
+        font-weight: 600;
+        padding: 3px;
+    }
+
+    .table tbody tr td {
+        padding: 3px;
+    }
+
+    .image-size-custom {
+        width: 141.28px;
+        height: 152.08px;
+        
+    }
+
+    #table1 > tbody > tr > td, #table1 > tbody > tr > th {
+        border: none !important;
+    }
+
+    #table2 > tbody > tr > td, #table1 > tbody > tr > th {
+        border: none !important;
+    }
+</style>
+
+<page size="A4" style="font-size: 13px;" id="applicantpage">
+    <div class="portlet-body" style="display: block;margin: 15px;">
+        @if (Model != null && Model.CandidateProfile != null)
+        {
+            <div class="row">
+                <div class="col-sm-12">
+                    <h4 style="text-align:center;">Applicant Report</h4>
+                    <hr style="border-bottom: 1px solid #ddd !important;float: left;width: 100%;margin-top: 5px;" />
+                </div>
+            </div>
+            <div class="row">
+
+                <div class="col-lg-9">
+
+                </div>
+                <div class="col-lg-3" style="float:right">
+                    <div class="form-group">
+                        <div class="fileinput fileinput-new" data-provides="fileinput">
+                            <div class="fileinput-new thumbnail-Custom ">
+                              
+                                @if (Model != null && Model.CandidateProfile != null && !string.IsNullOrEmpty(Model.CandidateProfile.Photograph) && File.Exists(HttpContext.Current.Server.MapPath(Constants.ApplicantProfileImagesPath + Model.CandidateProfile.Photograph)))
+                                {
+                                    <img class="img-responsive img-profile img-user image-size-custom" src="@string.Format(Constants.ApplicantProfileImagesPath.Replace("~", "") + Model.CandidateProfile.Photograph)" class="">
+                                }
+                                else
+                                {
+                                    <img class="img-responsive img-profile image-size-custom" src="/Areas/Setup/UploadImages/UserProfile/947253d1_0c59_4f20_85c5_57eb8713592c.png">
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <br />
+            <div class="row">
+                <div class="table-responsive col-lg-12">
+                    <table class="table table-hover margin-top-10 margin-bottom5" id="table1">
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <span><b>Position Applied for :</b></span>
+                                </td>
+                                <td>
+                                    <span style="margin-left:-400px;"><b>@(Model.CandidateProfile.PositionApplied != null ? Model.CandidateProfile.PositionApplied : "")</b></span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <span><b>Source referred through :</b></span>
+                                </td>
+                                <td>
+                                    <span style="margin-left:-400px;">@(Model.CandidateProfile.SourceOfProfile_Term != null ? Model.CandidateProfile.SourceOfProfile_Term : "")</span>
+                                </td>
+                            </tr>
+
+                        </tbody>
+
+                    </table>
+                </div>
+            </div>
+            <br />
+            <div>
+                <label><b>1. Personal Data :</b></label>
+            </div>
+            <div class="row">
+                <div class="table-responsive col-lg-12">
+                    <table class="table table-hover margin-top-10 margin-bottom5" id="table2">
+                        <tbody>
+                            <tr>
+                                <td class="col-lg-2">
+                                    <b>Full Name:</b>
+                                </td>
+                                <td class="col-lg-4">
+                                    @(Model.CandidateProfile.FullName != null ? Model.CandidateProfile.FullName : "")
+                                </td>
+                                <td class="col-lg-4"></td>
+
+                            </tr>
+                            @if (Model != null && Model.addresslist != null && Model.addresslist.Count > 0)
+                            {
+                                <tr>
+                                    <td class="col-lg-2">
+                                        <b>Address :</b>
+                                    </td>
+                                    @for (var i = 0; i < Model.addresslist.Count; i++)
+                                    {
+                                        <td class="col-lg-4">
+                                            <label><b>@(Model.addresslist[i].AddressType_Term != null ? Model.addresslist[i].AddressType_Term : "")</b></label><br />
+                                            @(Model.addresslist[i].Address1 != null ? Model.addresslist[i].Address1 : "")
+                                        </td>
+                                    }
+                                  
+                                </tr>
+                                <tr>
+                                    <td class="col-lg-2">
+                                        <b>Contact No :</b>
+                                    </td>
+                                    @for (var i = 0; i < Model.addresslist.Count; i++)
+                                    {
+                                        <td class="col-lg-4">
+                                            <label><b>Mo. No. :</b></label>
+                                            @(Model.addresslist[i].MobileNo != null ? Model.addresslist[i].MobileNo : "")
+                                        </td>
+                                    }
+                                    
+                                </tr>
+                            }
+                            <tr>
+                                <td class="col-lg-2">
+                                    <b>Email ID :</b>
+                                </td>
+                                <td class="col-lg-4">
+                                    <label>@(Model.CandidateProfile.EmailID != null ? Model.CandidateProfile.EmailID : "")</label>
+                                </td>
+                                <td class="col-lg-4"></td>
+                            </tr>
+                           
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="table-responsive">
+                <table class="table table-striped table-bordered table-hover margin-bottom5" id="dt_Assessmentcriteria">
+                    <thead class="flip-content">
+                        <tr>
+                            <th> Date Of Birth </th>
+                            <th> Age </th>
+                            <th> Marital status </th>
+                            <th> Residence </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (Model.CandidateProfile.birthdate != null || Model.CandidateProfile.Age != null || Model.CandidateProfile.MaritalStatus != null || Model.CandidateProfile.HouseLiving != null)
+                        {
+                            <tr>
+                                <td>@(Model.CandidateProfile.birthdate != null ? Model.CandidateProfile.birthdate : "")</td>
+                                <td>@(Convert.ToString(Model.CandidateProfile.Age) != null ? Convert.ToString(Model.CandidateProfile.Age) : "")</td>
+                                <td>@(Model.CandidateProfile.MaritalStatus != null ? Model.CandidateProfile.MaritalStatus : "")</td>
+                                <td>@(Model.CandidateProfile.HouseLiving != null ? Model.CandidateProfile.HouseLiving : "")</td>
+                            </tr>
+                        }
+
+                    </tbody>
+                </table>
+            </div>
+            <br />
+            <div>
+                <label><b>2. Language Details:</b></label>
+            </div>
+            if (Model.languagelist != null && Model.languagelist.Count > 0)
+            {
+                <div class="table-responsive">
+                    <table class="table table-striped table-bordered table-hover margin-bottom5" id="dt_Assessmentcriteria">
+                        <thead class="flip-content">
+                            <tr>
+                                <th> Language </th>
+                                <th> Is Read </th>
+                                <th> Is Write</th>
+                                <th> Is Speak </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model.languagelist)
+                            {
+                                <tr>
+                                    <td><label>@(item.Language_Term != null ? item.Language_Term : "")</label></td>
+                                    @if (item.IsRead == true)
+                                    {
+                                        <td><label>&#x2713</label></td>
+                                    }
+                                    else
+                                    {
+                                        <td><label></label></td>
+                                    }
+                                    @if (item.IsWrite == true)
+                                    {
+                                        <td><label>&#x2713</label></td>
+                                    }
+                                    else
+                                    {
+                                        <td><label></label></td>
+                                    }
+                                    @if (item.IsSpeak == true)
+                                    {
+                                        <td><label>&#x2713</label></td>
+                                    }
+                                    else
+                                    {
+                                        <td><label></label></td>
+                                    }
+
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            }
+
+            <br />
+
+            <div>
+                <label><b>3. Qualifications:</b></label>
+            </div>
+
+            <div class="table-responsive">
+                <table class="table table-striped table-bordered table-hover margin-bottom5" id="dt_Assessmentcriteria">
+                    <thead class="flip-content">
+                        <tr>
+                            <th> Qualification </th>
+                            <th> University Board </th>
+                            <th> Completion Month year </th>
+                            <th> Grade </th>
+                            <th> No of Attempt </th>
+                            <th> Professional Qualification </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.CandidateEducationBackgroundList)
+                        {
+                            <tr>
+                                <td><label>@(item.Qualification_Term != null ? item.Qualification_Term : "")</label></td>
+                                <td><label>@(item.UniversityBoard_Term != null ? item.UniversityBoard_Term : "")</label></td>
+                                <td><label>@(item.CompletionMonthYear != null ? item.CompletionMonthYear : "")</label></td>
+                                <td><label>@(item.Grade != null ? item.Grade : "")</label></td>
+                                <td><label>@(Convert.ToString(item.NoOfAttempt) != null ? Convert.ToString(item.NoOfAttempt) : "")</label></td>
+                                <td><label>@(item.ProfessionalQualification != null ? item.ProfessionalQualification : "")</label></td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+            <br />
+            <div>
+                <label style="margin-top:15px;"><b>4. Family Details:</b></label>
+            </div>
+
+            <div class="table-responsive">
+                <table class="table table-striped table-bordered table-hover margin-bottom5" id="dt_Assessmentcriteria">
+                    <thead class="flip-content">
+                        <tr>
+                            <th> Name </th>
+                            <th> Relationship </th>
+                            <th> Occupation </th>
+                            <th> Mobile No. </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.CandidateFamilyDetailsList)
+                        {
+                            <tr>
+                                <td><label>@(item.NameOfmember != null ? item.NameOfmember : "")</label></td>
+                                <td><label>@(item.RelationType_Term != null ? item.RelationType_Term : "")</label></td>
+                                <td><label>@(item.OccupationType_Term != null ? item.OccupationType_Term : "")</label></td>
+                                <td><label>@(item.MobileNo != null ? item.MobileNo : "")</label></td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+            <br />
+            <br />
+            <br />
+
+
+            <div style="margin-top:15px;">
+                <label><b>5. Work Experience:</b></label>
+            </div>
+
+            <div class="table-responsive">
+                <table class="table table-striped table-bordered table-hover margin-bottom5" id="dt_Assessmentcriteria">
+                    <thead class="flip-content">
+                        <tr>
+                            <th> Name of Employer </th>
+                            <th> From </th>
+                            <th> To </th>
+                            <th> Designation </th>
+                            <th> Income Per Annum </th>
+                            <th> Reason for leaving </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.CandidatePreviousEmployerList)
+                        {
+                            <tr>
+                                <td><label>@(item.PreviousEmployerName != null ? item.PreviousEmployerName : "")</label></td>
+                                <td><label>@(item.DOJ != null ? item.DOJ : "")</label></td>
+                                <td><label>@(item.DOL != null ? item.DOL : "")</label></td>
+                                <td><label>@(item.EmployeeDesignation != null ? item.EmployeeDesignation : "")</label></td>
+                                <td><label>@(Convert.ToString(item.CTC) != null ? Convert.ToString(item.CTC) : "")</label></td>
+                                <td><label>@(item.ReasonForLeaving != null ? item.ReasonForLeaving : "")</label></td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        }
+    </div>
+
+</page>
+
+<script src="~/assets/global/plugins/jquery.min.js" type="text/javascript"></script>
+
+
+<script>
+
+    $(document).ready(function () {
+        window.print();
+    })
+
+   
+
+</script>*@

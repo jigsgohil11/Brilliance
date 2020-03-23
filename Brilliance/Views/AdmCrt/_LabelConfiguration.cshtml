@@ -11,10 +11,12 @@
         @*<form id="frmlabelconfig" action="/AdmCrt/Savelabelconfig" method="post" data-ajax="true" data-ajax-method="Post" data-ajax-success="SaveLabelResponse(data);">*@
         <form id="frmlabelconfig" action="/AdmCrt/Savelabelconfig" method="post">
             <div class="modal-body">
-                @Html.HiddenFor(m => m.labelconfig.ClientID)
+
                 @Html.HiddenFor(m => m.labelconfig.LabelconfigID)
                 @Html.HiddenFor(m => m.labelconfig.IsTemplate)
+                @Html.HiddenFor(m => m.labelconfig.TemplateID)
                 @Html.HiddenFor(m => m.labelconfig.IsEdit)
+                @Html.HiddenFor(m => m.labelconfig.ClientID)
                 <input type="hidden" id="istemplate" />
 
                 <div class="row">
@@ -22,8 +24,8 @@
                         <div class="form-group">
                             <label class="col-md-5">Template Name</label>
                             <div class="col-md-7">
-                                @Html.TextBoxFor(m => m.labelconfig.InstanceName, new { @class = "form-control m-input" })
-                                @Html.ValidationMessageFor(m => m.labelconfig.InstanceName)
+                                @Html.TextBoxFor(m => m.labelconfig.TemplateName, new { @class = "form-control m-input", @disabled = "disabled" })
+                                @Html.ValidationMessageFor(m => m.labelconfig.TemplateName)
                             </div>
                         </div>
                     </div>
@@ -31,8 +33,6 @@
                 <div class="row" style="margin-top:12px;">
                     <div class="col-md-6">
                         <div class="form-group">
-                            @Html.HiddenFor(m => m.labelconfig.ClientID)
-
                             <label class="col-md-5">Tier 2</label>
                             <div class="col-md-7">
                                 @Html.TextBoxFor(m => m.labelconfig.Tier2, new { @class = "form-control m-input" })
@@ -54,7 +54,6 @@
                             <label class="col-md-5">Tier 3</label>
                             <div class="col-md-7">
                                 @Html.TextBoxFor(m => m.labelconfig.Tier3, new { @class = "form-control m-input" })
-
                             </div>
                         </div>
                     </div>
@@ -63,7 +62,6 @@
                             <label class="col-md-5">Policy status</label>
                             <div class="col-md-7">
                                 @Html.TextBoxFor(m => m.labelconfig.policystatus, new { @class = "form-control m-input" })
-
                             </div>
                         </div>
                     </div>
@@ -195,7 +193,6 @@
                         </div>
                     </div>
                 </div>
-
                 <div class="row" style="margin-top:12px;">
                     <div class="col-md-6">
                         <div class="form-group">
@@ -242,6 +239,22 @@
                             </div>
                         </div>
                     </div>
+                    @*<div class="col-md-6 hide" id="Div_OnSave">
+                            <div class="form-group">
+                                <label class="col-md-5">Preferred Template Name</label>
+                                <div class="col-md-7">
+                                    @Html.TextBoxFor(m => m.labelconfig.PreferredTempName, new { @class = "form-control m-input" })
+                                </div>
+                            </div>
+                        </div>*@
+                    <div class="col-md-6 hide" id="Div_OnSaveTemplate">
+                        <div class="form-group">
+                            <label class="col-md-5">New Template</label>
+                            <div class="col-md-7">
+                                @Html.TextBoxFor(m => m.labelconfig.PreferredTempName, new { @class = "form-control m-input" })
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
             </div>
@@ -250,7 +263,10 @@
                 @*<button id="btnSaveAreaTask" type="submit" class="btn green">SAVE</button>*@
                 <button id="btnSaveAreaTask" type="button" onclick="submitlabels(false);" class="btn green">SAVE</button>
                 @*<button id="btnSaveAreaTask" type="button" onclick="Savelabelform(@Common.SerializeObject(Model));" class="btn green">SAVE</button>*@
-                <button id="btnSave" type="button" onclick="submitlabels(true);" class="btn green">SAVE AS NEW TEMPLATE</button>
+                @if (Model!=null && Model.labelconfig!=null && Model.labelconfig.IsExistinTemplate == false)
+                {
+                    <button id="btnSave" type="button" onclick="submitlabels(true);" class="btn green">SAVE AS NEW TEMPLATE</button>
+                }
             </div>
         </form>
     </div>
