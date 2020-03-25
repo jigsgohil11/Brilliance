@@ -128,6 +128,7 @@ namespace Brilliance.Infrastructure.DataProvider
                     cmd.Parameters.AddWithValue("@TCFOutcome", Complaintmodel.complaint.TCFOutcome).SqlDbType = SqlDbType.NVarChar;
                     cmd.Parameters.AddWithValue("@Eventtype", Complaintmodel.complaint.Eventtype).SqlDbType = SqlDbType.UniqueIdentifier;
                     cmd.Parameters.AddWithValue("@Descofloss", Complaintmodel.complaint.Descofloss).SqlDbType = SqlDbType.UniqueIdentifier;
+                    cmd.Parameters.AddWithValue("@AssignTo", Complaintmodel.complaint.AssignTo).SqlDbType = SqlDbType.UniqueIdentifier;
                     cmd.Parameters.AddWithValue("@CreatedBy", SessionHelper.UserId).SqlDbType = SqlDbType.UniqueIdentifier;
                     cmd.Parameters.AddWithValue("@CreatedOn", DateTime.Now).SqlDbType = SqlDbType.DateTime;
                     cmd.Parameters.AddWithValue("@UpdatedOn", null).SqlDbType = SqlDbType.DateTime;
@@ -205,6 +206,7 @@ namespace Brilliance.Infrastructure.DataProvider
                     cmd.Parameters.AddWithValue("@TCFOutcome", Complaintmodel.complaint.TCFOutcome).SqlDbType = SqlDbType.NVarChar;
                     cmd.Parameters.AddWithValue("@Eventtype", Complaintmodel.complaint.Eventtype).SqlDbType = SqlDbType.UniqueIdentifier;
                     cmd.Parameters.AddWithValue("@Descofloss", Complaintmodel.complaint.Descofloss).SqlDbType = SqlDbType.UniqueIdentifier;
+                    cmd.Parameters.AddWithValue("@AssignTo", Complaintmodel.complaint.AssignTo).SqlDbType = SqlDbType.UniqueIdentifier;
                     cmd.Parameters.AddWithValue("@UpdatedOn", DateTime.Now).SqlDbType = SqlDbType.DateTime;
                     cmd.Parameters.AddWithValue("@UpdatedBy", SessionHelper.UserId).SqlDbType = SqlDbType.UniqueIdentifier;
                     cmd.Parameters.AddWithValue("@IsEdit", Complaintmodel.complaint.IsEdit).SqlDbType = SqlDbType.Bit;

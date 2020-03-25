@@ -59,6 +59,8 @@ namespace Brilliance.Models.Entity
         public Guid? ComplaintReceivedId { get; set; }
         [Required(ErrorMessage = "Received Regulatory is required.")]
         public Guid? ComplaintReceivedRegulatoryId { get; set; }
+      
+        public Guid? AssignTo { get; set; }
         [Required(ErrorMessage = "Received Regulatory Feedback is required.")]
         public Guid? ComplaintReceivedRegulatoryFeedbackId { get; set; }
         [MaxLength(50)]

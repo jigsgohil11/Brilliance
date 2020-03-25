@@ -933,6 +933,15 @@
                                                                 </div>
                                                             </div>
                                                         </div>
+                                                        <div class="row">
+                                                            <div class="col-md-6">
+                                                                <div class="form-group">
+                                                                    <label>Assign To</label>
+                                                                    @Html.DropDownListFor(m => m.complaint.AssignTo, new SelectList(Model.UserList, "Value", "Text", 0), "Choose..", new { @data_live_search = "true", @class = "form-control bs-select"})
+                                                                    @*@Html.ValidationMessageFor(m => m.complaint.ComplaintReceivedRegulatoryId)*@
+                                                                </div>
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>

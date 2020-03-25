@@ -376,5 +376,128 @@ namespace Brilliance.Controllers
                 ////----Direct Excel Export END----///  
             }
         }
+        public void GetLevel3ComplaintTypesExcelReport(string Type)
+        {
+            string clientid = "";
+            DataSet ds = new DataSet();
+            _ireportDataProvider = new ReportDataProvider();
+            Guid ClientID = Common.CheckIdNullOrEmptyNonEncrypt(clientid);
+            IWorkbook workbook;
+            workbook = new HSSFWorkbook();
+            ds = _ireportDataProvider.GetComplaintExcelReport(ClientID, Type);
+
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0] != null && ds.Tables[0].Rows.Count > 0)
+            {
+                for (int k = 0; k < ds.Tables[0].Rows.Count; k++)
+                {
+                    string Tier3 = Convert.ToString(ds.Tables[0].Rows[k]["Tier3"]);
+                    DataTable dt = ds.Tables[0];
+
+                    ISheet sheet1 = workbook.CreateSheet("Sheet " + k);
+
+                    IRow row1 = sheet1.CreateRow(0);
+                    ICell cellr1 = row1.CreateCell(0);
+                    cellr1.SetCellValue("Complaint Notes Report");
+                    ICellStyle style = workbook.CreateCellStyle();
+                    style.Alignment = HorizontalAlignment.Left;
+                    row1.GetCell(0).CellStyle = style;
+
+                    var font = workbook.CreateFont();
+                    font.FontHeightInPoints = 11;
+                    font.FontName = "Calibri";
+                    font.Boldweight = (short)FontBoldWeight.Bold;
+                    cellr1.CellStyle.SetFont(font);
+                    sheet1.AddMergedRegion(new CellRangeAddress(0, 0, 0, 6));
+
+                    IRow row2 = sheet1.CreateRow(1);
+                    ICell cellr2 = row2.CreateCell(0);
+                    cellr2.SetCellValue(Tier3);
+                    row1.GetCell(0).CellStyle = style;
+
+                    var fontr2 = workbook.CreateFont();
+                    fontr2.FontHeightInPoints = 9;
+                    fontr2.FontName = "Calibri";
+                    fontr2.Boldweight = (short)FontBoldWeight.Bold;
+                    //fontr2.Color = IndexedColors.Blue.Index;
+                    cellr2.CellStyle.SetFont(fontr2);
+                    sheet1.AddMergedRegion(new CellRangeAddress(1, 1, 0, 0));
+
+
+                    IRow row3 = sheet1.CreateRow(2);
+                    ICell cellr3 = row3.CreateCell(0);
+                    cellr3.SetCellValue("01 Jan 2020 - 29 Feb 2020");
+                    row3.GetCell(0).CellStyle = style;
+
+                    var fontr3 = workbook.CreateFont();
+                    fontr3.FontHeightInPoints = 9;
+                    fontr3.FontName = "Calibri";
+                    fontr3.Boldweight = (short)FontBoldWeight.Bold;
+                    cellr3.CellStyle.SetFont(fontr3);
+                    sheet1.AddMergedRegion(new CellRangeAddress(2, 2, 0, 6));
+
+                    IRow row4 = sheet1.CreateRow(4);
+
+                    for (int j = 0; j < dt.Columns.Count - 1; j++)
+                    {
+                        ICell cell = row4.CreateCell(j);
+
+                        String columnName = dt.Columns[j].ToString();
+                        cell.SetCellValue(columnName);
+                    }
+
+                    for (int i = 0; i < dt.Rows.Count; i++)
+                    {
+                        IRow row = sheet1.CreateRow(i + 5);
+                        for (int j = 0; j < dt.Columns.Count - 1; j++)
+                        {
+                            ICell cell = row.CreateCell(j);
+                            String columnName = dt.Columns[j].ToString();
+                            cell.SetCellValue(dt.Rows[i][columnName].ToString());
+
+                        }
+                    }
+
+                    sheet1.AutoSizeColumn(0);
+                    sheet1.AutoSizeColumn(1);
+                    sheet1.AutoSizeColumn(2);
+                    sheet1.AutoSizeColumn(3);
+                    sheet1.AutoSizeColumn(4);
+                    sheet1.AutoSizeColumn(5);
+                    sheet1.AutoSizeColumn(6);
+                    sheet1.AutoSizeColumn(7);
+                    sheet1.AutoSizeColumn(8);
+                    sheet1.AutoSizeColumn(9);
+                    sheet1.AutoSizeColumn(10);
+                    sheet1.AutoSizeColumn(11);
+                    sheet1.AutoSizeColumn(12);
+                    sheet1.AutoSizeColumn(13);
+                    sheet1.AutoSizeColumn(14);
+                    sheet1.AutoSizeColumn(15);
+                    sheet1.AutoSizeColumn(16);
+                    sheet1.AutoSizeColumn(17);
+                    sheet1.AutoSizeColumn(18);
+                    sheet1.AutoSizeColumn(19);
+                    sheet1.AutoSizeColumn(20);
+                }
+            }
+
+
+            using (var exportData = new MemoryStream())
+            {
+                Response.Clear();
+                workbook.Write(exportData);
+
+                ///-----Direct Excel Export Start----///
+                ///
+                string saveAsFileName = string.Format("Complaintsdata_WithoutNotes_Report.xls", DateTime.Now);
+                Response.ContentType = "application/vnd.ms-excel";
+                Response.AddHeader("Content-Disposition", string.Format("attachment;filename={0}", saveAsFileName));
+                Response.Clear();
+                Response.BinaryWrite(exportData.GetBuffer());
+                Response.End();
+
+                ////----Direct Excel Export END----///  
+            }
+        }
     }
 }
