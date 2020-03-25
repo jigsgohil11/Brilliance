@@ -88,7 +88,7 @@
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label><b>OutCome configuration</b></label>
-                                            <button type="button" onclick="ShowDropselect();" class="btn">OPEN</button>
+                                            <button type="button" onclick="AddOutcomes();" class="btn">OPEN</button>
                                         </div>
                                     </div>
                                 </div>
@@ -97,7 +97,7 @@
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label><b>Business Practice Set up configuration</b></label>
-                                            <button type="button" onclick="ShowDropselect();" class="btn">OPEN</button>
+                                            <button type="button" onclick="AddBusiness();" class="btn">OPEN</button>
                                         </div>
                                     </div>
                                 </div>
@@ -106,7 +106,7 @@
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label><b>Drop select configuration</b></label>
-                                            <button type="button" onclick="ShowDropselect();" class="btn">OPEN</button>
+                                            <button type="button" onclick="AddDropselect();" class="btn">OPEN</button>
                                         </div>
                                     </div>
                                 </div>
@@ -115,6 +115,7 @@
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label><b>Notification configuration</b></label>
+                                            <button type="button" onclick="AddNotification();" class="btn">OPEN</button>
                                             <button type="button" onclick="ShowDropselect();" class="btn">OPEN</button>
                                         </div>
                                     </div>
@@ -611,10 +612,46 @@
 <div class="modal fade modal-scroll bs-modal-lg" id="Labelconfig_popup" tabindex="-1" role="dialog" aria-hidden="true">
     <div id="LabelsConfig">
         @*@if (Model != null)
-        {
-            @Html.Partial("~/Views/AdmCrt/_LabelConfiguration.cshtml", Model)
-        }*@
+            {
+                @Html.Partial("~/Views/AdmCrt/_LabelConfiguration.cshtml", Model)
+            }*@
         @Html.Partial("~/Views/AdmCis/_LabelConfiguration.cshtml", null)
+    </div>
+</div>
+<div class="modal fade modal-scroll bs-modal-lg" id="Outcomeconfig_popup" tabindex="-1" role="dialog" aria-hidden="true">
+    <div id="OutcomesConfig">
+        @*@if (Model != null)
+            {
+                @Html.Partial("~/Views/AdmCrt/_LabelConfiguration.cshtml", Model)
+            }*@
+        @Html.Partial("~/Views/AdmCis/_OutcomeConfiguration.cshtml", null)
+    </div>
+</div>
+<div class="modal fade modal-scroll bs-modal-lg" id="Businessconfig_popup" tabindex="-1" role="dialog" aria-hidden="true">
+    <div id="BusinessConfig">
+        @*@if (Model != null)
+            {
+                @Html.Partial("~/Views/AdmCrt/_LabelConfiguration.cshtml", Model)
+            }*@
+        @Html.Partial("~/Views/AdmCis/_AddBusinessConfiguration.cshtml", null)
+    </div>
+</div>
+<div class="modal fade modal-scroll bs-modal-lg" id="Dropselectconfig_popup" tabindex="-1" role="dialog" aria-hidden="true">
+    <div id="DropselectConfig">
+        @*@if (Model != null)
+            {
+                @Html.Partial("~/Views/AdmCrt/_LabelConfiguration.cshtml", Model)
+            }*@
+        @Html.Partial("~/Views/AdmCis/_AddDropselectConfiguration.cshtml", null)
+    </div>
+</div>
+<div class="modal fade modal-scroll bs-modal-lg" id="Notificationconfig_popup" tabindex="-1" role="dialog" aria-hidden="true">
+    <div id="NotificationConfig">
+        @*@if (Model != null)
+            {
+                @Html.Partial("~/Views/AdmCrt/_LabelConfiguration.cshtml", Model)
+            }*@
+        @Html.Partial("~/Views/AdmCis/_NotificationConfiguration.cshtml", null)
     </div>
 </div>
 <div class="modal fade modal-scroll bs-modal-lg" id="AddDropselect_popup" tabindex="-1" role="dialog" aria-hidden="true">
@@ -670,7 +707,49 @@
             //var value = $("#client_ClientID").val();
             //if (value != "" && value != undefined && value != null) {
             //    $("#labelconfig_ClientID").val(value);
-                $("#Labelconfig_popup").modal('show');
+            $("#Labelconfig_popup").modal('show');
+            //}
+            //else {
+            //    ShowMessage("Select organisation.", "error");
+            //}
+        }
+
+
+        function AddOutcomes() {
+            //var value = $("#client_ClientID").val();
+            //if (value != "" && value != undefined && value != null) {
+            //    $("#labelconfig_ClientID").val(value);
+            $("#Outcomeconfig_popup").modal('show');
+            //}
+            //else {
+            //    ShowMessage("Select organisation.", "error");
+            //}
+        }
+        function AddBusiness() {
+            //var value = $("#client_ClientID").val();
+            //if (value != "" && value != undefined && value != null) {
+            //    $("#labelconfig_ClientID").val(value);
+            $("#Businessconfig_popup").modal('show');
+            //}
+            //else {
+            //    ShowMessage("Select organisation.", "error");
+            //}
+        }
+        function AddDropselect() {
+            //var value = $("#client_ClientID").val();
+            //if (value != "" && value != undefined && value != null) {
+            //    $("#labelconfig_ClientID").val(value);
+            $("#Dropselectconfig_popup").modal('show');
+            //}
+            //else {
+            //    ShowMessage("Select organisation.", "error");
+            //}
+        }
+        function AddNotification() {
+            //var value = $("#client_ClientID").val();
+            //if (value != "" && value != undefined && value != null) {
+            //    $("#labelconfig_ClientID").val(value);
+            $("#Notificationconfig_popup").modal('show');
             //}
             //else {
             //    ShowMessage("Select organisation.", "error");
@@ -702,6 +781,30 @@
             }
         }
 
+        function ShowOutcome() {
+            var id = $("#client_ClientID").val();
+            if (id != "" && id != undefined && id != null) {
+                var postData = JSON.stringify({ ClientID: id });
+                ShowLoader();
+                $.ajax({
+                    type: "POST",
+                    url: "/AdmCrt/LabelconfigList",
+                    traditional: true,
+                    async: true,
+                    data: {
+                        ClientID: id
+                    },
+                    success: function (data) {
+                        HideLoader();
+                        $("#Partialviewbind").html('');
+                        $("#Partialviewbind").html(data);
+                    }
+                });
+            }
+            else {
+                ShowMessage("Select organisation.", "error");
+            }
+        }
 
         function closeList() {
             $("#Partialviewbind").html('');

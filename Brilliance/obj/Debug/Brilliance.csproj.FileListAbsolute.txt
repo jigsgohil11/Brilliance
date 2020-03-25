@@ -134,7 +134,6 @@ D:\iSoftNet Work\Brilliance\Latest Work\Brilliance\Brilliance\bin\Microsoft.AI.D
 D:\iSoftNet Work\Brilliance\Latest Work\Brilliance\Brilliance\bin\Microsoft.AI.ServerTelemetryChannel.xml
 D:\iSoftNet Work\Brilliance\Latest Work\Brilliance\Brilliance\bin\Microsoft.AI.WindowsServer.xml
 D:\iSoftNet Work\Brilliance\Latest Work\Brilliance\Brilliance\bin\Microsoft.AI.Web.xml
-D:\iSoftNet Work\Brilliance\Latest Work\Brilliance\Brilliance\obj\Debug\Brilliance.csprojResolveAssemblyReference.cache
 D:\iSoftNet Work\Brilliance\Latest Work\Brilliance\Brilliance\obj\Debug\Brilliance.Resource.Resource.resources
 D:\iSoftNet Work\Brilliance\Latest Work\Brilliance\Brilliance\obj\Debug\Brilliance.csproj.GenerateResource.Cache
 D:\iSoftNet Work\Brilliance\Latest Work\Brilliance\Brilliance\obj\Debug\Brilliance.dll
@@ -324,3 +323,5 @@ D:\NEHA_Isoftnetech\Projects\Brilliance\Latest Work\Brilliance\obj\Debug\Brillia
 D:\NEHA_Isoftnetech\Projects\Brilliance\Latest Work\Brilliance\obj\Debug\Brilliance.dll
 D:\NEHA_Isoftnetech\Projects\Brilliance\Latest Work\Brilliance\obj\Debug\Brilliance.pdb
 D:\NEHA_Isoftnetech\Projects\Brilliance\Latest Work\Brilliance\obj\Debug\Brilliance.csprojAssemblyReference.cache
+D:\iSoftNet Work\Brilliance\Latest Work\Brilliance\Brilliance\obj\Debug\Brilliance.csprojAssemblyReference.cache
+D:\iSoftNet Work\Brilliance\Latest Work\Brilliance\Brilliance\obj\Debug\Brilliance.csproj.CopyComplete

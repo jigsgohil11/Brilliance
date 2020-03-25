@@ -20,28 +20,20 @@
                 <div class="row">
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label class="col-md-5">Template Name</label>
+                            <label class="col-md-5">
+                                Add TCF requirement
+                            </label>
                             <div class="col-md-7">
                                 @Html.TextBoxFor(m => m.labelconfig.InstanceName, new { @class = "form-control m-input" })
                                 @Html.ValidationMessageFor(m => m.labelconfig.InstanceName)
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="row" style="margin-top:12px;">
                     <div class="col-md-6">
                         <div class="form-group">
-                            @Html.HiddenFor(m => m.labelconfig.ClientID)
-
-                            <label class="col-md-5">Tier 2</label>
-                            <div class="col-md-7">
-                                @Html.TextBoxFor(m => m.labelconfig.Tier2, new { @class = "form-control m-input" })
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label class="col-md-5">Complaint incident date</label>
+                            <label class="col-md-5">
+                                My responsibilities / tasks
+                            </label>
                             <div class="col-md-7">
                                 @Html.TextBoxFor(m => m.labelconfig.incidentdate, new { @class = "form-control m-input" })
                             </div>
@@ -51,7 +43,33 @@
                 <div class="row" style="margin-top:12px;">
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label class="col-md-5">Tier 3</label>
+                            @Html.HiddenFor(m => m.labelconfig.ClientID)
+
+                            <label class="col-md-5">
+                                Guidance
+                            </label>
+                            <div class="col-md-7">
+                                @Html.TextBoxFor(m => m.labelconfig.Tier2, new { @class = "form-control m-input" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="col-md-5">
+                                Rate the extent to which this is in place or in practice
+                            </label>
+                            <div class="col-md-7">
+                                @Html.TextBoxFor(m => m.labelconfig.incidentdate, new { @class = "form-control m-input" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row" style="margin-top:12px;">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="col-md-5">
+                                Report
+                            </label>
                             <div class="col-md-7">
                                 @Html.TextBoxFor(m => m.labelconfig.Tier3, new { @class = "form-control m-input" })
 
@@ -60,7 +78,9 @@
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label class="col-md-5">Policy status</label>
+                            <label class="col-md-5">
+                                Due date by when this will be in place or in practice
+                            </label>
                             <div class="col-md-7">
                                 @Html.TextBoxFor(m => m.labelconfig.policystatus, new { @class = "form-control m-input" })
 
@@ -71,7 +91,9 @@
                 <div class="row" style="margin-top:12px;">
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label class="col-md-5">Account number</label>
+                            <label class="col-md-5">
+                                ref
+                            </label>
                             <div class="col-md-7">
                                 @Html.TextBoxFor(m => m.labelconfig.Accnumber, new { @class = "form-control m-input" })
                             </div>
@@ -79,80 +101,32 @@
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label class="col-md-5">Root cause</label>
+                            <label class="col-md-5">
+                                Who is responsible for getting and/or keeping this in place or in practice?
+                            </label>
+                            <div class="col-md-7">
+                                @Html.TextBoxFor(m => m.labelconfig.Tier3, new { @class = "form-control m-input" })
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row" style="margin-top:12px;">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="col-md-5">
+                                Description
+                            </label>
                             <div class="col-md-7">
                                 @Html.TextBoxFor(m => m.labelconfig.Rootcause, new { @class = "form-control m-input" })
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="row" style="margin-top:12px;">
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label class="col-md-5">ID number</label>
-                            <div class="col-md-7">
-                                @Html.TextBoxFor(m => m.labelconfig.Idnumber, new { @class = "form-control m-input" })
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label class="col-md-5">How complaint received</label>
-                            <div class="col-md-7">
-                                @Html.TextBoxFor(m => m.labelconfig.howcomreceived, new { @class = "form-control m-input" })
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row" style="margin-top:12px;">
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label class="col-md-5">Contact number</label>
-                            <div class="col-md-7">
-                                @Html.TextBoxFor(m => m.labelconfig.contactno, new { @class = "form-control m-input" })
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label class="col-md-5">Complaint from regulatory body</label>
-                            <div class="col-md-7">
-                                @Html.TextBoxFor(m => m.labelconfig.Compregulatory, new { @class = "form-control m-input" })
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row" style="margin-top:12px;">
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label class="col-md-5">Email address</label>
-                            <div class="col-md-7">
-                                @Html.TextBoxFor(m => m.labelconfig.emailaddress, new { @class = "form-control m-input" })
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label class="col-md-5">Feedback from regulatory body</label>
-                            <div class="col-md-7">
-                                @Html.TextBoxFor(m => m.labelconfig.feedbackregulatory, new { @class = "form-control m-input" })
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="row" style="margin-top:12px;">
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label class="col-md-5">Product category</label>
-                            <div class="col-md-7">
-                                @Html.TextBoxFor(m => m.labelconfig.productcategory, new { @class = "form-control m-input" })
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label class="col-md-5">Overall outcome</label>
+                            <label class="col-md-5">
+                                Why do you say this is fully in place or in practice?
+                            </label>
                             <div class="col-md-7">
                                 @Html.TextBoxFor(m => m.labelconfig.Overalloutcome, new { @class = "form-control m-input" })
                             </div>
@@ -162,17 +136,44 @@
                 <div class="row" style="margin-top:12px;">
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label class="col-md-5">Product type</label>
+                            <label class="col-md-5">
+                                Previous rating
+                            </label>
+                            <div class="col-md-7">
+                                @Html.TextBoxFor(m => m.labelconfig.Tier3, new { @class = "form-control m-input" })
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="col-md-5">
+                                Provide evidence proving this is fully in place or in practice
+                            </label>
                             <div class="col-md-7">
                                 @Html.TextBoxFor(m => m.labelconfig.Producttype, new { @class = "form-control m-input" })
                             </div>
                         </div>
                     </div>
+                </div>
+                <div class="row" style="margin-top:12px;">
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label class="col-md-5">Compensation/Payment</label>
+                            <label class="col-md-5">
+                                Current due dates
+                            </label>
                             <div class="col-md-7">
-                                @Html.TextBoxFor(m => m.labelconfig.Compensation, new { @class = "form-control m-input" })
+                                @Html.TextBoxFor(m => m.labelconfig.Idnumber, new { @class = "form-control m-input" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="col-md-5">
+                                Capture…
+                            </label>
+                            <div class="col-md-7">
+                                @Html.TextBoxFor(m => m.labelconfig.howcomreceived, new { @class = "form-control m-input" })
                             </div>
                         </div>
                     </div>
@@ -180,70 +181,25 @@
                 <div class="row" style="margin-top:12px;">
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label class="col-md-5">Complaint category</label>
+                            <label class="col-md-5">
+                                See help
+                            </label>
                             <div class="col-md-7">
-                                @Html.TextBoxFor(m => m.labelconfig.Compcategory, new { @class = "form-control m-input" })
+                                @Html.TextBoxFor(m => m.labelconfig.contactno, new { @class = "form-control m-input" })
                             </div>
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label class="col-md-5">Regulated costs</label>
+                            <label class="col-md-5">
+                                More
+                            </label>
                             <div class="col-md-7">
-                                @Html.TextBoxFor(m => m.labelconfig.Regulatedcost, new { @class = "form-control m-input" })
+                                @Html.TextBoxFor(m => m.labelconfig.Compregulatory, new { @class = "form-control m-input" })
                             </div>
                         </div>
                     </div>
                 </div>
-
-                <div class="row" style="margin-top:12px;">
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label class="col-md-5">Nature of complaint</label>
-                            <div class="col-md-7">
-                                @Html.TextBoxFor(m => m.labelconfig.Nature, new { @class = "form-control m-input" })
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label class="col-md-5">Value</label>
-                            <div class="col-md-7">
-                                @Html.TextBoxFor(m => m.labelconfig.Value, new { @class = "form-control m-input" })
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="row" style="margin-top:12px;">
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label class="col-md-5">TCF outcome</label>
-                            <div class="col-md-7">
-                                @Html.TextBoxFor(m => m.labelconfig.TCF, new { @class = "form-control m-input" })
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label class="col-md-5">Level of dissatisfaction</label>
-                            <div class="col-md-7">
-                                @Html.TextBoxFor(m => m.labelconfig.DissatisfactionLevel, new { @class = "form-control m-input" })
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row" style="margin-top:12px;">
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label class="col-md-5">Satisfaction post resolution</label>
-                            <div class="col-md-7">
-                                @Html.TextBoxFor(m => m.labelconfig.SatisfactionResolution, new { @class = "form-control m-input" })
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn default" data-dismiss="modal">Cancel</button>
@@ -255,4 +211,3 @@
         </form>
     </div>
 </div>
-
