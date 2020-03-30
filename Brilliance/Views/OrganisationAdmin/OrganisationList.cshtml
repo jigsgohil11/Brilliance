@@ -16,10 +16,10 @@
                             <span class="caption-subject bold">Organisation Administration</span>
                         </div>
                         @*<div class="caption font-dark pull-right">
-                            <a class="btn btn-circle btn-icon-only btn-default" title="Add Organization" href="/Organization/Organization">
-                                <i class="fa fa-plus"></i>
-                            </a>
-                        </div>*@
+                                <a class="btn btn-circle btn-icon-only btn-default" title="Add Organization" href="/Organization/Organization">
+                                    <i class="fa fa-plus"></i>
+                                </a>
+                            </div>*@
                     </div>
                 </div>
             </div>
@@ -43,7 +43,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @if (Model != null && Model.Organisationlist!=null && Model.Organisationlist.Count > 0)
+                            @if (Model != null && Model.Organisationlist != null && Model.Organisationlist.Count > 0)
                             {
                                 int index = 0;
                                 foreach (var item in Model.Organisationlist)
@@ -56,24 +56,45 @@
                                         @*<td width="10%">
                                                 <a class="action" href="/Organization/Organization/@item.EncryptedClientID">@item.OrganizationName</a>
                                             </td>*@
+                                        @if (Common.IsPermissionAllowed(Constants.Can_Access_Company).IsCreate || Common.IsPermissionAllowed(Constants.Can_Access_Company).IsUpdate)
+                                        {
+                                            <td>
+                                                @if (Common.IsPermissionAllowed(Constants.Can_Access_Company).IsCreate)
+                                                {
+                                                    <a href="/AdmCompany/Company/@item.EncryptedClientID" title="Add company">
+                                                        <i class="fa fa-plus"></i>
+                                                    </a>
+                                                }
+                                                @if (Common.IsPermissionAllowed(Constants.Can_Access_Company).IsUpdate)
+                                                {
+                                                    <a href="/AdmCompany/Company/@item.EncryptedClientID" title="Edit company">
+                                                        <i class="btn-xs fa fa-pencil padding0"></i>
+                                                    </a>
+                                                }
+                                            </td>
+                                        }
+
                                         <td>
-                                            <a href="/AdmCompany/Company/@item.EncryptedClientID" title="Add company">
-                                                <i class="fa fa-plus"></i>
-                                            </a>
-                                            <a href="/AdmCompany/Company/@item.EncryptedClientID" title="Edit company">
-                                                <i class="btn-xs fa fa-pencil padding0"></i>
-                                            </a>
-                                        </td>
-                                        <td>
-                                            @if (item.IsCompanyExist == true)
+                                            @if (Common.IsPermissionAllowed(Constants.Can_Access_Division).IsCreate || Common.IsPermissionAllowed(Constants.Can_Access_Division).IsUpdate)
                                             {
-                                                <a href="/AdmDivision/Division?clientid=@item.EncryptedClientID" title="Add division">
-                                                    <i class="fa fa-plus"></i>
-                                                </a>
-                                                <a href="/AdmDivision/Division/@item.EncryptedClientID" title="Edit division">
-                                                    <i class="btn-xs fa fa-pencil padding0"></i>
-                                                </a>
+
+                                                if (item.IsCompanyExist == true)
+                                                {
+                                                    if (Common.IsPermissionAllowed(Constants.Can_Access_Division).IsCreate)
+                                                    {
+                                                        <a href="/AdmDivision/Division?clientid=@item.EncryptedClientID" title="Add division">
+                                                            <i class="fa fa-plus"></i>
+                                                        </a>
+                                                    }
+                                                    if (Common.IsPermissionAllowed(Constants.Can_Access_Division).IsUpdate)
+                                                    {
+                                                        <a href="/AdmDivision/Division/@item.EncryptedClientID" title="Edit division">
+                                                            <i class="btn-xs fa fa-pencil padding0"></i>
+                                                        </a>
+                                                    }
+                                                }
                                             }
+
 
                                         </td>
                                         <td width="10%" style="background-color:white !important;">3</td>
@@ -81,7 +102,7 @@
                                         <td width="20%">
                                             <a class="action btn  btn-primary btn-xs @Constants.Class_Cannot_Access_Update" href="/ClientSetup/Client/@item.EncryptedClientID" title="Edit"><i class="btn-xs fa fa-pencil padding0"></i></a>
                                             <a class="action btn  btn-danger btn-xs @Constants.Class_Cannot_Access_Remove" href="javascript:void(0);" title="Delete" onclick="fnOpenDeleteModel('DeleteButton','DeleteModal','@item.EncryptedClientID.ToString()');"><i class="btn-xs fa fa-trash-o padding0"></i></a>
-                                            <a class="action btn  btn-danger btn-xs @Constants.Class_Cannot_Access_Remove"  title="App Subscription" href="/ClientSetup/InstanceSubscription/@item.EncryptedClientID">Add subscription</a>
+                                            @*<a class="action btn  btn-danger btn-xs @Constants.Class_Cannot_Access_Remove" title="App Subscription" href="/ClientSetup/InstanceSubscription/@item.EncryptedClientID">Add subscription</a>*@
                                         </td>
                                     </tr>
                                 }

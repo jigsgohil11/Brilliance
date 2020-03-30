@@ -110,6 +110,8 @@ namespace Brilliance.Models.Entity
         public bool OrganisationID { get; set; }
         [ResultColumn]
         public Guid? TemplateID { get; set; }
+        [ResultColumn]
+        public Guid? TemplatedataID { get; set; }
 
         [Ignore]
         public string EncryptedClientID { get { return ClientID != Guid.Empty ? Crypto.Encrypt(Convert.ToString(ClientID)) : null; } }

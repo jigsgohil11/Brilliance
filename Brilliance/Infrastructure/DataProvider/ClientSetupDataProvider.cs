@@ -73,10 +73,6 @@ namespace Brilliance.Infrastructure.DataProvider
                     cmd.Parameters.AddWithValue("@subheadsclr", Clients.client.subheadsclr).SqlDbType = SqlDbType.NVarChar;
                     cmd.Parameters.AddWithValue("@IsCrtSubscribe", Clients.client.IsCrtSubscribe).SqlDbType = SqlDbType.Bit;
                     cmd.Parameters.AddWithValue("@IsCISSubscribe", Clients.client.IsCISSubscribe).SqlDbType = SqlDbType.Bit;
-                    cmd.Parameters.AddWithValue("@IsViewDissatisfationLevel", Clients.client.IsViewDissatisfationLevel).SqlDbType = SqlDbType.Bit;
-                    cmd.Parameters.AddWithValue("@IsRequireDissatisfationLevel", Clients.client.IsRequireDissatisfationLevel).SqlDbType = SqlDbType.Bit;
-                    cmd.Parameters.AddWithValue("@IsViewSatisfationLevel", Clients.client.IsViewSatisfationLevel).SqlDbType = SqlDbType.Bit;
-                    cmd.Parameters.AddWithValue("@IsRequireSatisfationLevel", Clients.client.IsRequireSatisfationLevel).SqlDbType = SqlDbType.Bit;
                     cmd.Parameters.AddWithValue("@IsEdit", Clients.client.IsEdit).SqlDbType = SqlDbType.Bit;
 
                     DataSet ds = null;

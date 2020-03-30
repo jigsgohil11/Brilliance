@@ -62,7 +62,7 @@ namespace Brilliance.Infrastructure
         public const string Can_Access_ODS = "ODS";
         public const string Can_Access_Sector = "Sector";
         public const string Can_Access_SubSector = "SubSector";
-        public const string Can_Access_Division = "Division";
+        
         public const string Can_Access_SMEApplication = "SMEApplication";
         public const string Can_Access_EASApplication = "EASApplication";
         public const string Can_Access_GeneralOption = "GeneralOption";
@@ -87,7 +87,6 @@ namespace Brilliance.Infrastructure
         //public const string Can_Access_OzoneProgramme = "OzoneProgramme";
         //public const string Can_Access_SMECertificate = "SMECertificate";
         public const string Can_Access_Region = "Region";
-        public const string Can_Access_User = "User";
         public const string Can_Access_UserRole = "UserRole";
         public const string Can_Access_UserGroup = "UserGroup";
         public const string Can_Access_UserAlert = "UserAlert";
@@ -98,6 +97,19 @@ namespace Brilliance.Infrastructure
         public const string Can_Access_FiscalYear = "FiscalYear";
         public const string Can_Access_FiscalYearEnd = "FiscalYearEnd";
         public const string Can_Access_ApproveReject = "Approve/Reject";
+
+
+
+        public const string Can_Access_ClientSetup = "Client Setup";
+        public const string Can_Access_Orgadmin = "Organisation admin";
+        public const string Can_Access_Company = "Company";
+        public const string Can_Access_Division = "Division";
+        public const string Can_Access_Crt = "Complaints Reporting Tool";
+        public const string Can_Access_User = "User";
+        public const string Can_Access_Crtadmin = "CRT Admin";
+        public const string Can_Access_FieldLabels = "Field Label configuration";
+        public const string Can_Access_Dropselect = "Drop-select configuration";
+        public const string Can_Access_CrtReports = "CRT Portal reports";
         #endregion Role Permission List
 
         public const string StatusRejected = "Rejected";

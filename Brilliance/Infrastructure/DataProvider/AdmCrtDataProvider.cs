@@ -31,7 +31,7 @@ namespace Brilliance.Infrastructure.DataProvider
             }
             return response;
         }
-        public CrtAdminViewmodel GetLabelConfig(Guid TemplateID, Guid ClientID,bool? IsEdit)
+        public CrtAdminViewmodel GetLabelConfig(Guid TemplateID, Guid ClientID,string OrgName, bool? IsEdit)
         {
             var CrtVM = new CrtAdminViewmodel();
             var response = new ServiceResponse();
@@ -45,6 +45,7 @@ namespace Brilliance.Infrastructure.DataProvider
                 CrtVM.labelconfig = labelconfig;
                 CrtVM.labelconfig.IsEdit = IsEdit;
                 CrtVM.labelconfig.ClientID = ClientID;
+                CrtVM.labelconfig.OrganizationName = OrgName;
                 CrtVM.labelconfig.TemplateID = TemplateID;
                 response.IsSuccess = true;
             }
@@ -342,6 +343,10 @@ namespace Brilliance.Infrastructure.DataProvider
                 cmd.Parameters.AddWithValue("@WebTurnaround_hours", crtadminVM.client.WebTurnaround_hours).SqlDbType = SqlDbType.Int;
                 cmd.Parameters.AddWithValue("@WebTurnaround_times", crtadminVM.client.WebTurnaround_times).SqlDbType = SqlDbType.Int;
                 cmd.Parameters.AddWithValue("@WebTurnaround_email", crtadminVM.client.WebTurnaround_email).SqlDbType = SqlDbType.NVarChar;
+                cmd.Parameters.AddWithValue("@IsViewDissatisfationLevel", crtadminVM.client.IsViewDissatisfationLevel).SqlDbType = SqlDbType.Bit;
+                cmd.Parameters.AddWithValue("@IsRequireDissatisfationLevel", crtadminVM.client.IsRequireDissatisfationLevel).SqlDbType = SqlDbType.Bit;
+                cmd.Parameters.AddWithValue("@IsViewSatisfationLevel", crtadminVM.client.IsViewSatisfationLevel).SqlDbType = SqlDbType.Bit;
+                cmd.Parameters.AddWithValue("@IsRequireSatisfationLevel", crtadminVM.client.IsRequireSatisfationLevel).SqlDbType = SqlDbType.Bit;
 
                 DataSet ds = null;
                 ds = BulkInsert("SaveCRTconfig", cmd);
@@ -356,7 +361,7 @@ namespace Brilliance.Infrastructure.DataProvider
             return response;
         }
 
-        public ServiceResponse SavedropselectInTemplate(Guid ClientID)
+        public ServiceResponse SavedropselectInTemplate(Guid ClientID, Guid TemplateID)
         {
             var CrtVM = new CrtAdminViewmodel();
             var response = new ServiceResponse();
@@ -364,7 +369,7 @@ namespace Brilliance.Infrastructure.DataProvider
             {
                 SqlCommand cmd = new SqlCommand();
                 cmd.Parameters.AddWithValue("@ClientID", ClientID).SqlDbType = SqlDbType.UniqueIdentifier;
-
+                cmd.Parameters.AddWithValue("@TemplateID", TemplateID).SqlDbType = SqlDbType.UniqueIdentifier;
                 DataSet ds = null;
                 ds = BulkInsert("SavedropselectInTemplate", cmd);
                 response.IsSuccess = true;
@@ -394,6 +399,26 @@ namespace Brilliance.Infrastructure.DataProvider
                 response.Message = "Internal Server Error";
             }
             return response;
+        }
+
+        public CrtAdminViewmodel GetTemplateList()
+        {
+            var response = new ServiceResponse();
+            var CrtVM = new CrtAdminViewmodel();
+            try
+            {
+                var searchList = new List<SearchValueData>();
+               
+                //searchList.Add(new SearchValueData { Name = "ClientID", Value = Convert.ToString(ClientID) });
+                CrtVM = GetMultipleEntity<CrtAdminViewmodel>("GetTemplateList", searchList);
+                response.Data = CrtVM;
+                response.IsSuccess = true;
+            }
+            catch (Exception ex)
+            {
+
+            }
+            return CrtVM;
         }
     }
 }

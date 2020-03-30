@@ -38,7 +38,11 @@ namespace Brilliance.Infrastructure.DataProvider
             var complaintlistVM = new ComplaintListModel();
             try
             {
-                var searchList = new List<SearchValueData>();
+                var searchList = new List<SearchValueData>()
+                {
+                        new SearchValueData { Name = "UserID" ,Value = Convert.ToString(SessionHelper.UserId)},
+                        new SearchValueData { Name = "RoleID" ,Value = Convert.ToString(SessionHelper.RoleID)}
+                };
 
                 List<Complaint> complaints = GetEntityList<Complaint>("GetComplaintList", searchList);//Constants.GetUserGroupList
                 if (complaints.Count > 0)

@@ -21,10 +21,10 @@ namespace Brilliance.Controllers
             response = _iadmcrtDataProvider.GetCrtSetup(ClientID);
             return View(response.Data);
         }
-        public ActionResult GetLabelConfig(Guid TemplateID,Guid ClientID,bool? IsEdit)
+        public ActionResult GetLabelConfig(Guid TemplateID,Guid ClientID,string OrgName, bool? IsEdit)
         {
             _iadmcrtDataProvider = new AdmCrtDataProvider();
-            CrtAdminViewmodel crtadminVM = _iadmcrtDataProvider.GetLabelConfig(TemplateID, ClientID, IsEdit);
+            CrtAdminViewmodel crtadminVM = _iadmcrtDataProvider.GetLabelConfig(TemplateID, ClientID, OrgName, IsEdit);
             return PartialView("~/Views/AdmCrt/_LabelConfiguration.cshtml", crtadminVM);    
         }
 
@@ -92,11 +92,11 @@ namespace Brilliance.Controllers
             return Json(response);
         }
         [HttpPost]
-        public ActionResult SavedropselectInTemplate(Guid ClientID)
+        public ActionResult SavedropselectInTemplate(Guid ClientID,Guid TemplateID)
         {
             _iadmcrtDataProvider = new AdmCrtDataProvider();
             var response = new ServiceResponse();
-            response = _iadmcrtDataProvider.SavedropselectInTemplate(ClientID);
+            response = _iadmcrtDataProvider.SavedropselectInTemplate(ClientID, TemplateID);
             return Json(response);
         }
         public ActionResult GetComplaintReasonList(Guid ComplaintTypeID,Guid ClientID)
@@ -104,6 +104,14 @@ namespace Brilliance.Controllers
             _iadmcrtDataProvider = new AdmCrtDataProvider();
             //Guid ComplaintCategoryID = Common.CheckIdNullOrEmptyNonEncrypt(id);
             ServiceResponse response = _iadmcrtDataProvider.GetComplaintReasonList(ComplaintTypeID, ClientID);
+            return Json(response.Data, JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult GetTemplateList()
+        {
+            _iadmcrtDataProvider = new AdmCrtDataProvider();
+            var response = new ServiceResponse();
+            CrtAdminViewmodel crm = _iadmcrtDataProvider.GetTemplateList();
             return Json(response.Data, JsonRequestBehavior.AllowGet);
         }
     }

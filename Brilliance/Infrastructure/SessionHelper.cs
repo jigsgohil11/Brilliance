@@ -52,6 +52,20 @@ namespace Brilliance.Infrastructure
                 HttpContext.Current.Session["UserName"] = value;
             }
         }
+        public static string FullName
+        {
+            get
+            {
+                if (HttpContext.Current.Session["FullName"] != null)
+                    return HttpContext.Current.Session["FullName"].ToString();
+                else
+                    return string.Empty;
+            }
+            set
+            {
+                HttpContext.Current.Session["FullName"] = value;
+            }
+        }
 
         public static string Photo
         {

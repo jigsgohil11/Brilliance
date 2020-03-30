@@ -152,13 +152,14 @@ else
 
                                 <div class="form-actions">
                                     <div class="col-lg-12  text-right">
+                                        <button type="button" onclick="CompanyFormSubmit();" class="btn green uppercase">Save Company</button>
                                         <button type="button" onclick="location.href = '/AdmDivision/Division?clientid=@Model.company.EncryptedClientID'" class="btn uppercase">Add Division</button>
-                                        <button type="button" onclick="CompanyFormSubmit();" class="btn green uppercase">Save and close</button>
-                                        <button type="button" onclick="location.href = '/OrganisationAdmin/OrganisationList'" class="btn default uppercase">Cancel</button>
+                                        <button type="button" onclick="location.href = '/OrganisationAdmin/OrganisationList'" class="btn default uppercase">Close</button>
                                     </div>
                                 </div>
                             </form>
                         </div>
+
                     </div>
                 </div>
             </div>

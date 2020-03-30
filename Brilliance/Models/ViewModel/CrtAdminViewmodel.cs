@@ -17,12 +17,14 @@ namespace Brilliance.Models.ViewModel
             clientList = new List<SelectListItem>();
             TemplateList = new List<SelectListItem>();
             labelconfig = new LabelConfiguration();
+            TemplateDataList = new List<SelectListItem>();
             //labelconfiglist = new List<LabelConfiguration>();
         }
         public Client client { get; set; }
         public List<SelectListItem> clientList { get; set; }
         public List<SelectListItem> TemplateList { get; set; }
         public LabelConfiguration labelconfig { get; set; }
+        public List<SelectListItem> TemplateDataList { get; set; }
         //public List<LabelConfiguration> labelconfiglist { get; set; }
     }
 

@@ -198,7 +198,7 @@ License: You must have a valid license purchased only from themeforest(the above
                         <li class="dropdown dropdown-user">
                             <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
                                 <img alt="" class="img-circle" src="../assets/layouts/layout/img/avatar3_small.jpg" />
-                                <span class="username username-hide-on-mobile"> Neha </span>
+                                <span class="username username-hide-on-mobile"> @SessionHelper.FullName </span>
                                 <i class="fa fa-angle-down"></i>
                             </a>
                             <ul class="dropdown-menu dropdown-menu-default">
@@ -258,14 +258,14 @@ License: You must have a valid license purchased only from themeforest(the above
                                             <i class="icon-bar-chart"></i>
                                             <span class="title">Dashboard 1</span>
                                         </a>
-                                    </li>
+                                    </li>5
                                 </ul>*@
                         </li>
                         @*<li class="heading">
                                 <h3 class="uppercase">Features</h3>
                             </li>*@
-                        @*@if (Common.IsPermissionAllowed("Complaints").IsView)
-                        {*@
+                        @if(Common.IsPermissionAllowed(Constants.Can_Access_Crt).IsView)
+                        {
                             <li class="nav-item start">
                                 <a href="javascript:;" class="nav-link nav-toggle">
                                     <i class="icon-settings"></i>
@@ -273,102 +273,102 @@ License: You must have a valid license purchased only from themeforest(the above
                                     <span class="arrow"></span>
                                 </a>
                                 <ul class="sub-menu">
-                                    @*@if (Common.IsPermissionAllowed("Complaints Reporting Tool").IsView)
-                                    {*@
-
-                                    <li class="nav-item start">
-                                        <a href="/CRT/CRTList" class="nav-link ">
-                                        @*<a href="/CRT/CrtTemplates" class="nav-link ">*@
-                                            <span class="title">
-                                                Complaints Reporting Tool
-                                            </span>
-                                        </a>
-                                    </li>
-                                    @*}*@
+                                    @if (Common.IsPermissionAllowed(Constants.Can_Access_Crt).IsView)
+                                    {
+                                        <li class="nav-item start">
+                                            <a href="/CRT/CRTList" class="nav-link ">
+                                                @*<a href="/CRT/CrtTemplates" class="nav-link ">*@
+                                                <span class="title">
+                                                    Complaints Reporting Tool
+                                                </span>
+                                            </a>
+                                        </li>
+                                    }
                                 </ul>
                             </li>
-                        @*}
-                        @if (Common.IsPermissionAllowed("Conduct System").IsView)
-                        {*@
-                            <li class="nav-item start">
-                                <a href="avascript:;" class="nav-link nav-toggle">
-                                    <i class="icon-settings"></i>
-                                    <span class="title">Conduct System</span>
-                                    @*<span class="selected"></span>*@
-                                    <span class="arrow"></span>
-                                </a>
-                                <ul class="sub-menu">
-                                    @*@if (Common.IsPermissionAllowed("Outcome Master").IsView)
+                        }
+                        @*@if (Common.IsPermissionAllowed("Conduct System").IsView)
+                            {*@
+                        <li class="nav-item start">
+                            <a href="avascript:;" class="nav-link nav-toggle">
+                                <i class="icon-settings"></i>
+                                <span class="title">Conduct System</span>
+                                @*<span class="selected"></span>*@
+                                <span class="arrow"></span>
+                            </a>
+                            <ul class="sub-menu">
+                                @*@if (Common.IsPermissionAllowed("Outcome Master").IsView)
                                     {*@
-                                        <li class="nav-item start">
-                                            <a href="/CIS/TemplateMaster" class="nav-link ">
-                                                <span class="title">
-                                                    Template Master
-                                                </span>
-                                            </a>@*<span class="selected"></span>*@
-                                        </li>
+                                <li class="nav-item start">
+                                    <a href="/CIS/TemplateMaster" class="nav-link ">
+                                        <span class="title">
+                                            Template Master
+                                        </span>
+                                    </a>@*<span class="selected"></span>*@
+                                </li>
 
-                                        <li class="nav-item start">
-                                            <a href="/CIS/TemplateOutcomemaster" class="nav-link ">
-                                                <span class="title">
-                                                    Template Outcomemaster
-                                                </span>
-                                            </a>@*<span class="selected"></span>*@
-                                        </li>
-                                        <li class="nav-item start">
-                                            <a href="/CIS/TemplateSubOutcomemaster" class="nav-link ">
-                                                <span class="title">
-                                                    Template SubOutcomemaster
-                                                </span>
-                                            </a>@*<span class="selected"></span>*@
-                                        </li>
-                                        <li class="nav-item start">
-                                            <a href="/CIS/OutComeMaster" class="nav-link ">
-                                                <span class="title">
-                                                    Outcome Master
-                                                </span>
-                                            </a>@*<span class="selected"></span>*@
-                                        </li>
-                                    @*}
+                                <li class="nav-item start">
+                                    <a href="/CIS/TemplateOutcomemaster" class="nav-link ">
+                                        <span class="title">
+                                            Template Outcomemaster
+                                        </span>
+                                    </a>@*<span class="selected"></span>*@
+                                </li>
+                                <li class="nav-item start">
+                                    <a href="/CIS/TemplateSubOutcomemaster" class="nav-link ">
+                                        <span class="title">
+                                            Template SubOutcomemaster
+                                        </span>
+                                    </a>@*<span class="selected"></span>*@
+                                </li>
+                                <li class="nav-item start">
+                                    <a href="/CIS/OutComeMaster" class="nav-link ">
+                                        <span class="title">
+                                            Outcome Master
+                                        </span>
+                                    </a>@*<span class="selected"></span>*@
+                                </li>
+                                @*}
                                     @if (Common.IsPermissionAllowed("Sub Outcome Master").IsView)
                                     {*@
-                                        <li class="nav-item start">
-                                            <a href="/CIS/SuboutComes" class="nav-link ">
-                                                <span class="title">
-                                                    Sub Outcome Master
-                                                </span>
-                                            </a>@*<span class="selected"></span>*@
-                                        </li>
-                                    @*}
+                                <li class="nav-item start">
+                                    <a href="/CIS/SuboutComes" class="nav-link ">
+                                        <span class="title">
+                                            Sub Outcome Master
+                                        </span>
+                                    </a>@*<span class="selected"></span>*@
+                                </li>
+                                @*}
                                     @if (Common.IsPermissionAllowed("Conduct Improvement").IsView)
                                     {*@
-                                        <li class="nav-item start">
-                                            <a href="/CIS/Index" class="nav-link ">
-                                                <span class="title">
-                                                    Conduct Improvement
-                                                </span>
-                                            </a>@*<span class="selected"></span>*@
-                                        </li>
-                                    @*}*@
-                                </ul>
-                            </li>
-                        @*}
-                        @if (Common.IsPermissionAllowed("Admin").IsView)
-                        {*@
-                            <li class="nav-item start">
-                                <a href="javascript:;" class="nav-link nav-toggle">
-                                    <i class="icon-settings"></i>
-                                    <span class="title">Admin</span>
-                                    <span class="arrow"></span>
-                                </a>
-                                <ul class="sub-menu">
-                                    <li class="nav-item start">
-                                        <a href="javascript:;" class="nav-link nav-toggle">
-                                            <span class="title">Client Admin</span>
-                                            <span class="arrow"></span>
-                                        </a>
-                                        <ul class="sub-menu">
-
+                                <li class="nav-item start">
+                                    <a href="/CIS/Index" class="nav-link ">
+                                        <span class="title">
+                                            Conduct Improvement
+                                        </span>
+                                    </a>@*<span class="selected"></span>*@
+                                </li>
+                                @*}*@
+                            </ul>
+                        </li>
+                        //}
+                        @*@if (Common.IsPermissionAllowed("Admin").IsView)
+                            {*@
+                        <li class="nav-item start">
+                            <a href="javascript:;" class="nav-link nav-toggle">
+                                <i class="icon-settings"></i>
+                                <span class="title">Admin</span>
+                                <span class="arrow"></span>
+                            </a>
+                            <ul class="sub-menu">
+                                <li class="nav-item start">
+                                    <a href="javascript:;" class="nav-link nav-toggle">
+                                        <span class="title">Client Admin</span>
+                                        <span class="arrow"></span>
+                                    </a>
+                                    <ul class="sub-menu">
+                                        @*@if (Common.IsPermissionAllowed(Constants.Can_Access_ClientSetup).IsView)
+                                        {*@
                                             <li class="nav-item start">
                                                 <a href="/ClientSetup/Client" class="nav-link ">
                                                     <span class="title">
@@ -376,6 +376,9 @@ License: You must have a valid license purchased only from themeforest(the above
                                                     </span>
                                                 </a>
                                             </li>
+                                        @*}*@
+                                        @if (Common.IsPermissionAllowed(Constants.Can_Access_Orgadmin).IsView)
+                                        {
                                             <li class="nav-item start">
                                                 <a href="/OrganisationAdmin/OrganisationList" class="nav-link ">
                                                     <span class="title">
@@ -383,15 +386,18 @@ License: You must have a valid license purchased only from themeforest(the above
                                                     </span>
                                                 </a>
                                             </li>
-                                            @*<li class="nav-item start">
-                                                    <a href="/ClientSetup/InstanceSubscription" class="nav-link ">
-                                                        <span class="title">
-                                                            App Subscription
-                                                        </span>
-                                                    </a>
-                                                </li>*@
-                                        </ul>
-                                    </li>
+                                        }
+                                        @*<li class="nav-item start">
+                                                <a href="/ClientSetup/InstanceSubscription" class="nav-link ">
+                                                    <span class="title">
+                                                        App Subscription
+                                                    </span>
+                                                </a>
+                                            </li>*@
+                                    </ul>
+                                </li>
+                                @if (Common.IsPermissionAllowed(Constants.Can_Access_Crtadmin).IsView)
+                                {
                                     <li class="nav-item start">
                                         <a href="/AdmCrt/CRTadmin" class="nav-link ">
                                             <span class="title">
@@ -399,15 +405,16 @@ License: You must have a valid license purchased only from themeforest(the above
                                             </span>
                                         </a>
                                     </li>
-                                    <li class="nav-item start">
-                                        <a href="/AdmCis/CISadmin" class="nav-link ">
-                                            <span class="title">
-                                                CIS Admin
-                                            </span>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </li>
+                                }
+                                <li class="nav-item start">
+                                    <a href="/AdmCis/CISadmin" class="nav-link ">
+                                        <span class="title">
+                                            CIS Admin
+                                        </span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
                         @*}*@
                     </ul>
                     <!-- END SIDEBAR MENU -->

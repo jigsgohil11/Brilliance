@@ -49,30 +49,30 @@
                     <div class="portlet light">
                         <div class="portlet-body form">
                             @*<form action="/ClientSetup/SaveClient" id="frmClient" data-ajax-success="SaveClientResponse(data);" data-ajax="true" data-ajax-method="Post" method="post">
-                                *@
-                                <form id="frmcrtconfig" action="/AdmCrt/SaveCRTconfig" method="post" data-ajax="true" data-ajax-method="Post" data-ajax-success="SaveCRTconfigResponse(data);">
-                                    @*@Html.HiddenFor(m => m.client.ClientID)
+                            *@
+                            <form id="frmcrtconfig" action="/AdmCrt/SaveCRTconfig" method="post" data-ajax="true" data-ajax-method="Post" data-ajax-success="SaveCRTconfigResponse(data);">
+                                @*@Html.HiddenFor(m => m.client.ClientID)
                                     @Html.HiddenFor(m => m.client.Logo)*@
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label>For this organisation</label>
-                                                @Html.DropDownListFor(m => m.client.ClientID, new SelectList(Model.clientList, "Value", "Text", 0), "--Select Client--", new { @data_live_search = "true", @class = "form-control bs-select", @onchange = "GetCRTDetails();" })
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label>Configuration at Tier level</label>
-                                                <select id="tierlevel" class="form-control bs-select" data_live_search="true">
-                                                    <option value="Organisation">Organisation</option>
-                                                    <option value="Company">Company</option>
-                                                    <option value="Division">Division</option>
-                                                </select>
-                                            </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>For this organisation</label>
+                                            @Html.DropDownListFor(m => m.client.ClientID, new SelectList(Model.clientList, "Value", "Text", 0), "--Select Client--", new { @data_live_search = "true", @class = "form-control bs-select", @onchange = "GetCRTDetails();" })
                                         </div>
                                     </div>
-                                    @if (Model != null && Model.labelconfig != null && Model.labelconfig.LabelconfigID != Guid.Empty)
-                                    {
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Configuration at Tier level</label>
+                                            <select id="tierlevel" class="form-control bs-select" data_live_search="true">
+                                                <option value="Organisation">Organisation</option>
+                                                <option value="Company">Company</option>
+                                                <option value="Division">Division</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                @if (Model != null && Model.labelconfig != null && Model.labelconfig.LabelconfigID != Guid.Empty)
+                                {
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="form-group">
@@ -81,9 +81,9 @@
                                             </div>
                                         </div>
                                     </div>
-                                    }
-                                    else
-                                    {
+                                }
+                                else
+                                {
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="form-group">
@@ -92,9 +92,9 @@
                                             </div>
                                         </div>
                                     </div>
-                                    }
+                                }
 
-                                    @*<div class="row">
+                                @*<div class="row">
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label><b>CRT this organisation subscribed to :</b></label>
@@ -117,200 +117,226 @@
                                             </div>
                                         </div>
                                     </div>*@
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <div class="form-group">
-                                                <label><b>Field label configuration</b></label>
-                                                @*<button type="button" onclick="Addlabels();" class="btn">OPEN</button>*@
-                                                @if (Model != null && Model.labelconfig != null && Model.labelconfig.LabelconfigID != Guid.Empty)
-                                                {
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label><b>Field label configuration</b></label>
+                                            @*<button type="button" onclick="Addlabels();" class="btn">OPEN</button>*@
+                                            @if (Model != null && Model.labelconfig != null && Model.labelconfig.LabelconfigID != Guid.Empty)
+                                            {
                                                 <button type="button" onclick="GetLabelsForEdit('@Model.labelconfig.LabelconfigID');" class="btn">OPEN</button>
-                                                }
-                                                else
-                                                {
+                                            }
+                                            else
+                                            {
                                                 <button type="button" onclick="GetLabels();" class="btn">OPEN</button>
 
-                                                }
-                                                @*<button type="button" onclick="showlabellist();" class="btn">Label List</button>*@
-                                            </div>
+                                            }
+                                            @*<button type="button" onclick="showlabellist();" class="btn">Label List</button>*@
                                         </div>
                                     </div>
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <div class="form-group">
-                                                <label><b>Drop select configuration</b></label>
-                                                <button type="button" onclick="ShowDropselect();" class="btn">OPEN</button>
-                                                <button type="button" onclick="SaveInTemplate();" class="btn">Save In Template</button>
-                                            </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label><b>Drop select configuration</b></label>
+                                            <button type="button" onclick="ShowDropselect();" class="btn">OPEN</button>
+                                            <button type="button" onclick="OpenTemplateModal();" class="btn">Save In Template</button>
                                         </div>
                                     </div>
-                                    @*@if (Model != null && Model.labelconfiglist != null && Model.labelconfiglist.Count > 0)
+                                </div>
+                                @*@if (Model != null && Model.labelconfiglist != null && Model.labelconfiglist.Count > 0)
                                     {
                                     <div class="tab-content">
                                         <div class="row" id="Partialviewbind">
                                         </div>
                                     </div>
                                     }*@
-                                    <div id="DropSelectsConfig">
-                                        @*@if (Model != null)
+                                <div id="DropSelectsConfig">
+                                    @*@if (Model != null)
                                         {
                                         @Html.Partial("~/Views/AdmCrt/_DropselectConfiguration.cshtml", Model)
                                         }*@
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label><b>Client configuration</b></label>
+                                        </div>
                                     </div>
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <div class="form-group">
-                                                <label><b>Client configuration</b></label>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <label>Client Complaint Portal for this Organisation*</label>
+                                        <div class="mt-radio-inline">
+                                            <label class="mt-radio mt-radio-outline margin-bottom0" style="font-size:13px;">
+                                                @Html.RadioButtonFor(m => m.client.IsPortal, "Yes", new { @class = "class1", @checked = "checked", @onchange = "showUrldiv();" })
+                                                Yes
+                                                <span></span>
+                                            </label>
+                                            <label class="mt-radio mt-radio-outline margin-bottom0" style="font-size:13px;">
+                                                @Html.RadioButtonFor(m => m.client.IsPortal, "No", new { @class = "class2", @onchange = "showUrldiv();" })
+                                                No
+                                                <span></span>
+                                            </label>
+
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Show complaint number*</label>
+                                            <div class="mt-radio-inline">
+                                                <label class="mt-radio mt-radio-outline margin-bottom0" style="font-size:13px;">
+                                                    @Html.RadioButtonFor(m => m.client.ShowComplaintNumber, "Yes", new { @class = "class1", @checked = "checked" })
+                                                    Only on Complaint Capture and Resolution forms
+                                                    <span></span>
+                                                </label>
+                                                <label class="mt-radio mt-radio-outline margin-bottom0" style="font-size:13px;">
+                                                    @Html.RadioButtonFor(m => m.client.ShowComplaintNumber, "No", new { @class = "class2" })
+                                                    Also on Complaint Register
+                                                    <span></span>
+                                                </label>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <label>Client Complaint Portal for this Organisation*</label>
+                                </div>
+                                <div id="UrlDiv" class="row hide">
+                                    <div class="col-md-6" style="margin-bottom: 18px;">
+                                        <label class="col-md-1">URL</label>
+                                        <div class="col-md-5">
+                                            @Html.TextBoxFor(m => m.client.URL, new { @class = "form-control m-input" })
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Show declaration portion*</label>
                                             <div class="mt-radio-inline">
                                                 <label class="mt-radio mt-radio-outline margin-bottom0" style="font-size:13px;">
-                                                    @Html.RadioButtonFor(m => m.client.IsPortal, "Yes", new { @class = "class1", @checked = "checked", @onchange = "showUrldiv();" })
+                                                    @Html.RadioButtonFor(m => m.client.IsShowDeclaration, "No", new { @class = "class1", @checked = "checked" })
+                                                    No
+                                                    <span></span>
+                                                </label>
+                                                <label class="mt-radio mt-radio-outline margin-bottom0" style="font-size:13px;">
+                                                    @Html.RadioButtonFor(m => m.client.IsShowDeclaration, "Yes", new { @class = "class2" })
+                                                    Yes
+                                                    <span></span>
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Upload attachment*</label>
+                                            <div class="mt-radio-inline">
+                                                <label class="mt-radio mt-radio-outline margin-bottom0" style="font-size:13px;">
+                                                    @Html.RadioButtonFor(m => m.client.IsUploadattachment, "Mandatory", new { @class = "class1" })
+                                                    Mandatory
+                                                    <span></span>
+                                                </label>
+                                                <label class="mt-radio mt-radio-outline margin-bottom0" style="font-size:13px;">
+                                                    @Html.RadioButtonFor(m => m.client.IsUploadattachment, "Optional", new { @class = "class2", @checked = "checked" })
+                                                    Optional
+                                                    <span></span>
+                                                </label>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <label>Turnaround timer*</label>
+                                        <div class="mt-radio-inline">
+                                            <label class="mt-radio mt-radio-outline margin-bottom0" style="font-size:13px;">
+                                                @Html.RadioButtonFor(m => m.client.IsTurnaroundTimer, "Yes", new { @class = "class1", @checked = "checked", @onchange = "showdiv();" })
+                                                Yes
+                                                <span></span>
+                                            </label>
+                                            <label class="mt-radio mt-radio-outline margin-bottom0" style="font-size:13px;">
+                                                @Html.RadioButtonFor(m => m.client.IsTurnaroundTimer, "No", new { @class = "class2", @onchange = "showdiv();" })
+                                                No
+                                                <span></span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div id="timerDiv" class="col-md-9 hide">
+                                        <label class="col-md-1">Hours</label>
+                                        <div class="col-md-1">
+                                            @Html.TextBoxFor(m => m.client.Turnaround_hours, new { @class = "form-control m-input" })
+                                        </div>
+                                        <label class="col-md-1">of times</label>
+                                        <div class="col-md-1">
+                                            @Html.TextBoxFor(m => m.client.Turnaround_times, new { @class = "form-control m-input" })
+                                        </div>
+                                        <label class="col-md-2">Email to</label>
+                                        <div class="col-md-5">
+                                            @Html.TextBoxFor(m => m.client.Turnaround_email, new { @class = "form-control m-input" })
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label>Web turnaround timer*</label>
+                                            <div class="mt-radio-inline">
+                                                <label class="mt-radio mt-radio-outline margin-bottom0" style="font-size:13px;">
+                                                    @Html.RadioButtonFor(m => m.client.IsWebturnaroundTimer, "Yes", new { @class = "class1", @onchange = "showWebdiv();" })
                                                     Yes
                                                     <span></span>
                                                 </label>
                                                 <label class="mt-radio mt-radio-outline margin-bottom0" style="font-size:13px;">
-                                                    @Html.RadioButtonFor(m => m.client.IsPortal, "No", new { @class = "class2", @onchange = "showUrldiv();" })
-                                                    No
-                                                    <span></span>
-                                                </label>
-
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label>Show complaint number*</label>
-                                                <div class="mt-radio-inline">
-                                                    <label class="mt-radio mt-radio-outline margin-bottom0" style="font-size:13px;">
-                                                        @Html.RadioButtonFor(m => m.client.ShowComplaintNumber, "Yes", new { @class = "class1", @checked = "checked" })
-                                                        Only on Complaint Capture and Resolution forms
-                                                        <span></span>
-                                                    </label>
-                                                    <label class="mt-radio mt-radio-outline margin-bottom0" style="font-size:13px;">
-                                                        @Html.RadioButtonFor(m => m.client.ShowComplaintNumber, "No", new { @class = "class2" })
-                                                        Also on Complaint Register
-                                                        <span></span>
-                                                    </label>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div id="UrlDiv" class="row hide">
-                                        <div class="col-md-6" style="margin-bottom: 18px;">
-                                            <label class="col-md-1">URL</label>
-                                            <div class="col-md-5">
-                                                @Html.TextBoxFor(m => m.client.URL, new { @class = "form-control m-input" })
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label>Show declaration portion*</label>
-                                                <div class="mt-radio-inline">
-                                                    <label class="mt-radio mt-radio-outline margin-bottom0" style="font-size:13px;">
-                                                        @Html.RadioButtonFor(m => m.client.IsShowDeclaration, "No", new { @class = "class1", @checked = "checked" })
-                                                        No
-                                                        <span></span>
-                                                    </label>
-                                                    <label class="mt-radio mt-radio-outline margin-bottom0" style="font-size:13px;">
-                                                        @Html.RadioButtonFor(m => m.client.IsShowDeclaration, "Yes", new { @class = "class2" })
-                                                        Yes
-                                                        <span></span>
-                                                    </label>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label>Upload attachment*</label>
-                                                <div class="mt-radio-inline">
-                                                    <label class="mt-radio mt-radio-outline margin-bottom0" style="font-size:13px;">
-                                                        @Html.RadioButtonFor(m => m.client.IsUploadattachment, "Mandatory", new { @class = "class1" })
-                                                        Mandatory
-                                                        <span></span>
-                                                    </label>
-                                                    <label class="mt-radio mt-radio-outline margin-bottom0" style="font-size:13px;">
-                                                        @Html.RadioButtonFor(m => m.client.IsUploadattachment, "Optional", new { @class = "class2", @checked = "checked" })
-                                                        Optional
-                                                        <span></span>
-                                                    </label>
-                                                </div>
-
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-3">
-                                            <label>Turnaround timer*</label>
-                                            <div class="mt-radio-inline">
-                                                <label class="mt-radio mt-radio-outline margin-bottom0" style="font-size:13px;">
-                                                    @Html.RadioButtonFor(m => m.client.IsTurnaroundTimer, "Yes", new { @class = "class1", @checked = "checked", @onchange = "showdiv();" })
-                                                    Yes
-                                                    <span></span>
-                                                </label>
-                                                <label class="mt-radio mt-radio-outline margin-bottom0" style="font-size:13px;">
-                                                    @Html.RadioButtonFor(m => m.client.IsTurnaroundTimer, "No", new { @class = "class2", @onchange = "showdiv();" })
+                                                    @Html.RadioButtonFor(m => m.client.IsWebturnaroundTimer, "No", new { @class = "class2", @checked = "checked", @onchange = "showWebdiv();" })
                                                     No
                                                     <span></span>
                                                 </label>
                                             </div>
-                                        </div>
-                                        <div id="timerDiv" class="col-md-9 hide">
-                                            <label class="col-md-1">Hours</label>
-                                            <div class="col-md-1">
-                                                @Html.TextBoxFor(m => m.client.Turnaround_hours, new { @class = "form-control m-input" })
-                                            </div>
-                                            <label class="col-md-1">of times</label>
-                                            <div class="col-md-1">
-                                                @Html.TextBoxFor(m => m.client.Turnaround_times, new { @class = "form-control m-input" })
-                                            </div>
-                                            <label class="col-md-2">Email to</label>
-                                            <div class="col-md-5">
-                                                @Html.TextBoxFor(m => m.client.Turnaround_email, new { @class = "form-control m-input" })
-                                            </div>
+
                                         </div>
                                     </div>
-                                    <div class="row">
-                                        <div class="col-md-3">
-                                            <div class="form-group">
-                                                <label>Web turnaround timer*</label>
-                                                <div class="mt-radio-inline">
-                                                    <label class="mt-radio mt-radio-outline margin-bottom0" style="font-size:13px;">
-                                                        @Html.RadioButtonFor(m => m.client.IsWebturnaroundTimer, "Yes", new { @class = "class1", @onchange = "showWebdiv();" })
-                                                        Yes
-                                                        <span></span>
-                                                    </label>
-                                                    <label class="mt-radio mt-radio-outline margin-bottom0" style="font-size:13px;">
-                                                        @Html.RadioButtonFor(m => m.client.IsWebturnaroundTimer, "No", new { @class = "class2", @checked = "checked", @onchange = "showWebdiv();" })
-                                                        No
-                                                        <span></span>
-                                                    </label>
-                                                </div>
-
-                                            </div>
+                                    <div id="webDiv" class="col-md-9 hide">
+                                        <label class="col-md-1">Hours</label>
+                                        <div class="col-md-1">
+                                            @Html.TextBoxFor(m => m.client.WebTurnaround_hours, new { @class = "form-control m-input" })
                                         </div>
-                                        <div id="webDiv" class="col-md-9 hide">
-                                            <label class="col-md-1">Hours</label>
-                                            <div class="col-md-1">
-                                                @Html.TextBoxFor(m => m.client.WebTurnaround_hours, new { @class = "form-control m-input" })
-                                            </div>
-                                            <label class="col-md-1">of times</label>
-                                            <div class="col-md-1">
-                                                @Html.TextBoxFor(m => m.client.WebTurnaround_times, new { @class = "form-control m-input" })
-                                            </div>
-                                            <label class="col-md-2">Email to</label>
-                                            <div class="col-md-5">
-                                                @Html.TextBoxFor(m => m.client.WebTurnaround_email, new { @class = "form-control m-input" })
-                                            </div>
+                                        <label class="col-md-1">of times</label>
+                                        <div class="col-md-1">
+                                            @Html.TextBoxFor(m => m.client.WebTurnaround_times, new { @class = "form-control m-input" })
                                         </div>
-
+                                        <label class="col-md-2">Email to</label>
+                                        <div class="col-md-5">
+                                            @Html.TextBoxFor(m => m.client.WebTurnaround_email, new { @class = "form-control m-input" })
+                                        </div>
                                     </div>
-                                    @*<div class="row">
+
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label>View Level of Dissatisfaction</label>
+                                            @Html.CheckBoxFor(m => m.client.IsViewDissatisfationLevel, new { @class = "form-control m-input", @checked = "checked" })
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label>Require Level of Dissatisfaction</label>
+                                            @Html.CheckBoxFor(m => m.client.IsRequireDissatisfationLevel, new { @class = "form-control m-input", @checked = "checked" })
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label>View Level of Satisfaction</label>
+                                            @Html.CheckBoxFor(m => m.client.IsViewSatisfationLevel, new { @class = "form-control m-input", @checked = "checked" })
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label>Require Level of Satisfaction</label>
+                                            @Html.CheckBoxFor(m => m.client.IsRequireSatisfationLevel, new { @class = "form-control m-input", @checked = "checked" })
+                                        </div>
+                                    </div>
+                                </div>
+                                @*<div class="row">
                                         <div class="mt-checkbox-inline">
                                             <label class="mt-checkbox mt-checkbox-outline margin-bottom0" style="font-size:13px;">
                                                 @Html.CheckBox("txt", new { @checked = "checked" })
@@ -324,7 +350,7 @@
                                             </label>
                                         </div>
                                     </div>*@
-                                    @*<div class="row">
+                                @*<div class="row">
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label>Automatic CRT data extract to SFTP*</label>
@@ -392,13 +418,13 @@
                                         </div>
                                     </div>*@
 
-                                    <div class="row">
-                                        <div class="col-md-3">
+                                <div class="row">
+                                    <div class="col-md-3">
 
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="row">
-                                                @*<div class="col-md-3">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="row">
+                                            @*<div class="col-md-3">
                                                     <div class="form-group">
                                                         <button type="button" class="btn">Back To Top</button>
                                                     </div>
@@ -408,23 +434,23 @@
                                                         <button type="button" class="btn">Save</button>
                                                     </div>
                                                 </div>*@
-                                                <div class="col-md-3">
-                                                    <div class="form-group">
-                                                        <button type="button" onclick="SubmitCRTconfig()" class="btn">Save And Close</button>
-                                                    </div>
+                                            <div class="col-md-3">
+                                                <div class="form-group">
+                                                    <button type="button" onclick="SubmitCRTconfig()" class="btn">Save And Close</button>
                                                 </div>
-                                                <div class="col-md-3">
-                                                    <div class="form-group">
-                                                        <button type="button" onclick="location.href = '/AdmCrt/CRTadmin'" class="btn">Cancel</button>
-                                                    </div>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <div class="form-group">
+                                                    <button type="button" onclick="location.href = '/AdmCrt/CRTadmin'" class="btn">Cancel</button>
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-md-3">
-
-                                        </div>
                                     </div>
-                                </form>
+                                    <div class="col-md-3">
+
+                                    </div>
+                                </div>
+                            </form>
                         </div>
                     </div>
                 </div>
@@ -436,7 +462,7 @@
     <div id="LabelsConfig">
         @if (Model != null)
         {
-        @Html.Partial("~/Views/AdmCrt/_LabelConfiguration.cshtml", Model)
+            @Html.Partial("~/Views/AdmCrt/_LabelConfiguration.cshtml", Model)
         }
     </div>
 </div>
@@ -445,14 +471,35 @@
         @*@Html.Partial("~/Views/AdmCrt/_AddNewDropSelectItem.cshtml")*@
     </div>
 </div>
+<div class="modal fade modal-scroll  bs-modal-lg" id="TemplateModal" tabindex="-1" role="basic" aria-hidden="true">
+    <div id="Templatedata">
+        <div class="modal-dialog  modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                    <h4 class="modal-title">Drop-Select Config</h4>
+                </div>
+                <div class="modal-body">
+                    @Html.DropDownListFor(m => m.client.TemplatedataID, new SelectList(Model.TemplateDataList, "Value", "Text", 0), "--Select Template--", new { @data_live_search = "true", @class = "form-control bs-select" })
+                </div>
+                <div class="modal-footer">
+                    <button type="button" id="btnsavecompany" class="btn default" onclick="SaveInTemplate(this);">Save</button>
+                    <button type="button" class="btn dark btn-outline" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+</div>
 
 
 @section scripts{
-<script src="~/assets/global/scripts/datatable.js" type="text/javascript"></script>
-<script src="~/assets/global/plugins/datatables/datatables.min.js" type="text/javascript"></script>
-<script src="~/assets/global/plugins/bootstrap-fileinput/bootstrap-fileinput.js"></script>
-<script src="~/assets/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
-<script>
+    <script src="~/assets/global/scripts/datatable.js" type="text/javascript"></script>
+    <script src="~/assets/global/plugins/datatables/datatables.min.js" type="text/javascript"></script>
+    <script src="~/assets/global/plugins/bootstrap-fileinput/bootstrap-fileinput.js"></script>
+    <script src="~/assets/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
+    <script>
 
         $(document).ready(function () {
             if ($("input[id=client_IsTurnaroundTimer]:checked").val().toUpperCase() == "YES") {
@@ -630,6 +677,7 @@
             $('#' + form + ' input[type=text]').val("");
             $('#' + form + ' .bs-select').val("");
             $('#' + form + ' .bs-select').selectpicker('refresh');
+            $("#btnsavecompany").removeAttr("editid");
         }
 
         //function DropselectFormSubmit() {
@@ -755,6 +803,7 @@
                 refname = $("#tr_" + ID + "").find('.Type_').html();
                 refname1 = $("#tr_" + ID + "").find('.Nature_').html();
                 refid = ($("#tr_" + ID + "").find('.refid_').val()).toUpperCase();
+                //Deletedropselect($("#tr_" + ID + "").find('.refid_').val());
                 refid1 = ($("#tr_" + ID + "").find('.refid1_').val()).toUpperCase();
             }
 
@@ -987,6 +1036,7 @@
         function GetLabels() {
             var temid = $("#client_TemplateID").val();
             var value = $("#client_ClientID").val();
+            var clientname = $("#client_ClientID :selected").text();
             if (value != "" && value != undefined && value != null) {
                 if (temid != "" && temid != undefined && temid != null) {
                     $.ajax({
@@ -997,6 +1047,7 @@
                         data: {
                             TemplateID: temid,
                             ClientID: value,
+                            OrgName: clientname,
                             IsEdit: false
                         },
                         success: function (data) {
@@ -1022,6 +1073,7 @@
             debugger;
             //var temid = $("#client_TemplateID").val();
             var value = $("#client_ClientID").val();
+            var clientname = $("#client_ClientID :selected").text();
             if (value != "" && value != undefined && value != null) {
                 if (tempid != "" && tempid != undefined && tempid != null) {
                     $.ajax({
@@ -1032,6 +1084,7 @@
                         data: {
                             TemplateID: tempid,
                             ClientID: value,
+                            OrgName: clientname,
                             IsEdit: true
                         },
                         success: function (data) {
@@ -1058,13 +1111,15 @@
         function SaveInTemplate() {
             //var temid = $("#client_TemplateID").val();
             var value = $("#client_ClientID").val();
+            var value1 = $("#client_TemplatedataID").val();
             $.ajax({
                 type: "POST",
                 url: "/AdmCrt/SavedropselectInTemplate",
                 traditional: true,
                 async: true,
                 data: {
-                    ClientID: value
+                    ClientID: value,
+                    TemplateID: value1
                 },
                 success: function (data) {
                     ShowLoader();
@@ -1081,7 +1136,7 @@
             var id = $("#dropselectconfig_ClientID").val();
             var postData = {
                 ComplaintTypeID: complaintTypeVal,
-                ClientID:id
+                ClientID: id
             };
             ShowLoader();
             AjaxCall("/AdmCrt/GetComplaintReasonList", JSON.stringify(postData), "post", "json", "application/json", false).done(function (data) {
@@ -1102,6 +1157,32 @@
                 }
             });
         }
-</script>
+
+        function OpenTemplateModal() {
+            $("#TemplateModal").modal('show');
+            //var temid = $("#client_TemplateID").val();
+            //var value = $("#client_ClientID").val();
+            //var clientname = $("#client_ClientID :selected").text();
+
+            //$.ajax({
+            //    type: "POST",
+            //    url: "/AdmCrt/GetTemplateList",
+            //    traditional: true,
+            //    async: true,
+            //    data: {
+            //        //TemplateID: temid,
+            //        //ClientID: value,
+            //        //OrgName: clientname,
+            //        //IsEdit: false
+            //    },
+            //    success: function (data) {
+            //        debugger;
+            //        HideLoader();
+            //        $("#TemplateModal").modal('show');
+            //        $("#Templatedata").html(data);
+            //    }
+            //});
+        }
+    </script>
 }
 

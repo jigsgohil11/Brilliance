@@ -35,6 +35,7 @@ namespace Brilliance.Infrastructure.DataProvider
                             SessionHelper.UserId = logindetails.LoginUserData.UserID;
                             SessionHelper.UserName = logindetails.LoginUserData.UserName;
                             SessionHelper.Password = logindetails.LoginUserData.Password;
+                            SessionHelper.FullName = logindetails.LoginUserData.FullName;
                             //SessionHelper.EmployeeID = logindetails.LoginUserData.EmployeeID;
                             //SessionHelper.Issu = logindetails.LoginUserData.IsSuperAdmin;
                             //SessionHelper.UserName = logindetails.LoginUserData.DisplayName;

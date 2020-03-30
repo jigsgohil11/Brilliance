@@ -25,6 +25,9 @@ namespace Brilliance.Models.Entity
         public string DefaultDropboxName { get; set; }
         public string DefaultLandingPageURL { get; set; }
 
+        [ResultColumn]
+        public string FullName { get; set; }
+
         [Ignore]
         public string EncryptedDefaultDropboxID { get { return DefaultDropboxID != Guid.Empty ? Crypto.Encrypt(Convert.ToString(DefaultDropboxID)) : null; } }
 
