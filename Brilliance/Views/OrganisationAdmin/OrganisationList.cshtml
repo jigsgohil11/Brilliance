@@ -146,8 +146,9 @@
         $(document).ready(function () {
             ShowPageLoadMessage("Organizationsaved", "Organization");
             ShowPageLoadMessage("divisionsaved", "Division");
-            //ShowPageLoadMessage("companysaved", "Company");
+         CanAccessEditOrDelete('@Common.IsPermissionAllowed(Constants.Can_Access_ClientSetup).IsCreate.ToString()', '@Common.IsPermissionAllowed(Constants.Can_Access_ClientSetup).IsUpdate.ToString()', '@Common.IsPermissionAllowed(Constants.Can_Access_ClientSetup).IsDelete.ToString()');
+            var table = $('#dt_client').DataTable({});
         });
-        var table = $('#dt_client').DataTable({});
+        
     </script>
 }

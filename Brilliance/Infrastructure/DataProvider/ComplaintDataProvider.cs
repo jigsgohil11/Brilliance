@@ -20,10 +20,14 @@ namespace Brilliance.Infrastructure.DataProvider
                 var searchList = new List<SearchValueData>()
                 {
                         new SearchValueData { Name = "ComplaintID" ,Value = Convert.ToString(ComplaintID)},
-                        new SearchValueData { Name = "ClientID" ,Value = "B3E5F363-8293-4069-8239-4220AA40CA26"}
+                        new SearchValueData { Name = "ClientID" ,Value = Convert.ToString(SessionHelper.ClientID)},
+                        new SearchValueData { Name = "CompanyID" ,Value = Convert.ToString(SessionHelper.CompanyID)},
+                        new SearchValueData { Name = "DivisionID" ,Value = Convert.ToString(SessionHelper.DivisionID)},
+                        new SearchValueData { Name = "RoleName" ,Value = Convert.ToString(SessionHelper.RoleName)}
                 };
 
                 Complaintmodel = GetMultipleEntity<ComplaintViewModel>("GetComplaintdata", searchList);
+                //Complaintmodel.complaint.ClientId = SessionHelper.ClientID;
                 response.Data = Complaintmodel;
                 response.IsSuccess = true;
             }
@@ -41,7 +45,7 @@ namespace Brilliance.Infrastructure.DataProvider
                 var searchList = new List<SearchValueData>()
                 {
                         new SearchValueData { Name = "UserID" ,Value = Convert.ToString(SessionHelper.UserId)},
-                        new SearchValueData { Name = "RoleID" ,Value = Convert.ToString(SessionHelper.RoleID)}
+                        new SearchValueData { Name = "RoleName" ,Value = Convert.ToString(SessionHelper.RoleName)}
                 };
 
                 List<Complaint> complaints = GetEntityList<Complaint>("GetComplaintList", searchList);//Constants.GetUserGroupList
@@ -305,14 +309,14 @@ namespace Brilliance.Infrastructure.DataProvider
             }
             return response;
         }
-        public ServiceResponse GetProductByProductCategory(Guid ProductCategoryID, Guid ClientID)
+        public ServiceResponse GetProductByProductCategory(Guid ProductCategoryID)
         {
             var response = new ServiceResponse();
             var searchvaluedata = new List<SearchValueData>();
             try
             {
                 searchvaluedata.Add(new SearchValueData { Name = "ProductCategoryID", Value = Convert.ToString(ProductCategoryID) });
-                searchvaluedata.Add(new SearchValueData { Name = "ClientID", Value = "B3E5F363-8293-4069-8239-4220AA40CA26" });
+                searchvaluedata.Add(new SearchValueData { Name = "ClientID", Value = Convert.ToString(SessionHelper.ClientID) });
                 List<SelectListItem> Products = GetEntityList<SelectListItem>("GetProductTypeList", searchvaluedata);
                 response.Data = Products;
                 response.IsSuccess = true;
@@ -323,14 +327,14 @@ namespace Brilliance.Infrastructure.DataProvider
             }
             return response;
         }
-        public ServiceResponse GetNatureOfComplaintList(Guid ComplaintCategoryID, Guid ClientID)
+        public ServiceResponse GetNatureOfComplaintList(Guid ComplaintCategoryID)
         {
             var response = new ServiceResponse();
             var searchvaluedata = new List<SearchValueData>();
             try
             {
                 searchvaluedata.Add(new SearchValueData { Name = "ComplaintCategoryID", Value = Convert.ToString(ComplaintCategoryID) });
-                searchvaluedata.Add(new SearchValueData { Name = "ClientID", Value = "B3E5F363-8293-4069-8239-4220AA40CA26" });
+                searchvaluedata.Add(new SearchValueData { Name = "ClientID", Value = Convert.ToString(SessionHelper.ClientID) });
                 List<SelectListItem> NatureOfComplaints = GetEntityList<SelectListItem>("GetNatureOfComplaintList", searchvaluedata);
                 response.Data = NatureOfComplaints;
                 response.IsSuccess = true;
@@ -342,7 +346,7 @@ namespace Brilliance.Infrastructure.DataProvider
             return response;
         }
 
-        public ServiceResponse GetTCFOutcome(Guid ComplaintCategoryID, Guid NatureID, Guid ClientID)
+        public ServiceResponse GetTCFOutcome(Guid ComplaintCategoryID, Guid NatureID)
         {
             var response = new ServiceResponse();
             var searchvaluedata = new List<SearchValueData>();
@@ -350,7 +354,7 @@ namespace Brilliance.Infrastructure.DataProvider
             {
                 searchvaluedata.Add(new SearchValueData { Name = "ComplaintCategoryID", Value = Convert.ToString(ComplaintCategoryID) });
                 searchvaluedata.Add(new SearchValueData { Name = "NatureID", Value = Convert.ToString(NatureID) });
-                searchvaluedata.Add(new SearchValueData { Name = "ClientID", Value = "B3E5F363-8293-4069-8239-4220AA40CA26" });
+                searchvaluedata.Add(new SearchValueData { Name = "ClientID", Value = Convert.ToString(SessionHelper.ClientID) });
                 projectterm projectterm = GetEntity<projectterm>("GetTCFOutcome", searchvaluedata);
                 response.Data = projectterm;
                 if (response.Data == null)

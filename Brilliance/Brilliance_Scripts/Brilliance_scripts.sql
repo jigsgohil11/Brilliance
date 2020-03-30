@@ -74,11 +74,11 @@ select *from usr_RolePrevillages where RoleID='0BF4C837-2C69-4559-A96D-F3E307797
 
 -----insert user role right data--
 insert into usr_RolePrevillages(RolePrevillageID,RoleID,PrevillageID,ClientID,IsEnable,IsView,IsCreate,IsUpdate,IsDelete)
-values(newid(),'0BF4C837-2C69-4559-A96D-F3E307797736','C32C8B5F-44E9-43BA-8D84-16E86ECB972B',NULL,1,1,1,1,1)
+values(newid(),'0BF4C837-2C69-4559-A96D-F3E307797736','C32C8B5F-44E9-43BA-8D84-16E86ECB972B',NULL,1,1,0,0,0)
 insert into usr_RolePrevillages(RolePrevillageID,RoleID,PrevillageID,ClientID,IsEnable,IsView,IsCreate,IsUpdate,IsDelete)
-values(newid(),'0BF4C837-2C69-4559-A96D-F3E307797736','DB92974F-4613-45FE-A26F-1C56FC2059C6',NULL,1,1,1,1,1)
+values(newid(),'0BF4C837-2C69-4559-A96D-F3E307797736','DB92974F-4613-45FE-A26F-1C56FC2059C6',NULL,1,1,0,0,0)
 insert into usr_RolePrevillages(RolePrevillageID,RoleID,PrevillageID,ClientID,IsEnable,IsView,IsCreate,IsUpdate,IsDelete)
-values(newid(),'0BF4C837-2C69-4559-A96D-F3E307797736','4FE962A1-6404-4B3B-8E5B-45B86F7022C6',NULL,1,1,1,1,1)
+values(newid(),'0BF4C837-2C69-4559-A96D-F3E307797736','4FE962A1-6404-4B3B-8E5B-45B86F7022C6',NULL,1,1,0,0,0)
 insert into usr_RolePrevillages(RolePrevillageID,RoleID,PrevillageID,ClientID,IsEnable,IsView,IsCreate,IsUpdate,IsDelete)
 values(newid(),'0BF4C837-2C69-4559-A96D-F3E307797736','D328B7D1-C872-403B-87B0-DC43812DA75A',NULL,1,1,1,1,1)
 insert into usr_RolePrevillages(RolePrevillageID,RoleID,PrevillageID,ClientID,IsEnable,IsView,IsCreate,IsUpdate,IsDelete)
@@ -127,7 +127,21 @@ update CRT_Template set
 ,DissatisfactionLevel  = 'Level of dissatisfaction'
 ,SatisfactionResolution= 'Satisfaction post resolution'
 where TemplateID='4F50D4F0-D3D0-4E90-8341-CBBEC67F007B'
-----
+
+---------------
+--left menu
+--clientsetup(/ClientSetup/Client)
+--orgAdmin(/OrganisationAdmin/OrganisationList)
+--CRTAdmin(/AdmCrt/CRTadmin)
+--dashboard(/Dashboard/Dashboard)
+--complaints(/CRT/CRTList)
+
+---inner page--
+--Company(/AdmCompany/Company/)
+--division(/AdmDivision/Division)
+--Reports(/CRT/CRTReports)
+
+---------------
 
 
 

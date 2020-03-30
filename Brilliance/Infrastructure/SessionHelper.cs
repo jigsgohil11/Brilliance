@@ -66,6 +66,34 @@ namespace Brilliance.Infrastructure
                 HttpContext.Current.Session["FullName"] = value;
             }
         }
+        public static Guid CompanyID
+        {
+            get
+            {
+                if (HttpContext.Current.Session["CompanyID"] != null)
+                    return new Guid(HttpContext.Current.Session["CompanyID"].ToString());
+                else
+                    return Guid.Empty;
+            }
+            set
+            {
+                HttpContext.Current.Session["CompanyID"] = value;
+            }
+        }
+        public static Guid DivisionID
+        {
+            get
+            {
+                if (HttpContext.Current.Session["DivisionID"] != null)
+                    return new Guid(HttpContext.Current.Session["DivisionID"].ToString());
+                else
+                    return Guid.Empty;
+            }
+            set
+            {
+                HttpContext.Current.Session["DivisionID"] = value;
+            }
+        }
 
         public static string Photo
         {

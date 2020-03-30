@@ -16,6 +16,7 @@ namespace Brilliance.Models.Entity
         public Guid? CompanyId { get; set; }
         [Required(ErrorMessage = "Division is required.")]
         public Guid? DivisionId { get; set; }
+        //public Guid? ClientId { get; set; }
         [Required(ErrorMessage = "Policy number is required.")]
         [MaxLength(50)]
         public string PolicyNumber { get; set; }

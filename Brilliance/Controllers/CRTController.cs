@@ -197,30 +197,27 @@ namespace Brilliance.Controllers
             return Json(response.Data, JsonRequestBehavior.AllowGet);
         }
 
-        public ActionResult GetProductByProductCategory(string id, string clientid)
+        public ActionResult GetProductByProductCategory(string id)
         {
             _icomplaintDataProvider = new ComplaintDataProvider();
             Guid ProductCategoryID = Common.CheckIdNullOrEmptyNonEncrypt(id);
-            Guid ClientID = Common.CheckIdNullOrEmptyNonEncrypt(clientid);
-            ServiceResponse response = _icomplaintDataProvider.GetProductByProductCategory(ProductCategoryID, ClientID);
+            ServiceResponse response = _icomplaintDataProvider.GetProductByProductCategory(ProductCategoryID);
             return Json(response.Data, JsonRequestBehavior.AllowGet);
         }
 
-        public ActionResult GetNatureOfComplaintList(string id, string clientid)
+        public ActionResult GetNatureOfComplaintList(string id)
         {
             _icomplaintDataProvider = new ComplaintDataProvider();
             Guid ComplaintCategoryID = Common.CheckIdNullOrEmptyNonEncrypt(id);
-            Guid ClientID = Common.CheckIdNullOrEmptyNonEncrypt(clientid);
-            ServiceResponse response = _icomplaintDataProvider.GetNatureOfComplaintList(ComplaintCategoryID, ClientID);
+            ServiceResponse response = _icomplaintDataProvider.GetNatureOfComplaintList(ComplaintCategoryID);
             return Json(response.Data, JsonRequestBehavior.AllowGet);
         }
-        public ActionResult GetTCFOutcome(string Categoryid, string Natureid, string clientid)
+        public ActionResult GetTCFOutcome(string Categoryid, string Natureid)
         {
             _icomplaintDataProvider = new ComplaintDataProvider();
             Guid ComplaintCategoryID = Common.CheckIdNullOrEmptyNonEncrypt(Categoryid);
             Guid NatureID = Common.CheckIdNullOrEmptyNonEncrypt(Natureid);
-            Guid ClientID = Common.CheckIdNullOrEmptyNonEncrypt(clientid);
-            ServiceResponse response = _icomplaintDataProvider.GetTCFOutcome(ComplaintCategoryID, NatureID, ClientID);
+            ServiceResponse response = _icomplaintDataProvider.GetTCFOutcome(ComplaintCategoryID, NatureID);
             return Json(response.Data, JsonRequestBehavior.AllowGet);
         }
 

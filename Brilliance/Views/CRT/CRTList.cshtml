@@ -52,7 +52,10 @@
         </div>
     </div>
     <div class="caption font-dark">
-        <a class="action btn  btn-primary @Constants.Class_Cannot_Access_Update" style="padding:2px;" href="/CRT/CRT" title="Edit">Add new complaint</a>
+        @if (Common.IsPermissionAllowed(Constants.Can_Access_Crt).IsCreate)
+        {
+            <a class="action btn  btn-primary @Constants.Class_Cannot_Access_Update" style="padding:2px;" href="/CRT/CRT" title="Edit">Add new complaint</a>
+        }
         <a class="action btn  btn-primary @Constants.Class_Cannot_Access_Update" style="padding:2px;" href="/CRT/CRTReports" title="Edit">Reports</a>
 
     </div>
@@ -236,7 +239,7 @@
             $(document).ready(function () {
                 ShowPageLoadMessage("complaintsaved", "Complaint");
             });
-            @*CanAccessEditOrDelete('@Common.IsPermissionAllowed(Constants.Can_Access_Client).IsCreate.ToString()', '@Common.IsPermissionAllowed(Constants.Can_Access_Client).IsUpdate.ToString()', '@Common.IsPermissionAllowed(Constants.Can_Access_Client).IsDelete.ToString()');*@
+            CanAccessEditOrDelete('@Common.IsPermissionAllowed(Constants.Can_Access_Crt).IsCreate.ToString()', '@Common.IsPermissionAllowed(Constants.Can_Access_Crt).IsUpdate.ToString()', '@Common.IsPermissionAllowed(Constants.Can_Access_Crt).IsDelete.ToString()');
 
     </script>
     <script src="~/assets/global/scripts/OMSDatatable.js"></script>

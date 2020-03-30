@@ -27,6 +27,10 @@ namespace Brilliance.Models.Entity
 
         [ResultColumn]
         public string FullName { get; set; }
+        [ResultColumn]
+        public Guid CompanyID { get; set; }
+        [ResultColumn]
+        public Guid DivisionID { get; set; }
 
         [Ignore]
         public string EncryptedDefaultDropboxID { get { return DefaultDropboxID != Guid.Empty ? Crypto.Encrypt(Convert.ToString(DefaultDropboxID)) : null; } }

@@ -264,7 +264,7 @@ License: You must have a valid license purchased only from themeforest(the above
                         @*<li class="heading">
                                 <h3 class="uppercase">Features</h3>
                             </li>*@
-                        @if(Common.IsPermissionAllowed(Constants.Can_Access_Crt).IsView)
+                        @if (Common.IsPermissionAllowed(Constants.Can_Access_CRTList).IsView)
                         {
                             <li class="nav-item start">
                                 <a href="javascript:;" class="nav-link nav-toggle">
@@ -273,7 +273,7 @@ License: You must have a valid license purchased only from themeforest(the above
                                     <span class="arrow"></span>
                                 </a>
                                 <ul class="sub-menu">
-                                    @if (Common.IsPermissionAllowed(Constants.Can_Access_Crt).IsView)
+                                    @if (Common.IsPermissionAllowed(Constants.Can_Access_CRTList).IsView)
                                     {
                                         <li class="nav-item start">
                                             <a href="/CRT/CRTList" class="nav-link ">
@@ -352,70 +352,70 @@ License: You must have a valid license purchased only from themeforest(the above
                             </ul>
                         </li>
                         //}
-                        @*@if (Common.IsPermissionAllowed("Admin").IsView)
-                            {*@
-                        <li class="nav-item start">
-                            <a href="javascript:;" class="nav-link nav-toggle">
-                                <i class="icon-settings"></i>
-                                <span class="title">Admin</span>
-                                <span class="arrow"></span>
-                            </a>
-                            <ul class="sub-menu">
-                                <li class="nav-item start">
-                                    <a href="javascript:;" class="nav-link nav-toggle">
-                                        <span class="title">Client Admin</span>
-                                        <span class="arrow"></span>
-                                    </a>
-                                    <ul class="sub-menu">
-                                        @*@if (Common.IsPermissionAllowed(Constants.Can_Access_ClientSetup).IsView)
-                                        {*@
-                                            <li class="nav-item start">
-                                                <a href="/ClientSetup/Client" class="nav-link ">
-                                                    <span class="title">
-                                                        Client setup
-                                                    </span>
-                                                </a>
-                                            </li>
-                                        @*}*@
-                                        @if (Common.IsPermissionAllowed(Constants.Can_Access_Orgadmin).IsView)
-                                        {
-                                            <li class="nav-item start">
-                                                <a href="/OrganisationAdmin/OrganisationList" class="nav-link ">
-                                                    <span class="title">
-                                                        Organisation admin
-                                                    </span>
-                                                </a>
-                                            </li>
-                                        }
-                                        @*<li class="nav-item start">
-                                                <a href="/ClientSetup/InstanceSubscription" class="nav-link ">
-                                                    <span class="title">
-                                                        App Subscription
-                                                    </span>
-                                                </a>
-                                            </li>*@
-                                    </ul>
-                                </li>
-                                @if (Common.IsPermissionAllowed(Constants.Can_Access_Crtadmin).IsView)
-                                {
+                        @if (Common.IsPermissionAllowed(Constants.Can_Access_ClientSetup).IsView || Common.IsPermissionAllowed(Constants.Can_Access_Orgadmin).IsView || Common.IsPermissionAllowed(Constants.Can_Access_Crtadmin).IsView)
+                        {
+                            <li class="nav-item start">
+                                <a href="javascript:;" class="nav-link nav-toggle">
+                                    <i class="icon-settings"></i>
+                                    <span class="title">Admin</span>
+                                    <span class="arrow"></span>
+                                </a>
+                                <ul class="sub-menu">
                                     <li class="nav-item start">
-                                        <a href="/AdmCrt/CRTadmin" class="nav-link ">
+                                        <a href="javascript:;" class="nav-link nav-toggle">
+                                            <span class="title">Client Admin</span>
+                                            <span class="arrow"></span>
+                                        </a>
+                                        <ul class="sub-menu">
+                                            @if (Common.IsPermissionAllowed(Constants.Can_Access_ClientSetup).IsView)
+                                            {
+                                                <li class="nav-item start">
+                                                    <a href="/ClientSetup/Client" class="nav-link ">
+                                                        <span class="title">
+                                                            Client setup
+                                                        </span>
+                                                    </a>
+                                                </li>
+                                            }
+                                            @if (Common.IsPermissionAllowed(Constants.Can_Access_Orgadmin).IsView)
+                                            {
+                                                <li class="nav-item start">
+                                                    <a href="/OrganisationAdmin/OrganisationList" class="nav-link ">
+                                                        <span class="title">
+                                                            Organisation admin
+                                                        </span>
+                                                    </a>
+                                                </li>
+                                            }
+                                            @*<li class="nav-item start">
+                                                    <a href="/ClientSetup/InstanceSubscription" class="nav-link ">
+                                                        <span class="title">
+                                                            App Subscription
+                                                        </span>
+                                                    </a>
+                                                </li>*@
+                                        </ul>
+                                    </li>
+                                    @if (Common.IsPermissionAllowed(Constants.Can_Access_Crtadmin).IsView)
+                                    {
+                                        <li class="nav-item start">
+                                            <a href="/AdmCrt/CRTadmin" class="nav-link ">
+                                                <span class="title">
+                                                    CRT Admin
+                                                </span>
+                                            </a>
+                                        </li>
+                                    }
+                                    <li class="nav-item start">
+                                        <a href="/AdmCis/CISadmin" class="nav-link ">
                                             <span class="title">
-                                                CRT Admin
+                                                CIS Admin
                                             </span>
                                         </a>
                                     </li>
-                                }
-                                <li class="nav-item start">
-                                    <a href="/AdmCis/CISadmin" class="nav-link ">
-                                        <span class="title">
-                                            CIS Admin
-                                        </span>
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
-                        @*}*@
+                                </ul>
+                            </li>
+                        }
                     </ul>
                     <!-- END SIDEBAR MENU -->
                     <!-- END SIDEBAR MENU -->

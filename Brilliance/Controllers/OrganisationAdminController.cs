@@ -13,12 +13,14 @@ namespace Brilliance.Controllers
         private IOrganisationAdminDataProvider _iOrganisationAdminDataProvider;
 
         // GET: OrganisationAdmin
+        //[CustomAuthorize(Permissions = Constants.Can_Access_Orgadmin, PermissionType = Constants.Can_View)]
         public ActionResult OrganisationList()
         {
             _iOrganisationAdminDataProvider = new OrganisationAdminDataProvider();
             OrganisationListModel organisationlistModel = _iOrganisationAdminDataProvider.OrganisationList();
             return View(organisationlistModel);
         }
+       // [CustomAuthorize(Permissions = Constants.Can_Access_Company, PermissionType = Constants.Can_CreateOrUpdate)]
         public ActionResult Company(string id)
         {
             _iOrganisationAdminDataProvider = new OrganisationAdminDataProvider();

@@ -36,11 +36,15 @@ namespace Brilliance.Infrastructure.DataProvider
                             SessionHelper.UserName = logindetails.LoginUserData.UserName;
                             SessionHelper.Password = logindetails.LoginUserData.Password;
                             SessionHelper.FullName = logindetails.LoginUserData.FullName;
+                            SessionHelper.ClientID = logindetails.LoginUserData.ClientID;
+                            SessionHelper.CompanyID = logindetails.LoginUserData.CompanyID;
+                            SessionHelper.DivisionID = logindetails.LoginUserData.DivisionID;
+
                             //SessionHelper.EmployeeID = logindetails.LoginUserData.EmployeeID;
                             //SessionHelper.Issu = logindetails.LoginUserData.IsSuperAdmin;
                             //SessionHelper.UserName = logindetails.LoginUserData.DisplayName;
                             //SessionHelper.EmailID = logindetails.LoginUserData.SecondaryEmailID;
-                            //SessionHelper.RoleName = logindetails.LoginUserData.RoleName.ToString().Trim();
+                            SessionHelper.RoleName = logindetails.LoginUserData.RoleName.ToString().Trim();
                             SessionHelper.Permissions = string.Join(",", logindetails.loginUserRoleRightModel.Select(m => m.DisplayName.Trim().ToLower()).ToList());
                             SessionHelper.LoginUserRoleRightList = System.Web.Helpers.Json.Encode(logindetails.loginUserRoleRightModel);
                             //if (!string.IsNullOrEmpty(logindetails.LoginUserData.ProfileImage))

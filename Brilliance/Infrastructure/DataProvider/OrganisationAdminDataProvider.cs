@@ -18,7 +18,12 @@ namespace Brilliance.Infrastructure.DataProvider
             var organisationListModel = new OrganisationListModel();
             try
             {
-                var searchList = new List<SearchValueData>();
+                var searchList = new List<SearchValueData>()
+                {
+                        new SearchValueData { Name = "RoleName" ,Value = Convert.ToString(SessionHelper.RoleName)},
+                        new SearchValueData { Name = "ClientID" ,Value = Convert.ToString(SessionHelper.ClientID)}
+                };
+
 
                 List<Client> clients = GetEntityList<Client>("GetOrganisationList", searchList);//Constants.GetUserGroupList
                 if (clients.Count > 0)

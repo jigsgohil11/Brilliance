@@ -12,6 +12,7 @@ namespace Brilliance.Controllers
         private IAdmDivisionDataProvider _idivisionDataProvider;
 
         // GET: AdmDivision
+        //[CustomAuthorize(Permissions = Constants.Can_Access_Division, PermissionType = Constants.Can_CreateOrUpdate)]
         public ActionResult Division(string clientid, string companyid)
         {
             _idivisionDataProvider = new AdmDivisionDataProvider();
@@ -29,7 +30,7 @@ namespace Brilliance.Controllers
             return Json(response);
         }
 
-        //[CustomAuthorize(Permissions = Constants.Can_Access_Pms_Requisition, PermissionType = Constants.Can_Delete)]
+        //[CustomAuthorize(Permissions = Constants.Can_Access_Division, PermissionType = Constants.Can_Delete)]
         public ActionResult DeleteDivision(string DeleteID)
         {
             _idivisionDataProvider = new AdmDivisionDataProvider();

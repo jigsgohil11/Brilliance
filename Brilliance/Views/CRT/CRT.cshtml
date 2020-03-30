@@ -105,6 +105,7 @@
                             <div class="row">
                                 <div class="col-md-12">
                                     @Html.HiddenFor(m => m.complaint.ComplaintID)
+                                    @*@Html.HiddenFor(m => m.complaint.ClientId)*@
                                     <div class="tab-content">
                                         <div class="tab-pane active" id="tab1" role="tabpanel">
                                             <div class="form-body">
@@ -237,7 +238,15 @@
                                                                 {
                                                                     <label>Tier2<span style="font-weight: bold;color: red;">*</span></label>
                                                                 }
-                                                                @Html.DropDownListFor(m => m.complaint.CompanyId, new SelectList(Model.CompanyList, "Value", "Text", 0), "--Select Company--", new { @data_live_search = "true", @class = "form-control bs-select", @onchange = "Getdata(this);" })
+                                                                @if (SessionHelper.RoleName == "Level 2" || SessionHelper.RoleName == "Level 3")
+                                                                {
+                                                                    @Html.DropDownListFor(m => m.complaint.CompanyId, new SelectList(Model.CompanyList, "Value", "Text", 0), new { @data_live_search = "true", @class = "form-control bs-select", @onchange = "Getdata(this);" })
+                                                                }
+                                                                else
+                                                                {
+                                                                    @Html.DropDownListFor(m => m.complaint.CompanyId, new SelectList(Model.CompanyList, "Value", "Text", 0), "--Select Company--", new { @data_live_search = "true", @class = "form-control bs-select", @onchange = "Getdata(this);" })
+                                                                }
+                                                                @*@Html.DropDownListFor(m => m.complaint.CompanyId, new SelectList(Model.CompanyList, "Value", "Text", 0), "--Select Company--", new { @data_live_search = "true", @class = "form-control bs-select", @onchange = "Getdata(this);" })*@
                                                                 @Html.ValidationMessageFor(m => m.complaint.CompanyId)
                                                             </div>
                                                         </div>
@@ -251,7 +260,16 @@
                                                                 {
                                                                     <label>Tier3<span style="font-weight: bold;color: red;">*</span></label>
                                                                 }
-                                                                @Html.DropDownListFor(m => m.complaint.DivisionId, new SelectList(Model.DivisionList, "Value", "Text", 0), "--Select Division--", new { @data_live_search = "true", @class = "form-control bs-select" })
+                                                                @if (SessionHelper.RoleName == "Level 3")
+                                                                {
+                                                                    @Html.DropDownListFor(m => m.complaint.DivisionId, new SelectList(Model.DivisionList, "Value", "Text", 0), new { @data_live_search = "true", @class = "form-control bs-select" })
+
+                                                                }
+                                                                else
+                                                                {
+                                                                    @Html.DropDownListFor(m => m.complaint.DivisionId, new SelectList(Model.DivisionList, "Value", "Text", 0), "--Select Division--", new { @data_live_search = "true", @class = "form-control bs-select" })
+                                                                }
+                                                                @*@Html.DropDownListFor(m => m.complaint.DivisionId, new SelectList(Model.DivisionList, "Value", "Text", 0), "--Select Division--", new { @data_live_search = "true", @class = "form-control bs-select" })*@
                                                                 @Html.ValidationMessageFor(m => m.complaint.DivisionId)
                                                             </div>
                                                         </div>
@@ -455,8 +473,8 @@
                                                                                 else
                                                                                 {
                                                                                     @*<a target="_blank" href="">
-                                                                                            <span id="fileid">No file</span>
-                                                                                        </a>*@
+                                                            <span id="fileid">No file</span>
+                                                        </a>*@
                                                                                 }
 
                                                                             </div>
@@ -464,23 +482,23 @@
                                                                     </div>
                                                                 </div>
                                                                 @*<div class="col-md-6">
-                                                                        <div class="col-lg-4">
-                                                                            <div class="form-group">
-                                                                                <label style="margin-top: 20px;">Upload Attachment</label>
-                                                                                <div class="fileinput margin-0 fileinput-new" data-provides="fileinput">
-                                                                                    <span class="btn green btn-file" style="padding: 1px 5px; font-size: 12px;">
-                                                                                            <span class="fa fa-upload"></span>
-                                                                                            <span class="fileinput-exists"> Change </span>
-                                                                                            <input type="file" onchange="Upload(this)" name="@CustID" id="@CustID" rpid="@i" accept=".doc,.docx,xls,.xlsx,.xlsm,.xltx,.xltm,.pdf,image/*">
-                                                                                        </span>
-                                                                                    <label style="color:red;" id="VALmassage_@i"></label>
-                                                                                    <a target="_blank" href="~/ComplaintFiles/@Model.NoteList[i].FilePath">
-                                                                                        <span id="fileid">@Model.NoteList[i].FilePath</span>
-                                                                                    </a>
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>*@
+                                        <div class="col-lg-4">
+                                            <div class="form-group">
+                                                <label style="margin-top: 20px;">Upload Attachment</label>
+                                                <div class="fileinput margin-0 fileinput-new" data-provides="fileinput">
+                                                    <span class="btn green btn-file" style="padding: 1px 5px; font-size: 12px;">
+                                                            <span class="fa fa-upload"></span>
+                                                            <span class="fileinput-exists"> Change </span>
+                                                            <input type="file" onchange="Upload(this)" name="@CustID" id="@CustID" rpid="@i" accept=".doc,.docx,xls,.xlsx,.xlsm,.xltx,.xltm,.pdf,image/*">
+                                                        </span>
+                                                    <label style="color:red;" id="VALmassage_@i"></label>
+                                                    <a target="_blank" href="~/ComplaintFiles/@Model.NoteList[i].FilePath">
+                                                        <span id="fileid">@Model.NoteList[i].FilePath</span>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>*@
                                                             </div>
                                                         </div>
                                                     }
@@ -517,21 +535,21 @@
                                                 }
 
                                                 @*<div class="row">
-                                                        <div class="col-md-6">
-                                                            <div class="form-group">
-                                                                <label>Note</label>
-                                                                @if (Model != null && Model.complaint != null && Model.complaint.Notes != null && (Model.complaint.IsResolved.ToUpper() == "NEW" || Model.complaint.IsComplaint.ToUpper() == "NO"))
-                                                                {
-                                                                    @Html.TextAreaFor(m => m.complaint.Notes, new { @class = "form-control m-input", @placeholder = "Enter Description", @rows = "4", @disabled = "disabled" })
-                                                                }
-                                                                else
-                                                                {
-                                                                    @Html.TextAreaFor(m => m.complaint.Notes, new { @class = "form-control m-input", @placeholder = "Enter Description", @rows = "4" })
-                                                                }
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Note</label>
+                                @if (Model != null && Model.complaint != null && Model.complaint.Notes != null && (Model.complaint.IsResolved.ToUpper() == "NEW" || Model.complaint.IsComplaint.ToUpper() == "NO"))
+                                {
+                                    @Html.TextAreaFor(m => m.complaint.Notes, new { @class = "form-control m-input", @placeholder = "Enter Description", @rows = "4", @disabled = "disabled" })
+                                }
+                                else
+                                {
+                                    @Html.TextAreaFor(m => m.complaint.Notes, new { @class = "form-control m-input", @placeholder = "Enter Description", @rows = "4" })
+                                }
 
-                                                            </div>
-                                                        </div>
-                                                    </div>*@
+                            </div>
+                        </div>
+                    </div>*@
                                                 @*@if (Model != null && Model.complaint != null && (Model.complaint.IsResolved.ToUpper() == "NEW" || Model.complaint.IsComplaint.ToUpper() == "NO"))*@
                                                 @if (Model != null && Model.complaint != null && Model.complaint.ComplaintType.ToUpper() == "WEB SUBMISSION")
                                                 {
@@ -609,7 +627,7 @@
                                                                 {
                                                                     <label>Product Category<span style="font-weight: bold;color: red;">*</span></label>
                                                                 }
-                                                                @Html.DropDownListFor(m => m.complaint.ComplaintProductTypeId, new SelectList(Model.ProductTypeList, "Value", "Text", 0), "--Select Product Category--", new { @data_live_search = "true", @class = "form-control bs-select", @onchange = "GetProductType(this);" })
+                                                                @Html.DropDownListFor(m => m.complaint.ComplaintProductTypeId, new SelectList(Model.ProductCategorylist, "Value", "Text", 0), "--Select Product Category--", new { @data_live_search = "true", @class = "form-control bs-select", @onchange = "GetProductType(this);" })
                                                                 @Html.ValidationMessageFor(m => m.complaint.ComplaintProductTypeId)
                                                             </div>
                                                         </div>
@@ -623,7 +641,7 @@
                                                                 {
                                                                     <label>Product Type<span style="font-weight: bold;color: red;">*</span></label>
                                                                 }
-                                                                @Html.DropDownListFor(m => m.complaint.ComplaintProductId, new SelectList(Model.ProductCategorylist, "Value", "Text", 0), "--Select Product--", new { @data_live_search = "true", @class = "form-control bs-select" })
+                                                                @Html.DropDownListFor(m => m.complaint.ComplaintProductId, new SelectList(Model.ProductTypeList, "Value", "Text", 0), "--Select Product--", new { @data_live_search = "true", @class = "form-control bs-select" })
                                                                 @Html.ValidationMessageFor(m => m.complaint.ComplaintProductId)
                                                             </div>
                                                         </div>
@@ -937,7 +955,7 @@
                                                             <div class="col-md-6">
                                                                 <div class="form-group">
                                                                     <label>Assign To</label>
-                                                                    @Html.DropDownListFor(m => m.complaint.AssignTo, new SelectList(Model.UserList, "Value", "Text", 0), "Choose..", new { @data_live_search = "true", @class = "form-control bs-select"})
+                                                                    @Html.DropDownListFor(m => m.complaint.AssignTo, new SelectList(Model.UserList, "Value", "Text", 0), "Choose..", new { @data_live_search = "true", @class = "form-control bs-select" })
                                                                     @*@Html.ValidationMessageFor(m => m.complaint.ComplaintReceivedRegulatoryId)*@
                                                                 </div>
                                                             </div>
@@ -1381,8 +1399,7 @@
         function GetProductType(Obj) {
             var productCategoryVal = $('#' + Obj.id).val();
             var postData = {
-                id: productCategoryVal,
-                clientid: productCategoryVal
+                id: productCategoryVal
             };
             ShowLoader();
             AjaxCall("/CRT/GetProductByProductCategory", JSON.stringify(postData), "post", "json", "application/json", false).done(function (data) {
@@ -1410,8 +1427,7 @@
         function GetNatureOfComplaint(Obj) {
             var complaiutCategoryVal = $('#' + Obj.id).val();
             var postData = {
-                id: complaiutCategoryVal,
-                clientid: complaiutCategoryVal
+                id: complaiutCategoryVal
             };
             ShowLoader();
             AjaxCall("/CRT/GetNatureOfComplaintList", JSON.stringify(postData), "post", "json", "application/json", false).done(function (data) {
@@ -1568,8 +1584,7 @@
             var compcategoryid = $('#complaint_ComplaintCategoryId').val();
             var postData = {
                 Categoryid: compcategoryid,
-                Natureid: complaintNatureVal,
-                clientid: complaintNatureVal
+                Natureid: complaintNatureVal
             };
             ShowLoader();
             AjaxCall("/CRT/GetTCFOutcome", JSON.stringify(postData), "post", "json", "application/json", false).done(function (data) {

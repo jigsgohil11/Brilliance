@@ -105,6 +105,7 @@ namespace Brilliance.Infrastructure
         public const string Can_Access_Company = "Company";
         public const string Can_Access_Division = "Division";
         public const string Can_Access_Crt = "Complaints Reporting Tool";
+        public const string Can_Access_CRTList = "CRT List";
         public const string Can_Access_User = "User";
         public const string Can_Access_Crtadmin = "CRT Admin";
         public const string Can_Access_FieldLabels = "Field Label configuration";
