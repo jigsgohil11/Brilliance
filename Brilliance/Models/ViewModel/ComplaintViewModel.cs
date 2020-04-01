@@ -1,5 +1,7 @@
 ﻿using Brilliance.Models.Entity;
+using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Web.Mvc;
 
 namespace Brilliance.Models.ViewModel
@@ -65,4 +67,30 @@ namespace Brilliance.Models.ViewModel
         public List<Complaint> Complaintlist { get; set; }
         public ServiceResponse Response { get; set; }
     }
+
+    public class ComplaintReportModel
+    {
+        public ComplaintReportModel()
+        {
+            Reportlist = new List<SelectListItem>();
+            report = new ReportType();
+            //Response = new ServiceResponse();
+        }
+        public List<SelectListItem> Reportlist { get; set; }
+        public ReportType report { get; set; }
+        //public ServiceResponse Response { get; set; }
+    }
+
+    public class ReportType
+    {
+
+        public Guid ReportTypeID { get; set; }
+        [Required(ErrorMessage = "Report Type is required.")]
+        public string ReportTypeName { get; set; }
+        public string RoleName { get; set; }
+        public DateTime DateFrom { get; set; }
+        public DateTime DateTo { get; set; }
+
+    }
+
 }

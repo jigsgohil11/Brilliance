@@ -274,7 +274,7 @@ namespace Brilliance.Controllers
 
                     IRow row1 = sheet1.CreateRow(0);
                     ICell cellr1 = row1.CreateCell(0);
-                    cellr1.SetCellValue("Complaint Notes Report");
+                    cellr1.SetCellValue("Complaint Data Without Notes");
                     ICellStyle style = workbook.CreateCellStyle();
                     style.Alignment = HorizontalAlignment.Left;
                     row1.GetCell(0).CellStyle = style;
@@ -397,7 +397,7 @@ namespace Brilliance.Controllers
 
                     IRow row1 = sheet1.CreateRow(0);
                     ICell cellr1 = row1.CreateCell(0);
-                    cellr1.SetCellValue("Complaint Notes Report");
+                    cellr1.SetCellValue("Complaint Types Report");
                     ICellStyle style = workbook.CreateCellStyle();
                     style.Alignment = HorizontalAlignment.Left;
                     row1.GetCell(0).CellStyle = style;
@@ -489,7 +489,7 @@ namespace Brilliance.Controllers
 
                 ///-----Direct Excel Export Start----///
                 ///
-                string saveAsFileName = string.Format("Complaintsdata_WithoutNotes_Report.xls", DateTime.Now);
+                string saveAsFileName = string.Format("Complaints_Types_Report.xls", DateTime.Now);
                 Response.ContentType = "application/vnd.ms-excel";
                 Response.AddHeader("Content-Disposition", string.Format("attachment;filename={0}", saveAsFileName));
                 Response.Clear();

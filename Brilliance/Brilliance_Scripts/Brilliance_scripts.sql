@@ -142,6 +142,13 @@ where TemplateID='4F50D4F0-D3D0-4E90-8341-CBBEC67F007B'
 --Reports(/CRT/CRTReports)
 
 ---------------
-
+insert into mst_ReportType(ReportTypeID,ReportTypeName,RoleName,IsActive)Values(
+newid(),'Complaint Types','Level 3',1)
+insert into mst_ReportType(ReportTypeID,ReportTypeName,RoleName,IsActive)Values(
+newid(),'Complaint Notes Report','Level 3',1)
+insert into mst_ReportType(ReportTypeID,ReportTypeName,RoleName,IsActive)Values(
+newid(),'Complaint Data without Notes','Level 3',1)
+insert into mst_ReportType(ReportTypeID,ReportTypeName,RoleName,IsActive)Values(
+newid(),'Complaint Turnaround Time','Level 3',1)
 
 

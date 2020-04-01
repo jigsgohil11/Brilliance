@@ -371,6 +371,29 @@ namespace Brilliance.Infrastructure.DataProvider
             return response;
         }
 
+        public ServiceResponse GetReport()
+        {
+            ComplaintReportModel reportmodel = new ComplaintReportModel();
+            var response = new ServiceResponse();
+            try
+            {
+                var searchList = new List<SearchValueData>()
+                {
+                        //new SearchValueData { Name = "RoleName" ,Value = Convert.ToString(SessionHelper.RoleName)}
+                        new SearchValueData { Name = "RoleName" ,Value = "Level 3"}
+                };
+
+                reportmodel = GetMultipleEntity<ComplaintReportModel>("GetReportType", searchList);
+                response.Data = reportmodel;
+                response.IsSuccess = true;
+            }
+            catch (Exception ex)
+            {
+
+            }
+            return response;
+        }
+
         //public ServiceResponse GetCRTDataPdf()
         //{
         //    var response = new ServiceResponse();

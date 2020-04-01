@@ -67,7 +67,14 @@
                                                         {
                                                             <label>Company<span style="font-weight: bold;color: red;">*</span></label>
                                                         }
-                                                        @Html.DropDownListFor(m => m.complaint.CompanyId, new SelectList(Model.CompanyList, "Value", "Text", 0), "--Select Company--", new { @data_live_search = "true", @class = "form-control bs-select", @onchange = "Getdata(this);" })
+                                                        @if (SessionHelper.RoleName == "Level 2" || SessionHelper.RoleName == "Level 3")
+                                                        {
+                                                            @Html.DropDownListFor(m => m.complaint.CompanyId, new SelectList(Model.CompanyList, "Value", "Text", 0), new { @data_live_search = "true", @class = "form-control bs-select", @onchange = "Getdata(this);" })
+                                                        }
+                                                        else
+                                                        {
+                                                            @Html.DropDownListFor(m => m.complaint.CompanyId, new SelectList(Model.CompanyList, "Value", "Text", 0), "--Select Company--", new { @data_live_search = "true", @class = "form-control bs-select", @onchange = "Getdata(this);" })
+                                                        }
                                                         @Html.ValidationMessageFor(m => m.complaint.CompanyId)
                                                     </div>
                                                 </div>
@@ -82,7 +89,15 @@
                                                         {
                                                             <label>Division<span style="font-weight: bold;color: red;">*</span></label>
                                                         }
-                                                        @Html.DropDownListFor(m => m.complaint.DivisionId, new SelectList(Model.DivisionList, "Value", "Text", 0), "--Select Division--", new { @data_live_search = "true", @class = "form-control bs-select" })
+                                                        @if (SessionHelper.RoleName == "Level 3")
+                                                        {
+                                                            @Html.DropDownListFor(m => m.complaint.DivisionId, new SelectList(Model.DivisionList, "Value", "Text", 0), new { @data_live_search = "true", @class = "form-control bs-select" })
+
+                                                        }
+                                                        else
+                                                        {
+                                                            @Html.DropDownListFor(m => m.complaint.DivisionId, new SelectList(Model.DivisionList, "Value", "Text", 0), "--Select Division--", new { @data_live_search = "true", @class = "form-control bs-select" })
+                                                        }
                                                         @Html.ValidationMessageFor(m => m.complaint.DivisionId)
                                                     </div>
                                                 </div>

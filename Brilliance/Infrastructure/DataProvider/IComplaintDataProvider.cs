@@ -17,7 +17,7 @@ namespace Brilliance.Infrastructure.DataProvider
         ServiceResponse GetProductByProductCategory(Guid ProductCategoryID);
         ServiceResponse GetNatureOfComplaintList(Guid ComplaintCategoryID);
         ServiceResponse GetTCFOutcome(Guid ComplaintCategoryID, Guid NatureID);
-        //ServiceResponse GetCRTDataPdf();
+        ServiceResponse GetReport();
 
     }
 }

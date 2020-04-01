@@ -227,7 +227,10 @@ namespace Brilliance.Controllers
         }
         public ActionResult CRTReports()
         {
-            return View();
+            _icomplaintDataProvider = new ComplaintDataProvider();
+            var response = new ServiceResponse();
+            response = _icomplaintDataProvider.GetReport();
+            return View(response.Data);
         }
 
     }

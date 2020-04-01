@@ -1,12 +1,14 @@
 ﻿@using Brilliance.Infrastructure
 @model Brilliance.Models.ViewModel.ComplaintViewModel
 @{
-    /**/
+                /**/
 
-    ViewBag.Title = "CRT";
-    Layout = "~/Views/Shared/_Layout_public.cshtml";
+                /**/
 
-    int index = 0;
+                ViewBag.Title = "CRT";
+                Layout = "~/Views/Shared/_Layout_public.cshtml";
+
+                int index = 0;
 }
 @*<link href="~/assets/global/plugins/bootstrap-summernote/summernote.css" rel="stylesheet" type="text/css" />
 
@@ -473,8 +475,8 @@
                                                                                 else
                                                                                 {
                                                                                     @*<a target="_blank" href="">
-                                                            <span id="fileid">No file</span>
-                                                        </a>*@
+                                                                                            <span id="fileid">No file</span>
+                                                                                        </a>*@
                                                                                 }
 
                                                                             </div>
@@ -482,23 +484,23 @@
                                                                     </div>
                                                                 </div>
                                                                 @*<div class="col-md-6">
-                                        <div class="col-lg-4">
-                                            <div class="form-group">
-                                                <label style="margin-top: 20px;">Upload Attachment</label>
-                                                <div class="fileinput margin-0 fileinput-new" data-provides="fileinput">
-                                                    <span class="btn green btn-file" style="padding: 1px 5px; font-size: 12px;">
-                                                            <span class="fa fa-upload"></span>
-                                                            <span class="fileinput-exists"> Change </span>
-                                                            <input type="file" onchange="Upload(this)" name="@CustID" id="@CustID" rpid="@i" accept=".doc,.docx,xls,.xlsx,.xlsm,.xltx,.xltm,.pdf,image/*">
-                                                        </span>
-                                                    <label style="color:red;" id="VALmassage_@i"></label>
-                                                    <a target="_blank" href="~/ComplaintFiles/@Model.NoteList[i].FilePath">
-                                                        <span id="fileid">@Model.NoteList[i].FilePath</span>
-                                                    </a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>*@
+                                                                        <div class="col-lg-4">
+                                                                            <div class="form-group">
+                                                                                <label style="margin-top: 20px;">Upload Attachment</label>
+                                                                                <div class="fileinput margin-0 fileinput-new" data-provides="fileinput">
+                                                                                    <span class="btn green btn-file" style="padding: 1px 5px; font-size: 12px;">
+                                                                                            <span class="fa fa-upload"></span>
+                                                                                            <span class="fileinput-exists"> Change </span>
+                                                                                            <input type="file" onchange="Upload(this)" name="@CustID" id="@CustID" rpid="@i" accept=".doc,.docx,xls,.xlsx,.xlsm,.xltx,.xltm,.pdf,image/*">
+                                                                                        </span>
+                                                                                    <label style="color:red;" id="VALmassage_@i"></label>
+                                                                                    <a target="_blank" href="~/ComplaintFiles/@Model.NoteList[i].FilePath">
+                                                                                        <span id="fileid">@Model.NoteList[i].FilePath</span>
+                                                                                    </a>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>*@
                                                             </div>
                                                         </div>
                                                     }
@@ -535,21 +537,21 @@
                                                 }
 
                                                 @*<div class="row">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label>Note</label>
-                                @if (Model != null && Model.complaint != null && Model.complaint.Notes != null && (Model.complaint.IsResolved.ToUpper() == "NEW" || Model.complaint.IsComplaint.ToUpper() == "NO"))
-                                {
-                                    @Html.TextAreaFor(m => m.complaint.Notes, new { @class = "form-control m-input", @placeholder = "Enter Description", @rows = "4", @disabled = "disabled" })
-                                }
-                                else
-                                {
-                                    @Html.TextAreaFor(m => m.complaint.Notes, new { @class = "form-control m-input", @placeholder = "Enter Description", @rows = "4" })
-                                }
+                                                        <div class="col-md-6">
+                                                            <div class="form-group">
+                                                                <label>Note</label>
+                                                                @if (Model != null && Model.complaint != null && Model.complaint.Notes != null && (Model.complaint.IsResolved.ToUpper() == "NEW" || Model.complaint.IsComplaint.ToUpper() == "NO"))
+                                                                {
+                                                                    @Html.TextAreaFor(m => m.complaint.Notes, new { @class = "form-control m-input", @placeholder = "Enter Description", @rows = "4", @disabled = "disabled" })
+                                                                }
+                                                                else
+                                                                {
+                                                                    @Html.TextAreaFor(m => m.complaint.Notes, new { @class = "form-control m-input", @placeholder = "Enter Description", @rows = "4" })
+                                                                }
 
-                            </div>
-                        </div>
-                    </div>*@
+                                                            </div>
+                                                        </div>
+                                                    </div>*@
                                                 @*@if (Model != null && Model.complaint != null && (Model.complaint.IsResolved.ToUpper() == "NEW" || Model.complaint.IsComplaint.ToUpper() == "NO"))*@
                                                 @if (Model != null && Model.complaint != null && Model.complaint.ComplaintType.ToUpper() == "WEB SUBMISSION")
                                                 {
@@ -1278,7 +1280,7 @@
                     $("#complaint_ComplaintReceivedRegulatoryId").attr('disabled', 'disabled');
                 }
                 var y = document.getElementById("complaint_ComplaintOverallOutcomeId");
-                for (i = 0; i < x.options.length; i++) {
+                for (i = 0; i < y.options.length; i++) {
                     if (document.getElementById("complaint_ComplaintOverallOutcomeId").getElementsByTagName("option")[i].text.toString().toUpperCase() == "REJECTED: NOT A COMPLAINT") {
                         document.getElementById("complaint_ComplaintOverallOutcomeId").getElementsByTagName("option")[i].selected = true;
                     }
@@ -1292,9 +1294,24 @@
                     $("#complaint_ComplaintCompensationId").attr('disabled', 'disabled');
                     $('#complaint_CompensationValue').val("");
                     $("#complaint_CompensationValue").attr('disabled', 'disabled');
-                    $("#complaint_ComplaintReceivedRegulatoryFeedbackId").val("");
+                    //$("#complaint_ComplaintReceivedRegulatoryFeedbackId").val("");
+                    //$('#complaint_ComplaintReceivedRegulatoryFeedbackId').selectpicker('render');
+                    //$("#complaint_ComplaintReceivedRegulatoryFeedbackId").attr('disabled', 'disabled');
+                }
+                var z = document.getElementById("complaint_ComplaintReceivedRegulatoryFeedbackId");
+                for (i = 0; i < z.options.length; i++) {
+                    if (document.getElementById("complaint_ComplaintReceivedRegulatoryFeedbackId").getElementsByTagName("option")[i].text.toString().toUpperCase() == "NOT APPLICABLE") {
+                        document.getElementById("complaint_ComplaintReceivedRegulatoryFeedbackId").getElementsByTagName("option")[i].selected = true;
+                    }
                     $('#complaint_ComplaintReceivedRegulatoryFeedbackId').selectpicker('render');
                     $("#complaint_ComplaintReceivedRegulatoryFeedbackId").attr('disabled', 'disabled');
+                    $("span[data-valmsg-for='complaint.ComplaintReceivedRegulatoryFeedbackId']").html('');
+                    $("span[data-valmsg-for='complaint.ComplaintReceivedRegulatoryFeedbackId']").removeClass('field-validation-error');
+                    $("span[data-valmsg-for='complaint.ComplaintReceivedRegulatoryFeedbackId']").addClass('field-validation-valid');
+                    $("#complaint_ComplaintReceivedRegulatoryFeedbackId").removeClass('input-validation-error');
+                    $("#complaint_ComplaintReceivedRegulatoryFeedbackId").addClass('valid');
+                    //$('#complaint_ComplaintRegulatedCostId').val("");
+                    //$("#complaint_ComplaintRegulatedCostId").attr('disabled', 'disabled');
                 }
 
             }
@@ -1631,20 +1648,20 @@
             return (number < 10 ? '0' : '') + number
         }
 
-                                                                    //function Upload(DocID) {
-                                                                    //    var size = DocID.files[0].size;
-                                                                    //    var fileExtension = DocID.value.substring(DocID.value.lastIndexOf(".") + 1);
-                                                                    //    if (fileExtension == "doc" || fileExtension == "docx" || fileExtension == "pdf" || fileExtension == "jpg" || fileExtension == "jpeg" || fileExtension == "png") {
-                                                                    //        if (size > 1048576) {
-                                                                    //            toastr["error"]("File should not be more than 1 MB.", { "positionClass": "toast-top-right", "progressBar": true });
-                                                                    //            DocID.value = "";
-                                                                    //        };
-                                                                    //        document.getElementById('VALmassage').innerHTML = '';
-                                                                    //    }
-                                                                    //    else {
-                                                                    //        document.getElementById('VALmassage').innerHTML = 'File must be doc,docx or pdf!';
-                                                                    //    }
-                                                                    //}
+                                                                        //function Upload(DocID) {
+                                                                        //    var size = DocID.files[0].size;
+                                                                        //    var fileExtension = DocID.value.substring(DocID.value.lastIndexOf(".") + 1);
+                                                                        //    if (fileExtension == "doc" || fileExtension == "docx" || fileExtension == "pdf" || fileExtension == "jpg" || fileExtension == "jpeg" || fileExtension == "png") {
+                                                                        //        if (size > 1048576) {
+                                                                        //            toastr["error"]("File should not be more than 1 MB.", { "positionClass": "toast-top-right", "progressBar": true });
+                                                                        //            DocID.value = "";
+                                                                        //        };
+                                                                        //        document.getElementById('VALmassage').innerHTML = '';
+                                                                        //    }
+                                                                        //    else {
+                                                                        //        document.getElementById('VALmassage').innerHTML = 'File must be doc,docx or pdf!';
+                                                                        //    }
+                                                                        //}
     </script>
 }
 
