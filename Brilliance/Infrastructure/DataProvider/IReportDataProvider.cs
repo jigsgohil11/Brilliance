@@ -7,6 +7,10 @@ namespace Brilliance.Infrastructure.DataProvider
 {
     interface IReportDataProvider
     {
-        DataSet GetComplaintExcelReport(Guid ClientID,string Type);
+
+        DataSet GetComplaintExcelReport(string Type);
+        DataSet GetLevel2ComplaintExcelReport(string Type);
+        DataSet GetLevel1ComplaintExcelReport(string Type);
+
     }
 }

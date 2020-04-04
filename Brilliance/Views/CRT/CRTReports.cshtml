@@ -34,8 +34,8 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label>Reports</label>
-                                    @Html.DropDownListFor(m => m.report.ReportTypeID, new SelectList(Model.Reportlist, "Value", "Text", 0), "--Select Report Type--", new { @data_live_search = "true", @class = "form-control bs-select"})
-
+                                    @Html.DropDownListFor(m => m.report.ReportTypeID, new SelectList(Model.Reportlist, "Value", "Text", 0), "--Select Report Type--", new { @data_live_search = "true", @class = "form-control bs-select" })
+                                    @Html.ValidationMessageFor(m => m.report.ReportTypeID)
                                 </div>
                             </div>
                         </div>
@@ -102,18 +102,41 @@
 
         function GetCRTDataPdf() {
             var Type = $("#report_ReportTypeID :selected").text();
+            var datefrom = $("#report_DateFrom").val();
+            var dateto = $("#report_DateTo").val();
             if (Type != null && Type != "" && Type != undefined) {
                 if (Type == 'Complaint Types') {
-                    window.location.href = "/Reports/GetLevel3ComplaintTypesExcelReport?Type='Complaint data'";
+                    window.location.href = "/Reports/GetLevel3ComplaintTypesExcelReport?Type=Complaint data&From=" + datefrom + "&To=" + dateto + "";
                 }
                 else if (Type == 'Complaint Notes Report') {
-                    window.location.href = "/Reports/GetLevel3ComplaintExcelReportwithNotes?Type='With Notes'";
+                    window.location.href = "/Reports/GetLevel3ComplaintExcelReportwithNotes?Type=With Notes&From=" + datefrom + "&To=" + dateto + "";
                 }
                 else if (Type == 'Complaint Data without Notes') {
-                    window.location.href = "/Reports/GetLevel3ComplaintExcelReportwithoutNotes?Type='Without Notes'";
+                    window.location.href = "/Reports/GetLevel3ComplaintExcelReportwithoutNotes?Type=Without Notes&From=" + datefrom + "&To=" + dateto + "";
+                }
+                else if (Type == 'Complaint Turnaround Time') {
+                    window.location.href = "/Reports/GetLevel3ComplaintTurnaroundTimeExcelReport?Type=Turnaround Time&From=" + datefrom + "&To=" + dateto + "";
+                }
+                else if (Type == 'Complaint Types rollup') {
+                    window.location.href = "/Reports/GetLevel2ComplaintsTypesRollupReport?Type=Complaint Types rollup&From=" + datefrom + "&To=" + dateto + "";
+                }
+                else if (Type == 'Complaint data rollup') {
+                    window.location.href = "/Reports/GetLevel2ComplaintsDatasRollupReport?Type=Complaint data rollup&From=" + datefrom + "&To=" + dateto + "";
+                }
+                else if (Type == 'Complaint Turnaround Time rollup') {
+                    window.location.href = "/Reports/GetLevel2ComplaintTurnaroundTimerollup?Type=Complaint Turnaround Time rollup&From=" + datefrom + "&To=" + dateto + "";
+                }
+                else if (Type == 'Level1 Complaint Types rollup') {
+                    window.location.href = "/Reports/GetLevel1ComplaintsTypesRollupReport?Type=Complaint Types rollup&From=" + datefrom + "&To=" + dateto + "";
+                }
+                else if (Type == 'Level1 Complaint data rollup') {
+                    window.location.href = "/Reports/GetLevel1ComplaintsDatasRollupReport?Type=Complaint data rollup&From=" + datefrom + "&To=" + dateto + "";
+                }
+                else if (Type == 'Level1 Complaint Turnaround Time rollup') {
+                    window.location.href = "/Reports/GetLevel1ComplaintTurnaroundTimerollup?Type=Complaint Turnaround Time rollup&From=" + datefrom + "&To=" + dateto + "";
                 }
                 else {
-                    window.location.href = "/Reports/GetLevel3ComplaintTypesExcelReport?Type='Complaint data'";
+                    window.location.href = "/Reports/GetLevel3ComplaintTypesExcelReport?Type=Complaint data&From=" + datefrom + "&To=" + dateto + "";
                 }
             }
         }

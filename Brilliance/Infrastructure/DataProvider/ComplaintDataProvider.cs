@@ -379,8 +379,8 @@ namespace Brilliance.Infrastructure.DataProvider
             {
                 var searchList = new List<SearchValueData>()
                 {
-                        //new SearchValueData { Name = "RoleName" ,Value = Convert.ToString(SessionHelper.RoleName)}
-                        new SearchValueData { Name = "RoleName" ,Value = "Level 3"}
+                        new SearchValueData { Name = "RoleName" ,Value = Convert.ToString(SessionHelper.RoleName)}
+                       // new SearchValueData { Name = "RoleName" ,Value = "Level 3"}
                 };
 
                 reportmodel = GetMultipleEntity<ComplaintReportModel>("GetReportType", searchList);

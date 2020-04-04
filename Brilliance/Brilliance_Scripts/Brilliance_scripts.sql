@@ -151,4 +151,18 @@ newid(),'Complaint Data without Notes','Level 3',1)
 insert into mst_ReportType(ReportTypeID,ReportTypeName,RoleName,IsActive)Values(
 newid(),'Complaint Turnaround Time','Level 3',1)
 
+insert into mst_ReportType(ReportTypeID,ReportTypeName,RoleName,IsActive)Values(
+newid(),'Complaint Types rollup','Level 2',1)
+insert into mst_ReportType(ReportTypeID,ReportTypeName,RoleName,IsActive)Values(
+newid(),'Complaint data rollup','Level 2',1)
+insert into mst_ReportType(ReportTypeID,ReportTypeName,RoleName,IsActive)Values(
+newid(),'Complaint Turnaround Time rollup','Level 2',1)
+
+insert into mst_ReportType(ReportTypeID,ReportTypeName,RoleName,IsActive)Values(
+newid(),'Level1 Complaint Types rollup','Level 1',1)
+insert into mst_ReportType(ReportTypeID,ReportTypeName,RoleName,IsActive)Values(
+newid(),'Level1 Complaint data rollup','Level 1',1)
+insert into mst_ReportType(ReportTypeID,ReportTypeName,RoleName,IsActive)Values(
+newid(),'Level1 Complaint Turnaround Time rollup','Level 1',
+
 

@@ -18,8 +18,8 @@ namespace Brilliance.Controllers
     {
         private IReportDataProvider _ireportDataProvider;
         // GET: Reports
-
-        public void GetLevel3ComplaintExcelReportwithNotes(string Type)
+        #region Level3Reports
+        public void GetLevel3ComplaintExcelReportwithNotes(string Type, string From, string To)
         {
             string clientid = "";
             DataSet ds = new DataSet();
@@ -28,11 +28,15 @@ namespace Brilliance.Controllers
 
             //int monthInDigit = Convert.ToDateTime(MonthYearStr).Month;
             //int year = Convert.ToDateTime(MonthYearStr).Year;
+            DateTime datefrom = Convert.ToDateTime(From);
+            DateTime dateto = Convert.ToDateTime(To);
+            string dfrom = (datefrom).ToString("dd MMMM yyyy");
+            string dto = (dateto).ToString("dd MMMM yyyy");
             Guid ClientID = Common.CheckIdNullOrEmptyNonEncrypt(clientid);
             IWorkbook workbook;
             workbook = new HSSFWorkbook();
             //string CompanyID = "CA484A56-94D4-4AD5-9C5A-0ACA865A059E";
-            ds = _ireportDataProvider.GetComplaintExcelReport(ClientID, Type);
+            ds = _ireportDataProvider.GetComplaintExcelReport(Type);
 
             if (ds != null && ds.Tables.Count > 0 && ds.Tables[0] != null && ds.Tables[0].Rows.Count > 0)
             {
@@ -86,7 +90,7 @@ namespace Brilliance.Controllers
                     // DateTime date = DateTime.Now;
 
                     //cellr2.SetCellValue("Date : " + date.ToString("dd/MM/yyyy"));
-                    cellr3.SetCellValue("01 Jan 2020 - 29 Feb 2020");
+                    cellr3.SetCellValue(dfrom + " - " + dto);
                     //ICellStyle styler2 = workbook.CreateCellStyle();
                     //styler2.Alignment = HorizontalAlignment.Left;
                     row3.GetCell(0).CellStyle = style;
@@ -253,15 +257,19 @@ namespace Brilliance.Controllers
             //foreach (string filePath in files)
             //    System.IO.File.Delete(filePath);
         }
-        public void GetLevel3ComplaintExcelReportwithoutNotes(string Type)
+        public void GetLevel3ComplaintExcelReportwithoutNotes(string Type, string From, string To)
         {
             string clientid = "";
             DataSet ds = new DataSet();
             _ireportDataProvider = new ReportDataProvider();
+            DateTime datefrom = Convert.ToDateTime(From);
+            DateTime dateto = Convert.ToDateTime(To);
+            string dfrom = (datefrom).ToString("dd MMMM yyyy");
+            string dto = (dateto).ToString("dd MMMM yyyy");
             Guid ClientID = Common.CheckIdNullOrEmptyNonEncrypt(clientid);
             IWorkbook workbook;
             workbook = new HSSFWorkbook();
-            ds = _ireportDataProvider.GetComplaintExcelReport(ClientID, Type);
+            ds = _ireportDataProvider.GetComplaintExcelReport(Type);
 
             if (ds != null && ds.Tables.Count > 0 && ds.Tables[0] != null && ds.Tables[0].Rows.Count > 0)
             {
@@ -302,7 +310,7 @@ namespace Brilliance.Controllers
 
                     IRow row3 = sheet1.CreateRow(2);
                     ICell cellr3 = row3.CreateCell(0);
-                    cellr3.SetCellValue("01 Jan 2020 - 29 Feb 2020");
+                    cellr3.SetCellValue(dfrom + " - " + dto);
                     row3.GetCell(0).CellStyle = style;
 
                     var fontr3 = workbook.CreateFont();
@@ -330,7 +338,7 @@ namespace Brilliance.Controllers
                             ICell cell = row.CreateCell(j);
                             String columnName = dt.Columns[j].ToString();
                             cell.SetCellValue(dt.Rows[i][columnName].ToString());
-                            
+
                         }
                     }
 
@@ -376,15 +384,19 @@ namespace Brilliance.Controllers
                 ////----Direct Excel Export END----///  
             }
         }
-        public void GetLevel3ComplaintTypesExcelReport(string Type)
+        public void GetLevel3ComplaintTypesExcelReport(string Type, string From, string To)
         {
             string clientid = "";
             DataSet ds = new DataSet();
             _ireportDataProvider = new ReportDataProvider();
+            DateTime datefrom = Convert.ToDateTime(From);
+            DateTime dateto = Convert.ToDateTime(To);
+            string dfrom = (datefrom).ToString("dd MMMM yyyy");
+            string dto = (dateto).ToString("dd MMMM yyyy");
             Guid ClientID = Common.CheckIdNullOrEmptyNonEncrypt(clientid);
             IWorkbook workbook;
             workbook = new HSSFWorkbook();
-            ds = _ireportDataProvider.GetComplaintExcelReport(ClientID, Type);
+            ds = _ireportDataProvider.GetComplaintExcelReport(Type);
 
             if (ds != null && ds.Tables.Count > 0 && ds.Tables[0] != null && ds.Tables[0].Rows.Count > 0)
             {
@@ -425,7 +437,7 @@ namespace Brilliance.Controllers
 
                     IRow row3 = sheet1.CreateRow(2);
                     ICell cellr3 = row3.CreateCell(0);
-                    cellr3.SetCellValue("01 Jan 2020 - 29 Feb 2020");
+                    cellr3.SetCellValue(dfrom + " - " + dto);
                     row3.GetCell(0).CellStyle = style;
 
                     var fontr3 = workbook.CreateFont();
@@ -499,5 +511,957 @@ namespace Brilliance.Controllers
                 ////----Direct Excel Export END----///  
             }
         }
+        public void GetLevel3ComplaintTurnaroundTimeExcelReport(string Type, string From, string To)
+        {
+            string clientid = "";
+            DataSet ds = new DataSet();
+            _ireportDataProvider = new ReportDataProvider();
+            DateTime datefrom = Convert.ToDateTime(From);
+            DateTime dateto = Convert.ToDateTime(To);
+            string dfrom = (datefrom).ToString("dd MMMM yyyy");
+            string dto = (dateto).ToString("dd MMMM yyyy");
+            Guid ClientID = Common.CheckIdNullOrEmptyNonEncrypt(clientid);
+            IWorkbook workbook;
+            workbook = new HSSFWorkbook();
+            ds = _ireportDataProvider.GetComplaintExcelReport(Type);
+
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0] != null && ds.Tables[0].Rows.Count > 0)
+            {
+                for (int k = 0; k < ds.Tables[0].Rows.Count; k++)
+                {
+                    string Tier3 = Convert.ToString(ds.Tables[0].Rows[k]["Tier3"]);
+                    DataTable dt = ds.Tables[0];
+
+                    ISheet sheet1 = workbook.CreateSheet("Sheet " + k);
+
+                    IRow row1 = sheet1.CreateRow(0);
+                    ICell cellr1 = row1.CreateCell(0);
+                    cellr1.SetCellValue("Complaints Turnsround Time Report");
+                    ICellStyle style = workbook.CreateCellStyle();
+                    style.Alignment = HorizontalAlignment.Left;
+                    row1.GetCell(0).CellStyle = style;
+
+                    var font = workbook.CreateFont();
+                    font.FontHeightInPoints = 11;
+                    font.FontName = "Calibri";
+                    font.Boldweight = (short)FontBoldWeight.Bold;
+                    cellr1.CellStyle.SetFont(font);
+                    sheet1.AddMergedRegion(new CellRangeAddress(0, 0, 0, 6));
+
+                    IRow row2 = sheet1.CreateRow(1);
+                    ICell cellr2 = row2.CreateCell(0);
+                    cellr2.SetCellValue(Tier3);
+                    row1.GetCell(0).CellStyle = style;
+
+                    var fontr2 = workbook.CreateFont();
+                    fontr2.FontHeightInPoints = 9;
+                    fontr2.FontName = "Calibri";
+                    fontr2.Boldweight = (short)FontBoldWeight.Bold;
+                    //fontr2.Color = IndexedColors.Blue.Index;
+                    cellr2.CellStyle.SetFont(fontr2);
+                    sheet1.AddMergedRegion(new CellRangeAddress(1, 1, 0, 0));
+
+
+                    IRow row3 = sheet1.CreateRow(2);
+                    ICell cellr3 = row3.CreateCell(0);
+                    cellr3.SetCellValue(dfrom + " - " + dto);
+                    row3.GetCell(0).CellStyle = style;
+
+                    var fontr3 = workbook.CreateFont();
+                    fontr3.FontHeightInPoints = 9;
+                    fontr3.FontName = "Calibri";
+                    fontr3.Boldweight = (short)FontBoldWeight.Bold;
+                    cellr3.CellStyle.SetFont(fontr3);
+                    sheet1.AddMergedRegion(new CellRangeAddress(2, 2, 0, 6));
+
+                    IRow row4 = sheet1.CreateRow(4);
+
+                    for (int j = 0; j < dt.Columns.Count - 1; j++)
+                    {
+                        ICell cell = row4.CreateCell(j);
+
+                        String columnName = dt.Columns[j].ToString();
+                        cell.SetCellValue(columnName);
+                    }
+
+                    for (int i = 0; i < dt.Rows.Count; i++)
+                    {
+                        IRow row = sheet1.CreateRow(i + 5);
+                        for (int j = 0; j < dt.Columns.Count - 1; j++)
+                        {
+                            ICell cell = row.CreateCell(j);
+                            String columnName = dt.Columns[j].ToString();
+                            cell.SetCellValue(dt.Rows[i][columnName].ToString());
+
+                        }
+                    }
+
+                    sheet1.AutoSizeColumn(0);
+                    sheet1.AutoSizeColumn(1);
+                    sheet1.AutoSizeColumn(2);
+                    sheet1.AutoSizeColumn(3);
+                    sheet1.AutoSizeColumn(4);
+                    sheet1.AutoSizeColumn(5);
+                    sheet1.AutoSizeColumn(6);
+                    sheet1.AutoSizeColumn(7);
+                    sheet1.AutoSizeColumn(8);
+                    sheet1.AutoSizeColumn(9);
+                    sheet1.AutoSizeColumn(10);
+                    sheet1.AutoSizeColumn(11);
+                    sheet1.AutoSizeColumn(12);
+                    sheet1.AutoSizeColumn(13);
+                    sheet1.AutoSizeColumn(14);
+                    sheet1.AutoSizeColumn(15);
+                    sheet1.AutoSizeColumn(16);
+                    sheet1.AutoSizeColumn(17);
+                    sheet1.AutoSizeColumn(18);
+                    sheet1.AutoSizeColumn(19);
+                    sheet1.AutoSizeColumn(20);
+                    sheet1.AutoSizeColumn(21);
+                    sheet1.AutoSizeColumn(22);
+                    sheet1.AutoSizeColumn(23);
+                    sheet1.AutoSizeColumn(24);
+                    sheet1.AutoSizeColumn(25);
+                    sheet1.AutoSizeColumn(26);
+                }
+            }
+
+
+            using (var exportData = new MemoryStream())
+            {
+                Response.Clear();
+                workbook.Write(exportData);
+
+                ///-----Direct Excel Export Start----///
+                ///
+                string saveAsFileName = string.Format("Complaints_Types_Report.xls", DateTime.Now);
+                Response.ContentType = "application/vnd.ms-excel";
+                Response.AddHeader("Content-Disposition", string.Format("attachment;filename={0}", saveAsFileName));
+                Response.Clear();
+                Response.BinaryWrite(exportData.GetBuffer());
+                Response.End();
+
+                ////----Direct Excel Export END----///  
+            }
+        }
+        #endregion
+        #region Level2Reports
+        public void GetLevel2ComplaintsTypesRollupReport(string Type, string From, string To)
+        {
+            string clientid = "";
+            DataSet ds = new DataSet();
+            //MonthYearStr = "01 " + MonthYearStr;
+            _ireportDataProvider = new ReportDataProvider();
+            DateTime datefrom = Convert.ToDateTime(From);
+            DateTime dateto = Convert.ToDateTime(To);
+            string dfrom = (datefrom).ToString("dd MMMM yyyy");
+            string dto = (dateto).ToString("dd MMMM yyyy");
+            
+            //int monthInDigit = Convert.ToDateTime(MonthYearStr).Month;
+            //int year = Convert.ToDateTime(MonthYearStr).Year;
+            Guid ClientID = Common.CheckIdNullOrEmptyNonEncrypt(clientid);
+            IWorkbook workbook;
+            workbook = new HSSFWorkbook();
+            ds = _ireportDataProvider.GetLevel2ComplaintExcelReport(Type);
+
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0] != null && ds.Tables[0].Rows.Count > 0)
+            {
+
+                for (int k = 0; k < ds.Tables[0].Rows.Count; k++)
+                {
+                    string Tier2 = Convert.ToString(ds.Tables[0].Rows[k]["Tier2"]);
+                    DataTable dt = ds.Tables[0];
+
+
+                    //workbook = new XSSFWorkbook();
+
+                    ISheet sheet1 = workbook.CreateSheet("Sheet " + k);
+
+                    IRow row1 = sheet1.CreateRow(0);
+                    ICell cellr1 = row1.CreateCell(0);
+                    cellr1.SetCellValue("Complaints Types Roll up Report");
+                    ICellStyle style = workbook.CreateCellStyle();
+                    style.Alignment = HorizontalAlignment.Left;
+                    row1.GetCell(0).CellStyle = style;
+
+                    var font = workbook.CreateFont();
+                    font.FontHeightInPoints = 11;
+                    font.FontName = "Calibri";
+                    font.Boldweight = (short)FontBoldWeight.Bold;
+                    //font.Color = IndexedColors.Red.Index;
+                    cellr1.CellStyle.SetFont(font);
+                    sheet1.AddMergedRegion(new CellRangeAddress(0, 0, 0, 6));
+
+                    IRow row2 = sheet1.CreateRow(1);
+                    ICell cellr2 = row2.CreateCell(0);
+                    cellr2.SetCellValue(Tier2);
+                    //ICellStyle styler2 = workbook.CreateCellStyle();
+                    //styler2.Alignment = HorizontalAlignment.Left;
+                    row1.GetCell(0).CellStyle = style;
+
+                    var fontr2 = workbook.CreateFont();
+                    fontr2.FontHeightInPoints = 9;
+                    fontr2.FontName = "Calibri";
+                    fontr2.Boldweight = (short)FontBoldWeight.Bold;
+                    //fontr2.Color = IndexedColors.Blue.Index;
+                    cellr2.CellStyle.SetFont(fontr2);
+                    sheet1.AddMergedRegion(new CellRangeAddress(1, 1, 0, 0));
+
+
+                    IRow row3 = sheet1.CreateRow(2);
+                    ICell cellr3 = row3.CreateCell(0);
+                    // DateTime date = DateTime.Now;
+
+                    //cellr2.SetCellValue("Date : " + date.ToString("dd/MM/yyyy"));
+                    cellr3.SetCellValue(dfrom + " - " + dto);
+                    //ICellStyle styler2 = workbook.CreateCellStyle();
+                    //styler2.Alignment = HorizontalAlignment.Left;
+                    row3.GetCell(0).CellStyle = style;
+
+                    var fontr3 = workbook.CreateFont();
+                    fontr3.FontHeightInPoints = 9;
+                    fontr3.FontName = "Calibri";
+                    fontr3.Boldweight = (short)FontBoldWeight.Bold;
+                    //fontr3.Color = IndexedColors.Grey80Percent.Index;
+                    cellr3.CellStyle.SetFont(fontr3);
+                    sheet1.AddMergedRegion(new CellRangeAddress(2, 2, 0, 6));
+
+                    IRow row4 = sheet1.CreateRow(4);
+
+                    for (int j = 0; j < dt.Columns.Count - 1; j++)
+                    {
+                        ICell cell = row4.CreateCell(j);
+
+                        String columnName = dt.Columns[j].ToString();
+                        cell.SetCellValue(columnName);
+                    }
+
+                    for (int i = 0; i < dt.Rows.Count; i++)
+                    {
+                        IRow row = sheet1.CreateRow(i + 5);
+                        for (int j = 0; j < dt.Columns.Count - 1; j++)
+                        {
+                            ICell cell = row.CreateCell(j);
+                            String columnName = dt.Columns[j].ToString();
+                            cell.SetCellValue(dt.Rows[i][columnName].ToString());
+
+                        }
+                    }
+
+                    sheet1.AutoSizeColumn(0);
+                    sheet1.AutoSizeColumn(1);
+                    sheet1.AutoSizeColumn(2);
+                    sheet1.AutoSizeColumn(3);
+                    sheet1.AutoSizeColumn(4);
+                    sheet1.AutoSizeColumn(5);
+                    sheet1.AutoSizeColumn(6);
+                    sheet1.AutoSizeColumn(7);
+                    sheet1.AutoSizeColumn(8);
+                    sheet1.AutoSizeColumn(9);
+                    sheet1.AutoSizeColumn(10);
+                    sheet1.AutoSizeColumn(11);
+                    sheet1.AutoSizeColumn(12);
+                    sheet1.AutoSizeColumn(13);
+                    sheet1.AutoSizeColumn(14);
+                    sheet1.AutoSizeColumn(15);
+                    sheet1.AutoSizeColumn(16);
+                    sheet1.AutoSizeColumn(17);
+                    sheet1.AutoSizeColumn(18);
+                    sheet1.AutoSizeColumn(19);
+                    sheet1.AutoSizeColumn(20);
+                }
+            }
+
+
+            using (var exportData = new MemoryStream())
+            {
+                Response.Clear();
+                workbook.Write(exportData);
+
+                ///-----Direct Excel Export Start----///
+                ///
+                string saveAsFileName = string.Format("ComplaintsTypes_Rollup_Report.xls", DateTime.Now);
+                Response.ContentType = "application/vnd.ms-excel";
+                Response.AddHeader("Content-Disposition", string.Format("attachment;filename={0}", saveAsFileName));
+                Response.Clear();
+                Response.BinaryWrite(exportData.GetBuffer());
+                Response.End();
+
+            }
+
+        }
+        public void GetLevel2ComplaintsDatasRollupReport(string Type, string From, string To)
+        {
+            string clientid = "";
+            DataSet ds = new DataSet();
+            //MonthYearStr = "01 " + MonthYearStr;
+            _ireportDataProvider = new ReportDataProvider();
+
+            //int monthInDigit = Convert.ToDateTime(MonthYearStr).Month;
+            //int year = Convert.ToDateTime(MonthYearStr).Year;
+            DateTime datefrom = Convert.ToDateTime(From);
+            DateTime dateto = Convert.ToDateTime(To);
+            string dfrom = (datefrom).ToString("dd MMMM yyyy");
+            string dto = (dateto).ToString("dd MMMM yyyy");
+            Guid ClientID = Common.CheckIdNullOrEmptyNonEncrypt(clientid);
+            IWorkbook workbook;
+            workbook = new HSSFWorkbook();
+            //string CompanyID = "CA484A56-94D4-4AD5-9C5A-0ACA865A059E";
+            ds = _ireportDataProvider.GetLevel2ComplaintExcelReport(Type);
+
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0] != null && ds.Tables[0].Rows.Count > 0)
+            {
+
+                for (int k = 0; k < ds.Tables[0].Rows.Count; k++)
+                {
+                    string Tier2 = Convert.ToString(ds.Tables[0].Rows[k]["Tier2"]);
+                    DataTable dt = ds.Tables[0];
+
+                    ISheet sheet1 = workbook.CreateSheet("Sheet " + k);
+
+                    IRow row1 = sheet1.CreateRow(0);
+                    ICell cellr1 = row1.CreateCell(0);
+                    cellr1.SetCellValue("Complaints Data Roll up Report");
+                    ICellStyle style = workbook.CreateCellStyle();
+                    style.Alignment = HorizontalAlignment.Left;
+                    row1.GetCell(0).CellStyle = style;
+
+                    var font = workbook.CreateFont();
+                    font.FontHeightInPoints = 11;
+                    font.FontName = "Calibri";
+                    font.Boldweight = (short)FontBoldWeight.Bold;
+                    cellr1.CellStyle.SetFont(font);
+                    sheet1.AddMergedRegion(new CellRangeAddress(0, 0, 0, 6));
+
+                    IRow row2 = sheet1.CreateRow(1);
+                    ICell cellr2 = row2.CreateCell(0);
+                    cellr2.SetCellValue(Tier2);
+                    row1.GetCell(0).CellStyle = style;
+
+                    var fontr2 = workbook.CreateFont();
+                    fontr2.FontHeightInPoints = 9;
+                    fontr2.FontName = "Calibri";
+                    fontr2.Boldweight = (short)FontBoldWeight.Bold;
+                    cellr2.CellStyle.SetFont(fontr2);
+                    sheet1.AddMergedRegion(new CellRangeAddress(1, 1, 0, 0));
+
+
+                    IRow row3 = sheet1.CreateRow(2);
+                    ICell cellr3 = row3.CreateCell(0);
+
+                    cellr3.SetCellValue(dfrom + " - " + dto);
+                    row3.GetCell(0).CellStyle = style;
+
+                    var fontr3 = workbook.CreateFont();
+                    fontr3.FontHeightInPoints = 9;
+                    fontr3.FontName = "Calibri";
+                    fontr3.Boldweight = (short)FontBoldWeight.Bold;
+                    cellr3.CellStyle.SetFont(fontr3);
+                    sheet1.AddMergedRegion(new CellRangeAddress(2, 2, 0, 6));
+
+
+                    IRow row4 = sheet1.CreateRow(4);
+
+                    for (int j = 0; j < dt.Columns.Count - 1; j++)
+                    {
+                        ICell cell = row4.CreateCell(j);
+
+                        String columnName = dt.Columns[j].ToString();
+                        cell.SetCellValue(columnName);
+                    }
+
+                    for (int i = 0; i < dt.Rows.Count; i++)
+                    {
+                        IRow row = sheet1.CreateRow(i + 5);
+                        for (int j = 0; j < dt.Columns.Count - 1; j++)
+                        {
+                            ICell cell = row.CreateCell(j);
+                            String columnName = dt.Columns[j].ToString();
+                            cell.SetCellValue(dt.Rows[i][columnName].ToString());
+
+                        }
+                    }
+
+                    sheet1.AutoSizeColumn(0);
+                    sheet1.AutoSizeColumn(1);
+                    sheet1.AutoSizeColumn(2);
+                    sheet1.AutoSizeColumn(3);
+                    sheet1.AutoSizeColumn(4);
+                    sheet1.AutoSizeColumn(5);
+                    sheet1.AutoSizeColumn(6);
+                    sheet1.AutoSizeColumn(7);
+                    sheet1.AutoSizeColumn(8);
+                    sheet1.AutoSizeColumn(9);
+                    sheet1.AutoSizeColumn(10);
+                    sheet1.AutoSizeColumn(11);
+                    sheet1.AutoSizeColumn(12);
+                    sheet1.AutoSizeColumn(13);
+                    sheet1.AutoSizeColumn(14);
+                    sheet1.AutoSizeColumn(15);
+                    sheet1.AutoSizeColumn(16);
+                    sheet1.AutoSizeColumn(17);
+                    sheet1.AutoSizeColumn(18);
+                    sheet1.AutoSizeColumn(19);
+                    sheet1.AutoSizeColumn(20);
+                }
+            }
+
+
+            using (var exportData = new MemoryStream())
+            {
+                Response.Clear();
+                workbook.Write(exportData);
+
+                ///-----Direct Excel Export Start----///
+                ///
+                string saveAsFileName = string.Format("Complaints_DataRollup_Report.xls", DateTime.Now);
+                Response.ContentType = "application/vnd.ms-excel";
+                Response.AddHeader("Content-Disposition", string.Format("attachment;filename={0}", saveAsFileName));
+                Response.Clear();
+                Response.BinaryWrite(exportData.GetBuffer());
+                Response.End();
+            }
+        }
+        public void GetLevel2ComplaintTurnaroundTimerollup(string Type, string From, string To)
+        {
+            string clientid = "";
+            DataSet ds = new DataSet();
+            //MonthYearStr = "01 " + MonthYearStr;
+            _ireportDataProvider = new ReportDataProvider();
+            //int monthInDigit = Convert.ToDateTime(MonthYearStr).Month;
+            //int year = Convert.ToDateTime(MonthYearStr).Year;
+            DateTime datefrom = Convert.ToDateTime(From);
+            DateTime dateto = Convert.ToDateTime(To);
+            string dfrom = (datefrom).ToString("dd MMMM yyyy");
+            string dto = (dateto).ToString("dd MMMM yyyy");
+            Guid ClientID = Common.CheckIdNullOrEmptyNonEncrypt(clientid);
+            IWorkbook workbook;
+            workbook = new HSSFWorkbook();
+            //string CompanyID = "CA484A56-94D4-4AD5-9C5A-0ACA865A059E";
+            ds = _ireportDataProvider.GetLevel2ComplaintExcelReport(Type);
+
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0] != null && ds.Tables[0].Rows.Count > 0)
+            {
+
+                for (int k = 0; k < ds.Tables[0].Rows.Count; k++)
+                {
+                    string Tier2 = Convert.ToString(ds.Tables[0].Rows[k]["Tier2"]);
+                    DataTable dt = ds.Tables[0];
+
+                    ISheet sheet1 = workbook.CreateSheet("Sheet " + k);
+
+                    IRow row1 = sheet1.CreateRow(0);
+                    ICell cellr1 = row1.CreateCell(0);
+                    cellr1.SetCellValue("Complaints Turnaround Time Roll up Report");
+                    ICellStyle style = workbook.CreateCellStyle();
+                    style.Alignment = HorizontalAlignment.Left;
+                    row1.GetCell(0).CellStyle = style;
+
+                    var font = workbook.CreateFont();
+                    font.FontHeightInPoints = 11;
+                    font.FontName = "Calibri";
+                    font.Boldweight = (short)FontBoldWeight.Bold;
+                    cellr1.CellStyle.SetFont(font);
+                    sheet1.AddMergedRegion(new CellRangeAddress(0, 0, 0, 6));
+
+                    IRow row2 = sheet1.CreateRow(1);
+                    ICell cellr2 = row2.CreateCell(0);
+                    cellr2.SetCellValue(Tier2);
+                    row1.GetCell(0).CellStyle = style;
+
+                    var fontr2 = workbook.CreateFont();
+                    fontr2.FontHeightInPoints = 9;
+                    fontr2.FontName = "Calibri";
+                    fontr2.Boldweight = (short)FontBoldWeight.Bold;
+                    cellr2.CellStyle.SetFont(fontr2);
+                    sheet1.AddMergedRegion(new CellRangeAddress(1, 1, 0, 0));
+
+
+                    IRow row3 = sheet1.CreateRow(2);
+                    ICell cellr3 = row3.CreateCell(0);
+
+                    cellr3.SetCellValue(dfrom + " - "+ dto);
+                    row3.GetCell(0).CellStyle = style;
+
+                    var fontr3 = workbook.CreateFont();
+                    fontr3.FontHeightInPoints = 9;
+                    fontr3.FontName = "Calibri";
+                    fontr3.Boldweight = (short)FontBoldWeight.Bold;
+                    cellr3.CellStyle.SetFont(fontr3);
+                    sheet1.AddMergedRegion(new CellRangeAddress(2, 2, 0, 6));
+
+
+                    IRow row4 = sheet1.CreateRow(4);
+
+                    for (int j = 0; j < dt.Columns.Count - 1; j++)
+                    {
+                        ICell cell = row4.CreateCell(j);
+
+                        String columnName = dt.Columns[j].ToString();
+                        cell.SetCellValue(columnName);
+                    }
+
+                    for (int i = 0; i < dt.Rows.Count; i++)
+                    {
+                        IRow row = sheet1.CreateRow(i + 5);
+                        for (int j = 0; j < dt.Columns.Count - 1; j++)
+                        {
+                            ICell cell = row.CreateCell(j);
+                            String columnName = dt.Columns[j].ToString();
+                            cell.SetCellValue(dt.Rows[i][columnName].ToString());
+
+                        }
+                    }
+
+                    sheet1.AutoSizeColumn(0);
+                    sheet1.AutoSizeColumn(1);
+                    sheet1.AutoSizeColumn(2);
+                    sheet1.AutoSizeColumn(3);
+                    sheet1.AutoSizeColumn(4);
+                    sheet1.AutoSizeColumn(5);
+                    sheet1.AutoSizeColumn(6);
+                    sheet1.AutoSizeColumn(7);
+                    sheet1.AutoSizeColumn(8);
+                    sheet1.AutoSizeColumn(9);
+                    sheet1.AutoSizeColumn(10);
+                    sheet1.AutoSizeColumn(11);
+                    sheet1.AutoSizeColumn(12);
+                    sheet1.AutoSizeColumn(13);
+                    sheet1.AutoSizeColumn(14);
+                    sheet1.AutoSizeColumn(15);
+                    sheet1.AutoSizeColumn(16);
+                    sheet1.AutoSizeColumn(17);
+                    sheet1.AutoSizeColumn(18);
+                    sheet1.AutoSizeColumn(19);
+                    sheet1.AutoSizeColumn(20);
+                }
+            }
+
+
+            using (var exportData = new MemoryStream())
+            {
+                Response.Clear();
+                workbook.Write(exportData);
+
+                ///-----Direct Excel Export Start----///
+                ///
+                string saveAsFileName = string.Format("Complaints_TurnaroundTime_Rollup Report.xls", DateTime.Now);
+                Response.ContentType = "application/vnd.ms-excel";
+                Response.AddHeader("Content-Disposition", string.Format("attachment;filename={0}", saveAsFileName));
+                Response.Clear();
+                Response.BinaryWrite(exportData.GetBuffer());
+                Response.End();
+            }
+        }
+        #endregion
+        #region Level1Reports
+        public void GetLevel1ComplaintsTypesRollupReport(string Type, string From, string To)
+        {
+            string clientid = "";
+            DataSet ds = new DataSet();
+            //MonthYearStr = "01 " + MonthYearStr;
+            _ireportDataProvider = new ReportDataProvider();
+            DateTime datefrom = Convert.ToDateTime(From);
+            DateTime dateto = Convert.ToDateTime(To);
+            string dfrom = (datefrom).ToString("dd MMMM yyyy");
+            string dto = (dateto).ToString("dd MMMM yyyy");
+            //int monthInDigit = Convert.ToDateTime(MonthYearStr).Month;
+            //int year = Convert.ToDateTime(MonthYearStr).Year;
+            Guid ClientID = Common.CheckIdNullOrEmptyNonEncrypt(clientid);
+            IWorkbook workbook;
+            workbook = new HSSFWorkbook();
+            ds = _ireportDataProvider.GetLevel1ComplaintExcelReport(Type);
+
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0] != null && ds.Tables[0].Rows.Count > 0)
+            {
+
+                for (int k = 0; k < ds.Tables[0].Rows.Count; k++)
+                {
+                    string Organisation = Convert.ToString(ds.Tables[0].Rows[k]["Organisation"]);
+                    DataTable dt = ds.Tables[0];
+
+
+                    //workbook = new XSSFWorkbook();
+
+                    ISheet sheet1 = workbook.CreateSheet("Sheet " + k);
+
+                    IRow row1 = sheet1.CreateRow(0);
+                    ICell cellr1 = row1.CreateCell(0);
+                    cellr1.SetCellValue("Complaints Types Roll up Report");
+                    ICellStyle style = workbook.CreateCellStyle();
+                    style.Alignment = HorizontalAlignment.Left;
+                    row1.GetCell(0).CellStyle = style;
+
+                    var font = workbook.CreateFont();
+                    font.FontHeightInPoints = 11;
+                    font.FontName = "Calibri";
+                    font.Boldweight = (short)FontBoldWeight.Bold;
+                    //font.Color = IndexedColors.Red.Index;
+                    cellr1.CellStyle.SetFont(font);
+                    sheet1.AddMergedRegion(new CellRangeAddress(0, 0, 0, 6));
+
+                    IRow row2 = sheet1.CreateRow(1);
+                    ICell cellr2 = row2.CreateCell(0);
+                    cellr2.SetCellValue(Organisation);
+                    //ICellStyle styler2 = workbook.CreateCellStyle();
+                    //styler2.Alignment = HorizontalAlignment.Left;
+                    row1.GetCell(0).CellStyle = style;
+
+                    var fontr2 = workbook.CreateFont();
+                    fontr2.FontHeightInPoints = 9;
+                    fontr2.FontName = "Calibri";
+                    fontr2.Boldweight = (short)FontBoldWeight.Bold;
+                    //fontr2.Color = IndexedColors.Blue.Index;
+                    cellr2.CellStyle.SetFont(fontr2);
+                    sheet1.AddMergedRegion(new CellRangeAddress(1, 1, 0, 0));
+
+
+                    IRow row3 = sheet1.CreateRow(2);
+                    ICell cellr3 = row3.CreateCell(0);
+                    // DateTime date = DateTime.Now;
+
+                    //cellr2.SetCellValue("Date : " + date.ToString("dd/MM/yyyy"));
+                    cellr3.SetCellValue(dfrom + " - " + dto);
+                    //ICellStyle styler2 = workbook.CreateCellStyle();
+                    //styler2.Alignment = HorizontalAlignment.Left;
+                    row3.GetCell(0).CellStyle = style;
+
+                    var fontr3 = workbook.CreateFont();
+                    fontr3.FontHeightInPoints = 9;
+                    fontr3.FontName = "Calibri";
+                    fontr3.Boldweight = (short)FontBoldWeight.Bold;
+                    //fontr3.Color = IndexedColors.Grey80Percent.Index;
+                    cellr3.CellStyle.SetFont(fontr3);
+                    sheet1.AddMergedRegion(new CellRangeAddress(2, 2, 0, 6));
+
+                    IRow row4 = sheet1.CreateRow(4);
+
+                    for (int j = 0; j < dt.Columns.Count - 1; j++)
+                    {
+                        ICell cell = row4.CreateCell(j);
+
+                        String columnName = dt.Columns[j].ToString();
+                        cell.SetCellValue(columnName);
+                    }
+
+                    for (int i = 0; i < dt.Rows.Count; i++)
+                    {
+                        IRow row = sheet1.CreateRow(i + 5);
+                        for (int j = 0; j < dt.Columns.Count - 1; j++)
+                        {
+                            ICell cell = row.CreateCell(j);
+                            String columnName = dt.Columns[j].ToString();
+                            cell.SetCellValue(dt.Rows[i][columnName].ToString());
+
+                        }
+                    }
+
+                    sheet1.AutoSizeColumn(0);
+                    sheet1.AutoSizeColumn(1);
+                    sheet1.AutoSizeColumn(2);
+                    sheet1.AutoSizeColumn(3);
+                    sheet1.AutoSizeColumn(4);
+                    sheet1.AutoSizeColumn(5);
+                    sheet1.AutoSizeColumn(6);
+                    sheet1.AutoSizeColumn(7);
+                    sheet1.AutoSizeColumn(8);
+                    sheet1.AutoSizeColumn(9);
+                    sheet1.AutoSizeColumn(10);
+                    sheet1.AutoSizeColumn(11);
+                    sheet1.AutoSizeColumn(12);
+                    sheet1.AutoSizeColumn(13);
+                    sheet1.AutoSizeColumn(14);
+                    sheet1.AutoSizeColumn(15);
+                    sheet1.AutoSizeColumn(16);
+                    sheet1.AutoSizeColumn(17);
+                    sheet1.AutoSizeColumn(18);
+                    sheet1.AutoSizeColumn(19);
+                    sheet1.AutoSizeColumn(20);
+                }
+            }
+
+
+            using (var exportData = new MemoryStream())
+            {
+                Response.Clear();
+                workbook.Write(exportData);
+
+                ///-----Direct Excel Export Start----///
+                ///
+                string saveAsFileName = string.Format("Level1_ComplaintsTypes_Rollup_Report.xls", DateTime.Now);
+                Response.ContentType = "application/vnd.ms-excel";
+                Response.AddHeader("Content-Disposition", string.Format("attachment;filename={0}", saveAsFileName));
+                Response.Clear();
+                Response.BinaryWrite(exportData.GetBuffer());
+                Response.End();
+
+            }
+
+        }
+        public void GetLevel1ComplaintsDatasRollupReport(string Type, string From, string To)
+        {
+            string clientid = "";
+            DataSet ds = new DataSet();
+            //MonthYearStr = "01 " + MonthYearStr;
+            _ireportDataProvider = new ReportDataProvider();
+
+            //int monthInDigit = Convert.ToDateTime(MonthYearStr).Month;
+            //int year = Convert.ToDateTime(MonthYearStr).Year;
+            DateTime datefrom = Convert.ToDateTime(From);
+            DateTime dateto = Convert.ToDateTime(To);
+            string dfrom = (datefrom).ToString("dd MMMM yyyy");
+            string dto = (dateto).ToString("dd MMMM yyyy");
+            Guid ClientID = Common.CheckIdNullOrEmptyNonEncrypt(clientid);
+            IWorkbook workbook;
+            workbook = new HSSFWorkbook();
+            //string CompanyID = "CA484A56-94D4-4AD5-9C5A-0ACA865A059E";
+            ds = _ireportDataProvider.GetLevel1ComplaintExcelReport(Type);
+
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0] != null && ds.Tables[0].Rows.Count > 0)
+            {
+
+                for (int k = 0; k < ds.Tables[0].Rows.Count; k++)
+                {
+                    string Organisation = Convert.ToString(ds.Tables[0].Rows[k]["Organisation"]);
+                    DataTable dt = ds.Tables[0];
+
+                    ISheet sheet1 = workbook.CreateSheet("Sheet " + k);
+
+                    IRow row1 = sheet1.CreateRow(0);
+                    ICell cellr1 = row1.CreateCell(0);
+                    cellr1.SetCellValue("Complaints Data Roll up Report");
+                    ICellStyle style = workbook.CreateCellStyle();
+                    style.Alignment = HorizontalAlignment.Left;
+                    row1.GetCell(0).CellStyle = style;
+
+                    var font = workbook.CreateFont();
+                    font.FontHeightInPoints = 11;
+                    font.FontName = "Calibri";
+                    font.Boldweight = (short)FontBoldWeight.Bold;
+                    cellr1.CellStyle.SetFont(font);
+                    sheet1.AddMergedRegion(new CellRangeAddress(0, 0, 0, 6));
+
+                    IRow row2 = sheet1.CreateRow(1);
+                    ICell cellr2 = row2.CreateCell(0);
+                    cellr2.SetCellValue(Organisation);
+                    row1.GetCell(0).CellStyle = style;
+
+                    var fontr2 = workbook.CreateFont();
+                    fontr2.FontHeightInPoints = 9;
+                    fontr2.FontName = "Calibri";
+                    fontr2.Boldweight = (short)FontBoldWeight.Bold;
+                    cellr2.CellStyle.SetFont(fontr2);
+                    sheet1.AddMergedRegion(new CellRangeAddress(1, 1, 0, 0));
+
+
+                    IRow row3 = sheet1.CreateRow(2);
+                    ICell cellr3 = row3.CreateCell(0);
+
+                    cellr3.SetCellValue(dfrom + " - " + dto);
+                    row3.GetCell(0).CellStyle = style;
+
+                    var fontr3 = workbook.CreateFont();
+                    fontr3.FontHeightInPoints = 9;
+                    fontr3.FontName = "Calibri";
+                    fontr3.Boldweight = (short)FontBoldWeight.Bold;
+                    cellr3.CellStyle.SetFont(fontr3);
+                    sheet1.AddMergedRegion(new CellRangeAddress(2, 2, 0, 6));
+
+
+                    IRow row4 = sheet1.CreateRow(4);
+
+                    for (int j = 0; j < dt.Columns.Count - 1; j++)
+                    {
+                        ICell cell = row4.CreateCell(j);
+
+                        String columnName = dt.Columns[j].ToString();
+                        cell.SetCellValue(columnName);
+                    }
+
+                    for (int i = 0; i < dt.Rows.Count; i++)
+                    {
+                        IRow row = sheet1.CreateRow(i + 5);
+                        for (int j = 0; j < dt.Columns.Count - 1; j++)
+                        {
+                            ICell cell = row.CreateCell(j);
+                            String columnName = dt.Columns[j].ToString();
+                            cell.SetCellValue(dt.Rows[i][columnName].ToString());
+
+                        }
+                    }
+
+                    sheet1.AutoSizeColumn(0);
+                    sheet1.AutoSizeColumn(1);
+                    sheet1.AutoSizeColumn(2);
+                    sheet1.AutoSizeColumn(3);
+                    sheet1.AutoSizeColumn(4);
+                    sheet1.AutoSizeColumn(5);
+                    sheet1.AutoSizeColumn(6);
+                    sheet1.AutoSizeColumn(7);
+                    sheet1.AutoSizeColumn(8);
+                    sheet1.AutoSizeColumn(9);
+                    sheet1.AutoSizeColumn(10);
+                    sheet1.AutoSizeColumn(11);
+                    sheet1.AutoSizeColumn(12);
+                    sheet1.AutoSizeColumn(13);
+                    sheet1.AutoSizeColumn(14);
+                    sheet1.AutoSizeColumn(15);
+                    sheet1.AutoSizeColumn(16);
+                    sheet1.AutoSizeColumn(17);
+                    sheet1.AutoSizeColumn(18);
+                    sheet1.AutoSizeColumn(19);
+                    sheet1.AutoSizeColumn(20);
+                }
+            }
+
+
+            using (var exportData = new MemoryStream())
+            {
+                Response.Clear();
+                workbook.Write(exportData);
+
+                ///-----Direct Excel Export Start----///
+                ///
+                string saveAsFileName = string.Format("Level1_Complaints_DataRollup_Report.xls", DateTime.Now);
+                Response.ContentType = "application/vnd.ms-excel";
+                Response.AddHeader("Content-Disposition", string.Format("attachment;filename={0}", saveAsFileName));
+                Response.Clear();
+                Response.BinaryWrite(exportData.GetBuffer());
+                Response.End();
+            }
+        }
+
+        public void GetLevel1ComplaintTurnaroundTimerollup(string Type, string From, string To)
+        {
+            string clientid = "";
+            DataSet ds = new DataSet();
+            //MonthYearStr = "01 " + MonthYearStr;
+            _ireportDataProvider = new ReportDataProvider();
+
+            //int monthInDigit = Convert.ToDateTime(MonthYearStr).Month;
+            //int year = Convert.ToDateTime(MonthYearStr).Year;
+            DateTime datefrom = Convert.ToDateTime(From);
+            DateTime dateto = Convert.ToDateTime(To);
+            string dfrom = (datefrom).ToString("dd MMMM yyyy");
+            string dto = (dateto).ToString("dd MMMM yyyy");
+            Guid ClientID = Common.CheckIdNullOrEmptyNonEncrypt(clientid);
+            IWorkbook workbook;
+            workbook = new HSSFWorkbook();
+            //string CompanyID = "CA484A56-94D4-4AD5-9C5A-0ACA865A059E";
+            ds = _ireportDataProvider.GetLevel1ComplaintExcelReport(Type);
+
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0] != null && ds.Tables[0].Rows.Count > 0)
+            {
+
+                for (int k = 0; k < ds.Tables[0].Rows.Count; k++)
+                {
+                    string Organisation = Convert.ToString(ds.Tables[0].Rows[k]["Organisation"]);
+                    DataTable dt = ds.Tables[0];
+
+                    ISheet sheet1 = workbook.CreateSheet("Sheet " + k);
+
+                    IRow row1 = sheet1.CreateRow(0);
+                    ICell cellr1 = row1.CreateCell(0);
+                    cellr1.SetCellValue("Complaints Turnaround Time Roll up Report");
+                    ICellStyle style = workbook.CreateCellStyle();
+                    style.Alignment = HorizontalAlignment.Left;
+                    row1.GetCell(0).CellStyle = style;
+
+                    var font = workbook.CreateFont();
+                    font.FontHeightInPoints = 11;
+                    font.FontName = "Calibri";
+                    font.Boldweight = (short)FontBoldWeight.Bold;
+                    cellr1.CellStyle.SetFont(font);
+                    sheet1.AddMergedRegion(new CellRangeAddress(0, 0, 0, 6));
+
+                    IRow row2 = sheet1.CreateRow(1);
+                    ICell cellr2 = row2.CreateCell(0);
+                    cellr2.SetCellValue(Organisation);
+                    row1.GetCell(0).CellStyle = style;
+
+                    var fontr2 = workbook.CreateFont();
+                    fontr2.FontHeightInPoints = 9;
+                    fontr2.FontName = "Calibri";
+                    fontr2.Boldweight = (short)FontBoldWeight.Bold;
+                    cellr2.CellStyle.SetFont(fontr2);
+                    sheet1.AddMergedRegion(new CellRangeAddress(1, 1, 0, 0));
+
+
+                    IRow row3 = sheet1.CreateRow(2);
+                    ICell cellr3 = row3.CreateCell(0);
+
+                    cellr3.SetCellValue(dfrom + " - " + dto);
+                    row3.GetCell(0).CellStyle = style;
+
+                    var fontr3 = workbook.CreateFont();
+                    fontr3.FontHeightInPoints = 9;
+                    fontr3.FontName = "Calibri";
+                    fontr3.Boldweight = (short)FontBoldWeight.Bold;
+                    cellr3.CellStyle.SetFont(fontr3);
+                    sheet1.AddMergedRegion(new CellRangeAddress(2, 2, 0, 6));
+
+
+                    IRow row4 = sheet1.CreateRow(4);
+
+                    for (int j = 0; j < dt.Columns.Count - 1; j++)
+                    {
+                        ICell cell = row4.CreateCell(j);
+
+                        String columnName = dt.Columns[j].ToString();
+                        cell.SetCellValue(columnName);
+                    }
+
+                    for (int i = 0; i < dt.Rows.Count; i++)
+                    {
+                        IRow row = sheet1.CreateRow(i + 5);
+                        for (int j = 0; j < dt.Columns.Count - 1; j++)
+                        {
+                            ICell cell = row.CreateCell(j);
+                            String columnName = dt.Columns[j].ToString();
+                            cell.SetCellValue(dt.Rows[i][columnName].ToString());
+
+                        }
+                    }
+
+                    sheet1.AutoSizeColumn(0);
+                    sheet1.AutoSizeColumn(1);
+                    sheet1.AutoSizeColumn(2);
+                    sheet1.AutoSizeColumn(3);
+                    sheet1.AutoSizeColumn(4);
+                    sheet1.AutoSizeColumn(5);
+                    sheet1.AutoSizeColumn(6);
+                    sheet1.AutoSizeColumn(7);
+                    sheet1.AutoSizeColumn(8);
+                    sheet1.AutoSizeColumn(9);
+                    sheet1.AutoSizeColumn(10);
+                    sheet1.AutoSizeColumn(11);
+                    sheet1.AutoSizeColumn(12);
+                    sheet1.AutoSizeColumn(13);
+                    sheet1.AutoSizeColumn(14);
+                    sheet1.AutoSizeColumn(15);
+                    sheet1.AutoSizeColumn(16);
+                    sheet1.AutoSizeColumn(17);
+                    sheet1.AutoSizeColumn(18);
+                    sheet1.AutoSizeColumn(19);
+                    sheet1.AutoSizeColumn(20);
+                }
+            }
+
+            using (var exportData = new MemoryStream())
+            {
+                Response.Clear();
+                workbook.Write(exportData);
+
+                ///-----Direct Excel Export Start----///
+                ///
+                string saveAsFileName = string.Format("Level1_Complaints_TurnaroundTime_Rollup Report.xls", DateTime.Now);
+                Response.ContentType = "application/vnd.ms-excel";
+                Response.AddHeader("Content-Disposition", string.Format("attachment;filename={0}", saveAsFileName));
+                Response.Clear();
+                Response.BinaryWrite(exportData.GetBuffer());
+                Response.End();
+            }
+        }
+        #endregion
     }
 }

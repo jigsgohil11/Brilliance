@@ -84,12 +84,12 @@ namespace Brilliance.Models.ViewModel
     public class ReportType
     {
 
-        public Guid ReportTypeID { get; set; }
         [Required(ErrorMessage = "Report Type is required.")]
+        public Guid ReportTypeID { get; set; }
         public string ReportTypeName { get; set; }
         public string RoleName { get; set; }
-        public DateTime DateFrom { get; set; }
-        public DateTime DateTo { get; set; }
+        public DateTime? DateFrom { get; set; }
+        public DateTime? DateTo { get; set; }
 
     }
 
