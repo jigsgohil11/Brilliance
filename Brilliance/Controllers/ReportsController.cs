@@ -28,8 +28,9 @@ namespace Brilliance.Controllers
 
             //int monthInDigit = Convert.ToDateTime(MonthYearStr).Month;
             //int year = Convert.ToDateTime(MonthYearStr).Year;
-            DateTime datefrom = Convert.ToDateTime(From);
-            DateTime dateto = Convert.ToDateTime(To);
+            DateTime datefrom = DateTime.ParseExact(From, "dd/MM/yyyy", System.Globalization.CultureInfo.InvariantCulture);
+            DateTime dateto = DateTime.ParseExact(To, "dd/MM/yyyy", System.Globalization.CultureInfo.InvariantCulture);
+
             string dfrom = (datefrom).ToString("dd MMMM yyyy");
             string dto = (dateto).ToString("dd MMMM yyyy");
             Guid ClientID = Common.CheckIdNullOrEmptyNonEncrypt(clientid);
@@ -262,8 +263,8 @@ namespace Brilliance.Controllers
             string clientid = "";
             DataSet ds = new DataSet();
             _ireportDataProvider = new ReportDataProvider();
-            DateTime datefrom = Convert.ToDateTime(From);
-            DateTime dateto = Convert.ToDateTime(To);
+            DateTime datefrom = DateTime.ParseExact(From, "dd/MM/yyyy", System.Globalization.CultureInfo.InvariantCulture);
+            DateTime dateto = DateTime.ParseExact(To, "dd/MM/yyyy", System.Globalization.CultureInfo.InvariantCulture);
             string dfrom = (datefrom).ToString("dd MMMM yyyy");
             string dto = (dateto).ToString("dd MMMM yyyy");
             Guid ClientID = Common.CheckIdNullOrEmptyNonEncrypt(clientid);
@@ -389,8 +390,8 @@ namespace Brilliance.Controllers
             string clientid = "";
             DataSet ds = new DataSet();
             _ireportDataProvider = new ReportDataProvider();
-            DateTime datefrom = Convert.ToDateTime(From);
-            DateTime dateto = Convert.ToDateTime(To);
+            DateTime datefrom = DateTime.ParseExact(From, "dd/MM/yyyy", System.Globalization.CultureInfo.InvariantCulture);
+            DateTime dateto = DateTime.ParseExact(To, "dd/MM/yyyy", System.Globalization.CultureInfo.InvariantCulture);
             string dfrom = (datefrom).ToString("dd MMMM yyyy");
             string dto = (dateto).ToString("dd MMMM yyyy");
             Guid ClientID = Common.CheckIdNullOrEmptyNonEncrypt(clientid);
@@ -516,8 +517,8 @@ namespace Brilliance.Controllers
             string clientid = "";
             DataSet ds = new DataSet();
             _ireportDataProvider = new ReportDataProvider();
-            DateTime datefrom = Convert.ToDateTime(From);
-            DateTime dateto = Convert.ToDateTime(To);
+            DateTime datefrom = DateTime.ParseExact(From, "dd/MM/yyyy", System.Globalization.CultureInfo.InvariantCulture);
+            DateTime dateto = DateTime.ParseExact(To, "dd/MM/yyyy", System.Globalization.CultureInfo.InvariantCulture);
             string dfrom = (datefrom).ToString("dd MMMM yyyy");
             string dto = (dateto).ToString("dd MMMM yyyy");
             Guid ClientID = Common.CheckIdNullOrEmptyNonEncrypt(clientid);
@@ -652,11 +653,12 @@ namespace Brilliance.Controllers
             DataSet ds = new DataSet();
             //MonthYearStr = "01 " + MonthYearStr;
             _ireportDataProvider = new ReportDataProvider();
-            DateTime datefrom = Convert.ToDateTime(From);
-            DateTime dateto = Convert.ToDateTime(To);
+            DateTime datefrom = DateTime.ParseExact(From, "dd/MM/yyyy", System.Globalization.CultureInfo.InvariantCulture);
+            DateTime dateto = DateTime.ParseExact(To, "dd/MM/yyyy", System.Globalization.CultureInfo.InvariantCulture);
+
             string dfrom = (datefrom).ToString("dd MMMM yyyy");
             string dto = (dateto).ToString("dd MMMM yyyy");
-            
+
             //int monthInDigit = Convert.ToDateTime(MonthYearStr).Month;
             //int year = Convert.ToDateTime(MonthYearStr).Year;
             Guid ClientID = Common.CheckIdNullOrEmptyNonEncrypt(clientid);
@@ -799,8 +801,8 @@ namespace Brilliance.Controllers
 
             //int monthInDigit = Convert.ToDateTime(MonthYearStr).Month;
             //int year = Convert.ToDateTime(MonthYearStr).Year;
-            DateTime datefrom = Convert.ToDateTime(From);
-            DateTime dateto = Convert.ToDateTime(To);
+            DateTime datefrom = DateTime.ParseExact(From, "dd/MM/yyyy", System.Globalization.CultureInfo.InvariantCulture);
+            DateTime dateto = DateTime.ParseExact(To, "dd/MM/yyyy", System.Globalization.CultureInfo.InvariantCulture);
             string dfrom = (datefrom).ToString("dd MMMM yyyy");
             string dto = (dateto).ToString("dd MMMM yyyy");
             Guid ClientID = Common.CheckIdNullOrEmptyNonEncrypt(clientid);
@@ -930,8 +932,8 @@ namespace Brilliance.Controllers
             _ireportDataProvider = new ReportDataProvider();
             //int monthInDigit = Convert.ToDateTime(MonthYearStr).Month;
             //int year = Convert.ToDateTime(MonthYearStr).Year;
-            DateTime datefrom = Convert.ToDateTime(From);
-            DateTime dateto = Convert.ToDateTime(To);
+            DateTime datefrom = DateTime.ParseExact(From, "dd/MM/yyyy", System.Globalization.CultureInfo.InvariantCulture);
+            DateTime dateto = DateTime.ParseExact(To, "dd/MM/yyyy", System.Globalization.CultureInfo.InvariantCulture);
             string dfrom = (datefrom).ToString("dd MMMM yyyy");
             string dto = (dateto).ToString("dd MMMM yyyy");
             Guid ClientID = Common.CheckIdNullOrEmptyNonEncrypt(clientid);
@@ -980,7 +982,7 @@ namespace Brilliance.Controllers
                     IRow row3 = sheet1.CreateRow(2);
                     ICell cellr3 = row3.CreateCell(0);
 
-                    cellr3.SetCellValue(dfrom + " - "+ dto);
+                    cellr3.SetCellValue(dfrom + " - " + dto);
                     row3.GetCell(0).CellStyle = style;
 
                     var fontr3 = workbook.CreateFont();
@@ -1061,8 +1063,8 @@ namespace Brilliance.Controllers
             DataSet ds = new DataSet();
             //MonthYearStr = "01 " + MonthYearStr;
             _ireportDataProvider = new ReportDataProvider();
-            DateTime datefrom = Convert.ToDateTime(From);
-            DateTime dateto = Convert.ToDateTime(To);
+            DateTime datefrom = DateTime.ParseExact(From, "dd/MM/yyyy", System.Globalization.CultureInfo.InvariantCulture);
+            DateTime dateto = DateTime.ParseExact(To, "dd/MM/yyyy", System.Globalization.CultureInfo.InvariantCulture);
             string dfrom = (datefrom).ToString("dd MMMM yyyy");
             string dto = (dateto).ToString("dd MMMM yyyy");
             //int monthInDigit = Convert.ToDateTime(MonthYearStr).Month;
@@ -1207,8 +1209,8 @@ namespace Brilliance.Controllers
 
             //int monthInDigit = Convert.ToDateTime(MonthYearStr).Month;
             //int year = Convert.ToDateTime(MonthYearStr).Year;
-            DateTime datefrom = Convert.ToDateTime(From);
-            DateTime dateto = Convert.ToDateTime(To);
+            DateTime datefrom = DateTime.ParseExact(From, "dd/MM/yyyy", System.Globalization.CultureInfo.InvariantCulture);
+            DateTime dateto = DateTime.ParseExact(To, "dd/MM/yyyy", System.Globalization.CultureInfo.InvariantCulture);
             string dfrom = (datefrom).ToString("dd MMMM yyyy");
             string dto = (dateto).ToString("dd MMMM yyyy");
             Guid ClientID = Common.CheckIdNullOrEmptyNonEncrypt(clientid);
@@ -1340,8 +1342,8 @@ namespace Brilliance.Controllers
 
             //int monthInDigit = Convert.ToDateTime(MonthYearStr).Month;
             //int year = Convert.ToDateTime(MonthYearStr).Year;
-            DateTime datefrom = Convert.ToDateTime(From);
-            DateTime dateto = Convert.ToDateTime(To);
+            DateTime datefrom = DateTime.ParseExact(From, "dd/MM/yyyy", System.Globalization.CultureInfo.InvariantCulture);
+            DateTime dateto = DateTime.ParseExact(To, "dd/MM/yyyy", System.Globalization.CultureInfo.InvariantCulture);
             string dfrom = (datefrom).ToString("dd MMMM yyyy");
             string dto = (dateto).ToString("dd MMMM yyyy");
             Guid ClientID = Common.CheckIdNullOrEmptyNonEncrypt(clientid);

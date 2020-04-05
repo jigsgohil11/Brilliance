@@ -322,6 +322,6 @@ D:\NEHA_Isoftnetech\Projects\Brilliance\Latest Work\Brilliance\obj\Debug\Brillia
 D:\NEHA_Isoftnetech\Projects\Brilliance\Latest Work\Brilliance\obj\Debug\Brilliance.csproj.CopyComplete
 D:\NEHA_Isoftnetech\Projects\Brilliance\Latest Work\Brilliance\obj\Debug\Brilliance.dll
 D:\NEHA_Isoftnetech\Projects\Brilliance\Latest Work\Brilliance\obj\Debug\Brilliance.pdb
-D:\NEHA_Isoftnetech\Projects\Brilliance\Latest Work\Brilliance\obj\Debug\Brilliance.csprojAssemblyReference.cache
 D:\iSoftNet Work\Brilliance\Latest Work\Brilliance\Brilliance\obj\Debug\Brilliance.csprojAssemblyReference.cache
 D:\iSoftNet Work\Brilliance\Latest Work\Brilliance\Brilliance\obj\Debug\Brilliance.csproj.CopyComplete
+D:\NEHA_Isoftnetech\Projects\Brilliance\Latest Work\Brilliance\obj\Debug\Brilliance.csprojAssemblyReference.cache
