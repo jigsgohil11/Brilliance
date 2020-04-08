@@ -8,8 +8,8 @@ namespace Brilliance.Infrastructure.DataProvider
     interface IReportDataProvider
     {
 
-        DataSet GetComplaintExcelReport(string Type);
-        DataSet GetLevel2ComplaintExcelReport(string Type);
+        DataSet GetComplaintExcelReport(string Type, Guid CompanyID, Guid DivisionID);
+        DataSet GetLevel2ComplaintExcelReport(string Type,Guid CompanyID);
         DataSet GetLevel1ComplaintExcelReport(string Type);
 
     }

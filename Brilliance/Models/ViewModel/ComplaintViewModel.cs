@@ -72,20 +72,52 @@ namespace Brilliance.Models.ViewModel
     {
         public ComplaintReportModel()
         {
+            Companylist = new List<SelectListItem>();
+            Divisionlist = new List<SelectListItem>();
             Reportlist = new List<SelectListItem>();
             report = new ReportType();
+           
             //Response = new ServiceResponse();
         }
+        public List<SelectListItem> Companylist { get; set; }
+        public List<SelectListItem> Divisionlist { get; set; }
         public List<SelectListItem> Reportlist { get; set; }
         public ReportType report { get; set; }
+        
         //public ServiceResponse Response { get; set; }
     }
+
+    public class ComplaintReportViewModel
+    {
+        public ComplaintReportViewModel()
+        {
+            Companylist = new List<SelectListItem>();
+            Divisionlist = new List<SelectListItem>();
+            Reportlist = new List<SelectListItem>();
+            report = new ReportType();
+            labelconfig = new LabelConfiguration();
+            //Response = new ServiceResponse();
+        }
+        public List<SelectListItem> Companylist { get; set; }
+        public List<SelectListItem> Divisionlist { get; set; }
+        public List<SelectListItem> Reportlist { get; set; }
+        public ReportType report { get; set; }
+        public LabelConfiguration labelconfig { get; set; }
+        //public ServiceResponse Response { get; set; }
+    }
+
 
     public class ReportType
     {
 
         [Required(ErrorMessage = "Report Type is required.")]
         public Guid ReportTypeID { get; set; }
+        [Required(ErrorMessage = "Company is required.")]
+        public Guid? CompanyID { get; set; }
+        [Required(ErrorMessage = "Company is required.")]
+        public Guid? DivCompanyID { get; set; }
+        [Required(ErrorMessage = "Division is required.")]
+        public Guid? DivisionID { get; set; }
         public string ReportTypeName { get; set; }
         public string RoleName { get; set; }
         public DateTime? DateFrom { get; set; }

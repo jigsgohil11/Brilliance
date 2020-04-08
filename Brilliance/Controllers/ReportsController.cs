@@ -19,25 +19,29 @@ namespace Brilliance.Controllers
         private IReportDataProvider _ireportDataProvider;
         // GET: Reports
         #region Level3Reports
-        public void GetLevel3ComplaintExcelReportwithNotes(string Type, string From, string To)
+        public void GetLevel3ComplaintExcelReportwithNotes(string Type, string From, string To,string companyid, string divid)
         {
-            string clientid = "";
             DataSet ds = new DataSet();
             //MonthYearStr = "01 " + MonthYearStr;
             _ireportDataProvider = new ReportDataProvider();
-
+            Guid CompanyID = Common.CheckIdNullOrEmptyNonEncrypt(companyid);
+            Guid DivisionID = Common.CheckIdNullOrEmptyNonEncrypt(divid);
             //int monthInDigit = Convert.ToDateTime(MonthYearStr).Month;
             //int year = Convert.ToDateTime(MonthYearStr).Year;
-            DateTime datefrom = DateTime.ParseExact(From, "dd/MM/yyyy", System.Globalization.CultureInfo.InvariantCulture);
-            DateTime dateto = DateTime.ParseExact(To, "dd/MM/yyyy", System.Globalization.CultureInfo.InvariantCulture);
+            string dfrom = "";
+            string dto = "";
+            if (From != "" && To != "")
+            {
+                DateTime datefrom = DateTime.ParseExact(From, "dd/MM/yyyy", System.Globalization.CultureInfo.InvariantCulture);
+                DateTime dateto = DateTime.ParseExact(To, "dd/MM/yyyy", System.Globalization.CultureInfo.InvariantCulture);
+                dfrom = (datefrom).ToString("dd MMMM yyyy");
+                dto = (dateto).ToString("dd MMMM yyyy");
+            }
 
-            string dfrom = (datefrom).ToString("dd MMMM yyyy");
-            string dto = (dateto).ToString("dd MMMM yyyy");
-            Guid ClientID = Common.CheckIdNullOrEmptyNonEncrypt(clientid);
             IWorkbook workbook;
             workbook = new HSSFWorkbook();
             //string CompanyID = "CA484A56-94D4-4AD5-9C5A-0ACA865A059E";
-            ds = _ireportDataProvider.GetComplaintExcelReport(Type);
+            ds = _ireportDataProvider.GetComplaintExcelReport(Type, CompanyID, DivisionID);
 
             if (ds != null && ds.Tables.Count > 0 && ds.Tables[0] != null && ds.Tables[0].Rows.Count > 0)
             {
@@ -258,19 +262,25 @@ namespace Brilliance.Controllers
             //foreach (string filePath in files)
             //    System.IO.File.Delete(filePath);
         }
-        public void GetLevel3ComplaintExcelReportwithoutNotes(string Type, string From, string To)
+        public void GetLevel3ComplaintExcelReportwithoutNotes(string Type, string From, string To, string companyid, string divid)
         {
-            string clientid = "";
             DataSet ds = new DataSet();
             _ireportDataProvider = new ReportDataProvider();
-            DateTime datefrom = DateTime.ParseExact(From, "dd/MM/yyyy", System.Globalization.CultureInfo.InvariantCulture);
-            DateTime dateto = DateTime.ParseExact(To, "dd/MM/yyyy", System.Globalization.CultureInfo.InvariantCulture);
-            string dfrom = (datefrom).ToString("dd MMMM yyyy");
-            string dto = (dateto).ToString("dd MMMM yyyy");
-            Guid ClientID = Common.CheckIdNullOrEmptyNonEncrypt(clientid);
+            Guid CompanyID = Common.CheckIdNullOrEmptyNonEncrypt(companyid);
+            Guid DivisionID = Common.CheckIdNullOrEmptyNonEncrypt(divid);
+            string dfrom = "";
+            string dto = "";
+            if (From != "" && To != "")
+            {
+                DateTime datefrom = DateTime.ParseExact(From, "dd/MM/yyyy", System.Globalization.CultureInfo.InvariantCulture);
+                DateTime dateto = DateTime.ParseExact(To, "dd/MM/yyyy", System.Globalization.CultureInfo.InvariantCulture);
+                dfrom = (datefrom).ToString("dd MMMM yyyy");
+                dto = (dateto).ToString("dd MMMM yyyy");
+            }
+           
             IWorkbook workbook;
             workbook = new HSSFWorkbook();
-            ds = _ireportDataProvider.GetComplaintExcelReport(Type);
+            ds = _ireportDataProvider.GetComplaintExcelReport(Type, CompanyID, DivisionID);
 
             if (ds != null && ds.Tables.Count > 0 && ds.Tables[0] != null && ds.Tables[0].Rows.Count > 0)
             {
@@ -385,19 +395,25 @@ namespace Brilliance.Controllers
                 ////----Direct Excel Export END----///  
             }
         }
-        public void GetLevel3ComplaintTypesExcelReport(string Type, string From, string To)
+        public void GetLevel3ComplaintTypesExcelReport(string Type, string From, string To, string companyid, string divid)
         {
-            string clientid = "";
+           
             DataSet ds = new DataSet();
             _ireportDataProvider = new ReportDataProvider();
-            DateTime datefrom = DateTime.ParseExact(From, "dd/MM/yyyy", System.Globalization.CultureInfo.InvariantCulture);
-            DateTime dateto = DateTime.ParseExact(To, "dd/MM/yyyy", System.Globalization.CultureInfo.InvariantCulture);
-            string dfrom = (datefrom).ToString("dd MMMM yyyy");
-            string dto = (dateto).ToString("dd MMMM yyyy");
-            Guid ClientID = Common.CheckIdNullOrEmptyNonEncrypt(clientid);
+            Guid CompanyID = Common.CheckIdNullOrEmptyNonEncrypt(companyid);
+            Guid DivisionID = Common.CheckIdNullOrEmptyNonEncrypt(divid);
+            string dfrom = "";
+            string dto = "";
+            if (From != "" && To != "")
+            {
+                DateTime datefrom = DateTime.ParseExact(From, "dd/MM/yyyy", System.Globalization.CultureInfo.InvariantCulture);
+                DateTime dateto = DateTime.ParseExact(To, "dd/MM/yyyy", System.Globalization.CultureInfo.InvariantCulture);
+                dfrom = (datefrom).ToString("dd MMMM yyyy");
+                dto = (dateto).ToString("dd MMMM yyyy");
+            }
             IWorkbook workbook;
             workbook = new HSSFWorkbook();
-            ds = _ireportDataProvider.GetComplaintExcelReport(Type);
+            ds = _ireportDataProvider.GetComplaintExcelReport(Type, CompanyID, DivisionID);
 
             if (ds != null && ds.Tables.Count > 0 && ds.Tables[0] != null && ds.Tables[0].Rows.Count > 0)
             {
@@ -512,19 +528,25 @@ namespace Brilliance.Controllers
                 ////----Direct Excel Export END----///  
             }
         }
-        public void GetLevel3ComplaintTurnaroundTimeExcelReport(string Type, string From, string To)
+        public void GetLevel3ComplaintTurnaroundTimeExcelReport(string Type, string From, string To, string companyid, string divid)
         {
-            string clientid = "";
+           
             DataSet ds = new DataSet();
             _ireportDataProvider = new ReportDataProvider();
-            DateTime datefrom = DateTime.ParseExact(From, "dd/MM/yyyy", System.Globalization.CultureInfo.InvariantCulture);
-            DateTime dateto = DateTime.ParseExact(To, "dd/MM/yyyy", System.Globalization.CultureInfo.InvariantCulture);
-            string dfrom = (datefrom).ToString("dd MMMM yyyy");
-            string dto = (dateto).ToString("dd MMMM yyyy");
-            Guid ClientID = Common.CheckIdNullOrEmptyNonEncrypt(clientid);
+            Guid CompanyID = Common.CheckIdNullOrEmptyNonEncrypt(companyid);
+            Guid DivisionID = Common.CheckIdNullOrEmptyNonEncrypt(divid);
+            string dfrom = "";
+            string dto = "";
+            if (From != "" && To != "")
+            {
+                DateTime datefrom = DateTime.ParseExact(From, "dd/MM/yyyy", System.Globalization.CultureInfo.InvariantCulture);
+                DateTime dateto = DateTime.ParseExact(To, "dd/MM/yyyy", System.Globalization.CultureInfo.InvariantCulture);
+                dfrom = (datefrom).ToString("dd MMMM yyyy");
+                dto = (dateto).ToString("dd MMMM yyyy");
+            }
             IWorkbook workbook;
             workbook = new HSSFWorkbook();
-            ds = _ireportDataProvider.GetComplaintExcelReport(Type);
+            ds = _ireportDataProvider.GetComplaintExcelReport(Type, CompanyID, DivisionID);
 
             if (ds != null && ds.Tables.Count > 0 && ds.Tables[0] != null && ds.Tables[0].Rows.Count > 0)
             {
@@ -647,24 +669,28 @@ namespace Brilliance.Controllers
         }
         #endregion
         #region Level2Reports
-        public void GetLevel2ComplaintsTypesRollupReport(string Type, string From, string To)
+        public void GetLevel2ComplaintsTypesRollupReport(string Type, string From, string To,string companyid)
         {
-            string clientid = "";
             DataSet ds = new DataSet();
             //MonthYearStr = "01 " + MonthYearStr;
             _ireportDataProvider = new ReportDataProvider();
-            DateTime datefrom = DateTime.ParseExact(From, "dd/MM/yyyy", System.Globalization.CultureInfo.InvariantCulture);
-            DateTime dateto = DateTime.ParseExact(To, "dd/MM/yyyy", System.Globalization.CultureInfo.InvariantCulture);
+            string dfrom = "";
+            string dto = "";
+            if (From!="" && To != "")
+            {
+                DateTime datefrom = DateTime.ParseExact(From, "dd/MM/yyyy", System.Globalization.CultureInfo.InvariantCulture);
+                DateTime dateto = DateTime.ParseExact(To, "dd/MM/yyyy", System.Globalization.CultureInfo.InvariantCulture);
+                 dfrom = (datefrom).ToString("dd MMMM yyyy");
+                 dto = (dateto).ToString("dd MMMM yyyy");
+            }
 
-            string dfrom = (datefrom).ToString("dd MMMM yyyy");
-            string dto = (dateto).ToString("dd MMMM yyyy");
-
+            Guid CompanyID= Common.CheckIdNullOrEmptyNonEncrypt(companyid);
             //int monthInDigit = Convert.ToDateTime(MonthYearStr).Month;
             //int year = Convert.ToDateTime(MonthYearStr).Year;
-            Guid ClientID = Common.CheckIdNullOrEmptyNonEncrypt(clientid);
+          
             IWorkbook workbook;
             workbook = new HSSFWorkbook();
-            ds = _ireportDataProvider.GetLevel2ComplaintExcelReport(Type);
+            ds = _ireportDataProvider.GetLevel2ComplaintExcelReport(Type, CompanyID);
 
             if (ds != null && ds.Tables.Count > 0 && ds.Tables[0] != null && ds.Tables[0].Rows.Count > 0)
             {
@@ -792,24 +818,29 @@ namespace Brilliance.Controllers
             }
 
         }
-        public void GetLevel2ComplaintsDatasRollupReport(string Type, string From, string To)
+        public void GetLevel2ComplaintsDatasRollupReport(string Type, string From, string To,string companyid)
         {
-            string clientid = "";
+          
             DataSet ds = new DataSet();
             //MonthYearStr = "01 " + MonthYearStr;
             _ireportDataProvider = new ReportDataProvider();
-
+            Guid CompanyID = Common.CheckIdNullOrEmptyNonEncrypt(companyid);
             //int monthInDigit = Convert.ToDateTime(MonthYearStr).Month;
             //int year = Convert.ToDateTime(MonthYearStr).Year;
-            DateTime datefrom = DateTime.ParseExact(From, "dd/MM/yyyy", System.Globalization.CultureInfo.InvariantCulture);
-            DateTime dateto = DateTime.ParseExact(To, "dd/MM/yyyy", System.Globalization.CultureInfo.InvariantCulture);
-            string dfrom = (datefrom).ToString("dd MMMM yyyy");
-            string dto = (dateto).ToString("dd MMMM yyyy");
-            Guid ClientID = Common.CheckIdNullOrEmptyNonEncrypt(clientid);
+            string dfrom = "";
+            string dto = "";
+            if (From != "" && To != "")
+            {
+                DateTime datefrom = DateTime.ParseExact(From, "dd/MM/yyyy", System.Globalization.CultureInfo.InvariantCulture);
+                DateTime dateto = DateTime.ParseExact(To, "dd/MM/yyyy", System.Globalization.CultureInfo.InvariantCulture);
+                dfrom = (datefrom).ToString("dd MMMM yyyy");
+                dto = (dateto).ToString("dd MMMM yyyy");
+            }
+           
             IWorkbook workbook;
             workbook = new HSSFWorkbook();
             //string CompanyID = "CA484A56-94D4-4AD5-9C5A-0ACA865A059E";
-            ds = _ireportDataProvider.GetLevel2ComplaintExcelReport(Type);
+            ds = _ireportDataProvider.GetLevel2ComplaintExcelReport(Type, CompanyID);
 
             if (ds != null && ds.Tables.Count > 0 && ds.Tables[0] != null && ds.Tables[0].Rows.Count > 0)
             {
@@ -924,23 +955,29 @@ namespace Brilliance.Controllers
                 Response.End();
             }
         }
-        public void GetLevel2ComplaintTurnaroundTimerollup(string Type, string From, string To)
+        public void GetLevel2ComplaintTurnaroundTimerollup(string Type, string From, string To,string companyid)
         {
-            string clientid = "";
+           
             DataSet ds = new DataSet();
             //MonthYearStr = "01 " + MonthYearStr;
             _ireportDataProvider = new ReportDataProvider();
+            Guid CompanyID = Common.CheckIdNullOrEmptyNonEncrypt(companyid);
             //int monthInDigit = Convert.ToDateTime(MonthYearStr).Month;
             //int year = Convert.ToDateTime(MonthYearStr).Year;
-            DateTime datefrom = DateTime.ParseExact(From, "dd/MM/yyyy", System.Globalization.CultureInfo.InvariantCulture);
-            DateTime dateto = DateTime.ParseExact(To, "dd/MM/yyyy", System.Globalization.CultureInfo.InvariantCulture);
-            string dfrom = (datefrom).ToString("dd MMMM yyyy");
-            string dto = (dateto).ToString("dd MMMM yyyy");
-            Guid ClientID = Common.CheckIdNullOrEmptyNonEncrypt(clientid);
+            string dfrom = "";
+            string dto = "";
+            if (From != "" && To != "")
+            {
+                DateTime datefrom = DateTime.ParseExact(From, "dd/MM/yyyy", System.Globalization.CultureInfo.InvariantCulture);
+                DateTime dateto = DateTime.ParseExact(To, "dd/MM/yyyy", System.Globalization.CultureInfo.InvariantCulture);
+                dfrom = (datefrom).ToString("dd MMMM yyyy");
+                dto = (dateto).ToString("dd MMMM yyyy");
+            }
+            
             IWorkbook workbook;
             workbook = new HSSFWorkbook();
             //string CompanyID = "CA484A56-94D4-4AD5-9C5A-0ACA865A059E";
-            ds = _ireportDataProvider.GetLevel2ComplaintExcelReport(Type);
+            ds = _ireportDataProvider.GetLevel2ComplaintExcelReport(Type, CompanyID);
 
             if (ds != null && ds.Tables.Count > 0 && ds.Tables[0] != null && ds.Tables[0].Rows.Count > 0)
             {
@@ -1059,17 +1096,22 @@ namespace Brilliance.Controllers
         #region Level1Reports
         public void GetLevel1ComplaintsTypesRollupReport(string Type, string From, string To)
         {
-            string clientid = "";
+            
             DataSet ds = new DataSet();
             //MonthYearStr = "01 " + MonthYearStr;
             _ireportDataProvider = new ReportDataProvider();
-            DateTime datefrom = DateTime.ParseExact(From, "dd/MM/yyyy", System.Globalization.CultureInfo.InvariantCulture);
-            DateTime dateto = DateTime.ParseExact(To, "dd/MM/yyyy", System.Globalization.CultureInfo.InvariantCulture);
-            string dfrom = (datefrom).ToString("dd MMMM yyyy");
-            string dto = (dateto).ToString("dd MMMM yyyy");
+            string dfrom = "";
+            string dto = "";
+            if (From != "" && To != "")
+            {
+                DateTime datefrom = DateTime.ParseExact(From, "dd/MM/yyyy", System.Globalization.CultureInfo.InvariantCulture);
+                DateTime dateto = DateTime.ParseExact(To, "dd/MM/yyyy", System.Globalization.CultureInfo.InvariantCulture);
+                dfrom = (datefrom).ToString("dd MMMM yyyy");
+                dto = (dateto).ToString("dd MMMM yyyy");
+            }
             //int monthInDigit = Convert.ToDateTime(MonthYearStr).Month;
             //int year = Convert.ToDateTime(MonthYearStr).Year;
-            Guid ClientID = Common.CheckIdNullOrEmptyNonEncrypt(clientid);
+            
             IWorkbook workbook;
             workbook = new HSSFWorkbook();
             ds = _ireportDataProvider.GetLevel1ComplaintExcelReport(Type);
@@ -1202,18 +1244,23 @@ namespace Brilliance.Controllers
         }
         public void GetLevel1ComplaintsDatasRollupReport(string Type, string From, string To)
         {
-            string clientid = "";
+           
             DataSet ds = new DataSet();
             //MonthYearStr = "01 " + MonthYearStr;
             _ireportDataProvider = new ReportDataProvider();
 
             //int monthInDigit = Convert.ToDateTime(MonthYearStr).Month;
             //int year = Convert.ToDateTime(MonthYearStr).Year;
-            DateTime datefrom = DateTime.ParseExact(From, "dd/MM/yyyy", System.Globalization.CultureInfo.InvariantCulture);
-            DateTime dateto = DateTime.ParseExact(To, "dd/MM/yyyy", System.Globalization.CultureInfo.InvariantCulture);
-            string dfrom = (datefrom).ToString("dd MMMM yyyy");
-            string dto = (dateto).ToString("dd MMMM yyyy");
-            Guid ClientID = Common.CheckIdNullOrEmptyNonEncrypt(clientid);
+            string dfrom = "";
+            string dto = "";
+            if (From != "" && To != "")
+            {
+                DateTime datefrom = DateTime.ParseExact(From, "dd/MM/yyyy", System.Globalization.CultureInfo.InvariantCulture);
+                DateTime dateto = DateTime.ParseExact(To, "dd/MM/yyyy", System.Globalization.CultureInfo.InvariantCulture);
+                dfrom = (datefrom).ToString("dd MMMM yyyy");
+                dto = (dateto).ToString("dd MMMM yyyy");
+            }
+           
             IWorkbook workbook;
             workbook = new HSSFWorkbook();
             //string CompanyID = "CA484A56-94D4-4AD5-9C5A-0ACA865A059E";
@@ -1335,18 +1382,24 @@ namespace Brilliance.Controllers
 
         public void GetLevel1ComplaintTurnaroundTimerollup(string Type, string From, string To)
         {
-            string clientid = "";
+          
             DataSet ds = new DataSet();
             //MonthYearStr = "01 " + MonthYearStr;
             _ireportDataProvider = new ReportDataProvider();
 
             //int monthInDigit = Convert.ToDateTime(MonthYearStr).Month;
             //int year = Convert.ToDateTime(MonthYearStr).Year;
-            DateTime datefrom = DateTime.ParseExact(From, "dd/MM/yyyy", System.Globalization.CultureInfo.InvariantCulture);
-            DateTime dateto = DateTime.ParseExact(To, "dd/MM/yyyy", System.Globalization.CultureInfo.InvariantCulture);
-            string dfrom = (datefrom).ToString("dd MMMM yyyy");
-            string dto = (dateto).ToString("dd MMMM yyyy");
-            Guid ClientID = Common.CheckIdNullOrEmptyNonEncrypt(clientid);
+            string dfrom = "";
+            string dto = "";
+            if (From != "" && To != "")
+            {
+                DateTime datefrom = DateTime.ParseExact(From, "dd/MM/yyyy", System.Globalization.CultureInfo.InvariantCulture);
+                DateTime dateto = DateTime.ParseExact(To, "dd/MM/yyyy", System.Globalization.CultureInfo.InvariantCulture);
+                dfrom = (datefrom).ToString("dd MMMM yyyy");
+                dto = (dateto).ToString("dd MMMM yyyy");
+
+            }
+            
             IWorkbook workbook;
             workbook = new HSSFWorkbook();
             //string CompanyID = "CA484A56-94D4-4AD5-9C5A-0ACA865A059E";

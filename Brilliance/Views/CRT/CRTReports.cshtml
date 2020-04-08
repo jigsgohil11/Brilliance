@@ -1,4 +1,4 @@
-﻿@model Brilliance.Models.ViewModel.ComplaintReportModel
+﻿@model Brilliance.Models.ViewModel.ComplaintReportViewModel
 @using Brilliance.Infrastructure
 @{
     ViewBag.Title = "CRTReports";
@@ -24,16 +24,71 @@
             </div>
         </div>
     </div>
+
     <div class="row" style="margin-left:-25px;margin-right:-25px;margin-top:-5px;">
         <div class="col-lg-12">
             <div class="portlet light">
                 <div class="portlet-body form">
                     @*<form action="/ClientSetup/SaveClient" id="frmClient" data-ajax-success="SaveClientResponse(data);" data-ajax="true" data-ajax-method="Post" method="post">*@
-                    <form action="/ClientSetup/SaveClient" id="frmClient" method="post" enctype="multipart/form-data">
+                    <form action="/ClientSetup/SaveClient" id="frmreport" method="post" enctype="multipart/form-data">
+                        @if (SessionHelper.RoleName == "Level 1")
+                        {
+                            <div class="caption font-dark">
+                                <a class="action btn  btn-primary @Constants.Class_Cannot_Access_Update" style="padding:2px;" onclick="orgrpt();" title="Edit">Report By Organisation</a>
+                                <a class="action btn  btn-primary @Constants.Class_Cannot_Access_Update" style="padding:2px;" onclick="cmpnyrpt();" title="Edit">Report By Company</a>
+                                <a class="action btn  btn-primary @Constants.Class_Cannot_Access_Update" style="padding:2px;" onclick="Divrpt();" title="Edit">Report By Division</a>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6 hide" id="rpt_cmpny">
+                                    <div class="form-group">
+                                        @if (Model != null && Model.labelconfig != null && Model.labelconfig.Tier2 != null)
+                                        {
+                                            <label>@Model.labelconfig.Tier2</label>
+                                        }
+                                        else
+                                        {
+                                            <label>Tier 2</label>
+                                        }
+
+                                        @Html.DropDownListFor(m => m.report.CompanyID, new SelectList(Model.Companylist, "Value", "Text", 0), "--Select Company--", new { @data_live_search = "true", @class = "form-control bs-select" })
+                                        @Html.ValidationMessageFor(m => m.report.CompanyID)
+                                    </div>
+                                </div>
+                                <div class="col-md-6 hide" id="rpt_divcmpny">
+                                    <div class="form-group">
+                                        @if (Model != null && Model.labelconfig != null && Model.labelconfig.Tier2 != null)
+                                        {
+                                            <label>@Model.labelconfig.Tier2</label>
+                                        }
+                                        else
+                                        {
+                                            <label>Tier 2</label>
+                                        }
+                                        @Html.DropDownListFor(m => m.report.DivCompanyID, new SelectList(Model.Companylist, "Value", "Text", 0), "--Select Company--", new { @data_live_search = "true", @class = "form-control bs-select", @onchange = "GetDivByCompany();" })
+                                        @Html.ValidationMessageFor(m => m.report.DivCompanyID)
+                                    </div>
+                                </div>
+                                <div class="col-md-6 hide" id="rpt_division">
+                                    <div class="form-group">
+                                        @if (Model != null && Model.labelconfig != null && Model.labelconfig.Tier3 != null)
+                                        {
+                                            <label>Model.labelconfig.Tier3</label>
+                                        }
+                                        else
+                                        {
+                                            <label>Tier3</label>
+                                        }
+                                        @Html.DropDownListFor(m => m.report.DivisionID, new SelectList(Model.Divisionlist, "Value", "Text", 0), "--Select Division--", new { @data_live_search = "true", @class = "form-control bs-select" })
+                                        @Html.ValidationMessageFor(m => m.report.DivisionID)
+                                    </div>
+                                </div>
+                            </div>
+                        }
+
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label>Reports</label>
+                                    <label>Report Type</label>
                                     @Html.DropDownListFor(m => m.report.ReportTypeID, new SelectList(Model.Reportlist, "Value", "Text", 0), "--Select Report Type--", new { @data_live_search = "true", @class = "form-control bs-select" })
                                     @Html.ValidationMessageFor(m => m.report.ReportTypeID)
                                 </div>
@@ -101,46 +156,186 @@
         //}
 
         function GetCRTDataPdf() {
-            var Type = $("#report_ReportTypeID :selected").text();
-            var datefrom = $("#report_DateFrom").val();
-            var dateto = $("#report_DateTo").val();
-            if (Type != null && Type != "" && Type != undefined) {
-                if (Type == 'Complaint Types') {
-                    window.location.href = "/Reports/GetLevel3ComplaintTypesExcelReport?Type=Complaint data&From=" + datefrom + "&To=" + dateto + "";
-                }
-                else if (Type == 'Complaint Notes Report') {
-                    window.location.href = "/Reports/GetLevel3ComplaintExcelReportwithNotes?Type=With Notes&From=" + datefrom + "&To=" + dateto + "";
-                }
-                else if (Type == 'Complaint Data without Notes') {
-                    window.location.href = "/Reports/GetLevel3ComplaintExcelReportwithoutNotes?Type=Without Notes&From=" + datefrom + "&To=" + dateto + "";
-                }
-                else if (Type == 'Complaint Turnaround Time') {
-                    window.location.href = "/Reports/GetLevel3ComplaintTurnaroundTimeExcelReport?Type=Turnaround Time&From=" + datefrom + "&To=" + dateto + "";
-                }
-                else if (Type == 'Complaint Types rollup') {
-                    window.location.href = "/Reports/GetLevel2ComplaintsTypesRollupReport?Type=Complaint Types rollup&From=" + datefrom + "&To=" + dateto + "";
-                }
-                else if (Type == 'Complaint data rollup') {
-                    window.location.href = "/Reports/GetLevel2ComplaintsDatasRollupReport?Type=Complaint data rollup&From=" + datefrom + "&To=" + dateto + "";
-                }
-                else if (Type == 'Complaint Turnaround Time rollup') {
-                    window.location.href = "/Reports/GetLevel2ComplaintTurnaroundTimerollup?Type=Complaint Turnaround Time rollup&From=" + datefrom + "&To=" + dateto + "";
-                }
-                else if (Type == 'Level1 Complaint Types rollup') {
-                    window.location.href = "/Reports/GetLevel1ComplaintsTypesRollupReport?Type=Complaint Types rollup&From=" + datefrom + "&To=" + dateto + "";
-                }
-                else if (Type == 'Level1 Complaint data rollup') {
-                    window.location.href = "/Reports/GetLevel1ComplaintsDatasRollupReport?Type=Complaint data rollup&From=" + datefrom + "&To=" + dateto + "";
-                }
-                else if (Type == 'Level1 Complaint Turnaround Time rollup') {
-                    window.location.href = "/Reports/GetLevel1ComplaintTurnaroundTimerollup?Type=Complaint Turnaround Time rollup&From=" + datefrom + "&To=" + dateto + "";
-                }
-                else {
-                    window.location.href = "/Reports/GetLevel3ComplaintTypesExcelReport?Type=Complaint data&From=" + datefrom + "&To=" + dateto + "";
+            if ($("#frmreport").valid()) {
+                var Type = $("#report_ReportTypeID :selected").text();
+                var cmpnyid = $("#report_CompanyID").val();
+                var divcmpnyid = $("#report_DivCompanyID").val();
+                var divid = $("#report_DivisionID").val();
+                var datefrom = $("#report_DateFrom").val();
+                var dateto = $("#report_DateTo").val();
+                if (Type != null && Type != "" && Type != undefined) {
+
+                    //------level 3------------//
+                    if (Type == 'Complaint Types') {
+                        window.location.href = "/Reports/GetLevel3ComplaintTypesExcelReport?Type=Complaint data&From=" + datefrom + "&To=" + dateto + "&companyid=" + divcmpnyid + "&divid=" + divid + "";
+                    }
+                    else if (Type == 'Complaint Notes Report') {
+                        window.location.href = "/Reports/GetLevel3ComplaintExcelReportwithNotes?Type=With Notes&From=" + datefrom + "&To=" + dateto + "&companyid=" + divcmpnyid + "&divid=" + divid + "";
+                    }
+                    else if (Type == 'Complaint Data without Notes') {
+                        window.location.href = "/Reports/GetLevel3ComplaintExcelReportwithoutNotes?Type=Without Notes&From=" + datefrom + "&To=" + dateto + "&companyid=" + divcmpnyid + "&divid=" + divid + "";
+                    }
+                    else if (Type == 'Complaint Turnaround Time') {
+                        window.location.href = "/Reports/GetLevel3ComplaintTurnaroundTimeExcelReport?Type=Turnaround Time&From=" + datefrom + "&To=" + dateto + "&companyid=" + divcmpnyid + "&divid=" + divid + "";
+                    }
+
+                    //------level 2------------//
+                    else if (Type == 'Complaint Types rollup') {
+                        window.location.href = "/Reports/GetLevel2ComplaintsTypesRollupReport?Type=Complaint Types rollup&From=" + datefrom + "&To=" + dateto + "&companyid=" + cmpnyid + "";
+                    }
+                    else if (Type == 'Complaint data rollup') {
+                        window.location.href = "/Reports/GetLevel2ComplaintsDatasRollupReport?Type=Complaint data rollup&From=" + datefrom + "&To=" + dateto + "&companyid=" + cmpnyid + "";
+                    }
+                    else if (Type == 'Complaint Turnaround Time rollup') {
+                        window.location.href = "/Reports/GetLevel2ComplaintTurnaroundTimerollup?Type=Complaint Turnaround Time rollup&From=" + datefrom + "&To=" + dateto + "&companyid=" + cmpnyid + "";
+                    }
+
+                    //------level 1------------//
+                    else if (Type == 'Level1 Complaint Types rollup') {
+                        window.location.href = "/Reports/GetLevel1ComplaintsTypesRollupReport?Type=Complaint Types rollup&From=" + datefrom + "&To=" + dateto + "";
+                    }
+                    else if (Type == 'Level1 Complaint data rollup') {
+                        window.location.href = "/Reports/GetLevel1ComplaintsDatasRollupReport?Type=Complaint data rollup&From=" + datefrom + "&To=" + dateto + "";
+                    }
+                    else if (Type == 'Level1 Complaint Turnaround Time rollup') {
+                        window.location.href = "/Reports/GetLevel1ComplaintTurnaroundTimerollup?Type=Complaint Turnaround Time rollup&From=" + datefrom + "&To=" + dateto + "";
+                    }
+                    else {
+                        window.location.href = "/Reports/GetLevel3ComplaintTypesExcelReport?Type=Complaint data&From=" + datefrom + "&To=" + dateto + "";
+                    }
                 }
             }
+           
         }
 
+        function cmpnyrpt() {
+            $("#report_ReportTypeID").html('');
+            $("#rpt_divcmpny").addClass('hide');
+            $("#rpt_division").addClass('hide');
+            //var complaintNatureVal = $('#' + Obj.id).val();
+            //var compcategoryid = $('#complaint_ComplaintCategoryId').val();
+            var postData = {
+                //Categoryid: compcategoryid,
+                //Natureid: complaintNatureVal
+            };
+            ShowLoader();
+            debugger;
+
+            AjaxCall("/CRT/GetCompanyReport", JSON.stringify(postData), "post", "json", "application/json", false).done(function (data) {
+                HideLoader();
+                $("#rpt_cmpny").removeClass('hide');
+                debugger;
+                if (data.Reportlist != null && data.Reportlist.length > 0) {
+                    $("#report_ReportTypeID").html('');
+                    $("#report_ReportTypeID").append('<option value="">-- Select Report Type --</option>');
+                    $("#report_ReportTypeID").selectpicker('refresh');
+                    for (key in data.Reportlist) {
+                        $("#report_ReportTypeID").append('<option value="' + data.Reportlist[key].Value + '">' + data.Reportlist[key].Text + '</option>');
+                    }
+                    $("#report_ReportTypeID").selectpicker('refresh');
+                }
+                else {
+                    $("#report_ReportTypeID").html('');
+                    $("#report_ReportTypeID").append('<option value="">-- Select Report Type --</option>');
+                    $("#report_ReportTypeID").selectpicker('refresh');
+                }
+            });
+        }
+
+        function orgrpt() {
+            $("#report_ReportTypeID").val('');
+            $("#rpt_cmpny").addClass('hide');
+            $("#rpt_divcmpny").addClass('hide');
+            $("#rpt_division").addClass('hide');
+            //var complaintNatureVal = $('#' + Obj.id).val();
+            //var compcategoryid = $('#complaint_ComplaintCategoryId').val();
+            var postData = {
+                //Categoryid: compcategoryid,
+                //Natureid: complaintNatureVal
+            };
+            ShowLoader();
+
+            AjaxCall("/CRT/GetOrganisationReport", JSON.stringify(postData), "post", "json", "application/json", false).done(function (data) {
+                HideLoader();
+
+                debugger;
+                if (data.Reportlist != null && data.Reportlist.length > 0) {
+                    $("#report_ReportTypeID").html('');
+                    $("#report_ReportTypeID").append('<option value="">-- Select Report Type --</option>');
+                    $("#report_ReportTypeID").selectpicker('refresh');
+                    for (key in data.Reportlist) {
+                        $("#report_ReportTypeID").append('<option value="' + data.Reportlist[key].Value + '">' + data.Reportlist[key].Text + '</option>');
+                    }
+                    $("#report_ReportTypeID").selectpicker('refresh');
+                }
+                else {
+                    $("#report_ReportTypeID").html('');
+                    $("#report_ReportTypeID").append('<option value="">-- Select Report Type --</option>');
+                    $("#report_ReportTypeID").selectpicker('refresh');
+                }
+            });
+        }
+
+        function Divrpt() {
+            $("#report_ReportTypeID").val('');
+            $("#report_CompanyID").val('');
+            $("#report_DivisionID").val('');
+            $("#rpt_cmpny").addClass('hide');
+            //var complaintNatureVal = $('#' + Obj.id).val();
+            //var compcategoryid = $('#complaint_ComplaintCategoryId').val();
+            var postData = {
+                //Categoryid: compcategoryid,
+                //Natureid: complaintNatureVal
+            };
+            ShowLoader();
+            AjaxCall("/CRT/GetDivisionReport", JSON.stringify(postData), "post", "json", "application/json", false).done(function (data) {
+                HideLoader();
+                $("#rpt_divcmpny").removeClass('hide');
+                $("#rpt_division").removeClass('hide');
+                debugger;
+                if (data.Reportlist != null && data.Reportlist.length > 0) {
+                    $("#report_ReportTypeID").html('');
+                    $("#report_ReportTypeID").append('<option value="">-- Select Report Type --</option>');
+                    $("#report_ReportTypeID").selectpicker('refresh');
+                    for (key in data.Reportlist) {
+                        $("#report_ReportTypeID").append('<option value="' + data.Reportlist[key].Value + '">' + data.Reportlist[key].Text + '</option>');
+                    }
+                    $("#report_ReportTypeID").selectpicker('refresh');
+                }
+                else {
+                    $("#report_ReportTypeID").html('');
+                    $("#report_ReportTypeID").append('<option value="">-- Select Report Type --</option>');
+                    $("#report_ReportTypeID").selectpicker('refresh');
+                }
+            });
+        }
+
+        function GetDivByCompany() {
+            debugger;
+            var compid = $("#report_DivCompanyID").val();
+            var postData = {
+                companyid: compid
+            };
+            ShowLoader();
+            AjaxCall("/CRT/GetDivbyCompany", JSON.stringify(postData), "post", "json", "application/json", false).done(function (data) {
+                HideLoader();
+                debugger;
+                if (data != null && data.length > 0) {
+                    $("#report_DivisionID").html('');
+                    $("#report_DivisionID").append('<option value="">-- Select Division --</option>');
+                    $("#report_DivisionID").selectpicker('refresh');
+                    for (key in data) {
+                        $("#report_DivisionID").append('<option value="' + data[key].Value + '">' + data[key].Text + '</option>');
+                    }
+                    $("#report_DivisionID").selectpicker('refresh');
+                }
+                else {
+                    $("#report_DivisionID").html('');
+                    $("#report_DivisionID").append('<option value="">-- Select Division --</option>');
+                    $("#report_DivisionID").selectpicker('refresh');
+                }
+            });
+        }
     </script>
 
 }

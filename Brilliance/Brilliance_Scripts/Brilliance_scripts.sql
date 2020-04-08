@@ -163,6 +163,6 @@ newid(),'Level1 Complaint Types rollup','Level 1',1)
 insert into mst_ReportType(ReportTypeID,ReportTypeName,RoleName,IsActive)Values(
 newid(),'Level1 Complaint data rollup','Level 1',1)
 insert into mst_ReportType(ReportTypeID,ReportTypeName,RoleName,IsActive)Values(
-newid(),'Level1 Complaint Turnaround Time rollup','Level 1',
+newid(),'Level1 Complaint Turnaround Time rollup','Level 1',1)
 
 

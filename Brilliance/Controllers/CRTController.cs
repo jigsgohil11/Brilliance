@@ -233,5 +233,31 @@ namespace Brilliance.Controllers
             return View(response.Data);
         }
 
+        public ActionResult  GetCompanyReport()
+        {
+            _icomplaintDataProvider = new ComplaintDataProvider();
+            ServiceResponse response = _icomplaintDataProvider.GetCompanyReport();
+            return Json(response.Data, JsonRequestBehavior.AllowGet);
+        }
+        public ActionResult GetOrganisationReport()
+        {
+            _icomplaintDataProvider = new ComplaintDataProvider();
+            ServiceResponse response = _icomplaintDataProvider.GetOrganisationReport();
+            return Json(response.Data, JsonRequestBehavior.AllowGet);
+        }
+        public ActionResult GetDivisionReport()
+        {
+            _icomplaintDataProvider = new ComplaintDataProvider();
+            ServiceResponse response = _icomplaintDataProvider.GetDivisionReport();
+            return Json(response.Data, JsonRequestBehavior.AllowGet);
+        }
+        public ActionResult GetDivbyCompany(string companyid)
+        {
+            _icomplaintDataProvider = new ComplaintDataProvider();
+            Guid CompanyID = Common.CheckIdNullOrEmptyNonEncrypt(companyid);
+            ServiceResponse response = _icomplaintDataProvider.GetDivbyCompany(CompanyID);
+            return Json(response.Data, JsonRequestBehavior.AllowGet);
+        }
+
     }
 }

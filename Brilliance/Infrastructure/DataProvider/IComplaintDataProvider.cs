@@ -18,6 +18,10 @@ namespace Brilliance.Infrastructure.DataProvider
         ServiceResponse GetNatureOfComplaintList(Guid ComplaintCategoryID);
         ServiceResponse GetTCFOutcome(Guid ComplaintCategoryID, Guid NatureID);
         ServiceResponse GetReport();
+        ServiceResponse GetCompanyReport();
+        ServiceResponse GetOrganisationReport();
+        ServiceResponse GetDivisionReport();
+        ServiceResponse GetDivbyCompany(Guid CompanyID);
 
     }
 }

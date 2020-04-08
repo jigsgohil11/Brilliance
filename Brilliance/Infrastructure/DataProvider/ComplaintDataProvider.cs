@@ -373,18 +373,109 @@ namespace Brilliance.Infrastructure.DataProvider
 
         public ServiceResponse GetReport()
         {
+            ComplaintReportViewModel reportmodel = new ComplaintReportViewModel();
+            var response = new ServiceResponse();
+            try
+            {
+                var searchList = new List<SearchValueData>()
+                {
+                        new SearchValueData { Name = "RoleName" ,Value = Convert.ToString(SessionHelper.RoleName)},
+                        new SearchValueData { Name = "ClientID" ,Value = Convert.ToString(SessionHelper.ClientID)}
+                       // new SearchValueData { Name = "RoleName" ,Value = "Level 3"}
+                };
+
+                reportmodel = GetMultipleEntity<ComplaintReportViewModel>("GetReportType", searchList);
+                response.Data = reportmodel;
+                response.IsSuccess = true;
+            }
+            catch (Exception ex)
+            {
+
+            }
+            return response;
+        }
+
+        public ServiceResponse GetCompanyReport()
+        {
             ComplaintReportModel reportmodel = new ComplaintReportModel();
             var response = new ServiceResponse();
             try
             {
                 var searchList = new List<SearchValueData>()
                 {
-                        new SearchValueData { Name = "RoleName" ,Value = Convert.ToString(SessionHelper.RoleName)}
+                        new SearchValueData { Name = "ClientID" ,Value = Convert.ToString(SessionHelper.ClientID)}
                        // new SearchValueData { Name = "RoleName" ,Value = "Level 3"}
                 };
 
-                reportmodel = GetMultipleEntity<ComplaintReportModel>("GetReportType", searchList);
+                reportmodel = GetMultipleEntity<ComplaintReportModel>("GetCompanyReport", searchList);
                 response.Data = reportmodel;
+                response.IsSuccess = true;
+            }
+            catch (Exception ex)
+            {
+
+            }
+            return response;
+        }
+
+        public ServiceResponse GetOrganisationReport()
+        {
+            ComplaintReportModel reportmodel = new ComplaintReportModel();
+            var response = new ServiceResponse();
+            try
+            {
+                var searchList = new List<SearchValueData>()
+                {
+                       new SearchValueData { Name = "RoleName" ,Value = Convert.ToString(SessionHelper.RoleName)}
+                };
+
+                reportmodel = GetMultipleEntity<ComplaintReportModel>("GetOrgReport", searchList);
+                response.Data = reportmodel;
+                response.IsSuccess = true;
+            }
+            catch (Exception ex)
+            {
+
+            }
+            return response;
+        }
+
+        public ServiceResponse GetDivisionReport()
+        {
+            ComplaintReportModel reportmodel = new ComplaintReportModel();
+            var response = new ServiceResponse();
+            try
+            {
+                var searchList = new List<SearchValueData>()
+                {
+                        new SearchValueData { Name = "ClientID" ,Value = Convert.ToString(SessionHelper.ClientID)}
+                       // new SearchValueData { Name = "RoleName" ,Value = "Level 3"}
+                };
+
+                reportmodel = GetMultipleEntity<ComplaintReportModel>("GetDivisionReport", searchList);
+                response.Data = reportmodel;
+                response.IsSuccess = true;
+            }
+            catch (Exception ex)
+            {
+
+            }
+            return response;
+        }
+        public ServiceResponse GetDivbyCompany(Guid CompanyID)
+        {
+            
+            var response = new ServiceResponse();
+            try
+            {
+                var searchList = new List<SearchValueData>()
+                {
+                        new SearchValueData { Name = "CompanyID" ,Value = Convert.ToString(CompanyID)},
+                        new SearchValueData { Name = "ClientID" ,Value = Convert.ToString(SessionHelper.ClientID)}
+                };
+
+                List<SelectListItem> divList = GetEntityList<SelectListItem>("GetDivisionByCompany", searchList);
+                response.Data = divList;
                 response.IsSuccess = true;
             }
             catch (Exception ex)
