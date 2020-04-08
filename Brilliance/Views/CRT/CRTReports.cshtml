@@ -158,9 +158,24 @@
         function GetCRTDataPdf() {
             if ($("#frmreport").valid()) {
                 var Type = $("#report_ReportTypeID :selected").text();
-                var cmpnyid = $("#report_CompanyID").val();
-                var divcmpnyid = $("#report_DivCompanyID").val();
-                var divid = $("#report_DivisionID").val();
+                if ($("#report_CompanyID").val() != null && $("#report_CompanyID").val() != undefined && $("#report_CompanyID").val() != "") {
+                    var cmpnyid = $("#report_CompanyID").val();
+                }
+                else {
+                    var cmpnyid ="";
+                }
+                if ($("#report_DivCompanyID").val() != null && $("#report_DivCompanyID").val() != undefined && $("#report_DivCompanyID").val() != "") {
+                    var divcmpnyid = $("#report_DivCompanyID").val();
+                }
+                else {
+                    var divcmpnyid = "";
+                }
+                if ($("#report_DivisionID").val() != null && $("#report_DivisionID").val() != undefined && $("#report_DivisionID").val() != "") {
+                    var divid = $("#report_DivisionID").val();
+                }
+                else {
+                    var divid = "";
+                }
                 var datefrom = $("#report_DateFrom").val();
                 var dateto = $("#report_DateTo").val();
                 if (Type != null && Type != "" && Type != undefined) {
