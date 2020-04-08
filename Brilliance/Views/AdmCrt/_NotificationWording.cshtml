@@ -1,0 +1,72 @@
+﻿@model Brilliance.Models.ViewModel.CrtAdminViewmodel
+@using Brilliance.Infrastructure
+
+<div class="modal-dialog modal-lg" style="height:200px;">
+    <div class="modal-content" style="width: 1213px;margin-left: -125px;">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+            <h4 class="modal-title">Notification wording and timing configuration:</h4>
+        </div>
+        <form>
+            <div class="row" style="margin-top:12px;">
+                <div class="form-group">
+                    <div class="col-md-1">
+                        @Html.TextBox("test", "", new { @class = "form-control m-input", placeholder = "001" })
+                    </div>
+                    <div class="col-md-5">
+                        @Html.TextBox("test", "", new { @class = "form-control m-input", placeholder = "Inactivity alert" })
+                    </div>
+                    <div class="col-md-2">
+                        @Html.TextBox("test", "", new { @class = "form-control m-input", placeholder = "Level 1 Users" })
+                    </div>
+                    <div class="col-md-2">
+                        @Html.TextBox("test", "", new { @class = "form-control m-input", placeholder = "001" })
+                    </div>
+                </div>
+            </div>
+            <div class="row" style="margin:5px;height:auto;border:1px solid lightgrey;">
+                <div>
+                    <h5 class="modal-title" style="color:lightblue;margin:6px;">No one in {Name of Tier 3} is updating the CRT</h5>
+                </div>
+                <p>Here are the details of who should be updating the system according to our records:</p>
+                <ul style="list-style-type:disc;">
+                    <li>{First name and surname Level 3 user} (email address of Level 3 user)</li>
+                    <li>{Add a bullet with same detail as above for each active user with access rights to this Tier 3}</li>
+                </ul>
+                <p>Should you prefer not to receive emails of this nature, please contact us.</p>
+
+                <p>Serving your success</p>
+                The Team at Brilliance
+            </div>
+            <div class="row" style="margin:5px;height:auto;">
+                <div>
+                    <h5 class="modal-title" style="color:lightblue;margin:6px;">Inactive alert*</h5>
+                </div>
+                <div class="col-md-2">
+                    <label>No</label> <input type="radio" name="Inactive alert" value="No" />
+                </div>
+                <div class="col-md-2">
+                    <label>Yes</label><input type="radio" name="Inactive alert" value="Yes" />
+                </div>
+                <div class="col-md-2">
+                    @Html.TextBox("test", "", new { @class = "form-control m-input", placeholder = "30" })
+                </div>
+            </div>
+            <div class="row" style="margin:30px;height:auto;">
+                <div class="col-md-3">
+                    <button type="button" class="btn default" data-dismiss="modal">Save And Close</button>
+                </div>
+                <div class="col-md-3">
+                    <button type="button" class="btn default" data-dismiss="modal">Save</button>
+                </div>
+                <div class="col-md-3">
+                    <button type="button" class="btn default" data-dismiss="modal">Undo</button>
+                </div>
+                <div class="col-md-3">
+                    <button type="button" class="btn default" data-dismiss="modal">Cancel</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+

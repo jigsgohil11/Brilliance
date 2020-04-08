@@ -6953,6 +6953,8 @@
     <Content Include="Views\AdmCis\_AddDropselectConfiguration.cshtml" />
     <Content Include="Views\AdmCis\_NotificationConfiguration.cshtml" />
     <Content Include="Views\AdmCis\_OutcomeConfiguration.cshtml" />
+    <Content Include="Views\AdmCrt\_Notificationconfiguration.cshtml" />
+    <Content Include="Views\AdmCrt\_NotificationWording.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

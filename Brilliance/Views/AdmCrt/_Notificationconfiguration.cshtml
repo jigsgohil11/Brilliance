@@ -1,0 +1,470 @@
+﻿@model Brilliance.Models.ViewModel.CrtAdminViewmodel
+@using Brilliance.Infrastructure
+
+
+
+<div class="row" style="margin-top:12px;">
+    <div class="form-group">
+        <div class="col-md-1">
+            @Html.TextBoxFor(m => m.labelconfig.contactno, new { @class = "form-control m-input", placeholder = "001" })
+        </div>
+        <div class="col-md-4">
+            @Html.TextBoxFor(m => m.labelconfig.contactno, new { @class = "form-control m-input", placeholder = "Inactive alert" })
+        </div>
+        <div class="col-md-4">
+            @Html.TextBoxFor(m => m.labelconfig.contactno, new { @class = "form-control m-input", placeholder = "Level 1 Users / DARs / Level 2 users" })
+        </div>
+        <div class="col-md-3">
+            <a class="action btn  btn-primary btn-xs @Constants.Class_Cannot_Access_Update" href="#" onclick="AddNotificationWording();" title="Edit"><i class="btn-xs fa fa-pencil padding0"></i></a>
+            <a class="action btn  btn-primary btn-xs @Constants.Class_Cannot_Access_Update" href="#" onclick="AddNotificationWording();" title="Edit"><i class="btn-xs fa fa-navicon padding0"></i></a>
+            <a class="action btn  btn-primary btn-xs @Constants.Class_Cannot_Access_Update" href="#" onclick="AddNotificationWording();" title="Edit"><i class="btn-xs fa fa-refresh padding0"></i></a>
+            <a class="action btn  btn-primary btn-xs @Constants.Class_Cannot_Access_Update" href="#" onclick="AddNotificationWording();" title="Edit"><i class="btn-xs fa fa-share-square-o padding0"></i></a>
+            <a class="action btn  btn-primary btn-xs @Constants.Class_Cannot_Access_Update" href="#" onclick="AddNotificationWording();" title="Edit"><i class="btn-xs fa fa-eye padding0"></i></a>
+            <a class="action btn  btn-primary btn-xs @Constants.Class_Cannot_Access_Update" href="#" onclick="AddNotificationWording();" title="Edit"><i class="btn-xs fa fa-remove padding0"></i></a>
+        </div>
+
+    </div>
+</div>
+<div class="row" style="margin-top:12px;">  
+    <div class="form-group">
+        <div class="col-md-1">
+            @Html.TextBoxFor(m => m.labelconfig.contactno, new { @class = "form-control m-input", placeholder = "002" })
+        </div>
+        <div class="col-md-4">
+            @Html.TextBoxFor(m => m.labelconfig.contactno, new { @class = "form-control m-input", placeholder = "Complaint assigned notification" })
+        </div>
+        <div class="col-md-4">
+            @Html.TextBoxFor(m => m.labelconfig.contactno, new { @class = "form-control m-input", placeholder = "" })
+        </div>
+        <div class="col-md-3">
+            <a class="action btn  btn-primary btn-xs @Constants.Class_Cannot_Access_Update" href="#" onclick="AddNotificationWording();" title="Edit"><i class="btn-xs fa fa-pencil padding0"></i></a>
+            <a class="action btn  btn-primary btn-xs @Constants.Class_Cannot_Access_Update" href="#" onclick="AddNotificationWording();" title="Edit"><i class="btn-xs fa fa-navicon padding0"></i></a>
+            <a class="action btn  btn-primary btn-xs @Constants.Class_Cannot_Access_Update" href="#" onclick="AddNotificationWording();" title="Edit"><i class="btn-xs fa fa-refresh padding0"></i></a>
+            <a class="action btn  btn-primary btn-xs @Constants.Class_Cannot_Access_Update" href="#" onclick="AddNotificationWording();" title="Edit"><i class="btn-xs fa fa-share-square-o padding0"></i></a>
+            <a class="action btn  btn-primary btn-xs @Constants.Class_Cannot_Access_Update" href="#" onclick="AddNotificationWording();" title="Edit"><i class="btn-xs fa fa-eye padding0"></i></a>
+            <a class="action btn  btn-primary btn-xs @Constants.Class_Cannot_Access_Update" href="#" onclick="AddNotificationWording();" title="Edit"><i class="btn-xs fa fa-remove padding0"></i></a>
+        </div>
+    </div>
+</div>
+<div class="row" style="margin-top:12px;">
+    <div class="form-group">
+        <div class="col-md-1">
+            @Html.TextBoxFor(m => m.labelconfig.contactno, new { @class = "form-control m-input", placeholder = "003" })
+        </div>
+        <div class="col-md-4">
+            @Html.TextBoxFor(m => m.labelconfig.contactno, new { @class = "form-control m-input", placeholder = "Complaint escalated notification" })
+        </div>
+        <div class="col-md-4">
+            @Html.TextBoxFor(m => m.labelconfig.contactno, new { @class = "form-control m-input", placeholder = "User selected at the time" })
+        </div>
+        <div class="col-md-3">
+            <a class="action btn  btn-primary btn-xs @Constants.Class_Cannot_Access_Update" href="#" onclick="AddNotificationWording();" title="Edit"><i class="btn-xs fa fa-pencil padding0"></i></a>
+            <a class="action btn  btn-primary btn-xs @Constants.Class_Cannot_Access_Update" href="#" onclick="AddNotificationWording();" title="Edit"><i class="btn-xs fa fa-navicon padding0"></i></a>
+            <a class="action btn  btn-primary btn-xs @Constants.Class_Cannot_Access_Update" href="#" onclick="AddNotificationWording();" title="Edit"><i class="btn-xs fa fa-refresh padding0"></i></a>
+            <a class="action btn  btn-primary btn-xs @Constants.Class_Cannot_Access_Update" href="#" onclick="AddNotificationWording();" title="Edit"><i class="btn-xs fa fa-share-square-o padding0"></i></a>
+            <a class="action btn  btn-primary btn-xs @Constants.Class_Cannot_Access_Update" href="#" onclick="AddNotificationWording();" title="Edit"><i class="btn-xs fa fa-eye padding0"></i></a>
+            <a class="action btn  btn-primary btn-xs @Constants.Class_Cannot_Access_Update" href="#" onclick="AddNotificationWording();" title="Edit"><i class="btn-xs fa fa-remove padding0"></i></a>
+        </div>
+    </div>
+</div>
+<div class="row" style="margin-top:12px;">
+    <div class="form-group">
+        <div class="col-md-1">
+            @Html.TextBoxFor(m => m.labelconfig.contactno, new { @class = "form-control m-input", placeholder = "004" })
+        </div>
+        <div class="col-md-4">
+            @Html.TextBoxFor(m => m.labelconfig.contactno, new { @class = "form-control m-input", placeholder = "Turnaround time reminder 1" })
+        </div>
+        <div class="col-md-4">
+            @Html.TextBoxFor(m => m.labelconfig.contactno, new { @class = "form-control m-input", placeholder = "Relevant responsible person" })
+        </div>
+        <div class="col-md-3">
+            <a class="action btn  btn-primary btn-xs @Constants.Class_Cannot_Access_Update" href="#" onclick="AddNotificationWording();" title="Edit"><i class="btn-xs fa fa-pencil padding0"></i></a>
+            <a class="action btn  btn-primary btn-xs @Constants.Class_Cannot_Access_Update" href="#" onclick="AddNotificationWording();" title="Edit"><i class="btn-xs fa fa-navicon padding0"></i></a>
+            <a class="action btn  btn-primary btn-xs @Constants.Class_Cannot_Access_Update" href="#" onclick="AddNotificationWording();" title="Edit"><i class="btn-xs fa fa-refresh padding0"></i></a>
+            <a class="action btn  btn-primary btn-xs @Constants.Class_Cannot_Access_Update" href="#" onclick="AddNotificationWording();" title="Edit"><i class="btn-xs fa fa-share-square-o padding0"></i></a>
+            <a class="action btn  btn-primary btn-xs @Constants.Class_Cannot_Access_Update" href="#" onclick="AddNotificationWording();" title="Edit"><i class="btn-xs fa fa-eye padding0"></i></a>
+            <a class="action btn  btn-primary btn-xs @Constants.Class_Cannot_Access_Update" href="#" onclick="AddNotificationWording();" title="Edit"><i class="btn-xs fa fa-remove padding0"></i></a>
+        </div>
+    </div>
+</div>
+<div class="row" style="margin-top:12px;">
+    <div class="form-group">
+        <div class="col-md-1">
+            @Html.TextBoxFor(m => m.labelconfig.contactno, new { @class = "form-control m-input", placeholder = "005" })
+        </div>
+        <div class="col-md-4">
+            @Html.TextBoxFor(m => m.labelconfig.contactno, new { @class = "form-control m-input", placeholder = "Turnaround time reminder 2" })
+        </div>
+        <div class="col-md-4">
+            @Html.TextBoxFor(m => m.labelconfig.contactno, new { @class = "form-control m-input", placeholder = "Relevant responsible person" })
+        </div>
+        <div class="col-md-3">
+            <a class="action btn  btn-primary btn-xs @Constants.Class_Cannot_Access_Update" href="#" onclick="AddNotificationWording();" title="Edit"><i class="btn-xs fa fa-pencil padding0"></i></a>
+            <a class="action btn  btn-primary btn-xs @Constants.Class_Cannot_Access_Update" href="#" onclick="AddNotificationWording();" title="Edit"><i class="btn-xs fa fa-navicon padding0"></i></a>
+            <a class="action btn  btn-primary btn-xs @Constants.Class_Cannot_Access_Update" href="#" onclick="AddNotificationWording();" title="Edit"><i class="btn-xs fa fa-refresh padding0"></i></a>
+            <a class="action btn  btn-primary btn-xs @Constants.Class_Cannot_Access_Update" href="#" onclick="AddNotificationWording();" title="Edit"><i class="btn-xs fa fa-share-square-o padding0"></i></a>
+            <a class="action btn  btn-primary btn-xs @Constants.Class_Cannot_Access_Update" href="#" onclick="AddNotificationWording();" title="Edit"><i class="btn-xs fa fa-eye padding0"></i></a>
+            <a class="action btn  btn-primary btn-xs @Constants.Class_Cannot_Access_Update" href="#" onclick="AddNotificationWording();" title="Edit"><i class="btn-xs fa fa-remove padding0"></i></a>
+        </div>
+    </div>
+</div>
+<div class="row" style="margin-top:12px;">
+    <div class="form-group">
+        <div class="col-md-1">
+            @Html.TextBoxFor(m => m.labelconfig.contactno, new { @class = "form-control m-input", placeholder = "006" })
+        </div>
+        <div class="col-md-4">
+            @Html.TextBoxFor(m => m.labelconfig.contactno, new { @class = "form-control m-input", placeholder = "Turnaround time reminder 3" })
+        </div>
+        <div class="col-md-4">
+            @Html.TextBoxFor(m => m.labelconfig.contactno, new { @class = "form-control m-input", placeholder = "Relevant responsible person" })
+        </div>
+        <div class="col-md-3">
+            <a class="action btn  btn-primary btn-xs @Constants.Class_Cannot_Access_Update" href="#" onclick="AddNotificationWording();" title="Edit"><i class="btn-xs fa fa-pencil padding0"></i></a>
+            <a class="action btn  btn-primary btn-xs @Constants.Class_Cannot_Access_Update" href="#" onclick="AddNotificationWording();" title="Edit"><i class="btn-xs fa fa-navicon padding0"></i></a>
+            <a class="action btn  btn-primary btn-xs @Constants.Class_Cannot_Access_Update" href="#" onclick="AddNotificationWording();" title="Edit"><i class="btn-xs fa fa-refresh padding0"></i></a>
+            <a class="action btn  btn-primary btn-xs @Constants.Class_Cannot_Access_Update" href="#" onclick="AddNotificationWording();" title="Edit"><i class="btn-xs fa fa-share-square-o padding0"></i></a>
+            <a class="action btn  btn-primary btn-xs @Constants.Class_Cannot_Access_Update" href="#" onclick="AddNotificationWording();" title="Edit"><i class="btn-xs fa fa-eye padding0"></i></a>
+            <a class="action btn  btn-primary btn-xs @Constants.Class_Cannot_Access_Update" href="#" onclick="AddNotificationWording();" title="Edit"><i class="btn-xs fa fa-remove padding0"></i></a>
+        </div>
+    </div>
+</div>
+<div class="row" style="margin-top:12px;">
+    <div class="form-group">
+        <div class="col-md-1">
+            @Html.TextBoxFor(m => m.labelconfig.contactno, new { @class = "form-control m-input", placeholder = "007" })
+        </div>
+        <div class="col-md-4">
+            @Html.TextBoxFor(m => m.labelconfig.contactno, new { @class = "form-control m-input", placeholder = "Turnaround time reminder 4" })
+        </div>
+        <div class="col-md-4">
+            @Html.TextBoxFor(m => m.labelconfig.contactno, new { @class = "form-control m-input", placeholder = "Relevant responsible person" })
+        </div>
+        <div class="col-md-3">
+            <a class="action btn  btn-primary btn-xs @Constants.Class_Cannot_Access_Update" href="#" onclick="AddNotificationWording();" title="Edit"><i class="btn-xs fa fa-pencil padding0"></i></a>
+            <a class="action btn  btn-primary btn-xs @Constants.Class_Cannot_Access_Update" href="#" onclick="AddNotificationWording();" title="Edit"><i class="btn-xs fa fa-navicon padding0"></i></a>
+            <a class="action btn  btn-primary btn-xs @Constants.Class_Cannot_Access_Update" href="#" onclick="AddNotificationWording();" title="Edit"><i class="btn-xs fa fa-refresh padding0"></i></a>
+            <a class="action btn  btn-primary btn-xs @Constants.Class_Cannot_Access_Update" href="#" onclick="AddNotificationWording();" title="Edit"><i class="btn-xs fa fa-share-square-o padding0"></i></a>
+            <a class="action btn  btn-primary btn-xs @Constants.Class_Cannot_Access_Update" href="#" onclick="AddNotificationWording();" title="Edit"><i class="btn-xs fa fa-eye padding0"></i></a>
+            <a class="action btn  btn-primary btn-xs @Constants.Class_Cannot_Access_Update" href="#" onclick="AddNotificationWording();" title="Edit"><i class="btn-xs fa fa-remove padding0"></i></a>
+        </div>
+    </div>
+</div>
+<div class="row" style="margin-top:12px;">
+    <div class="form-group">
+        <div class="col-md-1">
+            @Html.TextBoxFor(m => m.labelconfig.contactno, new { @class = "form-control m-input", placeholder = "008" })
+        </div>
+        <div class="col-md-4">
+            @Html.TextBoxFor(m => m.labelconfig.contactno, new { @class = "form-control m-input", placeholder = "Final turnaround time reminder" })
+        </div>
+        <div class="col-md-4">
+            @Html.TextBoxFor(m => m.labelconfig.contactno, new { @class = "form-control m-input", placeholder = "DAR / Relevant Level 2 user / Level 1 users" })
+        </div>
+        <div class="col-md-3">
+            <a class="action btn  btn-primary btn-xs @Constants.Class_Cannot_Access_Update" href="#" onclick="AddNotificationWording();" title="Edit"><i class="btn-xs fa fa-pencil padding0"></i></a>
+            <a class="action btn  btn-primary btn-xs @Constants.Class_Cannot_Access_Update" href="#" onclick="AddNotificationWording();" title="Edit"><i class="btn-xs fa fa-navicon padding0"></i></a>
+            <a class="action btn  btn-primary btn-xs @Constants.Class_Cannot_Access_Update" href="#" onclick="AddNotificationWording();" title="Edit"><i class="btn-xs fa fa-refresh padding0"></i></a>
+            <a class="action btn  btn-primary btn-xs @Constants.Class_Cannot_Access_Update" href="#" onclick="AddNotificationWording();" title="Edit"><i class="btn-xs fa fa-share-square-o padding0"></i></a>
+            <a class="action btn  btn-primary btn-xs @Constants.Class_Cannot_Access_Update" href="#" onclick="AddNotificationWording();" title="Edit"><i class="btn-xs fa fa-eye padding0"></i></a>
+            <a class="action btn  btn-primary btn-xs @Constants.Class_Cannot_Access_Update" href="#" onclick="AddNotificationWording();" title="Edit"><i class="btn-xs fa fa-remove padding0"></i></a>
+        </div>
+    </div>
+</div>
+<div class="row" style="margin-top:12px;">
+    <div class="form-group">
+        <div class="col-md-1">
+            @Html.TextBoxFor(m => m.labelconfig.contactno, new { @class = "form-control m-input", placeholder = "009" })
+        </div>
+        <div class="col-md-4">
+            @Html.TextBoxFor(m => m.labelconfig.contactno, new { @class = "form-control m-input", placeholder = "Web submission turnaround time reminder 1" })
+        </div>
+        <div class="col-md-4">
+            @Html.TextBoxFor(m => m.labelconfig.contactno, new { @class = "form-control m-input", placeholder = "Relevant responsible person" })
+        </div>
+        <div class="col-md-3">
+            <a class="action btn  btn-primary btn-xs @Constants.Class_Cannot_Access_Update" href="#" onclick="AddNotificationWording();" title="Edit"><i class="btn-xs fa fa-pencil padding0"></i></a>
+            <a class="action btn  btn-primary btn-xs @Constants.Class_Cannot_Access_Update" href="#" onclick="AddNotificationWording();" title="Edit"><i class="btn-xs fa fa-navicon padding0"></i></a>
+            <a class="action btn  btn-primary btn-xs @Constants.Class_Cannot_Access_Update" href="#" onclick="AddNotificationWording();" title="Edit"><i class="btn-xs fa fa-refresh padding0"></i></a>
+            <a class="action btn  btn-primary btn-xs @Constants.Class_Cannot_Access_Update" href="#" onclick="AddNotificationWording();" title="Edit"><i class="btn-xs fa fa-share-square-o padding0"></i></a>
+            <a class="action btn  btn-primary btn-xs @Constants.Class_Cannot_Access_Update" href="#" onclick="AddNotificationWording();" title="Edit"><i class="btn-xs fa fa-eye padding0"></i></a>
+            <a class="action btn  btn-primary btn-xs @Constants.Class_Cannot_Access_Update" href="#" onclick="AddNotificationWording();" title="Edit"><i class="btn-xs fa fa-remove padding0"></i></a>
+        </div>
+    </div>
+</div>
+<div class="row" style="margin-top:12px;">
+    <div class="form-group">
+        <div class="col-md-1">
+            @Html.TextBoxFor(m => m.labelconfig.contactno, new { @class = "form-control m-input", placeholder = "010" })
+        </div>
+        <div class="col-md-4">
+            @Html.TextBoxFor(m => m.labelconfig.contactno, new { @class = "form-control m-input", placeholder = "Web submission turnaround time reminder 2" })
+        </div>
+        <div class="col-md-4">
+            @Html.TextBoxFor(m => m.labelconfig.contactno, new { @class = "form-control m-input", placeholder = "Relevant responsible person" })
+        </div>
+        <div class="col-md-3">
+            <a class="action btn  btn-primary btn-xs @Constants.Class_Cannot_Access_Update" href="#" onclick="AddNotificationWording();" title="Edit"><i class="btn-xs fa fa-pencil padding0"></i></a>
+            <a class="action btn  btn-primary btn-xs @Constants.Class_Cannot_Access_Update" href="#" onclick="AddNotificationWording();" title="Edit"><i class="btn-xs fa fa-navicon padding0"></i></a>
+            <a class="action btn  btn-primary btn-xs @Constants.Class_Cannot_Access_Update" href="#" onclick="AddNotificationWording();" title="Edit"><i class="btn-xs fa fa-refresh padding0"></i></a>
+            <a class="action btn  btn-primary btn-xs @Constants.Class_Cannot_Access_Update" href="#" onclick="AddNotificationWording();" title="Edit"><i class="btn-xs fa fa-share-square-o padding0"></i></a>
+            <a class="action btn  btn-primary btn-xs @Constants.Class_Cannot_Access_Update" href="#" onclick="AddNotificationWording();" title="Edit"><i class="btn-xs fa fa-eye padding0"></i></a>
+            <a class="action btn  btn-primary btn-xs @Constants.Class_Cannot_Access_Update" href="#" onclick="AddNotificationWording();" title="Edit"><i class="btn-xs fa fa-remove padding0"></i></a>
+        </div>
+    </div>
+</div>
+<div class="row" style="margin-top:12px;">
+    <div class="form-group">
+        <div class="col-md-1">
+            @Html.TextBoxFor(m => m.labelconfig.contactno, new { @class = "form-control m-input", placeholder = "011" })
+        </div>
+        <div class="col-md-4">
+            @Html.TextBoxFor(m => m.labelconfig.contactno, new { @class = "form-control m-input", placeholder = "Web submission turnaround time reminder 3" })
+        </div>
+        <div class="col-md-4">
+            @Html.TextBoxFor(m => m.labelconfig.contactno, new { @class = "form-control m-input", placeholder = "Relevant responsible person" })
+        </div>
+        <div class="col-md-3">
+            <a class="action btn  btn-primary btn-xs @Constants.Class_Cannot_Access_Update" href="#" onclick="AddNotificationWording();" title="Edit"><i class="btn-xs fa fa-pencil padding0"></i></a>
+            <a class="action btn  btn-primary btn-xs @Constants.Class_Cannot_Access_Update" href="#" onclick="AddNotificationWording();" title="Edit"><i class="btn-xs fa fa-navicon padding0"></i></a>
+            <a class="action btn  btn-primary btn-xs @Constants.Class_Cannot_Access_Update" href="#" onclick="AddNotificationWording();" title="Edit"><i class="btn-xs fa fa-refresh padding0"></i></a>
+            <a class="action btn  btn-primary btn-xs @Constants.Class_Cannot_Access_Update" href="#" onclick="AddNotificationWording();" title="Edit"><i class="btn-xs fa fa-share-square-o padding0"></i></a>
+            <a class="action btn  btn-primary btn-xs @Constants.Class_Cannot_Access_Update" href="#" onclick="AddNotificationWording();" title="Edit"><i class="btn-xs fa fa-eye padding0"></i></a>
+            <a class="action btn  btn-primary btn-xs @Constants.Class_Cannot_Access_Update" href="#" onclick="AddNotificationWording();" title="Edit"><i class="btn-xs fa fa-remove padding0"></i></a>
+        </div>
+    </div>
+</div>
+<div class="row" style="margin-top:12px;">
+    <div class="form-group">
+        <div class="col-md-1">
+            @Html.TextBoxFor(m => m.labelconfig.contactno, new { @class = "form-control m-input", placeholder = "012" })
+        </div>
+        <div class="col-md-4">
+            @Html.TextBoxFor(m => m.labelconfig.contactno, new { @class = "form-control m-input", placeholder = "Web submission turnaround time reminder 4" })
+        </div>
+        <div class="col-md-4">
+            @Html.TextBoxFor(m => m.labelconfig.contactno, new { @class = "form-control m-input", placeholder = "Relevant responsible person " })
+        </div>
+        <div class="col-md-3">
+            <a class="action btn  btn-primary btn-xs @Constants.Class_Cannot_Access_Update" href="#" onclick="AddNotificationWording();" title="Edit"><i class="btn-xs fa fa-pencil padding0"></i></a>
+            <a class="action btn  btn-primary btn-xs @Constants.Class_Cannot_Access_Update" href="#" onclick="AddNotificationWording();" title="Edit"><i class="btn-xs fa fa-navicon padding0"></i></a>
+            <a class="action btn  btn-primary btn-xs @Constants.Class_Cannot_Access_Update" href="#" onclick="AddNotificationWording();" title="Edit"><i class="btn-xs fa fa-refresh padding0"></i></a>
+            <a class="action btn  btn-primary btn-xs @Constants.Class_Cannot_Access_Update" href="#" onclick="AddNotificationWording();" title="Edit"><i class="btn-xs fa fa-share-square-o padding0"></i></a>
+            <a class="action btn  btn-primary btn-xs @Constants.Class_Cannot_Access_Update" href="#" onclick="AddNotificationWording();" title="Edit"><i class="btn-xs fa fa-eye padding0"></i></a>
+            <a class="action btn  btn-primary btn-xs @Constants.Class_Cannot_Access_Update" href="#" onclick="AddNotificationWording();" title="Edit"><i class="btn-xs fa fa-remove padding0"></i></a>
+        </div>
+    </div>
+</div>
+<div class="row" style="margin-top:12px;">
+    <div class="form-group">
+        <div class="col-md-1">
+            @Html.TextBoxFor(m => m.labelconfig.contactno, new { @class = "form-control m-input", placeholder = "013" })
+        </div>
+        <div class="col-md-4">
+            @Html.TextBoxFor(m => m.labelconfig.contactno, new { @class = "form-control m-input", placeholder = "Web submission turnaround time final reminder " })
+        </div>
+        <div class="col-md-4">
+            @Html.TextBoxFor(m => m.labelconfig.contactno, new { @class = "form-control m-input", placeholder = "Level 1 Users / DARs / Level 2 users" })
+        </div>
+        <div class="col-md-3">
+            <a class="action btn  btn-primary btn-xs @Constants.Class_Cannot_Access_Update" href="#" onclick="AddNotificationWording();" title="Edit"><i class="btn-xs fa fa-pencil padding0"></i></a>
+            <a class="action btn  btn-primary btn-xs @Constants.Class_Cannot_Access_Update" href="#" onclick="AddNotificationWording();" title="Edit"><i class="btn-xs fa fa-navicon padding0"></i></a>
+            <a class="action btn  btn-primary btn-xs @Constants.Class_Cannot_Access_Update" href="#" onclick="AddNotificationWording();" title="Edit"><i class="btn-xs fa fa-refresh padding0"></i></a>
+            <a class="action btn  btn-primary btn-xs @Constants.Class_Cannot_Access_Update" href="#" onclick="AddNotificationWording();" title="Edit"><i class="btn-xs fa fa-share-square-o padding0"></i></a>
+            <a class="action btn  btn-primary btn-xs @Constants.Class_Cannot_Access_Update" href="#" onclick="AddNotificationWording();" title="Edit"><i class="btn-xs fa fa-eye padding0"></i></a>
+            <a class="action btn  btn-primary btn-xs @Constants.Class_Cannot_Access_Update" href="#" onclick="AddNotificationWording();" title="Edit"><i class="btn-xs fa fa-remove padding0"></i></a>
+        </div>
+    </div>
+</div>
+<div class="row" style="margin-top:12px;">
+    <div class="form-group">
+        <div class="col-md-1">
+            @Html.TextBoxFor(m => m.labelconfig.contactno, new { @class = "form-control m-input", placeholder = "014" })
+        </div>
+        <div class="col-md-4">
+            @Html.TextBoxFor(m => m.labelconfig.contactno, new { @class = "form-control m-input", placeholder = "Friendly reminder to load complaints 1" })
+        </div>
+        <div class="col-md-4">
+            @Html.TextBoxFor(m => m.labelconfig.contactno, new { @class = "form-control m-input", placeholder = "Level 3 users" })
+        </div>
+        <div class="col-md-3">
+            <a class="action btn  btn-primary btn-xs @Constants.Class_Cannot_Access_Update" href="#" onclick="AddNotificationWording();" title="Edit"><i class="btn-xs fa fa-pencil padding0"></i></a>
+            <a class="action btn  btn-primary btn-xs @Constants.Class_Cannot_Access_Update" href="#" onclick="AddNotificationWording();" title="Edit"><i class="btn-xs fa fa-navicon padding0"></i></a>
+            <a class="action btn  btn-primary btn-xs @Constants.Class_Cannot_Access_Update" href="#" onclick="AddNotificationWording();" title="Edit"><i class="btn-xs fa fa-refresh padding0"></i></a>
+            <a class="action btn  btn-primary btn-xs @Constants.Class_Cannot_Access_Update" href="#" onclick="AddNotificationWording();" title="Edit"><i class="btn-xs fa fa-share-square-o padding0"></i></a>
+            <a class="action btn  btn-primary btn-xs @Constants.Class_Cannot_Access_Update" href="#" onclick="AddNotificationWording();" title="Edit"><i class="btn-xs fa fa-eye padding0"></i></a>
+            <a class="action btn  btn-primary btn-xs @Constants.Class_Cannot_Access_Update" href="#" onclick="AddNotificationWording();" title="Edit"><i class="btn-xs fa fa-remove padding0"></i></a>
+        </div>
+    </div>
+</div>
+<div class="row" style="margin-top:12px;">
+    <div class="form-group">
+        <div class="col-md-1">
+            @Html.TextBoxFor(m => m.labelconfig.contactno, new { @class = "form-control m-input", placeholder = "015" })
+        </div>
+        <div class="col-md-4">
+            @Html.TextBoxFor(m => m.labelconfig.contactno, new { @class = "form-control m-input", placeholder = "Friendly reminder to load complaints 2" })
+        </div>
+        <div class="col-md-4">
+            @Html.TextBoxFor(m => m.labelconfig.contactno, new { @class = "form-control m-input", placeholder = "Level 3 users" })
+        </div>
+        <div class="col-md-3">
+            <a class="action btn  btn-primary btn-xs @Constants.Class_Cannot_Access_Update" href="#" onclick="AddNotificationWording();" title="Edit"><i class="btn-xs fa fa-pencil padding0"></i></a>
+            <a class="action btn  btn-primary btn-xs @Constants.Class_Cannot_Access_Update" href="#" onclick="AddNotificationWording();" title="Edit"><i class="btn-xs fa fa-navicon padding0"></i></a>
+            <a class="action btn  btn-primary btn-xs @Constants.Class_Cannot_Access_Update" href="#" onclick="AddNotificationWording();" title="Edit"><i class="btn-xs fa fa-refresh padding0"></i></a>
+            <a class="action btn  btn-primary btn-xs @Constants.Class_Cannot_Access_Update" href="#" onclick="AddNotificationWording();" title="Edit"><i class="btn-xs fa fa-share-square-o padding0"></i></a>
+            <a class="action btn  btn-primary btn-xs @Constants.Class_Cannot_Access_Update" href="#" onclick="AddNotificationWording();" title="Edit"><i class="btn-xs fa fa-eye padding0"></i></a>
+            <a class="action btn  btn-primary btn-xs @Constants.Class_Cannot_Access_Update" href="#" onclick="AddNotificationWording();" title="Edit"><i class="btn-xs fa fa-remove padding0"></i></a>
+        </div>
+    </div>
+</div>
+<div class="row" style="margin-top:12px;">
+    <div class="form-group">
+        <div class="col-md-1">
+            @Html.TextBoxFor(m => m.labelconfig.contactno, new { @class = "form-control m-input", placeholder = "016" })
+        </div>
+        <div class="col-md-4">
+            @Html.TextBoxFor(m => m.labelconfig.contactno, new { @class = "form-control m-input", placeholder = "Monthly reminder to all Level 3 users 1" })
+        </div>
+        <div class="col-md-4">
+            @Html.TextBoxFor(m => m.labelconfig.contactno, new { @class = "form-control m-input", placeholder = "Level 3 users" })
+        </div>
+        <div class="col-md-3">
+            <a class="action btn  btn-primary btn-xs @Constants.Class_Cannot_Access_Update" href="#" onclick="AddNotificationWording();" title="Edit"><i class="btn-xs fa fa-pencil padding0"></i></a>
+            <a class="action btn  btn-primary btn-xs @Constants.Class_Cannot_Access_Update" href="#" onclick="AddNotificationWording();" title="Edit"><i class="btn-xs fa fa-navicon padding0"></i></a>
+            <a class="action btn  btn-primary btn-xs @Constants.Class_Cannot_Access_Update" href="#" onclick="AddNotificationWording();" title="Edit"><i class="btn-xs fa fa-refresh padding0"></i></a>
+            <a class="action btn  btn-primary btn-xs @Constants.Class_Cannot_Access_Update" href="#" onclick="AddNotificationWording();" title="Edit"><i class="btn-xs fa fa-share-square-o padding0"></i></a>
+            <a class="action btn  btn-primary btn-xs @Constants.Class_Cannot_Access_Update" href="#" onclick="AddNotificationWording();" title="Edit"><i class="btn-xs fa fa-eye padding0"></i></a>
+            <a class="action btn  btn-primary btn-xs @Constants.Class_Cannot_Access_Update" href="#" onclick="AddNotificationWording();" title="Edit"><i class="btn-xs fa fa-remove padding0"></i></a>
+        </div>
+    </div>
+</div>
+<div class="row" style="margin-top:12px;">
+    <div class="form-group">
+        <div class="col-md-1">
+            @Html.TextBoxFor(m => m.labelconfig.contactno, new { @class = "form-control m-input", placeholder = "017" })
+        </div>
+        <div class="col-md-4">
+            @Html.TextBoxFor(m => m.labelconfig.contactno, new { @class = "form-control m-input", placeholder = "Monthly reminder to all Level 3 users 2" })
+        </div>
+        <div class="col-md-4">
+            @Html.TextBoxFor(m => m.labelconfig.contactno, new { @class = "form-control m-input", placeholder = "Level 3 users" })
+        </div>
+        <div class="col-md-3">
+            <a class="action btn  btn-primary btn-xs @Constants.Class_Cannot_Access_Update" href="#" onclick="AddNotificationWording();" title="Edit"><i class="btn-xs fa fa-pencil padding0"></i></a>
+            <a class="action btn  btn-primary btn-xs @Constants.Class_Cannot_Access_Update" href="#" onclick="AddNotificationWording();" title="Edit"><i class="btn-xs fa fa-navicon padding0"></i></a>
+            <a class="action btn  btn-primary btn-xs @Constants.Class_Cannot_Access_Update" href="#" onclick="AddNotificationWording();" title="Edit"><i class="btn-xs fa fa-refresh padding0"></i></a>
+            <a class="action btn  btn-primary btn-xs @Constants.Class_Cannot_Access_Update" href="#" onclick="AddNotificationWording();" title="Edit"><i class="btn-xs fa fa-share-square-o padding0"></i></a>
+            <a class="action btn  btn-primary btn-xs @Constants.Class_Cannot_Access_Update" href="#" onclick="AddNotificationWording();" title="Edit"><i class="btn-xs fa fa-eye padding0"></i></a>
+            <a class="action btn  btn-primary btn-xs @Constants.Class_Cannot_Access_Update" href="#" onclick="AddNotificationWording();" title="Edit"><i class="btn-xs fa fa-remove padding0"></i></a>
+        </div>
+    </div>
+</div>
+<div class="row" style="margin-top:12px;">
+    <div class="form-group">
+        <div class="col-md-1">
+            @Html.TextBoxFor(m => m.labelconfig.contactno, new { @class = "form-control m-input", placeholder = "018" })
+        </div>
+        <div class="col-md-4">
+            @Html.TextBoxFor(m => m.labelconfig.contactno, new { @class = "form-control m-input", placeholder = "Final monthly reminder to all Level 3 users" })
+        </div>
+        <div class="col-md-4">
+            @Html.TextBoxFor(m => m.labelconfig.contactno, new { @class = "form-control m-input", placeholder = "Level 3 users" })
+        </div>
+        <div class="col-md-3">
+            <a class="action btn  btn-primary btn-xs @Constants.Class_Cannot_Access_Update" href="#" onclick="AddNotificationWording();" title="Edit"><i class="btn-xs fa fa-pencil padding0"></i></a>
+            <a class="action btn  btn-primary btn-xs @Constants.Class_Cannot_Access_Update" href="#" onclick="AddNotificationWording();" title="Edit"><i class="btn-xs fa fa-navicon padding0"></i></a>
+            <a class="action btn  btn-primary btn-xs @Constants.Class_Cannot_Access_Update" href="#" onclick="AddNotificationWording();" title="Edit"><i class="btn-xs fa fa-refresh padding0"></i></a>
+            <a class="action btn  btn-primary btn-xs @Constants.Class_Cannot_Access_Update" href="#" onclick="AddNotificationWording();" title="Edit"><i class="btn-xs fa fa-share-square-o padding0"></i></a>
+            <a class="action btn  btn-primary btn-xs @Constants.Class_Cannot_Access_Update" href="#" onclick="AddNotificationWording();" title="Edit"><i class="btn-xs fa fa-eye padding0"></i></a>
+            <a class="action btn  btn-primary btn-xs @Constants.Class_Cannot_Access_Update" href="#" onclick="AddNotificationWording();" title="Edit"><i class="btn-xs fa fa-remove padding0"></i></a>
+        </div>
+    </div>
+</div>
+<div class="row" style="margin-top:12px;">
+    <div class="form-group">
+        <div class="col-md-1">
+            @Html.TextBoxFor(m => m.labelconfig.contactno, new { @class = "form-control m-input", placeholder = "019" })
+        </div>
+        <div class="col-md-4">
+            @Html.TextBoxFor(m => m.labelconfig.contactno, new { @class = "form-control m-input", placeholder = "Complaints not captured reminder 1" })
+        </div>
+        <div class="col-md-4">
+            @Html.TextBoxFor(m => m.labelconfig.contactno, new { @class = "form-control m-input", placeholder = "Relevant T3 Level 3 users" })
+        </div>
+        <div class="col-md-3">
+            <a class="action btn  btn-primary btn-xs @Constants.Class_Cannot_Access_Update" href="#" onclick="AddNotificationWording();" title="Edit"><i class="btn-xs fa fa-pencil padding0"></i></a>
+            <a class="action btn  btn-primary btn-xs @Constants.Class_Cannot_Access_Update" href="#" onclick="AddNotificationWording();" title="Edit"><i class="btn-xs fa fa-navicon padding0"></i></a>
+            <a class="action btn  btn-primary btn-xs @Constants.Class_Cannot_Access_Update" href="#" onclick="AddNotificationWording();" title="Edit"><i class="btn-xs fa fa-refresh padding0"></i></a>
+            <a class="action btn  btn-primary btn-xs @Constants.Class_Cannot_Access_Update" href="#" onclick="AddNotificationWording();" title="Edit"><i class="btn-xs fa fa-share-square-o padding0"></i></a>
+            <a class="action btn  btn-primary btn-xs @Constants.Class_Cannot_Access_Update" href="#" onclick="AddNotificationWording();" title="Edit"><i class="btn-xs fa fa-eye padding0"></i></a>
+            <a class="action btn  btn-primary btn-xs @Constants.Class_Cannot_Access_Update" href="#" onclick="AddNotificationWording();" title="Edit"><i class="btn-xs fa fa-remove padding0"></i></a>
+        </div>
+    </div>
+</div>
+<div class="row" style="margin-top:12px;">
+    <div class="form-group">
+        <div class="col-md-1">
+            @Html.TextBoxFor(m => m.labelconfig.contactno, new { @class = "form-control m-input", placeholder = "020" })
+        </div>
+        <div class="col-md-4">
+            @Html.TextBoxFor(m => m.labelconfig.contactno, new { @class = "form-control m-input", placeholder = "Complaints not captured reminder 2" })
+        </div>
+        <div class="col-md-4">
+            @Html.TextBoxFor(m => m.labelconfig.contactno, new { @class = "form-control m-input", placeholder = "Relevant T3 Level 3 users" })
+        </div>
+        <div class="col-md-3">
+            <a class="action btn  btn-primary btn-xs @Constants.Class_Cannot_Access_Update" href="#" onclick="AddNotificationWording();" title="Edit"><i class="btn-xs fa fa-pencil padding0"></i></a>
+            <a class="action btn  btn-primary btn-xs @Constants.Class_Cannot_Access_Update" href="#" onclick="AddNotificationWording();" title="Edit"><i class="btn-xs fa fa-navicon padding0"></i></a>
+            <a class="action btn  btn-primary btn-xs @Constants.Class_Cannot_Access_Update" href="#" onclick="AddNotificationWording();" title="Edit"><i class="btn-xs fa fa-refresh padding0"></i></a>
+            <a class="action btn  btn-primary btn-xs @Constants.Class_Cannot_Access_Update" href="#" onclick="AddNotificationWording();" title="Edit"><i class="btn-xs fa fa-share-square-o padding0"></i></a>
+            <a class="action btn  btn-primary btn-xs @Constants.Class_Cannot_Access_Update" href="#" onclick="AddNotificationWording();" title="Edit"><i class="btn-xs fa fa-eye padding0"></i></a>
+            <a class="action btn  btn-primary btn-xs @Constants.Class_Cannot_Access_Update" href="#" onclick="AddNotificationWording();" title="Edit"><i class="btn-xs fa fa-remove padding0"></i></a>
+        </div>
+    </div>
+</div>
+<div class="row" style="margin-top:12px;">
+    <div class="form-group">
+        <div class="col-md-1">
+            @Html.TextBoxFor(m => m.labelconfig.contactno, new { @class = "form-control m-input", placeholder = "021" })
+        </div>
+        <div class="col-md-4">
+            @Html.TextBoxFor(m => m.labelconfig.contactno, new { @class = "form-control m-input", placeholder = "Final complaints not captured reminder" })
+        </div>
+        <div class="col-md-4">
+            @Html.TextBoxFor(m => m.labelconfig.contactno, new { @class = "form-control m-input", placeholder = "Relevant T3 Level 3 users and Relevant 1 user users" })
+        </div>
+        <div class="col-md-3">
+            <a class="action btn  btn-primary btn-xs @Constants.Class_Cannot_Access_Update" href="#" onclick="AddNotificationWording();" title="Edit"><i class="btn-xs fa fa-pencil padding0"></i></a>
+            <a class="action btn  btn-primary btn-xs @Constants.Class_Cannot_Access_Update" href="#" onclick="AddNotificationWording();" title="Edit"><i class="btn-xs fa fa-navicon padding0"></i></a>
+            <a class="action btn  btn-primary btn-xs @Constants.Class_Cannot_Access_Update" href="#" onclick="AddNotificationWording();" title="Edit"><i class="btn-xs fa fa-refresh padding0"></i></a>
+            <a class="action btn  btn-primary btn-xs @Constants.Class_Cannot_Access_Update" href="#" onclick="AddNotificationWording();" title="Edit"><i class="btn-xs fa fa-share-square-o padding0"></i></a>
+            <a class="action btn  btn-primary btn-xs @Constants.Class_Cannot_Access_Update" href="#" onclick="AddNotificationWording();" title="Edit"><i class="btn-xs fa fa-eye padding0"></i></a>
+            <a class="action btn  btn-primary btn-xs @Constants.Class_Cannot_Access_Update" href="#" onclick="AddNotificationWording();" title="Edit"><i class="btn-xs fa fa-remove padding0"></i></a>
+        </div>
+    </div>
+</div>
+<div class="row" style="margin-top:12px;">
+    <div class="form-group">
+        <div class="col-md-1">
+            @Html.TextBoxFor(m => m.labelconfig.contactno, new { @class = "form-control m-input", placeholder = "022" })
+        </div>
+        <div class="col-md-4">
+            @Html.TextBoxFor(m => m.labelconfig.contactno, new { @class = "form-control m-input", placeholder = "Notification of failure to declare no complaints received" })
+        </div>
+        <div class="col-md-4">
+            @Html.TextBoxFor(m => m.labelconfig.contactno, new { @class = "form-control m-input", placeholder = "DARs / Relevant Level 2 users" })
+        </div>
+        <div class="col-md-3">
+            <a class="action btn  btn-primary btn-xs @Constants.Class_Cannot_Access_Update" href="#" onclick="AddNotificationWording();" title="Edit"><i class="btn-xs fa fa-pencil padding0"></i></a>
+            <a class="action btn  btn-primary btn-xs @Constants.Class_Cannot_Access_Update" href="#" onclick="AddNotificationWording();" title="Edit"><i class="btn-xs fa fa-navicon padding0"></i></a>
+            <a class="action btn  btn-primary btn-xs @Constants.Class_Cannot_Access_Update" href="#" onclick="AddNotificationWording();" title="Edit"><i class="btn-xs fa fa-refresh padding0"></i></a>
+            <a class="action btn  btn-primary btn-xs @Constants.Class_Cannot_Access_Update" href="#" onclick="AddNotificationWording();" title="Edit"><i class="btn-xs fa fa-share-square-o padding0"></i></a>
+            <a class="action btn  btn-primary btn-xs @Constants.Class_Cannot_Access_Update" href="#" onclick="AddNotificationWording();" title="Edit"><i class="btn-xs fa fa-eye padding0"></i></a>
+            <a class="action btn  btn-primary btn-xs @Constants.Class_Cannot_Access_Update" href="#" onclick="AddNotificationWording();" title="Edit"><i class="btn-xs fa fa-remove padding0"></i></a>
+        </div>
+    </div>
+</div>
+
+

@@ -62,6 +62,12 @@ namespace Brilliance.Controllers
             DropSelectViewmodel model = _iadmcrtDataProvider.DropselectgList(ClientID);
             return PartialView("~/Views/AdmCrt/_DropselectConfiguration.cshtml", model);
         }
+        public ActionResult NotificationwordingList(Guid ClientID)
+        {
+            _iadmcrtDataProvider = new AdmCrtDataProvider();
+            DropSelectViewmodel model = null;
+            return PartialView("~/Views/AdmCrt/_Notificationconfiguration.cshtml", model);
+        }
         public ActionResult AddDropSelect(string Category, Guid ClientID)
         {
             _iadmcrtDataProvider = new AdmCrtDataProvider();
